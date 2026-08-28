@@ -2317,7 +2317,11 @@ The last two rows are the architecture's own measurements, and
 they belong together. On a clean two-encoder cell, concatenation
 more than doubles the single encoder ($0.548$ vs $0.242$), and
 CCA alignment loses to raw concatenation ($0.511$): fusion works,
-bridges are optional. On the quickdraw axis --- where four frozen
+bridges are optional. The frozen-concatenation recipe appears
+independently in CoMET~\cite{comet2026}, which reads the
+concatenation with a pretrained tabular-foundation-model head
+where GEODE fits a closed-form ridge; GEODE's version adds the
+registry, the versioned bus, and payment by measured use. On the quickdraw axis --- where four frozen
 backbones had agreed on a ceiling near $0.63$ --- a hash-seeded
 random-feature map over the same frozen features reaches $0.675$
 at the extended map width ($0.670$ at the original width; the
@@ -2468,9 +2472,11 @@ next section.
 Two composition neighbors bound the claim. AdapterHub~\cite%
 {ruckle2020} is a registry of composable adapters over frozen
 backbones; it has no versioned-block semantics and no economy.
-CoMET-class frozen-encoder composition~\cite{comet2026} composes
-frozen backbones by concatenation into one predictor; it is not a
-registry architecture and carries no attribution. Model
+CoMET~\cite{comet2026} composes frozen backbones by
+PCA-compressed concatenation into a tabular-foundation-model head
+with no training --- the same frozen-concatenation recipe GEODE
+measures with a closed-form ridge in place of the TFM; it is not
+a registry architecture and carries no attribution. Model
 stitching~\cite{bansal2023} is the methodological precedent for
 asking whether two encoders' representations are compatible at
 all --- a scientific probe, not a production composition
@@ -3145,9 +3151,10 @@ AdapterHub: a framework for adapting transformers.
 \emph{EMNLP (Demonstrations)}, 2020.
 
 \bibitem{comet2026}
-CoMET: composing modality encoders with tabular foundation models
-for multimodal classification without fine-tuning.
-\emph{arXiv}, 2026.
+H.~Bergstr\"om, A.~Mehrotra, and R.~G.~Krishnan.
+Modular multimodal classification without fine-tuning: a simple
+compositional approach (CoMET).
+\emph{arXiv:2605.20674}, 2026.
 
 \bibitem{bansal2023}
 U.~Bansal, P.~Nakkiran, and B.~Barak.

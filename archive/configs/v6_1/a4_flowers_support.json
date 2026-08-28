@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A4",
+  "stage": "S1-Flowers",
+  "seed": 11,
+  "representation": {
+    "backbone": "dinov2-small",
+    "representation_hash": "b0c0bb74c51684d184a4be1638a684ad55fcde9d4836c1012b6f736ba5a9763b",
+    "dimension": 384
+  },
+  "parent_config": {
+    "path": "experiments/configs/v5/m19_flowers102_s1.json",
+    "sha256": "3a026e144ad24ced370287280be4e3cfc3d4e30546a90753597684eac687080e"
+  },
+  "extraction_summary": {
+    "path": "data/v5/features/m19_flowers102_s1/extraction_summary.json",
+    "sha256": "d7eb40bbff80b9430ca9eb9ea90ee4f7fa4c1f94469bc0a2c6ec225fb786d192"
+  },
+  "parent_evidence": {
+    "path": "logs/results/v5/m19_flowers102_s1/m19_flowers102_s1_evidence.json",
+    "sha256": "ad15db9df71b3b6b3b65185546ae85112f6e2b1b6928e7ebff6b2612f9905193"
+  },
+  "a2_evidence": {
+    "path": "logs/results/v6_1/a2_weighted_s2/evidence.json",
+    "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65",
+    "required_final_outcome": "Outcome D"
+  },
+  "a4_f5": {
+    "samples_per_class": 5,
+    "rank": 3,
+    "minimum_support_rule": "r_plus_2",
+    "minimum_support": 5,
+    "components_per_class": 1,
+    "heads": [
+      "linear_logistic",
+      "prototype",
+      "weighted_knn",
+      "rank3_affine_subspace",
+      "rank3_tangent_cap"
+    ],
+    "evaluation_split": "dev",
+    "objective": "fit_and_replay_feasibility"
+  },
+  "a4_f34": {
+    "rank": 32,
+    "minimum_support_rule": "r_plus_2",
+    "minimum_support": 34,
+    "allowed_fit_splits": ["train"],
+    "forbid_partition_combination": true
+  },
+  "weighted_knn": {
+    "n_neighbors": 20,
+    "temperature": 0.07,
+    "query_batch_size": 1024
+  },
+  "temperature": {
+    "minimum": 0.05,
+    "maximum": 20.0
+  },
+  "test_labels_opened": false
+}

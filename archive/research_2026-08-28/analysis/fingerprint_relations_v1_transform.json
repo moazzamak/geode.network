@@ -1,0 +1,23 @@
+{
+  "version": "v1-transform",
+  "frozen": "2026-08-20",
+  "provenance": "analytical (assistant-authored under the user's 20 Aug delegation - the user's message names integration/differentiation as the motivating pair); registered in the v25 plan M225 before the build; I3: authored constraints, not measured labels",
+  "note": "the user's example made mechanical: the direction from an operation to its inverse must generalise across inverse pairs (word2vec-style analogy)",
+  "axis": "task.transform",
+  "vocabulary": ["identity", "integration", "differentiation", "fft", "ifft", "convolution", "deconvolution", "sort", "reverse"],
+  "reference_inverse_pair": ["integration", "differentiation"],
+  "inverse_pairs": [
+    ["integration", "differentiation"],
+    ["fft", "ifft"],
+    ["convolution", "deconvolution"]
+  ],
+  "polar_pairs": [
+    ["integration", "differentiation"],
+    ["fft", "ifft"]
+  ],
+  "gates": {
+    "inverse_analogy_min_cos": 0.5,
+    "polar_max_cos": -0.3,
+    "reading_registered_before_running": "G6 pass means the inverse-relation direction generalises from the reference pair (integration/differentiation) to the held-out pairs (fft/ifft, convolution/deconvolution) - the user's finger:hand::hand:arm requirement made mechanical. Failure of either sub-gate is a scoped negative for the authored set, not a void."
+  }
+}

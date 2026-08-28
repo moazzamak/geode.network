@@ -1,0 +1,36 @@
+{
+  "milestone": "M175",
+  "cell": "A0",
+  "title": "First text encoder: additive next-token fit-and-report on wikitext-103 (the M131 machinery)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026); analysis/v24_m175_transfer_cells.md (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the M131 additive next-token construction build a frozen text arm on wikitext-103 character tokens, with the window dial behaving as measured on the DSL (perplexity falls, footprint grows, more memory does not hurt)?",
+  "corpus": {
+    "cache_file": "data/tier6/wikitext103_100000.npz",
+    "vocab_fingerprint": "5c6f0917b424e3a7",
+    "cache_version": 2,
+    "kind": "wikitext103_100000 character-level token ids",
+    "train_tokens": 80000,
+    "test_tokens": 20000,
+    "note": "test is held-out and read-only; nothing is fitted on it"
+  },
+  "model": {
+    "window_ladder": [1, 2, 4, 8, 16, 32],
+    "alpha": 1.0,
+    "interpolation": "uniform over orders 1..w (Jelinek-Mercer, uniform lambda)",
+    "max_window": 32
+  },
+  "anchors": {
+    "g1": "window-1 test perplexity equals the independent closed-form bigram computation to <= 1e-9",
+    "g2": "footprint_bytes monotone non-decreasing in window"
+  },
+  "gate": {
+    "more_memory_hurts": "fired if test_ppl(window=max) > test_ppl(window=1) * 1.10 (uniform variant; a fired switch is a reported negative per N90.5)"
+  },
+  "comparison_arm": {
+    "registered": "longest-match backoff read (continuations primitive, add-alpha at the matched order, uniform floor for novel contexts), same window ladder — registered before the sealed run (18 Aug 2026)",
+    "verdict_clause": "A0 selects NO arm from test numbers; the ladder + fired gate answer the cell, and cells A/D pin their arm in A's own registration using a validation slice"
+  },
+  "role": "this encoder is the frozen text arm reused by cells A (text->text transfer) and D (license-clean Wikipedia fit-and-report)",
+  "output_dir": "logs/results/v24/m175_cell_a0"
+}

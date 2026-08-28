@@ -1,0 +1,29 @@
+{
+  "milestone": "M139a",
+  "title": "SMOKE: routing slack plumbing on a head block of the sealed codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M139 amendment)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cell (n=2000). Results are INADMISSIBLE as evidence: the runner refuses the sealed output directory for this config.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "atoms": 6144,
+    "width": 24576,
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy"
+  },
+  "domain_head": { "n": 2000, "penalty": 1.0, "classes": 6 },
+  "gate": { "t1_tolerance": 0.002 },
+  "numerics": { "gram_dtype": "float64", "block": 512, "seed": 109 }
+}

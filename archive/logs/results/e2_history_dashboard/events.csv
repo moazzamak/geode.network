@@ -1,0 +1,4 @@
+schema_version,event_id,run_id,attempt_id,stage_name,split,metric_name,value,sample_count,created_at,epoch,global_step,namespace
+1,train-loss-1,e2-history-export-smoke,attempt-1,representation,train,loss,0.8,128,2026-07-26T00:00:00Z,1,10,exploratory
+1,train-loss-2,e2-history-export-smoke,attempt-2,representation,train,loss,0.6,128,2026-07-26T00:01:00Z,2,20,exploratory
+1,validation-loss-2,e2-history-export-smoke,attempt-2,representation,validation,loss,0.65,64,2026-07-26T00:02:00Z,2,20,selection

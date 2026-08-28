@@ -1,0 +1,11 @@
+{
+  "artifact_path": "logs/results/tier4_real_feature_class_pairs.json",
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "seeds": [101, 102, 103],
+  "class_pairs": [[3, 5], [4, 7], [2, 6]],
+  "mode_shifts": ["horizontal_flip", "gaussian_noise", "center_occlusion"],
+  "samples_per_slice": 40,
+  "pca_components": 8,
+  "minimum_proposal_gain": 0.5,
+  "minimum_geometric_coverage": 0.5
+}

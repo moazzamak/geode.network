@@ -1,0 +1,133 @@
+{
+  "domainnet": {
+    "class_count": 345,
+    "domains": [
+      "clipart",
+      "infograph",
+      "painting",
+      "quickdraw",
+      "real",
+      "sketch"
+    ],
+    "source_repository": "wltjr1007/DomainNet",
+    "source_revision": "ee20570ae7a29c51571e55a9a17983f7625295d6",
+    "split_samples": {
+      "test": 176743,
+      "train": 409832
+    },
+    "total_declared_samples": 586575,
+    "total_verified_bytes": 18521436207,
+    "verified_files": [
+      "data/test-00000-of-00001.parquet",
+      "data/train-00000-of-00003.parquet",
+      "data/train-00001-of-00003.parquet",
+      "data/train-00002-of-00003.parquet"
+    ],
+    "version": "huggingface-parquet-v1"
+  },
+  "histories": {
+    "complete": true,
+    "first_hash": "101e9f279fe0ae76e863bf0d4bcb13d72f5240276b58edfeeb7bf41b76dbe792",
+    "items": 16,
+    "second_hash": "101e9f279fe0ae76e863bf0d4bcb13d72f5240276b58edfeeb7bf41b76dbe792"
+  },
+  "limitations": [
+    "all Ray containers share one physical host",
+    "worker process loss is tested; physical worker-node loss is not",
+    "this artifact cannot satisfy the final E7 multi-host gate"
+  ],
+  "milestone": "E7-local-simulation",
+  "qualification": {
+    "e7_gate_passed": false,
+    "evidence": {
+      "artifact_identity_verified": true,
+      "complete_histories": true,
+      "executing_nodes": 3,
+      "logical_nodes": 3,
+      "physical_hosts": 1,
+      "task_retry_passed": true,
+      "worker_node_loss_recovered": false,
+      "worker_process_loss_recovered": true
+    },
+    "local_checks": {
+      "artifact_identity_verified": true,
+      "complete_histories": true,
+      "logical_cluster_has_multiple_nodes": true,
+      "task_retry_passed": true,
+      "tasks_executed_on_multiple_nodes": true,
+      "worker_process_loss_recovered": true
+    },
+    "local_simulation_gate_passed": true,
+    "multihost_checks": {
+      "artifact_identity_verified": true,
+      "complete_histories": true,
+      "logical_cluster_has_multiple_nodes": true,
+      "physical_hosts_are_distinct": false,
+      "task_retry_passed": true,
+      "tasks_executed_on_multiple_nodes": true,
+      "worker_node_loss_recovered": false,
+      "worker_process_loss_recovered": true
+    },
+    "multihost_gate_passed": false,
+    "scope": "local_simulation"
+  },
+  "qualification_status": "passed_local_simulation",
+  "ray": {
+    "address": "ray://127.0.0.1:10001",
+    "fault_recovery_node_id": "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+    "node_runtimes": [
+      [
+        "9941d26e46d2e6f79c918f3523beee6d584d5b2268dbdd72324438ef",
+        "3.12.12",
+        "2.56.1"
+      ],
+      [
+        "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+        "3.12.12",
+        "2.56.1"
+      ],
+      [
+        "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8",
+        "3.12.12",
+        "2.56.1"
+      ]
+    ],
+    "resources": {
+      "address": "172.19.0.2:6379",
+      "available_resources": {
+        "CPU": 48.0,
+        "memory": 68853419624.0,
+        "node:172.19.0.2": 1.0,
+        "node:172.19.0.3": 1.0,
+        "node:172.19.0.4": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 29508608408.0
+      },
+      "cluster_resources": {
+        "CPU": 48.0,
+        "memory": 68853419624.0,
+        "node:172.19.0.2": 1.0,
+        "node:172.19.0.3": 1.0,
+        "node:172.19.0.4": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 29508608408.0
+      },
+      "node_ids": [
+        "9941d26e46d2e6f79c918f3523beee6d584d5b2268dbdd72324438ef",
+        "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+        "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+      ],
+      "nodes": 3,
+      "worker_node_ids": [
+        "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+        "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+      ]
+    },
+    "task_node_ids": [
+      "9941d26e46d2e6f79c918f3523beee6d584d5b2268dbdd72324438ef",
+      "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+      "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+    ]
+  },
+  "schema_version": 1
+}

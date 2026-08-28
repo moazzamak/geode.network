@@ -1,0 +1,49 @@
+{
+  "milestone": "M267",
+  "title": "Chained core+polish audio demonstration: FFT/mel primitive -> SpeechT5 mel predictor core -> HiFi-GAN vocoder polish -> M266a Whisper re-transcription (WER)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M267 registered 21 Aug, dispatched 21 Aug, local-first)",
+  "registered_before_any_accuracy": true,
+  "question": "Is the in-system core+polish chain measured, auditable, and deterministic — and what does the end-to-end re-transcription WER read?",
+  "stages": {
+    "0_primitive": {
+      "module": "geode/core/audio_primitives.py",
+      "role": "FFT/mel front-end as a PROGRAMMATIC PRIMITIVE; input-guard feature space + replay hash",
+      "license": "license-free (deterministic code)"
+    },
+    "1_core": {
+      "checkpoint": "microsoft/speecht5_tts",
+      "license_recorded": "MIT",
+      "role": "frozen text->mel predictor (vocoder=None -> mel spectrogram output)",
+      "decoding": "do_sample=False (deterministic), fp32"
+    },
+    "2_polish": {
+      "checkpoint": "microsoft/speecht5_hifigan",
+      "license_recorded": "MIT",
+      "role": "frozen neural-vocoder polish: mel -> waveform"
+    },
+    "eval_instrument": {
+      "checkpoint": "openai/whisper-small.en",
+      "role": "the SEALED M266a protocol: re-transcribe the synthesized waveform; loop WER vs source text"
+    }
+  },
+  "speaker": {
+    "note": "the cmu-arctic-xvectors dataset is GATED (401) — instead a FIXED registered speaker-conditioning vector is used (seeded L2-normalized 512-d); voice naturalness is NOT the gate, the measured chain loop is",
+    "vector_seed": 42,
+    "dim": 512,
+    "license_recorded": "synthetic constant — no third-party data"
+  },
+  "sentences": {
+    "source": "LibriSpeech test-clean transcripts (head rows, registered count)",
+    "full_count": 100,
+    "smoke_count": 3
+  },
+  "gates": {
+    "g2_primitive_replay": "stage-0 output replays from its payload hash",
+    "g3_chain_determinism": "two runs of the full chain produce identical content hashes (timing excluded)",
+    "g4_ledger_replay": "the decision path is orchestrator-ledger recorded and verifies",
+    "g5_loop_wer": "synthesized speech re-transcribed by the sealed M266a protocol; WER recorded",
+    "g6_abstention": "an empty/guarded input yields an empty chain, recorded"
+  },
+  "output_dir": "logs/results/v25/m267_core_polish",
+  "feature_cache_relpath": "v25/m267_core_polish"
+}

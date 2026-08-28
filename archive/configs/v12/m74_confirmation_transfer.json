@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "milestone": "M74",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "geometry_fraction": 0.8,
+  "projection_dimension": 64,
+  "rank": 32,
+  "miscoverage": 0.08,
+  "known_coverage_target": 0.92,
+  "knn_neighbors": 5,
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 7400,
+  "training": {
+    "epochs": 24,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "classification_temperature": 2.0,
+    "target_score": 1.0,
+    "separation_margin": 1.0,
+    "probe_margin_multiplier": 2.0,
+    "loss_weights": {
+      "classification": 1.0,
+      "eikonal": 0.01,
+      "probe": 1.0,
+      "distribution": 0.1,
+      "separation": 0.1
+    },
+    "collapse_weight": 10.0,
+    "trained_probe_families": [
+      "axis_tangent",
+      "normal",
+      "masking",
+      "random_direction"
+    ],
+    "held_out_probe_families": ["corner_tangent", "mixed"]
+  },
+  "loss_ablation_seed": 11,
+  "loss_ablation_terms": [
+    "classification",
+    "eikonal",
+    "probe",
+    "distribution",
+    "separation"
+  ],
+  "domainnet_transfer": {
+    "known_class_count": 32,
+    "geometry_per_class": 60,
+    "calibration_per_class": 20,
+    "evaluation_per_class": 20,
+    "unknown_class_start": 32,
+    "unknown_class_stop": 128,
+    "unknown_evaluation_per_class": 20
+  },
+  "gate": {
+    "accuracy_parity_tolerance": 0.01,
+    "minimum_unknown_recall": 0.87,
+    "maximum_held_out_four_x_acceptance": 0.01,
+    "maximum_median_threshold_ratio": 2.0,
+    "transfer_accuracy_parity_tolerance": 0.01,
+    "minimum_transfer_unknown_recall": 0.87
+  },
+  "source_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m73_index": {
+    "path": "logs/results/v12/m73_projected_metric_fields/artifact_index.json",
+    "sha256": "5e1f39bdd22a25ba3e8f01ff45d910c32944590522834396d4bed606a72acc1b"
+  },
+  "m70_native_index": {
+    "path": "logs/results/v12/m70_native_domainnet/artifact_index.json",
+    "sha256": "20c2dea882b41ecce8066f5b0d5468a8c9cff692686144e94f2d115ddf78b22a"
+  },
+  "final_labels_opened": false
+}

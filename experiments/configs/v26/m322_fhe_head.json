@@ -1,0 +1,23 @@
+{
+  "milestone": "M322e",
+  "title": "Owner-anchored private serving: mechanical VOID reproduction of registered M322b and the FHE amendment registration",
+  "question": "Does the registered M322b construction meet its gates? (Expected before running: G1 VOID by the cross term; G2/G4 hold.)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md §8.22 M322e (27 Aug 2026, before the build)",
+  "seed": 20260827,
+  "d": 768,
+  "C": 345,
+  "n_seeds": 40,
+  "g1_tolerance": 1e-09,
+  "corr_tolerance": 0.02,
+  "registered_checks": {
+    "c1": "the registered M322b reconstruction max relative error vs W^T z + b is far above 1e-9 (VOID, the cross term)",
+    "c2": "the residual equals -(W_C+W_S)^T z_U to float64 rounding (mechanical diagnosis)",
+    "c3": "the MEAN argmax agreement of the broken reconstruction across seeds is below the registered usability bound 0.25 (decision-destroying; the residual share W_S couples the noise to the masked-input ranking, so the expectation is a usability bound, not pure chance)",
+    "c4": "the masked vector m = z - z_U carries the input at 1/sqrt(2) correlation BY CONSTRUCTION (pinned inside [0.6, 0.8]); exact reconstruction fails — the recovery error is exactly the uniform mask. The registered zero-information phrasing is corrected by this cell, not re-tested.",
+    "c6": "the amended M322e-A FHE gates remain PENDING the registered HE library/scheme choice"
+  },
+  "interpretation_registered_before_running": {
+    "c1_void_and_c2_pass": "the registered M322b is impossible as specified; the M322e-A FHE amendment stands",
+    "c1_pass": "unexpected — the cross-term diagnosis would be refuted; re-audit the reproduction"
+  }
+}

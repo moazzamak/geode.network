@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "dataset": "CIFAR-10 public cache",
+  "dataset_sha256": "0287a3f4d1aa16cdd168a8506adb0efb74d3d9be7cd07652f538eab9c175bac7",
+  "representation": "deterministic HOG",
+  "sample_count": 3500,
+  "seed": 42,
+  "pca_components": 32,
+  "max_ransac_iterations": 1,
+  "failure_injected_after": "class-0",
+  "run_id": "f81b84190fca621b",
+  "resumed_summary": {
+    "class_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "final_test_observed": false,
+    "run_id": "f81b84190fca621b",
+    "validation_accuracy": 0.35551330798479086,
+    "validation_sample_count": 526
+  },
+  "uninterrupted_summary": {
+    "class_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "final_test_observed": false,
+    "run_id": "f81b84190fca621b",
+    "validation_accuracy": 0.35551330798479086,
+    "validation_sample_count": 526
+  },
+  "assembly_output_hashes": {
+    "summary.json": "e0a65fee82035b7cc5b2a7b9fad5edc36fdbde5fd22370965c3001744248026e",
+    "validation_predictions.npy": "b88eabd9a03a501cd02726a298a2d6c386b57da835d5d673eddc6fd954b4d1d5",
+    "validation_scores.npy": "5fd6c9a965f6579f02336794a1ed010f7fb7138d28f22ef6ee9c0e8f2d5cc2a7"
+  },
+  "assembly_hashes_equal": true,
+  "final_test_index_count": 700,
+  "final_test_features_materialized": false,
+  "final_test_labels_materialized": false,
+  "metric_counts": [1, 1]
+}

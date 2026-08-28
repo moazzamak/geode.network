@@ -1,0 +1,29 @@
+{
+  "milestone": "M308",
+  "title": "Drawn-challenge admission: sealed per-axis corpus + stratified sampling rule (A8, H26-10)",
+  "question": "Are scores commensurable when validators draw from a sealed corpus, and does validator authorship demonstrably break commensurability?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M308 (26 Aug 2026, before the build)",
+  "beacon_seed": "geode-m308-test-beacon",
+  "corpus_rows": 24000,
+  "classes": 4,
+  "draw_count": 6400,
+  "dim": 6,
+  "population_rows": 24000,
+  "authored_count": 400,
+  "drawn_tolerance": 0.02,
+  "authored_tolerance": 0.05,
+  "seed": 308,
+  "m308a_note": "run 1 VOIDED on its own C2 bound: the drawn-score gap 0.025 sat above the registered tolerance 0.02 with draw_count 40. M308a calibrated from the instrument's own sampling resolution (100 seeded reps per draw count, before any change): gap median/p95/max 0.025/0.101/0.175 at 40, 0.0125/0.030/0.04 at 400, 0.0028/0.0072/0.0145 at 6400. draw_count 40->6400 and population_rows 6000->24000 (the stratified rule needs 1600 per class without replacement); tolerance unchanged and now above the instrument's measured worst gap. Run-1 evidence stays on record as evidence_void_c2.json.",  "registered_notes": {
+    "drawn": "R-A8: validators draw from a registered sealed per-axis corpus under a published stratified rule; they sample, pose, verify, attest - never choose the exam",
+    "score": "the routable score is the fraction correct over drawn challenges: an estimate of ONE fixed population quantity",
+    "authored": "validator-authored challenges remain as a supplementary stream, reported separately, never entering the routable score",
+    "h26_10": "scores for the same artifact by disjoint validator sets agree within tolerance under drawn challenges and violate it under authored ones"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "the draw is not stratified per the registered rule or does not rotate - the sampling rule is not the published one; VOID",
+    "c2_fails": "disjoint validator sets disagree beyond tolerance on the same artifact - drawn scores are not commensurable either; VOID",
+    "c3_fails": "authored challenges do NOT produce disagreement - the defect A8 claims would not be demonstrated; VOID",
+    "c4_fails": "authored challenges change the routable score - the supplementary stream leaks into scoring; VOID",
+    "all_hold": "M308 PASS: drawn challenges are commensurable (H26-10) and authoring is demonstrably not"
+  }
+}

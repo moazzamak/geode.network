@@ -1,0 +1,49 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+ms train (409832, 13244), test (34500, 13244)
+accumulated; solving the grid...
+  penalty    0.01: aggregate 0.242753623188406
+  penalty     0.1: aggregate 0.243101449275362
+  penalty     1.0: aggregate 0.242144927536232
+  penalty    10.0: aggregate 0.238347826086957
+  penalty   100.0: aggregate 0.228985507246377
+{
+ "gates_ok": true,
+ "anchor": {
+  "measured": 0.24214492753623187,
+  "sealed": 0.24214492753623187,
+  "delta": 0.0,
+  "tolerance": 1e-09,
+  "ok": true
+ },
+ "best_aggregate": {
+  "penalty": 0.1,
+  "accuracy": 0.2431014492753623
+ },
+ "best_per_domain": {
+  "d0": {
+   "penalty": 0.1,
+   "accuracy": 0.2571428571428571
+  },
+  "d1": {
+   "penalty": 0.1,
+   "accuracy": 0.07945670628183361
+  },
+  "d2": {
+   "penalty": 0.01,
+   "accuracy": 0.1445900048520136
+  },
+  "d3": {
+   "penalty": 0.1,
+   "accuracy": 0.33657235400590646
+  },
+  "d4": {
+   "penalty": 0.01,
+   "accuracy": 0.26897496087636935
+  },
+  "d5": {
+   "penalty": 0.01,
+   "accuracy": 0.1441717791411043
+  }
+ }
+}
+M218 complete -> logs\results\v25\m218_ms_penalty_sweep\evidence.json

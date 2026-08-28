@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "artifact": "V13-NAMING-VOCABULARY",
+  "purpose": "The naming vocabulary for M82, fixed and hashed before any atom is named. Plan Section 9 and Amendment R6 require a vocabulary registered in advance; R9 additionally requires a gating positive control, which the in-corpus/absent split below supplies.",
+  "registered_before_naming": true,
+  "corpus": {
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128
+  },
+  "label_source": {
+    "description": "DomainNet ships 345 class names in the HuggingFace parquet schema metadata. The v13 corpus uses labels 0-127, so 128 names are present in the corpus and 217 are absent from it. Both the in-corpus names and the absent ones are taken verbatim from the dataset rather than authored here, so the vocabulary cannot be tuned toward a flattering result.",
+    "parquet_root": "D:/geode-ml/data/cache/domainnet",
+    "metadata_key": "huggingface",
+    "expected_total_names": 345,
+    "expected_in_corpus_names": 128
+  },
+  "distractor_rationale": "The 217 DomainNet classes absent from the v13 corpus are the naming instrument's far-field control, in the role N1 gave far-field noise for the detection instrument. They are drawn from the same concept distribution as the in-corpus names, are the same kind of word, and are the same length on average, but nothing in the corpus depicts them. A naming channel that assigns absent names at the rate it assigns present ones is not reading the atoms. This rate is reported as false_naming_rate.",
+  "style_terms": {
+    "rationale": "The v13 corpus is 61 percent quickdraw, a recorded corpus defect. An atom may therefore encode rendering style rather than object identity, and a vocabulary of object nouns alone could not name such an atom - it would be forced to emit an object word for a style direction and would look wrong when it was in fact reading something real. The six DomainNet domains are registered as a second vocabulary section so that style-carrying atoms are nameable and countable. The fraction of atoms best named by a style term is reported, never hidden.",
+    "terms": [
+      { "domain": 0, "name": "clipart", "phrase": "a piece of clipart" },
+      { "domain": 1, "name": "infograph", "phrase": "an infographic" },
+      { "domain": 2, "name": "painting", "phrase": "a painting" },
+      { "domain": 3, "name": "quickdraw", "phrase": "a rough black and white doodle" },
+      { "domain": 4, "name": "real", "phrase": "a real photograph" },
+      { "domain": 5, "name": "sketch", "phrase": "a pencil sketch" }
+    ]
+  },
+  "object_templates": {
+    "rationale": "CLIP zero-shot practice averages a fixed ensemble of prompts rather than trusting a single phrasing. The ensemble spans the corpus's six rendering styles so that no single domain's phrasing is privileged; a photo-only template would systematically favour the 3,607 real images over the 44,800 quickdraw ones. The ensemble is fixed here, before any naming, and may not be extended after a naming number is seen.",
+    "templates": [
+      "a photo of a {}.",
+      "a drawing of a {}.",
+      "a sketch of a {}.",
+      "a painting of a {}.",
+      "a piece of clipart of a {}.",
+      "an infographic of a {}.",
+      "a rough doodle of a {}."
+    ]
+  },
+  "style_templates": {
+    "templates": ["{}.", "an image that is {}."]
+  },
+  "name_normalisation": "DomainNet class names use underscores. Underscores are replaced by single spaces before templating, and no other edit is made.",
+  "output_dir": "logs/results/v13/naming_vocabulary"
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "milestone": "M82",
+  "registered_hypothesis": "H82: M80 atoms admit stable natural-language names, and naming raises I5 by converting coordinate indices into concepts.",
+  "registration_notes": [
+    "N81.2 - M81 measured I5 with component identity withheld, so it could not test nameability. M82 carries that burden.",
+    "N82.1 - CLIP reads quickdraw at 28.99 percent against clipart's 91.23 while quickdraw is 61 percent of the corpus. Per-domain naming quality is reported alongside every aggregate and no aggregate may be quoted alone.",
+    "N82.2 - the naming channel picks a name absent from the corpus for 34.57 percent of single images. Atom names are read against that floor, never against zero.",
+    "N82.3 - the registered style vocabulary recovers rendering domain for 26.17 percent of images against 16.67 chance and 0.00 percent on quickdraw. Not amended; the weakness is reported.",
+    "N82.4 - R8's arm (b) is sharpened from 'stable arbitrary indices' to a matched-size random grouping. See grouping_rationale below.",
+    "R9 - the two naming channels are structurally one, because a DINOv2 atom cannot be compared to a text embedding directly. Exemplar-resampling stability is the primary operand and the class-purity control is gating."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "domain_count": 6
+  },
+  "clip": {
+    "path": "logs/results/v13/clip_embeddings/artifact_index.json",
+    "vocabulary_path": "logs/results/v13/naming_vocabulary/vocabulary.json",
+    "vocabulary_hash": "e58714310c65841243826a4320ed5ed895c5ddc58c2bbc0d1beac0c031683ff9",
+    "in_corpus_terms": 128,
+    "style_terms_start": 345
+  },
+  "partition": { "fit_per_class": 512, "evaluation_per_class": 64 },
+  "dictionary": {
+    "dictionary_size": 8192,
+    "active_atoms": 32,
+    "epochs": 40,
+    "batch_size": 1024,
+    "learning_rate": 0.001,
+    "carried_from": "M80 m=8192/k=32 per N80.2, the cell that beats its own random-dictionary null"
+  },
+  "seeds": [11, 23, 37],
+  "naming": {
+    "exemplars_per_atom": 32,
+    "purity_threshold": 0.75,
+    "purity_control_floor": 0.5,
+    "purity_control_rationale": "R9 makes this gating. A channel that cannot name an atom whose exemplars are at least 75 percent one class is not naming anything, and its output on mixed atoms would be uninterpretable. The floor is set at 0.5 against a 1/345 chance baseline: far above chance, but well below the 91 percent CLIP reaches on clipart, so it tests the instrument rather than the corpus.",
+    "split_seed_offset": 82100,
+    "shuffle_seed_offset": 82200
+  },
+  "i5_eight": {
+    "classes": [1, 3, 23, 26, 62, 99, 105, 127],
+    "draw_seed": 8101,
+    "carried_from": "M81, so the two milestones' 8-way numbers are commensurable"
+  },
+  "heads": {
+    "carried_arm": "sparse_linear_budget_256",
+    "reported_arm": "sparse_linear_budget_512",
+    "carried_rationale": "R8 fixes the evaluand before names are assigned, so the naming channel cannot select the arm it is scored on. budget_256 was M81's best 8-way arm at I5 40.22 percent and 5.7 cited atoms.",
+    "epochs": 20,
+    "batch_size": 1024,
+    "learning_rate": 0.01,
+    "atom_budgets": [256, 512]
+  },
+  "grouping_rationale": "R8 registered arm (b) as atoms carried as stable arbitrary indices. Implemented literally that is a poor control: naming does not merely reveal identity, it GROUPS many atoms under one word, and a per-atom arm differs from a named arm in width as well as in meaning. Arm (b) is therefore also run as a matched-size random grouping - the same number of groups as naming produces, with the same group-size distribution, assigned arbitrarily. The naming claim rests on named minus matched-random, where width and group structure are identical and only the semantics differ. This is R5's null-control contract applied to the grouping itself. The literal per-atom arm is retained and reported so that R8's registered wording is still answered.",
+  "explanations": {
+    "top_count": 8,
+    "budget": 10,
+    "withheld_rationale": "Arm (a) is M81's identity-withheld form, carried unchanged so that M82's numbers can be read against M81's."
+  },
+  "i5": { "train_fraction": 0.7, "max_iter": 2000 },
+  "gate": {
+    "purity_control_is_gating": true,
+    "naming_delta_must_exceed_seed_spread": true,
+    "stability_null_margin_must_exceed_seed_spread": true,
+    "task_width": "eight_way_only",
+    "task_width_rationale": "R8. M81 left no accuracy-comparable atom arm inside the 10-atom budget at 128 classes in any seed at any tolerance, so there is no 128-way baseline for naming to raise. Any M82 claim is an 8-way claim."
+  },
+  "threading": { "torch_threads_per_worker": 1, "workers": 3 },
+  "output_dir": "logs/results/v13/m82_atom_naming"
+}

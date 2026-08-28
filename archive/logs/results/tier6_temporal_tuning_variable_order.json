@@ -1,0 +1,425 @@
+{
+  "config": {
+    "artifact_path": "logs/results/tier6_temporal_tuning_variable_order.json",
+    "candidates": [
+      {
+        "name": "window_2",
+        "representation": "window",
+        "window": 2
+      },
+      {
+        "name": "single_d8_r50",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.5
+      },
+      {
+        "name": "single_d8_r80",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.8
+      },
+      {
+        "name": "single_d8_r95",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.95
+      },
+      {
+        "name": "single_d16_r50",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.5
+      },
+      {
+        "name": "single_d16_r80",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.8
+      },
+      {
+        "name": "single_d16_r95",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.95
+      },
+      {
+        "name": "single_d24_r80",
+        "representation": "temporal_state",
+        "state_dim": 24,
+        "recurrence": 0.8
+      },
+      {
+        "name": "single_d24_r95",
+        "representation": "temporal_state",
+        "state_dim": 24,
+        "recurrence": 0.95
+      },
+      {
+        "name": "timescale_d12",
+        "representation": "multi_timescale",
+        "state_dim": 12,
+        "recurrences": [
+          0.3,
+          0.7,
+          0.95
+        ]
+      },
+      {
+        "name": "timescale_d24",
+        "representation": "multi_timescale",
+        "state_dim": 24,
+        "recurrences": [
+          0.3,
+          0.7,
+          0.95
+        ]
+      },
+      {
+        "name": "multiseed_d12_r80",
+        "representation": "multi_seed",
+        "state_dim": 12,
+        "member_count": 3,
+        "recurrence": 0.8
+      },
+      {
+        "name": "multiseed_d24_r80",
+        "representation": "multi_seed",
+        "state_dim": 24,
+        "member_count": 3,
+        "recurrence": 0.8
+      },
+      {
+        "name": "multiseed_d24_r95",
+        "representation": "multi_seed",
+        "state_dim": 24,
+        "member_count": 3,
+        "recurrence": 0.95
+      },
+      {
+        "name": "hybrid_d12_r80",
+        "representation": "hybrid",
+        "window": 2,
+        "state_dim": 12,
+        "recurrence": 0.8
+      },
+      {
+        "name": "hybrid_d24_r95",
+        "representation": "hybrid",
+        "window": 2,
+        "state_dim": 24,
+        "recurrence": 0.95
+      }
+    ],
+    "dataset": "synthetic_variable_order",
+    "max_chars": 6000,
+    "n_folds": 3,
+    "seed": 13
+  },
+  "results": [
+    {
+      "name": "window_2",
+      "candidate": {
+        "name": "window_2",
+        "representation": "window",
+        "window": 2
+      },
+      "fold_accuracies": [
+        0.21916666666666668,
+        0.22518765638031693,
+        0.22583333333333333
+      ],
+      "mean_forward_accuracy": 0.22339588546010566,
+      "std_forward_accuracy": 0.003002104082583543,
+      "feature_dimension": 192
+    },
+    {
+      "name": "single_d8_r50",
+      "candidate": {
+        "name": "single_d8_r50",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.5
+      },
+      "fold_accuracies": [
+        0.21416666666666667,
+        0.22833333333333333,
+        0.21833333333333332
+      ],
+      "mean_forward_accuracy": 0.2202777777777778,
+      "std_forward_accuracy": 0.0059447040441757484,
+      "feature_dimension": 8
+    },
+    {
+      "name": "single_d8_r80",
+      "candidate": {
+        "name": "single_d8_r80",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.23666666666666666,
+        0.23166666666666666,
+        0.2375
+      ],
+      "mean_forward_accuracy": 0.23527777777777778,
+      "std_forward_accuracy": 0.002576005137637695,
+      "feature_dimension": 8
+    },
+    {
+      "name": "single_d8_r95",
+      "candidate": {
+        "name": "single_d8_r95",
+        "representation": "temporal_state",
+        "state_dim": 8,
+        "recurrence": 0.95
+      },
+      "fold_accuracies": [
+        0.22,
+        0.24,
+        0.24666666666666667
+      ],
+      "mean_forward_accuracy": 0.23555555555555555,
+      "std_forward_accuracy": 0.011331154474650633,
+      "feature_dimension": 8
+    },
+    {
+      "name": "single_d16_r50",
+      "candidate": {
+        "name": "single_d16_r50",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.5
+      },
+      "fold_accuracies": [
+        0.21666666666666667,
+        0.24166666666666667,
+        0.24
+      ],
+      "mean_forward_accuracy": 0.23277777777777778,
+      "std_forward_accuracy": 0.011412576991207849,
+      "feature_dimension": 16
+    },
+    {
+      "name": "single_d16_r80",
+      "candidate": {
+        "name": "single_d16_r80",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.2825,
+        0.26666666666666666,
+        0.2608333333333333
+      ],
+      "mean_forward_accuracy": 0.26999999999999996,
+      "std_forward_accuracy": 0.009154031696268931,
+      "feature_dimension": 16
+    },
+    {
+      "name": "single_d16_r95",
+      "candidate": {
+        "name": "single_d16_r95",
+        "representation": "temporal_state",
+        "state_dim": 16,
+        "recurrence": 0.95
+      },
+      "fold_accuracies": [
+        0.32,
+        0.31416666666666665,
+        0.3016666666666667
+      ],
+      "mean_forward_accuracy": 0.3119444444444444,
+      "std_forward_accuracy": 0.007647722165520102,
+      "feature_dimension": 16
+    },
+    {
+      "name": "single_d24_r80",
+      "candidate": {
+        "name": "single_d24_r80",
+        "representation": "temporal_state",
+        "state_dim": 24,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.32166666666666666,
+        0.3275,
+        0.3125
+      ],
+      "mean_forward_accuracy": 0.32055555555555554,
+      "std_forward_accuracy": 0.006173919658581357,
+      "feature_dimension": 24
+    },
+    {
+      "name": "single_d24_r95",
+      "candidate": {
+        "name": "single_d24_r95",
+        "representation": "temporal_state",
+        "state_dim": 24,
+        "recurrence": 0.95
+      },
+      "fold_accuracies": [
+        0.3333333333333333,
+        0.3358333333333333,
+        0.33166666666666667
+      ],
+      "mean_forward_accuracy": 0.33361111111111114,
+      "std_forward_accuracy": 0.0017123372230469325,
+      "feature_dimension": 24
+    },
+    {
+      "name": "timescale_d12",
+      "candidate": {
+        "name": "timescale_d12",
+        "representation": "multi_timescale",
+        "state_dim": 12,
+        "recurrences": [
+          0.3,
+          0.7,
+          0.95
+        ]
+      },
+      "fold_accuracies": [
+        0.24166666666666667,
+        0.2425,
+        0.24166666666666667
+      ],
+      "mean_forward_accuracy": 0.24194444444444443,
+      "std_forward_accuracy": 0.00039283710065918904,
+      "feature_dimension": 12
+    },
+    {
+      "name": "timescale_d24",
+      "candidate": {
+        "name": "timescale_d24",
+        "representation": "multi_timescale",
+        "state_dim": 24,
+        "recurrences": [
+          0.3,
+          0.7,
+          0.95
+        ]
+      },
+      "fold_accuracies": [
+        0.30083333333333334,
+        0.3175,
+        0.3125
+      ],
+      "mean_forward_accuracy": 0.3102777777777778,
+      "std_forward_accuracy": 0.0069832250499869625,
+      "feature_dimension": 24
+    },
+    {
+      "name": "multiseed_d12_r80",
+      "candidate": {
+        "name": "multiseed_d12_r80",
+        "representation": "multi_seed",
+        "state_dim": 12,
+        "member_count": 3,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.22833333333333333,
+        0.22833333333333333,
+        0.2075
+      ],
+      "mean_forward_accuracy": 0.22138888888888889,
+      "std_forward_accuracy": 0.009820927516479831,
+      "feature_dimension": 12
+    },
+    {
+      "name": "multiseed_d24_r80",
+      "candidate": {
+        "name": "multiseed_d24_r80",
+        "representation": "multi_seed",
+        "state_dim": 24,
+        "member_count": 3,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.305,
+        0.31416666666666665,
+        0.315
+      ],
+      "mean_forward_accuracy": 0.3113888888888889,
+      "std_forward_accuracy": 0.004530418452861136,
+      "feature_dimension": 24
+    },
+    {
+      "name": "multiseed_d24_r95",
+      "candidate": {
+        "name": "multiseed_d24_r95",
+        "representation": "multi_seed",
+        "state_dim": 24,
+        "member_count": 3,
+        "recurrence": 0.95
+      },
+      "fold_accuracies": [
+        0.31083333333333335,
+        0.30583333333333335,
+        0.3025
+      ],
+      "mean_forward_accuracy": 0.3063888888888889,
+      "std_forward_accuracy": 0.0034246744460938857,
+      "feature_dimension": 24
+    },
+    {
+      "name": "hybrid_d12_r80",
+      "candidate": {
+        "name": "hybrid_d12_r80",
+        "representation": "hybrid",
+        "window": 2,
+        "state_dim": 12,
+        "recurrence": 0.8
+      },
+      "fold_accuracies": [
+        0.325,
+        0.30775646371976645,
+        0.2991666666666667
+      ],
+      "mean_forward_accuracy": 0.3106410434621444,
+      "std_forward_accuracy": 0.01074184583751416,
+      "feature_dimension": 204
+    },
+    {
+      "name": "hybrid_d24_r95",
+      "candidate": {
+        "name": "hybrid_d24_r95",
+        "representation": "hybrid",
+        "window": 2,
+        "state_dim": 24,
+        "recurrence": 0.95
+      },
+      "fold_accuracies": [
+        0.40166666666666667,
+        0.3978315262718932,
+        0.39
+      ],
+      "mean_forward_accuracy": 0.3964993976461866,
+      "std_forward_accuracy": 0.004855148661256276,
+      "feature_dimension": 216
+    }
+  ],
+  "selected": {
+    "name": "hybrid_d24_r95",
+    "candidate": {
+      "name": "hybrid_d24_r95",
+      "representation": "hybrid",
+      "window": 2,
+      "state_dim": 24,
+      "recurrence": 0.95
+    },
+    "fold_accuracies": [
+      0.40166666666666667,
+      0.3978315262718932,
+      0.39
+    ],
+    "mean_forward_accuracy": 0.3964993976461866,
+    "std_forward_accuracy": 0.004855148661256276,
+    "feature_dimension": 216
+  },
+  "selection_metric": "train_only_linear_forward_validation_accuracy",
+  "test_sequence_used": false
+}

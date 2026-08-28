@@ -1,0 +1,60 @@
+{
+  "milestone": "M161",
+  "title": "SMOKE: M161 hybrid-readout plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M161 / section 6 build entry (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (4000 train / 2000 test rows, 2 epochs, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 4000,
+  "_smoke_test_rows": 2000,
+  "_smoke_epochs": 2,
+  "question": "Does the M161 pipeline (ridge anchor, pure trained head, hybrid training, gate) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "level": {
+    "n_train": 138000
+  },
+  "sparse": {
+    "spm_atoms": 1923,
+    "power": 0.5
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "schedule": {
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 3e-4,
+    "weight_decay": 1e-4,
+    "patience": 2,
+    "validation_fraction": 0.05
+  },
+  "anchors": {
+    "ridge_reference": 0.2273623188405797,
+    "ridge_tolerance": 1e-06
+  },
+  "gate": {
+    "registered": "hybrid >= ridge + 0.005 on the test rows, else archived as a scoped negative.",
+    "margin": 0.005,
+    "consequence_passed": "the hybrid beats both parents.",
+    "consequence_fired": "M161 closes as a scoped negative and the pure ridge stays the readout."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m161_hybrid_readout_smoke"
+}

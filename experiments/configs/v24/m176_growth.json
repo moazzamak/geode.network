@@ -1,0 +1,30 @@
+{
+  "milestone": "M176",
+  "title": "Registry-growth: at what registry size does routing measurably beat the global fallback?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase D (M176)",
+  "registered_before_any_training": true,
+  "question": "As the arm registry grows over synthetic families with distinct descriptors, at what size K does routed accuracy (with the registered eps-advance rule) measurably beat the global mean-predictor fallback?",
+  "interpretation_registered_before_running": {
+    "gate": "K* = the smallest registry size where mean margin >= 0.05 AND at least 2/3 of included families improve over the fallback",
+    "exclusion": "a family is excluded from the margin where the best measured arm scores below 0.1 R2 (iid/noise families: routing cannot beat a fallback on noise; measuring there tests nothing). Applied uniformly across all K.",
+    "raw_nearest": "the raw nearest-arm margin (no eps-advance) is reported alongside; the eps-advance rule is the registered deployment behavior",
+    "trigger": "K* is the registered learned-router trigger size for the deployment-phase learned policy"
+  },
+  "cell": {
+    "families": "synthetic AR families over the axis grid: temporal {iid, sequential, delayed} x noise {low, medium, high} x stationarity {stationary, non-stationary}, interleaved assignment (temporal cycles fastest)",
+    "k_ladder": [2, 4, 8, 16],
+    "n_rows": 800,
+    "train_frac": 0.6,
+    "window": 10,
+    "eps": 0.0
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 300,
+    "lr": 0.001,
+    "note": "one self-consistent in-process encoder (the M172b pattern)"
+  },
+  "output_dir": "logs/results/v24/m176_growth"
+}

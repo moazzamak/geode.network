@@ -1,0 +1,56 @@
+{
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Tiny atoms (128), tiny hash pool, few hash iterations, gates bypassed. Its only job is to prove the code paths execute: parity guard, corpus, M108-exact whitener + candidates, deterministic dictionary rebuild, ITQ fit, random-projection fit, bit packing, XOR+POPCNT Hamming, triangle + uneven-edge pooling, ridge heads, per-domain eval, binary MAC/op ledger, and both kill switches evaluate. Every accuracy it produces is meaningless.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "whiten": "cpu",
+    "hash": "cpu",
+    "encode": "gpu",
+    "ridge": "cpu",
+    "_note": "encode=gpu exercises the sign-GEMM Hamming backend (identical distances to the CPU popcount path, torch-only, no toolchain)."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 128,
+    "bits": [64, 108],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 2048,
+    "hash_fit_seed": 33,
+    "hash_fit_images": 40,
+    "hash_pool_size": 10000,
+    "hash_iters": 5
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0]
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

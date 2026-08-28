@@ -1,0 +1,34 @@
+{
+  "milestone": "M222",
+  "title": "DINOv2-hybrid ridge, BOUNDED PILOT (GPU extraction)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M222 registered 20 Aug before the build)",
+  "question": "On a registered train subset, does concatenating DINOv2-small features with the ms codes help the closed-form ridge on the sealed test? (feasibility + direction only)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "note": "the sealed subsample parameters. The runner reuses the sealed m109 _load_corpus: the 400/class train index is computed ONLY to reproduce the registered combined subsample digest (a gate); the PILOT itself uses per-class prefixes of the FULL 409,832-row schedule, and the test selection is the sealed 34,500-row selection.",
+    "decoded_npz": "GEODE_CACHE_DIR/domainnet_decoded/size32.npz",
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy"
+  },
+  "pilot": {
+    "train_rows_per_class": 58,
+    "note": "per-class PREFIX selection over the full 409,832-row schedule (first 58 rows of each class in schedule order) — a registered bounded pilot, NOT the full-scale result",
+    "penalties": [0.1, 1.0, 10.0]
+  },
+  "model": {
+    "repo": "facebookresearch/dinov2",
+    "name": "dinov2_vits14",
+    "feature_dim": 384,
+    "input_size": 224
+  },
+  "output_dir": "logs/results/v25/m222_dinov2_hybrid_pilot"
+}

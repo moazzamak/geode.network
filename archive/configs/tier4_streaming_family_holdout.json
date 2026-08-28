@@ -1,0 +1,15 @@
+{
+  "artifact_path": "logs/results/tier4_streaming_family_holdout.json",
+  "holdout_seeds": [61, 62, 63, 64, 65],
+  "stream_families": [
+    "heavy_tailed",
+    "anisotropic",
+    "abrupt_drift",
+    "intermittent_unseen"
+  ],
+  "frozen_separation": 2.5,
+  "rejection_threshold": 1.0,
+  "dbscan_epsilon": 0.9,
+  "dbscan_minimum_samples": 4,
+  "incremental_assignment_radius": 0.9
+}

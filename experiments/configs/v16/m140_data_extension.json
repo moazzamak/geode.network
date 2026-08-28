@@ -1,0 +1,59 @@
+{
+  "milestone": "M140",
+  "title": "Data-axis extension: does Q(6144, n) keep rising past 138000 rows on the sealed construction?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M140, amended 13 Aug 2026 before measurement)",
+  "registered_before_any_accuracy": true,
+  "question": "Data is the steep lever (M116). The subsample caps at 400 train rows per class. Does Q(n) keep rising past 138000 on the same class schedule, and does the crossover vs dense r42 hold or widen?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms": 6144,
+    "note": "M117/M126 exact construction, unchanged; M140 adds rows only."
+  },
+  "extension": {
+    "class_caps": [450, 600],
+    "n_ladder": [155250, 207000],
+    "rule": "per class, the first (cap - 400) raw-train rows of that class (raw array order) NOT in the sealed 400-row subsample. n = 345 * cap.",
+    "whitener_and_dictionary": "the SEALED M117 construction, unchanged; only rows are added",
+    "encoder_check_rows": 256,
+    "encoder_check_tolerance": 1e-05
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "Q(6144, 138000) from the sealed memmaps reproduces 0.2248695652173913",
+    "kill_switch_data": "fired if Q(6144, 207000) - 0.2248695652173913 < +0.005. Fired: the data axis saturates at the corpus cap (negative sealed). Passed: data extension is a measured lever; escalate.",
+    "dense_r42_reference": 0.1972,
+    "crossover_report": "Q_ext - 0.1972 reported at both extended cells"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05
+  }
+}

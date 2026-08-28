@@ -1,0 +1,25 @@
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+{
+ "results": {
+  "ood_flag_rate": 1.0,
+  "id_flag_rate": 1.0,
+  "planted_score_quantiles": [
+   39.39004086142246,
+   41.27987162317111,
+   43.23649216602356,
+   43.23649216602356,
+   43.23649216602356
+  ],
+  "id_score_quantiles": [
+   17.189625297440465,
+   29.547276033585558,
+   34.8723788350173,
+   37.90896216797692,
+   42.958772169916344
+  ],
+  "g1_ok": true,
+  "g2_ok": false,
+  "verdict": "M285b FAIL \u2014 the repair does not separate; recorded, no threshold dialing"
+ }
+}
+M285b complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v25\m285b_ood_repair\evidence.json

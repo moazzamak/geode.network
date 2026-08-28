@@ -1,0 +1,43 @@
+{
+  "milestone": "M192b",
+  "title": "All-random field-based Gram sharing: 2-of-3 replicated Shamir over q = 2^31-1",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M192b registered 19 Aug before the build)",
+  "registered_before_any_accuracy": true,
+  "question": "Can the joint ridge Gram be accumulated from shares that are individually uniform over a field (no residual share), reconstructing the field Gram exactly?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "anchor": {
+    "value": 0.24214492753623187,
+    "source": "M180 sealed V_ms (penalty 1.0, block 4096, RidgeAccumulator bit-exact path)",
+    "tolerance": 1e-9
+  },
+  "cell": {
+    "columns": 64,
+    "rows": 512,
+    "fixed_point_scale": 65536,
+    "field_note": "q = 2^61-1 (registered repair: the 2^31-1 field wrapped the Gram entries; entries <= 2^24, products <= 2^48, sums <= 2^57 < q)",
+    "threshold_k": 2,
+    "parties": 3,
+    "share_seed": 20260822,
+    "fidelity_tol": 1e-4,
+    "corr_tol": 0.05,
+    "band_tol": 0.02
+  },
+  "output_dir": "logs/results/v25/m192b_all_random_gram"
+}

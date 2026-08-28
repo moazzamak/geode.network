@@ -1,0 +1,76 @@
+{
+  "milestone": "M118",
+  "title": "Binary x data scaling: does the 108-bit Hamming code inherit the frozen family's steep Q(n), and does data buy back M114's 3.3-point bit loss?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.5 (M118)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "whiten": "cpu",
+    "hash": "cpu",
+    "encode": "gpu",
+    "ridge": "cpu",
+    "_note": "sign-code projection on CPU numpy (float64); the Hamming GEMM (sign-GEMM identity, bit-identical to the CPU hardware-POPCNT path) on the GPU; ridge on CPU. HIP_VISIBLE_DEVICES=1, gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 3072,
+    "bits": 108,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "random_dictionary": "M108/M113/M114 exact: prefix of the seeded permutation of the shared 8192-whitened-patch pool (seed 11)",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "hash_fit_seed": 33,
+    "hash_fit_images": 200,
+    "hash_pool_size": 100000,
+    "hash_iters": 50,
+    "arms": ["b_random", "c_itq"],
+    "hash_learned": "ITQ (Gong et al., CVPR 2011) with M114's exact registered parameters; hash_control = seeded Gaussian projection",
+    "hamming": "sign-GEMM identity (bit-identical to packed uint64 XOR + POPCNT); triangle kernel on Hamming, soft assignment over ALL atoms"
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0]
+  },
+  "scaling": {
+    "n_ladder": [6900, 13800, 27600, 55200, 110400, 138000],
+    "subsample_rule": "first n rows of the M107-shuffled train order (nested), identical to M116",
+    "test_set": "the full 34500-row shared test set, identical for every ladder point and both arms",
+    "float_reference_curve": "M116 sealed sparse Q(n): 0.0484/0.0706/0.0952/0.1442/0.1935/0.2153 (gain 0.1668); binary codes are image functions, so each arm's codes are encoded ONCE into D: memmaps and a ridge is fitted at each n"
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "M114 sealed b_random (RANDOM-108) = 0.1842 at n=138000, reproduced within 0.002",
+    "kill_switch_1_binary_steepness": "fired if the binary arm's Q(n) gain across the ladder is < 0.5 x the float arm's gain (0.1668): the 108-bit code must inherit at least half of the frozen family's data-scaling steepness",
+    "kill_switch_2_bit_loss_buyback": "fired if the binary-vs-float gap at n_max exceeds the gap at n_min + 0.01: data must NARROW (or hold) the M114 bit loss, else data does not buy back the 3.3-point loss and M114's KS2 failure is not rescued at scale",
+    "registered_prediction": "the binary code is a lossy projection of the same 12288-wide feature; if its Q(n) is comparably steep (same wide head), the gap should narrow as data grows - the M114 rescue test"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

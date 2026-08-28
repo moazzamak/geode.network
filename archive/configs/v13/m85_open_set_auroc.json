@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "milestone": "M85",
+  "registered_question": "N85.4: does the fitted geometry rank unseen rows above known ones, threshold-free, and does it do so better than a free baseline?",
+  "registration_notes": [
+    "N85.4 - L2 registers a threshold-free bar as gating and forbids a bare recall percentage, and no v13 evidence file contains an AUROC. This run completes the open-set leg's reporting from the sealed artifacts. It re-runs no training and re-fits nothing: the geometry is closed-form Phase A on the same fit rows, at the same rank, under the same domain-quota partition and the same 90 percent coverage match as M83 and M84, so the object being ranked is the object those milestones thresholded.",
+    "N85.4a - a threshold-free result cannot overturn a threshold result. If AUROC lands above 0.5 while recall at matched coverage sits near zero, the finding is that the score ranks better than it thresholds, which is a statement about the coverage-matching rule and not a rescue of H83 or H84. Registered before the number was seen.",
+    "N85.4b - the direction is deliberately not predicted. M84's mechanism, a union of 128 elongated ellipsoids that covers the space, predicts an AUROC near chance. M84's domain decomposition, in which the untrained boundary rejects 0.7333 of unseen real-photograph rows and 0.0003 of unseen quickdraw rows, predicts a strong one on photographic domains. Aggregate and per-domain figures are both reported whichever way they fall.",
+    "N85.4c - R5 applies. The geometry's AUROC is reported beside free baselines computed on the identical rows, the identical split and the identical frozen fit set: distance to the nearest class centre, which uses the geometry's own centres but none of its learned radii or subspaces, and distance to the k-th nearest fit row, the k-NN bar this program has used as the free-composability control throughout. An operand without its null is not evidence.",
+    "N85.4d - the instrument is validated at both ends before any figure is read, as ACCEPTANCE_CRITERIA section 5 requires and as M83.1 failed to do. The positive control places synthetic points at five times the data's median radius from its own mean, where AUROC must be at or above 0.99. The negative control splits the held-out knowns in half and scores one against the other, where AUROC must sit within 0.02 of 0.5. A run that fails either control reports instrument_invalid and suppresses every figure below it."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "The same 5760 rows in 90 classes M84 read, so the AUROC completes M84's recall rather than describing a different evaluation set."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged from M83 and M84."
+  },
+  "geometry": {
+    "rank": 51,
+    "phase_a_frozen": true
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3. AUROC is threshold-free and does not depend on the offsets, which are a per-class constant; they are applied anyway so that the reported recall is exactly M84's zero-rung figure and the two statistics are read off one object."
+  },
+  "baselines": {
+    "knn_k": 10,
+    "knn_rationale": "Distance to the 10th nearest fit row. k is fixed at the value used for the free-composability bar elsewhere in v13 and is not tuned against this evaluation set.",
+    "chunk_rows": 512
+  },
+  "controls": {
+    "far_field_multiplier": 5.0,
+    "far_field_count": 2048,
+    "far_field_seed": 85001,
+    "far_field_floor": 0.99,
+    "known_split_tolerance": 0.02,
+    "rationale": "N85.4d. The far-field radius is measured from the corpus's own mean and median radius, so the control scales with the data rather than with a hard-coded length."
+  },
+  "reporting": {
+    "decisive_margin": 0.02,
+    "m84_zero_rung_recall": 0.11875,
+    "m84_zero_rung_rationale": "N84.4's registered known-value control. The run recomputes it from the sealed corpus and stops if it does not reproduce, because a boundary that ranks well but is not M84's boundary would say nothing about the open-set leg.",
+    "rationale": "The geometry is recorded as beating a free baseline only if it exceeds the strongest of them by more than this margin. Anything inside the margin is recorded as a tie, because a hundredth of AUROC on 5760 rows is not a capability claim."
+  },
+  "output_dir": "logs/results/v13/m85_open_set_auroc"
+}

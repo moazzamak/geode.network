@@ -1,0 +1,105 @@
+{
+  "milestone": "M103",
+  "title": "Is a grown dictionary better than a drawn one?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.9",
+  "corpus": {
+    "dataset": "uoft-cs/cifar10",
+    "train_rows": 50000,
+    "test_rows": 10000,
+    "expected_sha256": null,
+    "_note": "Full CIFAR-10 train and test splits, in dataset order. expected_sha256 is filled in from the first run and pinned thereafter; a mismatch aborts. Plan section 7.9 restriction 1: NO M103 figure may be compared to any v13, v14 or v15 DomainNet figure in either direction."
+  },
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_rows": 200000,
+    "zca_fit_seed": 11,
+    "_note": "Coates-style pipeline: per-patch contrast normalisation, ZCA whitening, triangle encoding, 2x2 sum pooling, so a dictionary of A atoms yields 4A features. Plan section 7.9 design item 4 requires stride 1 and the full 50,000-row train split; section 2.9.3 relaxed both and its accuracies are therefore below what this family reaches. The ZCA basis is fitted on a seeded subsample of the TRAIN split only and is shared by every arm and every seed, so no arm gets a different whitening."
+  },
+  "budgets": [64, 128, 256, 512, 1024, 2048],
+  "reference_budget": 1024,
+  "seeds": [11, 23, 37],
+  "sample_adequacy": {
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_note": "Plan section 5.3, never waived, and section 7.9 restriction 4. The linear head fits 4*atoms features from 50,000 rows, so the ratio is 50000/(4*atoms): 64 -> 195.3, 128 -> 97.7, 256 -> 48.8, 512 -> 24.4, 1024 -> 12.2 all pass; 2048 -> 6.1 FAILS. The 2048 rung is run and reported VOID, not negative, exactly as M102 reported its d=64 arm (C102.2). It is registered as expected void BEFORE the run."
+  },
+  "arms": {
+    "a_random_patches": {
+      "label": "(a) random whitened patches drawn from the shared candidate pool",
+      "role": "the null. Section 2.9.3 measures this as the strongest of the three constructions tried before M103."
+    },
+    "b_kmeans": {
+      "label": "(b) k-means centroids (Coates et al. 2011)",
+      "role": "the published learned-dictionary construction, carried so section 2.9.3's ordering is tested under seal rather than recalled",
+      "n_init": 1,
+      "batch_size": 4096,
+      "max_iter": 100
+    },
+    "c_discriminative": {
+      "label": "(c) additive selection against a discriminative residual (group OMP)",
+      "role": "the arm the thesis is about",
+      "selection_rows": 8000,
+      "_note": "Group orthogonal matching pursuit over the shared candidate pool. The residual starts as the centred one-hot label matrix; each candidate owns the four pooled columns it contributes; the atom whose block best explains the current residual is taken and regressed out, so the next atom is chosen against what the selected ones leave unexplained. Selection uses TRAIN ROWS ONLY. The selection order is nested, so the budget-64 dictionary is the 64-atom prefix of the budget-2048 one and the sweep costs one selection pass per seed."
+    },
+    "d_random_projections": {
+      "label": "(d) isotropic Gaussian directions, not data patches",
+      "role": "second null, distinguishing 'atoms drawn from data' from 'atoms that are directionally arbitrary'",
+      "_note": "Drawn isotropically in whitened patch space and given the patch pool's EMPIRICAL NORM DISTRIBUTION by resampling, so arm (d) differs from arm (a) in DIRECTION only. Section 2.9.4 measured that atom-norm distribution is the mechanism separating these dictionaries; fixing every arm (d) atom to a single norm would have made the second kill switch a test of norm variance as well as of provenance, which is not what section 7.9 registers. The alternative — unit-norm directions — was considered and rejected for that reason, and the choice is recorded here rather than left implicit."
+    }
+  },
+  "candidate_pool": {
+    "size": 4096,
+    "_note": "Plan section 7.9 restriction 6, added from section 2.9.4 limitation (iii). Arms (a) and (c) draw from the SAME pool at the SAME size, so the operand isolates the selection criterion rather than the breadth of the search. A larger search space is itself an advantage, and without this restriction a confirmed arm (c) would be ambiguous between 'the discriminative criterion works' and 'looking at more atoms works'. The pool is drawn once per seed from the whitened patch pool and is reported beside every arm (a) and arm (c) figure."
+  },
+  "head": {
+    "family": "multinomial_logistic",
+    "regularisation_grid": [0.01, 0.03, 0.1, 0.3],
+    "validation_rows": 5000,
+    "selection_rows": 15000,
+    "selection_arm": "a_random_patches",
+    "max_iter": 1000,
+    "_note": "Plan section 7.9 design item 4 requires the head trained to convergence. The inverse-regularisation constant is chosen ONCE PER BUDGET, on the NULL arm (a) at the first seed, from a fit on selection_rows rows scored against a validation_rows split carved out of TRAIN; the chosen constant is then applied unchanged to every arm and every seed at that budget, and the head is refitted on all 50,000 train rows so the sample-floor arithmetic in section 7.9 restriction 4 holds exactly as written. Choosing on the null arm is deliberately against interest: arm (c) never gets a constant tuned to itself. The evaluation split is never touched by any choice. Convergence is recorded per fit and a non-converged fit is reported as such rather than silently read.",
+    "_grid_note": "The grid was [0.003, 0.01, 0.03] when the instrumentation run of section 2.9.6 was made, and 0.03 — the TOP of that grid — won for all four arms, which means the grid was truncated and every arm was under-fitted. The grid was extended upward before the sealed run for that reason. This is disclosed rather than silently corrected: the change was made after seeing data, and section 2.9.6 records what was seen."
+  },
+  "instrument_check": {
+    "arm": "b_kmeans",
+    "monotonicity_arm": "b_kmeans",
+    "floor_budget": 1024,
+    "floor_accuracy": 0.6223,
+    "floor_source": "plan section 2.9.3, k-means at 1024 atoms on the relaxed instrument (20,000 rows, stride 2, unconverged head)",
+    "anchor_accuracy": 0.796,
+    "anchor_features": 4000,
+    "anchor_source": "Coates, Ng & Lee (2011), CIFAR-10 k-means triangle encoding, PMLR v15 abstract",
+    "_note": "Plan section 7.9 design item 4 AS CORRECTED in section 2.9.6. The check as first registered required arm (b) at 1024-2048 atoms to reach the Coates 0.796, which is a 4000-FEATURE figure, while section 7.9 restriction 4 fixes M103's top readable rung at 1024 atoms. That check fails on every possible run and, by making an external figure a pass/fail gate, makes it an OPERAND, which R7 forbids. The corrected check is internal: (i) arm (b)'s accuracy must RISE with atom count across the readable rungs; (ii) arm (b) at 1024 atoms must exceed section 2.9.3's own 1024-atom reading of 0.6223, since M103 relaxes none of the three things that probe relaxed; (iii) the encode must be bitwise repeatable within the run. The Coates figure is reported beside the curve as an ANCHOR with the feature-count mismatch stated, and gates nothing.",
+    "_anchor_note": "R7: external figures are anchors, never operands. The Coates K was NOT verified by fetch and plan section 8.5 discloses it as unverified; that is a second reason it cannot carry a gate."
+  },
+  "external_bars": {
+    "thiry_linear_registered": 0.869,
+    "thiry_linear_status": "UNCONFIRMED — plan section 2.9.5. Re-verification against the authors' official repository gives 0.8232 (2K patches) and 0.8562 (16K patches), neither of which reproduces 0.869. No M103 arm may be reported as having reached or missed 'the Thiry bar' until the paper's own tables are read and the figure is restated in the plan.",
+    "thiry_repository_2k_linear": 0.8232,
+    "thiry_repository_16k_linear": 0.8562,
+    "thiry_repository_2k_hidden": 0.8853,
+    "_note": "R7: external figures are ANCHORS, never operands. M103's verdict is computed only from its own arms, which is why section 2.9.5 records that the unconfirmed bar does not block this milestone."
+  },
+  "gate": {
+    "primary_operand": "efficiency at matched accuracy — the smallest atom count at which each arm reaches the accuracy arm (a) reaches at the reference budget, per plan section 7.9 design item 2",
+    "kill_switch_1": "If arm (c) does not reach arm (a)'s reference-budget accuracy with FEWER than reference_budget atoms, at three seeds, the registered finding is that for patch dictionaries ATOM COUNT DOMINATES ATOM CHOICE. That is a substantive negative about the plan's central thesis and section 11.1 requires it as the headline.",
+    "kill_switch_2": "If arm (d) matches arm (a), the effective content of the dictionary is its size and geometry rather than its provenance in the data, and both M103's and M99's premises weaken together.",
+    "kill_switch_2_tolerance": 0.005,
+    "_note": "Both kill switches were registered in plan section 7.9 BEFORE section 2.9.4 reversed the program's prior on this milestone, and neither is loosened by that reversal. A milestone whose bar moved when its prior moved would not be a milestone."
+  },
+  "compute_ledger": {
+    "report_training_and_inference_separately": true,
+    "_note": "Plan section 5.11 and section 7.9 design item 7. Arm (c) pays a selection cost that arms (a) and (d) do not pay at all, and section 11.2 item 10 forbids netting training against inference. Both columns are reported for every arm and any efficiency statement must name which column it means. Patch extraction and per-patch contrast normalisation are excluded from the MAC count and that exclusion is stated in the evidence, exactly as section 2.9.3 limitation (iv) requires."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "torch_threads": 16,
+    "float64_control_budget": 256,
+    "float64_control_seed": 11,
+    "_note": "The encode runs in float32 on a multi-threaded torch backend, which is what makes the full-scale sweep affordable. Two self-checks discharge the risk this introduces: a within-run determinism check that encodes the same block twice and requires bitwise equality, and a float64 control that re-runs one (arm, budget, seed) cell in double precision and reports the difference. Bitwise reproducibility across machines requires the same thread count, which is recorded in the evidence rather than assumed."
+  }
+}

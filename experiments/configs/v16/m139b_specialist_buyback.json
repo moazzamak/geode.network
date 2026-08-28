@@ -1,0 +1,62 @@
+{
+  "milestone": "M139b",
+  "title": "The assembled specialist buy-back: oracle-routed vs code-routed vs confidence-gated vs the sealed dense ladder",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M139 amendment, 13 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "The parts are sealed (M119/M124: per-domain super-additive at ~5.6x fewer MACs; M139a: code-routed domain dispatch at 75.6%). The assembled routed system was never run. Does the ASSEMBLED system - specialists dispatched by the code-router, no domain labels at inference - beat the sealed dense r28 arm per domain at ~2.4x fewer per-image MACs?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_construction": "A5-exact (M119/M124): global M108 whitener; per-domain candidate pool (n_cap 20000, seed [11, domain]) restricted to the domain's train rows; dictionary = candidates in the [11,100] seeded-permutation order, first 512 atoms; triangle encode on GPU with the registered throttle; closed-form ridge lambda=1.0."
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "note": "Global fallback + domain router fitted on the SEALED 6144-atom memmaps (dual accumulate, the M139a convention)."
+  },
+  "routing": {
+    "tau_ladder": [0.0, 0.2046],
+    "tau_note": "0.2046 = the SEALED M139a router-margin q25 (logs/results/v16/m139a_routing_slack/evidence.json), registered BEFORE this run. gated(tau): router margin >= tau -> routed specialist, else the global head."
+  },
+  "anchors": {
+    "t1_tolerance": 0.002,
+    "m119_specialist_curves": "logs/results/v16/m119_specialist_scale/evidence.json (specialist_curves[d].accuracy[n_d] at 512 atoms, full per-domain data)",
+    "m117_class_ridge": 0.2248695652173913,
+    "m139a_router_accuracy": 0.7559
+  },
+  "gate": {
+    "kill_switch_buyback": "fired if the ROUTED arm's per-domain accuracy beats the sealed dense r28 per-domain accuracy on fewer than 4 of 6 domains.",
+    "dense_r28_per_domain": [0.1575, 0.0431, 0.1014, 0.1968, 0.2137, 0.0711],
+    "dense_r28_macs": 107566848,
+    "dense_r28_global_accuracy": 0.1599,
+    "min_domains": 4,
+    "consequence_fired": "the assembled buy-back fails the A5 pattern; the negative is sealed and reported.",
+    "consequence_passed": "the assembled buy-back holds end-to-end: code-routed specialists beat dense r28 per domain on >= 4/6 domains at ~2.4x fewer MACs."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  }
+}

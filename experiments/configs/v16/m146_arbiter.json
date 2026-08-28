@@ -1,0 +1,73 @@
+{
+  "milestone": "M146",
+  "title": "The end-to-end arbiter: gradients through the promoted additive code (SPM+sqrt, the C4 winner) measure the price of freezing",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 9 M146 (15 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does gradient co-adaptation of the promoted additive code (21-bin SPM, 1,923 atoms, signed sqrt + per-row L2) beat the frozen closed-form read at the sealed 138k level, or does freezing hold on the winner construction as it did on the sealed 6144-atom construction (M109 sealed: frozen 0.2148 > trained-dictionary 0.1588 > trained-dictionary+whitener 0.1302)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "spm_atoms": 1923,
+    "patch": 6,
+    "stride": 1,
+    "grid": 27,
+    "pool_levels": [1, 2, 4],
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "power": 0.5,
+    "note": "the sealed C2/C4 construction: 21-bin SPM over the [11,100]-seeded dictionary (1,923 atoms), signed sqrt + per-row L2 (p=0.5). The whitener stays FROZEN in every rung (the M109 t3 structure: train the dictionary + head, never the whitener)."
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz",
+    "note": "the cached C2 SPM codes: train 409,832 x 40,383 (schedule part 1 = the 138k subsample rows, positional), test 34,500 x 40,383 (persisted by C4)."
+  },
+  "level": {
+    "n_train": 138000,
+    "note": "the first 138,000 rows of the cached full-train codes = the subsample rows = the sealed dense-ladder level and the C4 138k read."
+  },
+  "anchors": {
+    "t1_reference": 0.2273623188405797,
+    "t1_note": "the sealed C4 138k read (p=0.5, PENALTY 1.0 ONLY — C4's cells_138k protocol fits penalties [1.0]) reproduced from the cached codes with the C4 fitter; tolerance 1e-6. The {0.1, 10.0} rungs are diagnostics, never selected for the anchor.",
+    "t1_tolerance": 1e-06
+  },
+  "rungs": {
+    "r1": "frozen codes + closed-form ridge (the C4 fitter, penalties {0.1, 1.0, 10.0}, best reported) — the t1 anchor itself",
+    "r2": "frozen transformed codes + TRAINED linear head (the M109 t2 pattern; the E5 read on the promoted codes)",
+    "r3": "trainable dictionary + trained head through the differentiable SPM+sqrt encoder (the gradients-through-the-code cell); whitener frozen",
+    "shipping_map": "r3 clearly above r1 -> gradients pay on the winner -> hybrid / trained-small shipping; r3 below r1 (the M109 sealed answer) -> the frozen system ships.",
+    "no_gate": "M146 is a measuring stick: no win/loss gate; its outcome selects the shipping mode."
+  },
+  "schedule": {
+    "batch": 64,
+    "epochs": { "r2": 4, "r3": 8 },
+    "learning_rate": 3e-4,
+    "lr_schedule": "cosine",
+    "weight_decay": 1e-4,
+    "early_stopping": { "metric": "validation_accuracy", "patience": 2, "min_epochs": 2 },
+    "validation_fraction": 0.05,
+    "val_seed": 66,
+    "note": "the M109 registered shared schedule, unchanged (AdamW, cosine, patience 2), so M146 reads against M109's sealed t2/t3 under one schedule."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v16/m146_arbiter"
+}

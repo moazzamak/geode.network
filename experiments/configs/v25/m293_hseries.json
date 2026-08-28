@@ -1,0 +1,40 @@
+{
+  "milestone": "M293",
+  "cell": "H-series economic simulation battery (copycat race, detection-horizon sweep, bootstrap dynamics)",
+  "title": "M293 H-series — the registered synthetic scenarios for the economic design's anti-abuse rules",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (25 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "scenario_a": {
+    "demand": 1000.0,
+    "price": 1.0,
+    "epochs": 24,
+    "quality": 0.9,
+    "copycat_epochs": [0, 1, 2, 4, 8, 12, -1],
+    "undercuts": [0.0, 0.1, 0.2, 0.3],
+    "serving_cost": 200.0,
+    "seed": 101
+  },
+  "scenario_b": {
+    "draws": 2000,
+    "probe_rate": 0.05,
+    "epoch_volume": 1000.0,
+    "gaming_rate": 0.5,
+    "ring_rate": 0.5,
+    "health_probes": 10,
+    "health_hit_rate": 0.9,
+    "vesting_window": 4,
+    "seed": 102
+  },
+  "scenario_c": {
+    "demand": 1000.0,
+    "price": 1.0,
+    "epochs": 24,
+    "bootstrap_quality": 0.8,
+    "arrivals": {"3": 0.75, "6": 0.8, "9": 0.85},
+    "fallback_share": 0.02,
+    "vesting_window": 4,
+    "seed": 103
+  },
+  "scope_note": "synthetic-scenario instruments, not deployment claims",
+  "output_dir": "logs/results/v25/m293_hseries"
+}

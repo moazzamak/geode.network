@@ -1,0 +1,41 @@
+{
+  "milestone": "M154",
+  "title": "Data-sharing specialists (score-level): per-arm domain-interaction fusion",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M154 / section 6 (16 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does letting the fusion weights depend on the row's domain (the score-level data-sharing proxy) recover specialist gains beyond M143b's flat stacking?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "score_caches": {
+    "m143": "v16/m143/scores.npz",
+    "m143b": "v16/m143b/train_scores.npz",
+    "note": "the m143b train cache stores arm score matrices and labels only, NOT domains; domain indicators for the interaction features are taken from the corpus train_domains (the M141 schedule's first 138k rows) and test_domains."
+  },
+  "cell": {
+    "interaction": "each arm's 345-dim score vector GATED per domain (7 arms x 6 domains = 42 gated copies, 14,490 features) appended to the flat 7-arm concat (2,415) => 16,905 fusion features; the row's domain one-hot selects which copy is active, so the fusion weights may depend on the row's domain; fusion = stacking with the M143b valid-slice protocol.",
+    "note": "the registered interpretation of score-level data sharing; head-level sharing stays M159."
+  },
+  "anchors": {
+    "m143b_fused": 0.22431884057971013,
+    "m143b_global": 0.22460869565217392,
+    "tolerance": 1e-09
+  },
+  "gate": {
+    "registered": "fused(interaction) >= global + 0.005 on the sealed test scores, else archived as a scoped negative.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m154_data_sharing"
+}

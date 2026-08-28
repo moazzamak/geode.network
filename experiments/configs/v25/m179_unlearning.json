@@ -1,0 +1,40 @@
+{
+  "milestone": "M179",
+  "cell": "unlearning/erasure reuse on a frozen component",
+  "title": "Closed-form erasure of the species class from the frozen flowers CLS component (M90.2 machinery, certificate)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "flowers": {
+    "features_dir": "data/v5/features/m19_flowers102_s1/dinov2-small",
+    "train_file": "features_train_b0c0bb74c51684d1.npz",
+    "test_file": "features_test_b0c0bb74c51684d1.npz",
+    "note": "the capability map's flowers node (sealed M19 cache)"
+  },
+  "erasure": {
+    "machinery": "M90.2 leace_eraser (geode/erasure.py, verbatim provenance)",
+    "floor": 1e-10,
+    "singular_tolerance": 1e-10,
+    "relative_residual_max": 1e-6,
+    "null_seed": 12345,
+    "null": "budget-matched random 102-way partition, same machinery"
+  },
+  "gates": {
+    "a_probe_at_chance": "ridge probe on erased codes <= 1.5 x chance",
+    "b_concept_specific": "erased probe <= 0.5 x null probe (the concept erasure removes what the matched-budget random removal keeps; amended and registered before the first seal — 101/384 random directions measurably degrade any probe, 0.9673 -> 0.8791 measured)",
+    "c_certificate": "relative residuals <= 1e-6"
+  },
+  "boundary": {
+    "CAN": [
+      "exact closed-form erasure of a measured LINEAR concept from a frozen component",
+      "component-level unlearning with no global retrain",
+      "auditable as a new hashable artifact (M177)"
+    ],
+    "CANNOT": [
+      "nonlinear concepts",
+      "second moments (covariance structure untouched)",
+      "cross-task side effects (unmeasured unless measured)",
+      "deletion: the registry is append-only, so unlearning = route-exclusion plus the auditable record"
+    ]
+  },
+  "output_dir": "logs/results/v25/m179_unlearning"
+}

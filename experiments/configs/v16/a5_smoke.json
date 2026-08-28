@@ -1,0 +1,69 @@
+{
+  "milestone": "A5-p1-smoke",
+  "title": "A5 instrument smoke test — INADMISSIBLE AS EVIDENCE",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v17.md section 3 (A5, phase 1)",
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Eight rows per class, 8 atoms per domain, one dense resolution (28), gates bypassed. Its only job is to prove the code paths execute: parity guard, corpus, Arm D re-measured ridge, global whitener, per-domain dictionary construction, per-domain ridge heads, oracle + fingerprint routers, floor gate, and both kill switches evaluate. Every accuracy it produces is meaningless.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 8,
+    "test_rows_per_class": 2,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 16,
+    "expected_subsample_sha256": null
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "training": "cuda",
+    "ridge": "cpu"
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 2,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "dense": {
+    "model": "dinov2-small",
+    "resolutions": [28],
+    "pixels": "original",
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "arm": "a_random",
+    "atoms_per_domain": [8, 8, 8, 8, 8, 8],
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "image_size": 32
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalty": 1.0
+  },
+  "router": {
+    "oracle": true,
+    "fingerprint": {
+      "descriptor": "per-image mean/std of raw pixels",
+      "distance": "normalised L2 to per-domain centroids"
+    }
+  },
+  "gate": {
+    "registered_prediction": "SMOKE ONLY — no prediction is read from a smoke run.",
+    "kill_switch_1_ceiling_lift": "SMOKE ONLY.",
+    "kill_switch_2_vs_dense": "SMOKE ONLY."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

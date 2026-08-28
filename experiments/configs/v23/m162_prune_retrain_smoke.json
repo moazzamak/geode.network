@@ -1,0 +1,52 @@
+{
+  "milestone": "M162",
+  "title": "SMOKE: M162 prune-retrain plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M162 / section 6 build entry (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (2000 train / 2000 test rows, 1 epoch, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 2000,
+  "_smoke_test_rows": 2000,
+  "_smoke_epochs": 1,
+  "question": "Does the M162 pipeline (prune, masked retrain, re-encode, ridge readout) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "parity_guard": {
+    "resolution": 56,
+    "batch": 8,
+    "models": ["small"],
+    "bound_relative": 0.0001
+  },
+  "arm": {
+    "keep": 0.5,
+    "note": "the M144 _prune, the prune mask re-applied after every optimizer step"
+  },
+  "schedule": {
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 3e-4,
+    "weight_decay": 1e-4,
+    "patience": 2,
+    "validation_fraction": 0.05
+  },
+  "anchors": {
+    "t2_reference": 0.245014492753623,
+    "t2_tolerance": 0.002
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m162_prune_retrain_smoke"
+}

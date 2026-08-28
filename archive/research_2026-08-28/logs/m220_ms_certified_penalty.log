@@ -1,0 +1,23 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+ms train (409832, 13244), test (34500, 13244)
+fitting fold A...
+scoring fold B...
+validation accuracies: {0.01: 0.23215314462031186, 0.1: 0.2326901858162538, 1.0: 0.23232402136447522, 10.0: 0.23083007040121858, 100.0: 0.22327731830919903}
+chosen penalty: 0.1
+refitting on the full train...
+full-train penalty 1.0 aggregate 0.242144927536232 (anchor delta +0.000e+00)
+CERTIFIED test aggregate at penalty 0.1: 0.243101449275362
+{
+ "gates_ok": false,
+ "chosen_penalty": 0.1,
+ "certified_test_aggregate": 0.2431014492753623,
+ "delta_vs_sealed": 0.0009565217391304393,
+ "val_accuracies": {
+  "0.01": 0.23215314462031186,
+  "0.1": 0.2326901858162538,
+  "1.0": 0.23232402136447522,
+  "10.0": 0.23083007040121858,
+  "100.0": 0.22327731830919903
+ }
+}
+M220 complete -> logs\results\v25\m220_ms_certified_penalty\evidence.json

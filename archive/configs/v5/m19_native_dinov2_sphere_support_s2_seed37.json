@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "artifact_id": "m19_native_dinov2_sphere_support_s2_seed37",
+  "milestone": "M19",
+  "stage": "S2-Native-Sphere-Support",
+  "description": "Native 384D DINOv2 spherical GEODE support confirmation on CIFAR-10",
+  "dataset": "cifar10_native_dinov2_sphere_support_s2",
+  "seed": 37,
+  "split_protocol": {
+    "name": "v5_cifar10_native_dinov2_sphere_support_s2_seed37_v1",
+    "total_per_class_train": 1000,
+    "total_per_class_dev": 100,
+    "total_per_class_test": 200,
+    "n_classes": 10,
+    "train_size": 10000,
+    "dev_size": 1000,
+    "test_size": 2000,
+    "selection_seed": 37,
+    "no_leakage": true
+  },
+  "backbones": [
+    {
+      "id": "dinov2-small",
+      "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+      "weights_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+      "output_dimension": 384,
+      "preprocessor_config": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+      "checkpoint_source": "https://huggingface.co/onnx-community/dinov2-small-ONNX",
+      "checkpoint_license": "apache-2.0",
+      "token_pooling_policy": "cls_token",
+      "extraction_batch_size": 32
+    }
+  ],
+  "interfaces": [{"architecture": "identity", "output_dim": null}],
+  "weighted_knn": {
+    "n_neighbors": 20,
+    "temperature": 0.07,
+    "query_batch_size": 1024,
+    "distance": "cosine",
+    "normalization": "l2"
+  },
+  "geode_config": {
+    "primitive_family": "sphere",
+    "minimum_seed_rule": "d_plus_2",
+    "minimum_seed_size": 386,
+    "consensus_threshold": 0.05,
+    "capture_threshold": 0.0,
+    "component_efficiency_target_coverage": 0.95,
+    "max_iterations": 1,
+    "min_growth_fraction": 0.01
+  },
+  "limits": {
+    "bounded_feasibility_only": true,
+    "identity_interface_only": true,
+    "test_used_for_selection": false
+  }
+}

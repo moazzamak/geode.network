@@ -1,0 +1,84 @@
+{
+  "milestone": "M142",
+  "cell": "C2",
+  "title": "Construction factorial screen - cell C2 (RE-SCOPED): spatial-pyramid pooling (1x1+2x2+4x4, 21 bins) vs a single 2x2 pool at matched per-image cost",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 Phase A / section 9 M142 / execution log (14 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does replacing the single 2x2 pool with a spatial-pyramid pool (21 bins over the 27x27 activation map) lift the construction at matched per-image cost?",
+  "registration_notes": {
+    "N101.1": "RE-SCOPE (registered before measurement, plan execution log): the original matched-cost cell (5,677 atoms, width 119,217) needs a 113.7 GB Gram for the sealed ridge fit (63 GB installed), and both exact subspace surrogates were REFUTED on the sealed codes before dispatch (reduced-rank ridge r=2048 -> 0.030; Lanczos-Galerkin k=200 -> 0.086, vs direct 0.2246). The cell is answered at a width-feasible cost point with everything else unchanged.",
+    "N101.2": "Matched pair (same ledger equation, widths capped for the sealed Gram fit): b*(729*108 + 729 + 4*345) = a*(729*108 + 729 + 21*345), i.e. b*80,841 = a*86,706 — pool adds counted on BOTH arms (both sum the same 729-activation map). Registered pair: pool b = 2,062, SPM a = 1,923 (SPM width 40,383, pool width 8,248); both ~175.2M MACs/image (delta 0.02%). Both arms share the whitener and are nested prefixes of the seeded [11,100] permutation.",
+    "N101.3": "Both arms are encoded by the SAME encoder (the SPM encoder's 2x2 level for the pool arm), so the arms differ only in pooling; t1 pins both codepaths at the sealed 6,144 atoms bitwise against the sealed f6144 memmap. Prefix-atom codes are NOT column-comparable to the sealed codes (the triangle activation's mean is over the atom set).",
+    "N101.4": "t2 is the environment anchor: the direct ridge on the sealed f6144 codes at full data must reproduce Q(6144, 409832) = 0.26136231884058 within 0.002 (context; the gate is the matched-pair head-to-head, not this).",
+    "N101.5": "t4 is the premise range for the fresh pool encode: Q(2062, 138000) must land within +-0.002 of the sealed atom-ladder envelope [Q(1536,138000)=0.19704347826086957, Q(3072,138000)=0.2152753623188406].",
+    "N101.6": "Gate: Q_SPM(1923, 409832) >= Q_pool(2062, 409832) + 0.005 at the sealed head constant (penalty 1.0), both on the full 409,832-row schedule, scored on the sealed 34,500-row test. The ridge ladder {0.1, 1.0, 10.0} is reported for both arms; the trained-head read on the SPM codes is the co-adaptation control; the cell closes as a scoped negative only if BOTH the gate fires AND the trained-head read fails.",
+    "N101.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "pool_atoms": 2062,
+    "spm_atoms": 1923,
+    "levels": [1, 2, 4],
+    "note": "M117/M126 exact whitener + candidate pool; both dictionaries are nested prefixes of the same seeded permutation."
+  },
+  "matched_cost": {
+    "pair_equation": "b*(729*108 + 729 + 4*345) = a*(729*108 + 729 + 21*345)",
+    "cost_tolerance_fraction": 0.005,
+    "note": "Same ledger exclusions as the sealed ledger (patch extraction and contrast normalisation not counted)."
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy",
+    "rest_relpath": "v16/m141",
+    "rest_file": "f6144_all_rest.npy"
+  },
+  "anchors": {
+    "t1_encoder_check_rows": 256,
+    "t1_encoder_check_tolerance": 1e-05,
+    "t2_reference": 0.26136231884058,
+    "t2_note": "Q(6144, 409832), the sealed M141 full-data direct-ridge accuracy",
+    "t2_tolerance": 0.002,
+    "t4_envelope_lo": 0.19704347826086957,
+    "t4_envelope_hi": 0.2152753623188406,
+    "t4_note": "Q(1536,138000) and Q(3072,138000) from the sealed M117 surface; Q(2062,138000) must fall inside +-0.002"
+  },
+  "cell_c2": {
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "trained_epochs": 8,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "gate_registered": "fired if Q_SPM(1923, 409832) < Q_pool(2062, 409832) + 0.005 at penalty 1.0 (matched cost verified by the runner); the cell closes as a scoped negative only if the trained-head read also fails.",
+    "consequence_fired": "spatial-pyramid pooling does not lift the single-pool construction at matched cost (conditional on the trained-head read); C2 is a scoped negative at this cost point.",
+    "consequence_passed": "spatial-pyramid pooling beats the single-pool construction at matched cost; C2 is promoted at this cost point."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "encode_throttle_seconds": 0.05
+  },
+  "output_dir": "logs/results/v16/m142_c2"
+}
+

@@ -1,0 +1,44 @@
+{
+  "milestone": "M271a",
+  "title": "Arm-quality ladder cell (a): task-specialized publisher checkpoints for the language and audio arms",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M271 registered 21 Aug; cell (a) dispatched 21 Aug, local-first)",
+  "registered_before_any_accuracy": true,
+  "question": "Do permissive task-specialized frozen checkpoints lift the sealed arms into the 80-90+ band, anchors first?",
+  "cells": {
+    "nli": {
+      "checkpoint": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
+      "license_recorded": "MIT",
+      "published_anchor_mnli_m": 0.918,
+      "anchor_source": "model card (cited, never exceeded)",
+      "held_out_splits": ["multi_nli validation_matched", "multi_nli validation_mismatched"]
+    },
+    "sst2": {
+      "checkpoint": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+      "license_recorded": "Apache-2.0",
+      "published_anchor": 0.913,
+      "held_out_split": "glue/sst2 validation"
+    },
+    "imdb": {
+      "excluded": "textattack/bert-base-uncased-imdb has NO license metadata — excluded by the permissive-only gate; IMDb keeps the sealed M262 reading 0.828"
+    },
+    "scv2": {
+      "checkpoint": "MIT/ast-finetuned-speech-commands-v2",
+      "license_recorded": "BSD-3-Clause",
+      "published_anchor": 0.9811,
+      "anchor_source": "AST paper / model card (cited, never exceeded)",
+      "held_out_split": "speech_commands/v0.02 test (local extraction on F:)"
+    }
+  },
+  "generation": {
+    "device": "cuda",
+    "batch": 16,
+    "cudnn_disabled": true
+  },
+  "smoke": {
+    "nli_rows": 100,
+    "sst2_rows": 100,
+    "scv2_rows": 200
+  },
+  "output_dir": "logs/results/v25/m271_quality_ladder",
+  "feature_cache_relpath": "v25/m271_quality_ladder"
+}

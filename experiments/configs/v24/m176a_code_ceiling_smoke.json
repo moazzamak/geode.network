@@ -1,0 +1,60 @@
+{
+  "milestone": "M176a",
+  "title": "SMOKE: M176a ceiling-probe plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase D (M176a)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (2000 train / 2000 test rows, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 2000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M176a pipeline (ridge, diagonal, kNN) run end-to-end on tiny cells?",
+  "interpretation_registered_before_running": {
+    "a": "kNN roughly ties ridge: no easy head-side accuracy is left in the codes for these head families — L1 (the code ceiling) is confirmed for this family.",
+    "b": "diagonal << ridge and kNN ~ ridge: linear cross-feature structure is load-bearing; the ceiling is the full ridge's, not the code's.",
+    "c": "kNN >> ridge: the codes hold non-linear structure a better head could exploit — contradicts M150's trained-head collapse; M176c priority rises.",
+    "scope_note": "measuring stick, not a win/loss gate; the probe covers two alternative head families (diagonal-ridge, kNN) and is not a bound on all possible heads."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "level": {
+    "n_train": 138000
+  },
+  "sparse": {
+    "power": 0.5,
+    "spm_atoms": 1923
+  },
+  "ridge": {
+    "penalty": 1.0,
+    "reference": 0.2273623188405797,
+    "tolerance": 1e-06
+  },
+  "diagonal": {
+    "penalty": 1.0
+  },
+  "knn": {
+    "k_values": [1, 5],
+    "test_block": 2000,
+    "train_chunk": 20000,
+    "metric": "cosine on the power-normalised codes"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v24/m176a_code_ceiling_smoke"
+}

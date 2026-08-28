@@ -1,0 +1,20 @@
+{
+  "milestone": "M315",
+  "title": "Takedown containment: pool-scaled quorum, appeal path, suspension-before-permanence, revenue-scaled deposit (A10)",
+  "question": "Do the registered repairs stop a thin-axis colluding set from irreversibly deleting a competitor for one vote round?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M315 (26 Aug 2026, before the build)",
+  "max_pool": 2000,
+  "registered_notes": {
+    "quorum": "R-A10a: min_responders = max(floor, ceil(0.1 * pool)); floor 3 registered in SECURITY_FLOORS as takedown_min_responders",
+    "appeal": "R-A10b: admissible only with at least one registered evidence class; judgement itself stays non-replayable",
+    "ladder": "R-A10c: first ratification suspends 1 epoch; permanence only on re-ratification after the window",
+    "deposit": "R-A10d: proposer deposit = 0.5 * trailing revenue"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "the quorum does not scale with the pool or dips below the floor - a thin axis can still force takedowns; VOID",
+    "c2_fails": "appeals without evidence pass or cited evidence is rejected - the appeal path is either toothless or unbounded; VOID",
+    "c3_fails": "first ratification delists or re-ratification cannot reach permanence - the ladder still lets one vote round delete a competitor; VOID",
+    "c4_fails": "the deposit is flat or zero for valuable targets - deleting a valuable artifact stays cheap; VOID",
+    "all_hold": "M315 PASS: takedown containment closes A10 at the registered cells"
+  }
+}

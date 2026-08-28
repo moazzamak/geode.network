@@ -1,0 +1,45 @@
+{
+  "milestone": "M153",
+  "title": "Routing granularity: class-group splits + fused readout on cached score matrices",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M153",
+  "registered_before_any_accuracy": true,
+  "question": "Does any finer routing/splitting granularity (class-groups) beat the single global head, when domain-level routing measurably does not (E10, M143b)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "score_caches": {
+    "m143": "v16/m143/scores.npz",
+    "m143b": "v16/m143b/train_scores.npz"
+  },
+  "cell": {
+    "k_values": [2, 4],
+    "kmeans_runs": 2,
+    "kmeans_seed": 311,
+    "random_control_seed": 312,
+    "mask_value": -1e30,
+    "note": "class groups = seeded 2-means over the 345 class score profiles (the global_train class-means, 345-dim); child-k scores = the GLOBAL head's score vector with non-group classes masked; fusion = stacking over [child1..childK masked vectors, global] fit on train scores, eval on test scores. NO new head is fit (the children reuse the global head's scores restricted to their class group), hence no section 5.3 floor applies — registered. Control: K random class partitions, same fusion."
+  },
+  "anchors": {
+    "m143b_fused": 0.22431884057971013,
+    "m143b_global": 0.22460869565217392,
+    "tolerance": 1e-09,
+    "note": "the M143b protocol reproduced from the same caches: stacking over the 7-arm train concat with the valid-slice penalty selection; fused test read 0.224319 and the global arm 0.224609."
+  },
+  "gate": {
+    "registered": "a K passes iff fused(kmeans) >= global + 0.005 AND fused(kmeans) >= fused(random); otherwise the single-head verdict of M143b is extended to finer granularity.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m153_routing_granularity"
+}

@@ -1,0 +1,73 @@
+{
+  "probe": "intrinsic_fingerprint_and_router_drift",
+  "note": "scoping evidence, not sealed, not a milestone",
+  "instruments": [
+    "RankMe per image, arXiv:2210.02885, unmodified",
+    "alpha-ReQ spectral decay exponent, NeurIPS 2022"
+  ],
+  "corpus": "DomainNet, 32x32, 1000 images per domain",
+  "atoms": 512,
+  "seed": 11,
+  "domain_identification": {
+    "chance": 0.16666666666666666,
+    "intrinsic_4_scalars": 0.49277777777777776,
+    "pooled_features": 0.6905555555555556,
+    "pooled_dimension": 2048
+  },
+  "per_domain_intrinsic_means": {
+    "clipart": [
+      43.522559243009376,
+      -2.837901287405034,
+      1.6652790785256453,
+      0.8198079101202901
+    ],
+    "infograph": [
+      47.74344856078792,
+      -2.70486973641126,
+      1.4930627539990082,
+      0.8193841546477226
+    ],
+    "painting": [
+      45.1453780980666,
+      -2.781862190253385,
+      1.295756224336745,
+      0.8412966002010444
+    ],
+    "quickdraw": [
+      30.761062871284015,
+      -1.2473190862407977,
+      0.972154984778096,
+      0.6934857479401032
+    ],
+    "real": [
+      41.92555915891741,
+      -3.0024478527904117,
+      1.474773402064181,
+      0.8463658199954751
+    ],
+    "sketch": [
+      31.40087323550663,
+      -2.82421283132053,
+      1.0383214418263247,
+      0.7983355597014488
+    ]
+  },
+  "seen_domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "drift_under_growth": {
+    "pooled": {
+      "assignment_agreement": 0.9065888240200167,
+      "assignments_moved": 0.09341117597998327,
+      "rows": 1199
+    },
+    "intrinsic": {
+      "assignment_agreement": 0.9666388657214345,
+      "assignments_moved": 0.03336113427856546,
+      "rows": 1199
+    }
+  }
+}

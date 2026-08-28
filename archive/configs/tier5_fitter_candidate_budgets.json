@@ -1,0 +1,26 @@
+{
+  "anisotropy": 8.0,
+  "artifact_path": "logs/results/tier5_fitter_candidate_budgets.json",
+  "candidate_counts": [1, 5, 20],
+  "dimensions": [9, 19],
+  "fitters": [
+    "quadric_svd",
+    "full_covariance",
+    "shrinkage_covariance",
+    "minimum_covariance_determinant"
+  ],
+  "scenarios": [
+    {
+      "name": "clean",
+      "fit_samples": 300
+    },
+    {
+      "name": "outliers_25pct",
+      "fit_samples": 300,
+      "outlier_rate": 0.25
+    }
+  ],
+  "seeds": [11, 23, 37],
+  "test_samples": 500,
+  "wall_clock_seconds": [0.1]
+}

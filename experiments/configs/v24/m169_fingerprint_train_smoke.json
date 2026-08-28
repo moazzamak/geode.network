@@ -1,0 +1,30 @@
+{
+  "milestone": "M169",
+  "title": "SMOKE: M169 training plumbing on 10 steps",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase B (M169)",
+  "registered_before_any_training": true,
+  "_smoke_note": "10 training steps. Results are INADMISSIBLE as evidence.",
+  "_smoke_steps": 10,
+  "question": "Does the M169 pipeline run end-to-end on 10 steps?",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID — determinism is the instrument contract",
+    "G2_pass": "the fingerprint orders the registered set; proceed to M170",
+    "G2_fail": "scoped negative for THIS training-signal mix",
+    "G3_fail": "traversality undetermined; scoped negative",
+    "G4": "deferred until sweep families exist"
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11
+  },
+  "training": {
+    "steps": 300,
+    "lr": 0.001
+  },
+  "label_sources": {
+    "ontology_pairs": "analysis/task_ontology_v0.json",
+    "measured_transfer": "M167a d0->d1 = +0.0092, ranking constraint only"
+  },
+  "output_dir": "logs/results/v24/m169_fingerprint_gates_smoke"
+}

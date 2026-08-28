@@ -1,0 +1,46 @@
+{
+  "milestone": "M139b",
+  "title": "SMOKE: assembled buy-back plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M139 amendment)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (specialist train cap 300 rows/domain, test = first 1000 rows, skip gates). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "_smoke_train_cap": 300,
+    "_smoke_test_rows": 1200
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576
+  },
+  "routing": { "tau_ladder": [0.0, 0.2046] },
+  "anchors": { "t1_tolerance": 0.002 },
+  "gate": {
+    "dense_r28_per_domain": [0.1575, 0.0431, 0.1014, 0.1968, 0.2137, 0.0711],
+    "dense_r28_macs": 107566848,
+    "dense_r28_global_accuracy": 0.1599,
+    "min_domains": 4
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 512
+  }
+}

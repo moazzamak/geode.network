@@ -1,0 +1,74 @@
+{
+  "milestone": "M145",
+  "title": "SMOKE: M145 residual-growth plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 9 (M145)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (8000 test rows, one budget, anchors and control skipped, floor violations tolerated). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_skip_control": true,
+  "_smoke_allow_floor_violation": true,
+  "_smoke_test_rows": 8000,
+  "question": "Does the M145 pipeline (static-fusion reproduction, error rows, growth encode, append, re-fuse) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "pool_size": 8192,
+    "pool_seed": 11,
+    "permutation_seed": [11, 100],
+    "growth_atoms": [16],
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_head_penalty": 1.0
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143"
+  },
+  "anchors": {
+    "static_fused": 0.1462608695652174,
+    "static_global": 0.22510144927536233,
+    "d0_own_domain": 0.19357142857142856,
+    "a1_tolerance": 1e-9,
+    "a2_tolerance": 0.002
+  },
+  "control": {
+    "mechanism": "M108 arm (c) blind greedy (group-OMP vs centred one-hot) on the fit-half rows",
+    "parity_subset_rows": 512,
+    "parity_budget": 32
+  },
+  "phase2": {
+    "split_seed": 33,
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44
+  },
+  "premise": {
+    "fit_floor": 10.0
+  },
+  "gate": {
+    "registered": "per budget g on the eval half: growth_fused >= static_fused + 0.005 AND growth_fused > control_fused.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.0,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v16/m145_growth_smoke"
+}

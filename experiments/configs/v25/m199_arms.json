@@ -1,0 +1,28 @@
+{
+  "ring": {
+    "members": [
+      {"name": "ring_a", "cash": 0.0},
+      {"name": "ring_b", "cash": 0.0},
+      {"name": "ring_c", "cash": 0.0}
+    ],
+    "rounds": 30,
+    "demand": 100.0,
+    "lag": 5,
+    "seed": 11
+  },
+  "farm": {
+    "hosting_cost": 2.0,
+    "rounds": 25,
+    "demand": 100.0,
+    "lag": 5,
+    "quality_floor": 0.5,
+    "seed": 13
+  },
+  "sybil": {
+    "original_name": "orig",
+    "sybil_name": "copy",
+    "contribution": 2.0,
+    "digest": "sha:abc",
+    "seed": 14
+  }
+}

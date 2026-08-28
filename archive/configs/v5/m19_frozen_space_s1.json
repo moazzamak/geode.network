@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "milestone": "M19",
+  "stage": "S1",
+  "description": "Bounded S1 frozen-space head probe on CIFAR-10 subset",
+  "dataset": "cifar10_bounded_s1",
+  "seed": 11,
+  "split_protocol": {
+    "name": "v5_cifar10_stratified_bounded_v1",
+    "total_per_class_train": 50,
+    "total_per_class_dev": 20,
+    "total_per_class_test": 30,
+    "n_classes": 10,
+    "train_size": 500,
+    "dev_size": 200,
+    "test_size": 300,
+    "selection_seed": 11,
+    "no_leakage": true
+  },
+  "backbones": [
+    {
+      "id": "dinov2-small",
+      "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+      "weights_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+      "output_dimension": 384,
+      "preprocessor_config": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+      "checkpoint_source": "https://huggingface.co/onnx-community/dinov2-small-ONNX",
+      "checkpoint_license": "apache-2.0",
+      "token_pooling_policy": "cls_token"
+    },
+    {
+      "id": "siglip-base-patch16-256",
+      "onnx_path": "data/v5/backbones/siglip-base-patch16-256/onnx/vision_model_quantized.onnx",
+      "weights_sha256": "9dd7c669514965a47cd1013c8069f2cb144b3e45786c0cf5ec363f283780bc7c",
+      "output_dimension": 768,
+      "preprocessor_config": "data/v5/backbones/siglip-base-patch16-256/preprocessor_config.json",
+      "checkpoint_source": "https://huggingface.co/pulsejet/siglip-base-patch16-256-multilingual-onnx",
+      "checkpoint_license": "apache-2.0",
+      "token_pooling_policy": "pooler_output"
+    },
+    {
+      "id": "ijepa-vith16-1k-int8",
+      "onnx_path": "data/v5/backbones/ijepa-vith16-1k/onnx/model_int8.onnx",
+      "weights_sha256": "7b75ad86641810610c88305a778cb53433f756d17b76027f1826637b3d81d0a5",
+      "output_dimension": 1280,
+      "preprocessor_config": "data/v5/backbones/ijepa-vith16-1k/preprocessor_config.json",
+      "checkpoint_source": "https://huggingface.co/onnx-community/ijepa_vith16_1k/tree/59ebd911845f639c18e06b1239ac243a30a7d35f",
+      "checkpoint_license": "cc-by-nc-4.0",
+      "token_pooling_policy": "mean_patch_tokens",
+      "extraction_batch_size": 1
+    },
+    {
+      "id": "mobilenetv2",
+      "status": "blocked",
+      "reason": "No immutable ONNX artifact with verified weights digest available under data/v5/backbones/. Existing tier4 artifact lacks provenance chain."
+    }
+  ],
+  "interfaces": [
+    {"architecture": "identity", "output_dim": null},
+    {"architecture": "linear", "output_dim": 64},
+    {"architecture": "low_rank", "output_dim": 64, "rank": 16}
+  ],
+  "lambda_tuples": [
+    {"compact": 0.0, "margin": 0.0, "complexity": 0.0},
+    {"compact": 1.0, "margin": 0.0, "complexity": 0.0},
+    {"compact": 0.0, "margin": 1.0, "complexity": 0.0},
+    {"compact": 0.0, "margin": 0.0, "complexity": 0.001},
+    {"compact": 1.0, "margin": 1.0, "complexity": 0.0},
+    {"compact": 1.0, "margin": 1.0, "complexity": 0.001},
+    {"compact": 0.5, "margin": 0.5, "complexity": 0.0005},
+    {"compact": 2.0, "margin": 1.0, "complexity": 0.001},
+    {"compact": 1.0, "margin": 2.0, "complexity": 0.001},
+    {"compact": 0.1, "margin": 0.1, "complexity": 0.0001},
+    {"compact": 5.0, "margin": 2.0, "complexity": 0.01},
+    {"compact": 0.5, "margin": 2.0, "complexity": 0.005}
+  ],
+  "ablations": [
+    "identity_no_interface",
+    "ce_only",
+    "metric_only",
+    "full_objective"
+  ],
+  "heads": [
+    "weighted_knn",
+    "linear_logistic",
+    "rbf_svm",
+    "prototype",
+    "gaussian_mixture",
+    "current_geode"
+  ],
+  "weighted_knn": {
+    "n_neighbors": 20,
+    "temperature": 0.07,
+    "query_batch_size": 1024,
+    "distance": "cosine",
+    "normalization": "l2"
+  },
+  "training": {
+    "learning_rate": 0.01,
+    "max_epochs": 200,
+    "patience": 20,
+    "batch_size": 256,
+    "target_margin": 1.0
+  },
+  "geode_config": {
+    "consensus_threshold": 0.05,
+    "capture_threshold": 0.0,
+    "component_efficiency_target_coverage": 0.95,
+    "max_iterations": 200,
+    "min_growth_fraction": 0.01,
+    "primitive_family": "ellipsoid"
+  },
+  "advancement_gates": {
+    "byte_replayable": true,
+    "hash_mismatch_guard": true,
+    "accuracy_loss_tolerance_pp": 0.25,
+    "geode_parity_tolerance_pp": 0.5
+  },
+  "limits": {
+    "max_lambda_tuples": 16,
+    "bounded_feasibility_only": true,
+    "s2_s3_status": "pending",
+    "notes": "S1 uses small deterministic stratified subsets for bounded CPU feasibility. Results establish contracts and measure relative ordering, not population-level claims."
+  }
+}

@@ -1,0 +1,30 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+device: AMD Radeon RX 9070 XT
+  extract batch 1: 8.5s elapsed
+  extract batch 26: 18.3s elapsed
+  extract batch 51: 27.7s elapsed
+  extract batch 76: 37.6s elapsed
+  extract batch 1: 0.4s elapsed
+  extract batch 26: 9.8s elapsed
+  extract batch 51: 19.3s elapsed
+  extract batch 76: 29.2s elapsed
+  extract batch 101: 38.7s elapsed
+  extract batch 126: 48.6s elapsed
+extraction: train 38.47s, test 51.91s
+penalty 0.1: ms-only 0.003130  hybrid 0.065014
+penalty 1.0: ms-only 0.002725  hybrid 0.087391
+penalty 10.0: ms-only 0.002841  hybrid 0.104638
+{
+ "gates_ok": true,
+ "ms_only": {
+  "0.1": 0.003130434782608696,
+  "1.0": 0.0027246376811594203,
+  "10.0": 0.0028405797101449274
+ },
+ "hybrid": {
+  "0.1": 0.06501449275362318,
+  "1.0": 0.08739130434782609,
+  "10.0": 0.10463768115942029
+ }
+}
+M222 complete -> logs\results\v25\m222_dinov2_hybrid_pilot\evidence.json

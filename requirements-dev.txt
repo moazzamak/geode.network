@@ -1,0 +1,6 @@
+# Product development and test tooling (M219 CI/CD).
+pytest
+pytest-cov
+fastapi
+uvicorn
+httpx

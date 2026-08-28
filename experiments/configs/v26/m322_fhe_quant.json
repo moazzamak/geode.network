@@ -1,0 +1,26 @@
+{
+  "milestone": "M322e-B",
+  "title": "FHE head quantization gate: fixed-point encoding of the sealed ridge head vs its fp64 original",
+  "question": "How much accuracy does the registered fixed-point encoding cost, per artifact, against its own fp64 original?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md §8.22 M322e-B (27 Aug 2026, before any measurement)",
+  "q16_max_rel_error": 0.001953125,
+  "q16_agreement": 0.99,
+  "q8_agreement": 0.90,
+  "n_rows": 2000,
+  "heads": {
+    "sealed_ridge": "the sealed ms full-train ridge head at penalty 1.0 (the registered serving artifact, M228 anchor 0.2421)",
+    "lambda_star_ridge": "the M297 ridge repair at lambda* = 30.0 (test 0.23516) — the M91 discipline: every artifact measured against its own fp32 original"
+  },
+  "registered_checks": {
+    "qg1": "16-bit sealed ridge: max relative score error <= 2^-9 and argmax agreement on the held-out slice >= 0.99",
+    "qg1b": "16-bit lambda*-ridge: same bounds, second artifact",
+    "qg2": "8-bit sealed ridge: argmax agreement >= 0.90, reported with its relative error",
+    "qg3": "the integer-MAC path is the exact BFV arithmetic by construction; the BFV stage verifies bit-exact agreement"
+  },
+  "interpretation_registered_before_running": {
+    "qg1_pass_and_qg1b_pass": "16-bit fixed point is registered as the serving quantization for both artifacts",
+    "qg1_fail_or_qg1b_fail": "the 16-bit cell fails its own bound for that artifact — reported as a negative finding; the encoding must be re-registered (never silently widened)",
+    "qg2_pass": "8-bit remains registered as the optional cheaper cell",
+    "qg2_fail": "8-bit misses its bound — a negative finding; 16-bit stands as the only registered serving encoding"
+  }
+}

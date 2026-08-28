@@ -1,0 +1,47 @@
+{
+  "milestone": "M142",
+  "title": "Construction factorial screen - cell C1b: power-norm re-adjudicated within instrument (clean anchor + converged trained-head schedule)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (C1 re-adjudication, 14 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Within the same fitter, does the signed-square-root + L2 power-norm lift the sealed f6144 codes at matched cost?",
+  "registration_notes": {
+    "N99.2b": "AMENDED 14 Aug after C1's sealed run exposed two registration defects: (1) the p=1.0 anchor claimed argmax-invariance under per-row L2 scaling, which is FALSE once an intercept exists, AND the C1 fitter scores the raw codes 0.2195 rather than the sealed fit path's 0.22487 - so the anchor is now the RAW-CODE SAME-FITTER reference (must match within 0.002), and the gate is adjudicated within instrument: best transformed cell >= raw reference + 0.005; (2) the trained-head read collapsed at lr 0.001/8 epochs (0.0032, the known a2 schedule artefact); the schedule is now the a2_head converged cell: lr 0.0003, 16 epochs, seed 201.",
+    "N99.4b": "The substantive C1 numbers stand: p=0.5 ridge cells 0.2328/0.2332/0.2363 vs raw 0.2195 (same fitter) = +1.68 points at matched cost; ext600 0.2483. C1b re-measures them under the corrected registration.",
+    "N99.6": "Encode cells C2/C3/C4 remain registered but not dispatched (full-data codes never cached; ~2h per encode).",
+    "N99.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy"
+  },
+  "cell_c1": {
+    "p_ladder": [1.0, 0.5],
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "trained_epochs": 16,
+    "trained_lr": 0.0003,
+    "trained_seed": 201,
+    "gate_registered": "fired if the raw same-fitter reference and the p=1.0 cell differ by more than 0.002, or the best transformed cell < raw reference + 0.005.",
+    "consequence_fired": "power-normalisation does not lift the sealed codes within instrument; C1 is a scoped negative.",
+    "consequence_passed": "power-normalisation lifts the sealed codes within instrument; C1 is promoted and C4 (SPM + power-norm) moves up."
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 16
+  },
+  "output_dir": "logs/results/v16/m142_factorial"
+}

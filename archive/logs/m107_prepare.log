@@ -1,0 +1,49 @@
+  reusing decoded corpus D:\geode-ml\data\cache\domainnet_decoded\size32.npz
+subsample 63f590097008f749  train 138000  test 34500
+resolutions [28, 42, 56, 70, 98, 140, 224]
+  train: pixel identity verified bitwise
+    train: 32/138000  243 img/s
+    train: 70/138000  257 img/s
+    train: 20030/138000  232 img/s
+    train: 20062/138000  232 img/s
+    train: 40002/138000  230 img/s
+    train: 40040/138000  230 img/s
+    train: 40083/138000  230 img/s
+    train: 60020/138000  135 img/s
+    train: 60056/138000  135 img/s
+    train: 60090/138000  134 img/s
+    train: 80019/138000  106 img/s
+    train: 80048/138000  106 img/s
+    train: 80073/138000  106 img/s
+    train: 100020/138000  102 img/s
+    train: 100048/138000  102 img/s
+    train: 100079/138000  102 img/s
+    train: 120011/138000  99 img/s
+    train: 120028/138000  99 img/s
+    train: 120059/138000  99 img/s
+    train: 120088/138000  99 img/s
+  train 28: 0.32 GB
+  train 42: 0.73 GB
+  train 56: 1.30 GB
+  train 70: 2.03 GB
+  train 98: 3.98 GB
+  train 140: 8.11 GB
+  train 224: 20.77 GB
+  test: pixel identity verified bitwise
+    test: 30/34500  248 img/s
+    test: 53/34500  236 img/s
+    test: 83/34500  221 img/s
+    test: 98/34500  191 img/s
+    test: 20007/34500  103 img/s
+    test: 20020/34500  103 img/s
+    test: 20038/34500  103 img/s
+    test: 20051/34500  103 img/s
+    test: 20068/34500  103 img/s
+    test: 20099/34500  103 img/s
+  test 28: 0.08 GB
+  test 42: 0.18 GB
+  test 56: 0.32 GB
+  test 70: 0.51 GB
+  test 98: 0.99 GB
+  test 140: 2.03 GB
+  test 224: 5.19 GB

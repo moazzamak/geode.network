@@ -1,0 +1,42 @@
+{
+  "milestone": "M261d",
+  "title": "M261d Open Images vision arm, rung 3: frozen DINOv2-large + closed-form ridge head over the 601 boxable classes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (23 Aug, the user's 'do 2' call)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the DINOv2-large trunk (304M params vs base's 86M) move the measured 0.1571 overall / 0.4381 per-class reading of the M261c arm on the SAME held-out test rows?",
+  "trunk": {
+    "checkpoint": "F:/geode-ml/data/cache/huggingface/dinov2-large",
+    "license_recorded": "Apache-2.0",
+    "frozen": true,
+    "feature_dim": 1024,
+    "resolution": 224,
+    "contamination_declared": "DINOv2's LVD-142M training corpus is web-scale; the test split is held out of our fitting, and the reading is product-quality, never a novelty claim"
+  },
+  "head": {
+    "kind": "closed-form ridge (the M262 post-lbfgs standard)",
+    "alpha": 1.0,
+    "n_classes": 601
+  },
+  "data": {
+    "train_manifest": "F:/geode-ml/data/cache/oid/manifests/train_manifest.json",
+    "test_manifest": "F:/geode-ml/data/cache/oid/manifests/test_manifest.json",
+    "license_recorded": "annotations CC BY 4.0; images listed CC BY 2.0 (commercial with attribution; per-image caveat recorded)",
+    "multi_row_caveat": "images with several positive labels contribute several rows — test rows are correlated; per-class mean top-1 reported alongside the overall"
+  },
+  "guard": {
+    "kind": "OodGate (diagonal Mahalanobis) fit on train features",
+    "threshold": 3.0,
+    "note": "test scores recorded as a report, not a gate"
+  },
+  "evaluation": {
+    "overall_top1": true,
+    "per_class_mean_top1": true,
+    "top5": true
+  },
+  "smoke": {
+    "max_rows": 20
+  },
+  "output_dir": "logs/results/v25/m261d_oid_vision",
+  "evidence_filename": "evidence.json",
+  "feature_cache_relpath": "v25/m261d_oid_vision"
+}

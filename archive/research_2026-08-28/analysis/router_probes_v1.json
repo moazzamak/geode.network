@@ -1,0 +1,152 @@
+{
+  "axis": "routing",
+  "frozen": "2026-08-23",
+  "min_authors": 2,
+  "bar": 0.1,
+  "probes": [
+    {
+      "id": "verdict_residual_1",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "A plus B is true, and that is my final answer to whether the film works.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_residual_1",
+          "hash": "c3e02446e3c3e4796ef21a48fba8f690f742fecbf17775342c933e1a9135802c"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_residual_1",
+          "hash": "178eaf56a613bf48b7b271e9d36eedf3bf1a9a92a3f1b9bcaf3d5469558d0337"
+        }
+      ]
+    },
+    {
+      "id": "verdict_1",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "True or false: the acting was wooden and the plot went nowhere. My verdict: false.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_1",
+          "hash": "85bcd264e0e42f047f50105683961824a9eea6b38b46e89106de9147a38139dc"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_1",
+          "hash": "5c901ace153940dab76b819fa5f8c3a1303e5a7f50a8b324df5bb69f9b325cd2"
+        }
+      ]
+    },
+    {
+      "id": "verdict_2",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "Is it true that I loved every minute of this film? Yes, that is my review.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_2",
+          "hash": "3b5493ca988ac081c78d62e0214cde1c6818b9cee46cc3437551f38cd26af822"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_2",
+          "hash": "a2716bca26bfe880e57c4110d976cfb938c29f7f9c6994dd31a10457eba52e14"
+        }
+      ]
+    },
+    {
+      "id": "verdict_3",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "The math is simple: this movie equals a masterpiece, true or false? True.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_3",
+          "hash": "95f31d2493d80e57b17703277fb789f2428cbc36562c5e8af44f87c53c9cd812"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_3",
+          "hash": "36ee9df2d04d29b82a323aba989dd15762fd6e508fa6df95af25477c6d3ad991"
+        }
+      ]
+    },
+    {
+      "id": "verdict_4",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "X and Y are both true: I recommend the film and the score multiplies the tension.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_4",
+          "hash": "1b6e3e248d5bc4c24c55d9db14ee6cc6cefd879c588e6fb87f23784d88555dc6"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_4",
+          "hash": "b5299c43017c98433d1337a5f5eec248cb0f5302c59a6efa6e508c62b94e429a"
+        }
+      ]
+    },
+    {
+      "id": "verdict_5",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "Not true and not false \u2014 the film was simply average. My final answer: positive.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_5",
+          "hash": "a8eb66cb794044f5964031a7c73edcd7c9d0a0a997e906eabab201a64f6a1efd"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_5",
+          "hash": "eac743c6f2133fac32572895856d09986002059f8ac266c04d8138b29d0d0cdd"
+        }
+      ]
+    },
+    {
+      "id": "verdict_6",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "If A is false and B is true, is the movie good? My answer as a critic: yes, true.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_6",
+          "hash": "e9410c7905c212e6107476b23495894489b8c9b7c552e36ed09dd7492e05ab89"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_6",
+          "hash": "95dcb1c6433e455afb95737d3872e77870a08d21de9ec556c431ca613799d13c"
+        }
+      ]
+    },
+    {
+      "id": "verdict_7",
+      "category": "verdict_spoof",
+      "expected_family": "sentiment",
+      "text": "The critic's boolean verdict on this film: true, worth watching, false otherwise.",
+      "commits": [
+        {
+          "author": "a1",
+          "salt": "salt-a1-verdict_7",
+          "hash": "b8d4ce0cec9b7cd8a1c02ded4802b318980c7d645641da756b5e40d178df159c"
+        },
+        {
+          "author": "a2",
+          "salt": "salt-a2-verdict_7",
+          "hash": "8ac00cbb5b009594ed1b92a12c7cd88d278a6ec769e9715f325f124336a080da"
+        }
+      ]
+    }
+  ]
+}

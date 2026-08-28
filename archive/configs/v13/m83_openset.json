@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "artifact": "V13-OPENSET",
+  "purpose": "Sealed out-of-set feature artifact for M83 boundary supervision and M84's exposure ladder. Holds DINOv2-small features for the 217 DomainNet classes absent from the v13 corpus, domain-stratified to the corpus so that rejection cannot be read off rendering style.",
+  "milestone_registered_by": "M83",
+  "registration_notes": [
+    "N83.2 requires the out-of-set sample to match the corpus domain distribution, because the corpus is 60.76% quickdraw and a boundary rejecting an unmatched sample could be detecting domain rather than novelty.",
+    "N83.3's known-class control is NOT built here. It is the corpus's own held-out evaluation partition, which Phase A never fits, so no new extraction is needed and the control stays inside an already-sealed artifact."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "class_count": 128,
+    "samples_per_class": 576,
+    "domain_counts": [9939, 8029, 7195, 44800, 3607, 158],
+    "domain_counts_rationale": "Read from logs/results/v13/domainnet_large/selection_manifest.json and sealed here so the stratification target cannot drift. Sums to 73728."
+  },
+  "unseen_classes": {
+    "first_label": 128,
+    "last_label": 344,
+    "count": 217,
+    "rationale": "The v13 corpus took DomainNet labels 0-127. Labels 128-344 are absent from it entirely, so they are novel in class while remaining drawn from the same dataset, the same acquisition pipeline and the same six rendering domains. They are the same 217 classes N1 and M82 used as the far-field control for the detection and naming instruments."
+  },
+  "samples_per_unseen_class": 64,
+  "samples_per_unseen_class_rationale": "Matches the corpus's own 64-row held-out evaluation partition per known class, so the out-of-set and known-class arms are read at the same per-class resolution. 217 x 64 = 13888 images, roughly a fifth of the corpus, which extracts in about three minutes at the measured 92.4 images per second.",
+  "domain_quota_per_unseen_class": [9, 7, 6, 39, 3, 0],
+  "domain_quota_rationale": "The largest-remainder allocation of 64 samples across the corpus's own domain distribution. Achieved fractions are 0.1406 / 0.1094 / 0.0938 / 0.6094 / 0.0469 / 0.0000 against the corpus's 0.1348 / 0.1089 / 0.0976 / 0.6076 / 0.0489 / 0.0021; the largest deviation is 0.006. The builder recomputes this allocation from the sealed domain counts and refuses to run if it disagrees. Sketch draws a zero quota because the corpus contains only 158 sketch images in 73728; matching the corpus means matching that absence, and this is recorded rather than repaired.",
+  "minimum_native_short_edge": 256,
+  "minimum_native_short_edge_rationale": "Identical to the corpus filter. An out-of-set sample admitted under a different resolution filter would differ from the corpus in image size as well as in class.",
+  "selection_rule": "prefix_scan_per_class_domain_cell",
+  "selection_rule_rationale": "For each (class, domain) cell the builder accepts the first images in shard order that clear the short-edge filter, exactly as the corpus builder did per class. No random number generator participates in selection, so the artifact is a function of the shards and this configuration alone. Classes that cannot fill every cell are recorded as underfilled and excluded from the stratified analysis set; their features are retained so the exclusion can be audited.",
+  "extraction_batch_size": 1,
+  "extraction_batch_size_rationale": "The frozen DINOv2-small INT8 graph derives activation scales from the whole input tensor, so above batch size one an image's features depend on its batch neighbours. Batch size one makes the artifact a function of (image, backbone) and lets extraction shard freely across processes.",
+  "dispatch_chunk_size": 512,
+  "execution_provider": "CPUExecutionProvider",
+  "domainnet_download_record": {
+    "path": "logs/results/e7_domainnet_download.json"
+  },
+  "backbone": {
+    "id": "dinov2-small",
+    "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+    "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+    "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+    "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "token_pooling_policy": "cls_token",
+    "output_dimension": 384
+  },
+  "corpus_disjointness_control": {
+    "description": "Every selected out-of-set row must be absent from the corpus selection manifest, keyed on (source_file, source_row). The two sets are disjoint by class construction, so this control should pass trivially; it is run because a silent label-range error would otherwise leak corpus rows into the out-of-set arm and inflate rejection recall.",
+    "maximum_shared_rows": 0
+  },
+  "shard_invariance_control": {
+    "description": "Extract a probe set under two worker counts and require bitwise identity. This passes only if features are genuinely per-image. It is the same control the corpus builder ran, repeated here because the out-of-set artifact is extracted by different code.",
+    "probe_images": 96,
+    "worker_counts": [3, 11],
+    "maximum_absolute_difference": 0.0
+  },
+  "output_dir": "logs/results/v13/openset",
+  "final_labels_opened": false
+}

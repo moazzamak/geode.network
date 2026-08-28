@@ -1,0 +1,75 @@
+{
+  "comparative_result": true,
+  "deduplication_key": "experiment_id_first_occurrence",
+  "duplicate_retries": 4,
+  "families": {
+    "diagonal_covariance": {
+      "accuracy_mean": 0.8344999999999999,
+      "fit_seconds_mean": 0.3647414999984903,
+      "negative_log_likelihood_mean": 0.5125934159580388,
+      "primitives_mean": 107.2
+    },
+    "full_covariance": {
+      "accuracy_mean": 0.81075,
+      "fit_seconds_mean": 0.2698617599962745,
+      "negative_log_likelihood_mean": 0.5909941183651044,
+      "primitives_mean": 58.6
+    },
+    "spherical_covariance": {
+      "accuracy_mean": 0.8400000000000001,
+      "fit_seconds_mean": 0.3346918600029312,
+      "negative_log_likelihood_mean": 0.486237418742998,
+      "primitives_mean": 115.2
+    }
+  },
+  "paired_accuracy_differences": {
+    "sphere_minus_diagonal_covariance": {
+      "mean_pp": 0.5499999999999994,
+      "per_seed_pp": [
+        1.0624999999999996,
+        0.6874999999999964,
+        -0.06249999999999867,
+        0.5000000000000004,
+        0.5624999999999991
+      ],
+      "t95_ci_pp": [
+        0.045872566011438604,
+        1.0541274339885602
+      ]
+    },
+    "sphere_minus_full_covariance": {
+      "mean_pp": 2.9249999999999976,
+      "per_seed_pp": [
+        3.0625000000000013,
+        2.0625000000000004,
+        3.749999999999998,
+        2.6874999999999982,
+        3.0624999999999902
+      ],
+      "t95_ci_pp": [
+        2.15990169675946,
+        3.6900983032405357
+      ]
+    }
+  },
+  "production_performance_claim": false,
+  "protocol": "tier4_primitive_family_ablation",
+  "readout": "multinomial",
+  "retry_scientific_metrics_exact": true,
+  "schema_version": 1,
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_winners": {
+    "diagonal_covariance": 1,
+    "spherical_covariance": 4
+  },
+  "source_artifact": "logs/results/tier4_primitive_family_ablation_runs.jsonl",
+  "source_rows": 9,
+  "test_used_for_selection": false,
+  "unique_experiments": 5
+}

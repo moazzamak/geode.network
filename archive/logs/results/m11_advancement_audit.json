@@ -1,0 +1,111 @@
+{
+  "milestone": "M11.40",
+  "audit_passed": true,
+  "retained_automatic_policy": {
+    "artifact": "logs/results/tier4_real_feature_finch_clustering.json",
+    "representation": "mobilenetv2",
+    "flag_fraction": 0.3,
+    "clustering_method": "hdbscan",
+    "minimum_cluster_size": 3,
+    "selection_scope": "proxy_classes_6_7_only",
+    "final_scope": "classes_8_9_observational_only"
+  },
+  "gate_decisions": {
+    "autonomous_grouping_advanced_after_m11_29": false,
+    "assisted_review_policy_retained_for_analysis": true,
+    "constraint_persistence_allowed": false,
+    "semantic_class_creation_allowed": false,
+    "representation_replacement_allowed": false,
+    "model_mutation_allowed": false
+  },
+  "m12_exhaustive_baseline": {
+    "counter_schema": [
+      "sample_count",
+      "nodes_executed",
+      "compatible_candidate_pairs",
+      "shortlisted_candidate_pairs",
+      "exact_class_sdf_pairs",
+      "primitive_sdf_pairs",
+      "score_values_materialized"
+    ],
+    "candidate_rule": "all_contract_compatible_classes",
+    "exact_fallback": "not_applicable_exhaustive",
+    "agreement_reference": "exhaustive_exact_class_sdf_argmin",
+    "feedback_derived_routing_state": false
+  },
+  "m12_entry_gate": {
+    "candidate_growth_target": "sublinear_in_registered_classes",
+    "minimum_exhaustive_agreement": 0.99,
+    "open_set_tolerance_required": true,
+    "resource_budgets_required": true,
+    "real_features_before_toy_equivalence": false
+  },
+  "artifact_checks": [
+    {
+      "artifact": "logs/results/tier4_real_feature_finch_clustering.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_real_feature_streaming_memory.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_real_feature_group_count_estimation.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_joint_unlabeled_representation.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_feedback_refinement.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_partition_refinement.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_query_budget.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_feedback_robustness.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_feedback_confirmation.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_pairwise_feedback_confirmation_repeated.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    },
+    {
+      "artifact": "logs/results/tier4_event_review_representation_control.json",
+      "final_labels_observational": true,
+      "constraints_persisted": false,
+      "mutation_published": false
+    }
+  ]
+}

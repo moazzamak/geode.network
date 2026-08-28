@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "milestone": "M89",
+  "registered_question": "Plan v14 section 6.1: what is the measured structure of the frozen representation that v13's rejection failure sits on top of?",
+  "registration_notes": [
+    "N89.1 - M89 is non-gating by construction. It registers no hypothesis and has no pass/fail on any figure it reports. It exists so that the diagnostics Plan v14 section 2 quotes are replayable rather than recalled, and so that M90's arms have a stated baseline computed by the same instrument that will measure them.",
+    "N89.2 - it trains nothing and re-fits nothing beyond v13's closed-form Phase A on the sealed fit rows, at the same rank, under the same domain-quota partition and the same 90 percent coverage match as M83, M84 and M85. The object described is the object those milestones thresholded.",
+    "N89.3 - because M89 asserts nothing, its only correctness requirement is object identity. The run must reproduce two sealed v13 quantities exactly from its own recomputed geometry: M84's zero-rung rejection recall and M85a's geometry AUROC. A run that reproduces neither is describing a different object and reports not_v13_geometry, suppressing every figure below it. This is the check that caught a unit-sphere boundary masquerading as M84's in the first draft of the M85 runner.",
+    "N89.4 - no figure in this evidence file may be used to revisit a v13 verdict, to argue against Outcome C, or to rescue H83 or H84. Diagnostics explain a sealed result; they do not amend it.",
+    "N89.5 - the corpus composition section records that domain 5, sketch, is absent from the open-set split entirely and near-absent from the known split, as a consequence of the minimum_native_short_edge filter. This is a limitation every v13 per-domain figure already carries and that no sealed document states. Recording it here does not make it a defect: N83.2's requirement is that known evaluation and out-of-set rows be domain-matched, and they are."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "The same 5760 rows in 90 classes M84 read and M85 ranked."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged from M83, M84 and M85."
+  },
+  "geometry": {
+    "rank": 51,
+    "phase_a_frozen": true,
+    "rationale": "512 fit rows against the standing floor of 10 samples per fitted dimension gives 51.2. Unchanged from M83, M84 and M85."
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3, unchanged, so that acceptance multiplicity is read at exactly the threshold v13 reported recall at."
+  },
+  "identity": {
+    "m84_zero_rung_recall": 0.11875,
+    "m85a_geometry_auroc": 0.585085105895996,
+    "tolerance": 1e-9,
+    "rationale": "N89.3. Both are recomputed rather than read from the sealed files, so agreement pins this run's geometry to v13's."
+  },
+  "mixture_probe": {
+    "minimum_cell_support": 100,
+    "floor_samples_per_dimension": 10,
+    "rationale": "Not fitted here. M89 records how many (class, domain) cells clear the support threshold and what common rank the standing floor would permit, so that M90's registered rank is derived from measured corpus structure rather than chosen after seeing M90's operands."
+  },
+  "baselines": {
+    "knn_k": 10,
+    "chunk_rows": 512,
+    "knn_rationale": "Fixed at v13's free-composability value and not tuned against this evaluation set."
+  },
+  "output_dir": "logs/results/v14/m89_representation_diagnostic"
+}

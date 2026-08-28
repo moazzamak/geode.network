@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "milestone": "M30",
+  "stage": "S1",
+  "seed": 11,
+  "parent_representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+  "directional_representation_hash": "72d2407ef8665c36d6f901f25e45a01d2058634c4255139b6b67a94f8c1de21f",
+  "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_pilot",
+  "m27_prediction_baseline": "logs/results/v6/m27_baseline_predictions/baseline_predictions.json",
+  "teacher_manifest": "logs/results/v6/m27_baseline_predictions/rbf_teacher.json",
+  "geometries": ["euclidean_sphere", "cosine_cap"],
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "seed_size": 386,
+    "anchor_fraction": 0.2
+  },
+  "objective": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "teacher_weight": 1.0,
+    "ground_truth_weight": 0.0,
+    "complexity_penalty": 0.0,
+    "minimum_improvement": 1e-08,
+    "initial_components_per_class": 1
+  },
+  "budget": {
+    "mode": "exact_component_matched",
+    "component_count": 46
+  },
+  "s1_promising_gate": {
+    "minimum_accuracy_improvement": 0.005,
+    "minimum_gap_closure_fraction": 0.25,
+    "require_nll_non_regression_for_gap_closure": true
+  },
+  "s2_advancement_gate": {
+    "seed_count": 5,
+    "minimum_mean_accuracy_improvement": 0.005,
+    "paired_interval_must_exclude_zero": true,
+    "minimum_gap_closure_fraction": 0.25
+  },
+  "test_used_for_selection": false
+}

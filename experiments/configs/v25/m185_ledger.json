@@ -1,0 +1,25 @@
+{
+  "milestone": "M185",
+  "cell": "ledger prototype (local chain + replay tie)",
+  "title": "Append-only hash-chained registry referencing sealed milestones, each verified by M177 replay",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "records": {
+    "m175_a0": {
+      "runner": "a0",
+      "milestone": "M175 A0",
+      "config": "experiments/configs/v24/m175_cell_a0.json",
+      "evidence": "logs/results/v24/m175_cell_a0/evidence.json",
+      "note": "first text encoder, sealed 18 Aug 2026"
+    },
+    "m175_c": {
+      "runner": "c",
+      "milestone": "M175 C",
+      "config": "experiments/configs/v24/m175_cell_c.json",
+      "evidence": "logs/results/v24/m175_cell_c/evidence.json",
+      "note": "cross-modality contract guard, sealed 18 Aug 2026"
+    }
+  },
+  "scope": "local only; public-testnet anchoring deferred to M194",
+  "output_dir": "logs/results/v25/m185_ledger"
+}

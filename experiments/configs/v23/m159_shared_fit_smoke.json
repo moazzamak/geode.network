@@ -1,0 +1,73 @@
+{
+  "milestone": "M159",
+  "title": "SMOKE: M159 shared-fit specialist plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M159 / section 6 (16 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (6000 train / 2000 test rows, 128 atoms, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 6000,
+  "_smoke_test_rows": 2000,
+  "_smoke_atoms": 128,
+  "question": "Does the M159 pipeline (per-domain dictionaries, all-row head fits, fusion, routing controls) run end-to-end on tiny cells?",
+  "phase1": true,
+  "phase2": true,
+  "registration_notes": {
+    "row_scale": "138k train rows (the M143b train-protocol scale); smoke reduces to 6000/2000.",
+    "construction": "the M143 phase-1 construction; heads on ALL train rows; fusion = the M143b protocol; the global arm = the cached M143b scores.",
+    "gate": "fused >= global + 0.005 on the sealed test scores, else scoped negative."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_construction": "A5-exact (M119/M124/M139b); smoke uses 128 atoms via _smoke_atoms.",
+    "head_penalty": 1.0
+  },
+  "score_caches": {
+    "m143": "v16/m143/scores.npz",
+    "m143b_train": "v16/m143b/train_scores.npz"
+  },
+  "anchors": {
+    "m119_evidence": "logs/results/v16/m119_specialist_scale/evidence.json",
+    "a2_tolerance": 0.002,
+    "m143b_fused": 0.22431884057971013,
+    "m143b_global": 0.22460869565217392,
+    "m143b_tolerance": 1e-09
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44
+  },
+  "gate": {
+    "registered": "fused >= global + 0.005 on the sealed test scores, else archived as a scoped negative; competence/identity/random reported alongside.",
+    "margin": 0.005,
+    "consequence_passed": "head-level data sharing exceeds the global arm where score-level fusion alone only tied it.",
+    "consequence_fired": "M159 closes as a scoped negative and the global arm stands."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m159_shared_fit_smoke"
+}

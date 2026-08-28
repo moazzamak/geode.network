@@ -1,0 +1,18 @@
+{
+  "_note": "engineering measurement of the instrument, NOT evidence; no corpus, no accuracy, no operand",
+  "torch": "2.13.0+cpu",
+  "hip": null,
+  "target": "cpu",
+  "ViT-S forward only": {
+    "seconds_per_batch32": 0.6839,
+    "img_per_s": 46.79
+  },
+  "ViT-S forward+backward": {
+    "seconds_per_batch32": 2.7359,
+    "img_per_s": 11.7
+  },
+  "sparse encode matmul": {
+    "seconds_per_64_images": 0.1391,
+    "img_per_s": 460.08
+  }
+}

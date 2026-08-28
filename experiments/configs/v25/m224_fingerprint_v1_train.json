@@ -1,0 +1,23 @@
+{
+  "milestone": "M224",
+  "title": "Fingerprint v1 training + gates (relational signal on the frozen v0 ontology)",
+  "question": "Does the v1 signal mix train a deterministic additive fingerprint that orders the registered pair set, stays traversable on the frozen set, and learns the authored relational constraints?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M224 REGISTERED (20 Aug, before the build)",
+  "model": {"f_dim": 16, "mlp_hidden": 32, "seed": 11},
+  "training": {
+    "steps": 2000,
+    "lr": 0.001,
+    "rel_ordered_triple_tau": 0.5,
+    "rel_polar_rho": 0.3,
+    "margin_dissimilar": 0.1,
+    "note": "Adam; InfoNCE over ALL registered similar pairs (the others as negatives) + margin ranking over the registered dissimilar pairs + CBOW attribute reconstruction + relational constraints over TOKEN embeddings from analysis/fingerprint_relations_v0.json"
+  },
+  "relations_file": "analysis/fingerprint_relations_v0.json",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID - determinism is the instrument contract",
+    "G2_fail": "scoped negative for THIS signal mix - the pair set is registered, not measured; the gates are the measurement",
+    "G3_fail": "traversability regressed vs the frozen M169 v0 set - scoped negative for this mix",
+    "G5_fail": "the authored relational constraints were not learned - scoped negative for the relation set (it is analytical, not measured)",
+    "ship": "the state_dict ships into geode/core/assets ONLY if G1-G3 pass; G5 recorded either way"
+  }
+}

@@ -1,0 +1,1091 @@
+{
+  "instrument": "prior_art_search_2 (28 Aug 2026)",
+  "registered_in": "analysis/SCIENCE_LAYER_PLAN_2026-08-28.md section 7",
+  "claim_under_test": "narrow-waist composition architecture for ML representations: (a) frozen artifacts composed by declaration, (b) versioned blocks with upgrade-without-invalidation, (c) an economic layer paying block owners by measured downstream use",
+  "queries": [
+    {
+      "label": "composable adapters",
+      "query": "all:\"composable\" AND all:\"adapters\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2511.03981v1",
+          "title": "Structural Priors and Modular Adapters in the Composable Fine-Tuning Algorithm of Large-Scale Models",
+          "published": "2025-11-06",
+          "summary": "This paper proposes a composable fine-tuning method that int"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.15965v1",
+          "title": "MoLoRA: Composable Specialization via Per-Token Adapter Routing",
+          "published": "2026-03-16",
+          "summary": "Multi-adapter serving systems route entire sequences to a si"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.21571v1",
+          "title": "Separable Expert Architecture: Toward Privacy-Preserving LLM Personalization via Composable Adapters and Deletable User Proxies",
+          "published": "2026-04-23",
+          "summary": "Current model training approaches incorporate user informati"
+        },
+        {
+          "id": "http://arxiv.org/abs/2310.06234v2",
+          "title": "Efficient Adaptation of Large Vision Transformer via Adapter Re-Composing",
+          "published": "2023-10-10",
+          "summary": "The advent of high-capacity pre-trained models has revolutio"
+        },
+        {
+          "id": "http://arxiv.org/abs/2510.10135v2",
+          "title": "CharCom: Composable Identity Control for Multi-Character Story Illustration",
+          "published": "2025-10-11",
+          "summary": "Ensuring character identity consistency across varying promp"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.16651v1",
+          "title": "TADA: Task-Agnostic Dialect Adapters for English",
+          "published": "2023-05-26",
+          "summary": "Large Language Models, the dominant starting point for Natur"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.14249v3",
+          "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+          "published": "2026-06-12",
+          "summary": "AI agent performance depends critically on the runtime harne"
+        },
+        {
+          "id": "http://arxiv.org/abs/2101.08244v1",
+          "title": "Energy Efficient Placement of Workloads in Composable Data Center Networks",
+          "published": "2021-01-20",
+          "summary": "This paper studies the energy efficiency of composable datac"
+        },
+        {
+          "id": "http://arxiv.org/abs/2404.18928v1",
+          "title": "Stylus: Automatic Adapter Selection for Diffusion Models",
+          "published": "2024-04-29",
+          "summary": "Beyond scaling base models with more data or parameters, fin"
+        },
+        {
+          "id": "http://arxiv.org/abs/1710.08256v1",
+          "title": "A Framework for Efficient Adaptively Secure Composable Oblivious Transfer in the ROM",
+          "published": "2017-10-23",
+          "summary": "Oblivious Transfer (OT) is a fundamental cryptographic proto"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.22158v3",
+          "title": "Context Parametrization with Compositional Adapters",
+          "published": "2025-09-26",
+          "summary": "Large language models (LLMs) often seamlessly adapt to new t"
+        },
+        {
+          "id": "http://arxiv.org/abs/2110.07560v2",
+          "title": "Composable Sparse Fine-Tuning for Cross-Lingual Transfer",
+          "published": "2021-10-14",
+          "summary": "Fine-tuning the entire set of parameters of a large pretrain"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.19622v2",
+          "title": "RH20T-P: A Primitive-Level Robotic Dataset Towards Composable Generalization Agents",
+          "published": "2024-03-28",
+          "summary": "Achieving generalizability in solving out-of-distribution ta"
+        },
+        {
+          "id": "http://arxiv.org/abs/2601.21795v2",
+          "title": "Effective LoRA Adapter Routing using Task Representations",
+          "published": "2026-01-29",
+          "summary": "Low-rank adaptation (LoRA) enables parameter efficient speci"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.19456v2",
+          "title": "Break-for-Make: Modular Low-Rank Adaptations for Composable Content-Style Customization",
+          "published": "2024-03-28",
+          "summary": "Personalized generation paradigms empower designers to custo"
+        }
+      ]
+    },
+    {
+      "label": "adapter composition",
+      "query": "all:\"adapter\" AND all:\"composition\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2605.30189v1",
+          "title": "Token-Level Generalization in LoRA Adapter Backdoors: Attack Characterization and Behavioral Detection",
+          "published": "2026-05-28",
+          "summary": "We show that LoRA adapters, the dominant distribution format"
+        },
+        {
+          "id": "http://arxiv.org/abs/2608.13820v1",
+          "title": "SDO: Subspace Deconflicting Operator for Multi-Adapter Composition",
+          "published": "2026-08-13",
+          "summary": "Composing independently trained adapters within a shared dif"
+        },
+        {
+          "id": "http://arxiv.org/abs/2003.14377v1",
+          "title": "DATESSO: Self-Adapting Service Composition with Debt-Aware Two Levels Constraint Reasoning",
+          "published": "2020-03-31",
+          "summary": "The rapidly changing workload of service-based systems can e"
+        },
+        {
+          "id": "http://arxiv.org/abs/2410.09908v2",
+          "title": "Beyond Adapter Retrieval: Latent Geometry-Preserving Composition via Sparse Task Projection",
+          "published": "2024-10-13",
+          "summary": "Recent advances in parameter-efficient transfer learning hav"
+        },
+        {
+          "id": "http://arxiv.org/abs/2602.21222v1",
+          "title": "Task-Aware LoRA Adapter Composition via Similarity Retrieval in Vector Databases",
+          "published": "2026-02-01",
+          "summary": "Parameter efficient fine tuning methods like LoRA have enabl"
+        },
+        {
+          "id": "http://arxiv.org/abs/2608.19355v1",
+          "title": "GRACE: Grounded Reasoning via Adapter Composition and Evidence-Aware Calibration for Educational Visual Question Answering",
+          "published": "2026-08-19",
+          "summary": "Educational visual question answering, or VQA, requires mode"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.22158v3",
+          "title": "Context Parametrization with Compositional Adapters",
+          "published": "2025-09-26",
+          "summary": "Large language models (LLMs) often seamlessly adapt to new t"
+        },
+        {
+          "id": "http://arxiv.org/abs/0909.2183v1",
+          "title": "A Survey on Service Composition Middleware in Pervasive Environments",
+          "published": "2009-09-11",
+          "summary": "The development of pervasive computing has put the light on "
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.11262v1",
+          "title": "PermDoRA -- Understanding Adapter Interference in Language Models: Limits of Parameter-Space Geometry",
+          "published": "2026-06-09",
+          "summary": "Access control in large language models (LLMs) requires modu"
+        },
+        {
+          "id": "http://arxiv.org/abs/2203.05481v3",
+          "title": "Fully Adaptive Composition in Differential Privacy",
+          "published": "2022-03-10",
+          "summary": "Composition is a key feature of differential privacy. Well-k"
+        },
+        {
+          "id": "http://arxiv.org/abs/2101.03287v1",
+          "title": "Unifying Relational Sentence Generation and Retrieval for Medical Image Report Composition",
+          "published": "2021-01-09",
+          "summary": "Beyond generating long and topic-coherent paragraphs in trad"
+        },
+        {
+          "id": "http://arxiv.org/abs/2409.14363v1",
+          "title": "MANTA -- Model Adapter Native generations that's Affordable",
+          "published": "2024-09-22",
+          "summary": "The presiding model generation algorithms rely on simple, in"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.07685v1",
+          "title": "Test-Time Adaptive Composition for Machine Learning as a Service (MLaaS) in IoT Environments",
+          "published": "2026-06-05",
+          "summary": "The dynamic nature of Internet of Things (IoT) environments "
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.10277v2",
+          "title": "Lightweight Adaptive Feature Composition for Heterogeneous Downstream Adaptation of Wireless Foundation Models",
+          "published": "2026-06-09",
+          "summary": "Mobile systems increasingly rely on heterogeneous learning-e"
+        },
+        {
+          "id": "http://arxiv.org/abs/1907.01154v1",
+          "title": "Adaptive Music Composition for Games",
+          "published": "2019-07-02",
+          "summary": "The generation of music that adapts dynamically to content a"
+        }
+      ]
+    },
+    {
+      "label": "model stitching",
+      "query": "all:\"model stitching\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2505.20142v2",
+          "title": "Grounding Functional Similarity by Invariance-Aware Model Stitching",
+          "published": "2025-05-26",
+          "summary": "In deep learning, functional similarity evaluation quantifie"
+        },
+        {
+          "id": "http://arxiv.org/abs/2303.11277v2",
+          "title": "Model Stitching: Looking For Functional Similarity Between Representations",
+          "published": "2023-03-20",
+          "summary": "Model stitching (Lenc & Vedaldi 2015) is a compelling method"
+        },
+        {
+          "id": "http://arxiv.org/abs/2106.07682v1",
+          "title": "Revisiting Model Stitching to Compare Neural Representations",
+          "published": "2021-06-14",
+          "summary": "We revisit and extend model stitching (Lenc & Vedaldi 2015) "
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.12433v3",
+          "title": "Revisiting Model Stitching In the Foundation Model Era",
+          "published": "2026-03-12",
+          "summary": "Model stitching, connecting early layers of one model (sourc"
+        },
+        {
+          "id": "http://arxiv.org/abs/2401.04821v2",
+          "title": "MoSECroT: Model Stitching with Static Word Embeddings for Crosslingual Zero-shot Transfer",
+          "published": "2024-01-09",
+          "summary": "Transformer-based pre-trained language models (PLMs) have ac"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.03532v1",
+          "title": "The Fairness Stitch: Unveiling the Potential of Model Stitching in Neural Network De-Biasing",
+          "published": "2023-11-06",
+          "summary": "The pursuit of fairness in machine learning models has emerg"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.21509v1",
+          "title": "A Stitch in Time Saves Nine: Preserving Policy Compatibility Under Perception Updates in End-to-End Autonomous Driving",
+          "published": "2026-06-19",
+          "summary": "End-to-end autonomous driving systems tightly couple percept"
+        },
+        {
+          "id": "http://arxiv.org/abs/2409.10967v3",
+          "title": "Relative Representations: Topological and Geometric Perspectives",
+          "published": "2024-09-17",
+          "summary": "Relative representations are an established approach to zero"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.09642v1",
+          "title": "Multi-DNN Inference of Sparse Models on Edge SoCs",
+          "published": "2026-03-10",
+          "summary": "Modern edge applications increasingly require multi-DNN infe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.06609v3",
+          "title": "Transferring Linear Features Across Language Models With Model Stitching",
+          "published": "2025-06-07",
+          "summary": "In this work, we demonstrate that affine mappings between re"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.07815v1",
+          "title": "HybridStitch: Pixel and Timestep Level Model Stitching for Diffusion Acceleration",
+          "published": "2026-03-08",
+          "summary": "Diffusion models have demonstrated a remarkable ability in T"
+        },
+        {
+          "id": "http://arxiv.org/abs/2309.04653v1",
+          "title": "Relative representations for cognitive graphs",
+          "published": "2023-09-09",
+          "summary": "Although the latent spaces learned by distinct neural networ"
+        },
+        {
+          "id": "http://arxiv.org/abs/2503.04478v1",
+          "title": "Semantic Alignment of Unimodal Medical Text and Vision Representations",
+          "published": "2025-03-06",
+          "summary": "General-purpose AI models, particularly those designed for t"
+        },
+        {
+          "id": "http://arxiv.org/abs/2302.02181v2",
+          "title": "Model Stitching and Visualization How GAN Generators can Invert Networks in Real-Time",
+          "published": "2023-02-04",
+          "summary": "In this work, we propose a fast and accurate method to recon"
+        },
+        {
+          "id": "http://arxiv.org/abs/2501.06164v7",
+          "title": "Model Alignment Search",
+          "published": "2025-01-10",
+          "summary": "When can we say that two neural systems perform a task in th"
+        }
+      ]
+    },
+    {
+      "label": "model reuse / composition",
+      "query": "all:\"model composition\" AND all:\"reuse\"",
+      "status": 200,
+      "n_hits": 11,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2402.12750v2",
+          "title": "Model Composition for Multimodal Large Language Models",
+          "published": "2024-02-20",
+          "summary": "Recent developments in Multimodal Large Language Models (MLL"
+        },
+        {
+          "id": "http://arxiv.org/abs/2307.14012v4",
+          "title": "MCMC-Correction of Score-Based Diffusion Models for Model Composition",
+          "published": "2023-07-26",
+          "summary": "Diffusion models can be parameterized in terms of either sco"
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.20174v2",
+          "title": "Towards Scalable and Generalizable Earth Observation Data Mining via Foundation Model Composition",
+          "published": "2025-06-25",
+          "summary": "Foundation models are rapidly transforming Earth Observation"
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.17313v1",
+          "title": "An Expert Survey on Models and Digital Twins",
+          "published": "2025-06-18",
+          "summary": "Digital Twins (DTs) are becoming increasingly vital for futu"
+        },
+        {
+          "id": "http://arxiv.org/abs/1404.0853v1",
+          "title": "Correct-by-construction model composition: Application to the Invasive Software Composition method",
+          "published": "2014-04-03",
+          "summary": "Composition technologies improve reuse in the development of"
+        },
+        {
+          "id": "http://arxiv.org/abs/2105.06449v1",
+          "title": "Feature Interactions on Steroids: On the Composition of ML Models",
+          "published": "2021-05-13",
+          "summary": "The lack of specifications is a key difference between tradi"
+        },
+        {
+          "id": "http://arxiv.org/abs/2512.17109v3",
+          "title": "Bridging Training and Merging Through Momentum-Aware Optimization",
+          "published": "2025-12-18",
+          "summary": "Training large neural networks and merging task-specific mod"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.19083v3",
+          "title": "GEqTrain: A Configuration-Driven Framework for Retargeting Equivariant Graph Neural Networks Across 3D Scientific Tasks",
+          "published": "2026-07-21",
+          "summary": "Equivariant graph neural networks provide a powerful modelin"
+        },
+        {
+          "id": "http://arxiv.org/abs/2601.00065v3",
+          "title": "When the Same Coefficients Reach Different Places: Asymmetric Realizability in Transplanting Tokenizers across Large Language Models",
+          "published": "2025-12-31",
+          "summary": "Tokenizer transplant in cross-vocabulary model composition r"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.03585v1",
+          "title": "Modular Foundation Models for Time-Series Perception in Digital Twins",
+          "published": "2026-07-03",
+          "summary": "Engineering Digital Twins and Prognostics and Health Managem"
+        },
+        {
+          "id": "http://arxiv.org/abs/2208.01795v4",
+          "title": "Dynamic Modeling of Branched Robots using Modular Composition",
+          "published": "2022-08-03",
+          "summary": "When modeling complex robot systems such as branched robots,"
+        }
+      ]
+    },
+    {
+      "label": "modular deep learning marketplace",
+      "query": "all:\"modular\" AND all:\"deep learning\" AND all:\"marketplace\"",
+      "status": 200,
+      "n_hits": 1,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2305.18431v1",
+          "title": "Optimizing Airbnb Search Journey with Multi-task Learning",
+          "published": "2023-05-28",
+          "summary": "At Airbnb, an online marketplace for stays and experiences, "
+        }
+      ]
+    },
+    {
+      "label": "LoRA marketplace / trading",
+      "query": "all:\"LoRA\" AND all:\"marketplace\"",
+      "status": 200,
+      "n_hits": 4,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/1712.08221v3",
+          "title": "Tackling Contention Through Cooperation: A Distributed Federation in LoRaWAN Space",
+          "published": "2017-12-21",
+          "summary": "Low-Power Wide Area Networks (LPWAN) play a key role in the "
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.03886v1",
+          "title": "Enhancement of E-commerce Sponsored Search Relevancy with LLM",
+          "published": "2026-07-04",
+          "summary": "Sponsored search plays a crucial role as a revenue stream fo"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.27172v1",
+          "title": "Improving Item Discoverability in e-Commerce Search via Related Intent Generation",
+          "published": "2026-07-29",
+          "summary": "Traditional search systems are optimized to retrieve items t"
+        },
+        {
+          "id": "http://arxiv.org/abs/2502.16759v3",
+          "title": "Can Explanations Improve Recommendations? Evidence from Prediction-Informed Explanations",
+          "published": "2025-02-24",
+          "summary": "Recommender systems are central to digital platforms, yet th"
+        }
+      ]
+    },
+    {
+      "label": "adapter marketplace",
+      "query": "all:\"adapter\" AND all:\"marketplace\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2209.15418v1",
+          "title": "Equitable Marketplace Mechanism Design",
+          "published": "2022-09-22",
+          "summary": "We consider a trading marketplace that is populated by trade"
+        },
+        {
+          "id": "http://arxiv.org/abs/1812.01344v1",
+          "title": "Realizing Edge Marketplaces: Challenges and Opportunities",
+          "published": "2018-12-04",
+          "summary": "The edge of the network has the potential to host services f"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.13604v1",
+          "title": "Multi-Agent Reinforcement Learning from Delayed Marketplace Feedback for Objective-Weight Adaptation in Three-Sided Dispatch",
+          "published": "2026-06-11",
+          "summary": "Dispatch in three-sided marketplaces provides a natural sett"
+        },
+        {
+          "id": "http://arxiv.org/abs/2401.04857v3",
+          "title": "Transportation Marketplace Rate Forecast Using Signature Transform",
+          "published": "2024-01-10",
+          "summary": "Freight transportation marketplace rates are typically chall"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.05833v1",
+          "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+          "published": "2025-09-06",
+          "summary": "The rise of distributed and privacy-preserving machine learn"
+        },
+        {
+          "id": "http://arxiv.org/abs/2006.12756v1",
+          "title": "A Framework for Fairness in Two-Sided Marketplaces",
+          "published": "2020-06-23",
+          "summary": "Many interesting problems in the Internet industry can be fr"
+        },
+        {
+          "id": "http://arxiv.org/abs/2210.04733v1",
+          "title": "A Privacy Preserving IoT Data Marketplace Using IOTA Smart Contracts",
+          "published": "2022-10-10",
+          "summary": "In recent years, the volume of data generated by IoT devices"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.10406v1",
+          "title": "Decentralized Energy Marketplace via NFTs and AI-based Agents",
+          "published": "2023-11-17",
+          "summary": "The paper introduces an advanced Decentralized Energy Market"
+        },
+        {
+          "id": "http://arxiv.org/abs/2206.11720v2",
+          "title": "Measurement and applications of position bias in a marketplace search engine",
+          "published": "2022-06-23",
+          "summary": "Search engines intentionally influence user behavior by pick"
+        },
+        {
+          "id": "http://arxiv.org/abs/2401.00503v1",
+          "title": "Viz: A QLoRA-based Copyright Marketplace for Legally Compliant Generative AI",
+          "published": "2023-12-31",
+          "summary": "This paper aims to introduce and analyze the Viz system in a"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.04707v1",
+          "title": "Detection of Illicit Content on Online Marketplaces using Large Language Models",
+          "published": "2026-03-05",
+          "summary": "Online marketplaces, while revolutionizing global commerce, "
+        },
+        {
+          "id": "http://arxiv.org/abs/2502.13891v1",
+          "title": "Highly Dynamic and Flexible Spatio-Temporal Spectrum Management with AI-Driven O-RAN: A Multi-Granularity Marketplace Framework",
+          "published": "2025-02-19",
+          "summary": "Current spectrum-sharing frameworks struggle with adaptabili"
+        },
+        {
+          "id": "http://arxiv.org/abs/2511.13233v1",
+          "title": "LLM-based Multi-Agent System for Simulating Strategic and Goal-Oriented Data Marketplaces",
+          "published": "2025-11-17",
+          "summary": "Data marketplaces, which mediate the purchase and exchange o"
+        },
+        {
+          "id": "http://arxiv.org/abs/2503.10773v2",
+          "title": "Learn then Decide: A Learning Approach for Designing Data Marketplaces",
+          "published": "2025-03-13",
+          "summary": "As data marketplaces become increasingly central to the digi"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.12246v1",
+          "title": "Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb",
+          "published": "2026-07-14",
+          "summary": "Personalization in two-sided marketplaces relies heavily on "
+        }
+      ]
+    },
+    {
+      "label": "feature store",
+      "query": "all:\"feature store\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2305.20077v1",
+          "title": "Managed Geo-Distributed Feature Store: Architecture and System Design",
+          "published": "2023-05-31",
+          "summary": "Companies are using machine learning to solve real-world pro"
+        },
+        {
+          "id": "http://arxiv.org/abs/2205.04267v2",
+          "title": "On Designing Data Models for Energy Feature Stores",
+          "published": "2022-05-09",
+          "summary": "The digital transformation of the energy infrastructure enab"
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.05053v1",
+          "title": "Managing ML Pipelines: Feature Stores and the Coming Wave of Embedding Ecosystems",
+          "published": "2021-08-11",
+          "summary": "The industrial machine learning pipeline requires iterating "
+        },
+        {
+          "id": "http://arxiv.org/abs/2407.19078v1",
+          "title": "Practical Marketplace Optimization at Uber Using Causally-Informed Machine Learning",
+          "published": "2024-07-26",
+          "summary": "Budget allocation of marketplace levers, such as incentives "
+        },
+        {
+          "id": "http://arxiv.org/abs/2106.11756v5",
+          "title": "Trinity: A No-Code AI platform for complex spatial datasets",
+          "published": "2021-06-21",
+          "summary": "We present a no-code Artificial Intelligence (AI) platform c"
+        },
+        {
+          "id": "http://arxiv.org/abs/2507.03789v2",
+          "title": "Efficient and Effective Query Context-Aware Learning-to-Rank Model for Sequential Recommendation",
+          "published": "2025-07-04",
+          "summary": "Modern sequential recommender systems commonly use transform"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.09759v2",
+          "title": "ReflectWorld-MM: An Entity-Oriented Multimodal Memory System for Open-Ended Video Streams",
+          "published": "2026-07-06",
+          "summary": "Building assistants that can continually watch the world, re"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.14331v1",
+          "title": "Long-History User Transformers for Real-Time Ad Ranking",
+          "published": "2026-07-15",
+          "summary": "Long interaction histories are among the most informative in"
+        },
+        {
+          "id": "http://arxiv.org/abs/2405.05231v2",
+          "title": "DiskGNN: Bridging I/O Efficiency and Model Accuracy for Out-of-Core GNN Training",
+          "published": "2024-05-08",
+          "summary": "Graph neural networks (GNNs) are machine learning models spe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2303.14617v1",
+          "title": "Neural Graph Reasoning: Complex Logical Query Answering Meets Graph Databases",
+          "published": "2023-03-26",
+          "summary": "Complex logical query answering (CLQA) is a recently emerged"
+        },
+        {
+          "id": "http://arxiv.org/abs/2508.15680v1",
+          "title": "Futurity as Infrastructure: A Techno-Philosophical Interpretation of the AI Lifecycle",
+          "published": "2025-08-21",
+          "summary": "This paper argues that a techno-philosophical reading of the"
+        },
+        {
+          "id": "http://arxiv.org/abs/2203.09555v1",
+          "title": "On the expressive power of message-passing neural networks as global feature map transformers",
+          "published": "2022-03-17",
+          "summary": "We investigate the power of message-passing neural networks "
+        },
+        {
+          "id": "http://arxiv.org/abs/2412.05179v1",
+          "title": "Spatially-Adaptive Hash Encodings For Neural Surface Reconstruction",
+          "published": "2024-12-06",
+          "summary": "Positional encodings are a common component of neural scene "
+        },
+        {
+          "id": "http://arxiv.org/abs/2212.02780v1",
+          "title": "Parameter Efficient Transfer Learning for Various Speech Processing Tasks",
+          "published": "2022-12-06",
+          "summary": "Fine-tuning of self-supervised models is a powerful transfer"
+        },
+        {
+          "id": "http://arxiv.org/abs/2103.16054v1",
+          "title": "3D-MAN: 3D Multi-frame Attention Network for Object Detection",
+          "published": "2021-03-30",
+          "summary": "3D object detection is an important module in autonomous dri"
+        }
+      ]
+    },
+    {
+      "label": "frozen backbone composition",
+      "query": "all:\"frozen\" AND all:\"backbone\" AND all:\"composition\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2608.09124v1",
+          "title": "ChronoState: Hidden Elapsed-Time Conditioning for Temporal-State Action Selection in Frozen-Backbone Language Models",
+          "published": "2026-08-10",
+          "summary": "Temporal decisions in language-model systems often depend on"
+        },
+        {
+          "id": "http://arxiv.org/abs/2505.19075v3",
+          "title": "Universal Reasoner: A Single, Composable Plug-and-Play Reasoner for Frozen LLMs",
+          "published": "2025-05-25",
+          "summary": "Large Language Models (LLMs) have demonstrated remarkable ge"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.14988v1",
+          "title": "Compositional Video Generation via Inference-Time Guidance",
+          "published": "2026-05-14",
+          "summary": "Text-to-video diffusion models generate realistic videos, bu"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.20674v1",
+          "title": "Modular Multimodal Classification Without Fine-Tuning: A Simple Compositional Approach",
+          "published": "2026-05-20",
+          "summary": "We introduce CoMET, \\textit{\\textbf{C}omposing \\textbf{M}oda"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.23271v1",
+          "title": "What CLIP Knows but Cannot Say: Recovering Negation from Frozen Intermediate Features",
+          "published": "2026-07-25",
+          "summary": "Contrastive vision-language models such as CLIP map semantic"
+        },
+        {
+          "id": "http://arxiv.org/abs/2608.22521v1",
+          "title": "VISTA: Test-Time Compositional Alignment for Visual Autoregressive Generation",
+          "published": "2026-08-23",
+          "summary": "Visual autoregressive (VAR) models have emerged as a fast, h"
+        },
+        {
+          "id": "http://arxiv.org/abs/2504.14994v1",
+          "title": "Learning Compositional Transferability of Time Series for Source-Free Domain Adaptation",
+          "published": "2025-04-21",
+          "summary": "Domain adaptation is challenging for time series classificat"
+        },
+        {
+          "id": "http://arxiv.org/abs/2512.09172v2",
+          "title": "Prompt-Based Continual Compositional Zero-Shot Learning",
+          "published": "2025-12-09",
+          "summary": "We tackle continual adaptation of vision-language models to "
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.03266v1",
+          "title": "Emergent Compositional Communication for Latent World Properties",
+          "published": "2026-03-18",
+          "summary": "Can multi-agent communication pressure extract discrete, com"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.04988v1",
+          "title": "InternVLA-A1.5: Unifying Understanding, Latent Foresight, and Action for Compositional Generalization",
+          "published": "2026-07-06",
+          "summary": "Unified models for robot manipulation aim to equip one polic"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.11710v2",
+          "title": "Unlocking Compositional Generalization in Continual Few-Shot Learning",
+          "published": "2026-05-12",
+          "summary": "Object-centric representations promise a key property for fe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.10064v1",
+          "title": "MAGE: Multi-Agent Self-Evolution with Co-Evolutionary Knowledge Graphs",
+          "published": "2026-05-11",
+          "summary": "Self-evolving language-model agents must decide what to lear"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.25314v1",
+          "title": "Golden RPG: Confidence-Adaptive Region-Aware Noise for Compositional Text-to-Image Generation",
+          "published": "2026-04-28",
+          "summary": "Compositional text-to-image (T2I) generation requires a mode"
+        },
+        {
+          "id": "http://arxiv.org/abs/2608.05207v1",
+          "title": "When Do Corrective Features Help? An Agent for Corrective Feature Discovery on Black-Box Forecasters",
+          "published": "2026-08-05",
+          "summary": "Frozen pretrained forecasters often fail in structured, recu"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.15765v2",
+          "title": "Learning to Orchestrate Vision Foundation Models for Multi-Task Dense Prediction",
+          "published": "2026-06-14",
+          "summary": "Vision foundation models (VFMs) exhibit complementary streng"
+        }
+      ]
+    },
+    {
+      "label": "representation composition",
+      "query": "all:\"representation\" AND all:\"composition\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2606.06182v2",
+          "title": "Slice Regular Composition Operators on Quaternionic Fock Spaces via Matrix Realization",
+          "published": "2026-06-04",
+          "summary": "We characterize the boundedness and compactness of slice reg"
+        },
+        {
+          "id": "http://arxiv.org/abs/1602.07065v3",
+          "title": "Composition, Cooperation, and Coordination of Computational Systems",
+          "published": "2016-02-23",
+          "summary": "In this paper I elaborated on the idea of David Harel and Am"
+        },
+        {
+          "id": "http://arxiv.org/abs/math/0408120v2",
+          "title": "Representation theory of 2-groups on finite dimensional 2-vector spaces",
+          "published": "2004-08-09",
+          "summary": "In this paper, the 2-category $\\mathfrak{Rep}_{{\\bf 2Mat}_{\\"
+        },
+        {
+          "id": "http://arxiv.org/abs/math/0604368v1",
+          "title": "Composition Factors of Polynomial Representation of DAHA and Crystallized Decomposition Numbers",
+          "published": "2006-04-17",
+          "summary": "We determine the composition factors of the polynomial repre"
+        },
+        {
+          "id": "http://arxiv.org/abs/1908.03818v5",
+          "title": "Composition series of a class of induced representations built on discrete series",
+          "published": "2019-08-10",
+          "summary": "We have determined composition series of a class of induced "
+        },
+        {
+          "id": "http://arxiv.org/abs/1912.09427v1",
+          "title": "Composition factors of 2-parts spin representations of symmetric groups",
+          "published": "2019-12-19",
+          "summary": "Given an odd prime $p$, we identify composition factors of t"
+        },
+        {
+          "id": "http://arxiv.org/abs/1504.04157v2",
+          "title": "On the $\\ell$-modular composition factors of the Steinberg representation",
+          "published": "2015-04-16",
+          "summary": "Let $G$ be a finite group of Lie type and $\\St_k$ be the Ste"
+        },
+        {
+          "id": "http://arxiv.org/abs/2010.03763v2",
+          "title": "Assessing Phrasal Representation and Composition in Transformers",
+          "published": "2020-10-08",
+          "summary": "Deep transformer models have pushed performance on NLP tasks"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.02993v2",
+          "title": "Neural Networks Provably Learn Spectral Representations for Group Composition",
+          "published": "2026-06-02",
+          "summary": "Understanding how structured internal structure emerges duri"
+        },
+        {
+          "id": "http://arxiv.org/abs/1612.06130v1",
+          "title": "Redundant Representation of Operators",
+          "published": "2016-12-19",
+          "summary": "To be able to solve operator equations numerically a discret"
+        },
+        {
+          "id": "http://arxiv.org/abs/2101.03287v1",
+          "title": "Unifying Relational Sentence Generation and Retrieval for Medical Image Report Composition",
+          "published": "2021-01-09",
+          "summary": "Beyond generating long and topic-coherent paragraphs in trad"
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.13289v2",
+          "title": "Compositional Representation of Polymorphic Crystalline Materials",
+          "published": "2023-11-17",
+          "summary": "Machine learning (ML) has seen promising developments in mat"
+        },
+        {
+          "id": "http://arxiv.org/abs/1407.1243v2",
+          "title": "Complete representation by partial functions for composition, intersection and antidomain",
+          "published": "2014-07-04",
+          "summary": "For representation by partial functions in the signature wit"
+        },
+        {
+          "id": "http://arxiv.org/abs/1503.02627v2",
+          "title": "The finite representation property for composition, intersection, domain and range",
+          "published": "2015-03-09",
+          "summary": "We prove that the finite representation property holds for r"
+        },
+        {
+          "id": "http://arxiv.org/abs/0901.3179v3",
+          "title": "A matrix representation of composition of polynomial maps",
+          "published": "2009-01-21",
+          "summary": "In this paper polynomial maps are represented by the use of "
+        }
+      ]
+    },
+    {
+      "label": "modular machine learning economy",
+      "query": "all:\"modular\" AND all:\"machine learning\" AND all:\"economy\"",
+      "status": 200,
+      "n_hits": 8,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2007.02382v2",
+          "title": "Decentralized Reinforcement Learning: Global Decision-Making via Local Economic Transactions",
+          "published": "2020-07-05",
+          "summary": "This paper seeks to establish a framework for directing a so"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.26417v1",
+          "title": "OntoAligner Meets Knowledge Graph Embedding Aligners",
+          "published": "2025-09-30",
+          "summary": "Ontology Alignment (OA) is essential for enabling semantic i"
+        },
+        {
+          "id": "http://arxiv.org/abs/2004.14593v2",
+          "title": "A Triangular Network For Density Estimation",
+          "published": "2020-04-30",
+          "summary": "We report a triangular neural network implementation of neur"
+        },
+        {
+          "id": "http://arxiv.org/abs/2503.15968v1",
+          "title": "Digital Asset Data Lakehouse. The concept based on a blockchain research center",
+          "published": "2025-03-20",
+          "summary": "In the rapidly evolving landscape of digital assets and bloc"
+        },
+        {
+          "id": "http://arxiv.org/abs/2511.15342v1",
+          "title": "Reflexive Evidence-Based Multimodal Learning for Clean Energy Transitions: Causal Insights on Cooking Fuel Access, Urbanization, and Carbon Emissions",
+          "published": "2025-11-19",
+          "summary": "Achieving Sustainable Development Goal 7 (Affordable and Cle"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.13079v1",
+          "title": "Alignment as Institutional Design: From Behavioral Correction to Transaction Structure in Intelligent Systems",
+          "published": "2026-03-23",
+          "summary": "Current AI alignment paradigms rely on behavioral correction"
+        },
+        {
+          "id": "http://arxiv.org/abs/2411.01042v2",
+          "title": "Introduction to AI Safety, Ethics, and Society",
+          "published": "2024-11-01",
+          "summary": "Artificial Intelligence is rapidly embedding itself within m"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.17066v2",
+          "title": "Mindstorms in Natural Language-Based Societies of Mind",
+          "published": "2023-05-26",
+          "summary": "Both Minsky's \"society of mind\" and Schmidhuber's \"learning "
+        }
+      ]
+    },
+    {
+      "label": "hourglass architecture ML",
+      "query": "all:\"hourglass\" AND all:\"machine learning\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2401.11605v2",
+          "title": "Scalable High-Resolution Pixel-Space Image Synthesis with Hourglass Diffusion Transformers",
+          "published": "2024-01-21",
+          "summary": "We present the Hourglass Diffusion Transformer (HDiT), an im"
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.05161v1",
+          "title": "The Hourglass Simulation: A Catalog for the Roman High-Latitude Time-Domain Core Community Survey",
+          "published": "2025-06-05",
+          "summary": "We present a simulation of the time-domain catalog for the N"
+        },
+        {
+          "id": "http://arxiv.org/abs/1810.12813v4",
+          "title": "Contextual Hourglass Network for Semantic Segmentation of High Resolution Aerial Imagery",
+          "published": "2018-10-30",
+          "summary": "Semantic segmentation for aerial imagery is a challenging an"
+        },
+        {
+          "id": "http://arxiv.org/abs/1909.02157v1",
+          "title": "Atypical Facial Landmark Localisation with Stacked Hourglass Networks: A Study on 3D Facial Modelling for Medical Diagnosis",
+          "published": "2019-09-05",
+          "summary": "While facial biometrics has been widely used for identificat"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.17548v2",
+          "title": "Contraction and Hourglass Persistence for Learning on Graphs, Simplices, and Cells",
+          "published": "2026-04-19",
+          "summary": "Persistent homology (PH) encodes global information, such as"
+        },
+        {
+          "id": "http://arxiv.org/abs/1802.02137v1",
+          "title": "An Occluded Stacked Hourglass Approach to Facial Landmark Localization and Occlusion Estimation",
+          "published": "2018-02-05",
+          "summary": "A key step to driver safety is to observe the driver's activ"
+        },
+        {
+          "id": "http://arxiv.org/abs/1904.07294v1",
+          "title": "RHR-Net: A Residual Hourglass Recurrent Neural Network for Speech Enhancement",
+          "published": "2019-04-15",
+          "summary": "Most current speech enhancement models use spectrogram featu"
+        },
+        {
+          "id": "http://arxiv.org/abs/2501.02843v1",
+          "title": "RAHN: A Reputation Based Hourglass Network for Web Service QoS Prediction",
+          "published": "2025-01-06",
+          "summary": "As the homogenization of Web services becomes more and more "
+        },
+        {
+          "id": "http://arxiv.org/abs/2412.03604v1",
+          "title": "Picture Perfect: Photometric Transient Classification Using the ParSNIP Model with Roman Hourglass Simulations",
+          "published": "2024-12-03",
+          "summary": "The Roman Space Telescope, equipped with a 2.4 meter primary"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.12028v2",
+          "title": "Hourglass Tokenizer for Efficient Transformer-Based 3D Human Pose Estimation",
+          "published": "2023-11-20",
+          "summary": "Transformers have been successfully applied in the field of "
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.06956v1",
+          "title": "H$_{2}$OT: Hierarchical Hourglass Tokenizer for Efficient Video Pose Transformers",
+          "published": "2025-09-08",
+          "summary": "Transformers have been successfully applied in the field of "
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.06554v1",
+          "title": "Stacked Hourglass Network with a Multi-level Attention Mechanism: Where to Look for Intervertebral Disc Labeling",
+          "published": "2021-08-14",
+          "summary": "Labeling vertebral discs from MRI scans is important for the"
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.01034v2",
+          "title": "An Efficient Image-to-Image Translation HourGlass-based Architecture for Object Pushing Policy Learning",
+          "published": "2021-08-02",
+          "summary": "Humans effortlessly solve pushing tasks in everyday life but"
+        },
+        {
+          "id": "http://arxiv.org/abs/2304.09069v1",
+          "title": "Robustness and complexity",
+          "published": "2023-04-18",
+          "summary": "When a biological system robustly corrects component-level e"
+        },
+        {
+          "id": "http://arxiv.org/abs/2102.00827v1",
+          "title": "Automatic Expansion of Domain-Specific Affective Models for Web Intelligence Applications",
+          "published": "2021-02-01",
+          "summary": "Sentic computing relies on well-defined affective models of "
+        }
+      ]
+    },
+    {
+      "label": "ANCHOR liveness: AdapterHub (title)",
+      "query": "all:\"AdapterHub\"",
+      "status": 200,
+      "n_hits": 3,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2007.07779v3",
+          "title": "AdapterHub: A Framework for Adapting Transformers",
+          "published": "2020-07-15",
+          "summary": "The current modus operandi in NLP involves downloading and f"
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.08103v3",
+          "title": "AdapterHub Playground: Simple and Flexible Few-Shot Learning with Adapters",
+          "published": "2021-08-18",
+          "summary": "The open-access dissemination of pretrained language models "
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.14126v2",
+          "title": "From Memorization to Parameter Interference: How Overtraining Experts Harms Model Merging",
+          "published": "2025-06-17",
+          "summary": "Modern deep learning is increasingly characterized by the us"
+        }
+      ]
+    },
+    {
+      "label": "ANCHOR sensitivity: composable adapters (no title)",
+      "query": "all:\"composable\" AND all:\"adapters\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2511.03981v1",
+          "title": "Structural Priors and Modular Adapters in the Composable Fine-Tuning Algorithm of Large-Scale Models",
+          "published": "2025-11-06",
+          "summary": "This paper proposes a composable fine-tuning method that int"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.15965v1",
+          "title": "MoLoRA: Composable Specialization via Per-Token Adapter Routing",
+          "published": "2026-03-16",
+          "summary": "Multi-adapter serving systems route entire sequences to a si"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.21571v1",
+          "title": "Separable Expert Architecture: Toward Privacy-Preserving LLM Personalization via Composable Adapters and Deletable User Proxies",
+          "published": "2026-04-23",
+          "summary": "Current model training approaches incorporate user informati"
+        },
+        {
+          "id": "http://arxiv.org/abs/2310.06234v2",
+          "title": "Efficient Adaptation of Large Vision Transformer via Adapter Re-Composing",
+          "published": "2023-10-10",
+          "summary": "The advent of high-capacity pre-trained models has revolutio"
+        },
+        {
+          "id": "http://arxiv.org/abs/2510.10135v2",
+          "title": "CharCom: Composable Identity Control for Multi-Character Story Illustration",
+          "published": "2025-10-11",
+          "summary": "Ensuring character identity consistency across varying promp"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.16651v1",
+          "title": "TADA: Task-Agnostic Dialect Adapters for English",
+          "published": "2023-05-26",
+          "summary": "Large Language Models, the dominant starting point for Natur"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.14249v3",
+          "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+          "published": "2026-06-12",
+          "summary": "AI agent performance depends critically on the runtime harne"
+        },
+        {
+          "id": "http://arxiv.org/abs/2101.08244v1",
+          "title": "Energy Efficient Placement of Workloads in Composable Data Center Networks",
+          "published": "2021-01-20",
+          "summary": "This paper studies the energy efficiency of composable datac"
+        },
+        {
+          "id": "http://arxiv.org/abs/2404.18928v1",
+          "title": "Stylus: Automatic Adapter Selection for Diffusion Models",
+          "published": "2024-04-29",
+          "summary": "Beyond scaling base models with more data or parameters, fin"
+        },
+        {
+          "id": "http://arxiv.org/abs/1710.08256v1",
+          "title": "A Framework for Efficient Adaptively Secure Composable Oblivious Transfer in the ROM",
+          "published": "2017-10-23",
+          "summary": "Oblivious Transfer (OT) is a fundamental cryptographic proto"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.22158v3",
+          "title": "Context Parametrization with Compositional Adapters",
+          "published": "2025-09-26",
+          "summary": "Large language models (LLMs) often seamlessly adapt to new t"
+        },
+        {
+          "id": "http://arxiv.org/abs/2110.07560v2",
+          "title": "Composable Sparse Fine-Tuning for Cross-Lingual Transfer",
+          "published": "2021-10-14",
+          "summary": "Fine-tuning the entire set of parameters of a large pretrain"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.19622v2",
+          "title": "RH20T-P: A Primitive-Level Robotic Dataset Towards Composable Generalization Agents",
+          "published": "2024-03-28",
+          "summary": "Achieving generalizability in solving out-of-distribution ta"
+        },
+        {
+          "id": "http://arxiv.org/abs/2601.21795v2",
+          "title": "Effective LoRA Adapter Routing using Task Representations",
+          "published": "2026-01-29",
+          "summary": "Low-rank adaptation (LoRA) enables parameter efficient speci"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.19456v2",
+          "title": "Break-for-Make: Modular Low-Rank Adaptations for Composable Content-Style Customization",
+          "published": "2024-03-28",
+          "summary": "Personalized generation paradigms empower designers to custo"
+        }
+      ]
+    }
+  ]
+}

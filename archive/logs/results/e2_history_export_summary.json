@@ -1,0 +1,22 @@
+{
+  "artifact_sha256": {
+    "dashboard.html": "a75a09ec0dd5d00945f049aab6e5b8ad8e25caea1c4c1cfd21c9a71bba26dd77",
+    "events.csv": "fe6e9c82c381148858800f88024941af76d6a499d18c3f30c425a7640be7904e",
+    "history.json": "04232bcb7d6fa2174887d98e3fdd3e8d9a18e422f24bd5b4ac952a100a53681e"
+  },
+  "attempt_count": 2,
+  "event_count": 3,
+  "external_service_required": false,
+  "idempotent_reexport": true,
+  "namespace_counts": {
+    "exploratory": 2,
+    "final": 0,
+    "selection": 1
+  },
+  "performance_claim": false,
+  "run_id": "e2-history-export-smoke",
+  "schema_version": 1,
+  "series_count": 3,
+  "source_of_truth": "append-only MetricLedger JSONL",
+  "standalone_dashboard": true
+}

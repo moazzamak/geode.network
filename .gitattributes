@@ -1,0 +1,32 @@
+logs/results/*_model_registry/** -text
+logs/results/v5/** text eol=lf
+
+# Evidence and manifest JSON is written with LF and then SHA-256 hashed into
+# artifact_index.json. Without this rule Git would check it out with CRLF on
+# Windows, changing the bytes and breaking artifact verification on a fresh
+# clone. The binary array rules below deliberately follow this line, because a
+# later matching rule overrides an earlier one.
+logs/results/v13/** text eol=lf
+logs/results/v14/** text eol=lf
+logs/results/v15/** text eol=lf
+
+# Numpy arrays produced from v13 onward are stored in Git LFS. The v13 DomainNet
+# corpus array alone is 108 MB, above GitHub's 100 MB per-file hard limit.
+#
+# The pattern is deliberately scoped to v13 and later rather than to all *.npy
+# and *.npz files. Converting the sealed v5-v12 arrays would make replay of every
+# historical milestone depend on Git LFS being installed, which it currently does
+# not. Those artifacts stay as ordinary blobs so prior replays remain
+# self-contained. Add new result directories here as they are created.
+logs/results/v13/**/*.npy filter=lfs diff=lfs merge=lfs -text
+logs/results/v13/**/*.npz filter=lfs diff=lfs merge=lfs -text
+logs/results/v14/**/*.npy filter=lfs diff=lfs merge=lfs -text
+logs/results/v14/**/*.npz filter=lfs diff=lfs merge=lfs -text
+logs/results/v15/**/*.npy filter=lfs diff=lfs merge=lfs -text
+logs/results/v15/**/*.npz filter=lfs diff=lfs merge=lfs -text
+
+# Shell scripts run on rented Linux boxes (the M176c pod); they must stay LF
+# regardless of the Windows checkout platform. Added after the 17 Aug 2026
+# CRLF-in-shebang failure on the pod.
+*.sh text eol=lf
+

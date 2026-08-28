@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "milestone": "M85",
+  "registered_question": "Does the v13 sparse dictionary, fitted on native DomainNet, retain its coding value on a corpus it never saw - and how much of any loss is resolution rather than corpus?",
+  "registration_notes": [
+    "N85.8 - the operand is retention, not accuracy. A 128-way DomainNet number and a 20-way CIFAR-100 number are not comparable, and R7 forbids exactly this kind of cross-corpus reading. What transfers or fails to transfer is the dictionary's value relative to the raw features it codes, so every cell reports sparse-probe accuracy divided by dense-probe accuracy on the identical rows, the identical split and the identical training budget. Absolute accuracies are reported too, and are never compared across arms.",
+    "N85.9 - width is matched rather than assumed away. DomainNet is read at its full 128 classes and again at labels 0-19, fixed positionally with no selection, so that the CIFAR-100 cell has a same-width partner. CIFAR-100 is read at the matched 32/32 per-class budget and again at its full 250/250, because reporting only the budget that flatters would be the R4 defect in a new place.",
+    "N85.2 - the degraded arm is the whole point. It is the corpus's own held-out evaluation rows, the identical images, at CIFAR-100's 32x32 resolution through the identical frozen graph. A retention drop on CIFAR-100 that also appears on degraded DomainNet is a statement about low-resolution input, not about corpus transfer.",
+    "N85.10 - R5 nulls. Every cell carries a label-shuffled null sharing its structure, budget and split, and the dictionary carries M80's registered random-dictionary null. A cell is reported with its nulls or not at all. The free-composability bar is k-NN on the raw features of the same split."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "transfer": {
+    "path": "logs/results/v13/m85_transfer/artifact_index.json",
+    "feature_hash": "34d89ad8836d7bf2b1ff432f928fa9e51661f6e9a1b06b12874e781306365752"
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's split. The dictionary is fitted on the fit rows only, so every arm below is read on rows the dictionary never saw."
+  },
+  "dictionary": {
+    "dictionary_size": 8192,
+    "active_atoms": 32,
+    "epochs": 40,
+    "batch_size": 1024,
+    "learning_rate": 0.001,
+    "rationale": "M80's registered cell, carried unchanged under N80.2. The dictionary seed is the run seed, so the three seeds vary the learned basis and not only the head."
+  },
+  "probe": {
+    "epochs": 20,
+    "batch_size": 1024,
+    "learning_rate": 0.01,
+    "knn_k": 10,
+    "rationale": "M81's probe budget, identical for the sparse and dense arms so that the ratio in N85.8 is a statement about the representation rather than about the optimiser."
+  },
+  "cells": [
+    { "name": "native_128", "source": "native", "class_count": 128, "train_per_class": 32, "test_per_class": 32 },
+    { "name": "degraded_128", "source": "degraded", "class_count": 128, "train_per_class": 32, "test_per_class": 32 },
+    { "name": "native_20", "source": "native", "class_count": 20, "train_per_class": 32, "test_per_class": 32 },
+    { "name": "degraded_20", "source": "degraded", "class_count": 20, "train_per_class": 32, "test_per_class": 32 },
+    { "name": "cifar100_20_matched", "source": "cifar100", "class_count": 20, "train_per_class": 32, "test_per_class": 32 },
+    { "name": "cifar100_20_full", "source": "cifar100", "class_count": 20, "train_per_class": 250, "test_per_class": 250 }
+  ],
+  "seeds": [11, 23, 37],
+  "reporting": {
+    "decisive_margin": 0.05,
+    "rationale": "Retention is recorded as differing between two arms only if the gap exceeds this margin, which is wider than the observed spread across seeds. Anything inside it is a tie."
+  },
+  "output_dir": "logs/results/v13/m85_transfer_eval"
+}

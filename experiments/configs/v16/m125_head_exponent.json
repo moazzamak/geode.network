@@ -1,0 +1,18 @@
+{
+  "milestone": "M125",
+  "title": "Head-width exponent: quantify the data-elasticity design rule (Q(n) steepness as a function of head width)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v19.md section 5.4 (M125)",
+  "registered_before_any_accuracy": true,
+  "source": "M117 sealed surface (logs/results/v16/m117_scale/evidence.json): atoms {1536, 3072, 6144} x n {34500, 69000, 138000}, all admissible",
+  "method": {
+    "per_atoms_exponent": "for each atom count, fit the n-axis gain: gain(n) = acc(n) - acc(n_min); fit log(gain) vs log(n) by least squares -> exponent beta (the Q(n) power), on the points where gain > 0",
+    "width_regression": "head width W = 4 * atoms (pool_grid^2 * atoms); regress log(beta) vs log(W) -> gamma, the data-elasticity exponent: beta ~ W^gamma",
+    "disclosure": "only 3 n-points per atom count -> the per-atoms exponent fits are rough (2-parameter fits on 3 points); the regression over 3 widths is likewise a disclosure-level estimate, reported with the raw steepnesses (which M117 already recorded). This is a quantification of an already-sealed effect, not a new experiment."
+  },
+  "gate": {
+    "no_kill_switch": "no threshold; the fitted gamma is the reported design rule. Monotonicity of beta with width is checked and reported (if beta is not monotone in width, the 'data-elastic compute' rule is only a 2-3 point trend, not a law)."
+  },
+  "numerics": {
+    "seed": 109
+  }
+}

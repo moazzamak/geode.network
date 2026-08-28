@@ -1,0 +1,22 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+repair digests all match the registered values
+  f6144 test 0.261536231884058 (anchor delta +0.000e+00); train errors 150236 (sealed corrupt-era 150289)
+  floor ladder repaired: [32, 64, 128, 256, 512, 1024, 2048, 4096]
+  floor ladder sealed:    [32, 64, 128, 256, 512, 1024, 2048, 4096]
+{
+ "anchor_ok": true,
+ "n_error_rows": 150236,
+ "floor_ladder": [
+  32,
+  64,
+  128,
+  256,
+  512,
+  1024,
+  2048,
+  4096
+ ],
+ "floor_ladder_changed": false
+}
+M182b complete -> logs\results\v25\m182b_growth_premise_repair\evidence.json

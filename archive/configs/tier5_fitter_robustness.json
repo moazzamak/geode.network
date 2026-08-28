@@ -1,0 +1,45 @@
+{
+  "anisotropy": 8.0,
+  "artifact_path": "logs/results/tier5_fitter_robustness.json",
+  "dimensions": [9, 19],
+  "fitters": [
+    "quadric_svd",
+    "full_covariance",
+    "diagonal_covariance",
+    "shrinkage_covariance",
+    "minimum_covariance_determinant",
+    "low_rank_covariance",
+    "gmm_covariance"
+  ],
+  "scenarios": [
+    {
+      "name": "clean",
+      "fit_samples": 300
+    },
+    {
+      "name": "outliers_25pct",
+      "fit_samples": 300,
+      "outlier_rate": 0.25
+    },
+    {
+      "name": "label_noise_20pct",
+      "fit_samples": 300,
+      "label_noise": 0.2
+    },
+    {
+      "name": "overlap_50pct",
+      "fit_samples": 300,
+      "overlap_fraction": 0.5
+    },
+    {
+      "name": "support_40",
+      "fit_samples": 40
+    },
+    {
+      "name": "support_100",
+      "fit_samples": 100
+    }
+  ],
+  "seeds": [11, 23, 37, 53, 71],
+  "test_samples": 1000
+}

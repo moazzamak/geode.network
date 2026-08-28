@@ -1,0 +1,10 @@
+.git
+.venv
+data
+logs
+analysis
+**/__pycache__
+**/*.pyc
+experiments/**/.feat_cache
+experiments/**/*.onnx
+experiments/**/*.onnx.data

@@ -1,0 +1,150 @@
+{
+  "protocol": {
+    "seeds": [
+      71,
+      72,
+      73,
+      74,
+      75
+    ],
+    "migration_published": false
+  },
+  "summary": {
+    "valid_migrations": 5,
+    "executed_candidate_graphs": 5,
+    "source_accuracy_mean": 1.0,
+    "downstream_accuracy_mean": 1.0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 71,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_reconstruction": false,
+        "migration_published": false
+      },
+      "migration": {
+        "valid": true,
+        "validation_issues": [],
+        "old_signature": "3230806201ba",
+        "new_signature": "56e73c632a1c",
+        "source_calibrator_width": 3,
+        "downstream_input_width": 3,
+        "downstream_calibrator_width": 2,
+        "candidate_graph_executed": true,
+        "live_source_unchanged": true,
+        "live_downstream_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 72,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_reconstruction": false,
+        "migration_published": false
+      },
+      "migration": {
+        "valid": true,
+        "validation_issues": [],
+        "old_signature": "3230806201ba",
+        "new_signature": "56e73c632a1c",
+        "source_calibrator_width": 3,
+        "downstream_input_width": 3,
+        "downstream_calibrator_width": 2,
+        "candidate_graph_executed": true,
+        "live_source_unchanged": true,
+        "live_downstream_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 73,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_reconstruction": false,
+        "migration_published": false
+      },
+      "migration": {
+        "valid": true,
+        "validation_issues": [],
+        "old_signature": "3230806201ba",
+        "new_signature": "56e73c632a1c",
+        "source_calibrator_width": 3,
+        "downstream_input_width": 3,
+        "downstream_calibrator_width": 2,
+        "candidate_graph_executed": true,
+        "live_source_unchanged": true,
+        "live_downstream_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 74,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_reconstruction": false,
+        "migration_published": false
+      },
+      "migration": {
+        "valid": true,
+        "validation_issues": [],
+        "old_signature": "3230806201ba",
+        "new_signature": "56e73c632a1c",
+        "source_calibrator_width": 3,
+        "downstream_input_width": 3,
+        "downstream_calibrator_width": 2,
+        "candidate_graph_executed": true,
+        "live_source_unchanged": true,
+        "live_downstream_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 75,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_reconstruction": false,
+        "migration_published": false
+      },
+      "migration": {
+        "valid": true,
+        "validation_issues": [],
+        "old_signature": "3230806201ba",
+        "new_signature": "56e73c632a1c",
+        "source_calibrator_width": 3,
+        "downstream_input_width": 3,
+        "downstream_calibrator_width": 2,
+        "candidate_graph_executed": true,
+        "live_source_unchanged": true,
+        "live_downstream_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0
+      }
+    }
+  ]
+}

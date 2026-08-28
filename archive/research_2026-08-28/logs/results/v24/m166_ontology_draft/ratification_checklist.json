@@ -1,0 +1,1 @@
+{"status":"pending_human","steps":["review batch1 axes/vocabularies against the provisional schema","review batch2 rules and candidate pairs","edit or accept; then write analysis/task_ontology_v0.json","re-run the descriptor unit tests against the ratified schema"]}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "milestone": "M46",
+  "parent_locks": [
+    {
+      "id": "m45_artifact_index",
+      "path": "logs/results/v8/m45_protocol_lock/artifact_index.json",
+      "sha256": "43529556627933089825763858cb3b8251a1a1d072199b58284d7271b11ef692"
+    },
+    {
+      "id": "m42_routing_index",
+      "path": "logs/results/v7/m42_routing/artifact_index.json",
+      "sha256": "7524d8bea7f36de0fcd0bee02ab50a09113b404fb1f8ccb460418e44b5beed12"
+    },
+    {
+      "id": "a3_lifecycle_evidence",
+      "path": "logs/results/v6_1/a3_lifecycle_frontier/evidence.json",
+      "sha256": "c15eefa56f5d12cb7226ac0028cd8df64bbe7b5ca767500c5607efc52399ac7c"
+    }
+  ],
+  "source_config": "experiments/configs/v6/m30_directional_s2.json",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "integrated_class": 8,
+  "remaining_unknown_class": 9,
+  "review_budget": 50,
+  "gaussian_rank": 32,
+  "adaptation_rank": 16,
+  "anchor_fraction": 0.2,
+  "anchor_known_coverage_target": 0.92,
+  "maximum_unknown_recall_drop": 0.02,
+  "maximum_known_accuracy_drop": 0.01,
+  "minimum_cluster_size": 10,
+  "threshold_rules": [
+    "frozen_pre_integration",
+    "class_count_heuristic",
+    "anchor_quantile",
+    "per_class_anchor_fail_closed"
+  ],
+  "heuristic": "subtract_log_child_parent_class_ratio",
+  "stale_anchor_action": "frozen_parent",
+  "final_labels_opened": false
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "milestone": "M90.1",
+  "registered_question": "Plan v14 section 6.3: under a negative control that actually splits comparable rows, is the mixture arm measurable, and does H90 survive?",
+  "registration_notes": [
+    "N90.1.1 - registered before this milestone was run. The known-split negative control becomes a random split of the report rows stratified jointly by class and by domain, drawn from the seed in the controls block, so the two halves are exchangeable in both factors. The scorer's AUROC at separating them must fall within known_split_tolerance of 0.5.",
+    "N90.1.2 - the repair is applied to every arm including the baseline and every null. Comparing an arm under a repaired control against an arm under the old one would be the defect wearing a different hat.",
+    "N90.1.3 - M90's figures are not retouched. M90 stands as executed with H90 undetermined, and this milestone has its own evidence file and its own hash. The arm operands are expected to be numerically identical to M90's, because only the control changes. Any arm whose operands move is a defect in the refit to be reported, not a finding, and this run records the comparison explicitly.",
+    "N90.1.4 - only this milestone can decide H90. If the mixture arm passes the repaired control and still fails all three bars, H90 is refuted and M91 opens. If it fails the repaired control as well, the mixture design is unmeasurable at this budget, H90 stays undetermined, and it is recorded as undetermined rather than converted into a negative.",
+    "N90.1.5 - M85 is not voided. Its arms passed the old control, and passing a mis-aimed control does not invalidate a measurement. What is withdrawn is one interpretive sentence in the M85 docstring, that the control measures the scorer rather than the split, and the withdrawal is disclosed in the write-up. This is a narrowing, which N87.1 permits, and it revises no sealed number.",
+    "N90.1.6 - the old class-block control is retained alongside the repaired one and both are reported for every arm, so the size of the class-block effect stays on the record rather than being deleted from it. Validity is decided on the repaired control alone.",
+    "N90.1.7 - every registered judgement of M90 that this milestone does not explicitly reopen is carried unchanged: N90.2 through N90.9 as written, the standing floor of 10 fit samples per fitted tangent dimension, R5 nulls, and the rule that an arm failing its instrument is void rather than negative.",
+    "N90.1.8 - the stratified split is drawn once from a seed fixed before execution. It is not redrawn, and no arm is re-read under a second draw."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "The same 5760 rows M84 read, M85 ranked, M89 described and M90 re-read."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged since M83. Identical to M90 so the operands are comparable."
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3 and N90.7, unchanged from M90."
+  },
+  "arms": [
+    {
+      "name": "baseline",
+      "transform": "identity",
+      "components": "class",
+      "rank": 51,
+      "rationale": "v13 exactly. N90.1.2 requires the baseline to be re-read under the repaired control alongside every other arm."
+    },
+    {
+      "name": "cosine",
+      "transform": "l2_normalise",
+      "components": "class",
+      "rank": 51,
+      "rationale": "H91. Carried unchanged from M90 so the repaired control is read across the full arm set."
+    },
+    {
+      "name": "domain_centred",
+      "transform": "domain_centre",
+      "components": "class",
+      "rank": 51,
+      "rationale": "H91. Carried unchanged from M90."
+    },
+    {
+      "name": "domain_centred_null",
+      "transform": "random_group_centre",
+      "components": "class",
+      "rank": 51,
+      "rationale": "N90.3. Carried unchanged from M90."
+    },
+    {
+      "name": "domain_mixture",
+      "transform": "identity",
+      "components": "domain_cell",
+      "rank": 10,
+      "rationale": "H90. The arm the old control voided, and the only reason this milestone exists."
+    },
+    {
+      "name": "domain_mixture_null",
+      "transform": "identity",
+      "components": "random_cell",
+      "rank": 10,
+      "rationale": "N90.3. Identical component count, sizes and rank, with cells drawn at random instead of by domain."
+    }
+  ],
+  "mixture": {
+    "minimum_cell_support": 100,
+    "floor_samples_per_dimension": 10,
+    "class_level_component": true,
+    "rationale": "N90.4 and N90.5, unchanged from M90."
+  },
+  "gate": {
+    "v13_acceptance_multiplicity_mean": 78.74169921875,
+    "v13_rejection_recall": 0.11875,
+    "v13_geometry_auroc": 0.585085105895996,
+    "multiplicity_bar": 40.0,
+    "auroc_margin": 0.02,
+    "rationale": "Identical to M90. The bars are not moved because the control changed."
+  },
+  "controls": {
+    "far_field_multiplier": 5.0,
+    "far_field_count": 2048,
+    "far_field_seed": 90001,
+    "far_field_floor": 0.99,
+    "known_split_tolerance": 0.02,
+    "known_split_seed": 90101,
+    "rationale": "N90.1.1 and N90.1.6. Far-field settings and the tolerance are identical to M90; only the split that the negative control reads is repaired, and the old split is still reported."
+  },
+  "replication": {
+    "reference_evidence": "logs/results/v14/m90_representation_remedies/evidence.json",
+    "reference_hash": "350167a2a24932585590060e4614a083cbfe112865c596904d950d44c46f7f99",
+    "operand_tolerance": 1e-12,
+    "rationale": "N90.1.3. Only the control changes, so every arm operand must reproduce M90's to within the tolerance. A drift is a defect to report, not a result."
+  },
+  "seeds": {
+    "random_group": 90002,
+    "random_cell": 90003,
+    "rationale": "Identical to M90, so the nulls are the same objects and the operands are comparable."
+  },
+  "output_dir": "logs/results/v14/m90_1_control_repair"
+}

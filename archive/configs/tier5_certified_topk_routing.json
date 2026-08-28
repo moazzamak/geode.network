@@ -1,0 +1,9 @@
+{
+  "class_counts": [4, 8, 16, 32, 64, 128, 256],
+  "candidate_budgets": [1, 2, 4, 8, 16],
+  "dimensions": 8,
+  "primitives_per_class": 4,
+  "batch_size": 128,
+  "seeds": [1201, 1202, 1203],
+  "timing_repeats": 10
+}

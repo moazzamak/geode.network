@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "milestone": "M53-S1",
+  "seed": 11,
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "ranks": [8, 16, 32],
+  "extent_quantile": 0.95,
+  "scale_quantile": 0.75,
+  "penalty_weight": 1.0,
+  "known_coverage_target": 0.92,
+  "knn_support_per_class": 256,
+  "gaussian_rank": 32,
+  "rbf_svm": {"C": 1.0, "gamma": "scale"},
+  "m51_config": {
+    "path": "experiments/configs/v9/m51_surface_diagnostics.json",
+    "sha256": "b6c4ad8c1b03f4c62b2a32a6b40f8dc274701df1376d0cc618d875e53f8c0dff"
+  },
+  "m51_evidence": {
+    "path": "logs/results/v9/m51_surface_diagnostics/evidence.json",
+    "sha256": "2d80c30114eb71d23d46b0c18380a4be6bf497c8c07a2c892ed23fd0aaf4ffd1"
+  },
+  "parent_student": {
+    "path": "logs/results/v6_1/a2_weighted_s2/seed_11/weighted_student.json",
+    "sha256": "fc4c42e236192a50e2b729e603a3bb3583a15170fed6bff9a51ffc185085c39c"
+  },
+  "screen_gate": {
+    "minimum_balanced_accuracy_gain": 0.01,
+    "maximum_unknown_recall_loss": 0.02,
+    "maximum_component_budget_ratio": 2.0,
+    "require_noncollapsed_predictions": true,
+    "require_tangent_monotonicity": true,
+    "maximum_8x_tangent_acceptance": 0.0
+  },
+  "final_labels_opened": false
+}

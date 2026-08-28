@@ -1,0 +1,42 @@
+{
+  "milestone": "M139a",
+  "title": "The routing slack: a 6-way linear domain router on the sealed 6144-atom codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M139 amendment, 13 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "How much routing slack does the sealed code carry? Can a 6-way linear domain router fit on the frozen 6144-atom codes identify the domain of a test row, and with what confidence? Prerequisite diagnostic for the M139b assembled buy-back. No kill switch: the buy-back gate lives in M139b.",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "atoms": 6144,
+    "width": 24576,
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "note": "Reuses the SEALED M117 6144-atom code memmaps. One streaming pass accumulates the Gram and BOTH cross-targets (345-class for the t1 anchor, 6-domain for the router). No encode, CPU-only."
+  },
+  "domain_head": {
+    "n": 138000,
+    "penalty": 1.0,
+    "classes": 6,
+    "note": "Closed-form ridge, lambda=1.0, standardised + intercept — the exact RidgeAccumulator convention, same as the class head."
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "the class head on the same codes reproduces M117 sealed Q(6144,138000) = 0.2248695652173913 (validates codes-to-labels pairing)",
+    "no_kill_switch": "M139a is a prerequisite diagnostic. The buy-back gate (>= 4/6 domains beat their dense arm at matched cost) lives in M139b."
+  },
+  "numerics": {
+    "gram_dtype": "float64",
+    "block": 4096,
+    "seed": 109
+  }
+}

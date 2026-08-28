@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "milestone": "M71",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "geometry_fraction": 0.8,
+  "gaussian_rank": 32,
+  "known_coverage_target": 0.92,
+  "sample_efficiency_per_class": [50, 200, 1000],
+  "knn_neighbors": 20,
+  "knn_temperature": 0.07,
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 71,
+  "parity_tolerance": 0.01,
+  "gaussian_unknown_recall_bar": 0.87,
+  "knn_size_megabytes": 6.02,
+  "source_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "v11_parent_index": {
+    "path": "logs/results/v11/m68_final_replay/artifact_index.json",
+    "sha256": "cfc23d287b93bc10e94ebc25aef817a344c32ddc8a17f522b797eca422e932cd"
+  },
+  "final_labels_opened": false
+}

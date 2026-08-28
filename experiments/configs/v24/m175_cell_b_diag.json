@@ -1,0 +1,39 @@
+{
+  "milestone": "M175",
+  "cell": "B-diagnostic",
+  "title": "What blocks the vision transfer: resolution vs construction (information-matched control)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Is the SPM arm's failure on Flowers-102 caused by the 32x32 input losing the fine-grained signal, or by the SPM construction itself?",
+  "backbone": {
+    "name": "facebook/dinov2-small",
+    "image_size": 224,
+    "patch_grid": 16
+  },
+  "flowers": {
+    "dataset_root": "data/v5/datasets/flowers102",
+    "jpg_dir": "flowers-102/jpg",
+    "features_dir": "data/v5/features/m19_flowers102_s1/dinov2-small",
+    "feature_dimension": 384,
+    "image_size": 32,
+    "splits": {
+      "train": [5, 11, "features_train_b0c0bb74c51684d1.npz"],
+      "dev": [2, 12, "features_dev_b0c0bb74c51684d1.npz"],
+      "test": [3, 13, "features_test_b0c0bb74c51684d1.npz"]
+    }
+  },
+  "cell": {
+    "penalty_ladder": [0.1, 1.0, 10.0]
+  },
+  "probes": {
+    "r2_reference_min": 0.95,
+    "reading_high": "R1 >= 0.8: the 32x32 input still carries the species signal for a strong reader; the blocker is the SPM CONSTRUCTION (next: R3 flowers-fitted SPM at 32x32)",
+    "reading_low": "R1 <= 0.4: 32x32 downsampling destroys the fine-grained signal; resolution is the primary blocker; the deep-patch (224px) family is the right encoder for flowers",
+    "reading_between": "R1 in (0.4, 0.8): both factors contribute; record the split as measured"
+  },
+  "numerics": {
+    "batch": 32,
+    "torch_threads": 4
+  },
+  "output_dir": "logs/results/v24/m175_cell_b_diag"
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "milestone": "M47",
+  "parent_locks": [
+    {
+      "id": "m46_artifact_index",
+      "path": "logs/results/v8/m46_diagnostics/artifact_index.json",
+      "sha256": "f86d8ad7441ecea202fd24715d22c72bb9fa6175a69d8ad1ce9b27ade82d16c0"
+    },
+    {
+      "id": "source_config",
+      "path": "experiments/configs/v6/m30_directional_s2.json",
+      "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+    }
+  ],
+  "source_config": "experiments/configs/v6/m30_directional_s2.json",
+  "seeds": [11, 23, 37],
+  "initial_known_classes": [0, 1, 2, 3, 4, 5],
+  "arrival_classes": [6, 7, 8],
+  "remaining_unknown_class": 9,
+  "review_budget": 50,
+  "geometry_count_per_class": 300,
+  "anchor_count_per_class": 100,
+  "proxy_validation_count_per_class": 100,
+  "gaussian_rank": 32,
+  "production_adaptation_rank": 16,
+  "proxy_adaptation_rank": 3,
+  "anchor_known_coverage_target": 0.92,
+  "maximum_unknown_recall_drop": 0.02,
+  "maximum_known_accuracy_drop": 0.01,
+  "arms": [
+    "core_selected",
+    "boundary_inclusive",
+    "coverage_selected",
+    "utility_selected",
+    "random_stratified",
+    "review_everything"
+  ],
+  "utility_candidates": [
+    "core_selected",
+    "boundary_inclusive",
+    "coverage_selected",
+    "random_0",
+    "random_1",
+    "random_2",
+    "random_3",
+    "random_4"
+  ],
+  "bootstrap_resamples": 10000,
+  "bootstrap_confidence": 0.95,
+  "bootstrap_seed": 8017,
+  "minimum_mean_utility_gain": 0.05,
+  "minimum_positive_cells": 7,
+  "total_cells": 9,
+  "final_labels_opened": false
+}

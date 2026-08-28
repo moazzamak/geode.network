@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A1-W",
+  "stage": "S1",
+  "seed": 11,
+  "a0_parent_index": {
+    "path": "logs/results/v6_1/a0_parent_lock/artifact_index.json",
+    "sha256": "aebefd2a0ab9648564d6fc7acdb8a9edf693492a619e88a9e22623a2f35f5efc"
+  },
+  "m30_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m30_evidence": {
+    "path": "logs/results/v6/m30_directional_s2/evidence.json",
+    "sha256": "bb64692fac27c78c9345a7c07a702804c117b36a95415d3b4b36720da8711331"
+  },
+  "m31_evidence": {
+    "path": "logs/results/v6/m31_factorial_s2/evidence.json",
+    "sha256": "bd1d52ec1ae76043b5dd4d53be25068a2b7abfdff29b4ab67e2caf4bab4a9511"
+  },
+  "parent_student": {
+    "path": "logs/results/v6/m31_factorial_s2/seed_11/selected_student.json",
+    "sha256": "cae62407d0d7ab0609bf5285a58da682205a9fea0797ba61b50087bf3db36978"
+  },
+  "tangent_result": {
+    "path": "logs/results/v6_1/a1_tangent_s1/evidence.json",
+    "sha256": "717637ecd2f3f4b38f379010daeeab433deb595200dbe2b747f29abb3eb1f7b2",
+    "required_advancement_status": false
+  },
+  "readout": {
+    "family": "nonnegative_component_mixture",
+    "constraint": "per_class_simplex",
+    "parameterization": "softmax_log_weights",
+    "optimizer": "L-BFGS-B",
+    "regularization": 0.0001,
+    "maximum_iterations": 500,
+    "gradient_tolerance": 1e-08,
+    "initialization": "zero_equal_weights",
+    "temperature_policy": "one_global",
+    "minimum_temperature": 0.05,
+    "maximum_temperature": 20.0
+  },
+  "cohort": {
+    "fraction": 0.2,
+    "minimum_count": 1000
+  },
+  "budget": {
+    "component_count": 46,
+    "parameter_limit": 584476
+  },
+  "latency": {
+    "warmup_runs": 1,
+    "measured_runs": 5,
+    "maximum_ratio": 1.2
+  },
+  "advancement_gate": {
+    "minimum_accuracy_improvement": 0.005,
+    "minimum_nll_reduction_fraction": 0.05,
+    "maximum_accuracy_loss_for_nll": 0.0025,
+    "minimum_unaffected_prediction_preservation": 0.999,
+    "collapse_weight_threshold": 0.9,
+    "require_exact_replay": true,
+    "require_exact_rollback": true
+  },
+  "test_labels_opened": false
+}

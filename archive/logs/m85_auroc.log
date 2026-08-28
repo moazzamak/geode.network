@@ -1,0 +1,8 @@
+  geometry        AUROC 0.5851  far-field 1.0000  known-split 0.4845
+  nearest_center  AUROC 0.5617  far-field 1.0000  known-split 0.4828
+  knn             AUROC 0.5749  far-field 1.0000  known-split 0.4838
+
+verdict         geometry_ties_free_baselines
+M84 zero rung   0.11875 vs registered 0.11875  reproduced
+evidence_hash   bf72f81de6f6bd7ed14f0f02101cfd13bd82a75bf1bf0791eada910f2910decb
+runtime         0.4 min

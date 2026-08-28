@@ -1,0 +1,54 @@
+{
+  "milestone": "M133",
+  "program": "v20 follow-up - registered measurement: matched-footprint perplexity frontier, additive count model vs trained tiny transformer on the constrained DSL (12 Aug 2026)",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B4b (completes the M131-disclosed transformer arm)",
+  "registration_notes": {
+    "N92.1": "Engineering MEASUREMENT milestone, not a claim audit and NOT a novelty claim. It completes the transformer arm M131 disclosed as not run (N90.6), producing a matched-footprint frontier.",
+    "N92.2": "Question registered before measurement: on the deterministic constrained DSL, at each matched footprint (stored-model bytes), does the additive count model's test perplexity beat, tie, or lose to a genuinely trained tiny transformer of the same footprint? The outcome in the sub-hundreds-of-KB regime is not known without measuring.",
+    "N92.3": "Count-model points are REUSED from the sealed M131 evidence (logs/results/v16/m131_additive_next_token/evidence.json), never recomputed. Transformer points are newly trained with fixed seeds and registered hyperparameters.",
+    "N92.4": "Footprint = stored fp32 parameters (4 bytes/param), reported alongside fp16 (2 bytes/param). Matched-footprint comparison uses nearest transformer point to each count point; the interpolation method is disclosed.",
+    "N92.5": "Transformer training is on the same train split as the count model (2.31M tokens, seed 900), same fixed test set (seed 902). Fixed torch seed; the run records the device and torch threads.",
+    "N92.6": "The DSL is deterministic and highly structured; a small transformer may memorize its regularities at small footprint. Whether it matches the count model (which exploits the same structure) is the measured question. No prior expectation is registered as a gate.",
+    "N92.7": "A surprise direction (count model dominating the transformer at matched footprint in the small regime) is reported as a measured fact if it occurs, with the footprint crossover point, not as a general claim about language modelling.",
+    "N92.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir.",
+    "N92.9": "This evidence is a dated snapshot; it records the exact seeds, transformer hyperparameters, training steps, and device so a reader can repeat the measurement."
+  },
+  "corpus": {
+    "kind": "generated_dsl",
+    "reuse": "M131 generator (same seeds 900/901/902, same grammar)",
+    "programs": {"train": 5000, "valid": 500, "test": 500},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "count_model": {
+    "source": "logs/results/v16/m131_additive_next_token/evidence.json",
+    "window_points": ["1", "2", "3", "4", "8"]
+  },
+  "transformer": {
+    "train_steps": 6000,
+    "batch_tokens": 512,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "seed": 2026,
+    "device": "cpu",
+    "torch_threads": 16,
+    "ladder": [
+      {"name": "t12k", "d_model": 32, "layers": 1, "heads": 2, "ff": 64},
+      {"name": "t43k", "d_model": 48, "layers": 2, "heads": 3, "ff": 96},
+      {"name": "t74k", "d_model": 64, "layers": 2, "heads": 4, "ff": 128},
+      {"name": "t235k", "d_model": 96, "layers": 3, "heads": 6, "ff": 192},
+      {"name": "t2m", "d_model": 256, "layers": 4, "heads": 8, "ff": 512},
+      {"name": "t28m", "d_model": 384, "layers": 6, "heads": 8, "ff": 768}
+    ]
+  },
+  "output_dir": "logs/results/v16/m133_matched_footprint"
+}

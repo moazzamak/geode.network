@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "milestone": "M49",
+  "parent_locks": [
+    {
+      "id": "m47_artifact_index",
+      "path": "logs/results/v8/m47_review_utility/artifact_index.json",
+      "sha256": "3decc3112e0d6a4158e2a82197b117840a7e9b6c22e7353e2c8c67d311d7ccd8"
+    },
+    {
+      "id": "source_config",
+      "path": "experiments/configs/v6/m30_directional_s2.json",
+      "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+    }
+  ],
+  "source_config": "experiments/configs/v6/m30_directional_s2.json",
+  "seeds": [11, 23, 37],
+  "initial_known_classes": [0, 1, 2, 3, 4, 5],
+  "arrival_classes": [6, 7, 8],
+  "review_policy": "coverage_selected",
+  "review_budget": 50,
+  "geometry_count_per_class": 300,
+  "anchor_count_per_class": 100,
+  "proxy_validation_count_per_class": 100,
+  "gaussian_rank": 32,
+  "production_adaptation_rank": 16,
+  "anchor_known_coverage_target": 0.92,
+  "responsibility_threshold": 0.99,
+  "support_radius_multiplier": 0.5,
+  "attempts": [
+    "local_target_temperature",
+    "bounded_class_local_affine"
+  ],
+  "minimum_utility_improvement": 0.05,
+  "minimum_unaffected_prediction_preservation": 0.999,
+  "maximum_known_accuracy_drop": 0.01,
+  "maximum_unknown_recall_drop": 0.02,
+  "final_labels_opened": false
+}

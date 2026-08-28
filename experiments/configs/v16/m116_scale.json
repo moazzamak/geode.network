@@ -1,0 +1,72 @@
+{
+  "milestone": "M116",
+  "title": "Data scaling Q(n): does the frozen family's accuracy scale with training rows comparably to a cost-matched dense trunk?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.2 (M116)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107..M115's exact shared subsample, unchanged."
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "dense_trunk": "cuda",
+    "_note": "frozen sparse encode and the DINOv2-small trunk forward on the GPU ('cuda' = ROCm/HIP, HIP_VISIBLE_DEVICES=1, gfx1201); whitening and ridge on numpy CPU (M107 arithmetic)."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 3072,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "layer0_dictionary": "M108/M113 arm (a) exact: prefix of the seeded permutation of the shared 8192-whitened-patch pool - IDENTICAL to the dictionary M113 measured at 0.2153",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "head": "closed_form_ridge_1.0 (M108's constant, unchanged)",
+    "_note": "M116 fits the BEST arm measured in M115, which was L=0 (the frozen single-stage 3072-dictionary arm); the depth arms lost. Data scaling of the depth stack is moot after M115 KS1 fired."
+  },
+  "dense": {
+    "model": "small",
+    "resolution": 42,
+    "protocol": "t1: frozen DINOv2-small trunk (M109 DenseModel) + closed-form ridge head penalty 1.0, all train rows",
+    "_note": "r42 is the best M107/M109 dense point at-or-below the sparse family's 254.6M per-image MACs (M107 gate rule): dense r42 0.19716 @ 215.6M. The Q(n) comparison is at matched per-image cost."
+  },
+  "scaling": {
+    "n_ladder": [6900, 13800, 27600, 55200, 110400, 138000],
+    "subsample_rule": "the first n rows of the M107-shuffled train order (nested, deterministic, class-balanced by the shuffle); every ladder point is a subset of every later one",
+    "test_set": "the full 34500-row shared test set, identical for every ladder point and both families",
+    "_note": "features are image functions, not n functions: the sparse codes and the dense trunk features are each computed ONCE over the full corpus (memmap on D:), then a ridge is fitted at each n from the first n rows. No re-encoding per ladder point."
+  },
+  "gate": {
+    "t1_sparse_tolerance": 0.002,
+    "t1_dense_tolerance": 0.002,
+    "kill_switch_data_scaling": "fired (fail) if the frozen family's accuracy gain across the n-ladder is less than half the dense trunk's gain: Delta_S = Q_S(n_max) - Q_S(n_min) >= 0.5 * Delta_T with Delta_T = Q_T(n_max) - Q_T(n_min). The family must improve with data at least half as fast as the cost-matched dense trunk, measured on the same nested ladder and the same full test set. Reported: per-n table, the gap Q_T(n) - Q_S(n) at each n (must not diverge for a competitive claim), power-law exponents log(acc_inf - acc) vs log(n).",
+    "registered_prediction": "the sparse ridge head is O(n*W^2) with W=12288, so at small n it is underdetermined and should sit below the dense trunk; as n grows past W the gap should close. Whether the gain ratio clears 0.5 is the open question (the family saturates at 0.2153 on the accuracy axis, but the SHAPE of Q_S(n) is independent of the absolute ceiling). Prior art: Bardone-Goldt (2603.12901) predicts linear-sample learnability of higher cumulants with shared latent structure; Ghorbani (2020) bounds random-feature accuracy, not its data-scaling shape."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

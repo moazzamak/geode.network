@@ -1,0 +1,61 @@
+{
+  "milestone": "M124",
+  "title": "Specialist joint surface: does each domain's OWN atoms x data surface rise super-additively, mirroring the global M117 surface?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v19.md section 5.3 (M124)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "_note": "HIP_VISIBLE_DEVICES=1, gfx1201; A5/M119-exact specialist encode on GPU, ridge on CPU."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms_ladder": [256, 512],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108",
+    "specialist_construction": "A5 exact: per-domain random whitened-patch candidates, seeded permutation pick (seed [11,100]), atoms = prefix of that permutation (nested: 256 is a prefix of 512, mirroring M117's nested atoms)",
+    "domain_candidate_seed": 11,
+    "head": "closed_form_ridge_1.0"
+  },
+  "scaling": {
+    "n_fractions": [0.4, 1.0],
+    "subsample_rule": "first n rows of each domain's train rows (n = round(fraction * n_d), nested)",
+    "test_set": "each domain's full test rows",
+    "t1_reference": "M119 sealed specialist full-data accuracies (512 atoms) at BOTH n = 0.4*n_d and n = n_d per domain: d0 0.1121/0.1936, d1 0.0374/0.0638, d2 0.0585/0.1111, d3 0.2731/0.3245, d4 0.1119/0.1948, d5 0.0734/0.1240"
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "kill_switch_specialist_superadditive": "per domain, at cell (256, 0.4*n_d): joint gain Q(512,n_d) - Q(256,0.4*n_d) must exceed the sum of the single-axis gains [Q(512,0.4*n_d)-Q(256,0.4*n_d)] + [Q(256,n_d)-Q(256,0.4*n_d)] by the M117 margin +0.005. KS FIRED if super-additivity holds on FEWER than 4 of 6 domains. Mirrors M117 (global surface was super-additive by +0.0097/+0.0101). If specialists are super-additive per domain, the specialist route is the primary buy-back candidate (cheap + scales + per-domain).",
+    "registered_prediction": "M119 showed specialists inherit per-domain data scaling at 512 atoms. If the per-domain joint surface is super-additive like the global one, more atoms use the domain's data productively and the specialist route to the buy-back is strongest."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

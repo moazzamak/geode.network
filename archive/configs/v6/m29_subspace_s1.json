@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "milestone": "M29",
+  "stage": "S1",
+  "seed": 11,
+  "representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+  "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_pilot",
+  "flowers_extraction": "data/v5/features/m19_flowers102_s1/extraction_summary.json",
+  "m27_prediction_baseline": "logs/results/v6/m27_baseline_predictions/baseline_predictions.json",
+  "teacher_manifest": "logs/results/v6/m27_baseline_predictions/rbf_teacher.json",
+  "ranks": [8, 16, 32],
+  "score_semantics": ["normalized_radial", "gaussian_log_likelihood"],
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "anchor_fraction": 0.2,
+    "variance_floor_fraction": 0.001,
+    "residual_floor_fraction": 0.05
+  },
+  "objective": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "teacher_weight": 1.0,
+    "ground_truth_weight": 0.0,
+    "complexity_penalty": 0.0,
+    "minimum_improvement": 1e-08,
+    "initial_components_per_class": 3
+  },
+  "budget": {
+    "mode": "component_matched",
+    "component_limit": 70
+  },
+  "advancement_gate": {
+    "minimum_components_per_class": 3,
+    "minimum_accuracy_improvement": 0.005,
+    "maximum_teacher_gap": 0.03
+  },
+  "test_used_for_selection": false
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "milestone": "M41",
+  "parent_artifact_index": "logs/results/v7/m40_discovery/artifact_index.json",
+  "parent_artifact_index_sha256": "367613b520af254768adb10636ca3b3b8264feffb2898ce3658013101f5521d6",
+  "source_config": "experiments/configs/v6/m30_directional_s2.json",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "new_class": 8,
+  "remaining_unknown_class": 9,
+  "gaussian_rank": 32,
+  "sdf_component_rank": 16,
+  "calibration_fraction": 0.2,
+  "calibration_known_coverage_target": 0.92,
+  "new_class_review_samples": 50,
+  "minimum_target_improvement": 0.05,
+  "maximum_known_accuracy_drop": 0.01,
+  "maximum_unknown_recall_drop": 0.02,
+  "maximum_known_nll_regression": 0.01,
+  "final_labels_opened": false
+}

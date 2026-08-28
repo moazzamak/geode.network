@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "milestone": "M91",
+  "registered_question": "Plan v14 sections 7 and 7.1: is v13's acceptance overlap a capacity limit of dinov2-small? H92 is refuted unless a larger backbone clears the same three bars on the identical partition.",
+  "registration_notes": [
+    "N91.1 - the comparison is single-factor by construction and the construction is checked. All three graphs are the onnx/model_int8.onnx export of onnx-community/dinov2-{size}-ONNX and all three ship a byte-identical preprocessor_config.json at 14e780d8..., the hash v13 already registered for dinov2-small. Producer, quantisation scheme, preprocessing, decode path, pooling policy, batch size and execution provider are held fixed; only the backbone changes.",
+    "N91.2 - identical rows is a check, not a claim, and it is discharged upstream by experiments/tier4/prepare_v14_m91_backbones.py. This runner refuses to read any arm whose corpus did not reproduce v13's selection manifest entry for entry.",
+    "N91.3 - every computation here is CPU-only and single-threaded, as for every gated v13 and v14 figure. Extraction was CPU-only too, on a measurement rather than a preference: DirectML disagrees with the CPU provider by 21.7 percent relative on dinov2-base at batch size one.",
+    "N91.4 - rank is re-derived and does not move. The standing floor of ten fit samples per fitted tangent dimension binds on fit rows per class, which is 512 for every arm, giving 51.2 and a rank of 51 at every ambient dimension. The cap of 53 is not reached. Rank 51 is therefore not a carry-over; the floor simply does not depend on the ambient dimension. Recorded so that sameness is not mistaken for an unexamined inheritance.",
+    "N91.5 - an arm that does not demonstrate added capacity is void on the capacity question, not negative. H92 is a hypothesis about capacity, so if a larger backbone does not beat dinov2-small on known-class accuracy on the identical evaluation rows, whatever it did to rejection is not evidence about capacity. Such an arm reports capacity_not_demonstrated and its rejection operands are recorded but excluded from the H92 verdict. This is the M83.1 and N83.8 precedent.",
+    "N91.6 - INT8 damage is measured upstream and reported here, never gated. It cannot rescue a failing arm; it exists so that a capacity_not_demonstrated verdict has a candidate cause on the record rather than a guess added afterwards.",
+    "N91.7 - the three bars are M90's, unchanged. Multiplicity below 40, rejection recall above 0.11875, AUROC above 0.585085105895996 plus 0.02, on the identical partition and coverage. Accuracy improving is not a pass; it is the precondition for the arm being readable at all.",
+    "N91.8 - the dinov2-small arm is re-extracted by the same code path as the others and must reproduce v13's sealed feature digest, M84's zero-rung recall 0.11875 and M85a's AUROC 0.585085105895996 exactly. A run whose reference arm does not reproduce is describing a different object and reports nothing.",
+    "N91.9 - no figure here may revisit a v13 verdict, amend Outcome C, rescue H83 or H84, or be read against any v12 or CIFAR-10 number.",
+    "N91.10 - M90.2 named a property, domain dominance that survives complete linear erasure, and a larger backbone is asked whether it improves that property. Each arm therefore reports M89's separation instrument, M90.2's domain probe, and the dominance ratio both before and after a LEACE erasure fitted on that arm's own fit rows. These are diagnostics and carry no bar; only N91.7's three operands gate H92."
+  ],
+  "arms": [
+    {
+      "name": "dinov2_small",
+      "backbone": "dinov2-small",
+      "role": "reference and R5 null",
+      "output_dimension": 384,
+      "directory": "logs/results/v14/m91_backbones/dinov2-small"
+    },
+    {
+      "name": "dinov2_base",
+      "backbone": "dinov2-base",
+      "role": "capacity arm",
+      "output_dimension": 768,
+      "directory": "logs/results/v14/m91_backbones/dinov2-base"
+    },
+    {
+      "name": "dinov2_large",
+      "backbone": "dinov2-large",
+      "role": "capacity arm",
+      "output_dimension": 1024,
+      "directory": "logs/results/v14/m91_backbones/dinov2-large"
+    }
+  ],
+  "reference_arm": "dinov2_small",
+  "corpus": {
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "evaluation_first_label": 248,
+    "stratified_only": true,
+    "rationale": "The same rows M84 read and M85 ranked, re-extracted under each backbone."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged since M83. Labels and domains are identical across arms by N91.2, so the partition is identical too."
+  },
+  "rank": 51,
+  "rank_rationale": "N91.4. 512 fit rows per class against the floor of ten samples per fitted dimension gives 51.2, at every ambient dimension.",
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3, unchanged, so recall is read at the threshold v13 reported it at."
+  },
+  "identity": {
+    "m84_zero_rung_recall": 0.11875,
+    "m85a_geometry_auroc": 0.585085105895996,
+    "tolerance": 1e-9,
+    "rationale": "N91.8. Both are recomputed from this run's geometry on the re-extracted dinov2-small arrays, so agreement pins the whole code path to v13."
+  },
+  "gate": {
+    "multiplicity_bar": 40.0,
+    "v13_rejection_recall": 0.11875,
+    "v13_geometry_auroc": 0.585085105895996,
+    "auroc_margin": 0.02,
+    "rationale": "N91.7. M90's three bars, unchanged."
+  },
+  "capacity": {
+    "operand": "known_accuracy",
+    "rule": "strictly_greater_than_reference",
+    "rationale": "N91.5. An arm that does not beat the reference on known-class accuracy has not demonstrated capacity, so its rejection operands are void on the capacity question rather than negative."
+  },
+  "controls": {
+    "far_field_count": 4096,
+    "far_field_multiplier": 5.0,
+    "far_field_floor": 0.99,
+    "far_field_seed": 91001,
+    "known_split_tolerance": 0.02,
+    "known_split_seed": 90101,
+    "rationale": "M90.1's repaired stratified negative control and the far-field positive control, on every arm. The stratified seed is M90.1's so the split rule is identical."
+  },
+  "separation": {
+    "minimum_cell_support": 100,
+    "floor_samples_per_dimension": 10
+  },
+  "probe": {
+    "max_iterations": 2000,
+    "regularisation_C": 1.0,
+    "seed": 91002,
+    "probe_positive_floor": 0.5,
+    "rationale": "M90.2's probe, including N90.2.12's convergence requirement. An unconverged probe understates the signal it measures."
+  },
+  "erasure": {
+    "eigenvalue_floor": 1e-10,
+    "singular_value_tolerance": 1e-10,
+    "rationale": "N91.10. M90.2's LEACE eraser, fitted per arm on that arm's own fit rows, so that the post-erasure dominance ratio is comparable across backbones."
+  },
+  "output_dir": "logs/results/v14/m91_backbone_capacity"
+}

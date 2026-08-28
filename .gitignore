@@ -1,0 +1,96 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.exec
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+s_static/
+var/
+wheels/
+ Jarrett/
+*.egg-info/
+.direnv/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+s_static/
+var/
+wheels/
+*.egg-info/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+node_modules/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.venv
+
+# Generated model artifacts (large binary files, regenerated on first run)
+*.onnx
+*.onnx.data
+
+# CNN feature cache (keyed by dataset hash, regenerated automatically)
+.feat_cache/
+
+# don't upload data files
+data/
+
+# Regenerable computation caches: never tracked (28 Aug 2026 rewrite —
+# these paths carried ~10.7 GB of blobs through the unpushed history;
+# the patterns are location-independent because the archived logs keep
+# the same layout under archive/).
+**/eigh_cache/
+**/heads_cache.npz
+# Oversized evidence dumps: the m296 evidence JSONs embed full array
+# payloads (3.7 GB each); the arrays live in the cache dirs above and
+# the canonical evidence is the small form (evidence_m296b_fullpivot).
+**/m296_head_repair/evidence.json
+**/m296_head_repair/evidence_m296c_void_g6.json
+
+# V14-M91 re-extracted arms: 731 MB of arrays plus 47 MB of selection manifests,
+# all reproducible from the sealed builder and hashed inside evidence.json.
+# The small arm's features.npy is byte-identical to the tracked v13 corpus.
+logs/results/v14/m91_backbones/*/*/arrays/
+logs/results/v14/m91_backbones/*/*/selection_manifest.json
+# Archived research arrays: large binaries stay out of git (tracked ones
+# under archive/ are historical renames; never add new ones)
+archive/**/*.npy
+archive/**/*.npz
+archive/**/*.onnx
+archive/**/*.onnx.data
+logs/results/**/features/*.npy

@@ -1,0 +1,50 @@
+{
+  "milestone": "M138",
+  "title": "Score-level seed-ensemble: two independently seeded 3072-atom heads averaged at matched MACs",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M138, amended 13 Aug 2026 before measurement)",
+  "registered_before_any_accuracy": true,
+  "question": "M126 closed the concatenation variant (flat accuracy, flat eff-rank). Does SCORE-LEVEL ensembling - two independently seeded (3072-atom dictionary, ridge head) pairs with per-row L2-normalised 345-score vectors averaged - beat Q(6144, 138000) = 0.22487 at matched total atoms (2 x 3072 = 6144)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "member_atoms": 3072,
+    "member_seeds": [11, 22],
+    "pool_seed_note": "Both members draw from the SEALED 8192-candidate pool with different seeded permutations (11 = M117 exact; 22 = a fresh permutation of the same pool). Disclosed: same source pool, different subsets - the concatenation variant of this construction was measured at M126 (flat).",
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192
+  },
+  "ensemble": {
+    "rule": "per-row L2 normalisation of each member's 345-score vector, then average; argmax. Registered BEFORE measurement.",
+    "member_penalty": 1.0,
+    "n": 138000
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "member 1 (seed 11) must reproduce M117 sealed Q(3072, 138000) = 0.2152753623188406",
+    "kill_switch_ensemble": "fired if ensemble_accuracy - 0.2248695652173913 < +0.005. Fired: the rank-8 ceiling is a property of the whitened patch space, not of the pool draw; the seed direction closes.",
+    "eff_rank_report": "effective rank of the joint 24576-width standardised Gram (participation ratio, M128 exact definition), reported alongside."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05
+  }
+}

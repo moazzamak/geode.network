@@ -1,0 +1,45 @@
+{
+  "milestone": "M278",
+  "title": "M278 cross-arm consistency as a weak verifier: sentiment -> NLI check -> escalate on contradiction",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (the M272-M281 wave)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the NLI arm re-checking the sentiment arm's label as entailment/contradiction buy anything, measured against the generalist-only reading on the same rows?",
+  "arms": {
+    "sentiment_specialist": {
+      "checkpoint": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+      "license_recorded": "Apache-2.0",
+      "id2label": {"0": "negative", "1": "positive"}
+    },
+    "nli": {
+      "checkpoint": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
+      "license_recorded": "MIT",
+      "id2label": {"0": "entailment", "1": "neutral", "2": "contradiction"}
+    },
+    "generalist_escalation": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+      "license_recorded": "Apache-2.0",
+      "max_new_tokens": 64
+    }
+  },
+  "loop": {
+    "protocol": "specialist labels -> NLI checks 'this review is {label}' as hypothesis vs the review as premise -> contradiction escalates to the generalist's label; entailment/neutral keep the specialist's label",
+    "honesty": "the weak-verifier gain is reported even if ~0 (the measured M263 lesson: weak instruments must be tested, not trusted)"
+  },
+  "mix": {
+    "hf_id": "stanfordnlp/imdb",
+    "split": "test",
+    "rows": [3000, 3200],
+    "license_recorded": "IMDb evaluation-only (standing research-class)",
+    "reuse_note": "declared re-use (one held-out read per configuration)"
+  },
+  "grading": {
+    "sentiment": "last occurrence of positive/negative in the lowercased answer (the sealed grader)",
+    "nli": "argmax over entailment/neutral/contradiction"
+  },
+  "smoke": {
+    "rows": 6
+  },
+  "output_dir": "logs/results/v25/m278_weak_verifier",
+  "evidence_filename": "evidence.json",
+  "feature_cache_relpath": "v25/m278_weak_verifier"
+}

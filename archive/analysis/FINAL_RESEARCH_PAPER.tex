@@ -1,0 +1,865 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\systemname}{GEODE}
+\newcommand{\ba}{\operatorname{BA}}
+\newcommand{\utility}{U}
+\setlength{\emergencystretch}{2em}
+
+\title{Adaptation Utility Reveals Why Qualified Open-World Recognition
+Stages Fail to Compose}
+\author{
+  Moazzam Abdullah Khan\\
+  \texttt{moazzam2k@yahoo.com}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Open-world recognition is usually evaluated as a sequence of separate
+problems: reject unfamiliar inputs, cluster rejected examples, request labels,
+add classes, and route future inputs. Strong stage-level results do not
+guarantee that these stages compose into a useful system. We study this gap in
+a preregistered, human-review-budgeted loop over frozen 384-dimensional DINOv2
+features. The protocol uses one primary endpoint: post-integration balanced
+accuracy on known and discovered classes at 50 reviewed labels per episode,
+with known-class regression and remaining-unknown recall as safety constraints.
+
+The parent study first established that several stages could pass in
+isolation. A rank-32 class-conditional Gaussian achieved 92.08\% known
+coverage, 86.17\% unknown recall, 0.9561 AUROC, and 98.67\% review precision.
+HDBSCAN achieved 100\% group recall and precision in its stage-wise
+evaluation, and confirmed rank-16 class insertion improved isolated target
+success by 43.33 percentage points. Nevertheless, grouped end-to-end loops
+integrated 0 of 3 confirmable classes.
+
+We then optimize review selection for adaptation utility rather than purity.
+Across nine seed-by-arrival cells, deterministic utility selection beats
+density-core selection in all nine cells by 3.593 balanced-accuracy points on
+average, with a paired 95\% bootstrap interval of [2.794, 4.382]. This is a
+real and consistent signal, but it misses the preregistered 5-point minimum and
+violates the 2-point remaining-unknown-recall band in six cells. A separate
+local-residual study preserves 100\% of unaffected predictions, repairing an
+earlier scope-leakage failure, but adds at most 0.204 points of utility and
+also fails unknown-recall safety. The final registered outcome is therefore
+negative: purity-selected discovery outputs are insufficient statistics for
+safe adaptation, while improving representativeness helps but does not by
+itself qualify an open-world lifecycle. The study contributes an auditable
+episode protocol, typed stage interfaces, fail-closed lineage contracts, exact
+rollback, and artifact-only reproduction of the negative result.
+\end{abstract}
+
+\noindent\textbf{Keywords:} open-world recognition, open-set recognition,
+novel-class discovery, human-in-the-loop learning, continual learning,
+adaptation utility, transactional machine learning, negative results
+
+\section{Introduction}
+
+A deployed classifier eventually encounters examples outside its original
+class inventory. Open-world recognition requires the system to recognize known
+classes, reject unknowns, and incrementally add newly supervised classes
+\cite{bendale2015}. In an operational system, however, rejection is only the
+first step. Rejected evidence must be buffered; recurring structure must be
+separated from corruption; candidate groups must be reviewed; semantic labels
+must be supplied by an authorized actor; updates must be validated; and every
+publication must remain auditable and reversible.
+
+The literature contains mature mechanisms for individual parts of this loop.
+OpenMax and the Extreme Value Machine calibrate unfamiliarity
+\cite{bendale2016,rudd2018}. Stream-mining systems buffer and organize emerging
+classes \cite{masud2011,haque2016sand,haque2016echo,faria2016,mu2017}.
+Generalized and continual category-discovery methods identify novel groups in
+modern representation spaces \cite{vaze2022,cao2022,zhang2022,zhao2023}.
+Expert Gate and modular model systems route among specialists
+\cite{aljundi2017,gururangan2021,li2022}. Yet independently successful stages
+may emit the wrong sufficient statistics for the next stage.
+
+This paper asks:
+
+\begin{quote}
+Can a review-budgeted discovery, confirmation, adaptation, and routing loop
+improve post-integration performance while preserving known-class accuracy,
+remaining-unknown recall, and transactional safety?
+\end{quote}
+
+We investigate this question in \systemname, an experimental framework for
+explicit geometric models and auditable model lifecycles. We do not assume that
+signed-distance geometry is necessary or competitively optimal. In the same
+frozen representation, an earlier weighted affine head reached 91.73\%
+balanced accuracy, compared with 96.77\% for an RBF SVM. The acceptance
+mechanism is therefore treated as substitutable, and a low-rank Gaussian is
+the retained primary head.
+
+Our contributions are:
+
+\begin{enumerate}
+  \item \textbf{A registered end-to-end endpoint.} We evaluate adaptation
+  utility at a fixed human-review budget instead of promoting systems through
+  purity, AUROC, or coverage alone.
+
+  \item \textbf{A quantified interface failure.} Dense core sets cover only
+  34.0--39.1\% of the rejected region under a nearest-neighbor support
+  diagnostic, whereas boundary-inclusive sets cover 99.37--99.78\%.
+
+  \item \textbf{A consistent but insufficient selection signal.} Utility
+  selection improves over core selection in 9/9 cells, but the gain is smaller
+  than registered and does not preserve remaining-unknown recall.
+
+  \item \textbf{A transactional harness.} Typed interface contracts,
+  immutable lineage, human-confirmation gates, exact rollback, deterministic
+  replay, and artifact-only conclusion verification separate predictive
+  failure from systems failure.
+\end{enumerate}
+
+The central result is negative but actionable. Optimizing discovery for
+review purity does not provide sufficient support for adaptation. Optimizing
+support diversity improves adaptation, but safe open-world learning remains a
+joint constrained problem rather than a sequence of independently optimized
+stages.
+
+\section{Related Work}
+
+\subsection{Open-set and open-world recognition}
+
+Bendale and Boult formalized open-world recognition as known-class
+classification with explicit rejection and incremental class addition
+\cite{bendale2015}. OpenMax calibrates activation vectors using extreme-value
+theory \cite{bendale2016}, while the Extreme Value Machine models
+class-conditional margin tails and supports incremental updates
+\cite{rudd2018}. Feature-space alternatives include maximum posterior
+probability \cite{hendrycks2017}, Mahalanobis or class-conditional density
+scores \cite{lee2018,mukhoti2023}, deep nearest neighbors \cite{sun2022}, and
+distance-aware discriminative models \cite{vanamersfoort2020,liu2020}.
+
+These methods mainly answer whether an input lies outside learned support. Our
+primary question starts after rejection: whether selected rejected examples
+contain enough information to create a useful and safe child model.
+
+\subsection{Streaming novel-class detection}
+
+Data-stream systems operationalized reject-buffer-group-update loops before
+the modern deep-representation era. ECSMiner detects novel classes under
+concept drift \cite{masud2011}; SAND and ECHO address limited labels and
+evolving concepts \cite{haque2016sand,haque2016echo}; MINAS maintains
+micro-clusters and recurring novelty \cite{faria2016}; and SENCForest targets
+emerging classes \cite{mu2017}. These systems motivate our persistent buffer
+and delayed-confirmation protocol. We add immutable transaction lineage and
+measure downstream adaptation utility directly.
+
+\subsection{Category discovery}
+
+Generalized category discovery clusters unlabeled data containing both known
+and unknown categories, often over strong self-supervised features
+\cite{vaze2022}. ORCA jointly addresses seen and novel classes in open-world
+semi-supervised learning \cite{cao2022}. Grow and Merge and incremental GCD
+extend discovery across time \cite{zhang2022,zhao2023}. Our study holds the
+DINOv2 representation \cite{oquab2024} fixed so that review-set selection,
+rather than representation training, is the manipulated variable.
+
+DBSCAN \cite{ester1996}, HDBSCAN \cite{campello2013}, and FINCH
+\cite{sarfraz2019} offer distinct grouping mechanisms. Cluster quality is
+usually measured through coherence, purity, or recovery. We show that a pure
+cluster core can still be an inadequate adaptation set.
+
+\subsection{Expert routing and explicit models}
+
+Expert Gate uses reconstruction error to route among task experts
+\cite{aljundi2017}. More recent modular systems compose or route among
+independently trained experts \cite{gururangan2021,li2022,huang2024}.
+Our protocol distinguishes compatibility from empirical support. A model
+fingerprint determines whether a bundle may be called; a learned support
+profile may only propose a shortlist. Stale or low-confidence routes fall back
+to exhaustive compatible-model evaluation.
+
+Explicit geometry offers inspectable and editable artifacts
+\cite{requicha1980,park2019}, while low-rank Gaussian class models are related
+to probabilistic PCA and mixtures of factor analyzers
+\cite{tipping1999,ghahramani1996}. Editability is valuable for governance, but
+does not imply predictive superiority. We therefore report geometric heads as
+ablations rather than premises.
+
+\section{Problem Formulation}
+
+Let $f(x)\in\mathbb{R}^d$ be a frozen representation. Before episode $e$, the
+parent model recognizes class inventory $\mathcal{K}_e$. Review and
+confirmation may add a discovered class set $\mathcal{D}_e$. The registered
+episode utility is
+
+\begin{equation}
+\utility_e =
+\ba_{\mathcal{K}_e\cup\mathcal{D}_e}(\text{child})
+-
+\ba_{\mathcal{K}_e\cup\mathcal{D}_e}(\text{parent}).
+\label{eq:utility}
+\end{equation}
+
+Rejected or unavailable discovered labels count as incorrect for the parent.
+This prevents a no-update system from appearing competitive by excluding the
+new class from evaluation.
+
+\subsection{Fixed resources and safety}
+
+Each episode receives exactly $B=50$ reviewed labels. Unspent labels do not
+transfer. The representation and episode partitions are immutable. A candidate
+must keep known-class regression below one percentage point and preserve
+remaining-unknown recall within two points of its parent. Semantic publication
+requires linked human confirmation. Replay, graph validation, rollback,
+lineage, and fallback checks must all pass.
+
+\subsection{Statistical advancement}
+
+The pivotal review-selection hypothesis is preregistered. Utility-selected
+review advances only if it:
+
+\begin{enumerate}
+  \item exceeds density-core selection by at least 5.0 balanced-accuracy points
+  in mean $\utility_e$;
+  \item has a paired 95\% bootstrap lower bound above zero;
+  \item improves at least 7 of 9 seed-by-episode cells; and
+  \item satisfies the review-budget, safety, and transaction contracts.
+\end{enumerate}
+
+The first criterion is an effect-size requirement, not a significance test.
+Passing the interval and cell-count criteria is insufficient if the practical
+or safety thresholds fail.
+
+\section{System and Protocol}
+
+\subsection{Data, representation, and episodes}
+
+The realized study is a bounded CIFAR-10 proxy using immutable
+384-dimensional CLS-token features from DINOv2-small. Each frozen seed has
+10,000 training and 1,000 development examples. Seeds are 11, 23, and 37.
+The v8 replay begins with classes 0--5 and introduces classes 6, 7, and 8 in
+order, yielding nine seed-by-arrival cells. Class 9 remains unknown. No
+untouched final-label schedule is opened.
+
+Each class is deterministically partitioned into geometry fitting, anchor,
+review-candidate, and proxy-validation subsets. The validation subset may
+score a frozen candidate review set but never contributes adaptation support.
+Every episode records class order, partition hashes, support IDs, confirmation
+IDs, thresholds, parent and child hashes, utility, safety metrics, and rollback
+evidence.
+
+\subsection{Stage-interface contracts}
+
+We register five adjacent interfaces:
+
+\begin{enumerate}
+  \item rejector $\rightarrow$ buffer;
+  \item buffer $\rightarrow$ clusterer;
+  \item clusterer $\rightarrow$ review selector;
+  \item review $\rightarrow$ adapter; and
+  \item adapter $\rightarrow$ router.
+\end{enumerate}
+
+Seven versioned schemas represent the utility endpoint, episode replay,
+interface audits, threshold transfer, review selection, local residual scope,
+and integrated routing. The harness aborts on partition leakage, stale class
+order, threshold-lineage mismatch, review-budget overflow, missing
+confirmation, or rollback-parent drift.
+
+\subsection{Acceptance and threshold transfer}
+
+The retained acceptance head is a rank-32 class-conditional Gaussian. For
+center $\mu$, orthonormal tangent basis $V$, tangent variances $\lambda_j$,
+and residual variance $\sigma^2$,
+
+\begin{equation}
+q(x)=
+\sum_j\frac{(v_j^\top(x-\mu))^2}{\lambda_j}
++
+\frac{\lVert(I-VV^\top)(x-\mu)\rVert_2^2}{\sigma^2}.
+\end{equation}
+
+The class log likelihood includes the corresponding log determinant, and
+novelty is $-\max_k\log p(x\mid k)$. We compare a frozen parent threshold, a
+class-count heuristic, a global anchor quantile, and per-class anchor
+thresholds with a global fail-closed ceiling. Stale anchor lineage restores the
+parent threshold.
+
+\subsection{Review-selection arms}
+
+All eligible arms receive the same candidate pool and exactly 50 labels:
+
+\begin{description}
+  \item[Core-selected.] Samples nearest the candidate-group center.
+  \item[Boundary-inclusive.] A deterministic mix of core examples, modes, and
+  parent-boundary-distance quantiles.
+  \item[Coverage-selected.] Farthest-first $k$-center selection.
+  \item[Utility-selected.] Deterministic candidate subsets are ranked by a
+  cheap rank-3 proxy adapter on a disjoint validation partition; the production
+  adapter remains rank 16.
+  \item[Random stratified.] Seeded sampling across two candidate modes.
+  \item[Review-everything.] All 300 candidate examples; diagnostic only and
+  ineligible for equal-budget advancement.
+\end{description}
+
+All selected samples belong to the arriving class in this controlled
+sufficient-statistics study. Purity is therefore fixed at 100\%; the
+experiment isolates representativeness.
+
+\subsection{Transactional adaptation and routing}
+
+The production adapter adds one confirmed rank-16 low-rank component and
+recalibrates the global anchor threshold. Each transaction appends exactly one
+class, links a persistent review and confirmation, and must restore the exact
+parent bundle under rollback. Routing remains exhaustive because no empirical
+router passed the parent study's authoritative gate.
+
+\subsection{Local residual branch}
+
+Two preregistered residuals are evaluated independently after the pivotal
+selection experiment: a local target-class temperature and a bounded
+class-local affine correction. Before fitting, the parent alone freezes the
+affected region using selected support, a bounded nearest-neighbor radius, and
+component responsibility. Residual fusion is applied only inside that mask.
+An attempt requires at least 5 points of utility improvement, 99.9\%
+unaffected-prediction preservation on every seed, and the same known and
+unknown safety bounds.
+
+\section{Results}
+
+\subsection{Parent stage-wise evidence}
+
+Table~\ref{tab:parent} summarizes the stage-level mechanisms inherited from the
+v7 parent study. These results motivated composition but did not establish it.
+
+\begin{table}[t]
+\centering
+\caption{Parent stage-wise results. Values are three-seed means.}
+\label{tab:parent}
+\begin{tabular}{llr}
+\toprule
+Stage & Retained mechanism & Result \\
+\midrule
+Rejection & Rank-32 Gaussian & 86.17\% unknown recall \\
+           &                  & 92.08\% known coverage \\
+           &                  & 98.67\% review precision \\
+Discovery & HDBSCAN          & 100\% group recall/precision \\
+Discovery & FINCH            & 83.33\% recall; 86.39\% precision \\
+Adaptation & Confirmed rank-16 insertion & $+43.33$ points target success \\
+Routing & Best shadow profile & 99.57\% winner inclusion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Despite these stage-level results, HDBSCAN and FINCH integrated 0/3
+confirmable classes in the v7 grouped loop. Reviewing every rejection
+integrated 3/3 but provided no review reduction. This composition failure
+motivated the v8 endpoint.
+
+\subsection{Threshold transfer}
+
+Frozen, class-count, and global anchor-quantile thresholds all satisfy the
+registered bands on seeds 11, 23, and 37. We retain the global anchor rule
+because it directly recalibrates after class-order change. Mean known-class
+regression and mean remaining-unknown-recall change are both 0.00 points; mean
+remaining-unknown recall is 79.33\%. Per-class fail-closed thresholds increase
+unknown rejection but cause 1.875 points of mean known regression, exceeding
+the one-point ceiling.
+
+\begin{table}[t]
+\centering
+\caption{Threshold transfer over three development seeds.}
+\label{tab:threshold}
+\begin{tabular}{lrrc}
+\toprule
+Rule & Mean known drop & Mean unknown drop & Pass \\
+\midrule
+Frozen parent & 0.000 & 0.000 & Yes \\
+Class-count heuristic & 0.000 & 0.000 & Yes \\
+Global anchor quantile & 0.000 & 0.000 & Yes \\
+Per-class anchor & 1.875 & $-8.667$ & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Core sets are geometrically unrepresentative}
+
+Table~\ref{tab:coverage} compares 50 core examples with 50
+boundary-inclusive examples. Both cover the two coarse $k$-means modes, so
+mode count alone does not expose the defect. Nearest-neighbor support and
+covariance do. Core sets cover only 34.0--39.1\% of the rejected candidate
+region; boundary-inclusive sets cover more than 99\% and approximately recover
+the full covariance trace.
+
+\begin{table}[t]
+\centering
+\caption{Review-set representativeness diagnostics.}
+\label{tab:coverage}
+\begin{tabular}{crrrr}
+\toprule
+Seed & Core NN cov. & Boundary NN cov. & Core cov. ratio & Boundary cov. ratio \\
+\midrule
+11 & 34.04\% & 99.68\% & 0.663 & 1.078 \\
+23 & 35.47\% & 99.78\% & 0.658 & 1.096 \\
+37 & 39.14\% & 99.37\% & 0.679 & 1.068 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the M46 proxy adapter, boundary inclusion adds 0.259 balanced-accuracy
+points over core selection on average. The effect is positive on two of three
+seeds but is much smaller than the pivotal M47 threshold. The interface audit
+ranks changed-region fusion scope, full normalized router scores, and boundary
+examples as the three measured mismatches.
+
+\subsection{Equal-budget adaptation utility}
+
+Table~\ref{tab:utility} reports mean episode utility across nine cells.
+Coverage selection is the strongest eligible deterministic arm at 10.62
+points. Utility selection reaches 9.96 points, compared with 6.36 for core
+selection. Review-everything reaches 11.26 points but uses 300 labels per
+episode and is ineligible.
+
+\begin{table}[t]
+\centering
+\caption{Mean adaptation utility and review cost across nine cells.}
+\label{tab:utility}
+\begin{tabular}{lrrr}
+\toprule
+Review policy & Mean $\utility_e$ & Mean labels & Mean remaining-unknown recall \\
+\midrule
+Core-selected & 6.36 & 50 & 59.72\% \\
+Boundary-inclusive & 9.71 & 50 & 75.98\% \\
+Coverage-selected & \textbf{10.62} & 50 & \textbf{82.50\%} \\
+Utility-selected & 9.96 & 50 & 78.15\% \\
+Random stratified & 9.70 & 50 & 75.41\% \\
+Review-everything & 11.26 & 300 & 86.13\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Utility selection beats core selection in 9/9 cells. The mean paired
+difference is 3.593 points, and the 10,000-resample paired percentile
+bootstrap interval is [2.794, 4.382]. Thus the sign is stable and the interval
+excludes zero. Nevertheless, the gain is below the registered 5-point practical
+threshold.
+
+The safety conjunction also fails. Every utility-selected transaction consumes
+exactly 50 reviews, links confirmation, appends one class, replays, and rolls
+back exactly. Mean known regression is negative, indicating improvement rather
+than degradation. However, six of nine cells lose more than two points of
+remaining-unknown recall. The registered pivotal gate therefore fails and
+blocks learned selection and final E12 qualification.
+
+\begin{table}[t]
+\centering
+\caption{Preregistered pivotal gate.}
+\label{tab:gate}
+\begin{tabular}{lrc}
+\toprule
+Operand & Observed & Pass \\
+\midrule
+Mean gain over core $\geq 5.0$ points & 3.593 & No \\
+Paired 95\% lower bound $>0$ & 2.794 & Yes \\
+Positive cells $\geq 7/9$ & 9/9 & Yes \\
+Budget, safety, and transaction conjunction & 6 unknown-recall violations & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Locality can be repaired without creating utility}
+
+The parent A3 study preserved only 84.2\% of unaffected predictions because
+an ostensibly local edit entered a global fusion path. Parent-only region masks
+and explicit fusion gating raise unaffected preservation to 100\% for both M49
+attempts. Maximum known regression is only 0.125 points.
+
+The residuals do not qualify. Local target temperature adds 0.000 points of
+mean utility. The bounded affine correction adds 0.204 points, far below the
+5-point gate. Both observe a maximum remaining-unknown-recall drop of 4.333
+points. No residual is retained.
+
+\section{Discussion}
+
+\subsection{Purity is not an adaptation endpoint}
+
+The parent study appears strong when read stage by stage: high unknown recall,
+near-perfect review precision, perfect HDBSCAN recovery, and large isolated
+new-class gains. The integrated failure and v8 selection results show why this
+reading is misleading. A dense core can be semantically pure while discarding
+low-density modes and boundary variation needed by the child model.
+
+The 9/9 utility gain over core selection is evidence for the sufficient-
+statistics hypothesis. The failure of the 5-point and safety gates is equally
+important. Representativeness is necessary in this harness, but not sufficient.
+Future objectives must jointly optimize adaptation utility and preservation of
+the remaining unknown space.
+
+\subsection{Why the proxy selector is not the winner}
+
+Coverage-selected review outperforms utility-selected review. The utility
+selector ranks subsets with a cheap rank-3 proxy but deploys a rank-16
+production adapter. This creates proxy regret: validation utility under the
+cheap model does not perfectly rank production outcomes. Training a learned
+selector might reduce regret, but the preregistered kill switch correctly
+prohibits that continuation after the pivotal endpoint fails.
+
+\subsection{Unknown recall is a lifecycle state variable}
+
+Adding a class changes the score competition and the meaning of a calibrated
+threshold. Global anchor recalibration transfers safely in the isolated M46
+experiment, yet six M47 cells still exceed the remaining-unknown band. This
+shows that threshold transfer cannot be evaluated independently from support
+selection and cumulative class addition. Unknown recall must be measured after
+each transaction, not inherited from the rejection benchmark.
+
+\subsection{Locality and rollback answer different questions}
+
+Rollback proves that the parent can be restored. It does not prove that the
+child update is local. The M49 result demonstrates a direct repair:
+parent-defined masks plus explicitly gated fusion preserve every unaffected
+prediction. The absence of utility gain prevents a stronger claim, but the
+mechanism clarifies how edit scope should be enforced.
+
+\subsection{Negative results and stopping rules}
+
+The final outcome is not ``no signal.'' Utility selection has a positive,
+consistent effect. The outcome is negative because the effect is smaller than
+the registered practical threshold and violates a safety co-primary.
+Publishing only the positive interval would overstate the evidence. The
+stopping rule prevents post-hoc learner tuning, head substitution, or untouched
+schedule access from converting a failed primary endpoint into a new claim.
+
+\section{Reproducibility}
+
+All milestone configurations, schemas, selected sample IDs, parent and child
+lineage, and result artifacts are stored in the project repository. The final
+artifact-only command is:
+
+\begin{verbatim}
+.\.venv\Scripts\python.exe -m experiments.tier1.eval_v8_final_replay
+\end{verbatim}
+
+The verifier checks four immutable milestone indexes, 11 indexed artifacts,
+and six conclusion operands. Two runs must be byte-identical. The verifier
+loads no training data and opens no final labels. The complete repository test
+gate contains 374 tests.
+
+For an archival release, the authors should insert the public repository URL
+and release DOI here:
+\href{https://example.com/repository}{repository URL placeholder}.
+The arXiv source package should include this \texttt{.tex} file; no generated
+evidence or benchmark data are required to compile the manuscript.
+
+\section{Successor Geometric-Support Studies}
+
+After the lifecycle outcome was frozen, two separately registered studies
+examined whether class support in the same frozen features was better described
+by boundaries or higher-codimension manifolds. The v9 study found no calibrated
+shell occupancy around the existing zero-level sets. Rank-16 and rank-32 affine
+tubes improved seed-11 known balanced accuracy by 1.375 and 1.625 points, but
+accepted every 8x tangent-extrapolation probe because residual and tangent terms
+were not comparably scaled.
+
+V10 corrected this defect with dimensionless residuals, rank-normalized tangent
+overshoot, and calibration-only safety selection. Controlled ambient-64 tests
+recovered ranks 8, 16, and 32 and rejected all 8x probes. On the frozen real
+features, however, 16 of 18 registered cells were infeasible during calibration.
+best feasible cell passed all open-space gates but improved known balanced
+accuracy by only 0.875 points, below the registered 1-point gate. Thus the
+successor program also ended in Outcome D: controlled identifiability and a
+small residual signal did not qualify a practical support model or reopen
+lifecycle evaluation.
+
+\section{Limitations}
+
+\paragraph{Proxy scale.}
+The realized study uses CIFAR-10 classes and frozen DINOv2 features. It does
+not establish performance on large semantic inventories, natural long-running
+streams, or domain-scale routing.
+
+\paragraph{Development-only evidence.}
+The untouched M50 schedule remains sealed because the M47 kill switch fired.
+The result is preregistered development evidence, not an independent final-test
+confirmation.
+
+\paragraph{Simulated review.}
+A deterministic oracle models human confirmation. Real reviewers introduce
+disagreement, delay, expertise variation, and context-dependent cost.
+
+\paragraph{Controlled candidate purity.}
+The v8 sufficient-statistics experiment uses candidates from the true arriving
+class to isolate review-set geometry. Real discovery also introduces false
+members and fragmented groups.
+
+\paragraph{Limited selectors and adapters.}
+The deterministic utility selector enumerates registered subset families and
+uses a rank-3 proxy. The result does not rule out better constrained selectors,
+but the registered program prohibits training them after the pivotal failure.
+
+\paragraph{No head-substitution conclusion.}
+The same-harness geometric and kNN substitutions are not run after the binding
+kill switch. Earlier stage-level comparisons cannot be relabeled as
+adaptation-utility evidence.
+
+\paragraph{No universal novelty claim.}
+The prior-art audit cannot rule out patents, non-English work, inaccessible
+publications, or closed industrial systems.
+
+\section{Ethical and Deployment Considerations}
+
+Open-world systems can assign semantic meaning to coherent but irrelevant,
+sensitive, or harmful clusters. This study prohibits autonomous semantic
+publication and requires linked confirmation, immutable provenance, and exact
+rollback. These controls reduce but do not eliminate risk. Real deployment
+should additionally support reviewer disagreement, appeal and deletion
+procedures, privacy-aware retention, subgroup performance audits, monitoring
+for feedback loops, and explicit authority boundaries.
+
+The experiments use public benchmark representations and simulated review.
+They do not involve human subjects or sensitive personal data. The architecture
+should not be interpreted as authorization for high-stakes use.
+
+\section{Conclusion}
+
+We evaluated an open-world learning loop through adaptation utility rather than
+stage-wise proxies. Strong rejection, grouping, and isolated adaptation results
+did not compose. Review sets selected for density-core purity were
+geometrically unrepresentative. Boundary- and coverage-aware selection improved
+post-integration balanced accuracy consistently, but the registered
+utility-selected arm gained only 3.593 points rather than 5 and failed the
+remaining-unknown safety constraint.
+
+The broader methodological lesson is that open-world recognition should be
+evaluated as a constrained lifecycle. Rejection recall, cluster purity,
+adaptation accuracy, routing inclusion, locality, and rollback can all look
+strong independently while the complete system remains unqualified. The
+interfaces between stages---and the information each consumer actually
+needs---must be treated as first-class experimental objects.
+
+The successor support studies reinforce this lesson. Correcting a geometric
+score's units and proving synthetic identifiability were necessary but not
+sufficient: system-level component masking and a missed predictive threshold
+prevented the bounded support model from advancing.
+
+\begin{thebibliography}{32}
+
+\bibitem{bendale2015}
+A. Bendale and T. Boult.
+\newblock Towards open world recognition.
+\newblock In \emph{CVPR}, 2015.
+
+\bibitem{bendale2016}
+A. Bendale and T. Boult.
+\newblock Towards open set deep networks.
+\newblock In \emph{CVPR}, 2016.
+
+\bibitem{rudd2018}
+E. Rudd, L. Jain, W. Scheirer, and T. Boult.
+\newblock The extreme value machine.
+\newblock \emph{IEEE TPAMI}, 2018.
+
+\bibitem{masud2011}
+M. Masud et al.
+\newblock Classification and novel class detection in concept-drifting data
+streams under time constraints.
+\newblock \emph{IEEE TKDE}, 2011.
+
+\bibitem{haque2016sand}
+A. Haque et al.
+\newblock SAND: Semi-supervised adaptive novel class detection and
+classification over data stream.
+\newblock In \emph{AAAI}, 2016.
+
+\bibitem{haque2016echo}
+A. Haque et al.
+\newblock ECHO: A data stream classification method for detecting novel class
+drift.
+\newblock In \emph{ICDE}, 2016.
+
+\bibitem{faria2016}
+E. de Faria, A. Gama, and A. Carvalho.
+\newblock Novelty detection algorithm for data streams multi-class problems.
+\newblock \emph{Data Mining and Knowledge Discovery}, 2016.
+
+\bibitem{mu2017}
+X. Mu, F. Zhu, J. Du, E.-P. Lim, and Z.-H. Zhou.
+\newblock Classification under streaming emerging new classes.
+\newblock \emph{IEEE TKDE}, 2017.
+
+\bibitem{vaze2022}
+S. Vaze et al.
+\newblock Generalized category discovery.
+\newblock In \emph{CVPR}, 2022.
+
+\bibitem{cao2022}
+K. Cao, M. Brbi\'c, and J. Leskovec.
+\newblock Open-world semi-supervised learning.
+\newblock In \emph{ICLR}, 2022.
+
+\bibitem{zhang2022}
+Z. Zhang et al.
+\newblock Grow and Merge: A unified framework for continuous categories
+discovery.
+\newblock In \emph{NeurIPS}, 2022.
+
+\bibitem{zhao2023}
+B. Zhao and O. Mac Aodha.
+\newblock Incremental generalized category discovery.
+\newblock In \emph{ICCV}, 2023.
+
+\bibitem{aljundi2017}
+R. Aljundi, P. Chakravarty, and T. Tuytelaars.
+\newblock Expert Gate: Lifelong learning with a network of experts.
+\newblock In \emph{CVPR}, 2017.
+
+\bibitem{gururangan2021}
+S. Gururangan et al.
+\newblock DEMix layers: Disentangling domains for modular language modeling.
+\newblock arXiv:2108.05036, 2021.
+
+\bibitem{li2022}
+M. Li et al.
+\newblock Branch-Train-Merge: Embarrassingly parallel training of expert
+language models.
+\newblock arXiv:2208.03306, 2022.
+
+\bibitem{huang2024}
+C. Huang et al.
+\newblock LoraHub: Efficient cross-task generalization via dynamic LoRA
+composition.
+\newblock In \emph{COLM}, 2024.
+
+\bibitem{hendrycks2017}
+D. Hendrycks and K. Gimpel.
+\newblock A baseline for detecting misclassified and out-of-distribution
+examples in neural networks.
+\newblock In \emph{ICLR}, 2017.
+
+\bibitem{lee2018}
+K. Lee et al.
+\newblock A simple unified framework for detecting out-of-distribution samples
+and adversarial attacks.
+\newblock In \emph{NeurIPS}, 2018.
+
+\bibitem{mukhoti2023}
+J. Mukhoti et al.
+\newblock Deep deterministic uncertainty: A new simple baseline.
+\newblock \emph{TMLR}, 2023.
+
+\bibitem{sun2022}
+Y. Sun et al.
+\newblock Out-of-distribution detection with deep nearest neighbors.
+\newblock In \emph{ICML}, 2022.
+
+\bibitem{vanamersfoort2020}
+J. van Amersfoort et al.
+\newblock Uncertainty estimation using a single deep deterministic neural
+network.
+\newblock In \emph{ICML}, 2020.
+
+\bibitem{liu2020}
+J. Liu et al.
+\newblock Simple and principled uncertainty estimation with deterministic deep
+learning via distance awareness.
+\newblock In \emph{NeurIPS}, 2020.
+
+\bibitem{ester1996}
+M. Ester, H.-P. Kriegel, J. Sander, and X. Xu.
+\newblock A density-based algorithm for discovering clusters in large spatial
+databases with noise.
+\newblock In \emph{KDD}, 1996.
+
+\bibitem{campello2013}
+R. Campello, D. Moulavi, and J. Sander.
+\newblock Density-based clustering based on hierarchical density estimates.
+\newblock In \emph{PAKDD}, 2013.
+
+\bibitem{sarfraz2019}
+S. Sarfraz, V. Sharma, and R. Stiefelhagen.
+\newblock Efficient parameter-free clustering using first neighbor relations.
+\newblock In \emph{CVPR}, 2019.
+
+\bibitem{requicha1980}
+A. Requicha.
+\newblock Representations for rigid solids: Theory, methods, and systems.
+\newblock \emph{ACM Computing Surveys}, 1980.
+
+\bibitem{park2019}
+J. Park et al.
+\newblock DeepSDF: Learning continuous signed distance functions for shape
+representation.
+\newblock In \emph{CVPR}, 2019.
+
+\bibitem{tipping1999}
+M. Tipping and C. Bishop.
+\newblock Probabilistic principal component analysis.
+\newblock \emph{JRSS B}, 1999.
+
+\bibitem{ghahramani1996}
+Z. Ghahramani and G. Hinton.
+\newblock The EM algorithm for mixtures of factor analyzers.
+\newblock Technical Report CRG-TR-96-1, University of Toronto, 1996.
+
+\bibitem{oquab2024}
+M. Oquab et al.
+\newblock DINOv2: Learning robust visual features without supervision.
+\newblock \emph{TMLR}, 2024.
+
+\end{thebibliography}
+
+\appendix
+
+\section{Final Branch Disposition}
+
+\begin{table}[h]
+\centering
+\caption{Registered v8 milestone disposition.}
+\begin{tabular}{lll}
+\toprule
+Milestone & Decision & Final status \\
+\midrule
+M45 & Endpoint, schemas, replay & Passed \\
+M46 & Threshold and interface audit & Passed \\
+M47 & Equal-budget utility selection & Outcome D \\
+M48 & Learned selection & Blocked by M47 \\
+M49 & Two local-residual attempts & No residual retained \\
+M50/E12 & Untouched lifecycle qualification & Blocked by M47 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Artifact Verification}
+
+The final replay reports:
+
+\begin{itemize}
+  \item four verified milestone indexes;
+  \item 11 verified indexed artifacts;
+  \item six reproduced conclusion operands;
+  \item byte-identical output across two executions;
+  \item no training-data loading; and
+  \item no final-label access.
+\end{itemize}
+
+\section{Recent extension: the joint-budget scaling frontier}
+
+Since the stage-wise study above, the programme measured the scaling
+behaviour of the frozen patch-dictionary classifier. On a fixed DomainNet
+subsample (138{,}000 train / 34{,}500 test rows, 345 classes, six domains),
+the two-dimensional (dictionary-size $\times$ data) accuracy surface is
+super-additive: scaling both axes jointly beats the sum of the single-axis
+gains (excess +0.0097/+0.0101 over a +0.005 margin). The compute is
+data-elastic --- head-width data-scaling steepness rises with dictionary
+size --- and the atoms axis saturates near 6{,}144 atoms at full data. The
+remaining gap to a frozen dense trunk is structural: a fixed low-rank code
+geometry (effective rank $\approx$ 7.8) and a thin positive-margin argmax
+tail. All comparisons are cost-matched; no dominance claim is made. A
+self-contained report with reproduction steps is available at
+\texttt{analysis/RESEARCH\_REPORT\_v19.md}; the registered literature
+surveys (HTN-style routing; programmatic primitives and hybrid routers) are
+documented in \texttt{analysis/HTN\_ROUTING\_LITERATURE\_REVIEW.md} and
+\texttt{analysis/PROGRAMMATIC\_PRIMITIVES\_LITERATURE\_REVIEW.md}.
+
+\end{document}

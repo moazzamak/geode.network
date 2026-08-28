@@ -1,0 +1,17 @@
+loading DomainNet corpus + rebuilding the sealed encoder
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+g1 encoder pin: max-abs delta 0.000e+00 ok=True
+loading flowers (split pin + 32x32 adapter)
+  train: 510 rows
+  dev: 204 rows
+  test: 306 rows
+encoding flowers with the frozen SPM encoder
+  baseline_dinov2_cls best test 0.9902
+  spm_domainnet_encoder best test 0.1667
+{
+ "g1_delta": 0.0,
+ "baseline_best": 0.9901960784313726,
+ "spm_best": 0.16666666666666666,
+ "transfer_holds": false
+}
+M175 cell B complete -> logs\results\v24\m175_cell_b\evidence.json

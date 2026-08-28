@@ -1,0 +1,71 @@
+{
+  "milestone": "M113",
+  "title": "Learned (fitted) dictionary vs random dictionary: is the frozen sparse ceiling the family's or the random basis's?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v17.md (M113, 6 August 2026)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107/M108/M109/A2/A5's exact shared subsample, unchanged."
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "vq": "cuda",
+    "_note": "whitening and ridge on numpy CPU (M107 arithmetic); encode and the k-means fit on the GPU ('cuda' = ROCm/HIP). HIP_VISIBLE_DEVICES=1, device_count 1, gcnArchName gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 3072,
+    "topk": 64,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "random_dictionary": "M108 arm (a) exact: prefix of the seeded permutation of the shared 8192-whitened-patch pool",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "learned_dictionary": "mini-batch k-means (VQ) centroids fitted on a registered 2,000,000-whitened-patch pool (3,000 train images, seed 22); 60 iterations, batch 131072, moving-average lr = 1/(1+it), dead-centroid reinit from the pool; same 108-dim whitened space as random atoms",
+    "vq_fit_seed": 22,
+    "vq_fit_images": 3000,
+    "vq_pool_size": 2000000,
+    "vq_iters": 60,
+    "vq_batch": 131072,
+    "topk_codes": "keep the top-64 nearest-atom triangle activations per patch, zero the rest, pool; the code is zero-padded to the full atom dimension so per-image MACs are the SAME as arm (b) (sparse code, dense storage). Arm (c) asks whether top-k sparsity helps accuracy at matched cost. A compact sparse code + sparse ridge accumulator and approximate neighbor search (the genuine head/encode cost cuts) are deferred"
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0],
+    "_note": "M108's chosen head constant (penalty 1.0), applied unchanged to all three arms."
+  },
+  "gate": {
+    "t1_random_3072_tolerance": 0.002,
+    "kill_switch_1_learned_lifts_ceiling": "if learned-3072 does not beat random-3072 overall by >= +0.01 at matched atoms and MACs, the random basis is not the binding constraint and the learned-dictionary thesis fails at this budget",
+    "kill_switch_2_vs_dense_at_or_below": "learned-3072 (254.6M total MACs) vs the best M107 sealed dense point at-or-below that cost (dense r42: 0.1972 at 215.6M); if learned-3072 < 0.1972 + 0.01, no global accuracy win is licensed",
+    "registered_prediction": "k-means centroids remove a random draw's Poisson sampling noise, so learned should beat random by a modest amount (+1 to +4 points); whether it clears +0.01 is the open question; the dense-at-cost win (KS2) is not expected to be large because the global 3072-atom arm is MAC-bound"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

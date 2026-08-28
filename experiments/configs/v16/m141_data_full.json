@@ -1,0 +1,65 @@
+{
+  "milestone": "M141",
+  "title": "Data-axis escalation: uniform cap 612 and the all-available corpus (409,832 rows) on the sealed construction",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 5 (M141, registered 13 Aug 2026 before measurement)",
+  "registered_before_any_accuracy": true,
+  "question": "M140 PASSED (+50% rows -> +0.0161). Does the data axis keep paying to the corpus's full extent: Q(6144, 211140) at the uniform cap 612 and Q(6144, 409832) at ALL available raw rows per class?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms": 6144,
+    "note": "M117/M126 exact construction, unchanged; M141 adds rows only."
+  },
+  "extension": {
+    "premise": "measured before dispatch: per-class raw train counts min 612, median 1193, total 409832; no class below 612",
+    "uniform_cap": 612,
+    "uniform_n": 211140,
+    "all_available_n": 409832,
+    "all_available_note": "per class, ALL raw-train rows (raw array order) NOT in the sealed 400-row subsample. NON-UNIFORM schedule, disclosed. The first 69000 extension rows are exactly the sealed M140 ext600 selection and are REUSED from the sealed ext600 memmap (never re-encoded), verified by the t2 anchor.",
+    "encoder_check_rows": 256,
+    "encoder_check_tolerance": 1e-05
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy"
+  },
+  "anchors": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "Q(6144, 138000) = 0.2248695652173913",
+    "t2_reference": "Q(6144, 207000) = 0.24066666666666667 (sealed M140, via the reused ext600 memmap)",
+    "t2_tolerance": 0.002
+  },
+  "gate": {
+    "kill_switch_data_full": "fired if Q(6144, 409832) - 0.24066666666666667 < +0.005. Fired: the data axis saturates between 207k and the full corpus (negative sealed). Passed: the data lever holds to the corpus's full extent.",
+    "dense_r42_reference": 0.1972
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05
+  }
+}

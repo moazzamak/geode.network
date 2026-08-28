@@ -1,0 +1,40 @@
+{
+  "milestone": "M299",
+  "title": "Multi-block features + per-block L2 normalization; M228 hybrid re-run under the repaired solver",
+  "question": "Is the M228 hybrid regression (0.2421449 ms-only -> 0.1943478 raw concat at penalty 1.0) substantially recovered by the symmetric solver plus per-block L2 normalization, without native-resolution re-extraction?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M299 (26 Aug 2026, before the build)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters (the m109 _load_corpus digest gate)"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz",
+    "labels_note": "the M142 cell-2 schedule labels - the ms codes are aligned to THIS order (the M228 discipline)"
+  },
+  "penalties": [0.1, 1.0, 10.0],
+  "lambda_grid": [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0],
+  "sealed_anchors": {
+    "ms_only_penalty_1": 0.24214492753623187,
+    "hybrid_penalty_0.1": 0.1968985507246377,
+    "hybrid_penalty_1.0": 0.19434782608695653,
+    "hybrid_penalty_10.0": 0.18802898550724637
+  },
+  "registered_repair_definition": "per-block L2 normalization (each feature column divided by its train-set L2 norm, ms and DINOv2 as separate blocks), then the sealed closed-form standardisation and the symmetric eigen solve; lambda chosen train-side by exact LOOCV on the repaired hybrid",
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - premise (shapes, row counts, cache digests)",
+    "g2_fail": "VOID - both LU anchors must reproduce at 1e-9 or the instrument is not the sealed one",
+    "g3_fail": "VOID - LOOCV machinery must be finite with the validity rule applied",
+    "g4_fail": "VOID - the repaired solve failed its backward instrument",
+    "h26_2_pass": "the hybrid regression localises to conditioning (R-A6a + per-block L2 norm recovers it)",
+    "h26_2_fail": "the regression localises to the upscaling confound; both outcomes publishable"
+  }
+}

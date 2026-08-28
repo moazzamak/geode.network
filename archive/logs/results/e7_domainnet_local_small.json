@@ -1,0 +1,123 @@
+{
+  "checks": {
+    "exact_feature_replay": true,
+    "final_domain_observational": true,
+    "manifest_verified": true,
+    "multiple_logical_nodes": true,
+    "source_validation_final_domains_disjoint": true,
+    "tasks_executed_on_multiple_nodes": true
+  },
+  "claim_boundary": "bounded nearest-centroid systems episode; not full DomainNet training or predictive-performance evidence",
+  "config_hash": "b8657f97bd8a0ed89ffae62bbe6357382c07b79afd0d4f52375606bfdb4dd9ba",
+  "domainnet": {
+    "class_count": 345,
+    "domains": [
+      "clipart",
+      "infograph",
+      "painting",
+      "quickdraw",
+      "real",
+      "sketch"
+    ],
+    "source_repository": "wltjr1007/DomainNet",
+    "source_revision": "ee20570ae7a29c51571e55a9a17983f7625295d6",
+    "split_samples": {
+      "test": 176743,
+      "train": 409832
+    },
+    "total_declared_samples": 586575,
+    "total_verified_bytes": 18521436207,
+    "verified_files": [
+      "data/test-00000-of-00001.parquet",
+      "data/train-00000-of-00003.parquet",
+      "data/train-00001-of-00003.parquet",
+      "data/train-00002-of-00003.parquet"
+    ],
+    "version": "huggingface-parquet-v1"
+  },
+  "final_observational_metrics": {
+    "accuracy": 0.28125,
+    "balanced_accuracy": 0.28125,
+    "centroid_hash": "53d1b8ad77e5a05a0183dace91ecc517978c26653f2ff13402325505c4c27659",
+    "prediction_hash": "667eb60076e5d320434fb2e050e95841e673d52424f3a7db9e8b471b68bcf524"
+  },
+  "gate_passed": true,
+  "milestone": "E7-local-small",
+  "protocol": {
+    "class_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "final_domain": "sketch",
+    "final_samples": 32,
+    "final_used_for_selection": false,
+    "samples_per_class_domain": 4,
+    "source_domains": [
+      "infograph",
+      "painting",
+      "quickdraw",
+      "real"
+    ],
+    "source_samples": 128,
+    "validation_domain": "clipart",
+    "validation_samples": 32
+  },
+  "qualification_status": "passed",
+  "ray": {
+    "executing_node_ids": [
+      "9941d26e46d2e6f79c918f3523beee6d584d5b2268dbdd72324438ef",
+      "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+      "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+    ],
+    "resources": {
+      "address": "172.19.0.2:6379",
+      "available_resources": {
+        "CPU": 48.0,
+        "memory": 68853419624.0,
+        "node:172.19.0.2": 1.0,
+        "node:172.19.0.3": 1.0,
+        "node:172.19.0.4": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 29508608408.0
+      },
+      "cluster_resources": {
+        "CPU": 48.0,
+        "memory": 68853419624.0,
+        "node:172.19.0.2": 1.0,
+        "node:172.19.0.3": 1.0,
+        "node:172.19.0.4": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 29508608408.0
+      },
+      "node_ids": [
+        "9941d26e46d2e6f79c918f3523beee6d584d5b2268dbdd72324438ef",
+        "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+        "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+      ],
+      "nodes": 3,
+      "worker_node_ids": [
+        "a53d6ca490cf18457312b0e1c6b3144783872b1c3693afaa3735513f",
+        "d0cf66dba5e61a62f90ac8344c7203407890193da400f0fcb7c519c8"
+      ]
+    },
+    "work_items": 49
+  },
+  "replay": {
+    "exact": true,
+    "first_feature_hash": "5d5245049979c2fe687cc57877eda4b05714a1285bcd76782ce54f6c598375d0",
+    "second_feature_hash": "5d5245049979c2fe687cc57877eda4b05714a1285bcd76782ce54f6c598375d0"
+  },
+  "schema_version": 1,
+  "validation_metrics": {
+    "accuracy": 0.1875,
+    "balanced_accuracy": 0.1875,
+    "centroid_hash": "53d1b8ad77e5a05a0183dace91ecc517978c26653f2ff13402325505c4c27659",
+    "prediction_hash": "0c2608b7f7bd0a3beb6b7adf3a99ec3e553782d539385370137464eb918a6290"
+  }
+}

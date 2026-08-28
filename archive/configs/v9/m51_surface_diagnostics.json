@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "milestone": "M51",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "geometry_fraction": 0.8,
+  "equal_mass_fraction": 0.2,
+  "metric_eta": 1e-9,
+  "quantiles": [0.0, 0.25, 0.5, 0.75, 1.0],
+  "score_variants": ["normalized", "metric_corrected"],
+  "score_direction": "lower_is_stronger_support",
+  "source_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "parent_evidence": {
+    "path": "logs/results/v6_1/a2_weighted_s2/evidence.json",
+    "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65"
+  },
+  "v7_gaussian_evidence": {
+    "path": "logs/results/v7/m39_acceptance_heads/evidence.json",
+    "sha256": "3934d5fe9b6d366543ec9c2afa637ffae9748e3a2432f8d9571bd46e8ac6c5f2"
+  },
+  "v8_evidence": {
+    "path": "logs/results/v8/final_outcome_replay/evidence.json",
+    "sha256": "ddfeb008352e817e98704a2e2c33ceca9571a513f11ac19e0efce9dc98e1ec9f"
+  },
+  "parent_students": {
+    "11": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_11/weighted_student.json",
+      "sha256": "fc4c42e236192a50e2b729e603a3bb3583a15170fed6bff9a51ffc185085c39c"
+    },
+    "23": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_23/weighted_student.json",
+      "sha256": "d70da0a5239e8ac71f2f6a863fef51da234f8a7e41dfa0c97a51bba2d6fff1ad"
+    },
+    "37": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_37/weighted_student.json",
+      "sha256": "b1534f55109050334b519074719df55d923cbb634b18802f54eeb2693170e31d"
+    }
+  },
+  "gate": {
+    "minimum_class_fraction_per_seed": 0.6,
+    "minimum_precision_or_occupancy_difference": 0.02,
+    "minimum_consistent_seed_diagnostic_cells": 7,
+    "total_seed_diagnostic_cells": 9
+  },
+  "negative_controls": ["random_orientation", "label_permutation"],
+  "final_labels_opened": false
+}

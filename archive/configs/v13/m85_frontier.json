@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "milestone": "M85",
+  "purpose": "Assemble v13's deliverable frontier from sealed evidence only. Nothing here is recomputed; every cell cites the milestone and evidence hash it was read from.",
+  "registration_notes": [
+    "N85.5 - absent cells stay absent. Where a milestone did not produce a figure the cell reads 'absent' with a reason, and is never filled from the nearest available number, a different task width, or a different corpus.",
+    "N85.11 - every arm M81 measured is listed, and no arm is selected for the table. A frontier assembled by picking one point per family is the cherry-picking R4 was written against; the reader is given the whole measured set and the selection rules are left in M81's gate where they are auditable.",
+    "R4 - both I5 widths or neither. Each arm appears at I5-128 and at I5-8 with its own chance level and its own shuffled null, and no figure from one width is reported without the other.",
+    "R5 - each I5 figure is printed beside the shuffled-explanation null sharing its structure, budget and split.",
+    "R7 - the v12 CIFAR-10 figures are retained in a separate block, labelled as v12 CIFAR-10 at 8-way I5, and may not be compared against any v13 number. They are history, not bars.",
+    "N85.12 - the open-set column is a property of the boundary, not of any head. Every head in this table reads the same frozen features and the same fitted geometry, so a per-head OOD column would imply a distinction that was never measured. It is reported once, for the boundary, with both its threshold operand and its threshold-free one."
+  ],
+  "sources": {
+    "m81_sparse_head": {
+      "path": "logs/results/v13/m81_sparse_head/evidence.json",
+      "provides": "accuracy, I5 at both widths, shuffled-explanation nulls, active parameter counts"
+    },
+    "m84_exposure_ladder": {
+      "path": "logs/results/v13/m84_exposure_ladder/evidence.json",
+      "provides": "open-set rejection recall at matched known coverage"
+    },
+    "m85_open_set_auroc": {
+      "path": "logs/results/v13/m85_open_set_auroc/evidence.json",
+      "provides": "the threshold-free open-set operand and its free baselines"
+    },
+    "m85_transfer_eval": {
+      "path": "logs/results/v13/m85_transfer_eval/evidence.json",
+      "provides": "dictionary retention on the transfer corpus and its resolution control"
+    }
+  },
+  "v12_history": {
+    "note": "Amendment R7. v12 CIFAR-10 figures at 8-way I5, retained as historical reference only. Not v13 bars. The v13 corpus is 128-class DomainNet and its raw-probe accuracy bar is 61.304 percent, so no cell below is comparable to any cell above it.",
+    "rows": [
+      { "head": "RBF", "basis": "frozen dense", "accuracy": "96.917%", "i5": "22.772%", "size": "absent" },
+      { "head": "kNN", "basis": "frozen dense", "accuracy": "~96.7%", "i5": "25.246%", "size": "6.02 MB" },
+      { "head": "GEODE v12 field", "basis": "learned dense", "accuracy": "96.083%", "i5": "17.737%", "size": "absent" }
+    ]
+  },
+  "output_dir": "logs/results/v13/m85_frontier",
+  "table_path": "analysis/V13_FRONTIER.md"
+}

@@ -1,0 +1,63 @@
+{
+  "milestone": "M117",
+  "title": "2D scaling surface Q_S(C, n): does scaling atoms AND data jointly beat scaling either axis alone? (is the 0.2153 'ceiling' a slice artifact?)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.5 (M117)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "_note": "HIP_VISIBLE_DEVICES=1, gfx1201; whitening and ridge on numpy CPU (M107 arithmetic); frozen encode on GPU."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms_ladder": [1536, 3072, 6144],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "dictionary_rule": "at each atom count, the prefix of the seeded permutation of the shared 8192-whitened-patch pool (seed 11) - the same rule M108/M113/M115 used, so (3072, 138000) is the sealed anchor",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "head": "closed_form_ridge_1.0 (M108's constant, unchanged)",
+    "_note": "width = pool_grid^2 * atoms = 4*atoms. atoms 6144 <= 8192 pool, so all three atom counts are prefixes of the SAME random dictionary. M120 (head-width mechanism) is folded in: the atoms axis IS the head-width axis, and the per-atom Q(n) steepness is reported."
+  },
+  "scaling": {
+    "n_ladder": [34500, 69000, 138000],
+    "subsample_rule": "first n rows of the M107-shuffled train order (nested, deterministic)",
+    "test_set": "the full 34500-row shared test set, identical for every cell and atom count",
+    "_note": "codes are image functions, not n functions: train/test codes are encoded ONCE per atom count into D: memmaps, then a ridge is fitted at each n from the first n rows. No re-encoding per ladder point."
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "kill_switch_superadditive": "fired (fail) if the JOINT gain is not greater than the sum of the single-axis gains by the margin: at cell (1536, 34500): joint = Q(3072,69000) - Q(1536,34500); axes = [Q(3072,34500)-Q(1536,34500)] + [Q(1536,69000)-Q(1536,34500)]; super-additive iff joint > axes + 0.005. Reported: the same test at cell (3072, 69000). If atoms and data are separable resources, the 0.2153 ceiling at fixed n is a real slice, not an artifact of holding n fixed.",
+    "registered_prediction": "M108 measured the atoms axis at fixed n (24x atoms buys ~+10 pts, flattening); M116 measured the n axis at fixed atoms (steep, overtakes dense). If the two axes interact positively (more atoms use more data productively), the joint surface rises super-additively and the 'ceiling' was a slice artifact. If not, the ceiling is real."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

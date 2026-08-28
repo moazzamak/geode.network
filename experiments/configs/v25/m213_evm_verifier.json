@@ -1,0 +1,14 @@
+{
+  "milestone": "M213",
+  "cell": "EVM verification hook: Python-built M193b proofs verify on-chain bit-exactly; gas sweep + extrapolated real-width cost",
+  "n_gate": 64,
+  "n_sweep": [64, 128, 256, 512],
+  "seed": 9,
+  "fixture_path": "infrastructure/evm/evidence/m213_fixture_n64.json",
+  "hardhat": {
+    "cwd": "infrastructure/evm",
+    "cmd": ["npx", "hardhat", "run", "scripts/verify_onchain.js"],
+    "timeout_seconds": 900,
+    "note": "the verify JSON path is passed via the POST_VERIFY_PATH env var"
+  }
+}

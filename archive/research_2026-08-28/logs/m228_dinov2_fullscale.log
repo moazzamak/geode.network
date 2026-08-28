@@ -1,0 +1,24 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+labels from the M142 cell-2 schedule file: 409832 rows
+ms shapes: train (409832, 13244), test (34500, 13244)
+device: AMD Radeon RX 9070 XT
+reusing cached fulltrain DINOv2 features (fulltrain_dino.npy)
+reusing cached test DINOv2 features (test_dino.npy)
+extraction: train 617.09s, test 51.91s
+penalty 0.1: ms-only 0.243101  hybrid 0.196899
+penalty 1.0: ms-only 0.242145  hybrid 0.194348
+penalty 10.0: ms-only 0.238348  hybrid 0.188029
+{
+ "gates_ok": true,
+ "ms_only": {
+  "0.1": 0.2431014492753623,
+  "1.0": 0.24214492753623187,
+  "10.0": 0.2383478260869565
+ },
+ "hybrid": {
+  "0.1": 0.1968985507246377,
+  "1.0": 0.19434782608695653,
+  "10.0": 0.18802898550724637
+ }
+}
+M228 complete -> logs\results\v25\m228_dinov2_fullscale\evidence.json

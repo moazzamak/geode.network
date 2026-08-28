@@ -1,0 +1,21 @@
+{
+  "version": "v0",
+  "frozen": "2026-08-20",
+  "provenance": "analytical (assistant-authored, registered in the v25 plan M224 entry before the build); NOT LLM-generated and NOT measured labels - these are authored constraints only (I3: proposals are hypotheses, never labels)",
+  "note": "the relational constraints are applied to TOKEN embeddings (the word2vec-like object), not to normalised task fingerprints",
+  "ordered_axes": {
+    "latent.noise_regime": ["low", "medium", "high"],
+    "output.ordinality": ["nominal", "ordinal", "cardinal"],
+    "input.value_kind": ["discrete", "mixed", "continuous"],
+    "latent.sample_regime": ["tiny", "small", "medium", "large"],
+    "latent.label_cardinality": ["2", "3-10", "11-100", "101-1000", "1001+"]
+  },
+  "polar_pairs": [
+    {"axis": "latent.stationarity", "a": "stationary", "b": "non-stationary"}
+  ],
+  "gates": {
+    "ordered_triple_min_cos": 0.5,
+    "polar_max_cos": -0.3,
+    "reading_registered_before_running": "G5 ordered-triple pass means consecutive steps along an ordered axis move in a consistent direction; polar pass means the registered polar pair sits at least partially opposite. Failure of either is a scoped negative for the authored relation set, not a void."
+  }
+}

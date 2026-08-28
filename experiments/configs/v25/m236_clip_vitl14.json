@@ -1,0 +1,41 @@
+{
+  "milestone": "M236",
+  "title": "CLIP ViT-L/14 native-resolution extraction + per-domain probes",
+  "question": "Does a CLIP-based quickdraw probe reach the remaining easy bar (>= 0.8)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M236 REGISTERED (20 Aug)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "extraction": {"resize": 224, "batch": 256, "threads": 6,
+                 "dtype": "float16",
+                 "note": "fp16 features are used for PROBE TRAINING only, never for nearest-neighbour ranking artifacts (the v13 ranking-flip caveat)"},
+  "model": {"repo": "openai/clip-vit-large-patch14", "feature_dim": 768,
+            "mean": [0.48145466, 0.4578275, 0.40821073],
+            "std": [0.26862954, 0.26130258, 0.27577711],
+            "note": "the cached v13 CLIP ViT-L/14 (no preprocessor_config.json - the transform is hand-written above)"},
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "training": {"epochs": 30, "lr": 0.001, "weight_decay": 0.0001,
+               "batch": 1024, "seed": 11},
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09},
+  "domain_names": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "ladder": {"easy": ["quickdraw", "real", "clipart"], "easy_bar": 0.8,
+             "middle": ["sketch", "painting"], "middle_bar": [0.5, 0.6],
+             "hard": ["infograph"], "hard_first_bar": [0.3, 0.4]},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - the ms anchor must reproduce at 1e-9",
+    "g2_fail": "VOID - the schedule permutation must reconstruct the labels byte-exactly",
+    "g3_fail": "VOID - a trained probe must be reproducible under the same seed",
+    "reading": "quickdraw >= 0.8 meets the last easy bar; if it still misses, the ladder closes with 5/6 easy bars and a registered quickdraw-specific cell"
+  }
+}

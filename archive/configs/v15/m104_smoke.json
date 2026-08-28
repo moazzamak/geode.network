@@ -1,0 +1,85 @@
+{
+  "milestone": "M104-smoke",
+  "title": "Smoke configuration: exercises every M104 path at 1/40 the cost",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.10",
+  "_smoke_note": "NOT A MILESTONE RUN AND NOT ADMISSIBLE AS EVIDENCE. Section 2.4 and section 11.2 item 23: no figure produced by this configuration may be read as an operand, quoted in the plan, or entered in the claim ledger. It exists to prove the runner executes every branch — capping, both generalists, all four allocation rules, the gate — before the sealed configuration is started. The budget of 64 atoms and the 40,000-row train subsample are chosen so that the cap BINDS on several experts, which the sealed configuration does not do and which would otherwise never be executed. Its first execution earned its keep: it showed the atom cap failing to enforce the section 5.3 floor, because the cap was computed from an expert's full row count while the reported model was fitted on the 90% left after the validation split. Two of arm (b)'s six experts were voided with every cap respected. Section 7.10 execution-time amendment 5 records the fix. Voiding is now unreachable under this configuration, which is the point of the fix, not a loss of coverage: the assertion remains in the runner and any future configuration that breaks the floor will still trip it.",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows": 40000,
+    "test_rows": 8000,
+    "stratify_seed": 11,
+    "expected_sha256": null
+  },
+  "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 100000,
+    "zca_fit_seed": 11
+  },
+  "budgets": [64],
+  "seeds": [11, 23],
+  "candidate_pool": {"size": 1024},
+  "rank_measurement": {
+    "instrument": "RankMe, arXiv:2210.02885, used unmodified",
+    "probe_atoms": 64,
+    "rows_per_domain": 500,
+    "epsilon": 1e-07,
+    "external_reference": {
+      "source": "plan section 2.9.7 probe 3",
+      "ratio_to_control": {
+        "clipart": 1.168,
+        "infograph": 1.17,
+        "painting": 1.113,
+        "quickdraw": 0.185,
+        "real": 1.112,
+        "sketch": 0.475
+      }
+    }
+  },
+  "allocation": {
+    "match_on": "row_weighted_atoms",
+    "match_weights": "train",
+    "minimum_atoms_per_expert": 8
+  },
+  "sample_adequacy": {
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "report_per_class_reading": true
+  },
+  "arms": {
+    "a_uniform": {"label": "(a) uniform mixture", "role": "the null", "weights": "uniform"},
+    "b_rank_sized": {"label": "(b) rank-sized mixture", "role": "treatment", "weights": "rankme_train_only"},
+    "c1_generalist_mac_matched": {"label": "(c1) generalist at matched MACs", "role": "partition control", "weights": "single_expert"},
+    "c2_generalist_atom_matched": {"label": "(c2) generalist at matched atom sum", "role": "partition control", "weights": "single_expert"},
+    "d_random_sized": {"label": "(d) random-sized mixture", "role": "structure-matched null", "weights": "dirichlet", "dirichlet_concentration": 1.0},
+    "e_traffic_inverse": {"label": "(e) traffic-inverse mixture", "role": "second structure-matched null", "weights": "inverse_traffic"}
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [1.0, 10.0, 100.0, 1000.0, 10000.0],
+    "validation_fraction": 0.1,
+    "selection_arm": "a_uniform"
+  },
+  "routing": {"mode": "oracle_domain_label"},
+  "gate": {
+    "primary_operand": "test accuracy under oracle routing, per domain and pooled",
+    "registered_prediction": "smoke only, no prediction is registered here",
+    "kill_switch_1": "smoke only",
+    "kill_switch_2": "smoke only",
+    "kill_switch_2_tolerance": 0.005,
+    "kill_switch_3": "smoke only",
+    "kill_switch_4": "smoke only",
+    "mechanism_uniformity_tolerance": 0.5
+  },
+  "compute_ledger": {"report_training_and_inference_separately": true},
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16
+  }
+}

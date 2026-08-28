@@ -1,0 +1,121 @@
+{
+  "milestone": "M108",
+  "title": "Grow the dictionary instead of drawing it: does discriminative growth transfer to DomainNet?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v16.md section 5.1",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107's exact shared subsample, unchanged: 345 * 400 = 138,000 train rows and 345 * 100 = 34,500 test rows. Plan section 5.1: same corpus, same digest. A changed subsample would make arm (a) incomparable to M107 and restriction 4 unenforceable."
+  },
+  "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "_note": "M107's patch pipeline unchanged (plan section 5.1). The whitener is fitted on TRAIN patches only and shared by every arm."
+  },
+  "sparse": {
+    "budgets": [128, 256, 512, 1024, 2048, 3072],
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "_note": "Plan section 5.1: same budgets {128, 256, 512, 1024, 2048, 3072}, same 8192-atom candidate pool drawn once from the whitened patch pool with seed 11. ALL THREE arms (a), (c) and (e) draw from this one shared pool, so a win for any arm isolates the selection criterion and not the breadth of the search (M103 section 7.9 restriction 6, carried). The mixture ladder of M107 is NOT carried: M108's operand is the dictionary construction rule on the generalist, and plan section 5.1 arms are (a), (c), (e) only."
+  },
+  "selection": {
+    "arm": "c_discriminative",
+    "selection_rows": 20000,
+    "selection_seed": 11,
+    "parity_subset_rows": 2000,
+    "parity_budget": 256,
+    "_registered_before_measurement": [
+      "selection_rows = 20000 is a REGISTERED DESIGN DECISION, made before any M108 accuracy existed. M103 used 8000 rows for 10 classes (800 per class). 345 classes make 800 per class impossible on this subsample (276,000 rows > 138,000). 20,000 rows is 58 rows per class, enough for a centred one-hot residual to carry signal across 345 classes while keeping the greedy selection tractable. The plan's registered prediction already says the arm (c) margin SHRINKS on 345 classes; a smaller per-class selection count is one of the reasons why, and is stated as such rather than hidden.",
+      "parity_subset_rows / parity_budget: the GPU port of select_discriminative (plan section 5.1 arm (c)) must reproduce the numpy reference's atom ORDER exactly on a 2000-row, 256-atom subset before the full selection is trusted. The greedy argmax is highly sensitive to float rounding, so order agreement on a subset is a strong parity signal. If it fails, the runner falls back to the numpy function for the full selection."
+    ],
+    "_note": "The selection encodes selection_rows TRAIN rows against the full 8192-atom pool and runs the group-OMP selection (M103 eval_v15_m103_atoms.py select_discriminative, L227-280) to produce a nested atom order. TRAIN ROWS ONLY. Paid once for the whole sweep; charged in full to every budget (against this arm, M103 compute_ledger)."
+  },
+  "ridge_leverage": {
+    "arm": "e_ridge_leverage",
+    "penalty": 1.0,
+    "seed": 11,
+    "top_budget": 3072,
+    "_registered_before_measurement": [
+      "Arm (e) re-implements ridge-leverage sampling (Avron et al., ICML 2017) inside this protocol (plan section 5.1). Formula, registered: let Z be the 8192 x 108 whitened candidate pool (the same array arms (a) and (c) draw from) and lambda = 1.0, the M107 head constant. The regularised leverage score of candidate i is ell_i = z_i^T (Z^T Z + lambda I)^-1 z_i. One draw WITHOUT replacement of 3072 atoms from the 8192, with probability proportional to ell, seed 11. The ladder is the prefixes of that single draw, so it nests exactly as arms (a) and (c) do.",
+      "lambda = 1.0 is used because it is the M107 head constant chosen once on the sparse side (plan section 2.1) and it is the natural regulariser for the ridge problem this program actually solves. It is registered here, before any M108 accuracy, so the leverage axis cannot be tuned after seeing results.",
+      "Weighted sampling (not deterministic top-k) is used because the published mechanism is a SAMPLING method and its O(s_lambda log s_lambda) bound is a sampling bound. The sorted leverage scores are recorded in the evidence so the mechanism is transparent."
+    ]
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [1.0, 10.0, 100.0, 1000.0, 10000.0],
+    "selection_validation_fraction": 0.1,
+    "selection_arm": "a_random_128",
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_note": "Identical to M107's head and selection rule (plan section 5.1: same ridge head, same penalty grid, same selection rule). The constant is chosen ONCE, on arm (a) at the smallest budget (the registered null), against a validation split carved out of TRAIN, and applied unchanged to every arm and every budget. The full grid is recorded per arm as sensitivity only; reading the best constant per arm off it would be choosing the answer."
+  },
+  "arm_a_reproduction": {
+    "source": "logs/results/v15/m107_dense/evidence.json",
+    "tolerance_accuracy": 0.002,
+    "_registered_before_measurement": [
+      "Restriction 4: arm (a) is re-measured, never quoted from M107. The plan's 'section 4.6 parity bound' is stated for dense FEATURES (worst relative disagreement 1e-04). For arm (a) the operand is ACCURACY, so this config registers the accuracy-level reading of that bound: arm (a) must reproduce M107's s_generalist accuracy at the chosen penalty at EVERY budget within +/- 0.002 absolute (0.2 percentage points). Any budget outside it voids the run under plan section 3.3. The tolerance is a factor of 10-20 above the drift a GPU float32 cdist can plausibly cause and far below the +0.0104 to +0.0335 margin M103 measured for arm (c), so it cannot swallow a real effect.",
+      "A PRE-SEAL instrument check runs arm (a) at 128 atoms on the full subsample on the GPU and compares against M107's recorded 0.11171 before the sealed run is allowed to proceed. If it is outside tolerance, the runner switches the encode to CPU (M107's exact backend) rather than proceeding on the GPU."
+    ]
+  },
+  "kill_switch_3_dense_source": {
+    "path": "logs/results/v15/m107_dense/evidence.json",
+    "_registered_before_measurement": [
+      "Plan section 5.1 kill switch 3 needs the dense curve. M108 does not re-run the dense arms: restriction 4 requires arm (a) (the sparse generalist null) to be re-measured, and by contrast licenses the dense figures to be quoted from M107's sealed evidence, since M108 changes nothing on the dense side (same corpus, same protocol, same penalty). The dense curve is read from M107's evidence at M108's chosen penalty."
+    ]
+  },
+  "gate": {
+    "registered_prediction": "Arm (c) beats arm (a) at matched atoms on DomainNet, but by a SMALLER margin than CIFAR-10's +0.0104 to +0.0335, because 345 classes give the discriminative residual more directions to chase and d_eff is larger here. Arm (e), ridge-leverage, beats arm (c).",
+    "kill_switch_1": "If arm (c) does not beat arm (a) at matched atoms on DomainNet at the registered budgets, C103.1 does not transfer, and the additive-growth thesis has failed its first test outside CIFAR-10. That is the headline under plan section 3.6 and may not be reported as a limitation or future work.",
+    "kill_switch_2": "If arm (e) beats arm (c) at every budget, the label-free published mechanism dominates the one this program built, and every subsequent v16 sparse arm is constructed by ridge-leverage sampling, not by select_discriminative. The program does not get to keep its own mechanism for authorship reasons.",
+    "kill_switch_3": "If arm (c) beats arm (a) but the M107 crossings do not move earlier in MACs, dictionary learning improves accuracy without improving the efficiency operand, and the two are reported as separate findings. Operational definition, registered: the crossing budget of an arm is the CHEAPEST sparse budget at which that arm's accuracy >= the best dense accuracy at or below its MACs (M107's comparison rule). Kill switch 3 fires if arm (c) beats arm (a) at matched atoms AND arm (c)'s crossing budget is not cheaper (in inference MACs) than arm (a)'s.",
+    "_comparison_rule": "A sparse point at M MACs is compared against the best dense point at or below M MACs (M107 gate, unchanged).",
+    "_arm_a_gate": "The arm (a) reproduction check (arm_a_reproduction.tolerance_accuracy) is evaluated by the runner BEFORE any kill switch is read. Failure voids the run, not negative."
+  },
+  "device": {
+    "encode": "cuda",
+    "selection": "cuda",
+    "leverage": "cpu",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "_device_string_note": "'cuda' is PyTorch's device-string name for its accelerator API, and in this interpreter (.venv-rocm, torch 2.11.0+rocm7.13.0) it dispatches to HIP kernels on the AMD RX 9070 XT (gfx1201). It is NOT NVIDIA CUDA; there is no other device string torch accepts for an AMD accelerator. The runner verifies at startup that torch.cuda.device_count()==1 and gcnArchName=='gfx1201' and records torch.version.hip in the evidence so the backend is unambiguous in the record.",
+    "_note": "Registered device placement (plan section 4.6). Whitening stays on CPU because it is numpy and M107's exact arithmetic; the cdist/pool encode runs on the GPU (torch device 'cuda' = ROCm/HIP here); arm (c) greedy selection runs on the GPU; the ridge-leverage scores of arm (e) run on cpu in float64 because they feed a weighted sample whose result can flip on 1e-7 weight differences and the pool is only 8192 x 108 (trivial on CPU). The GPU may not change any arm's arithmetic beyond float32 accumulation-order noise, which the arm (a) reproduction gate bounds. HIP_VISIBLE_DEVICES=1 is a precondition; device_count must be 1 and gcnArchName gfx1201."
+  },
+  "gap_closing": {
+    "dense_reference_arm": "d1_small_224",
+    "dense_reference_source": "logs/results/v15/m107_dense/evidence.json",
+    "dense_reference_accuracy": 0.5375,
+    "_registered_before_measurement": [
+      "M108's second operand (plan section 5.1, registered 5 August 2026): the gap-closing fraction. Registered reading of the plan's formula (c - a) / (dense_224 - a): at each readable budget B, fraction_c(B) = (c(B) - a(B)) / (dense_224 - a(B)) and fraction_e(B) = (e(B) - a(B)) / (dense_224 - a(B)), where a(B), c(B), e(B) are the accuracies at budget B at the chosen penalty and dense_224 is M107's sealed d1_small_224 accuracy (0.5375) at that penalty. The denominator is the gap from the random null AT THE SAME BUDGET to the in-distribution dense reference; this is the reading that makes 'reported at every budget where both are readable' natural. A budget where the denominator is not positive is reported as undefined, never as zero.",
+      "The fraction is a measurement, never a novelty claim: both mechanisms are published (plan section 7.1). It quantifies how much of the representation gap the literature's own mechanism (neural low-degree filtering, Dandi et al. 2026) closes by selection rather than by gradient descent, at zero gradient training."
+    ]
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "_note": "Same as M107: float32 encode, float64 normal equations. The encode runs on cuda; the Gram accumulates in float64 on the CPU."
+  },
+  "_amendments": [
+    "REGISTERED BEFORE MEASUREMENT. selection_rows = 20000 for arm (c); see selection._registered_before_measurement. M103's 8000 rows for 10 classes is not portable to 345 classes.",
+    "REGISTERED BEFORE MEASUREMENT. Arm (e) construction (ridge-leverage sampling) formula, lambda and seed; see ridge_leverage._registered_before_measurement.",
+    "REGISTERED BEFORE MEASUREMENT. The plan's section 4.6 parity bound (1e-04, dense features) is read for arm (a) as an accuracy tolerance of +/- 0.002 at every budget; see arm_a_reproduction.",
+    "REGISTERED BEFORE MEASUREMENT. The sparse encode runs on cuda (device.encode) with the whitening on cpu; arm (a) reproduces M107's recorded s_generalist figures within tolerance_accuracy or the run voids.",
+    "REGISTERED BEFORE MEASUREMENT. M108 does not re-run the dense arms; kill switch 3 reads M107's sealed dense curve at M108's chosen penalty. See kill_switch_3_dense_source.",
+    "REGISTERED BEFORE MEASUREMENT. Arm (c) selection runs on cuda via a GPU port of select_discriminative, with a registered order-parity check against the numpy reference on a 2000-row, 256-atom subset; failure falls back to the numpy function.",
+    "REGISTERED BEFORE MEASUREMENT. Gap-closing fraction (plan section 5.1 second operand, 5 August 2026): computed per budget as (arm - a) / (dense_224 - a) with the registered reading in gap_closing._registered_before_measurement; dense_224 = M107 d1_small_224 at the chosen penalty."
+  ]
+}

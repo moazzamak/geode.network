@@ -1,0 +1,32 @@
+{
+  "_note": "engineering measurement of the instrument, NOT evidence; no corpus, no accuracy, no operand",
+  "torch": "2.11.0+rocm7.13.0a20260416",
+  "hip": "7.2.0",
+  "target": "gpu",
+  "devices": [
+    {
+      "index": 0,
+      "name": "AMD Radeon RX 9070 XT",
+      "total_memory_gb": 15.92,
+      "multi_processor_count": 32
+    }
+  ],
+  "chosen_device": {
+    "index": 0,
+    "name": "AMD Radeon RX 9070 XT",
+    "total_memory_gb": 15.92,
+    "multi_processor_count": 32
+  },
+  "ViT-S forward only": {
+    "seconds_per_batch32": 0.0558,
+    "img_per_s": 573.61
+  },
+  "ViT-S forward+backward": {
+    "seconds_per_batch32": 0.2045,
+    "img_per_s": 156.5
+  },
+  "sparse encode matmul": {
+    "seconds_per_64_images": 0.0048,
+    "img_per_s": 13255.68
+  }
+}

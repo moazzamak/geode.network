@@ -1,0 +1,58 @@
+{
+  "milestone": "M133",
+  "program": "v20 follow-up - SMOKE (inadmissible): matched-footprint frontier, tiny slice",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B4b",
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; refuses the sealed output dir.",
+  "_smoke_rows": 40,
+  "_smoke_steps": 50,
+  "_smoke_skip_gates": true,
+  "registration_notes": {
+    "N92.1": "Engineering MEASUREMENT milestone; no novelty claim.",
+    "N92.2": "Question: at matched footprint on the DSL, does the additive count model beat/tie/lose a trained tiny transformer?",
+    "N92.3": "Count points reused from sealed M131 evidence; transformer points newly trained.",
+    "N92.4": "Footprint = stored fp32 bytes.",
+    "N92.5": "Transformer trained on same train split, fixed seeds.",
+    "N92.6": "No pre-registered winner gate.",
+    "N92.7": "Surprise directions reported as measured facts with crossover points.",
+    "N92.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir.",
+    "N92.9": "Dated snapshot; seeds, hyperparameters, steps, device recorded."
+  },
+  "corpus": {
+    "kind": "generated_dsl",
+    "reuse": "M131 generator (same seeds 900/901/902, same grammar)",
+    "programs": {"train": 40, "valid": 20, "test": 20},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "count_model": {
+    "source": "logs/results/v16/m131_additive_next_token/evidence.json",
+    "window_points": ["1", "2", "3", "4", "8"]
+  },
+  "transformer": {
+    "train_steps": 6000,
+    "batch_tokens": 512,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "seed": 2026,
+    "device": "cpu",
+    "torch_threads": 16,
+    "ladder": [
+      {"name": "t12k", "d_model": 32, "layers": 1, "heads": 2, "ff": 64},
+      {"name": "t43k", "d_model": 48, "layers": 2, "heads": 3, "ff": 96},
+      {"name": "t74k", "d_model": 64, "layers": 2, "heads": 4, "ff": 128},
+      {"name": "t235k", "d_model": 96, "layers": 3, "heads": 6, "ff": 192},
+      {"name": "t2m", "d_model": 256, "layers": 4, "heads": 8, "ff": 512},
+      {"name": "t28m", "d_model": 384, "layers": 6, "heads": 8, "ff": 768}
+    ]
+  },
+  "output_dir": "logs/results/v16/m133_matched_footprint_smoke"
+}

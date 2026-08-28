@@ -1,0 +1,79 @@
+{
+  "milestone": "M142",
+  "cell": "C3",
+  "title": "Construction factorial screen - cell C3: multi-scale patches (3/5/7) vs a single 6x6 scale at matched per-image cost",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log + Remaining-milestones recipes (14 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does a three-scale patch construction (3x3 + 5x5 + 7x7, one 2x2 pool per scale, concatenated) beat the single-scale 6x6 pool construction at matched per-image cost?",
+  "registration_notes": {
+    "N103.1": "Per scale s in {3,5,7}: ZCA whitener on that scale's patch pool (20k sample images, 400k patches, seed 11, contrast 10.0, zca 0.1 — the M117 recipe per scale); 8,192 candidate pool = the seeded [11,100] permutation of that scale's whitened pool; triangle code + one 2x2 sum pool (m107 edges rule round(grid_s*i/2)); scales concatenated.",
+    "N103.2": "Matched-cost split (pool adds counted on every arm): atom budget = (pool2062 total 175,197,198 - per-scale whitening sum 19,673,784) split into EQUAL MAC shares per scale. Registered split: a3=1950, a5=850, a7=511 (total 3,311; width 13,244, Gram-feasible). MS total 175,153,892 vs pool 175,197,198 (delta 0.025%).",
+    "N103.3": "Anchors: t1 in-run bitwise determinism of the multi-scale encode (no sealed multi-scale artifact exists; the cdist/activation/pool arithmetic is the sealed code per scale, and the edges rule is unit-tested); t2 environment anchor on the sealed f6144 codes (0.26136231884058 +-0.002); t4 the cached pool2062 codes refit must reproduce their sealed C2 read 0.227536231884058 +-0.002.",
+    "N103.4": "Gate: Q_MS(409832) >= Q_pool(2062, 409832) + 0.005 at penalty 1.0, matched cost (|MS - pool| <= 0.5%). Ridge ladder {0.1, 1.0, 10.0}, per-scale diagnostics, and the trained-head read are reported; the cell closes as a scoped negative only if BOTH the gate fires AND the trained-head read fails. The power-norm composition (multi-scale + signed sqrt + L2) is a registered FOLLOW-UP free cell, not part of this gate.",
+    "N103.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms_by_scale": { "3": 1950, "5": 850, "7": 511 },
+    "pool_atoms": 2062,
+    "note": "per-scale whiteners and dictionaries per the M117/M126 recipe; the pool arm is the CACHED C2 pool2062 artifact, never re-encoded."
+  },
+  "matched_cost": {
+    "pool_total": 175197198,
+    "split_rule": "equal MAC share per scale after the per-scale whitening sum",
+    "cost_tolerance_fraction": 0.005,
+    "note": "Same ledger exclusions as the sealed ledger."
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy",
+    "rest_relpath": "v16/m141",
+    "rest_file": "f6144_all_rest.npy"
+  },
+  "anchors": {
+    "t1_check_rows": 256,
+    "t1_tolerance": 1e-05,
+    "t2_reference": 0.26136231884058,
+    "t2_tolerance": 0.002,
+    "t4_reference": 0.227536231884058,
+    "t4_note": "the sealed C2 pool2062 full-data read at penalty 1.0",
+    "t4_tolerance": 0.002
+  },
+  "cell_c3": {
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "trained_epochs": 8,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "gate_registered": "fired if Q_MS(409832) < Q_pool(2062, 409832) + 0.005 at penalty 1.0 (matched cost verified by the runner); the cell closes as a scoped negative only if the trained-head read also fails.",
+    "consequence_fired": "multi-scale patches do not lift the single-scale construction at matched cost; C3 is a scoped negative at this cost point.",
+    "consequence_passed": "multi-scale patches beat the single-scale construction at matched cost; C3 is promoted at this cost point and the power-norm composition follows as a free cell."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "encode_throttle_seconds": 0.05
+  },
+  "output_dir": "logs/results/v16/m142_c3"
+}

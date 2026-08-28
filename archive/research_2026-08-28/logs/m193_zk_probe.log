@@ -1,0 +1,20 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+anchor V_ms 0.242144927536232 delta +0.000e+00
+{
+ "anchor_ok": true,
+ "gates": {
+  "g1_honest_verifies": true,
+  "g2_tampered_rejected": true,
+  "g3_deterministic": true,
+  "g4_measured": {
+   "prove_seconds": 261.8967827000015,
+   "verify_seconds": 263.3799815999955,
+   "proof_size_bytes": 848000,
+   "prove_within_threshold": false,
+   "verify_within_threshold": false,
+   "size_vs_8kb_target": 848000
+  }
+ },
+ "gates_ok": false
+}
+M193 complete -> logs\results\v25\m193_zk_probe\evidence.json

@@ -1,0 +1,47 @@
+{
+  "milestone": "M182b",
+  "title": "Corrupt-tail impact on the M155/M156 growth premise: f6144 cell re-run on the repaired view",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M182b registered 19 Aug before the build, commit 899cd41e)",
+  "registered_before_any_accuracy": true,
+  "question": "The sealed M155 premise numbers were measured while the f6144 train cache had 251 corrupt tail rows. Do the genuine (repaired-view) error-row population and floor ladder change the registered M156 budgets?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy",
+    "m142_cache_relpath": "v16/m142_c2",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "anchors": {
+    "f6144_genuine": 0.26153623188405795,
+    "f6144_genuine_source": "M182 repaired-run rung 409832 (the genuine full-data Q on the repaired view, digest-gated, 19 Aug)",
+    "tolerance": 1e-9
+  },
+  "m155_sealed": {
+    "note": "sealed corrupt-era values from logs/results/v23/m155_growth_premise/evidence.json",
+    "test_accuracy": 0.2613623188405797,
+    "train_accuracy": 0.6332912022487263,
+    "n_error_rows": 150289,
+    "floor_ladder": [32, 64, 128, 256, 512, 1024, 2048, 4096]
+  },
+  "repair": {
+    "note": "same registered repair as m182_contributions_repaired.json (plan execution log, 19 Aug)",
+    "patch_relpath": "v16/m117/f6144_train_patch.npy",
+    "patch_start": 137749,
+    "rows": 251,
+    "original_sha256": "d7a0597da2f3130fb43a7ccb795a19b347dcb5e8ac691b6345a375f5885cf057",
+    "test_sha256": "1ef8499c7918289e749564ee59ddd9e59f770d66fb0d2ca3d99d6c48b9411b70",
+    "patch_sha256": "616880017ea8a2d0792d5c7126d66efa6c250c5183944d3e831a1796c87f28f8"
+  },
+  "output_dir": "logs/results/v25/m182b_growth_premise_repair"
+}

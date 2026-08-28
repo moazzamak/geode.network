@@ -1,0 +1,49 @@
+{
+  "milestone": "M162",
+  "title": "Prune + retrain dense: DINOv2-small keep=0.5 retrained under the M109 schedule on the M107 r56 pixels",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M162 / section 6 build entry (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does prune-then-retrain recover what pure pruning lost (M144: 0.1076 at half channels, no retraining)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "parity_guard": {
+    "resolution": 56,
+    "batch": 8,
+    "models": ["small"],
+    "bound_relative": 0.0001
+  },
+  "arm": {
+    "keep": 0.5,
+    "note": "the M144 _prune (both sides + bias zeroed), the prune mask re-applied after every optimizer step during retraining"
+  },
+  "schedule": {
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 3e-4,
+    "weight_decay": 1e-4,
+    "patience": 2,
+    "validation_fraction": 0.05,
+    "note": "the M109 shared schedule (AdamW, cosine); CE through a trainable 1536 -> 345 head over the CLS + mean-patch features (discarded after training; the ridge readout then fits the retrained encoder's features)"
+  },
+  "anchors": {
+    "t2_reference": 0.245014492753623,
+    "t2_tolerance": 0.002,
+    "note": "t1 = the M144 parity guard; t2 = the unpruned r56 reproduction on the M107-materialised pixels"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m162_prune_retrain"
+}

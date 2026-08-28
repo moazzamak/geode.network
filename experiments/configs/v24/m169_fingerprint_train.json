@@ -1,0 +1,29 @@
+{
+  "milestone": "M169",
+  "title": "Fingerprint training + gates G1-G4 (v0: InfoNCE over ontology pairs + attribute reconstruction)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase B (M169) / section 12 dispatch entry (17 Aug 2026)",
+  "registered_before_any_training": true,
+  "question": "Does the trained additive fingerprint order the registered similarity set, stay deterministic, and move along attribute axes?",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID — determinism is the instrument contract",
+    "G2_pass": "the fingerprint orders the registered set; proceed to M170",
+    "G2_fail": "scoped negative for THIS training-signal mix — the behavioral label set is thin by registration; M169b adds measured labels. Not void: the gates are the measurement.",
+    "G3_fail": "traversality undetermined for this signal mix; scoped negative",
+    "G4": "deferred until sweep families exist"
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11
+  },
+  "training": {
+    "steps": 300,
+    "lr": 0.001,
+    "note": "Adam; InfoNCE over the two registered known-similar pairs with the other tasks as negatives, plus a CBOW-style attribute-reconstruction auxiliary"
+  },
+  "label_sources": {
+    "ontology_pairs": "analysis/task_ontology_v0.json (similar/dissimilar registered sets)",
+    "measured_transfer": "M167a d0->d1 = +0.0092, recorded as a ranking constraint only"
+  },
+  "output_dir": "logs/results/v24/m169_fingerprint_gates"
+}

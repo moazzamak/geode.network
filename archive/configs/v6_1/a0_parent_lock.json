@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "stage": "A0",
+  "parent_file_locks": [
+    {"id": "v6_plan", "path": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v6.md", "sha256": "3cea11a8f64f3347a3965881838e9fb829c6f50672240ef0cc081c2745585f22"},
+    {"id": "v6_1_plan", "path": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v6_1.md",     "sha256": "7bd434d99dd6d956567929e3fed9024d78c214b6d61933cf741249a6a4660763"},
+    {"id": "v6_protocol", "path": "experiments/configs/v6/protocol.json", "sha256": "8fa5d3e30ab65c5b119c52dcbcc47d7cc803c0acc5bf14b675f2b1740c6f3335"},
+    {"id": "m29_config", "path": "experiments/configs/v6/m29_subspace_s1.json", "sha256": "0c9e8cd053df378f8b5ebba3a44ab47f9efad7ba2a9434e4227e6f79249dc6de"},
+    {"id": "m30_s2_config", "path": "experiments/configs/v6/m30_directional_s2.json", "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"},
+    {"id": "m31_config", "path": "experiments/configs/v6/m31_factorial_s2.json", "sha256": "aa7f528d9603d9a2f94f347ebaffffbad9d84e469b36b342e5bd3a344ed43731"}
+  ],
+  "indexed_parent_locks": [
+    {
+      "id": "m29_subspace_s1",
+      "root": "logs/results/v6/m29_subspace_s1",
+      "index_path": "logs/results/v6/m29_subspace_s1/artifact_index.json",
+      "index_sha256": "26a0d4908fd33da72623fb63c752fe1bc05271885dbc757698d00de3bada8323",
+      "required_paths": ["evidence.json", "student.json", "arrays/development_predictions.npy", "arrays/development_probabilities.npy", "arrays/test_predictions.npy", "arrays/test_probabilities.npy"]
+    },
+    {
+      "id": "m30_directional_s2",
+      "root": "logs/results/v6/m30_directional_s2",
+      "index_path": "logs/results/v6/m30_directional_s2/artifact_index.json",
+      "index_sha256": "6d2bc931da4f0046444a3f10f97988d10ba3d18a0c17757a3dd99eafe91bc6b1",
+      "required_paths": ["evidence.json", "seed_11/cosine_cap_student.json", "seed_11/cosine_cap_development_predictions.npy", "seed_23/cosine_cap_student.json", "seed_23/cosine_cap_development_predictions.npy", "seed_37/cosine_cap_student.json", "seed_37/cosine_cap_development_predictions.npy"]
+    },
+    {
+      "id": "m31_factorial_s2",
+      "root": "logs/results/v6/m31_factorial_s2",
+      "index_path": "logs/results/v6/m31_factorial_s2/artifact_index.json",
+      "index_sha256": "ff701c4d10cf65ca9f2bb02d7b0c696440da3c463cba7e8293b993f2a2320638",
+      "required_paths": ["evidence.json", "seed_11/selected_student.json", "seed_11/direct_subspace_radial_component_development_predictions.npy", "seed_23/selected_student.json", "seed_23/direct_subspace_radial_component_development_predictions.npy", "seed_37/selected_student.json", "seed_37/direct_subspace_radial_component_development_predictions.npy"]
+    }
+  ],
+  "representation_lineage": [
+    {"seed": 11, "parent_representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0", "directional_representation_hash": "72d2407ef8665c36d6f901f25e45a01d2058634c4255139b6b67a94f8c1de21f", "training_split_hash": "1a054d9f1bfe28dde3cf3466cc210feba65f08baeca41bc5d7623de745652a04", "development_split_hash": "9e549077c2078158e4747ed142a290f67547a9dbd8bb9096586c6bd6a28510d5"},
+    {"seed": 23, "parent_representation_hash": "6172b175cc163cbec17e90d102340d4cb63abf356922d28b0232bbc1b2c04219", "directional_representation_hash": "1b5d9211787435ce3fe3e4d210512d72215fe5cd25bf4089c46ebbb563b9e59f", "training_split_hash": "0b5412801edc50ce33e3295f7a48086cd621a8de4b031e4413098b3295fc32ad", "development_split_hash": "f23e353aa8b5b1adf955a93b8e5b698874c77c86ec1d70e157c7c1b75d432456"},
+    {"seed": 37, "parent_representation_hash": "a7bbdfb013bce429e30d7ffbf6043a088a84359a14b5f2c2e6d46540323132f7", "directional_representation_hash": "598b8cc22b2bc26bc0373c749b91fce2087ea4d1cc17f2f5c144fe1b18a88586", "training_split_hash": "e4d89037688a22792c93a18ad59797e76d53f3b0b6b3abc3636dd53cbcd54981", "development_split_hash": "7e64fd5189de04c3a6d5153d80684d44dd6899edef629698dd55ca6eeee60039"}
+  ],
+  "amended_primitive": {
+    "family": "tangent_cap",
+    "rank": 32,
+    "minimum_seed_rule": "r_plus_2",
+    "minimum_support": 34,
+    "normalization": "explicit_l2",
+    "direction": "unit_mean",
+    "angular_radius_units": "radians",
+    "residual_scale": "isotropic",
+    "primary_score": "normalized_tangent_radial"
+  },
+  "weighted_readout": {
+    "family": "nonnegative_component_mixture",
+    "constraint": "per_class_simplex",
+    "parameterization": "softmax_log_weights",
+    "optimizer": "lbfgs",
+    "regularization": 0.0001,
+    "maximum_iterations": 500,
+    "gradient_tolerance": 1e-08,
+    "initialization": "zero_equal_weights",
+    "temperature_policy": "one_global"
+  },
+  "budgets": [
+    {"id": "m30_directional_control", "components": 46, "parameter_limit": 17710, "candidate_evaluation_limit": 5000},
+    {"id": "m31_rank32_affine_control", "components": 46, "parameter_limit": 584430, "candidate_evaluation_limit": 5000},
+    {"id": "rank32_tangent_cap", "components": 46, "parameter_limit": 584476, "candidate_evaluation_limit": 5000},
+    {"id": "weighted_rank32_affine", "components": 46, "parameter_limit": 584476, "candidate_evaluation_limit": 5000},
+    {"id": "weighted_rank32_tangent_cap", "components": 46, "parameter_limit": 584522, "candidate_evaluation_limit": 5000}
+  ],
+  "claims": [
+    {"id": "same_space_parity", "status": "negative", "statement": "The v6 explicit head remains 6.00 percentage points behind the strongest same-space control.", "evidence": "logs/results/v6/m31_factorial_s2/evidence.json"},
+    {"id": "directional_geometry", "status": "supported", "statement": "Cosine caps improve matched normalized Euclidean spheres on S2.", "evidence": "logs/results/v6/m30_directional_s2/evidence.json"},
+    {"id": "direct_rank32_subspace", "status": "supported", "statement": "Direct rank-32 radial subspaces improve retained explicit controls but do not reach parity.", "evidence": "logs/results/v6/m31_factorial_s2/evidence.json"},
+    {"id": "proper_likelihood", "status": "negative", "statement": "Registered proper-likelihood cells underperform radial semantics.", "evidence": "logs/results/v6/m31_factorial_s2/evidence.json"},
+    {"id": "flowers_rank32_five_shot", "status": "blocked", "statement": "Five examples per class cannot satisfy rank-32 r+2 support.", "evidence": "logs/results/v6/m29_subspace_s1/evidence.json"},
+    {"id": "outcome_c_lifecycle", "status": "eligible", "statement": "Audited lifecycle distinctiveness remains eligible for independent evaluation.", "evidence": "logs/results/v6/m31_factorial_s2/evidence.json"}
+  ],
+  "closed_branches": ["M32_topology", "M33_ood", "M35_predictive_confirmation", "M36_migration", "M37_amortization"],
+  "test_labels_opened": false
+}

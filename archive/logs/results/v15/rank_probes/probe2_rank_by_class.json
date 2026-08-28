@@ -1,0 +1,81 @@
+{
+  "probe": "rankme_effective_rank_of_subpopulations",
+  "instrument": "RankMe, arXiv:2210.02885, used unmodified",
+  "note": "scoping evidence, not sealed, not a milestone",
+  "atoms": 512,
+  "ambient_dimension": 2048,
+  "rows_used": 10000,
+  "seed": 11,
+  "whole_corpus_rankme": 98.80740356445312,
+  "per_class": [
+    {
+      "class": 0,
+      "rows": 1003,
+      "rankme": 60.298091888427734,
+      "ratio_to_whole": 0.6102588441067035
+    },
+    {
+      "class": 1,
+      "rows": 963,
+      "rankme": 69.76323699951172,
+      "ratio_to_whole": 0.7060527296823907
+    },
+    {
+      "class": 2,
+      "rows": 1041,
+      "rankme": 64.34053039550781,
+      "ratio_to_whole": 0.6511711478536909
+    },
+    {
+      "class": 3,
+      "rows": 976,
+      "rankme": 68.65428161621094,
+      "ratio_to_whole": 0.6948293259363608
+    },
+    {
+      "class": 4,
+      "rows": 1004,
+      "rankme": 58.880897521972656,
+      "ratio_to_whole": 0.5959158463623023
+    },
+    {
+      "class": 5,
+      "rows": 1021,
+      "rankme": 68.8624496459961,
+      "ratio_to_whole": 0.6969361319273649
+    },
+    {
+      "class": 6,
+      "rows": 1004,
+      "rankme": 57.19450378417969,
+      "ratio_to_whole": 0.5788483627835752
+    },
+    {
+      "class": 7,
+      "rows": 981,
+      "rankme": 63.60841751098633,
+      "ratio_to_whole": 0.643761653644647
+    },
+    {
+      "class": 8,
+      "rows": 1024,
+      "rankme": 57.39921951293945,
+      "ratio_to_whole": 0.5809202290747103
+    },
+    {
+      "class": 9,
+      "rows": 983,
+      "rankme": 69.559814453125,
+      "ratio_to_whole": 0.7039939513009305
+    }
+  ],
+  "row_matched_controls": [
+    69.78669738769531,
+    70.42015075683594,
+    70.14684295654297
+  ],
+  "control_rows": 1003,
+  "mean_class_rankme": 63.85614433288574,
+  "mean_control_rankme": 70.1178970336914,
+  "specialisation_ratio": 0.9106967983110372
+}

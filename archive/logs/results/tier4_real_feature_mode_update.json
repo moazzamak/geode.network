@@ -1,0 +1,138 @@
+{
+  "protocol": {
+    "seeds": [
+      91,
+      92,
+      93
+    ],
+    "mutation_published": false
+  },
+  "summary": {
+    "usefulness_eligible": 0,
+    "transactions_attempted": 0,
+    "accepted_transactions": 0,
+    "exclusion_violations": 0,
+    "usefulness_failed_criterion_counts": {
+      "insufficient_gain_headroom": 3,
+      "insufficient_geometric_coverage": 3
+    },
+    "fit_positive_coverage_mean": 0.075,
+    "fit_positive_coverage_maximum": 0.1625,
+    "radius_scale_mean": 0.6075948822672107,
+    "candidate_accuracy_mean": 0.8354166666666667,
+    "new_mode_accuracy_before_mean": 0.8416666666666667,
+    "old_mode_accuracy_drop_mean": 0.0,
+    "new_mode_accuracy_gain_mean": 0.0,
+    "other_class_accuracy_drop_mean": 0.0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 91,
+        "dataset_path": "data/tier4/cifar10_features.npz",
+        "representation": "cifar10_hog",
+        "mode_shift": "horizontal_flip",
+        "source_images_disjoint_across_slices": true,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "usefulness_eligible": false,
+        "usefulness_failed_criteria": [
+          "insufficient_gain_headroom",
+          "insufficient_geometric_coverage"
+        ],
+        "baseline_proposal_success": 0.8375,
+        "maximum_possible_gain": 0.16249999999999998,
+        "transaction_attempted": false,
+        "transaction_accepted": false,
+        "radius_scale": 0.7006183731705087,
+        "fit_positive_coverage": 0.1625,
+        "exclusion_violations": 0,
+        "live_model_unchanged": true
+      },
+      "observational_test": {
+        "live_accuracy": 0.8625,
+        "candidate_accuracy": 0.8625,
+        "old_mode_accuracy_before": 0.925,
+        "old_mode_accuracy_after": 0.925,
+        "new_mode_accuracy_before": 0.85,
+        "new_mode_accuracy_after": 0.85,
+        "other_class_accuracy_before": 0.8375,
+        "other_class_accuracy_after": 0.8375
+      }
+    },
+    {
+      "protocol": {
+        "seed": 92,
+        "dataset_path": "data/tier4/cifar10_features.npz",
+        "representation": "cifar10_hog",
+        "mode_shift": "horizontal_flip",
+        "source_images_disjoint_across_slices": true,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "usefulness_eligible": false,
+        "usefulness_failed_criteria": [
+          "insufficient_gain_headroom",
+          "insufficient_geometric_coverage"
+        ],
+        "baseline_proposal_success": 0.6625,
+        "maximum_possible_gain": 0.3375,
+        "transaction_attempted": false,
+        "transaction_accepted": false,
+        "radius_scale": 0.5761612691390947,
+        "fit_positive_coverage": 0.025,
+        "exclusion_violations": 0,
+        "live_model_unchanged": true
+      },
+      "observational_test": {
+        "live_accuracy": 0.7625,
+        "candidate_accuracy": 0.7625,
+        "old_mode_accuracy_before": 0.775,
+        "old_mode_accuracy_after": 0.775,
+        "new_mode_accuracy_before": 0.85,
+        "new_mode_accuracy_after": 0.85,
+        "other_class_accuracy_before": 0.7125,
+        "other_class_accuracy_after": 0.7125
+      }
+    },
+    {
+      "protocol": {
+        "seed": 93,
+        "dataset_path": "data/tier4/cifar10_features.npz",
+        "representation": "cifar10_hog",
+        "mode_shift": "horizontal_flip",
+        "source_images_disjoint_across_slices": true,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "usefulness_eligible": false,
+        "usefulness_failed_criteria": [
+          "insufficient_gain_headroom",
+          "insufficient_geometric_coverage"
+        ],
+        "baseline_proposal_success": 0.8375,
+        "maximum_possible_gain": 0.16249999999999998,
+        "transaction_attempted": false,
+        "transaction_accepted": false,
+        "radius_scale": 0.5460050044920288,
+        "fit_positive_coverage": 0.0375,
+        "exclusion_violations": 0,
+        "live_model_unchanged": true
+      },
+      "observational_test": {
+        "live_accuracy": 0.88125,
+        "candidate_accuracy": 0.88125,
+        "old_mode_accuracy_before": 0.9,
+        "old_mode_accuracy_after": 0.9,
+        "new_mode_accuracy_before": 0.825,
+        "new_mode_accuracy_after": 0.825,
+        "other_class_accuracy_before": 0.9,
+        "other_class_accuracy_after": 0.9
+      }
+    }
+  ]
+}

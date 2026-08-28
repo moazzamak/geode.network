@@ -1,0 +1,3150 @@
+{
+  "protocol": {
+    "dataset_path": "data/tier4/cifar10_features.npz",
+    "seeds": [
+      101,
+      102,
+      103
+    ],
+    "episode_count": 3,
+    "cell_count": 9,
+    "proxy_unknown_pool": [
+      6,
+      7
+    ],
+    "final_unknown_pool": [
+      8,
+      9
+    ],
+    "proxy_and_final_pools_disjoint": true,
+    "minimum_known_coverage": 0.9,
+    "minimum_unknown_recall": 0.5,
+    "representation": "mobilenetv2",
+    "score_family_selected_on_development_only": true,
+    "final_unknown_used_for_selection": false,
+    "mutation_published": false,
+    "development_fit_selection_disjoint": true,
+    "model_form_selected_on_development_only": true
+  },
+  "baseline": {
+    "score": "maximum_probability",
+    "known_coverage_mean": 0.8999999999999999,
+    "known_coverage_minimum": 0.825,
+    "unknown_recall_mean": 0.39444444444444443,
+    "unknown_recall_minimum": 0.25,
+    "cells_passing_gate": 1,
+    "all_cells_pass_gate": false
+  },
+  "development_candidates": {
+    "global:C=0.01": {
+      "model_form": "global",
+      "C": 0.01,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.32222222222222224,
+      "proxy_unknown_recall_minimum": 0.1,
+      "auroc_mean": 0.7563888888888888,
+      "cells_passing_gate": 1
+    },
+    "global:C=0.1": {
+      "model_form": "global",
+      "C": 0.1,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.3888888888888889,
+      "proxy_unknown_recall_minimum": 0.075,
+      "auroc_mean": 0.7817361111111111,
+      "cells_passing_gate": 2
+    },
+    "global:C=1": {
+      "model_form": "global",
+      "C": 1.0,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.4305555555555556,
+      "proxy_unknown_recall_minimum": 0.075,
+      "auroc_mean": 0.7906944444444445,
+      "cells_passing_gate": 4
+    },
+    "global:C=10": {
+      "model_form": "global",
+      "C": 10.0,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.39722222222222225,
+      "proxy_unknown_recall_minimum": 0.1,
+      "auroc_mean": 0.7858333333333334,
+      "cells_passing_gate": 3
+    },
+    "class_conditional:C=0.01": {
+      "model_form": "class_conditional",
+      "C": 0.01,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.3138888888888889,
+      "proxy_unknown_recall_minimum": 0.15,
+      "auroc_mean": 0.6789583333333334,
+      "cells_passing_gate": 2
+    },
+    "class_conditional:C=0.1": {
+      "model_form": "class_conditional",
+      "C": 0.1,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.3638888888888888,
+      "proxy_unknown_recall_minimum": 0.175,
+      "auroc_mean": 0.7326388888888888,
+      "cells_passing_gate": 2
+    },
+    "class_conditional:C=1": {
+      "model_form": "class_conditional",
+      "C": 1.0,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.37222222222222223,
+      "proxy_unknown_recall_minimum": 0.1,
+      "auroc_mean": 0.7637499999999999,
+      "cells_passing_gate": 2
+    },
+    "class_conditional:C=10": {
+      "model_form": "class_conditional",
+      "C": 10.0,
+      "known_coverage_mean": 0.8999999999999999,
+      "proxy_unknown_recall_mean": 0.36944444444444446,
+      "proxy_unknown_recall_minimum": 0.15,
+      "auroc_mean": 0.7603472222222222,
+      "cells_passing_gate": 2
+    }
+  },
+  "selection": {
+    "key": "global:C=1",
+    "model_form": "global",
+    "C": 1.0,
+    "known_coverage_mean": 0.8999999999999999,
+    "proxy_unknown_recall_mean": 0.4305555555555556,
+    "proxy_unknown_recall_minimum": 0.075,
+    "auroc_mean": 0.7906944444444445,
+    "cells_passing_gate": 4
+  },
+  "final_summary": {
+    "known_coverage_mean": 0.8500000000000001,
+    "known_coverage_minimum": 0.7625,
+    "unknown_recall_mean": 0.36944444444444446,
+    "unknown_recall_minimum": 0.15,
+    "cells_passing_gate": 0,
+    "all_cells_pass_gate": false
+  },
+  "production_gate_passed": false,
+  "final_cells": [
+    {
+      "seed": 101,
+      "known_classes": [
+        0,
+        1
+      ],
+      "known_coverage": 0.8625,
+      "unknown_recall": 0.25,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.6898437500000001,
+        "aupr_out": 0.6410159437527188,
+        "aupr_in": 0.6942593353824231,
+        "fpr95": 0.8625
+      }
+    },
+    {
+      "seed": 101,
+      "known_classes": [
+        2,
+        3
+      ],
+      "known_coverage": 0.9,
+      "unknown_recall": 0.325,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.8146875,
+        "aupr_out": 0.7651434144052661,
+        "aupr_in": 0.857984162762545,
+        "fpr95": 0.45
+      }
+    },
+    {
+      "seed": 101,
+      "known_classes": [
+        4,
+        5
+      ],
+      "known_coverage": 0.825,
+      "unknown_recall": 0.5375,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.7725,
+        "aupr_out": 0.7251887408256585,
+        "aupr_in": 0.8042830818901637,
+        "fpr95": 0.6375
+      }
+    },
+    {
+      "seed": 102,
+      "known_classes": [
+        0,
+        1
+      ],
+      "known_coverage": 0.8625,
+      "unknown_recall": 0.4,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.71453125,
+        "aupr_out": 0.7258658408552836,
+        "aupr_in": 0.7175217440647106,
+        "fpr95": 0.7125
+      }
+    },
+    {
+      "seed": 102,
+      "known_classes": [
+        2,
+        3
+      ],
+      "known_coverage": 0.8125,
+      "unknown_recall": 0.3375,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.71625,
+        "aupr_out": 0.6830057332399562,
+        "aupr_in": 0.7705304118757291,
+        "fpr95": 0.6625
+      }
+    },
+    {
+      "seed": 102,
+      "known_classes": [
+        4,
+        5
+      ],
+      "known_coverage": 0.8875,
+      "unknown_recall": 0.5625,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.83109375,
+        "aupr_out": 0.8325530564715699,
+        "aupr_in": 0.8416359968038581,
+        "fpr95": 0.525
+      }
+    },
+    {
+      "seed": 103,
+      "known_classes": [
+        0,
+        1
+      ],
+      "known_coverage": 0.85,
+      "unknown_recall": 0.4,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.7312499999999998,
+        "aupr_out": 0.6631093145181238,
+        "aupr_in": 0.7451997374497008,
+        "fpr95": 0.8
+      }
+    },
+    {
+      "seed": 103,
+      "known_classes": [
+        2,
+        3
+      ],
+      "known_coverage": 0.8875,
+      "unknown_recall": 0.15,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.74578125,
+        "aupr_out": 0.6536834647579788,
+        "aupr_in": 0.7891187973714683,
+        "fpr95": 0.55
+      }
+    },
+    {
+      "seed": 103,
+      "known_classes": [
+        4,
+        5
+      ],
+      "known_coverage": 0.7625,
+      "unknown_recall": 0.3625,
+      "passed_gate": false,
+      "detection": {
+        "auroc": 0.6026562500000001,
+        "aupr_out": 0.6008707398930441,
+        "aupr_in": 0.6380431796240815,
+        "fpr95": 0.8625
+      }
+    }
+  ],
+  "base_runs": [
+    {
+      "protocol": {
+        "seed": 101,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.8983333333333333,
+        "local_intrinsic_dimension": 6.557527609462684,
+        "within_class_radius": 2.5816971855675312,
+        "minimum_centroid_separation": 1.8147806181046808,
+        "compactness_ratio": 1.4225946430174035
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.975
+      },
+      "conformal_control": {
+        "threshold": 0.36071301363843433,
+        "coverage": 0.95,
+        "average_set_size": 0.9625,
+        "final_unknown_empty_set_recall": 0.2,
+        "final_unknown_average_set_size": 0.8
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.60578125,
+            "aupr_out": 0.5740401062553502,
+            "aupr_in": 0.6117543981596191,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": -0.0015375237718554533,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": -0.0015375237718554533
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6040625000000001,
+            "aupr_out": 0.5746000391039087,
+            "aupr_in": 0.6374002882117418,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": -0.00440035809452029,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": -0.00440035809452029
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.41812499999999997,
+            "aupr_out": 0.4352634481656278,
+            "aupr_in": 0.4595815054905698,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": -0.4223890723554689,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0125
+          },
+          "threshold": -0.4223890723554689
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7032812500000001,
+            "aupr_out": 0.6304624407276683,
+            "aupr_in": 0.7652215386391058,
+            "fpr95": 0.6625
+          },
+          "operating_point": {
+            "threshold": 0.27105740484403534,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2125
+          },
+          "threshold": 0.27105740484403534
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.55359375,
+            "aupr_out": 0.5678974095859037,
+            "aupr_in": 0.5275902357950062,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 3.30719231271471,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.15
+          },
+          "threshold": 3.30719231271471
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.54953125,
+            "aupr_out": 0.5786220255814316,
+            "aupr_in": 0.5532101503086193,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 12.440556523648006,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1875
+          },
+          "threshold": 12.440556523648006
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.60875,
+            "aupr_out": 0.6134537388896861,
+            "aupr_in": 0.6459361830358664,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": 2.3077042390743436,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2125
+          },
+          "threshold": 2.3077042390743436
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.68890625,
+            "aupr_out": 0.6890862121618442,
+            "aupr_in": 0.6616832040594053,
+            "fpr95": 0.8125
+          },
+          "operating_point": {
+            "threshold": 3.138753926405592,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2625
+          },
+          "threshold": 3.138753926405592
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.67859375,
+            "aupr_out": 0.6837325867040376,
+            "aupr_in": 0.6504221730484769,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 12.008426712130387,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.25
+          },
+          "threshold": 12.008426712130387
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.538515625,
+            "aupr_out": 0.5472767857142856,
+            "aupr_in": 0.5202084585646768,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0375,
+            "true_positive_rate": 0.1125
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.61765625,
+            "aupr_out": 0.599875546325374,
+            "aupr_in": 0.6182730864325544,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": -0.0015375237718554533,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.1625
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6159375,
+            "aupr_out": 0.6031472484148239,
+            "aupr_in": 0.6087658531202369,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": -0.00440035809452029,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.1625
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.48109375,
+            "aupr_out": 0.49938421755974993,
+            "aupr_in": 0.5115558878458462,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": -0.4223890723554689,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7232812500000001,
+            "aupr_out": 0.7051734379358859,
+            "aupr_in": 0.7279748668669858,
+            "fpr95": 0.75
+          },
+          "operating_point": {
+            "threshold": 0.27105740484403534,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.3
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.5065625,
+            "aupr_out": 0.533521070455262,
+            "aupr_in": 0.5153391120683684,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 3.30719231271471,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0625
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.54,
+            "aupr_out": 0.5918757613378006,
+            "aupr_in": 0.520674145605083,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 12.440556523648006,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.1375
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.5270312500000001,
+            "aupr_out": 0.550478343495461,
+            "aupr_in": 0.5490861011484534,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": 2.3077042390743436,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.15
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.6115625,
+            "aupr_out": 0.5959302550713725,
+            "aupr_in": 0.6322295980560014,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 3.138753926405592,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.175
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.5965625,
+            "aupr_out": 0.5876709173114446,
+            "aupr_in": 0.6166437573475871,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": 12.008426712130387,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.1625
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5120312499999999,
+            "aupr_out": 0.5033333333333333,
+            "aupr_in": 0.5063311688311688,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.05
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 101,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.7729166666666667,
+        "local_intrinsic_dimension": 7.18763263697765,
+        "within_class_radius": 2.6214246278511206,
+        "minimum_centroid_separation": 1.6254531481894867,
+        "compactness_ratio": 1.612734658498769
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9625
+      },
+      "conformal_control": {
+        "threshold": 0.549452921700596,
+        "coverage": 0.9875,
+        "average_set_size": 1.075,
+        "final_unknown_empty_set_recall": 0.0,
+        "final_unknown_average_set_size": 1.4625
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.60359375,
+            "aupr_out": 0.576844508968528,
+            "aupr_in": 0.6360368618677792,
+            "fpr95": 0.8125
+          },
+          "operating_point": {
+            "threshold": 0.04115145751913075,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 0.04115145751913075
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6025,
+            "aupr_out": 0.5750930793999054,
+            "aupr_in": 0.6310822055690083,
+            "fpr95": 0.8125
+          },
+          "operating_point": {
+            "threshold": 0.13867632138762537,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 0.13867632138762537
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.5279687500000001,
+            "aupr_out": 0.5268981213203032,
+            "aupr_in": 0.5526043327148388,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": -0.5586697253931882,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.075
+          },
+          "threshold": -0.5586697253931882
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7703125000000001,
+            "aupr_out": 0.744768969735698,
+            "aupr_in": 0.7852621529691555,
+            "fpr95": 0.6125
+          },
+          "operating_point": {
+            "threshold": 0.4406410036632032,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.4125
+          },
+          "threshold": 0.4406410036632032
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.5509375,
+            "aupr_out": 0.543683533975635,
+            "aupr_in": 0.5706340633138892,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": 3.2945118300376635,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 3.2945118300376635
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.56109375,
+            "aupr_out": 0.5740746444893028,
+            "aupr_in": 0.5495336470619062,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 13.046739759202426,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1875
+          },
+          "threshold": 13.046739759202426
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.5765625000000001,
+            "aupr_out": 0.5820831367429797,
+            "aupr_in": 0.6033982050438707,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 2.3481274358501243,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 2.3481274358501243
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.62234375,
+            "aupr_out": 0.598655158542797,
+            "aupr_in": 0.6476973370072102,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": 3.2886136179990397,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1
+          },
+          "threshold": 3.2886136179990397
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.59890625,
+            "aupr_out": 0.5879591434043847,
+            "aupr_in": 0.6021753085442096,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 12.931758049856004,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1125
+          },
+          "threshold": 12.931758049856004
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5078124999999999,
+            "aupr_out": 0.5296874999999999,
+            "aupr_in": 0.5038006164649854,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.69703125,
+            "aupr_out": 0.648655347911172,
+            "aupr_in": 0.6856173921054423,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": 0.04115145751913075,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.1
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.7087499999999999,
+            "aupr_out": 0.6570417274798875,
+            "aupr_in": 0.7004801101962301,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": 0.13867632138762537,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.1
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.53265625,
+            "aupr_out": 0.5073988638950526,
+            "aupr_in": 0.535515205681616,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": -0.5586697253931882,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.025
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.861875,
+            "aupr_out": 0.7948511411497838,
+            "aupr_in": 0.8893063019466924,
+            "fpr95": 0.4625
+          },
+          "operating_point": {
+            "threshold": 0.4406410036632032,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.5375
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.5084375000000001,
+            "aupr_out": 0.4868602400783507,
+            "aupr_in": 0.5249254620957009,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 3.2945118300376635,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.025
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.47687500000000005,
+            "aupr_out": 0.5088706922895372,
+            "aupr_in": 0.4832377884886122,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 13.046739759202426,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.075
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.37187499999999996,
+            "aupr_out": 0.4303896280838036,
+            "aupr_in": 0.42938650366060604,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 2.3481274358501243,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.075
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.64,
+            "aupr_out": 0.6056084848216863,
+            "aupr_in": 0.6466441072125584,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 3.2886136179990397,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.075
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.5876562499999999,
+            "aupr_out": 0.5573228995918583,
+            "aupr_in": 0.5971191090190494,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 12.931758049856004,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.0625
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.51796875,
+            "aupr_out": 0.5039285714285714,
+            "aupr_in": 0.5095195153533111,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.0625
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 101,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.8125,
+        "local_intrinsic_dimension": 6.718212087121996,
+        "within_class_radius": 2.5904393101869987,
+        "minimum_centroid_separation": 1.6983391531535446,
+        "compactness_ratio": 1.5252779784161288
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.975
+      },
+      "conformal_control": {
+        "threshold": 0.31606430254215234,
+        "coverage": 0.825,
+        "average_set_size": 0.825,
+        "final_unknown_empty_set_recall": 0.65,
+        "final_unknown_average_set_size": 0.35
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.5743750000000001,
+            "aupr_out": 0.5609645207455445,
+            "aupr_in": 0.6040256535655868,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 0.03689301704154314,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 0.03689301704154314
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.58765625,
+            "aupr_out": 0.5652330031372261,
+            "aupr_in": 0.6258837813052145,
+            "fpr95": 0.7625
+          },
+          "operating_point": {
+            "threshold": 0.05731086575075759,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 0.05731086575075759
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.386875,
+            "aupr_out": 0.4222425220684858,
+            "aupr_in": 0.47255439922447384,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": -0.3991488317204744,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0125
+          },
+          "threshold": -0.3991488317204744
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.73609375,
+            "aupr_out": 0.6750800058653694,
+            "aupr_in": 0.7809933874365742,
+            "fpr95": 0.6375
+          },
+          "operating_point": {
+            "threshold": 0.33828363013454804,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.3125
+          },
+          "threshold": 0.33828363013454804
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.41937500000000005,
+            "aupr_out": 0.4669655187941164,
+            "aupr_in": 0.46577261746277265,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 3.2902056610702592,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.075
+          },
+          "threshold": 3.2902056610702592
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.46453125,
+            "aupr_out": 0.47868372849853724,
+            "aupr_in": 0.5152475618573138,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 12.248882106304395,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1
+          },
+          "threshold": 12.248882106304395
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.47890625000000003,
+            "aupr_out": 0.49466049698895825,
+            "aupr_in": 0.5070908452694949,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 2.3333393845244403,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 2.3333393845244403
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.543125,
+            "aupr_out": 0.5641464167676002,
+            "aupr_in": 0.5597790911223683,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 2.994149308583918,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1875
+          },
+          "threshold": 2.994149308583918
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.45187499999999997,
+            "aupr_out": 0.48612622865552024,
+            "aupr_in": 0.5141017117523808,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 12.241348728607012,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 12.241348728607012
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.524765625,
+            "aupr_out": 0.519375,
+            "aupr_in": 0.512863983500776,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0125,
+            "true_positive_rate": 0.0625
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.4125,
+            "aupr_out": 0.4238221004458297,
+            "aupr_in": 0.4893524522066938,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 0.03689301704154314,
+            "false_positive_rate": 0.05,
+            "true_positive_rate": 0.0
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.40875,
+            "aupr_out": 0.42434865730144244,
+            "aupr_in": 0.4817585542439453,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": 0.05731086575075759,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.36984375,
+            "aupr_out": 0.4017876290699256,
+            "aupr_in": 0.4607735667231885,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": -0.3991488317204744,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.81953125,
+            "aupr_out": 0.7465219235705849,
+            "aupr_in": 0.8587629904290615,
+            "fpr95": 0.4875
+          },
+          "operating_point": {
+            "threshold": 0.33828363013454804,
+            "false_positive_rate": 0.1625,
+            "true_positive_rate": 0.575
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.34671875,
+            "aupr_out": 0.39463114896150275,
+            "aupr_in": 0.4249821417678364,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 3.2902056610702592,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.0125
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.5471875,
+            "aupr_out": 0.49735321098419705,
+            "aupr_in": 0.5714942672974557,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 12.248882106304395,
+            "false_positive_rate": 0.1375,
+            "true_positive_rate": 0.025
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.33734375,
+            "aupr_out": 0.38903520315153295,
+            "aupr_in": 0.4567241165503386,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": 2.3333393845244403,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.0
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.4228125,
+            "aupr_out": 0.42955136814546324,
+            "aupr_in": 0.4825398381369585,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 2.994149308583918,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0125
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.45125,
+            "aupr_out": 0.43858095966581123,
+            "aupr_in": 0.52097232252904,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 12.241348728607012,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0125
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5,
+            "aupr_out": 0.5,
+            "aupr_in": 0.5,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 102,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.8729166666666667,
+        "local_intrinsic_dimension": 7.101393280965876,
+        "within_class_radius": 2.6029290305926263,
+        "minimum_centroid_separation": 1.807256719797411,
+        "compactness_ratio": 1.4402652385126604
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9375
+      },
+      "conformal_control": {
+        "threshold": 0.32967241846537876,
+        "coverage": 0.9,
+        "average_set_size": 0.925,
+        "final_unknown_empty_set_recall": 0.3375,
+        "final_unknown_average_set_size": 0.6625
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.739375,
+            "aupr_out": 0.7120614519701792,
+            "aupr_in": 0.7636898619063486,
+            "fpr95": 0.6875
+          },
+          "operating_point": {
+            "threshold": 0.1056593592383004,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2875
+          },
+          "threshold": 0.1056593592383004
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.7384375,
+            "aupr_out": 0.7297967486569972,
+            "aupr_in": 0.7553025777339254,
+            "fpr95": 0.675
+          },
+          "operating_point": {
+            "threshold": 0.2094849144071184,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.325
+          },
+          "threshold": 0.2094849144071184
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.64171875,
+            "aupr_out": 0.597438422644466,
+            "aupr_in": 0.6747297191020472,
+            "fpr95": 0.7875
+          },
+          "operating_point": {
+            "threshold": -0.36872575262050006,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.275
+          },
+          "threshold": -0.36872575262050006
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.9068749999999999,
+            "aupr_out": 0.8556275731042648,
+            "aupr_in": 0.9329128170797629,
+            "fpr95": 0.2
+          },
+          "operating_point": {
+            "threshold": 0.25449529186246117,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.7625
+          },
+          "threshold": 0.25449529186246117
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.6035937499999999,
+            "aupr_out": 0.6005464871082641,
+            "aupr_in": 0.6209054040797495,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": 3.3250847840509246,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.15
+          },
+          "threshold": 3.3250847840509246
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.75640625,
+            "aupr_out": 0.7378589470286787,
+            "aupr_in": 0.7723593682602942,
+            "fpr95": 0.7625
+          },
+          "operating_point": {
+            "threshold": 11.807593405066163,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.4125
+          },
+          "threshold": 11.807593405066163
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.65046875,
+            "aupr_out": 0.5960495649547031,
+            "aupr_in": 0.6915799860377851,
+            "fpr95": 0.75
+          },
+          "operating_point": {
+            "threshold": 2.4416557712938287,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1125
+          },
+          "threshold": 2.4416557712938287
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.7559375,
+            "aupr_out": 0.7577831785927247,
+            "aupr_in": 0.7732917320017821,
+            "fpr95": 0.7125
+          },
+          "operating_point": {
+            "threshold": 3.151262135052477,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.4
+          },
+          "threshold": 3.151262135052477
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.7201562499999999,
+            "aupr_out": 0.7225265077800676,
+            "aupr_in": 0.7381399709875116,
+            "fpr95": 0.75
+          },
+          "operating_point": {
+            "threshold": 12.248540983463462,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.3
+          },
+          "threshold": 12.248540983463462
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.578671875,
+            "aupr_out": 0.5927992358840846,
+            "aupr_in": 0.5431852609189609,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.2125
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.578125,
+            "aupr_out": 0.5674509612119654,
+            "aupr_in": 0.5822457910758727,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 0.1056593592383004,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.125
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.57015625,
+            "aupr_out": 0.5556151582621303,
+            "aupr_in": 0.5534567981021996,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 0.2094849144071184,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.125
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.43984375000000003,
+            "aupr_out": 0.44889456376877496,
+            "aupr_in": 0.488429478722065,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": -0.36872575262050006,
+            "false_positive_rate": 0.1625,
+            "true_positive_rate": 0.0625
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7401562499999998,
+            "aupr_out": 0.7191729425051256,
+            "aupr_in": 0.7600890584400792,
+            "fpr95": 0.675
+          },
+          "operating_point": {
+            "threshold": 0.25449529186246117,
+            "false_positive_rate": 0.175,
+            "true_positive_rate": 0.4125
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.485,
+            "aupr_out": 0.5051266917923463,
+            "aupr_in": 0.5102555856167097,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 3.3250847840509246,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.0625
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.5953125,
+            "aupr_out": 0.6151754160805741,
+            "aupr_in": 0.580739192915382,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 11.807593405066163,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.2375
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.5571875000000001,
+            "aupr_out": 0.5757714488051352,
+            "aupr_in": 0.5912187764997966,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 2.4416557712938287,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.125
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.5996874999999999,
+            "aupr_out": 0.6062153905141804,
+            "aupr_in": 0.5950072038441887,
+            "fpr95": 0.8125
+          },
+          "operating_point": {
+            "threshold": 3.151262135052477,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.1875
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.5801562499999999,
+            "aupr_out": 0.5879268927420203,
+            "aupr_in": 0.5827548920942276,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 12.248540983463462,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.1125
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5254687499999999,
+            "aupr_out": 0.527950036075036,
+            "aupr_in": 0.5133734458650941,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.05,
+            "true_positive_rate": 0.1
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 102,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.81625,
+        "local_intrinsic_dimension": 7.118520337894498,
+        "within_class_radius": 2.5745191265681235,
+        "minimum_centroid_separation": 1.7109056154531082,
+        "compactness_ratio": 1.504769815070307
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9
+      },
+      "conformal_control": {
+        "threshold": 0.5494057662983638,
+        "coverage": 0.925,
+        "average_set_size": 1.05,
+        "final_unknown_empty_set_recall": 0.0,
+        "final_unknown_average_set_size": 1.25
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.72953125,
+            "aupr_out": 0.7171908374409429,
+            "aupr_in": 0.7426064685201119,
+            "fpr95": 0.75
+          },
+          "operating_point": {
+            "threshold": -0.14817925531358442,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.375
+          },
+          "threshold": -0.14817925531358442
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.709375,
+            "aupr_out": 0.7089495502086309,
+            "aupr_in": 0.7122601807782944,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": -0.3856491632446808,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.325
+          },
+          "threshold": -0.3856491632446808
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.6432812499999999,
+            "aupr_out": 0.5896245109748018,
+            "aupr_in": 0.6673194216219251,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": -0.593224046164928,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": -0.593224046164928
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.6896875,
+            "aupr_out": 0.6508615136417761,
+            "aupr_in": 0.7272960227574542,
+            "fpr95": 0.7625
+          },
+          "operating_point": {
+            "threshold": 0.45037914166075194,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1625
+          },
+          "threshold": 0.45037914166075194
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.71125,
+            "aupr_out": 0.7123063100672077,
+            "aupr_in": 0.7113052672920587,
+            "fpr95": 0.7875
+          },
+          "operating_point": {
+            "threshold": 2.922480618075902,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.35
+          },
+          "threshold": 2.922480618075902
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.73515625,
+            "aupr_out": 0.7432887278050111,
+            "aupr_in": 0.7453479207121648,
+            "fpr95": 0.775
+          },
+          "operating_point": {
+            "threshold": 11.791235971633496,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.35
+          },
+          "threshold": 11.791235971633496
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.7253124999999999,
+            "aupr_out": 0.7472754744938657,
+            "aupr_in": 0.7276980938018737,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": 2.1333325009761017,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.4125
+          },
+          "threshold": 2.1333325009761017
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.765625,
+            "aupr_out": 0.7732021452920926,
+            "aupr_in": 0.7778036265248808,
+            "fpr95": 0.6875
+          },
+          "operating_point": {
+            "threshold": 2.86474951505758,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.4375
+          },
+          "threshold": 2.86474951505758
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.7509375,
+            "aupr_out": 0.7711045007568279,
+            "aupr_in": 0.7550845188914196,
+            "fpr95": 0.725
+          },
+          "operating_point": {
+            "threshold": 11.150014721161213,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.425
+          },
+          "threshold": 11.150014721161213
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5559375000000001,
+            "aupr_out": 0.5507931998556997,
+            "aupr_in": 0.5299432522549481,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0125,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.5170312499999999,
+            "aupr_out": 0.4850850399333806,
+            "aupr_in": 0.5690372857730341,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": -0.14817925531358442,
+            "false_positive_rate": 0.25,
+            "true_positive_rate": 0.1875
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.5606249999999999,
+            "aupr_out": 0.5084314868596627,
+            "aupr_in": 0.616679907625898,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": -0.3856491632446808,
+            "false_positive_rate": 0.2375,
+            "true_positive_rate": 0.2
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.29171875,
+            "aupr_out": 0.37564984629925235,
+            "aupr_in": 0.38760266294320556,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": -0.593224046164928,
+            "false_positive_rate": 0.2125,
+            "true_positive_rate": 0.0
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.84328125,
+            "aupr_out": 0.7760990471488728,
+            "aupr_in": 0.8851749052910786,
+            "fpr95": 0.35
+          },
+          "operating_point": {
+            "threshold": 0.45037914166075194,
+            "false_positive_rate": 0.05,
+            "true_positive_rate": 0.25
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.39140625,
+            "aupr_out": 0.42353747838756794,
+            "aupr_in": 0.43415844533424475,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": 2.922480618075902,
+            "false_positive_rate": 0.2625,
+            "true_positive_rate": 0.125
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.5059374999999999,
+            "aupr_out": 0.4799155617679315,
+            "aupr_in": 0.5682817674360199,
+            "fpr95": 0.8875
+          },
+          "operating_point": {
+            "threshold": 11.791235971633496,
+            "false_positive_rate": 0.1875,
+            "true_positive_rate": 0.1125
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.45171875,
+            "aupr_out": 0.4531915771541314,
+            "aupr_in": 0.49692607771887454,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": 2.1333325009761017,
+            "false_positive_rate": 0.2625,
+            "true_positive_rate": 0.125
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.52171875,
+            "aupr_out": 0.506334875533244,
+            "aupr_in": 0.5650555348745253,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 2.86474951505758,
+            "false_positive_rate": 0.25,
+            "true_positive_rate": 0.2
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.47671875,
+            "aupr_out": 0.4706004629432221,
+            "aupr_in": 0.5271171917771211,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 11.150014721161213,
+            "false_positive_rate": 0.2875,
+            "true_positive_rate": 0.1875
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.49945312500000005,
+            "aupr_out": 0.49666666666666665,
+            "aupr_in": 0.4999208829067019,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0375,
+            "true_positive_rate": 0.0375
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 102,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.8108333333333333,
+        "local_intrinsic_dimension": 6.7141535518102256,
+        "within_class_radius": 2.6183558820404027,
+        "minimum_centroid_separation": 1.6234641870918032,
+        "compactness_ratio": 1.612820229025687
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9125
+      },
+      "conformal_control": {
+        "threshold": 0.4278907276245896,
+        "coverage": 0.875,
+        "average_set_size": 0.95,
+        "final_unknown_empty_set_recall": 0.3125,
+        "final_unknown_average_set_size": 0.6875
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.5890625,
+            "aupr_out": 0.5970804011976407,
+            "aupr_in": 0.5633334625568205,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": -0.1262016719612454,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1625
+          },
+          "threshold": -0.1262016719612454
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6096874999999999,
+            "aupr_out": 0.6128530730321564,
+            "aupr_in": 0.5881915447946808,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": -0.372568179817806,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.15
+          },
+          "threshold": -0.372568179817806
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.43921875,
+            "aupr_out": 0.453802242474948,
+            "aupr_in": 0.4823307964032743,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": -0.6392440514584515,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.05
+          },
+          "threshold": -0.6392440514584515
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.71609375,
+            "aupr_out": 0.7065520801336367,
+            "aupr_in": 0.7173170236301423,
+            "fpr95": 0.7625
+          },
+          "operating_point": {
+            "threshold": 0.40600115445947643,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2875
+          },
+          "threshold": 0.40600115445947643
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.47187500000000004,
+            "aupr_out": 0.4947928777406281,
+            "aupr_in": 0.48180232986096333,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 3.120585545120481,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.075
+          },
+          "threshold": 3.120585545120481
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.47171874999999996,
+            "aupr_out": 0.5292648099068125,
+            "aupr_in": 0.48121512854370396,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 11.891780405826527,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 11.891780405826527
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.44140625,
+            "aupr_out": 0.49329706250012545,
+            "aupr_in": 0.4653738897355416,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": 2.203971024672385,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1
+          },
+          "threshold": 2.203971024672385
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.59765625,
+            "aupr_out": 0.619671296017902,
+            "aupr_in": 0.5642339524495827,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": 2.881595113496452,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1625
+          },
+          "threshold": 2.881595113496452
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.5312500000000001,
+            "aupr_out": 0.5598636952131606,
+            "aupr_in": 0.5195274253881155,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": 11.581262006588771,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 11.581262006588771
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5127343750000001,
+            "aupr_out": 0.5187499999999999,
+            "aupr_in": 0.5064495549567206,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0125,
+            "true_positive_rate": 0.0375
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.71125,
+            "aupr_out": 0.64756583022308,
+            "aupr_in": 0.7154877622853052,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": -0.1262016719612454,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.15
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6965625,
+            "aupr_out": 0.6337106070397148,
+            "aupr_in": 0.7051263017443827,
+            "fpr95": 0.675
+          },
+          "operating_point": {
+            "threshold": -0.372568179817806,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.1625
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.581875,
+            "aupr_out": 0.528571029266572,
+            "aupr_in": 0.6151742246015728,
+            "fpr95": 0.8875
+          },
+          "operating_point": {
+            "threshold": -0.6392440514584515,
+            "false_positive_rate": 0.125,
+            "true_positive_rate": 0.0375
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.876875,
+            "aupr_out": 0.8284402565083325,
+            "aupr_in": 0.90815055497128,
+            "fpr95": 0.325
+          },
+          "operating_point": {
+            "threshold": 0.40600115445947643,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.4125
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.5534374999999999,
+            "aupr_out": 0.5219671536906039,
+            "aupr_in": 0.5740893685271001,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 3.120585545120481,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.05
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.58546875,
+            "aupr_out": 0.5477179034882889,
+            "aupr_in": 0.6172957349203481,
+            "fpr95": 0.775
+          },
+          "operating_point": {
+            "threshold": 11.891780405826527,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.1125
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.4828125,
+            "aupr_out": 0.4853194273052364,
+            "aupr_in": 0.4971018807306534,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 2.203971024672385,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.075
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.6967187499999999,
+            "aupr_out": 0.6564994127639705,
+            "aupr_in": 0.6733902149903468,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 2.881595113496452,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.25
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.65109375,
+            "aupr_out": 0.6017220766155266,
+            "aupr_in": 0.6832957623781277,
+            "fpr95": 0.7875
+          },
+          "operating_point": {
+            "threshold": 11.581262006588771,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1875
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.499921875,
+            "aupr_out": 0.5,
+            "aupr_in": 0.5,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0125,
+            "true_positive_rate": 0.0125
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 103,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          0,
+          1
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.865,
+        "local_intrinsic_dimension": 6.686349051406621,
+        "within_class_radius": 2.5970461182734326,
+        "minimum_centroid_separation": 1.7685233198572765,
+        "compactness_ratio": 1.4684828235587075
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9875
+      },
+      "conformal_control": {
+        "threshold": 0.37510630018029634,
+        "coverage": 0.9625,
+        "average_set_size": 0.9625,
+        "final_unknown_empty_set_recall": 0.3,
+        "final_unknown_average_set_size": 0.7
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.54046875,
+            "aupr_out": 0.5011325518788106,
+            "aupr_in": 0.6326284484996096,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": -0.03435187731281918,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0375
+          },
+          "threshold": -0.03435187731281918
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.505625,
+            "aupr_out": 0.4875698619130091,
+            "aupr_in": 0.6025625926549355,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": -0.0939780138270772,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0375
+          },
+          "threshold": -0.0939780138270772
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.45046875,
+            "aupr_out": 0.43600111512740325,
+            "aupr_in": 0.5445283146880385,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": -0.44447210550599214,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0125
+          },
+          "threshold": -0.44447210550599214
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7095312500000001,
+            "aupr_out": 0.6047070942638408,
+            "aupr_in": 0.7886163689660601,
+            "fpr95": 0.55
+          },
+          "operating_point": {
+            "threshold": 0.36895297105730346,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.075
+          },
+          "threshold": 0.36895297105730346
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.51171875,
+            "aupr_out": 0.5009529987544344,
+            "aupr_in": 0.5645170354091484,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": 3.267783753430702,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.025
+          },
+          "threshold": 3.267783753430702
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.48796875,
+            "aupr_out": 0.48752862834586236,
+            "aupr_in": 0.5104593822103276,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 12.203578492978082,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 12.203578492978082
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.55046875,
+            "aupr_out": 0.5232363988231739,
+            "aupr_in": 0.608340543229747,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": 2.27238799874639,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.075
+          },
+          "threshold": 2.27238799874639
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.6509375,
+            "aupr_out": 0.6401156544095001,
+            "aupr_in": 0.6542590240727022,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": 3.0051394691240056,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2375
+          },
+          "threshold": 3.0051394691240056
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.6225,
+            "aupr_out": 0.6137930285335939,
+            "aupr_in": 0.62879674058997,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": 11.649126399625212,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.2
+          },
+          "threshold": 11.649126399625212
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.5187499999999999,
+            "aupr_out": 0.5203869047619049,
+            "aupr_in": 0.5097180656585907,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.0625
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.56078125,
+            "aupr_out": 0.5295886005077532,
+            "aupr_in": 0.6164337246057598,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": -0.03435187731281918,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.125
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.59890625,
+            "aupr_out": 0.5515478549281786,
+            "aupr_in": 0.6362619783278516,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": -0.0939780138270772,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.1375
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.40515625,
+            "aupr_out": 0.42993347443862395,
+            "aupr_in": 0.45952953730600565,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": -0.44447210550599214,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.0125
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7365625,
+            "aupr_out": 0.7556731915588222,
+            "aupr_in": 0.718760259215838,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 0.36895297105730346,
+            "false_positive_rate": 0.0375,
+            "true_positive_rate": 0.3
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.4125,
+            "aupr_out": 0.4464255666133573,
+            "aupr_in": 0.4503982298278356,
+            "fpr95": 0.975
+          },
+          "operating_point": {
+            "threshold": 3.267783753430702,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.05
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.418125,
+            "aupr_out": 0.4659825043004578,
+            "aupr_in": 0.4326963264120036,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": 12.203578492978082,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1125
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.45593750000000005,
+            "aupr_out": 0.47058234881701755,
+            "aupr_in": 0.4757760151512418,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 2.27238799874639,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.0875
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.57,
+            "aupr_out": 0.5433642130871312,
+            "aupr_in": 0.5998216229850075,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 3.0051394691240056,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.15
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.52125,
+            "aupr_out": 0.5163315121525679,
+            "aupr_in": 0.5471324830749406,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 11.649126399625212,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.1625
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.499140625,
+            "aupr_out": 0.49597222222222215,
+            "aupr_in": 0.4998800332334993,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.0625
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 103,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          2,
+          3
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.78375,
+        "local_intrinsic_dimension": 7.344178513796626,
+        "within_class_radius": 2.613635885206293,
+        "minimum_centroid_separation": 1.6642488355127147,
+        "compactness_ratio": 1.5704597950949415
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.925
+      },
+      "conformal_control": {
+        "threshold": 0.5593425895162472,
+        "coverage": 0.925,
+        "average_set_size": 1.0625,
+        "final_unknown_empty_set_recall": 0.0,
+        "final_unknown_average_set_size": 1.275
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.60953125,
+            "aupr_out": 0.5949022003789873,
+            "aupr_in": 0.6187531983645406,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": -0.09094338486363739,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.15
+          },
+          "threshold": -0.09094338486363739
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.60359375,
+            "aupr_out": 0.5902129956624899,
+            "aupr_in": 0.6137432556383802,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": -0.24788316296409155,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1625
+          },
+          "threshold": -0.24788316296409155
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.51875,
+            "aupr_out": 0.5165136160202655,
+            "aupr_in": 0.5346225090533014,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": -0.579525136224993,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": -0.579525136224993
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.70421875,
+            "aupr_out": 0.609342206199182,
+            "aupr_in": 0.7637723687853744,
+            "fpr95": 0.6375
+          },
+          "operating_point": {
+            "threshold": 0.44625666024824345,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1
+          },
+          "threshold": 0.44625666024824345
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.56171875,
+            "aupr_out": 0.5486202709557417,
+            "aupr_in": 0.5615644918807592,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 3.11669287887485,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 3.11669287887485
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.5331250000000001,
+            "aupr_out": 0.5097678434799431,
+            "aupr_in": 0.5609991119329116,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 12.53808298648356,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0625
+          },
+          "threshold": 12.53808298648356
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.64234375,
+            "aupr_out": 0.5981665665856211,
+            "aupr_in": 0.6772565678759741,
+            "fpr95": 0.7375
+          },
+          "operating_point": {
+            "threshold": 2.271314793095327,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 2.271314793095327
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.5865625,
+            "aupr_out": 0.5633171286407511,
+            "aupr_in": 0.5973910912949586,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 2.980736587115624,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1625
+          },
+          "threshold": 2.980736587115624
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.6178125,
+            "aupr_out": 0.591915523462238,
+            "aupr_in": 0.628689526517997,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 12.12444495345225,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 12.12444495345225
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.49999999999999994,
+            "aupr_out": 0.50625,
+            "aupr_in": 0.5000393081761006,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.025
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.57671875,
+            "aupr_out": 0.5192494033347659,
+            "aupr_in": 0.6223962313564636,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": -0.09094338486363739,
+            "false_positive_rate": 0.15,
+            "true_positive_rate": 0.0875
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6146875,
+            "aupr_out": 0.5389274352938266,
+            "aupr_in": 0.6615229083494287,
+            "fpr95": 0.7875
+          },
+          "operating_point": {
+            "threshold": -0.24788316296409155,
+            "false_positive_rate": 0.15,
+            "true_positive_rate": 0.0875
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.35500000000000004,
+            "aupr_out": 0.3999383002408305,
+            "aupr_in": 0.45170050815712187,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": -0.579525136224993,
+            "false_positive_rate": 0.125,
+            "true_positive_rate": 0.0125
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.83640625,
+            "aupr_out": 0.8002387515936942,
+            "aupr_in": 0.8694450082559101,
+            "fpr95": 0.4125
+          },
+          "operating_point": {
+            "threshold": 0.44625666024824345,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.2625
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.40421874999999996,
+            "aupr_out": 0.44028661122790796,
+            "aupr_in": 0.46374164469479806,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 3.11669287887485,
+            "false_positive_rate": 0.1375,
+            "true_positive_rate": 0.0375
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.40921874999999996,
+            "aupr_out": 0.4393667529726968,
+            "aupr_in": 0.4858515625616791,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 12.53808298648356,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.025
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.46453125,
+            "aupr_out": 0.45517476388382694,
+            "aupr_in": 0.5459964167614754,
+            "fpr95": 0.875
+          },
+          "operating_point": {
+            "threshold": 2.271314793095327,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.05
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.54421875,
+            "aupr_out": 0.5259319320799798,
+            "aupr_in": 0.5725479847003152,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": 2.980736587115624,
+            "false_positive_rate": 0.1375,
+            "true_positive_rate": 0.075
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.46328125,
+            "aupr_out": 0.46934470299366815,
+            "aupr_in": 0.5148323217225834,
+            "fpr95": 0.925
+          },
+          "operating_point": {
+            "threshold": 12.12444495345225,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.05
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.500078125,
+            "aupr_out": 0.50625,
+            "aupr_in": 0.5000393081761006,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0125,
+            "true_positive_rate": 0.0125
+          }
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 103,
+        "representation": "mobilenetv2",
+        "known_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_classes": [
+          6,
+          7
+        ],
+        "final_unknown_classes": [
+          8,
+          9
+        ],
+        "samples_per_slice": 40,
+        "pca_components": 8,
+        "source_images_disjoint_across_slices": true,
+        "transform_fit_classes": [
+          4,
+          5
+        ],
+        "proxy_unknown_used_for_score_selection": true,
+        "final_unknown_used_for_score_selection": false,
+        "mutation_published": false
+      },
+      "representation_diagnostics": {
+        "neighborhood_purity": 0.7741666666666667,
+        "local_intrinsic_dimension": 7.122964886371813,
+        "within_class_radius": 2.5990435167571535,
+        "minimum_centroid_separation": 1.7024698186513498,
+        "compactness_ratio": 1.5266311850485814
+      },
+      "closed_set": {
+        "id_test_accuracy": 0.9
+      },
+      "conformal_control": {
+        "threshold": 0.459206292528233,
+        "coverage": 0.875,
+        "average_set_size": 0.95,
+        "final_unknown_empty_set_recall": 0.125,
+        "final_unknown_average_set_size": 0.875
+      },
+      "validation": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.5190625,
+            "aupr_out": 0.5288345144305816,
+            "aupr_in": 0.5259018044489043,
+            "fpr95": 0.9625
+          },
+          "operating_point": {
+            "threshold": 0.03839507508632423,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 0.03839507508632423
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.55359375,
+            "aupr_out": 0.5354491193566578,
+            "aupr_in": 0.5767502153063951,
+            "fpr95": 0.9375
+          },
+          "operating_point": {
+            "threshold": 0.12322336294788798,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0875
+          },
+          "threshold": 0.12322336294788798
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.31859375,
+            "aupr_out": 0.4052202391294972,
+            "aupr_in": 0.3884054404103719,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": -0.4137560097428557,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.05
+          },
+          "threshold": -0.4137560097428557
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.721875,
+            "aupr_out": 0.7149551933814822,
+            "aupr_in": 0.7537695272683603,
+            "fpr95": 0.65
+          },
+          "operating_point": {
+            "threshold": 0.35434325339722633,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.25
+          },
+          "threshold": 0.35434325339722633
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.35343750000000007,
+            "aupr_out": 0.4190930272876545,
+            "aupr_in": 0.40412881794669614,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": 3.2108837872786298,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.05
+          },
+          "threshold": 3.2108837872786298
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.44140625,
+            "aupr_out": 0.49835376490720174,
+            "aupr_in": 0.4462065943540838,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 11.954681694914965,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.1375
+          },
+          "threshold": 11.954681694914965
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.37374999999999997,
+            "aupr_out": 0.43829098249970916,
+            "aupr_in": 0.43257893845387996,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 2.3277113069964774,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0625
+          },
+          "threshold": 2.3277113069964774
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.4990625,
+            "aupr_out": 0.5176753295363332,
+            "aupr_in": 0.48451573202511045,
+            "fpr95": 0.9875
+          },
+          "operating_point": {
+            "threshold": 3.0341586379231043,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.125
+          },
+          "threshold": 3.0341586379231043
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.37296875,
+            "aupr_out": 0.4283397615384489,
+            "aupr_in": 0.42268524280833336,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 12.151738835471905,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0625
+          },
+          "threshold": 12.151738835471905
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.49999999999999994,
+            "aupr_out": 0.5020833333333333,
+            "aupr_in": 0.5000398089171975,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.025,
+            "true_positive_rate": 0.025
+          },
+          "threshold": 5e-324
+        }
+      },
+      "final_test": {
+        "minimum_raw_sdf": {
+          "detection": {
+            "auroc": 0.35390625000000003,
+            "aupr_out": 0.39499590636533655,
+            "aupr_in": 0.4800391785067974,
+            "fpr95": 0.9125
+          },
+          "operating_point": {
+            "threshold": 0.03839507508632423,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0
+          }
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.29890625,
+            "aupr_out": 0.3767267107912321,
+            "aupr_in": 0.4193370802276837,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 0.12322336294788798,
+            "false_positive_rate": 0.1,
+            "true_positive_rate": 0.0
+          }
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.32890625,
+            "aupr_out": 0.38740509797042205,
+            "aupr_in": 0.4396841246078065,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": -0.4137560097428557,
+            "false_positive_rate": 0.1375,
+            "true_positive_rate": 0.0
+          }
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.81984375,
+            "aupr_out": 0.7594455235861732,
+            "aupr_in": 0.8640181151912567,
+            "fpr95": 0.4375
+          },
+          "operating_point": {
+            "threshold": 0.35434325339722633,
+            "false_positive_rate": 0.15,
+            "true_positive_rate": 0.5
+          }
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.4803125,
+            "aupr_out": 0.46546560359572076,
+            "aupr_in": 0.5221720234172671,
+            "fpr95": 0.95
+          },
+          "operating_point": {
+            "threshold": 3.2108837872786298,
+            "false_positive_rate": 0.1125,
+            "true_positive_rate": 0.025
+          }
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.6107812499999999,
+            "aupr_out": 0.5530909972510383,
+            "aupr_in": 0.6463490962894047,
+            "fpr95": 0.8375
+          },
+          "operating_point": {
+            "threshold": 11.954681694914965,
+            "false_positive_rate": 0.0875,
+            "true_positive_rate": 0.1
+          }
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.30609375,
+            "aupr_out": 0.38204477694197425,
+            "aupr_in": 0.39578562042438215,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 2.3277113069964774,
+            "false_positive_rate": 0.075,
+            "true_positive_rate": 0.0
+          }
+        },
+        "class_mahalanobis": {
+          "detection": {
+            "auroc": 0.53578125,
+            "aupr_out": 0.5064076560671166,
+            "aupr_in": 0.5830643992737363,
+            "fpr95": 0.8625
+          },
+          "operating_point": {
+            "threshold": 3.0341586379231043,
+            "false_positive_rate": 0.0625,
+            "true_positive_rate": 0.0625
+          }
+        },
+        "gaussian_mixture_nll": {
+          "detection": {
+            "auroc": 0.6292187499999999,
+            "aupr_out": 0.5555082858403209,
+            "aupr_in": 0.6737114444769299,
+            "fpr95": 0.7375
+          },
+          "operating_point": {
+            "threshold": 12.151738835471905,
+            "false_positive_rate": 0.1375,
+            "true_positive_rate": 0.075
+          }
+        },
+        "class_tail_probability": {
+          "detection": {
+            "auroc": 0.48125,
+            "aupr_out": 0.5,
+            "aupr_in": 0.49068571802723726,
+            "fpr95": 1.0
+          },
+          "operating_point": {
+            "threshold": 5e-324,
+            "false_positive_rate": 0.0375,
+            "true_positive_rate": 0.0
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "milestone": "M121",
+  "title": "Spectral learning-curve certificate: does the Canatar-Bordelon-Pehlevan theory (2006.13198 / 2002.02561) predict M116's measured Q(n) crossing from the feature Gram eigenspectra alone, without retraining?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.5 (M121)",
+  "registered_before_any_accuracy": true,
+  "source": {
+    "features": "reuses M116's sealed feature memmaps (data_cache_root()/v16/m116/f_train.npy 138000x12288 float32; dense_train.npy 138000x768 float32); no re-encoding, no training",
+    "m116_reference": "logs/results/v16/m116_scale/evidence.json (measured Q(n); sparse overtakes dense between n=27600 and n=55200)"
+  },
+  "theory": {
+    "formula": "Canatar-Bordelon-Pehlevan 2006.13198 eq.(4), noise-free: E_g(P) = (1/(1-gamma)) * sum_rho [ eta_rho * kappa^2 / (kappa + P*eta_rho)^2 ] * w2_rho, with kappa = lambda + sum_rho kappa*eta_rho/(kappa + P*eta_rho), gamma = sum_rho P*eta_rho^2/(kappa + P*eta_rho)^2",
+    "eigenvalues": "eta_rho = eigenvalues of (1/M) F_std^T F_std, the discrete-measure kernel PCA of the linear kernel on the STANDARDISED frozen features (M = 138000 train rows, the measure the head was fit on; per-dim mean/unit-variance from train, the M116 RidgeAccumulator convention)",
+    "modal_power": "w2_rho = sum over classes c of a_rho,c^2 / (M*eta_rho), a_rho,c = v_rho^T (F_std^T y_c) = projection of the one-hot label vector of class c onto feature eigenvector rho",
+    "ridge_mapping": "the program's RidgeAccumulator standardises then adds the penalty to the Gram diagonal, i.e. minimises ||F_std w - y||^2 + penalty*||w||^2 = Canatar's objective with lambda = penalty = 1.0",
+    "lambda_grid": [0.1, 1.0, 10.0],
+    "ladder": [6900, 13800, 27600, 55200, 110400, 138000],
+    "disclosure": "E_g is an MSE proxy for one-hot classification; the gate is the predicted CROSSING (shape-level), not absolute error values. Target power in kernel-null modes is a constant shift to both curves and is reported, not gated."
+  },
+  "gate": {
+    "predicted_crossing": "smallest ladder P where predicted E_g^sparse(P) <= E_g^dense(P); PASS if it lies within a factor [1/3, 3] of the measured crossing interval midpoint (M116: sparse overtakes between n=27600 and n=55200, midpoint 41400)",
+    "gap_direction_at_nmax": "predicted E_g^sparse(n_max) < E_g^dense(n_max) (matches M116's measured sparse accuracy 0.2153 > dense 0.1972)"
+  },
+  "numerics": {
+    "gram_dtype": "float64",
+    "eigh_backend": "numpy.linalg.eigh (CPU, M107 arithmetic convention)",
+    "kappa_fixed_point_iters": 200,
+    "kappa_fixed_point_tol": 1e-12,
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

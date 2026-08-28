@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "milestone": "M55",
+  "indexes": [
+    {
+      "path": "logs/results/v9/m51_surface_diagnostics/artifact_index.json",
+      "sha256": "0daeeec009fe9e0c1f9beff7568f48ad8c8a6d202b5bc5f7e5b10bf4d2027855"
+    },
+    {
+      "path": "logs/results/v9/m53_bounded_tube_s1/artifact_index.json",
+      "sha256": "45a21827a68dfabc681495525a7440198db7ef2cd8cb2c8ff1d6e0baa2d064f2"
+    }
+  ],
+  "evidence": {
+    "m51": {
+      "path": "logs/results/v9/m51_surface_diagnostics/evidence.json",
+      "sha256": "2d80c30114eb71d23d46b0c18380a4be6bf497c8c07a2c892ed23fd0aaf4ffd1"
+    },
+    "m53_s1": {
+      "path": "logs/results/v9/m53_bounded_tube_s1/evidence.json",
+      "sha256": "5bfac23e08c2665b8bf94c0b9c61a41aa4c8b1f613f24bc65bfd930bdc41f696"
+    }
+  },
+  "expected_outcome": "D",
+  "final_labels_opened": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "milestone": "M56",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "ranks": [8, 16, 32],
+  "patch_counts": [1, 2, 4],
+  "extent_quantiles": [0.90, 0.95, 0.99],
+  "outer_scale_policies": ["median_overshoot", "interquantile_range"],
+  "penalty_grid": [1, 4, 16, 64, 256, 1024],
+  "known_coverage_target": 0.92,
+  "calibration_known_coverage_floor": 0.90,
+  "tangent_multipliers": [0.5, 1, 2, 4, 8],
+  "parent_locks": {
+    "v9_final_claim": {
+      "path": "analysis/V9_FINAL_CLAIM_LEDGER.md",
+      "sha256": "95c0a641272410f7ed9c61bfa61691c3f4932db7905cd3cf369f9838301a4ea1"
+    },
+    "v9_final_index": {
+      "path": "logs/results/v9/m55_final_replay/artifact_index.json",
+      "sha256": "00c93854060d1e86854909181dad3e536ff5100c81855f52adb8a600c6cc0856"
+    },
+    "v9_partitions": {
+      "path": "logs/results/v9/m51_surface_diagnostics/partition_manifest.json",
+      "sha256": "2dd38edd3094557bb7047c928f0e69259f207f9fe6064e190d1837b893d7e7e5"
+    },
+    "v9_partition_config": {
+      "path": "experiments/configs/v9/m51_surface_diagnostics.json",
+      "sha256": "b6c4ad8c1b03f4c62b2a32a6b40f8dc274701df1376d0cc618d875e53f8c0dff"
+    },
+    "a2_evidence": {
+      "path": "logs/results/v6_1/a2_weighted_s2/evidence.json",
+      "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65"
+    },
+    "v7_gaussian_evidence": {
+      "path": "logs/results/v7/m39_acceptance_heads/evidence.json",
+      "sha256": "3934d5fe9b6d366543ec9c2afa637ffae9748e3a2432f8d9571bd46e8ac6c5f2"
+    }
+  },
+  "resource_contract": {
+    "maximum_parameter_ratio": 2.0,
+    "maximum_fit_work_ratio": 2.0,
+    "record_latency": true,
+    "record_peak_temporary_bytes": true
+  },
+  "final_labels_opened": false
+}

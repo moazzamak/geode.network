@@ -1,0 +1,31 @@
+{
+  "milestone": "M313",
+  "title": "Economic repairs: per-axis bond, claim delay under open probe exposure, honest L3, verified-work-only tenure (A11, A20)",
+  "question": "Do the registered economic repairs close the repeatable-cheating business: bond covers the compute saved at any conviction time, wash-ring volume buys no tenure, claim delay tracks exposure, L3 burns only vested-unclaimed?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M313 (26 Aug 2026, before the build)",
+  "rho": 0.05,
+  "delta": 0.005,
+  "p0_honest": 0.002,
+  "p1_substitute": 0.005,
+  "alpha": 0.01,
+  "beta": 0.01,
+  "saving_per_unit": 0.02,
+  "units_per_epoch": 100.0,
+  "session_budget": 20000,
+  "campaign_runs": 2000,
+  "seed": 313,
+  "registered_notes": {
+    "bond": "R-A11a: sized to saving_per_unit x exposure window; forfeitable on conviction; economic, no identity",
+    "claim_delay": "R-A11b: ceil(open_exposure_units / units_per_epoch) epochs; vested credits stay reachable while detection is pending",
+    "l3": "R-A11c: L3 = delist + burn vested-but-unclaimed; reachable because claims were frozen",
+    "tenure": "R-A20: tenure credit accrues only from sampled_challenge and probe_reference records; self-generated volume accrues zero",
+    "campaign_recorded": "expected forfeit vs expected saved is recorded, not gated: P(convict)=1-beta<1, so the expectation alone understates the bond; the registered reading is deterministic coverage at every conviction time"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "at some conviction time up to the horizon the forfeit + burn falls below the compute saved - the bond does not cover the arbitrage; VOID",
+    "c2_fails": "wash-ring volume buys tenure or verified work buys none - the self-payment repair is cosmetic; VOID",
+    "c3_fails": "claim delay decreases as exposure grows - the reachability of L3 is not established; VOID",
+    "c4_fails": "L3 burns more than vested or burns a fully-claimed account - the ladder is still not honestly described; VOID",
+    "all_hold": "M313 PASS: the economic repairs close A11 and A20 at the registered cells"
+  }
+}

@@ -1,0 +1,1234 @@
+{
+  "bundle_id": "18ab33416dd20c4c37d0",
+  "bundle_prediction_hash_verified": true,
+  "milestone": "E5",
+  "model": {
+    "class_count": 20,
+    "dimensions": 19,
+    "primitive_count": 53,
+    "readout": "multinomial complete-score-vector",
+    "score_normalization": "deployed per-class score scales"
+  },
+  "protocol": {
+    "authoritative_route": "exhaustive_vectorized_class_fields",
+    "batch_sizes": [
+      1,
+      32,
+      256,
+      1024
+    ],
+    "candidate_score_scales_modified": false,
+    "latency_includes_candidate_lookup_bounds_and_fallback": true,
+    "shadow_only": true,
+    "timing_repeats": 5
+  },
+  "records": [
+    {
+      "batch_size": 1,
+      "bound_distance_pairs": 20,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.0009218000050168484,
+        "p95": 0.0012368600058834998,
+        "p99": 0.0012972920096945017
+      },
+      "candidate_to_oracle_p95_latency_ratio": 1.824923307008657,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.0006095000135246664,
+          "p95": 0.0010035400046035647,
+          "p99": 0.0010457480093464255
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.0005444000125862658,
+          "p95": 0.0008048200048506259,
+          "p99": 0.0008556840056553483
+        },
+        "multinomial_readout": {
+          "p50": 4.8999994760379195e-05,
+          "p95": 0.00010824001510627567,
+          "p99": 0.00011492801480926573
+        },
+        "transform": {
+          "p50": 2.4299981305375695e-05,
+          "p95": 5.550000932998955e-05,
+          "p99": 6.086000823415816e-05
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 0.04624974808267745,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0005672999832313508,
+        "p95": 0.0006777599919587374,
+        "p99": 0.0006816319888457656
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "exact_bound",
+      "worst_classes": [
+        "8"
+      ]
+    },
+    {
+      "batch_size": 1,
+      "bound_distance_pairs": 20,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.0012701999803539366,
+        "p95": 0.0017906999972183257,
+        "p99": 0.0018865399959031492
+      },
+      "candidate_to_oracle_p95_latency_ratio": 1.8195951643352344,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.0006095000135246664,
+          "p95": 0.0010035400046035647,
+          "p99": 0.0010457480093464255
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.0005444000125862658,
+          "p95": 0.0008048200048506259,
+          "p99": 0.0008556840056553483
+        },
+        "multinomial_readout": {
+          "p50": 4.8999994760379195e-05,
+          "p95": 0.00010824001510627567,
+          "p99": 0.00011492801480926573
+        },
+        "transform": {
+          "p50": 2.4299981305375695e-05,
+          "p95": 5.550000932998955e-05,
+          "p99": 6.086000823415816e-05
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 0.04624974808267745,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0005584000027738512,
+        "p95": 0.0009841200022492557,
+        "p99": 0.0010562640021089464
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "batched_exact_bound",
+      "worst_classes": [
+        "8"
+      ]
+    },
+    {
+      "batch_size": 1,
+      "bound_distance_pairs": 20,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.0010870000114664435,
+        "p95": 0.0014156199991703033,
+        "p99": 0.0014386439975351095
+      },
+      "candidate_to_oracle_p95_latency_ratio": 1.7275878180973006,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.0006095000135246664,
+          "p95": 0.0010035400046035647,
+          "p99": 0.0010457480093464255
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.0005444000125862658,
+          "p95": 0.0008048200048506259,
+          "p99": 0.0008556840056553483
+        },
+        "multinomial_readout": {
+          "p50": 4.8999994760379195e-05,
+          "p95": 0.00010824001510627567,
+          "p99": 0.00011492801480926573
+        },
+        "transform": {
+          "p50": 2.4299981305375695e-05,
+          "p95": 5.550000932998955e-05,
+          "p99": 6.086000823415816e-05
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 0.04624974808267745,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0005527999892365187,
+        "p95": 0.0008194199937861412,
+        "p99": 0.0008605239947792143
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "class_major_exact_bound",
+      "worst_classes": [
+        "8"
+      ]
+    },
+    {
+      "batch_size": 1,
+      "bound_distance_pairs": 20,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.003923999989638105,
+        "p95": 0.0043263599916826935,
+        "p99": 0.00438087199232541
+      },
+      "candidate_to_oracle_p95_latency_ratio": 4.63893120268486,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.0006095000135246664,
+          "p95": 0.0010035400046035647,
+          "p99": 0.0010457480093464255
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.0005444000125862658,
+          "p95": 0.0008048200048506259,
+          "p99": 0.0008556840056553483
+        },
+        "multinomial_readout": {
+          "p50": 4.8999994760379195e-05,
+          "p95": 0.00010824001510627567,
+          "p99": 0.00011492801480926573
+        },
+        "transform": {
+          "p50": 2.4299981305375695e-05,
+          "p95": 5.550000932998955e-05,
+          "p99": 6.086000823415816e-05
+        }
+      },
+      "fallback_rate": 1.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 0.04624974808267745,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20,
+        "exact_class_sdf_pairs": 20,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53,
+        "sample_count": 1,
+        "score_values_materialized": 20,
+        "shortlisted_candidate_pairs": 20
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.000721900025382638,
+        "p95": 0.0009326199942734092,
+        "p99": 0.000934843992581591
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "certified_top5",
+      "worst_classes": [
+        "8"
+      ]
+    },
+    {
+      "batch_size": 32,
+      "bound_distance_pairs": 640,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 620,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1639,
+        "sample_count": 32,
+        "score_values_materialized": 620,
+        "shortlisted_candidate_pairs": 620
+      },
+      "candidate_fraction": 0.96875,
+      "candidate_latency_seconds": {
+        "p50": 0.026711099984822795,
+        "p95": 0.027807359996950255,
+        "p99": 0.02782763199764304
+      },
+      "candidate_to_oracle_p95_latency_ratio": 21.842586441597412,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.001047199999447912,
+          "p95": 0.0012615000014193356,
+          "p99": 0.0012986200046725572
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.000820100016426295,
+          "p95": 0.0008846799959428608,
+          "p99": 0.00089197599561885
+        },
+        "multinomial_readout": {
+          "p50": 6.650001159869134e-05,
+          "p95": 7.179999956861139e-05,
+          "p99": 7.243999978527427e-05
+        },
+        "transform": {
+          "p50": 0.00027329998556524515,
+          "p95": 0.0003262399812228978,
+          "p99": 0.0003353279805742204
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.6018712369830226,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 640,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1696,
+        "sample_count": 32,
+        "score_values_materialized": 640,
+        "shortlisted_candidate_pairs": 640
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.001189900009194389,
+        "p95": 0.0012730800022836774,
+        "p99": 0.001284855998819694
+      },
+      "primitive_fraction": 0.9663915094339622,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "exact_bound",
+      "worst_classes": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10",
+        "11",
+        "12",
+        "14",
+        "16",
+        "17",
+        "19"
+      ]
+    },
+    {
+      "batch_size": 32,
+      "bound_distance_pairs": 640,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 620,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1639,
+        "sample_count": 32,
+        "score_values_materialized": 620,
+        "shortlisted_candidate_pairs": 620
+      },
+      "candidate_fraction": 0.96875,
+      "candidate_latency_seconds": {
+        "p50": 0.010825300007127225,
+        "p95": 0.015363359992625192,
+        "p99": 0.015369791990378872
+      },
+      "candidate_to_oracle_p95_latency_ratio": 12.800239877210663,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.001047199999447912,
+          "p95": 0.0012615000014193356,
+          "p99": 0.0012986200046725572
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.000820100016426295,
+          "p95": 0.0008846799959428608,
+          "p99": 0.00089197599561885
+        },
+        "multinomial_readout": {
+          "p50": 6.650001159869134e-05,
+          "p95": 7.179999956861139e-05,
+          "p99": 7.243999978527427e-05
+        },
+        "transform": {
+          "p50": 0.00027329998556524515,
+          "p95": 0.0003262399812228978,
+          "p99": 0.0003353279805742204
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.6018712369830226,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 640,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1696,
+        "sample_count": 32,
+        "score_values_materialized": 640,
+        "shortlisted_candidate_pairs": 640
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.001177600002847612,
+        "p95": 0.0012002400064375252,
+        "p99": 0.0012011680088471622
+      },
+      "primitive_fraction": 0.9663915094339622,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "batched_exact_bound",
+      "worst_classes": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10",
+        "11",
+        "12",
+        "14",
+        "16",
+        "17",
+        "19"
+      ]
+    },
+    {
+      "batch_size": 32,
+      "bound_distance_pairs": 640,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 620,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1639,
+        "sample_count": 32,
+        "score_values_materialized": 620,
+        "shortlisted_candidate_pairs": 620
+      },
+      "candidate_fraction": 0.96875,
+      "candidate_latency_seconds": {
+        "p50": 0.0030430000042542815,
+        "p95": 0.0030649199965409935,
+        "p99": 0.0030680239968933166
+      },
+      "candidate_to_oracle_p95_latency_ratio": 2.5926439522501217,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.001047199999447912,
+          "p95": 0.0012615000014193356,
+          "p99": 0.0012986200046725572
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.000820100016426295,
+          "p95": 0.0008846799959428608,
+          "p99": 0.00089197599561885
+        },
+        "multinomial_readout": {
+          "p50": 6.650001159869134e-05,
+          "p95": 7.179999956861139e-05,
+          "p99": 7.243999978527427e-05
+        },
+        "transform": {
+          "p50": 0.00027329998556524515,
+          "p95": 0.0003262399812228978,
+          "p99": 0.0003353279805742204
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.6018712369830226,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 640,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1696,
+        "sample_count": 32,
+        "score_values_materialized": 640,
+        "shortlisted_candidate_pairs": 640
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0011738000030163676,
+        "p95": 0.0011821600084658713,
+        "p99": 0.0011822720093186945
+      },
+      "primitive_fraction": 0.9663915094339622,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "class_major_exact_bound",
+      "worst_classes": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10",
+        "11",
+        "12",
+        "14",
+        "16",
+        "17",
+        "19"
+      ]
+    },
+    {
+      "batch_size": 32,
+      "bound_distance_pairs": 640,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 640,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1696,
+        "sample_count": 32,
+        "score_values_materialized": 640,
+        "shortlisted_candidate_pairs": 640
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.004051800002343953,
+        "p95": 0.004645080002956092,
+        "p99": 0.004733176003210247
+      },
+      "candidate_to_oracle_p95_latency_ratio": 3.97436599874161,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.001047199999447912,
+          "p95": 0.0012615000014193356,
+          "p99": 0.0012986200046725572
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.000820100016426295,
+          "p95": 0.0008846799959428608,
+          "p99": 0.00089197599561885
+        },
+        "multinomial_readout": {
+          "p50": 6.650001159869134e-05,
+          "p95": 7.179999956861139e-05,
+          "p99": 7.243999978527427e-05
+        },
+        "transform": {
+          "p50": 0.00027329998556524515,
+          "p95": 0.0003262399812228978,
+          "p99": 0.0003353279805742204
+        }
+      },
+      "fallback_rate": 1.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.6018712369830226,
+      "minimum_class_agreement": 1.0,
+      "oracle_agreement": 1.0,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 640,
+        "exact_class_sdf_pairs": 640,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 1696,
+        "sample_count": 32,
+        "score_values_materialized": 640,
+        "shortlisted_candidate_pairs": 640
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0009544999920763075,
+        "p95": 0.0011687599995639174,
+        "p99": 0.0011812719970475882
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "certified_top5",
+      "worst_classes": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10",
+        "11",
+        "12",
+        "14",
+        "16",
+        "17",
+        "19"
+      ]
+    },
+    {
+      "batch_size": 256,
+      "bound_distance_pairs": 5120,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 4913,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 12977,
+        "sample_count": 256,
+        "score_values_materialized": 4913,
+        "shortlisted_candidate_pairs": 4913
+      },
+      "candidate_fraction": 0.9595703125,
+      "candidate_latency_seconds": {
+        "p50": 0.19109150001895614,
+        "p95": 0.21881409999914467,
+        "p99": 0.22174377999734132
+      },
+      "candidate_to_oracle_p95_latency_ratio": 82.41399436639307,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.003656899993075058,
+          "p95": 0.003731680003693327,
+          "p99": 0.0037463360035326332
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.002370300004258752,
+          "p95": 0.002506559988250956,
+          "p99": 0.0025206719839479773
+        },
+        "multinomial_readout": {
+          "p50": 0.00016880000475794077,
+          "p95": 0.00017715999274514616,
+          "p99": 0.00017791198915801943
+        },
+        "transform": {
+          "p50": 0.0011724999931175262,
+          "p95": 0.0012822599848732353,
+          "p99": 0.0012876519793644547
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.9200095853906465,
+      "minimum_class_agreement": 0.8181818181818182,
+      "oracle_agreement": 0.9765625,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 5120,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 13568,
+        "sample_count": 256,
+        "score_values_materialized": 5120,
+        "shortlisted_candidate_pairs": 5120
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.002472400024998933,
+        "p95": 0.002655060001416132,
+        "p99": 0.0026868520013522356
+      },
+      "primitive_fraction": 0.9564416273584906,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 256,
+      "bound_distance_pairs": 5120,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 4913,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 12977,
+        "sample_count": 256,
+        "score_values_materialized": 4913,
+        "shortlisted_candidate_pairs": 4913
+      },
+      "candidate_fraction": 0.9595703125,
+      "candidate_latency_seconds": {
+        "p50": 0.017013900011079386,
+        "p95": 0.01761806000722572,
+        "p99": 0.01772089200327173
+      },
+      "candidate_to_oracle_p95_latency_ratio": 8.896033163094845,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.003656899993075058,
+          "p95": 0.003731680003693327,
+          "p99": 0.0037463360035326332
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.002370300004258752,
+          "p95": 0.002506559988250956,
+          "p99": 0.0025206719839479773
+        },
+        "multinomial_readout": {
+          "p50": 0.00016880000475794077,
+          "p95": 0.00017715999274514616,
+          "p99": 0.00017791198915801943
+        },
+        "transform": {
+          "p50": 0.0011724999931175262,
+          "p95": 0.0012822599848732353,
+          "p99": 0.0012876519793644547
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.9200095853906465,
+      "minimum_class_agreement": 0.8181818181818182,
+      "oracle_agreement": 0.9765625,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 5120,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 13568,
+        "sample_count": 256,
+        "score_values_materialized": 5120,
+        "shortlisted_candidate_pairs": 5120
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.001711900025838986,
+        "p95": 0.001980440010083839,
+        "p99": 0.0020144080079626293
+      },
+      "primitive_fraction": 0.9564416273584906,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "batched_exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 256,
+      "bound_distance_pairs": 5120,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 4913,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 12977,
+        "sample_count": 256,
+        "score_values_materialized": 4913,
+        "shortlisted_candidate_pairs": 4913
+      },
+      "candidate_fraction": 0.9595703125,
+      "candidate_latency_seconds": {
+        "p50": 0.003989299992099404,
+        "p95": 0.004241920000640676,
+        "p99": 0.004270464003784582
+      },
+      "candidate_to_oracle_p95_latency_ratio": 2.1657255587080786,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.003656899993075058,
+          "p95": 0.003731680003693327,
+          "p99": 0.0037463360035326332
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.002370300004258752,
+          "p95": 0.002506559988250956,
+          "p99": 0.0025206719839479773
+        },
+        "multinomial_readout": {
+          "p50": 0.00016880000475794077,
+          "p95": 0.00017715999274514616,
+          "p99": 0.00017791198915801943
+        },
+        "transform": {
+          "p50": 0.0011724999931175262,
+          "p95": 0.0012822599848732353,
+          "p99": 0.0012876519793644547
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.9200095853906465,
+      "minimum_class_agreement": 0.8181818181818182,
+      "oracle_agreement": 0.9765625,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 5120,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 13568,
+        "sample_count": 256,
+        "score_values_materialized": 5120,
+        "shortlisted_candidate_pairs": 5120
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0015184999792836607,
+        "p95": 0.001958659989759326,
+        "p99": 0.00201661198399961
+      },
+      "primitive_fraction": 0.9564416273584906,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "class_major_exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 256,
+      "bound_distance_pairs": 5120,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 5120,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 13568,
+        "sample_count": 256,
+        "score_values_materialized": 5120,
+        "shortlisted_candidate_pairs": 5120
+      },
+      "candidate_fraction": 1.0,
+      "candidate_latency_seconds": {
+        "p50": 0.005744499998399988,
+        "p95": 0.006065040006069467,
+        "p99": 0.006106368008768186
+      },
+      "candidate_to_oracle_p95_latency_ratio": 4.1149603281754175,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.003656899993075058,
+          "p95": 0.003731680003693327,
+          "p99": 0.0037463360035326332
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.002370300004258752,
+          "p95": 0.002506559988250956,
+          "p99": 0.0025206719839479773
+        },
+        "multinomial_readout": {
+          "p50": 0.00016880000475794077,
+          "p95": 0.00017715999274514616,
+          "p99": 0.00017791198915801943
+        },
+        "transform": {
+          "p50": 0.0011724999931175262,
+          "p95": 0.0012822599848732353,
+          "p99": 0.0012876519793644547
+        }
+      },
+      "fallback_rate": 1.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 2.9200095853906465,
+      "minimum_class_agreement": 0.8181818181818182,
+      "oracle_agreement": 0.9765625,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 5120,
+        "exact_class_sdf_pairs": 5120,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 13568,
+        "sample_count": 256,
+        "score_values_materialized": 5120,
+        "shortlisted_candidate_pairs": 5120
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0014589999918825924,
+        "p95": 0.001473899994743988,
+        "p99": 0.001474379993742332
+      },
+      "primitive_fraction": 1.0,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "certified_top5",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 1024,
+      "bound_distance_pairs": 20480,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 19245,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 50821,
+        "sample_count": 1024,
+        "score_values_materialized": 19245,
+        "shortlisted_candidate_pairs": 19245
+      },
+      "candidate_fraction": 0.939697265625,
+      "candidate_latency_seconds": {
+        "p50": 0.5962936999858357,
+        "p95": 0.6676501000125427,
+        "p99": 0.6778746600134764
+      },
+      "candidate_to_oracle_p95_latency_ratio": 138.55341258453802,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.007971499988343567,
+          "p95": 0.00821610001148656,
+          "p99": 0.008255540013778954
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.004509000020334497,
+          "p95": 0.004795119998743757,
+          "p99": 0.004838863996556028
+        },
+        "multinomial_readout": {
+          "p50": 0.00027210000553168356,
+          "p95": 0.00032769999816082416,
+          "p99": 0.0003346599999349564
+        },
+        "transform": {
+          "p50": 0.003563600010238588,
+          "p95": 0.004084699979284778,
+          "p99": 0.004181419980013743
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 5.166539213089674,
+      "minimum_class_agreement": 0.851063829787234,
+      "oracle_agreement": 0.953125,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 20480,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 54272,
+        "sample_count": 1024,
+        "score_values_materialized": 20480,
+        "shortlisted_candidate_pairs": 20480
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.004762199998367578,
+        "p95": 0.0048187199980020525,
+        "p99": 0.004828223995864391
+      },
+      "primitive_fraction": 0.9364128832547169,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 1024,
+      "bound_distance_pairs": 20480,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 19245,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 50821,
+        "sample_count": 1024,
+        "score_values_materialized": 19245,
+        "shortlisted_candidate_pairs": 19245
+      },
+      "candidate_fraction": 0.939697265625,
+      "candidate_latency_seconds": {
+        "p50": 0.02426559999003075,
+        "p95": 0.024803999991854654,
+        "p99": 0.024844239990925415
+      },
+      "candidate_to_oracle_p95_latency_ratio": 5.2701582844205115,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.007971499988343567,
+          "p95": 0.00821610001148656,
+          "p99": 0.008255540013778954
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.004509000020334497,
+          "p95": 0.004795119998743757,
+          "p99": 0.004838863996556028
+        },
+        "multinomial_readout": {
+          "p50": 0.00027210000553168356,
+          "p95": 0.00032769999816082416,
+          "p99": 0.0003346599999349564
+        },
+        "transform": {
+          "p50": 0.003563600010238588,
+          "p95": 0.004084699979284778,
+          "p99": 0.004181419980013743
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 5.166539213089674,
+      "minimum_class_agreement": 0.851063829787234,
+      "oracle_agreement": 0.953125,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 20480,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 54272,
+        "sample_count": 1024,
+        "score_values_materialized": 20480,
+        "shortlisted_candidate_pairs": 20480
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.004517499997746199,
+        "p95": 0.004706500004976988,
+        "p99": 0.004708660002797842
+      },
+      "primitive_fraction": 0.9364128832547169,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "batched_exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 1024,
+      "bound_distance_pairs": 20480,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 19245,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 50821,
+        "sample_count": 1024,
+        "score_values_materialized": 19245,
+        "shortlisted_candidate_pairs": 19245
+      },
+      "candidate_fraction": 0.939697265625,
+      "candidate_latency_seconds": {
+        "p50": 0.008456299983663484,
+        "p95": 0.009184359974460677,
+        "p99": 0.00932559197419323
+      },
+      "candidate_to_oracle_p95_latency_ratio": 1.8803301780226755,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.007971499988343567,
+          "p95": 0.00821610001148656,
+          "p99": 0.008255540013778954
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.004509000020334497,
+          "p95": 0.004795119998743757,
+          "p99": 0.004838863996556028
+        },
+        "multinomial_readout": {
+          "p50": 0.00027210000553168356,
+          "p95": 0.00032769999816082416,
+          "p99": 0.0003346599999349564
+        },
+        "transform": {
+          "p50": 0.003563600010238588,
+          "p95": 0.004084699979284778,
+          "p99": 0.004181419980013743
+        }
+      },
+      "fallback_rate": 0.0,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 5.166539213089674,
+      "minimum_class_agreement": 0.851063829787234,
+      "oracle_agreement": 0.953125,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 20480,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 54272,
+        "sample_count": 1024,
+        "score_values_materialized": 20480,
+        "shortlisted_candidate_pairs": 20480
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.0047252999793272465,
+        "p95": 0.004884440021123737,
+        "p99": 0.004914648022968322
+      },
+      "primitive_fraction": 0.9364128832547169,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "class_major_exact_bound",
+      "worst_classes": [
+        "17"
+      ]
+    },
+    {
+      "batch_size": 1024,
+      "bound_distance_pairs": 20480,
+      "calibration_ood_gate_passed": false,
+      "calibration_ood_gate_reason": "E4 multinomial readout requires the complete class-score vector",
+      "candidate_controls_outputs": false,
+      "candidate_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 20375,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 53991,
+        "sample_count": 1024,
+        "score_values_materialized": 20375,
+        "shortlisted_candidate_pairs": 20375
+      },
+      "candidate_fraction": 0.994873046875,
+      "candidate_latency_seconds": {
+        "p50": 0.01188390000606887,
+        "p95": 0.013617320003686473,
+        "p99": 0.013704184003872797
+      },
+      "candidate_to_oracle_p95_latency_ratio": 2.473726476002548,
+      "complete_pipeline_stage_latency_seconds": {
+        "end_to_end": {
+          "p50": 0.007971499988343567,
+          "p95": 0.00821610001148656,
+          "p99": 0.008255540013778954
+        },
+        "exhaustive_class_fields": {
+          "p50": 0.004509000020334497,
+          "p95": 0.004795119998743757,
+          "p99": 0.004838863996556028
+        },
+        "multinomial_readout": {
+          "p50": 0.00027210000553168356,
+          "p95": 0.00032769999816082416,
+          "p99": 0.0003346599999349564
+        },
+        "transform": {
+          "p50": 0.003563600010238588,
+          "p95": 0.004084699979284778,
+          "p99": 0.004181419980013743
+        }
+      },
+      "fallback_rate": 0.9931640625,
+      "latency_gate_passed": false,
+      "maximum_winning_score_error": 5.166539213089674,
+      "minimum_class_agreement": 0.851063829787234,
+      "oracle_agreement": 0.953125,
+      "oracle_counters": {
+        "compatible_candidate_pairs": 20480,
+        "exact_class_sdf_pairs": 20480,
+        "nodes_executed": 1,
+        "primitive_sdf_pairs": 54272,
+        "sample_count": 1024,
+        "score_values_materialized": 20480,
+        "shortlisted_candidate_pairs": 20480
+      },
+      "oracle_latency_seconds": {
+        "p50": 0.005452899989904836,
+        "p95": 0.005504779989132657,
+        "p99": 0.005508715986507013
+      },
+      "primitive_fraction": 0.9948223761792453,
+      "promotion_eligible": false,
+      "quality_gate_passed": false,
+      "router": "certified_top5",
+      "worst_classes": [
+        "17"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "authoritative_route_retained": true,
+    "candidate_count": 16,
+    "gate_passed": true,
+    "latency_pass_count": 0,
+    "no_candidate_controls_outputs": true,
+    "oracle_agreement_reported_every_run": true,
+    "promotion_eligible_count": 0,
+    "quality_pass_count": 0
+  }
+}

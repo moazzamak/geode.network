@@ -1,0 +1,41 @@
+{
+  "milestone": "M218",
+  "title": "ms ridge-head penalty sweep (accuracy track, first cell)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M218 registered 20 Aug before the build)",
+  "question": "Does any ridge penalty beat the registered penalty-1.0 accuracies for the ms family?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "penalties": [0.01, 0.1, 1.0, 10.0, 100.0],
+  "anchor": {
+    "value": 0.24214492753623187,
+    "source": "M180 sealed V_ms (penalty 1.0, block 4096, RidgeAccumulator bit-exact path)",
+    "tolerance": 1e-9
+  },
+  "registered_per_domain_penalty_1": {
+    "d0": 0.25429,
+    "d1": 0.07742,
+    "d2": 0.14362,
+    "d3": 0.33638,
+    "d4": 0.26780,
+    "d5": 0.14136,
+    "source": "M210b sealed per-domain table",
+    "tolerance": 5e-6
+  },
+  "output_dir": "logs/results/v25/m218_ms_penalty_sweep"
+}

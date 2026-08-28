@@ -1,0 +1,16 @@
+{
+  "seed": 1200,
+  "timing_repeats": 25,
+  "baseline": {
+    "class_count": 8,
+    "dimensions": 4,
+    "primitives_per_class": 2,
+    "batch_size": 64
+  },
+  "sweeps": {
+    "class_count": [4, 8, 16, 32, 64],
+    "dimensions": [2, 4, 8, 16],
+    "primitives_per_class": [1, 2, 4, 8],
+    "batch_size": [1, 16, 64, 256]
+  }
+}

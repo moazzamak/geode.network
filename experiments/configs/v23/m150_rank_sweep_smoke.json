@@ -1,0 +1,47 @@
+{
+  "milestone": "M150",
+  "title": "SMOKE: M150 rank-sweep plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M150",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (4000 train rows, 1 trained epoch, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 4000,
+  "_smoke_epochs": 1,
+  "question": "Does the M150 pipeline (per-code Gram/spectrum profile, ridge fits, trained heads) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "level": {
+    "n_train": 138000
+  },
+  "codes": [
+    { "name": "pool2062", "file": "pool2062_fulltrain.npy", "train_relpath": "v16/m142_c2", "test_file": "pool2062_fulltest.npy", "test_relpath": "v16/m142_c2", "width": 8248, "power": null, "anchor_138k": 0.20640579710144927 },
+    { "name": "spm1923_sqrt", "file": "spm1923_fulltrain.npy", "train_relpath": "v16/m142_c2", "test_file": "spm1923_fulltest.npy", "test_relpath": "v16/m142_c2", "width": 40383, "power": 0.5, "anchor_138k": 0.2273623188405797 }
+  ],
+  "artifacts": {
+    "m142_cache_relpath": "v16/m142_c2",
+    "m117_cache_relpath": "v16/m117",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "anchors": {
+    "tolerance": 1e-09
+  },
+  "profile": {
+    "method": "participation ratio on the standardised Gram",
+    "rows": 138000,
+    "trained_schedule": "M109 shared schedule"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m150_rank_sweep_smoke"
+}

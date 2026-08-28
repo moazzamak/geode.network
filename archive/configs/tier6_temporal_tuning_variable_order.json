@@ -1,0 +1,25 @@
+{
+  "artifact_path": "logs/results/tier6_temporal_tuning_variable_order.json",
+  "candidates": [
+    {"name": "window_2", "representation": "window", "window": 2},
+    {"name": "single_d8_r50", "representation": "temporal_state", "state_dim": 8, "recurrence": 0.5},
+    {"name": "single_d8_r80", "representation": "temporal_state", "state_dim": 8, "recurrence": 0.8},
+    {"name": "single_d8_r95", "representation": "temporal_state", "state_dim": 8, "recurrence": 0.95},
+    {"name": "single_d16_r50", "representation": "temporal_state", "state_dim": 16, "recurrence": 0.5},
+    {"name": "single_d16_r80", "representation": "temporal_state", "state_dim": 16, "recurrence": 0.8},
+    {"name": "single_d16_r95", "representation": "temporal_state", "state_dim": 16, "recurrence": 0.95},
+    {"name": "single_d24_r80", "representation": "temporal_state", "state_dim": 24, "recurrence": 0.8},
+    {"name": "single_d24_r95", "representation": "temporal_state", "state_dim": 24, "recurrence": 0.95},
+    {"name": "timescale_d12", "representation": "multi_timescale", "state_dim": 12, "recurrences": [0.3, 0.7, 0.95]},
+    {"name": "timescale_d24", "representation": "multi_timescale", "state_dim": 24, "recurrences": [0.3, 0.7, 0.95]},
+    {"name": "multiseed_d12_r80", "representation": "multi_seed", "state_dim": 12, "member_count": 3, "recurrence": 0.8},
+    {"name": "multiseed_d24_r80", "representation": "multi_seed", "state_dim": 24, "member_count": 3, "recurrence": 0.8},
+    {"name": "multiseed_d24_r95", "representation": "multi_seed", "state_dim": 24, "member_count": 3, "recurrence": 0.95},
+    {"name": "hybrid_d12_r80", "representation": "hybrid", "window": 2, "state_dim": 12, "recurrence": 0.8},
+    {"name": "hybrid_d24_r95", "representation": "hybrid", "window": 2, "state_dim": 24, "recurrence": 0.95}
+  ],
+  "dataset": "synthetic_variable_order",
+  "max_chars": 6000,
+  "n_folds": 3,
+  "seed": 13
+}

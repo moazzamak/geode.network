@@ -1,0 +1,33 @@
+{
+  "milestone": "M296",
+  "title": "Head repair I: symmetric Gram + Cholesky/SVD + condition number (penalty 1.0, cached ms features)",
+  "question": "What does the repaired symmetric-Gram solve read on the sealed ms features, what is the decision-level delta against the sealed LU anchor 0.24214492753623187, and what is the condition number of the penalised system?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M296 (25 Aug 2026, before the build)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters (the m109 _load_corpus digest gate); the FULL 409,832-row schedule is the train set, the sealed 34,500-row selection is the test"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz",
+    "labels_note": "the M142 cell-2 schedule labels - the ms codes are aligned to THIS order (the M228 discipline)"
+  },
+  "penalty": 1.0,
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09,
+             "source": "the sealed ms full-train penalty-1.0 aggregate (M228)"},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - row counts are a premise",
+    "g2_fail": "VOID - the LU path must reproduce the sealed anchor or the instrument is not the sealed one",
+    "g3_fail": "VOID - the repaired system must be bitwise symmetric and the solve residual within tolerance",
+    "g4_fail": "VOID - the condition number must be finite",
+    "all_pass": "M296 registers the repaired solver and the conditioning evidence; the repaired-vs-LU decision-level delta is recorded, and H26-1 is read at M297 with LOOCV lambda"
+  }
+}

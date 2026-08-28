@@ -1,0 +1,45 @@
+{
+  "milestone": "M176c-c2",
+  "cell": "C2",
+  "title": "Fisher vectors on frozen DINOv2-small patches — K=32 (comparison arm)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Do K=32 Fisher vectors on the same deep patch tokens beat the sealed deep-patch SPM (0.487/0.563/0.590) or the dense ladder?",
+  "interpretation_registered_before_running": {
+    "comparison": "candidate 1 already passed the per-MAC gate; this cell is a comparison, not a gate",
+    "win": "Fisher earns a deployment consequence ONLY if it beats deep-patch SPM at a comparable width",
+    "loss": "Fisher closes as a measured comparison point; deep-patch SPM stays the deployment arm",
+    "note": "K=64 dropped (registered): its 49,152-dim solve needs an 18 GiB centred matrix the daily-driver PC cannot serve; K=32 (width 24,576, Gram 4.8 GiB) is the second rung"
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "backbone": {
+    "name": "facebook/dinov2-small",
+    "image_size": 224,
+    "patch_grid": 16
+  },
+  "sparse": {
+    "gmm_sample_images": 2000,
+    "gmm_fit_patches": 50000,
+    "gmm_seed": 11
+  },
+  "cell": {
+    "k": 32,
+    "penalty_ladder": [0.1, 1.0, 10.0]
+  },
+  "numerics": {
+    "block": 512,
+    "backbone_batch": 32,
+    "torch_threads": 4
+  },
+  "output_dir": "logs/results/v24/m176c_c2_k32"
+}

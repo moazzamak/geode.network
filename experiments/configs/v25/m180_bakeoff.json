@@ -1,0 +1,37 @@
+{
+  "milestone": "M180",
+  "cell": "attribution bake-off + H2",
+  "title": "Shapley vs LOO vs Beta16 vs coverage on the complete 3-arm game + ranking stability",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "collection": {
+    "evidence": "logs/results/v25/m180_collection/evidence.json",
+    "note": "the complete_game dict from the sealed collection cell"
+  },
+  "estimators": {
+    "shapley": "exact, Beta symmetric beta=1",
+    "beta16": "Beta Shapley beta=16 (the paper's headline default)",
+    "loo": "drop-one marginal",
+    "coverage": "task-fingerprint cosine shares"
+  },
+  "fingerprints": {
+    "task": [0.2604927536231884, 0.24214492753623187, 0.22753623188405797],
+    "arms": {
+      "spm": [1.0, 0.0, 0.0],
+      "ms": [0.0, 1.0, 0.0],
+      "pool": [0.0, 0.0, 1.0]
+    }
+  },
+  "h2": {
+    "perturbation_seed": 777,
+    "perturbation_suites": 5,
+    "perturbation_fraction": 0.005,
+    "perturbation_disclosure": "seeded symmetric +/-0.5% relative noise on every coalition value (measurement-noise model; the test-row-subsample perturbation follows when weight persistence lands with M181) — registered before any bake-off number",
+    "threshold_tau": 0.8
+  },
+  "verdict": {
+    "consequence_pass": "the attribution ranking is stable under the registered perturbation for all estimators; the Shapley ranking is the default for M181's value function",
+    "consequence_fail": "an estimator's ranking is unstable; report which and why, and M181 reopens the estimator choice"
+  },
+  "output_dir": "logs/results/v25/m180_bakeoff"
+}

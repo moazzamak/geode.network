@@ -1,0 +1,46 @@
+{
+  "milestone": "M287",
+  "cell": "coder ladder rung 2 — the 7B reading",
+  "title": "M287: Qwen2.5-Coder-7B-Instruct vs the generalist, HumanEval pass@1, sandbox-graded",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (24 Aug, the arm-fix wave)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the 7B coder lift the sealed 1.5B pass@1 (0.5976) on the same instrument?",
+  "arms": {
+    "sequential": true,
+    "coder": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-Coder-7B-Instruct",
+      "license_recorded": "Apache-2.0",
+      "torch_dtype": "float16",
+      "max_new_tokens": 512,
+      "decoding": "greedy (do_sample=False)"
+    },
+    "generalist": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+      "license_recorded": "Apache-2.0",
+      "max_new_tokens": 512,
+      "decoding": "greedy (do_sample=False)"
+    }
+  },
+  "corpus": {
+    "path": "F:/geode-ml/data/cache/humaneval/HumanEval.jsonl",
+    "provenance": "official MIT-licensed openai/human-eval repository",
+    "license_recorded": "MIT (source repository)",
+    "n_problems": 164
+  },
+  "prompt": "Complete the following Python function. Return only the function code, without any explanation or markdown fences.\n{prompt}",
+  "sandbox": {
+    "kind": "guarded tool arm (registered)",
+    "isolation": "subprocess python -I -B, no shell, timeout 5s, temp working directory",
+    "grading": "exec(candidate); run the problem's check(entry_point); a clean exit prints GEODE_CHECK_PASS"
+  },
+  "declarations": {
+    "contamination": "HumanEval sits in the training corpora of code LLMs — product-quality reading",
+    "holdout": "one held-out read per arm; single-sample pass@1"
+  },
+  "smoke": {
+    "problems": 5
+  },
+  "output_dir": "logs/results/v25/m287_coder_7b",
+  "evidence_filename": "evidence_code_7b.json",
+  "feature_cache_relpath": "v25/m287_coder_7b"
+}

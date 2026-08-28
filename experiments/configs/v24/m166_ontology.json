@@ -1,0 +1,35 @@
+{
+  "milestone": "M166",
+  "title": "Ontology bootstrap batch 1: axis/vocabulary proposals + normalisation rules + candidate task pairs",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 3.2 / section 12 dispatch entry (17 Aug 2026)",
+  "registered_before_any_generation": true,
+  "question": "What axis set, attribute vocabularies, normalisation rules, and candidate similarity-control task pairs does the pinned local LLM propose?",
+  "model": {
+    "repo": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "local_dir": "GEODE_CACHE_DIR/huggingface/Qwen2.5-1.5B-Instruct",
+    "dtype": "float16",
+    "note": "amendment to section 3.2 (17 Aug): the 1.5B replaces the 3B while F: disk is tight; pinned revision above"
+  },
+  "generation": {
+    "do_sample": false,
+    "temperature": 0.0,
+    "max_new_tokens": 1400,
+    "seed": 11,
+    "note": "greedy decoding; deterministic given the pinned weights"
+  },
+  "batch1": {
+    "role": "Propose a refined task-descriptor axis set with attribute vocabularies, given the provisional schema. Output STRICT JSON only: {\"axes\": {\"axis.name\": [\"token\", ...]}, \"notes\": [\"...\"]}.",
+    "input_includes": "the provisional AXES schema from geode.descriptor"
+  },
+  "batch2": {
+    "role": "Propose normalisation rules for continuous attributes and eight candidate task pairs/quadruples for similarity positive controls (four known-similar, four known-dissimilar) over the measured axes. Output STRICT JSON only: {\"rules\": [...], \"pairs\": [...]}.",
+    "input_includes": "the measured task list (DomainNet classification, CIFAR-10 classification, Mackey-Glass forecasting, Lorenz-63 forecasting, Dyck grammar, tabular regression)"
+  },
+  "constraints": {
+    "local_only": "model loads local_files_only=True from the pinned snapshot; no API dependency",
+    "no_data_leaves": "no corpus data is ever passed to the model",
+    "proposals_not_truth": "outputs are PROPOSALS; ratification is a human step, then frozen as task_ontology_v0.json (I3)"
+  },
+  "output_dir": "logs/results/v24/m166_ontology_draft"
+}

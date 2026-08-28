@@ -1,0 +1,443 @@
+evidence: logs\results\v16\m148_v22_final_prior_art_litsearch\evidence.json
+generated_at: 2026-08-14T02:47:28.758643+00:00
+milestone: m148_v22_final_prior_art_litsearch
+
+=== ANCHORS ===
+
+[anchor] arxiv 'echo state network reservoir computing' -> 20 hits
+   - Integer Echo State Networks: Efficient Reservoir Computing for Digital Hardware | 2017
+   - Echo State Queueing Network: a new reservoir computing learning tool | 2012
+   - Optical Echo State Network Reservoir Computing | 2025
+   - Reservoir Topology in Deep Echo State Networks | 2019
+   - Reservoir Memory Machines as Neural Computers | 2020
+   - Heterogeneous Reservoir Computing Models for Persian Speech Recognition | 2022
+   - Towards Deep Physical Reservoir Computing Through Automatic Task Decomposition And Mapping | 2019
+   - Evolutionary Echo State Network: evolving reservoirs in the Fourier space | 2022
+
+[anchor] semantic_scholar 'echo state network reservoir computing' -> 20 hits
+   - All Optical Echo State Network Reservoir Computing | 2025 | arXiv.org
+   - Optical Echo State Network Reservoir Computing | 2025
+   - All optical echo state network reservoir computing | 2025 | Physical Review Research
+   - Lightweight Echo State Network for Vehicular Network Intrusion Detection: A Reservoir Computing Approach | 2025 | 2025 IEEE 101st Vehicular 
+   - A Fast Parametric and Structural Transfer Leaky Integrator Echo State Network for Reservoir Computing | 2024 | IEEE Transactions on Systems,
+   - Walking Condition Estimation Using Physical Reservoir Computing with External Echo State Network | 2024 | International Conference on Biomed
+   - Echo State and Band-pass Networks with aqueous memristors: leaky reservoir computing with a leaky substrate | 2025 | Chaos
+   - Randomized tensor network reservoir computing: validity and learnability phase transitions | 2025 | Machine Learning: Science and Technology
+
+[anchor] arxiv 'liquid state machine cortical microcircuit' -> 1 hits
+   - PLSM: A Parallelized Liquid State Machine for Unintentional Action Detection | 2021
+
+[anchor] semantic_scholar 'liquid state machine cortical microcircuit' -> 20 hits
+   - Extended liquid state machines for speech recognition | 2022 | Frontiers in Neuroscience
+   - Co-evolutionary Learning in Liquid Architectures | 2005 | International Work-Conference on Artificial and Natural Neural Networks
+   - Mapping of Natural Patterns by Liquid Architectures Implementing Neural Cliques | 2006
+   - PLSM: A Parallelized Liquid State Machine for Unintentional Action Detection | 2021 | IEEE Transactions on Emerging Topics in Computing
+   - Improving liquid state machine with hybrid plasticity | 2016 | IEEE Advanced Information Management, Communicates, Electronic and Automation
+   - DIRECTIONAL CLASSIFICATION OF CORTICAL SIGNALS USING A LIQUID STATE MACHINE | 2008
+   - Towards the modeling of dissociated cortical tissue in the liquid state machine framework | 2005 | Proceedings. 2005 IEEE International Join
+   - Modelling of monkey's motor cortical signals by an extended adaptive Liquid State Machine: an integrated procedure from model, identificatio
+
+[anchor] arxiv 'time delay neural network phoneme recognition' -> 3 hits
+   - Re-synchronization using the Hand Preceding Model for Multi-modal Fusion in Automatic Continuous Cued Speech Recognition | 2020
+   - Speaker- and Age-Invariant Training for Child Acoustic Modeling Using Adversarial Multi-Task Learning | 2022
+   - Prediction of speech intelligibility with DNN-based performance measures | 2022
+
+[anchor] arxiv 'stacked generalization ensemble learning' -> 20 hits
+   - Systematic Ensemble Learning for Regression | 2014
+   - StackGenVis: Alignment of Data, Algorithms, and Models for Stacking Ensemble Learning Using Performance Metrics | 2020
+   - Demand Prediction Using Machine Learning Methods and Stacked Generalization | 2020
+   - Ensemble learning for uncertainty estimation with application to the correction of satellite precipitation products | 2024
+   - Stacked transfer learning for tropical cyclone intensity prediction | 2017
+   - Semi-Supervised Learning by Disentangling and Self-Ensembling Over Stochastic Latent Space | 2019
+   - Ensemble deep learning: A review | 2021
+   - Stacked Ensemble Learning for Abdominal Aortic Aneurysm Segmentation in CT Angiography | 2026
+
+[anchor] semantic_scholar 'stacked generalization ensemble learning' -> 20 hits
+   - Stacked generalization ensemble learning strategy for multivariate prediction of delamination and maximum thrust force in composite drilling
+   - "Comparative Analysis of Rate of Penetration Prediction and Optimization in Deep Wells Using Real-Time Continuous Stacked Generalization Ens
+   - Deep Stacked Generalization Ensemble Learning models in early diagnosis of Depression illness from wearable devices data | 2021 | Internatio
+   - Enhanced Oil and Gas Production Forecasting Through Stacked generalization Ensemble Learning Technique | 2025 | Sakarya University Journal o
+   - Employee turnover prediction model based on the stacked generalization ensemble learning algorithm | 2026 | International Conference on Big 
+   - Optimized Intrusion Detection Approach for CyberΓÇÉPhysical System Using MetaΓÇÉLearning With Stacked Generalization: An Ensemble Learning Inspi
+   - Enterprise financial early warning based on ensemble learning and stacked generalization fusion algorithm model | 2025 | Journal of Computat
+   - Sea surface temperature prediction by stacked generalization ensemble of deep learning | 2024 | Deep Sea Research Part I: Oceanographic Rese
+
+[anchor] arxiv 'gradient boosting machine approximation' -> 20 hits
+   - Soft Gradient Boosting Machine | 2020
+   - Boosting Gradient Ascent for Continuous DR-submodular Maximization | 2024
+   - TRBoost: A Generic Gradient Boosting Machine based on Trust-region Method | 2022
+   - Probabilistic Gradient Boosting Machines for Large-Scale Probabilistic Regression | 2021
+   - A Fast Sampling Gradient Tree Boosting Framework | 2019
+   - Calibrated Boosting-Forest | 2017
+   - Distributional Gradient Boosting Machines | 2022
+   - Evaluating Machine Learning Models for Supernova Gravitational Wave Signal Classification | 2024
+
+[anchor] arxiv 'neural network pruning' -> 20 hits
+   - Network Automatic Pruning: Start NAP and Take a Nap | 2021
+   - SCOP: Scientific Control for Reliable Neural Network Pruning | 2020
+   - Recent Advances on Neural Network Pruning at Initialization | 2021
+   - Studying the Plasticity in Deep Convolutional Neural Networks using Random Pruning | 2018
+   - Manifold Regularized Dynamic Network Pruning | 2021
+   - Pruning Very Deep Neural Network Channels for Efficient Inference | 2022
+   - CHIP: CHannel Independence-based Pruning for Compact Neural Networks | 2021
+   - Pruning Randomly Initialized Neural Networks with Iterative Randomization | 2021
+
+=== PROBES ===
+
+--- P-A: must retrieve 'The echo state approach to analysing and training recurrent neural networks'
+
+--- P-B: must retrieve 'Real-time computing without stable states'
+
+[probe P-B] semantic_scholar 'neural microcircuits time varying stimuli fading memory' -> 20 hits
+   - Investigation of Deep Learning Based NOMA System Over Time Varying Fading | 2023 | IEEE Uttar Pradesh Section International Conference on El
+   - The effects of visual working memory load on detection and neural processing of task-unrelated auditory stimuli | 2023 | Scientific Reports
+   - Inertial Measurement Unit Self-Calibration by Quantization-Aware and Memory-Parsimonious Neural Networks | 2024 | Electronics
+   - The neural mechanisms of concept formation over time in music | 2024 | bioRxiv
+   - Short-term sensory memory mediates adaptation, habituation, and a paradoxical neural-behavioral transformation in C. elegans | 2025 | bioRxi
+   - Machine Learning Prediction of Time-Varying Rayleigh Channels | 2021
+   - Constructing a Complex Hybrid Neural Network for Biomimetic Spatial and Temporal Perception. | 2025 | Small
+   - Enhancing Channel Estimation in Multipath Fading Channels Using AI Algorithms: A Performance Study | 2026 | 2026 International Conference on
+
+--- P-C: must retrieve 'Detecting strange attractors in turbulence'
+
+--- P-D: must retrieve 'Stacked generalization'
+
+[probe P-D] semantic_scholar 'combine predictions multiple learners generalizer' -> 20 hits
+   - Argumentation-Based Adversarial Regression with Multiple Learners | 2022 | IEEE International Conference on Tools with Artificial Intelligen
+   - Zero-Shot Learners for Natural Language Understanding via a Unified Multiple-Choice Perspective | 2023 | IEEE Access
+   - Algorithm selection and combining multiple learners for residential energy prediction | 2019 | Future generations computer systems
+   - Application of a Stacking Model with Multiple Base Learners Optimized by an Slime Mold Algorithm for Container Freight Index Prediction | 20
+   - Debris-flow susceptibility assessment in Dongchuan using stacking ensemble learning including multiple heterogeneous learners with RFE for f
+   - Enhanced and Interpretable Prediction of Multiple Cancer Types Using a Stacking Ensemble Approach with SHAP Analysis | 2025 | Bioengineering
+   - Debris-Flow Susceptibility assessment Using Stacking Ensemble Learning Including Multiple Heterogeneous Learners with RFE for factor optimiz
+   - SELFVarBL: a Stacking-based Ensemble Learning Framework with Variable numbers of Base-Learners | 2025 | Evolutionary Intelligence
+
+--- P-E: must retrieve 'Greedy function approximation: a gradient boosting machine'
+
+[probe P-E] arxiv 'stagewise additive expansion weak learners loss' -> 20 hits
+   - Grain refinement of stainless steel in ultrasound-assisted additive manufacturing | 2020
+   - Stress Flow Guided Non-Planar Print Trajectory Optimization for Additive Manufacturing of Anisotropic Polymers | 2023
+   - Weak coupling expansion of massless QCD with a Ginsparg-Wilson fermion and axial U(1) anomaly | 1998
+   - A tetrachotomy for expansions of the real ordered additive group | 2017
+   - Weak Decays, CKM and CP Violation | 1999
+   - Machine Teaching of Active Sequential Learners | 2018
+   - Forward Stagewise Additive Model for Collaborative Multiview Boosting | 2016
+   - Comparison between two methods of post-Newtonian expansion for the motion in a weak Schwarzschild field | 2001
+
+--- P-F: must retrieve 'Phoneme recognition using time-delay neural networks'
+
+[probe P-F] arxiv 'delay line hidden units speech recognition network' -> 20 hits
+   - Reinforcement Learning Based Speech Enhancement for Robust Speech Recognition | 2018
+   - Comparison of Self-Supervised Speech Pre-Training Methods on Flemish Dutch | 2021
+   - Recurrent Neural Network Transducer for Audio-Visual Speech Recognition | 2019
+   - Deep Long Short-Term Memory Adaptive Beamforming Networks For Multichannel Robust Speech Recognition | 2017
+   - The Effect of Silence Feature in Dimensional Speech Emotion Recognition | 2020
+   - Curriculum Learning for Speech Emotion Recognition from Crowdsourced Labels | 2018
+   - Data Augmentation For Children's Speech Recognition -- The "Ethiopian" System For The SLT 2021 Children Speech Recognition Challenge | 2020
+   - Leveraging Deep Neural Network Activation Entropy to cope with Unseen Data in Speech Recognition | 2017
+
+=== CLAIMS ===
+
+=== R1: Reservoir computing / echo state networks ΓÇö a fixed random recurrent reservoir with a closed-form ridge readout ΓÇö is already claimed: the construction, the echo
+
+[R1] arxiv 'echo state network ridge regression readout' -> 4 hits
+   - Hand Gesture Recognition from Doppler Radar Signals Using Echo State Networks | 2026
+   - Generalization in Representation Models via Random Matrix Theory: Application to Recurrent Networks | 2025
+   - Data-Specific Hyper-Parameter Design: A Paradigm Shift in Reservoir Computing | 2026
+   - Long-Memory Reservoir Computing for Data-Scarce Dengue Forecasting | 2026
+
+[R1] arxiv 'reservoir computing random recurrent neural network' -> 20 hits
+   - A theory of sequence indexing and working memory in recurrent neural networks | 2018
+   - Neuromorphic on-chip reservoir computing with spiking neural network architectures | 2024
+   - Computational Capabilities of Random Automata Networks for Reservoir Computing | 2012
+   - Reservoir Computing meets Recurrent Kernels and Structured Transforms | 2020
+   - Nonlinear Neural Dynamics and Classification Accuracy in Reservoir Computing | 2024
+   - Complex topological features of reservoirs shape learning performances in bio-inspired recurrent neural networks | 2022
+   - Asymptotic Stability in Reservoir Computing | 2022
+   - Echo State Queueing Network: a new reservoir computing learning tool | 2012
+
+[R1] arxiv 'reservoir computing time series prediction benchmark' -> 20 hits
+   - Rapid Time Series Prediction with a Hardware-Based Reservoir Computer | 2018
+   - Product Reservoir Computing: Time-Series Computation with Multiplicative Neurons | 2015
+   - Quantum reservoir computing in Jaynes-Cummings models: Nonlinear memory and time-series prediction | 2025
+   - Reservoir computing approaches for representation and classification of multivariate time series | 2018
+   - Optimizing quantum noise-induced reservoir computing for nonlinear and chaotic time series prediction | 2023
+   - A Meta-learning Approach to Reservoir Computing: Time Series Prediction with Limited Data | 2021
+   - Digital Quantum Reservoir Computing for ATM Time Series Prediction | 2026
+   - A Comparative Study of Reservoir Computing for Temporal Signal Processing | 2014
+
+[R1] arxiv 'deep echo state network stacked reservoirs' -> 20 hits
+   - On the approximation of rough functions with deep neural networks | 2019
+   - Memorization in Deep Neural Networks: Does the Loss Function matter? | 2021
+   - Reservoir Topology in Deep Echo State Networks | 2019
+   - Human in the Loop: Interactive Passive Automata Learning via Evidence-Driven State-Merging Algorithms | 2017
+   - Deep Learning and Computational Physics (Lecture Notes) | 2023
+   - Learn to Accumulate Evidence from All Training Samples: Theory and Practice | 2023
+   - Deep learning observables in computational fluid dynamics | 2019
+   - DILIE: Deep Internal Learning for Image Enhancement | 2020
+
+=== R2: Delay-line / autoregressive memory for sequence prediction ΓÇö tap-delay lines, time-delay embeddings, NARX autoregressive-exogenous models, TDNNs ΓÇö is classical,
+
+[R2] arxiv 'time delay embedding nonlinear time series prediction' -> 20 hits
+   - Optimal time delay embedding for nonlinear time series modeling | 2003
+   - State Space Reconstruction for Multivariate Time Series Prediction | 2008
+   - A Novel Reservoir Computing Framework for Chaotic Time Series Prediction Using Time Delay Embedding and Random Fourier Features | 2025
+   - Machine Learning of Time Series Using Time-delay Embedding and Precision Annealing | 2019
+   - A Time-Series Foundation Model by Universal Delay Embedding | 2025
+   - Dynamic Predictions from Time Series Data- An Artificial Neural Network Approach | 1997
+   - DEFM: Delay E mbedding based Forecast Machine for Time Series Forecasting by Spatiotemporal Information Transformation | 2020
+   - Selecting embedding delays: An overview of embedding techniques and a new method using persistent homology | 2023
+
+[R2] semantic_scholar 'time delay embedding nonlinear time series prediction' -> 20 hits
+   - A Novel Reservoir Computing Framework for Chaotic Time Series Prediction Using Time Delay Embedding and Random Fourier Features | 2025 | arX
+   - A Time-Series Foundation Model by Universal Delay Embedding | 2025 | arXiv.org
+   - Research on Load State Prediction of Host Servers Based on Nonlinear Time Series | 2024 | 2024 IEEE 3rd International Conference on Electric
+   - Markov models from data by simple nonlinear time series predictors in delay embedding spaces. | 2002 | Physical review. E, Statistical, nonl
+   - Phase Space Reconstruction and Time Series Prediction of a Nonlinear Financial System | 2021 | 2021 IEEE 10th Data Driven Control and Learni
+   - Nonlinear time series prediction of O3 concentration in Istanbul | 2000
+   - Dimensionless embedding for nonlinear time series analysis. | 2017 | Physical Review E
+   - Degradation Capacity Spatial-Temporal Embedding RUL Prediction Framework for Lithium-Ion Batteries | 2025 | IEEE Journal of Emerging and Sel
+
+[R2] arxiv 'NARX network autoregressive exogenous input' -> 14 hits
+   - Application of Nonlinear Autoregressive with Exogenous Input (NARX) neural network in macroeconomic forecasting, national goal setting and g
+   - NARX Identification using Derivative-Based Regularized Neural Networks | 2022
+   - Quadrotor Experimental Dynamic Identification with Comprehensive NARX Neural Networks | 2023
+   - Stability of discrete-time feed-forward neural networks in NARX configuration | 2020
+   - Prediction of SYMH and ASYH indices for geomagnetic storms of solar cycle 24 including recent St. Patrick's day, 2015 storm using NARX neura
+   - Nonlinear system identification with regularized Tensor Network B-splines | 2020
+   - Artificial Neural Network and Time Series Modeling Based Approach to Forecasting the Exchange Rate in a Multivariate Framework | 2016
+   - A Dual-Stage Attention-Based Recurrent Neural Network for Time Series Prediction | 2017
+
+[R2] arxiv 'time delay neural network sequential processing' -> 20 hits
+   - Delayed Memory Unit: Modelling Temporal Dependency Through Delay Gate | 2023
+   - TSkips: Efficiency Through Explicit Temporal Delay Connections in Spiking Neural Networks | 2024
+   - DelRec: learning delays in recurrent spiking neural networks | 2025
+   - Real-Time EMG Signal Classification via Recurrent Neural Networks | 2021
+   - Process-Aware Procurement Lead Time Prediction for Shipyard Delay Mitigation | 2026
+   - Parallel Delayed Memory Units for Enhanced Temporal Modeling in Biomedical and Bioacoustic Signal Analysis | 2025
+   - Detection of spiking motifs of arbitrary length in neural activity using bounded synaptic delays | 2025
+   - Anomaly Detection Under Controlled Sensing Using Actor-Critic Reinforcement Learning | 2020
+
+[R2] arxiv 'autoregressive linear model time series prediction' -> 20 hits
+   - Estimating the predictability of economic and financial time series | 2012
+   - Bootstrap Prediction Inference of Non-linear Autoregressive Models | 2023
+   - Autoregressive-Model-Based Methods for Online Time Series Prediction with Missing Values: an Experimental Evaluation | 2019
+   - Autoregressive with Slack Time Series Model for Forecasting a Partially-Observed Dynamical Time Series | 2023
+   - Autoregressive Convolutional Recurrent Neural Network for Univariate and Multivariate Time Series Prediction | 2019
+   - Short-term time series prediction using Hilbert space embeddings of autoregressive processes | 2016
+   - Inference of High-dimensional Autoregressive Generalized Linear Models | 2016
+   - G-NM: A Group of Numerical Time Series Prediction Models | 2023
+
+[R2] semantic_scholar 'autoregressive linear model time series prediction' -> 20 hits
+   - BAG: A Linear-Nonlinear Hybrid Time Series Prediction Model for Soil Moisture | 2023 | Agriculture
+   - Enhanced Multi-variate Time Series Prediction Through Statistical-Deep Learning Integration: The VAR-Stacked LSTM Model | 2024 | SN Computer
+   - Time Series Prediction Method for Meteorological Data Based on the ARIMA-LSTM Model | 2024 | Academic Journal of Science and Technology
+   - Research on Stock Price Time Series Prediction Based on Deep Learning and Autoregressive Integrated Moving Average | 2022 | Scientific Progr
+   - Traditional Prediction Techniques and Machine Learning Approaches for Financial Time Series Analysis | 2025 | Mathematics
+   - Autoregressive-Model-Based Methods for Online Time Series Prediction with Missing Values: an Experimental Evaluation | 2019 | arXiv.org
+   - Performance Evaluation of Long Short-Term Memory and Autoregressive Integrated Moving Average Time Series Models for Stock Price Prediction 
+   - A new tropospheric delay combination prediction model based on time series decomposition and deep learning | 2025 | Advances in Space Resear
+
+=== R3: Growing / incremental reservoirs ΓÇö appending reservoir neurons over time, growing ESNs ΓÇö is already claimed.
+
+[R3] arxiv 'growing echo state network incremental reservoir' -> 20 hits
+   - Human in the Loop: Interactive Passive Automata Learning via Evidence-Driven State-Merging Algorithms | 2017
+   - Incremental Network Quantization: Towards Lossless CNNs with Low-Precision Weights | 2017
+   - Physics-Informed Neural Network for the Transient Diffusivity Equation in Reservoir Engineering | 2023
+   - Reservoir Topology in Deep Echo State Networks | 2019
+   - Integer Echo State Networks: Efficient Reservoir Computing for Digital Hardware | 2017
+   - Optical Echo State Network Reservoir Computing | 2025
+   - Consistent SDNs through Network State Fuzzing | 2019
+   - Midterm Status Report of the ILC Technology Network Activities | 2026
+
+[R3] arxiv 'incremental reservoir computing online learning' -> 4 hits
+   - Personalized Negative Reservoir for Incremental Learning in Recommender Systems | 2024
+   - RECAP: Local Hebbian Prototype Learning as a Self-Organizing Readout for Reservoir Dynamics | 2026
+   - Incremental Extractive Opinion Summarization Using Cover Trees | 2024
+   - Deep Recurrent Stochastic Configuration Networks for Modelling Nonlinear Dynamic Systems | 2024
+
+[R3] semantic_scholar 'incremental reservoir computing online learning' -> 20 hits
+   - Effluent quality soft sensor for wastewater treatment plant with ensemble sparse learning-based online next generation reservoir computing |
+   - Control Pneumatic Soft Bending Actuator with Online Learning Pneumatic Physical Reservoir Computing | 2025 | International Conference on Sof
+   - Physical reservoir computing-based online learning of HfSiOx ferroelectric tunnel junction devices for image identification | 2025 | Applica
+   - Resource-efficient streaming architecture for ensemble Kalman filters designed for online learning in physical reservoir computing | 2025 | 
+   - Online Residual Learning Using Interpretable Reservoir Computing for Quadrotor Control | 2024 | International Conference on Unmanned Aircraf
+   - Reservoir Computing in Real-World Environments: Optimizing the Cost of Offline and Online Training | 2025 | IEEE International Joint Confere
+   - Experimental memory control in continuous-variable optical quantum reservoir computing | 2025 | Nature Photonics
+   - Deep reservoir architecture for short-term residential load forecasting: An online learning scheme for edge computing | 2021
+
+[R3] arxiv 'evolving reservoir topology time series' -> 2 hits
+   - Multivariate time series prediction using clustered echo state network | 2025
+   - Directed evolution effectively selects for DNA based physical reservoir computing networks capable of multiple tasks | 2025
+
+[R3] arxiv 'reservoir computing growth mechanism neurons' -> 20 hits
+   - Forecasting Using Reservoir Computing: The Role of Generalized Synchronization | 2021
+   - Neuromorphic Electronic Systems for Reservoir Computing | 2019
+   - Mechanism, dynamics, and biological existence of multistability in a large class of bursting neurons | 2008
+   - A new generation of reduction methods for networks of neurons with complex dynamic phenotypes | 2022
+   - Reservoir Computation with Networks of Differentiating Neuron Ring Oscillators | 2025
+   - A Substrate-Independent Framework to Characterise Reservoir Computers | 2018
+   - A computational investigation of the relationships between single-neuron and network dynamics in the cerebral cortex | 2016
+   - Product Reservoir Computing: Time-Series Computation with Multiplicative Neurons | 2015
+
+=== R4: Late fusion / score-level fusion / stacking, and competence-based classifier selection ΓÇö the v22 integration layer ΓÇö are already claimed.
+
+[R4] arxiv 'stacked generalization ensemble learning' -> 20 hits
+   - Systematic Ensemble Learning for Regression | 2014
+   - StackGenVis: Alignment of Data, Algorithms, and Models for Stacking Ensemble Learning Using Performance Metrics | 2020
+   - Demand Prediction Using Machine Learning Methods and Stacked Generalization | 2020
+   - Ensemble learning for uncertainty estimation with application to the correction of satellite precipitation products | 2024
+   - Stacked transfer learning for tropical cyclone intensity prediction | 2017
+   - Semi-Supervised Learning by Disentangling and Self-Ensembling Over Stochastic Latent Space | 2019
+   - Ensemble deep learning: A review | 2021
+   - Stacked Ensemble Learning for Abdominal Aortic Aneurysm Segmentation in CT Angiography | 2026
+
+[R4] semantic_scholar 'stacked generalization ensemble learning' -> 20 hits
+   - Stacked generalization ensemble learning strategy for multivariate prediction of delamination and maximum thrust force in composite drilling
+   - "Comparative Analysis of Rate of Penetration Prediction and Optimization in Deep Wells Using Real-Time Continuous Stacked Generalization Ens
+   - Deep Stacked Generalization Ensemble Learning models in early diagnosis of Depression illness from wearable devices data | 2021 | Internatio
+   - Enhanced Oil and Gas Production Forecasting Through Stacked generalization Ensemble Learning Technique | 2025 | Sakarya University Journal o
+   - Employee turnover prediction model based on the stacked generalization ensemble learning algorithm | 2026 | International Conference on Big 
+   - Optimized Intrusion Detection Approach for CyberΓÇÉPhysical System Using MetaΓÇÉLearning With Stacked Generalization: An Ensemble Learning Inspi
+   - Enterprise financial early warning based on ensemble learning and stacked generalization fusion algorithm model | 2025 | Journal of Computat
+   - Sea surface temperature prediction by stacked generalization ensemble of deep learning | 2024 | Deep Sea Research Part I: Oceanographic Rese
+
+[R4] arxiv 'score level fusion multiple classifiers' -> 18 hits
+   - An Evaluation of Score Level Fusion Approaches for Fingerprint and Finger-vein Biometrics | 2018
+   - Investigating the Potential of Multi-Stage Score Fusion in Spoofing-Aware Speaker Verification | 2025
+   - Multi-Label Product Categorization Using Multi-Modal Fusion Models | 2019
+   - How Does Urban Context Relate to Residential Building Health? A Vision-POI Fusion Framework for Building-Level Housing Inspection | 2026
+   - DWT-Fusion: A Signal-Based Framework for Training-Free LLM-Generated Text Detection | 2026
+   - 3D Facial Matching by Spiral Convolutional Metric Learning and a Biometric Fusion-Net of Demographic Properties | 2020
+   - Genetic Programming for Multibiometrics | 2012
+   - InFusionLayer: a CFA-based ensemble tool to generate new classifiers for learning and modeling | 2026
+
+[R4] arxiv 'dynamic classifier selection competence' -> 20 hits
+   - Online local pool generation for dynamic classifier selection: an extended version | 2018
+   - Evaluating Competence Measures for Dynamic Regressor Selection | 2019
+   - A Method For Dynamic Ensemble Selection Based on a Filter and an Adaptive Distance to Improve the Quality of the Regions of Competence | 201
+   - A DEEP analysis of the META-DES framework for dynamic selection of ensemble of classifiers | 2015
+   - Analyzing different prototype selection techniques for dynamic classifier and ensemble selection | 2018
+   - K-Nearest Oracles Borderline Dynamic Classifier Ensemble Selection | 2018
+   - FIRE-DES++: Enhanced Online Pruning of Base Classifiers for Dynamic Ensemble Selection | 2018
+   - META-DES.H: a dynamic ensemble selection technique using meta-learning and a dynamic weighting approach | 2018
+
+[R4] arxiv 'late fusion prediction combination classifiers' -> 10 hits
+   - FujiView: Multimodal Late-Fusion for Predicting Scenic Visibility | 2026
+   - Late fusion of machine learning models using passively captured interpersonal social interactions and motion from smartphones predicts decom
+   - Improving Pediatric Emergency Department Triage with Modality Dropout in Late Fusion Multimodal EHR Models | 2026
+   - Beyond Modality Fusion: Deep Ensembles for Multimodal Classification | 2026
+   - AutoPET Challenge: Combining nn-Unet with Swin UNETR Augmented by Maximum Intensity Projection Classifier | 2022
+   - Abnormality Prediction and Forecasting of Laboratory Values from Electrocardiogram Signals Using Multimodal Deep Learning | 2024
+   - Pretraining Transformer-Based Models on Diffusion-Generated Synthetic Graphs for Alzheimer's Disease Prediction | 2025
+   - The Multi-View Paradigm Shift in MRI Radiomics: Predicting MGMT Methylation in Glioblastoma | 2025
+
+[R4] semantic_scholar 'late fusion prediction combination classifiers' -> 20 hits
+   - Early and Late Fusion for Multimodal Aggression Prediction in Dementia Patients: A Comparative Analysis | 2025 | Applied Sciences
+   - Real-time HGR using Handcrafted Descriptors and Late Fusion Transformers for Computer Interaction | 2025 | 2025 International Symposium on M
+   - Enhancing the Prediction of Episodes of Aggression in Patients with Dementia Using Audio-Based Detection: A Multimodal Late Fusion Approach 
+   - Compute-Efficient Prediction of Rhetorical Relations via Late Fusion of Semantic Perturbation and Attention Features | 2025 | 2025 IEEE Inte
+   - Infodeslib: Python Library for Dynamic Ensemble Learning using Late Fusion of Multimodal Data | 2024 | KiL@KDD
+   - Water Leakage Classification With Acceleration, Pressure, and Acoustic Data: Leveraging the Wavelet Scattering Transform, Unimodal Classifie
+   - Multimodal fusion strategies for survival prediction in breast cancer: A comparative deep learning study | 2025 | Computational and Structur
+   - A comparative analysis between late fusion of features approach and ensemble of multiple classifiers approach for image classification | 202
+
+=== R5: Residual/greedy growth over fixed base learners ΓÇö boosting, including boosting of random features ΓÇö is already claimed.
+
+[R5] arxiv 'boosting random features generalization' -> 20 hits
+   - Random Feature Representation Boosting | 2025
+   - ANOVA-boosting for Random Fourier Features | 2024
+   - Learning Landmark-Based Ensembles with Random Fourier Features and Gradient Boosting | 2019
+   - Financial fraud detection system based on improved random forest and gradient boosting machine (GBM) | 2025
+   - Sample-Efficient Agnostic Boosting | 2024
+   - SnapBoost: A Heterogeneous Boosting Machine | 2020
+   - A Precise High-Dimensional Asymptotic Theory for Boosting and Minimum-$\ell_1$-Norm Interpolated Classifiers | 2020
+   - Using Random Noise Equivariantly to Boost Graph Neural Networks Universally | 2025
+
+[R5] arxiv 'gradient boosting additive model weak learners' -> 4 hits
+   - Boost Like a (Var)Pro: Trust-Region Gradient Boosting via Variable Projection | 2026
+   - path_boost: A Python Package for Interpretable Graph-Level Prediction using Path-Based Gradient Boosting | 2026
+   - BoostLLM: Boosting-inspired LLM Fine-tuning for Few-shot Tabular Classification | 2026
+   - Residual Likelihood Forests | 2020
+
+[R5] semantic_scholar 'gradient boosting additive model weak learners' -> 20 hits
+   - path_boost: A Python Package for Interpretable Graph-Level Prediction using Path-Based Gradient Boosting | 2026
+   - Network Based Prediction Model for Genomics Data Analysis | 2012 | Statistics in Biosciences
+   - Tackling the Wildfire Prediction Challenge: An Explainable Artificial Intelligence (XAI) Model Combining Extreme Gradient Boosting (XGBoost)
+   - Enhancing the performance of gradient boosting trees on regression problems | 2025 | Journal of Big Data
+   - Key factors affecting groundwater nitrate levels in the Yinchuan Region, Northwest China: research using the eXtreme Gradient Boosting (XGBo
+   - Stochastic Gradient Boosting for Robust Twitter Spam Detection: An Ensemble Learning Approach | 2025 | 2025 World Skills Conference on Unive
+   - Predicting dry matter intake in cattle at scale using gradient boosting regression techniques and Gaussian process boosting regression with 
+   - Influence of weather and air pollution on concentration change of PM2.5 using a generalized additive model and gradient boosting machine | 2
+
+[R5] arxiv 'residual learning additive weak learners' -> 3 hits
+   - Residual Likelihood Forests | 2020
+   - BoostLLM: Boosting-inspired LLM Fine-tuning for Few-shot Tabular Classification | 2026
+   - Variational Boosting for Physics-Informed Neural Networks | 2026
+
+[R5] arxiv 'boosting kernel ridge regression' -> 20 hits
+   - pGMM Kernel Regression and Comparisons with Boosted Trees | 2022
+   - Ridge Boosting is Both Robust and Efficient | 2025
+   - Estimation of Fish Catch Using Sentinel-2, 3 and XGBoost-Kernel-Based Kernel Ridge Regression | 2026
+   - Toward Capturing Genetic Epistasis From Multivariate Genome-Wide Association Studies Using Mixed-Precision Kernel Ridge Regression | 2024
+   - Gradient Boosting Performs Gaussian Process Inference | 2022
+   - Statistical Inference for Explainable Boosting Machines | 2026
+   - Parallelizing Spectral Algorithms for Kernel Learning | 2016
+   - SPHERE-JEPA: Spherical Prediction with Homogeneous Embeddings | 2026
+
+[R5] semantic_scholar 'boosting kernel ridge regression' -> 20 hits
+   - A hybrid framework: singular value decomposition and kernel ridge regression optimized using mathematical-based fine-tuning for enhancing ri
+   - Estimation of Fish Catch Using Sentinel-2, 3 and XGBoost-Kernel-Based Kernel Ridge Regression | 2026 | arXiv.org
+   - Forecasting water quality indices using generalized ridge model, regularized weighted kernel ridge model, and optimized multivariate variati
+   - Boosted Kernel Ridge Regression: Optimal Learning Rates and Early Stopping | 2019 | Journal of machine learning research
+   - Ridge Boosting is Both Robust and Efficient | 2025 | Neural Information Processing Systems
+   - Study on the ensemble methods with kernel ridge regression | 2012
+   - pGMM Kernel Regression and Comparisons with Boosted Trees | 2022 | arXiv.org
+   - Local Minimax Learning of Functions With Best Finite Sample Estimation Error Bounds: Applications to Ridge and Lasso Regression, Boosting, T
+
+=== R6: Pruned-dense baselines ΓÇö structured pruning, magnitude pruning, lottery tickets, and pruned-vs-efficient trade-offs ΓÇö are already claimed.
+
+[R6] arxiv 'structured pruning convolutional network' -> 20 hits
+   - Leveraging Structured Pruning of Convolutional Neural Networks | 2022
+   - Structured Pruning for Deep Convolutional Neural Networks: A survey | 2023
+   - Structured Probabilistic Pruning for Convolutional Neural Network Acceleration | 2017
+   - Structured Pruning of Deep Convolutional Neural Networks | 2015
+   - Convolutional Neural Network Pruning with Structural Redundancy Reduction | 2021
+   - Structured Model Pruning of Convolutional Networks on Tensor Processing Units | 2021
+   - Convolutional Network Fabric Pruning With Label Noise | 2022
+   - Automatic Block-wise Pruning with Auxiliary Gating Structures for Deep Convolutional Neural Networks | 2022
+
+[R6] arxiv 'magnitude pruning lottery ticket hypothesis' -> 20 hits
+   - Linear Mode Connectivity and the Lottery Ticket Hypothesis | 2019
+   - Stabilizing the Lottery Ticket Hypothesis | 2019
+   - Successfully Applying the Stabilized Lottery Ticket Hypothesis to the Transformer Architecture | 2020
+   - Insights into the Lottery Ticket Hypothesis and Iterative Magnitude Pruning | 2024
+   - Iterative Magnitude Pruning as a Renormalisation Group: A Study in The Context of The Lottery Ticket Hypothesis | 2023
+   - Towards Understanding Iterative Magnitude Pruning: Why Lottery Tickets Win | 2021
+   - Lottery Tickets in Linear Models: An Analysis of Iterative Magnitude Pruning | 2020
+   - COLT: Cyclic Overlapping Lottery Tickets for Faster Pruning of Convolutional Neural Networks | 2022
+
+[R6] arxiv 'pruning network accuracy computation tradeoff' -> 20 hits
+   - Pruning Filters while Training for Efficiently Optimizing Deep Learning Networks | 2020
+   - Fast as CHITA: Neural Network Pruning with Combinatorial Optimization | 2023
+   - Using Cooperative Game Theory to Prune Neural Networks | 2023
+   - Pruning as Evolution: Emergent Sparsity Through Selection Dynamics in Neural Networks | 2026
+   - From Lightweight CNNs to SpikeNets: Benchmarking Accuracy-Energy Tradeoffs with Pruned Spiking SqueezeNet | 2026
+   - Adaptive Pruning of Neural Language Models for Mobile Devices | 2018
+   - Scalable iterative pruning of large language and vision models using block coordinate descent | 2024
+   - An Information Theory-inspired Strategy for Automatic Network Pruning | 2021
+
+[R6] arxiv 'pruned network inference efficiency' -> 20 hits
+   - Pruning Convolutional Neural Networks for Resource Efficient Inference | 2016
+   - Graph-Adaptive Pruning for Efficient Inference of Convolutional Neural Networks | 2018
+   - Efficient Stein Variational Inference for Reliable Distribution-lossless Network Pruning | 2022
+   - Ps and Qs: Quantization-aware pruning for efficient low latency neural network inference | 2021
+   - Pruning Compact ConvNets for Efficient Inference | 2023
+   - UnIT: Scalable Unstructured Inference-Time Pruning for MAC-efficient Neural Inference on MCUs | 2025
+   - Basis Scaling and Double Pruning for Efficient Inference in Network-Based Transfer Learning | 2021
+   - Sparsity in Deep Learning: Pruning and growth for efficient inference and training in neural networks | 2021
+
+=== FAILURES (recorded, never empty) ===
+  semantic_scholar: 24
+  arxiv: 4
+total failed queries: 28

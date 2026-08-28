@@ -1,0 +1,12 @@
+{
+  "milestone": "M240",
+  "title": "Query-path latency measurement (feature extraction + routing + arm inference)",
+  "question": "What is the end-to-end latency of a routed query on the deployable path?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (registered as the routing-path latency cell, 20 Aug)",
+  "measurement": {"samples": 100, "repeats": 5, "batch": 1,
+                  "note": "per-query: parquet-style decode of one native image -> resize 224 -> CLIP fp16 features -> router 6-way classify -> per-domain probe inference; mean and p99 reported"},
+  "features": {"clip_test": "logs/results/v25/m236_clip_vitl14/features/clip_test.npy"},
+  "interpretation_registered_before_running": {
+    "reading": "latency is reported as measured (mean/p99); no bar was registered for this cell - the number feeds the deployment decision"
+  }
+}

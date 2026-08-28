@@ -1,0 +1,32 @@
+{
+  "milestone": "M164c",
+  "title": "Fingerprint/routing reference search (M164 instrument, third dispatch: routing, task embeddings, and the LeCun line)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 6 dispatch entry (17 Aug 2026)",
+  "registered_before_any_search": true,
+  "question": "Which published routing/task-embedding work must the v24 fingerprint/router cite — including the suspected LeCun line (configurator, task-conditioned routing)?",
+  "role": "displacement only: an unauthenticated public search cannot support novelty claims. Hits can displace or inform registered claims; absence proves nothing.",
+  "endpoint": "https://export.arxiv.org/api/query",
+  "max_results_per_query": 10,
+  "retries": 3,
+  "backoff_seconds_base": 2.0,
+  "gate": {
+    "anchor_rule": "every anchor query must return at least one hit in stage 1 (AND of quoted abs: phrases). If any anchor misses, stage 2 re-runs ALL queries uniformly with OR of the same phrases. If any anchor still misses, the whole search is VOID for claims.",
+    "rate_limit_rule": "HTTP 429 responses are retried with exponential backoff and recorded separately from genuinely empty results."
+  },
+  "queries": [
+    {"id": "a1", "kind": "anchor", "blocker": "routing", "phrases": ["sparse mixture of experts", "routing"], "note": "sparsely-gated MoE line (Shazeer 2017 territory)"},
+    {"id": "a2", "kind": "anchor", "blocker": "routing", "phrases": ["switch transformer", "scaling"], "note": "switch transformers (Fedus 2022 territory)"},
+    {"id": "a3", "kind": "anchor", "blocker": "routing", "phrases": ["routing network", "neural network"], "note": "differentiable routing networks (Rosenbaum 2018 territory)"},
+    {"id": "a4", "kind": "anchor", "blocker": "fingerprint", "phrases": ["task embedding", "meta learning"], "note": "task-embedding line (Task2Vec/Taskonomy territory)"},
+    {"id": "a5", "kind": "anchor", "blocker": "routing", "phrases": ["learning to route", "large language model"], "note": "LLM routing (FrugalGPT/RouteLLM territory)"},
+    {"id": "l1", "kind": "blocker", "blocker": "routing", "author": "LeCun", "phrases": ["mixture of experts"], "note": "LeCun + MoE"},
+    {"id": "l2", "kind": "blocker", "blocker": "routing", "author": "LeCun", "phrases": ["task", "routing"], "note": "LeCun + task routing"},
+    {"id": "l3", "kind": "blocker", "blocker": "routing", "author": "LeCun", "phrases": ["configurator"], "note": "LeCun + configurator (A Path Towards AMI territory)"},
+    {"id": "l4", "kind": "blocker", "blocker": "routing", "author": "LeCun", "phrases": ["task conditioned"], "note": "LeCun + task-conditioned modules"},
+    {"id": "b1", "kind": "blocker", "blocker": "routing", "phrases": ["router", "mixture of experts"], "note": "learned routers over experts"},
+    {"id": "b2", "kind": "blocker", "blocker": "fingerprint", "phrases": ["dataset similarity", "transfer"], "note": "dataset similarity for transfer prediction"},
+    {"id": "b3", "kind": "blocker", "blocker": "routing", "phrases": ["hierarchical routing", "expert"], "note": "hierarchical expert routing"},
+    {"id": "b4", "kind": "blocker", "blocker": "fingerprint", "phrases": ["task graph", "transfer learning"], "note": "task-graph / transfer taxonomy line"},
+    {"id": "b5", "kind": "blocker", "blocker": "routing", "phrases": ["composable", "expert", "zero shot"], "note": "compositional expert selection"}
+  ]
+}

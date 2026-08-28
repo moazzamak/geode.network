@@ -1,0 +1,36 @@
+{
+  "milestone": "M268",
+  "cell": "cell 1b",
+  "title": "M268 cell 1b: IMDb sentiment arm upgrade — the Qwen generalist full-scale read",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (low-accuracy flag list + amendment 32, 22 Aug)",
+  "registered_before_any_accuracy": true,
+  "question": "Seal the measured IMDb arm upgrade: the generalist read 0.959 on rows 0..999 (cell 1); what does it read on the remaining 24,000 rows, and what is the combined full-split reading?",
+  "arm": {
+    "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+    "role": "IMDb sentiment arm after the measured upgrade (was: the 0.8282 frozen probe)",
+    "license_recorded": "Apache-2.0",
+    "max_new_tokens": 64,
+    "decoding": "greedy (do_sample=False), cudnn disabled (registered M267 env note)"
+  },
+  "mix": {
+    "hf_id": "stanfordnlp/imdb",
+    "split": "test",
+    "rows": [1000, 25000],
+    "seed": 20260822,
+    "license_recorded": "IMDb evaluation-only (standing research-class)"
+  },
+  "prompt": "Classify the sentiment of this movie review as positive or negative. Answer with one word only.\nReview: {text}\nAnswer:",
+  "grading": "last occurrence of 'positive'/'negative' in the lowercased answer (the sealed cell-1 grader)",
+  "sealed_prior": {
+    "source": "logs/results/v25/m268_routing_study/evidence_cell1.json (sentiment segment, rows 0..999)",
+    "rows": [0, 1000],
+    "n": 1000,
+    "accuracy": 0.959
+  },
+  "smoke": {
+    "rows": 20
+  },
+  "output_dir": "logs/results/v25/m268_routing_study",
+  "evidence_filename": "evidence_cell1b.json",
+  "feature_cache_relpath": "v25/m268_routing_study"
+}

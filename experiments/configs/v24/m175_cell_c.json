@@ -1,0 +1,32 @@
+{
+  "milestone": "M175",
+  "cell": "C",
+  "title": "Cross-modality routing: contract guard demonstration (route-level, no data cost)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026); analysis/v24_m175_transfer_cells.md (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the router, with the registered contract guard, keep every task's chain within its own modality — including under a cross-contract query?",
+  "arms": [
+    {"arm_id": "spm1923_domainnet", "kind": "classification-vision", "sealed_score": 0.2786, "fingerprint": [0.2786, 0.0, 0.0], "note": "sealed sparse frontier (p0.5 l0.1 full)"},
+    {"arm_id": "deeppatch_spm", "kind": "classification-vision", "sealed_score": 0.5899, "fingerprint": [0.0, 0.5899, 0.0], "note": "sealed deep-patch SPM 2048 atoms"},
+    {"arm_id": "dense_r70", "kind": "classification-vision", "sealed_score": 0.3118, "fingerprint": [0.0, 0.0, 0.3118], "note": "sealed dense ladder r70"},
+    {"arm_id": "wikitext_uniform_w2", "kind": "next-token-text", "sealed_score": 9.9152, "fingerprint": [9.9152, 0.0], "note": "A0 sealed test ppl"},
+    {"arm_id": "wikipedia_uniform_w2", "kind": "next-token-text", "sealed_score": 9.5142, "fingerprint": [0.0, 9.5142], "note": "D sealed held-out ppl"}
+  ],
+  "tasks": {
+    "vision": {
+      "fingerprint": [0.2786, 0.5899, 0.3118],
+      "contract_kind": "classification-vision",
+      "note": "registered profile vector from sealed accuracies"
+    },
+    "text": {
+      "fingerprint": [9.9152, 9.5142],
+      "contract_kind": "next-token-text",
+      "note": "registered profile vector from sealed ppls"
+    }
+  },
+  "verdict": {
+    "pass": "every task's chain contains only output-contract-matching arms, including under a cross-contract query",
+    "fail": "a wrong-kind arm appeared in a chain"
+  },
+  "output_dir": "logs/results/v24/m175_cell_c"
+}

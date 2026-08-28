@@ -1,0 +1,27 @@
+{
+  "milestone": "M225",
+  "title": "Semantics axis + inverse-relation analogies (extended prototype, NOT shipped)",
+  "question": "Does the extended encoder learn that inverse operations share ONE relation direction - cos(emb[integration]-emb[differentiation], emb[fft]-emb[ifft]) >= 0.5 and the same for convolution/deconvolution?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M225 REGISTERED (20 Aug, before the build)",
+  "note": "the pinned-LLM proposal step is superseded by the user's 20 Aug delegation, which already specifies the motivating vocabulary (integration/differentiation); the vocabulary is authored and recorded as authored (I3: proposals are hypotheses, never labels)",
+  "model": {"f_dim": 16, "mlp_hidden": 32, "seed": 11},
+  "training": {
+    "steps": 3000,
+    "lr": 0.001,
+    "rel_ordered_triple_tau": 0.5,
+    "rel_polar_rho": 0.3,
+    "margin_dissimilar": 0.1,
+    "inverse_analogy_tau": 0.5,
+    "note": "Adam; the M224 v1 signal mix PLUS the transform-axis inverse-pair hinge (reference pair integration/differentiation) and the transform polar pairs"
+  },
+  "relations_file": "analysis/fingerprint_relations_v0.json",
+  "transform_relations_file": "analysis/fingerprint_relations_v1_transform.json",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID - determinism is the instrument contract",
+    "G2_fail": "scoped negative for this signal mix on the extended schema",
+    "G3_fail": "traversability regressed vs the frozen set - scoped negative",
+    "G5_fail": "the authored v0 relational constraints were not learned on the extended schema - scoped negative",
+    "G6_fail": "the inverse-relation direction did not generalise beyond the reference pair - scoped negative for the authored inverse set",
+    "ship": "NOT shipped by this milestone: the product ontology migration is M226 (registered) and runs only if G1-G3+G6 pass"
+  }
+}

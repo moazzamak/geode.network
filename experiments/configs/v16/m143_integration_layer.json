@@ -1,0 +1,76 @@
+{
+  "milestone": "M143",
+  "title": "The integration layer: late fusion + competence routing over the six specialists and the global model, on cached score matrices",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 integration layer / section 9 M143",
+  "registered_before_any_accuracy": true,
+  "question": "E10 sealed that hard routing loses (routed 18.8% / oracle 20.5% < global 22.5%). Does the integration layer - one closed-form fit over the concatenated scores of the six specialists plus the global model (late fusion), and a router trained to predict WHICH arm is right (competence routing) - recover the specialist gains that hard routing lost?",
+  "phase1": true,
+  "phase2": true,
+  "registration_notes": {
+    "N97.1": "Phase 1 recomputes the six per-domain specialist score matrices (512-atom A5 dictionaries, the exact M139b construction) plus the global head and domain router from the sealed f6144 codes, and caches the score matrices under data_cache_root()/v16/m143/scores.npz. No sealed evidence is modified.",
+    "N97.2": "t1 anchors in phase 1: class head reproduces 0.22487 (tol 0.002); domain router reproduces 0.7559 (tol 0.002); each specialist's own-domain accuracy reproduces the M119 sealed curve value (tol 0.002).",
+    "N97.3": "Phase 2 uses a deterministic 50/50 split of the sealed test rows (seed 33). The FIT half fits the stacking head (ridge over the 7x345 concatenated scores) and the competence router (ridge 2415 -> 7 arms; AMENDED 14 Aug after the inadmissible smoke: the target is the lowest-index arm whose argmax matches the row label - the plan's own wording 'predict which model will be correct' - labels on the fit half only; the original score-derived target was broken because raw-score magnitudes are not comparable across arms). The EVAL half measures everything.",
+    "N97.3b": "AMENDED 14 Aug after the inadmissible smoke: the penalty ladder is {1, 10, 100, 1000, 10000} (was {1,10,100,1000}); at the wide-design operating point (2415 features, ~800 smoke fit rows) the optimum sat above 1000 (smoke ladder scores peaked at the top). Registered before the full run.",
+    "N97.4": "The stacking guarantee (fused >= any single arm) holds on the FIT half by construction; the registered question is whether it survives to the EVAL half.",
+    "N97.5": "Gate (kill switch): fired if fused < global - 0.005 on the eval half, OR competence < identity, OR identity < random (all measured on the eval half). Random router = expectation over 10 seeded draws.",
+    "N97.6": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory; smoke caps rows and skips no gates except inadmissibility.",
+    "N97.7": "Dated snapshot; all seeds, penalties and the split registered for byte-repeat."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_construction": "A5-exact (M119/M124/M139b): global M108 whitener; per-domain candidate pool (n_cap 20000, seed [11, domain]) restricted to the domain's train rows; dictionary = candidates in the [11,100] seeded-permutation order, first 512 atoms; triangle encode on GPU with the registered throttle; closed-form ridge lambda=1.0."
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "note": "Global fallback + domain router fitted on the SEALED 6144-atom memmaps (dual accumulate, the M139a convention)."
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143"
+  },
+  "anchors": {
+    "m119_evidence": "logs/results/v16/m119_specialist_scale/evidence.json",
+    "t1_tolerance": 0.002
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  },
+  "phase2": {
+    "split_seed": 33,
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44,
+    "note": "penalty selected on a validation slice (first 80% of the seeded fit-half permutation) by valid accuracy; refit on the whole fit half; evaluated on the eval half only."
+  },
+  "gate": {
+    "registered": "fired if fused < global - 0.005 on the eval half, OR competence < identity, OR identity < random; all measured on the eval half of the sealed test rows.",
+    "consequence_fired": "the integration layer does not recover the specialist gains: late fusion and/or competence routing lose to the single global arm or to identity routing; M143 closes as a scoped negative and the interface itself is the finding.",
+    "consequence_passed": "the integration layer recovers the specialist gains: late fusion beats the global arm on held-out rows and competence routing beats identity routing, which beats the random router; the integration layer is promoted to the v22 system design."
+  },
+  "output_dir": "logs/results/v16/m143_integration_layer"
+}

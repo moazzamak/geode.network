@@ -1,0 +1,1238 @@
+{
+  "protocol": {
+    "seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "stream_families": [
+      "heavy_tailed",
+      "anisotropic",
+      "abrupt_drift",
+      "intermittent_unseen"
+    ],
+    "minimum_known_separation": 2.5,
+    "replay_constrained_updates": true,
+    "oracle_used_only_after_review": true,
+    "automatic_mutation_enabled": false
+  },
+  "summary": {
+    "review_count": 42,
+    "accepted_transactions": 28,
+    "decision_counts": {
+      "quarantine": 15,
+      "update_existing": 24,
+      "create_new": 3
+    },
+    "decision_accuracy": 0.6428571428571429,
+    "published_mutations": 0,
+    "reviewed_update_count": 38,
+    "accepted_reviewed_updates": 24,
+    "accepted_update_replay_drop_maximum": 0.0,
+    "failed_gate_counts": {
+      "insufficient_proposal_gain": 15,
+      "replay_regression": 0,
+      "ood_regression": 0,
+      "transaction_validation_failed": 0
+    },
+    "exclusion_violations": 0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-4566852681b3",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7777777777777778,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.865651052336185
+          },
+          "evidence": {
+            "proposal_gain": 0.7222222222222222,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-cde4327d1119",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 2.680261063337067
+          },
+          "evidence": {
+            "proposal_gain": 0.7000000000000001,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ac71df56935a",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7391304347826086,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.82345910349788
+          },
+          "evidence": {
+            "proposal_gain": 0.5652173913043478,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-99c5df3850cd",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6923076923076923,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 2.9689945506758693
+          },
+          "evidence": {
+            "proposal_gain": 0.6153846153846154,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-5027b4e15005",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.5333333333333333,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.4744104278189365
+          },
+          "evidence": {
+            "proposal_gain": 0.39999999999999997,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e2358250afbf",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.8260869565217391,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.09426359544656
+          },
+          "evidence": {
+            "proposal_gain": 0.6956521739130435,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-7259fc08a5d7",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": null,
+          "evidence": {
+            "proposal_gain": 0.6363636363636364,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2dbf24da37e8",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6470588235294118,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.512983747956262
+          },
+          "evidence": {
+            "proposal_gain": 0.5882352941176471,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ca851e4ab90d",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.9130434782608695,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.554011335994497
+          },
+          "evidence": {
+            "proposal_gain": 0.9130434782608696,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-af5f72a0ee82",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7727272727272727,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.516644884493545
+          },
+          "evidence": {
+            "proposal_gain": 0.6363636363636364,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-55f2cd9f0eba",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.8,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 6.96852465961388
+          },
+          "evidence": {
+            "proposal_gain": 0.7,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-602c544545f1",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6956521739130435,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.683261142842544
+          },
+          "evidence": {
+            "proposal_gain": 0.608695652173913,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-3b47403b551a",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.625,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.081960134662434
+          },
+          "evidence": {
+            "proposal_gain": 0.625,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e3e9848c423e",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7916666666666666,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.8994483594591527
+          },
+          "evidence": {
+            "proposal_gain": 0.7916666666666666,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-4696a231ec3e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6363636363636364,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.842097170579254
+          },
+          "evidence": {
+            "proposal_gain": 0.2727272727272728,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-30a9ff4af12d",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": null,
+          "evidence": {
+            "proposal_gain": 0.7727272727272727,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-41459915a2d3",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7272727272727273,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.132088926906592
+          },
+          "evidence": {
+            "proposal_gain": 0.6818181818181819,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e21fcd305c7d",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.4444444444444444,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.460329783302673
+          },
+          "evidence": {
+            "proposal_gain": 0.3333333333333333,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e47b7f602422",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.75,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.799766314852495
+          },
+          "evidence": {
+            "proposal_gain": 0.65,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-239bd3f6d337",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.782608695652174,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 7.9248214613644254
+          },
+          "evidence": {
+            "proposal_gain": 0.782608695652174,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ae1ffab43465",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6363636363636364,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.832530354431002
+          },
+          "evidence": {
+            "proposal_gain": 0.49999999999999994,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1cbb60e8a6c0",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6666666666666666,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 6.723002808684165
+          },
+          "evidence": {
+            "proposal_gain": 0.3333333333333333,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1b7a7b590fd6",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.631578947368421,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.008636488238536
+          },
+          "evidence": {
+            "proposal_gain": 0.5263157894736842,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-77aae142b983",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.5882352941176471,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 2.9000654668041346
+          },
+          "evidence": {
+            "proposal_gain": 0.47058823529411764,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-f02309ab2e18",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6956521739130435,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.216861317472163
+          },
+          "evidence": {
+            "proposal_gain": 0.47826086956521735,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-62e3b9b2fc70",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.5789473684210527,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.085268445650536
+          },
+          "evidence": {
+            "proposal_gain": 0.3684210526315789,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-b067667fdbdc",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": null,
+          "evidence": {
+            "proposal_gain": 0.6956521739130435,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-cdaf1566c3cc",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.5882352941176471,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.2790834102678845
+          },
+          "evidence": {
+            "proposal_gain": 0.5294117647058824,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-eb177a14bcd1",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.4,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.9023709303164225
+          },
+          "evidence": {
+            "proposal_gain": 0.33333333333333337,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-717b032588a9",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.8260869565217391,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.6997078086852575
+          },
+          "evidence": {
+            "proposal_gain": 0.6956521739130435,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-20aa8532be3a",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7142857142857143,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 6.2399112517638935
+          },
+          "evidence": {
+            "proposal_gain": 0.6190476190476191,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-20f88dcd66fa",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.42857142857142855,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 6.066917071008049
+          },
+          "evidence": {
+            "proposal_gain": 0.38095238095238093,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-c1c6df19426c",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7272727272727273,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 6.239902244155255
+          },
+          "evidence": {
+            "proposal_gain": 0.2727272727272728,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-0cd0d79df5ac",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.8636363636363636,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 2.576297589330914
+          },
+          "evidence": {
+            "proposal_gain": 0.8181818181818182,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-3bdefc76054a",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7916666666666666,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.9050322225593757
+          },
+          "evidence": {
+            "proposal_gain": 0.6666666666666667,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-d43d0076e0b8",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.5,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 3.737451215237675
+          },
+          "evidence": {
+            "proposal_gain": 0.4,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-6bd6161c0709",
+          "expected_action": "create_new",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": null,
+          "evidence": {
+            "proposal_gain": 0.4666666666666667,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2fb66b5448fc",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 5.370899449110844
+          },
+          "evidence": {
+            "proposal_gain": 0.6,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e6e3b7e2022e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.47058823529411764,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.631581566883469
+          },
+          "evidence": {
+            "proposal_gain": 0.4117647058823529,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2039e80057f5",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.782608695652174,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 8.506741656299504
+          },
+          "evidence": {
+            "proposal_gain": 0.7391304347826088,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "replay_constrained_updates": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1bb45769bb06",
+          "expected_action": "update_existing",
+          "decision_action": "update_existing",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.7727272727272727,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.715098546021582
+          },
+          "evidence": {
+            "proposal_gain": 0.6818181818181818,
+            "replay_accuracy_before": 0.9583333333333334,
+            "replay_accuracy_after": 0.9583333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-6e37ba694519",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "fit_diagnostics": {
+            "radius_scale": 0.999999999,
+            "positive_coverage": 0.6923076923076923,
+            "exclusion_violations": 0,
+            "minimum_exclusion_sdf": 4.879362574614269
+          },
+          "evidence": {
+            "proposal_gain": 0.4615384615384615,
+            "replay_accuracy_before": 0.9583333333333334,
+            "replay_accuracy_after": 0.9583333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    }
+  ]
+}

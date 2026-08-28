@@ -1,0 +1,135 @@
+{
+  "milestone": "M104",
+  "title": "Does sizing an expert to its sub-population's effective rank beat sizing it uniformly?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.10",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows": null,
+    "test_rows": 100000,
+    "stratify_seed": 11,
+    "expected_sha256": null,
+    "_note": "train_rows null means the whole 409,832-row train split, which section 7.10 design item 6 requires: the per-expert sample floor binds on each expert's OWN rows and clipart holds only 8.18 percent of them, so any train subsample lowers the largest allocation arm (b) may legally take. The test split IS subsampled, stratified by domain at the natural proportions, because test rows enter no fit and only set the precision of the reported accuracy. Plan section 7.10 restriction 1 and prohibition 24: NO M104 figure may be compared to any M103 or section 2.9.3 CIFAR-10 figure in either direction.",
+    "_resolution_note": "Plan section 7.10 restriction 5. Images are resized to 32x32 so the patch pipeline is the one sections 2.9.7 probes 1 to 4 measured. Section 2.9.7 discloses that this penalises line art, whose thin strokes survive downsampling badly, and that quickdraw's measured rank is therefore a lower bound of unmeasured tightness. M104 inherits that limitation in full and states it beside the allocation table."
+  },
+  "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "_note": "Identical Coates-style pipeline to M103 and to the section 2.9.7 probes, so a dictionary of A atoms yields 4A features. The ZCA basis is fitted once on a seeded subsample of TRAIN patches only and is shared by every arm, every expert and every seed. No arm gets a different whitening and no expert gets a whitening fitted to its own domain: only the DICTIONARY SIZE varies between arms, which is the whole of what M104 measures."
+  },
+  "budgets": [512],
+  "seeds": [11, 23, 37],
+  "candidate_pool": {
+    "size": 8192,
+    "_note": "One pool per seed, drawn from the shared whitened patch pool and shared by every arm. Each expert holds its OWN seeded permutation of that pool and takes a prefix of it, so a mixture is a mixture of genuinely different dictionaries rather than six copies of one, and an expert's larger dictionary in one arm CONTAINS its smaller dictionary in another exactly. Between arms an expert therefore differs in how many atoms it has and in nothing else, which is the whole of what M104 measures. Per-expert draws were chosen over one shared draw because a shared draw makes arm (a) six identical experts, which is not a mixture; nested prefixes were chosen over independent draws per arm because independent draws would confound expert size with the luck of the draw. The pool must exceed the largest single allocation, which is arm (c2)'s 6*512 = 3072."
+  },
+  "rank_measurement": {
+    "instrument": "RankMe, arXiv:2210.02885, used unmodified",
+    "probe_atoms": 512,
+    "rows_per_domain": 2000,
+    "epsilon": 1e-07,
+    "_note": "Plan section 7.10 design item 1(b): the allocation weight is each domain's population effective rank measured on TRAIN ROWS ONLY. It is re-measured inside this run rather than imported from section 2.9.7 probe 3, so arm (b) is self-contained and its input is produced under the same seed, the same whitener and the same encoder as the arms that consume it. Probe 3's figures are carried in external_reference below for comparison and gate nothing. ROWS PER DOMAIN IS EQUAL ACROSS DOMAINS AND THAT IS LOAD-BEARING: RankMe grows with row count, so measuring each domain on its own full row count would confound effective rank with traffic share, and traffic share is exactly what arm (e) exists to control for. The cost of this measurement is charged in full to arm (b)'s TRAINING column and to no other arm.",
+    "external_reference": {
+      "source": "plan section 2.9.7 probe 3, 1000 rows per domain, 512 atoms, seed 11",
+      "ratio_to_control": {
+        "clipart": 1.168,
+        "infograph": 1.17,
+        "painting": 1.113,
+        "quickdraw": 0.185,
+        "real": 1.112,
+        "sketch": 0.475
+      },
+      "_note": "R7: this is an anchor, never an operand. Arm (b) consumes the in-run measurement, not this table. A large disagreement between the two is reported as an instrument warning rather than silently absorbed."
+    }
+  },
+  "allocation": {
+    "match_on": "row_weighted_atoms",
+    "match_weights": "train",
+    "minimum_atoms_per_expert": 16,
+    "_match_note": "Plan section 7.10 design item 2 governs: arms are matched on INFERENCE MACS, not on parameters. Under oracle routing an image is encoded by exactly one expert, so the per-image cost is whitening + k*A_e for the expert that serves it, and the whitening term is identical in every arm. Matching total inference MACs therefore reduces EXACTLY to matching the row-weighted atom count sum_e f_e * A_e, where f_e is domain e's share of rows. This is NOT the same as matching the plain atom sum sum_e A_e, because DomainNet's domains differ in size by 3.6x. Design item 1 describes arms (a), (b) and (d) as sharing the 'same total atoms'; where the two readings conflict, item 2's MAC match is primary and the realised plain atom sum is reported beside it as a residual. Both figures appear in the ledger for every arm and neither is suppressed.",
+    "_weights_note": "The match uses the TRAIN row distribution, which is available at design time. The realised TEST-set MAC total is computed and reported for every arm so any residual mismatch from the small train/test proportion difference is visible rather than assumed away. Using test counts to set the allocation would import deployment traffic into a design decision and is not done.",
+    "_cap_note": "Every arm's allocation is capped by the section 5.3 sample floor on that expert's own rows and the freed budget is redistributed among the uncapped experts by the same procedure in every arm, so the capping cannot favour one allocation rule over another. The cap that binds and the arm it binds in are reported. AT 512 ATOMS THE CAP BINDS AGAINST THE NULLS AND NOT AGAINST ARM (b), AND THE DIRECTION OF THAT BIAS IS AGAINST INTEREST: the caps are tightest on clipart (838) and infograph (900), which are the two smallest domains and also the two highest-rank ones, so capping pushes arms (d) and (e) toward the same high allocation on exactly the domains arm (b) chooses to favour. Arm (b)'s own allocation at 512 atoms hits no cap. The nulls are therefore made MORE like the treatment by the floor, not less, which makes kill switches 2 and 4 harder for arm (b) to survive rather than easier."
+  },
+  "sample_adequacy": {
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "report_per_class_reading": true,
+    "_note": "Plan section 5.3, never waived. The floor binds PER EXPERT ON THAT EXPERT'S OWN ROWS, per section 7.10 design item 6: n_e / (pool_grid^2 * A_e) >= 10. This is the same quantity M103 computed and it is the statistically correct one for this head. The head is a SINGLE multi-output linear map: all 345 outputs share one design matrix and one Gram inverse, so fitting 345 outputs instead of one consumes no additional degrees of freedom per row and the relevant ratio is rows per fitted FEATURE DIMENSION. Section 5.3's phrase 'applied per class' was written for components fitted separately per class, such as a per-class tangent subspace, where each class's component sees only that class's rows; it does not describe this head. THE PER-CLASS RATIO IS NEVERTHELESS COMPUTED AND REPORTED for every expert of every arm, because the reading is arguable and a reader who takes the stricter one must be able to see what it says without rerunning anything. On a 345-class corpus that stricter reading is met by no arm at any budget, and it is met by no arm EQUALLY, so it cannot favour one allocation rule; what it does bound is how well any absolute accuracy here is estimated. An expert below the floor makes its arm void, not negative."
+  },
+  "arms": {
+    "a_uniform": {
+      "label": "(a) uniform mixture, every expert the same size",
+      "role": "THE NULL, and the construction the entire published mixture-of-experts literature uses. Plan section 8.10.4: Switch, Mixtral and DeepSeekMoE all allocate equal capacity per expert, and DeepSeekMoE's contribution was making experts finer while leaving them uniform.",
+      "weights": "uniform"
+    },
+    "b_rank_sized": {
+      "label": "(b) rank-sized mixture, capacity proportional to measured effective rank",
+      "role": "the arm the direction is about",
+      "weights": "rankme_train_only"
+    },
+    "c1_generalist_mac_matched": {
+      "label": "(c1) single generalist at the mixture's per-image inference cost",
+      "role": "tests whether ANY partition helps, at the matching section 7.10 design item 2 governs",
+      "weights": "single_expert"
+    },
+    "c2_generalist_atom_matched": {
+      "label": "(c2) single generalist at the mixture's plain atom sum",
+      "role": "tests the same question at the matching section 7.10 design item 1(c) describes, which costs 6x the per-image inference of every other arm",
+      "weights": "single_expert",
+      "_note": "Design item 1(c) says 'the same total atoms' and design item 2 says 'matched on inference MACs'. For a mixture under oracle routing those two are not the same thing and the registration did not notice: an image pays for one expert, so a generalist holding the whole atom sum costs six times as much per image. BOTH readings are run rather than one being chosen after the fact, because kill switch 3 is decided differently by each and choosing between them post hoc would be choosing the answer. The conflict is registered as a defect of section 7.10 and is contradicted in place there under section 5.10 rather than being edited out."
+    },
+    "d_random_sized": {
+      "label": "(d) random-sized mixture, one Dirichlet draw per seed",
+      "role": "THE STRUCTURE-MATCHED NULL R5 REQUIRES. Same heterogeneity, same row-weighted total, same floor, arbitrary sizes. Decides whether the instrument is doing the work or whether any unequal allocation would have done.",
+      "weights": "dirichlet",
+      "dirichlet_concentration": 1.0,
+      "_note": "One draw per seed rather than several per seed, so the three reported allocations are three genuinely different random rules and the spread across seeds is a spread across draws. Reporting the best of several draws would invert the null."
+    },
+    "e_traffic_inverse": {
+      "label": "(e) traffic-inverse mixture, capacity proportional to 1/(row share)",
+      "role": "SECOND STRUCTURE-MATCHED NULL, added before measurement",
+      "weights": "inverse_traffic",
+      "_note": "NOT in the section 7.10 registration. Added at build time, BEFORE any accuracy was computed, because reading the corpus revealed a confound the registration does not control: DomainNet's domains differ in size by 3.6x, and under a MAC match a rule may win simply by moving capacity off the high-traffic domains, where capacity is expensive, and onto the low-traffic ones, where it is cheap. Quickdraw holds 29.46 percent of train rows and has the lowest measured rank, so rank-sizing and traffic-avoidance point the same way there and arm (b) could win for a reason that has nothing to do with effective rank. Arm (d) does not control this: a Dirichlet draw is uncorrelated with traffic, not anti-correlated with it. Arm (e) is the allocation that maximises the confound while carrying no rank information at all. Adding a HARDER null before measurement makes the test stricter and is permitted; removing one, or adding one after seeing the result, is not. The addition and its reason are recorded here and in the evidence so the record shows the design was tightened rather than tuned."
+    }
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [1.0, 10.0, 100.0, 1000.0, 10000.0],
+    "validation_fraction": 0.1,
+    "selection_arm": "a_uniform",
+    "_note": "A single multi-output ridge from standardised pooled features to centred one-hot targets, solved from the normal equations. It is chosen over M103's multinomial logistic head for three reasons, all recorded before the run: it is exactly deterministic, so no arm can differ from another by an optimiser's stopping point; it is solved in closed form, so 'trained to convergence' is not a judgement call; and on 345 classes an iterative multinomial fit costs O(n*d*C) PER ITERATION, which would have forced a corpus subsample and the subsample would have lowered the sample-floor cap that arm (b)'s largest expert is bound by. The head differs from M103's and no cross-milestone comparison is permitted in any case (section 7.10 restriction 1). THE SAME HEAD FAMILY, THE SAME GRID AND THE SAME CHOSEN CONSTANT ARE USED BY EVERY ARM AND EVERY EXPERT.",
+    "_selection_note": "The regularisation constant is chosen ONCE PER BUDGET on the NULL arm (a) at the first seed, scored on a validation split carved out of TRAIN, and then applied unchanged to every arm, every expert and every seed at that budget. Choosing on the null is deliberately against interest: arm (b) never gets a constant tuned to itself. Per-expert tuning was considered and rejected, because an arm with more experts would then get more tuning and the operand would stop being the allocation. The evaluation split is never touched by any choice.",
+    "_intercept_note": "Features are standardised on each expert's own train rows and an unpenalised intercept column is appended, so the penalty falls only on the slopes and an expert is never penalised for its class prior."
+  },
+  "routing": {
+    "mode": "oracle_domain_label",
+    "_note": "Plan section 7.10 design item 3. Routing is by the true domain label so that a routing failure cannot be mistaken for a sizing failure. M104 THEREFORE MEASURES AN UPPER BOUND AND MAY NOT BE REPORTED AS A SYSTEM RESULT; section 7.11 M105 measures the system. Restriction 4: any statement of an M104 figure carries the word 'oracle' in the same sentence."
+  },
+  "gate": {
+    "primary_operand": "test accuracy under oracle routing, reported PER DOMAIN and pooled, per section 7.10 design item 5",
+    "registered_prediction": "Arm (b) beats arm (a), AND the margin is concentrated in quickdraw and sketch, the two domains whose measured rank sits below the mixed control. Section 2.9.7 probe 3 places the other four domains above that control, so the mechanism predicts little or nothing there. IF THE MARGIN IS UNIFORM ACROSS ALL SIX DOMAINS THE STATED MECHANISM IS WRONG even if the aggregate favours arm (b), and the plan requires that to be reported as a mechanism failure rather than an accuracy success.",
+    "kill_switch_1": "If arm (b) does not beat arm (a) by more than arm (a)'s own seed spread, at three seeds, then rank-sizing buys nothing at matched compute and the direction is refuted. Section 11.1 requires that as the headline, not a footnote.",
+    "kill_switch_2": "If arm (d), a random allocation with the same heterogeneity and the same row-weighted total, matches arm (b), then the win belongs to heterogeneity itself and not to effective rank, and the contribution claimed for this direction does not exist.",
+    "kill_switch_2_tolerance": 0.005,
+    "kill_switch_3": "If arm (c), the single generalist, matches the best mixture arm, then partitioning buys nothing at this scale and M105 and M106 are not worth running. Evaluated separately against (c1) and (c2), which sit at different inference costs.",
+    "kill_switch_4": "ADDED WITH ARM (e), before measurement. If arm (e), which carries no rank information, matches arm (b), then the operand is measuring traffic-weighted MAC arbitrage rather than effective rank, and the same reading as kill switch 2 applies.",
+    "mechanism_uniformity_tolerance": 0.5,
+    "_uniformity_note": "The registered prediction is tested by comparing the mean (b)-(a) margin on the two low-rank domains against the mean margin on the four high-rank ones. The mechanism is recorded as UNSUPPORTED unless the low-rank margin exceeds the high-rank margin, and as CONTRADICTED if the high-rank margin is the larger. The tolerance is the fraction of the low-rank margin the high-rank margin may reach before the pattern counts as uniform."
+  },
+  "compute_ledger": {
+    "report_training_and_inference_separately": true,
+    "_note": "Plan section 5.11 and section 7.10 design item 7. Section 11.2 item 10 forbids netting training against inference. Arm (b) pays a rank-measurement cost that no other arm pays; it is charged in full to arm (b)'s training column and reported even though it is small. Patch extraction and per-patch contrast normalisation are excluded from the MAC count and that exclusion is stated in the evidence, exactly as section 2.9.3 limitation (iv) requires."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "_note": "The encode runs in float32, which is what makes the sweep affordable, and the normal equations accumulate in float64, which is where the conditioning actually matters. A within-run determinism check encodes the same block twice and requires bitwise equality; a non-repeatable encode aborts the run rather than producing figures no one can reproduce."
+  }
+}

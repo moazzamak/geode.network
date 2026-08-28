@@ -1,0 +1,19 @@
+{
+  "name": "geode-evm-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-EVM test harness for GEODE blockchain contracts (M202 spec, M204 build)",
+  "scripts": {
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "compile": "hardhat compile"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.2.0",
+    "@openzeppelin/contracts-upgradeable": "^5.2.0",
+    "@openzeppelin/hardhat-upgrades": "^3.9.0",
+    "hardhat": "^2.22.19",
+    "solidity-coverage": "^0.8.14"
+  }
+}

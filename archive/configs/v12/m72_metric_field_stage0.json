@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "milestone": "M72",
+  "seed": 11,
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "geometry_fraction": 0.8,
+  "rank": 32,
+  "miscoverage": 0.08,
+  "training": {
+    "epochs": 24,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "classification_temperature": 2.0,
+    "target_score": 1.0,
+    "separation_margin": 1.0,
+    "probe_margin": 2.0,
+    "loss_weights": {
+      "classification": 1.0,
+      "eikonal": 0.01,
+      "probe": 1.0,
+      "distribution": 0.1,
+      "separation": 0.1
+    },
+    "trained_probe_families": [
+      "axis_tangent",
+      "normal",
+      "masking",
+      "random_direction"
+    ],
+    "held_out_probe_families": ["corner_tangent", "mixed"]
+  },
+  "gate": {
+    "maximum_median_threshold_ratio": 2.0,
+    "maximum_held_out_four_x_acceptance": 0.01,
+    "maximum_accuracy_regression": 0.01,
+    "m71_seed11_gaussian_accuracy": 0.95125
+  },
+  "source_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m70_index": {
+    "path": "logs/results/v12/m70_native_domainnet/artifact_index.json",
+    "sha256": "20c2dea882b41ecce8066f5b0d5468a8c9cff692686144e94f2d115ddf78b22a"
+  },
+  "m71_index": {
+    "path": "logs/results/v12/m71_gaussian_classifier/artifact_index.json",
+    "sha256": "f658ad7b1c4312ee18d94a373ed23ea342ec25bf4e42256e5db2c3f366e86866"
+  },
+  "final_labels_opened": false
+}

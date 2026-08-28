@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "milestone": "M16",
+  "stages": {
+    "S0": {"seeds": [11]},
+    "S1": {"seeds": [11]},
+    "S2": {"seeds": [11, 23, 37]},
+    "S3": {"seeds": [11, 23, 37, 53, 71]},
+    "S4": {"seeds": [11, 23, 37]},
+    "S5": {"seeds": [11, 23, 37]}
+  },
+  "required_heads": [
+    "linear_logistic",
+    "rbf",
+    "prototype",
+    "gaussian_mixture",
+    "current_geode"
+  ],
+  "representations": ["identity", "fixed_affine"],
+  "heads": [
+    "linear_logistic",
+    "rbf",
+    "prototype",
+    "gaussian_mixture",
+    "current_geode"
+  ],
+  "readouts": ["raw"],
+  "datasets": [
+    {
+      "dataset": "synthetic_gaussian_s0",
+      "stage": "S0",
+      "split_protocol": "m16_s0_fixed_indices_v1",
+      "feature_protocol": "m16_s0_identity_and_affine_v1",
+      "split_hash": null,
+      "feature_hash": null
+    },
+    {
+      "dataset": "cifar10_bounded",
+      "stage": "S1",
+      "split_protocol": "v5_cifar10_train_dev_cal_test_v1",
+      "feature_protocol": "v5_frozen_backbone_manifest_v1",
+      "split_hash": null,
+      "feature_hash": null
+    },
+    {
+      "dataset": "cifar10_development",
+      "stage": "S2",
+      "split_protocol": "v5_cifar10_train_dev_cal_test_v1",
+      "feature_protocol": "v5_frozen_backbone_manifest_v1",
+      "split_hash": null,
+      "feature_hash": null
+    },
+    {
+      "dataset": "cifar10_cifar100_confirmation",
+      "stage": "S3",
+      "split_protocol": "v5_cifar_confirmation_v1",
+      "feature_protocol": "v5_frozen_backbone_manifest_v1",
+      "split_hash": null,
+      "feature_hash": null
+    },
+    {
+      "dataset": "wikitext103_locked",
+      "stage": "S4",
+      "split_protocol": "v5_wikitext_chronological_purged_v1",
+      "feature_protocol": "v5_frozen_temporal_encoder_manifest_v1",
+      "split_hash": null,
+      "feature_hash": null
+    },
+    {
+      "dataset": "modelnet10_public",
+      "stage": "S5",
+      "split_protocol": "v5_modelnet10_public_v1",
+      "feature_protocol": "v5_frozen_pointcloud_encoder_manifest_v1",
+      "split_hash": null,
+      "feature_hash": null
+    }
+  ]
+}

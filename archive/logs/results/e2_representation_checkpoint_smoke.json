@@ -1,0 +1,24 @@
+{
+  "checkpoint_array_count": 17,
+  "final_epoch": 4,
+  "final_global_step": 8,
+  "history_count": 4,
+  "history_exact": true,
+  "interruption_epoch": 2,
+  "interruption_global_step": 4,
+  "model_exact": true,
+  "model_sha256": {
+    "0.bias": "8edb5ae5a190e021cffbf277a0eda3bace4dfef07066292b36470e7b982509f9",
+    "0.weight": "9b31718141311a6752a1e7a8cfc8a7d9aa5e4329c5072e9654623998a9b660f4",
+    "3.bias": "bf97724f7df91be37596f6ef118f3ac3e12b8558a0c6bd97c12711a83085d540",
+    "3.weight": "ee5990dc94f4f52246a1f3adfd3e47484a960aa9537917fd857e6d21cbe0f364"
+  },
+  "optimizer_exact": true,
+  "performance_claim": false,
+  "regression_test_count": 159,
+  "regression_test_seconds": 10.918,
+  "run_id": "e2-representation-smoke",
+  "scheduler_exact": true,
+  "schema_version": 1,
+  "torch_version": "2.13.0+cpu"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "manifest_path": "domainnet/manifest.json",
+  "data_root": "domainnet/repository",
+  "validation_domains": ["clipart"],
+  "final_domains": ["sketch"],
+  "source_domains": ["infograph", "painting", "quickdraw", "real"],
+  "selection_rule": "maximize source-held-out mean balanced accuracy on clipart only",
+  "primary_metric": "balanced_accuracy",
+  "required_class_count": 345,
+  "ray": {
+    "address": null,
+    "minimum_nodes": 2,
+    "max_retries": 1
+  }
+}

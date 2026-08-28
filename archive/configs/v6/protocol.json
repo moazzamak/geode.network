@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "milestone": "M27",
+  "parent_protocol": {
+    "path": "experiments/configs/v5/protocol.json",
+    "sha256": "e01a4814601deb7329954f529e92123b0e5443a1f689199bcadee19a2692730f"
+  },
+  "active_representation": {
+    "id": "dinov2-small",
+    "hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+    "interface": "identity",
+    "output_dimension": 384
+  },
+  "split_hashes": {
+    "train": "1a054d9f1bfe28dde3cf3466cc210feba65f08baeca41bc5d7623de745652a04",
+    "development": "9e549077c2078158e4747ed142a290f67547a9dbd8bb9096586c6bd6a28510d5",
+    "test": "d9d6b802f959dc2797e5e9285177a9e8896f5d22f5c2b76f4654b01dce36c6f9"
+  },
+  "feature_hashes": {
+    "train": "b6a35cfb65fed5630011070a731df3c90f5bc9adab8e84795b9da20f03457244",
+    "development": "86c8f30c269a645c081cb70fc55b6f69bfe20a6faad174cd538e357e6deab72d",
+    "test": "eab842d7a5ca29d07639f2f73c28f0463b44946197df02ae553a5b89c2e12a8b"
+  },
+  "baseline_locks": [
+    {
+      "artifact_id": "v5_protocol",
+      "path": "experiments/configs/v5/protocol.json",
+      "sha256": "e01a4814601deb7329954f529e92123b0e5443a1f689199bcadee19a2692730f",
+      "expected_values": {
+        "milestone": "M16",
+        "stages.S2.seeds": [11, 23, 37],
+        "stages.S3.seeds": [11, 23, 37, 53, 71]
+      }
+    },
+    {
+      "artifact_id": "m19_native_support_config",
+      "path": "experiments/configs/v5/m19_native_dinov2_sphere_support_pilot.json",
+      "sha256": "f199ef82caf453aade983ae293173670d3eb00aad47fcd1d278f113fc2495c3f",
+      "expected_values": {
+        "seed": 11,
+        "backbones": [
+          {
+            "id": "dinov2-small",
+            "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+            "weights_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+            "output_dimension": 384,
+            "preprocessor_config": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+            "checkpoint_source": "https://huggingface.co/onnx-community/dinov2-small-ONNX",
+            "checkpoint_license": "apache-2.0",
+            "token_pooling_policy": "cls_token",
+            "extraction_batch_size": 32
+          }
+        ],
+        "geode_config.minimum_seed_size": 386
+      }
+    },
+    {
+      "artifact_id": "m19_native_support_extraction",
+      "path": "data/v5/features/m19_native_dinov2_sphere_support_pilot/extraction_summary.json",
+      "sha256": "84a2f60fadda28b92c709e4f6b979cad3952eac9eb8971d92be914ff5b68f1b9",
+      "expected_values": {
+        "representations.dinov2-small.representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+        "split_hashes.train": "1a054d9f1bfe28dde3cf3466cc210feba65f08baeca41bc5d7623de745652a04",
+        "split_hashes.dev": "9e549077c2078158e4747ed142a290f67547a9dbd8bb9096586c6bd6a28510d5",
+        "split_hashes.test": "d9d6b802f959dc2797e5e9285177a9e8896f5d22f5c2b76f4654b01dce36c6f9"
+      }
+    },
+    {
+      "artifact_id": "m19_native_support_evidence",
+      "path": "logs/results/v5/m19_native_dinov2_sphere_support_pilot/m19_native_dinov2_sphere_support_pilot_evidence.json",
+      "sha256": "9deca0da806a46cd4f0f3fb62e353ffde8bc3367df073a90c521d46ac729d2bf",
+      "expected_values": {
+        "representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+        "heads.current_geode.test.balanced_accuracy": 0.8625,
+        "heads.rbf_svm.test.balanced_accuracy": 0.967,
+        "heads.weighted_knn.test.balanced_accuracy": 0.967,
+        "geode_structure.total_primitives": 70,
+        "test_used_for_selection": false
+      }
+    }
+  ],
+  "prediction_baseline": "logs/results/v6/m27_baseline_predictions/baseline_predictions.json",
+  "teacher": {
+    "primary_family": "rbf_svm",
+    "secondary_family": "compact_mlp",
+    "selection_metric": "development_balanced_accuracy",
+    "test_labels_used_for_selection": false
+  },
+  "boundary_cohort": {
+    "fraction": 0.2,
+    "minimum_count": 2,
+    "ranking": "ascending_top2_probability_margin",
+    "tie_break": "sample_index"
+  },
+  "primitive_candidates": [
+    {
+      "id": "sphere_radial",
+      "family": "sphere",
+      "minimum_seed_rule": "d_plus_2",
+      "score_semantics": "normalized_radial",
+      "local_rank": null,
+      "residual_scale": null,
+      "direction": null,
+      "angular_radius": null
+    },
+    {
+      "id": "subspace_r8_likelihood",
+      "family": "subspace",
+      "minimum_seed_rule": "r_plus_2",
+      "score_semantics": "gaussian_log_likelihood",
+      "local_rank": 8,
+      "residual_scale": "isotropic",
+      "direction": null,
+      "angular_radius": null
+    },
+    {
+      "id": "subspace_r16_likelihood",
+      "family": "subspace",
+      "minimum_seed_rule": "r_plus_2",
+      "score_semantics": "gaussian_log_likelihood",
+      "local_rank": 16,
+      "residual_scale": "isotropic",
+      "direction": null,
+      "angular_radius": null
+    },
+    {
+      "id": "subspace_r32_likelihood",
+      "family": "subspace",
+      "minimum_seed_rule": "r_plus_2",
+      "score_semantics": "gaussian_log_likelihood",
+      "local_rank": 32,
+      "residual_scale": "isotropic",
+      "direction": null,
+      "angular_radius": null
+    },
+    {
+      "id": "cosine_cap_angular",
+      "family": "cosine_cap",
+      "minimum_seed_rule": "direction_plus_radius",
+      "score_semantics": "angular_distance",
+      "local_rank": null,
+      "residual_scale": null,
+      "direction": "unit_mean",
+      "angular_radius": "radians"
+    }
+  ],
+  "budgets": [
+    {
+      "mode": "component_matched",
+      "component_limit": 70,
+      "parameter_limit": null
+    },
+    {
+      "mode": "parameter_matched",
+      "component_limit": null,
+      "parameter_limit": 27020
+    }
+  ]
+}

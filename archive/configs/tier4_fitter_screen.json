@@ -1,0 +1,23 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier4_fitter_screen_runs.jsonl",
+  "bootstrap_resamples": 100,
+  "calibration_fraction": 0.2,
+  "capture_threshold": 0.08,
+  "consensus_threshold": 0.12,
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "feature_extractor": "cnn",
+  "fitters": [
+    "current",
+    "shrinkage_covariance",
+    "minimum_covariance_determinant"
+  ],
+  "max_iterations": 10,
+  "max_samples": 8000,
+  "nudge_iterations": 0,
+  "nudge_learning_rate": 0.02,
+  "pca_components": 128,
+  "seed": 11,
+  "selection_fraction": 0.15,
+  "use_gpu": true
+}

@@ -1,0 +1,69 @@
+{
+  "milestone": "M142",
+  "cell": "C4",
+  "title": "Construction factorial screen - cell C4: power-normalisation on the cached SPM codes (free fit)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (14 Aug 2026, after the sealed C2 PASS)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the classic signed-square-root + per-row L2 normalisation lift the SPM construction, the way it lifted the sealed codes (the registered C1b prior: +1.68 points at 138k)?",
+  "registration_notes": {
+    "N102.1": "FREE fit on the sealed C2 artifacts (v16/m142_c2/spm1923_fulltrain.npy + m142_c2_fulltrain_labels.npz), never re-encoded. The SPM test codes are encoded once here and PERSISTED as spm1923_fulltest.npy for all later free cells.",
+    "N102.2": "t1 anchor: the raw fit (no transform, penalty 1.0, full data) must reproduce the sealed C2 read Q_SPM(1923, 409832) = 0.260493 within 0.002.",
+    "N102.3": "t1b (C1b rule): p=1.0 + L2 is the identity up to a positive per-row scale; its fit must track the raw fit closely (delta reported; the adjudication is within-instrument: best cell vs the raw same-fitter reference).",
+    "N102.4": "Gate: the best (p, penalty) cell at full data must beat the raw same-fitter reference at penalty 1.0 by >= +0.005. The 138k-level grid is reported alongside (the C1b prior level). The trained-head read (p=0.5) is the co-adaptation control; the cell closes as a scoped negative only if BOTH the gate fires AND the trained-head read fails.",
+    "N102.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "spm_atoms": 1923,
+    "levels": [1, 2, 4],
+    "note": "M117/M126 exact whitener, used only to re-encode the test codes once."
+  },
+  "anchors": {
+    "t1_reference": 0.260492753623188,
+    "t1_note": "the sealed C2 read Q_SPM(1923, 409832) at penalty 1.0",
+    "t1_tolerance": 0.002
+  },
+  "cell_c4": {
+    "p_ladder": [1.0, 0.5],
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "n_138k": 138000,
+    "trained_epochs": 8,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "prior_note": "the registered C1b prior: power-norm lifted the SEALED codes by +1.68 points at 138k (0.2363 vs 0.2195 raw same-fitter). C4 re-tests the transform on the SPM code.",
+    "gate_registered": "fired if the best (p, penalty) cell at full data < the raw same-fitter reference at penalty 1.0 + 0.005; the cell closes as a scoped negative only if the trained-head read also fails.",
+    "consequence_fired": "power-normalisation does not lift the SPM codes at matched cost; C4 is a scoped negative and the raw SPM read stays the C2 winner.",
+    "consequence_passed": "power-normalisation lifts the SPM codes; the (p, penalty) winner is promoted as the SPM family head recipe."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096,
+    "encode_throttle_seconds": 0.05
+  },
+  "output_dir": "logs/results/v16/m142_c4"
+}

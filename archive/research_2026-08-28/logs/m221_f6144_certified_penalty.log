@@ -1,0 +1,29 @@
+repair digests all match the registered values
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+fold profile: {'fold_a_rows': 205006, 'fold_b_rows': 204826, 'max_per_class_imbalance': 1, 'class_size_min': 612, 'class_size_max': 1926}
+fitting fold A...
+scoring fold B...
+  penalty    0.01: val 0.242918379502602
+  penalty     0.1: val 0.243435891927783
+  penalty     1.0: val 0.244114516711746
+  penalty    10.0: val 0.244392801695097
+  penalty   100.0: val 0.239779129602687
+chosen penalty: 10.0
+refitting on the full schedule...
+full penalty 1.0 aggregate 0.261536231884058 (anchor delta +0.000e+00)
+CERTIFIED test aggregate at penalty 10.0: 0.258521739130435
+{
+ "gates_ok": true,
+ "chosen_penalty": 10.0,
+ "certified_test_aggregate": 0.2585217391304348,
+ "delta_vs_sealed": -0.0030144927536231436,
+ "val_accuracies": {
+  "0.01": 0.2429183795026022,
+  "0.1": 0.24343589192778262,
+  "1.0": 0.24411451671174558,
+  "10.0": 0.2443928016950973,
+  "100.0": 0.23977912960268716
+ }
+}
+M221 complete -> logs\results\v25\m221_f6144_certified_penalty\evidence.json

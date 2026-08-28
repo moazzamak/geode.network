@@ -1,0 +1,67 @@
+{
+  "endpoint": "http://export.arxiv.org/api/query",
+  "max_results_per_query": 20,
+  "retries": 3,
+  "backoff_seconds_base": 2.0,
+  "sleep_between_queries_seconds": 3.2,
+  "question": "Which projects implement or run LLM-scale (or deep-network) inference under zero-knowledge proofs on blockchains, and what can GEODE's M191/M193 privacy track learn from them?",
+  "role": "Displacement + learning only — an unauthenticated public search cannot support novelty claims (M88). It can find displacing work and teaching material, nothing more.",
+  "gate": "Anchor gate: every anchor query must return at least one hit after both stages (AND of quoted abs: phrases, then a uniform OR re-run of ALL queries). An anchor that misses voids the search for all claims. A 429 is recorded separately from a genuinely empty result.",
+  "registered_anchors": {
+    "anchor_zkllm": "zkLLM: Zero Knowledge Proofs for Large Language Models (Sun et al., CCS 2024)",
+    "anchor_zen": "ZEN: An Optimizing Compiler for Verifiable, Zero-Knowledge Neural Network Inferences (Feng et al., 2021)",
+    "anchor_zkcnn": "zkCNN: Zero Knowledge Proofs for Convolutional Neural Network Predictions and Accuracy (Liu et al., 2022)"
+  },
+  "queries": [
+    {
+      "id": "anchor_zkllm",
+      "kind": "anchor",
+      "phrases": ["zero knowledge proof", "large language model"]
+    },
+    {
+      "id": "anchor_zen",
+      "kind": "anchor",
+      "phrases": ["zero-knowledge", "neural network inference"]
+    },
+    {
+      "id": "anchor_zkcnn",
+      "kind": "anchor",
+      "phrases": ["zero knowledge proofs", "convolutional neural network"]
+    },
+    {
+      "id": "disc_verifiable_llm",
+      "kind": "discovery",
+      "phrases": ["verifiable", "large language model", "inference"]
+    },
+    {
+      "id": "disc_optimistic_ml",
+      "kind": "discovery",
+      "phrases": ["optimistic", "machine learning", "blockchain"]
+    },
+    {
+      "id": "disc_zkvm_ml",
+      "kind": "discovery",
+      "phrases": ["zkVM", "machine learning"]
+    },
+    {
+      "id": "disc_quantized_zk_llm",
+      "kind": "discovery",
+      "phrases": ["quantization", "zero-knowledge", "large language model"]
+    },
+    {
+      "id": "disc_fhe_llm",
+      "kind": "discovery",
+      "phrases": ["fully homomorphic encryption", "large language model"]
+    },
+    {
+      "id": "disc_mpc_llm",
+      "kind": "discovery",
+      "phrases": ["secure multi-party computation", "large language model"]
+    },
+    {
+      "id": "disc_proof_of_inference",
+      "kind": "discovery",
+      "phrases": ["proof", "inference", "blockchain"]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A2",
+  "stage": "S2",
+  "seeds": [11, 23, 37],
+  "m30_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m30_evidence": {
+    "path": "logs/results/v6/m30_directional_s2/evidence.json",
+    "sha256": "bb64692fac27c78c9345a7c07a702804c117b36a95415d3b4b36720da8711331"
+  },
+  "m31_evidence": {
+    "path": "logs/results/v6/m31_factorial_s2/evidence.json",
+    "sha256": "bd1d52ec1ae76043b5dd4d53be25068a2b7abfdff29b4ab67e2caf4bab4a9511"
+  },
+  "a1_weighted_evidence": {
+    "path": "logs/results/v6_1/a1_weighted_s1/evidence.json",
+    "sha256": "e00a01b1f7c8d56640bf0e992a94e8d8be72be705b4b7bffd6985b6d90be8218",
+    "required_advancement_status": true
+  },
+  "a1_tangent_evidence": {
+    "path": "logs/results/v6_1/a1_tangent_s1/evidence.json",
+    "sha256": "717637ecd2f3f4b38f379010daeeab433deb595200dbe2b747f29abb3eb1f7b2",
+    "required_advancement_status": false
+  },
+  "a1_budget_evidence": {
+    "path": "logs/results/v6_1/a1_budget_curve_s1/evidence.json",
+    "sha256": "ae6ba25a924b1fc9e7efec9379089771951ab1cfe0b03fd07f60c4120deb5cc7",
+    "required_a2_component_count": 46
+  },
+  "parent_students": {
+    "11": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_11/selected_student.json",
+      "sha256": "cae62407d0d7ab0609bf5285a58da682205a9fea0797ba61b50087bf3db36978"
+    },
+    "23": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_23/selected_student.json",
+      "sha256": "e31e19f180a0393a929c06647d1f329324a54deebca3ac06a57c6110f80be86a"
+    },
+    "37": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_37/selected_student.json",
+      "sha256": "baddf80e036b7d9589010c4e93b27fa403e95753370ff903ee50becd41dc8d2b"
+    }
+  },
+  "retained_mechanisms": ["weighted_affine_rank32"],
+  "closed_mechanisms": ["tangent_cap_rank32", "weighted_tangent_cap_rank32"],
+  "readout": {
+    "family": "nonnegative_component_mixture",
+    "constraint": "per_class_simplex",
+    "parameterization": "softmax_log_weights",
+    "optimizer": "L-BFGS-B",
+    "regularization": 0.0001,
+    "maximum_iterations": 500,
+    "gradient_tolerance": 1e-08,
+    "initialization": "zero_equal_weights",
+    "temperature_policy": "one_global",
+    "minimum_temperature": 0.05,
+    "maximum_temperature": 20.0
+  },
+  "cohort": {
+    "fraction": 0.2,
+    "minimum_count": 1000
+  },
+  "budget": {
+    "component_count": 46,
+    "parameter_limit": 584476,
+    "maximum_optimizer_iterations": 500,
+    "maximum_function_evaluations": 1000
+  },
+  "latency": {
+    "warmup_runs": 1,
+    "measured_runs": 5,
+    "maximum_ratio": 1.2
+  },
+  "statistics": {
+    "confidence": 0.95,
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 61
+  },
+  "parity_gate": {
+    "maximum_same_space_gap": 0.02,
+    "maximum_m31_accuracy_loss": 0.0025,
+    "minimum_unaffected_prediction_preservation": 0.999,
+    "require_exact_replay": true,
+    "require_exact_rollback": true
+  },
+  "test_labels_opened": false
+}

@@ -1,0 +1,89 @@
+{
+  "milestone": "m132_joint_scaling_litsearch",
+  "program": "pre-registration literature survey: is the joint (model-size x data) scaling surface already investigated? (12 Aug 2026)",
+  "registration_notes": {
+    "N91.1": "This is a SURVEY for a measurement-context question - not a claim audit, and NOT a novelty search. The hypothesis is that the joint scaling conclusion IS already established (scaling laws); the survey documents the displacing/presence evidence, not an absence.",
+    "N91.2": "Question registered before search: is the finding 'model-size scaling saturates, data scaling saturates, but scaling BOTH jointly improves past the individual limits' already investigated and confirmed in the literature?",
+    "N91.3": "Anchors are recall probes: each MUST be retrieved by a topic query that does NOT contain its title, else the search is insensitive and every 'not found' is worthless.",
+    "N91.4": "Query families are phrased to find the presence of joint-scaling work (Chinchilla-style compute-optimal scaling, data-saturation, width/parameter saturation, kernel/RF joint theory), not work that merely agrees in spirit.",
+    "N91.5": "Empty queries are recorded, not dropped. Rate-limited queries are retried and residual failures recorded separately from genuinely empty results.",
+    "N91.6": "This survey expects PRESENCE. A positive result (retrieving Chinchilla/Kaplan/Muennighoff-class work) confirms the user's suspicion; absence would be UNRESOLVED, never 'first'.",
+    "N91.7": "Title/abstract mark a source live; only primary text with a located passage may count as displacement.",
+    "N91.8": "This evidence is a dated snapshot and is NOT replayable: the indexes change and the network is not a sealed corpus.",
+    "N91.9": "Instrument reused from M127/M129 (audit_v13_prior_art): arXiv two-stage AND-then-OR, Semantic Scholar with retry; S2 rate-limiting recorded as failures, not empty."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "language model scaling laws parameters data",
+    "compute optimal training large language model",
+    "repeated data epochs language model scaling",
+    "empirical power law deep learning dataset size",
+    "random feature regression generalization data and width"
+  ],
+  "claims": {
+    "D1": {
+      "statement": "Loss/accuracy is already modelled as a JOINT function of model size (parameters/width) and training data (the 2D scaling surface), with the requirement to scale both.",
+      "queries": [
+        "scaling law model size dataset jointly",
+        "loss function parameters and data power law",
+        "compute optimal scaling model size data",
+        "scaling behavior accuracy parameters training data",
+        "neural network scaling both parameters and data"
+      ]
+    },
+    "D2": {
+      "statement": "Data scaling already exhibits saturation/diminishing returns (repeated epochs, data-constrained scaling).",
+      "queries": [
+        "data constrained language model scaling",
+        "repeated epochs diminishing returns training data",
+        "data saturation scaling law neural network",
+        "power law dataset size diminishing returns",
+        "how much data enough pretraining scaling"
+      ]
+    },
+    "D3": {
+      "statement": "Model-size/width scaling already exhibits saturation/diminishing returns (power laws in parameters; double descent and overparameterization analyses).",
+      "queries": [
+        "scaling law parameters diminishing returns",
+        "width scaling saturation neural network accuracy",
+        "model capacity diminishing returns data fixed",
+        "overparameterization more parameters accuracy",
+        "power law model size generalization"
+      ]
+    },
+    "D4": {
+      "statement": "Kernel/random-feature theory already predicts the joint dependence of test error on data P and the feature spectrum (which is controlled by width).",
+      "queries": [
+        "random feature regression generalization data width",
+        "kernel regression learning curve data and spectrum",
+        "ridge regression test error dataset size features",
+        "spectral bias learning curve width data",
+        "modal power spectrum generalization data"
+      ]
+    },
+    "D5": {
+      "statement": "Compute-optimal / budget-constrained scaling (trading parameters vs data on a fixed compute budget) is already established.",
+      "queries": [
+        "compute optimal frontier parameters data",
+        "tradeoff model size dataset compute budget",
+        "optimal allocation parameters data training",
+        "isoflop scaling model data",
+        "chinchilla scaling compute optimal training"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v16/m132_joint_scaling_litsearch"
+}

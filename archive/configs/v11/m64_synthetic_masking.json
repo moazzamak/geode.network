@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "milestone": "M64",
+  "ambient_dimension": 64,
+  "seeds": [11, 23, 37],
+  "rank_grid": [8, 16, 32],
+  "straight_true_ranks": [8, 16, 32],
+  "geometry_count": 320,
+  "calibration_count": 199,
+  "evaluation_count": 800,
+  "explained_variance_target": 0.995,
+  "extent_quantile": 0.95,
+  "penalty_weight": 16,
+  "miscoverage": 0.08,
+  "coverage_band": [0.90, 0.94],
+  "four_x_acceptance_ceiling": 0.01,
+  "eight_x_acceptance_ceiling": 0,
+  "masking_v10_acceptance_floor": 0.20,
+  "masking_v11_acceptance_ceiling": 0.01,
+  "masking_contrast_margin": 0.1,
+  "full_dimension_residual_fraction_floor": 0.25,
+  "atlas_residual_ratio_ceiling": 0.75,
+  "random_orientation_residual_ratio_floor": 10,
+  "true_label_accuracy_floor": 0.95,
+  "random_label_accuracy_ceiling": 0.65,
+  "parent_lock": {
+    "path": "logs/results/v11/m63_protocol_lock/artifact_index.json",
+    "sha256": "8fe9ec24237062bc45d589a74c9144995eb7168457641c8f86ce63bf4045fbf1"
+  },
+  "final_labels_opened": false
+}

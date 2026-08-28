@@ -1,0 +1,12 @@
+{
+ "results": {
+  "n": 25,
+  "incumbent_misroutes": 4,
+  "candidate_misroutes": 4,
+  "incumbent_routed_accuracy": 0.84,
+  "candidate_routed_accuracy": 0.84,
+  "admitted": false,
+  "verdict": "NOT ADMITTED \u2014 the deterministic incumbent stands (the candidate did not beat it; a tie is not admission, registered)"
+ }
+}
+M281b complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v25\m281b_discriminating_router_smoke\evidence.json

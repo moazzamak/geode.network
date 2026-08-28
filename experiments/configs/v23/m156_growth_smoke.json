@@ -1,0 +1,97 @@
+{
+  "milestone": "M156",
+  "title": "SMOKE: M156 residual-growth plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M156 / section 6 (16 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (40000 train / 20000 test rows — the registered probe-derived row count; budget {256} only, anchors and control skipped, floor violations tolerated, GPU path not exercised). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_skip_control": true,
+  "_smoke_allow_floor_violation": true,
+  "_smoke_train_rows": 40000,
+  "_smoke_test_rows": 20000,
+  "question": "Does the M156 pipeline (base-head reproduction, error rows, column-extracted arm codes, head fit, append, re-fuse, gate) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "m142_cache_relpath": "v16/m142_c2",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "base": {
+    "note": "the promoted SPM+sqrt head (C4 p=0.5, penalty 0.1)",
+    "p": 0.5,
+    "penalty": 0.1
+  },
+  "sparse": {
+    "pool_size": 8192,
+    "pool_seed": 11,
+    "permutation_seed": [11, 100],
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11
+  },
+  "growth": {
+    "pool_atoms": 6144,
+    "pool_width": 24576,
+    "budgets": [256],
+    "head_penalty": 1.0,
+    "dictionary_note": "first g atoms of the cached f6144 pool; arms read the cached memmap columns"
+  },
+  "control": {
+    "mechanism": "M108 arm (c) blind greedy (group-OMP), SKIPPED in smoke (identity prefix used as the placeholder order)",
+    "parity_subset_rows": 512,
+    "parity_budget": 32,
+    "budget": 2048
+  },
+  "anchors": {
+    "base_full_data": 0.27855072463768116,
+    "d0_own_domain": 0.19357142857142856,
+    "a1_tolerance": 1e-09,
+    "a2_tolerance": 0.002,
+    "a4_tolerance": 1e-05
+  },
+  "premise": {
+    "fit_floor": 10.0,
+    "expected_n_error_rows": 76670
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000]
+  },
+  "gate": {
+    "registered": "per budget g: growth_fused >= static + 0.005 AND growth_fused > control_fused (static = the base head's test read)",
+    "margin": 0.005,
+    "consequence_passed": "residual-targeted growth lifts the global-head system beyond the base read beyond the blind-greedy control.",
+    "consequence_fired": "M156 closes as a scoped negative on this corpus and the base head stands."
+  },
+  "ops_ledger": {
+    "note": "both arms report the g-atom encode-equivalent MACs over train+test rows; the control additionally its error-row pool encode + OMP selection MACs."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "batch": 64,
+    "block": 4096,
+    "encode_throttle_seconds": 0.05,
+    "grid": 27,
+    "dimension": 108
+  },
+  "output_dir": "logs/results/v23/m156_growth_smoke"
+}

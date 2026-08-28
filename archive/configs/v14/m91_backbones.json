@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "artifact": "V14-M91-BACKBONES",
+  "milestone": "M91",
+  "purpose": "Re-extract v13's exact known corpus and open-set rows under three DINOv2 sizes, so that Plan v14 section 7's capacity question is asked with the backbone as the only factor that changes.",
+  "registered_question": "Plan v14 section 7 and 7.1: does a larger frozen backbone clear the three rejection bars on the identical partition?",
+  "registration_notes": [
+    "N91.1 - all three graphs are the onnx/model_int8.onnx export of onnx-community/dinov2-{size}-ONNX and all three ship a byte-identical preprocessor_config.json at 14e780d8..., which is the hash v13 already registered for dinov2-small. Producer, quantisation scheme, preprocessing, decode path, pooling policy, batch size and execution provider are held fixed; only the backbone changes.",
+    "N91.2 - identical rows is a check, not a claim. v13's selection scan is a deterministic prefix walk over hash-locked shards and never consults the backbone, so re-extraction re-derives the selection. The produced manifest must equal the sealed v13 manifest entry for entry on source_file, source_row, image_path, class_label, domain, native_width and native_height. Any mismatch means the reader changed and the artifact is not comparable.",
+    "N91.3 - extraction is CPU-only and this was re-measured rather than inherited. v13 measured DirectML disagreeing with the CPU provider by 11.7 percent relative for dinov2-small at batch size one. Repeated for dinov2-base before this config was written it is worse: mean relative divergence 0.2171, maximum 0.2500. The GPU cannot reproduce this backbone's features at any speed.",
+    "N91.6 - INT8 damage is measured because it is the obvious confound. A larger model can be quantised worse than a smaller one, and a null result would then be about quantisation rather than capacity. For each backbone the run records the mean relative divergence between the INT8 graph and the same producer's fp32 onnx/model.onnx on a fixed probe set drawn from the corpus. Reported, never gated: it cannot rescue a failing arm, and it exists so that a void verdict under N91.5 has a candidate cause on the record rather than a guess added afterwards.",
+    "N91.8 - dinov2-small is re-extracted by this same code path rather than copied from the sealed corpus, so that all three arms are produced identically. Its known-corpus features must hash to v13's sealed features_sha256; a mismatch means this code path is not v13's and no arm is comparable to a sealed number."
+  ],
+  "extraction": {
+    "batch_size": 1,
+    "batch_size_rationale": "The INT8 graphs contain DynamicQuantizeLinear operators that derive activation scales from the whole input tensor, so above batch size one a feature vector is a function of which other images shared its batch. Batch size one makes each artifact a function of (image, backbone).",
+    "dispatch_chunk_size": 512,
+    "worker_count": 14,
+    "worker_count_rationale": "v13's value on this 16-core machine. Worker count cannot influence the values, which is what the shard-invariance control asserts.",
+    "execution_provider": "CPUExecutionProvider",
+    "intra_op_threads_per_worker": 1
+  },
+  "backbones": [
+    {
+      "id": "dinov2-small",
+      "role": "reference and R5 null",
+      "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+      "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+      "float_repository": "onnx-community/dinov2-small-ONNX",
+      "float_file": "onnx/model.onnx",
+      "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+      "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+      "token_pooling_policy": "cls_token",
+      "output_dimension": 384
+    },
+    {
+      "id": "dinov2-base",
+      "role": "capacity arm",
+      "onnx_path": "data/v5/backbones/dinov2-base/onnx/model_int8.onnx",
+      "onnx_sha256": "f3006646af1ed07acceeefdd701e9be6e46e0b701ac0a1ab8e4ba7260e338302",
+      "float_repository": "onnx-community/dinov2-base-ONNX",
+      "float_file": "onnx/model.onnx",
+      "preprocessor_path": "data/v5/backbones/dinov2-base/preprocessor_config.json",
+      "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+      "token_pooling_policy": "cls_token",
+      "output_dimension": 768
+    },
+    {
+      "id": "dinov2-large",
+      "role": "capacity arm",
+      "onnx_path": "data/v5/backbones/dinov2-large/onnx/model_int8.onnx",
+      "onnx_sha256": "68910b3dff166c4853ac9ec87755249dfa5f59ab6e388b1d105ee017f4257d3d",
+      "float_repository": "onnx-community/dinov2-large-ONNX",
+      "float_file": "onnx/model.onnx",
+      "preprocessor_path": "data/v5/backbones/dinov2-large/preprocessor_config.json",
+      "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+      "token_pooling_policy": "cls_token",
+      "output_dimension": 1024
+    }
+  ],
+  "known": {
+    "class_count": 128,
+    "samples_per_class": 576,
+    "minimum_native_short_edge": 256,
+    "reference_manifest": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "reference_features_sha256": "6921c0ed444f6d8851c7b0441eaed432ba2bf980c761470db557377d3f5c170c",
+    "reference_labels_sha256": "05b21e506881bc4f14142770c6cb98808b663687aa52789d4474e18445b0034c"
+  },
+  "openset": {
+    "first_label": 128,
+    "last_label": 344,
+    "samples_per_unseen_class": 64,
+    "domain_quota_per_unseen_class": [9, 7, 6, 39, 3, 0],
+    "minimum_native_short_edge": 256,
+    "reference_manifest": "logs/results/v13/openset/selection_manifest.json",
+    "reference_feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "reference_feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9"
+  },
+  "manifest_identity": {
+    "fields": [
+      "source_file",
+      "source_row",
+      "class_label",
+      "domain",
+      "image_path",
+      "native_width",
+      "native_height"
+    ],
+    "maximum_differing_entries": 0
+  },
+  "quantisation_divergence_control": {
+    "description": "N91.6. Mean and maximum relative L2 divergence between the INT8 graph and the same producer's fp32 graph over a fixed probe set, per backbone. Reported, never gated.",
+    "probe_images": 64,
+    "gated": false
+  },
+  "domainnet_download_record": {
+    "path": "logs/results/e7_domainnet_download.json"
+  },
+  "output_dir": "logs/results/v14/m91_backbones",
+  "final_labels_opened": false
+}

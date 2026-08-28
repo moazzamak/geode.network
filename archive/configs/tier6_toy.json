@@ -1,0 +1,17 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier6_toy_runs.jsonl",
+  "calibration_fraction": 0.2,
+  "dataset": "synthetic_periodic",
+  "max_iterations": 10,
+  "max_test_samples": 180,
+  "max_train_samples": 600,
+  "n_folds": 1,
+  "nudge_iterations": 0,
+  "pca_components": 3,
+  "representation": "window",
+  "seed": 7,
+  "use_gpu": false,
+  "use_subtractive": false,
+  "window": 2
+}

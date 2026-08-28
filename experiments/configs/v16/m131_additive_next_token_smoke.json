@@ -1,0 +1,45 @@
+{
+  "milestone": "M131",
+  "program": "v20 B4b - SMOKE (inadmissible): additive next-token on a tiny DSL slice",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B4b",
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; refuses the sealed output dir.",
+  "_smoke_rows": 40,
+  "_smoke_skip_gates": true,
+  "registration_notes": {
+    "N90.1": "Engineering MEASUREMENT milestone, not a claim audit; no novelty claim.",
+    "N90.2": "Hypothesis: additive interpolated next-token test perplexity decreases with the window; footprint grows; per-token ops grow slowly.",
+    "N90.3": "Corpus deterministically generated, split by seed, byte-reproducible.",
+    "N90.4": "Model additive: uniform mixture over orders 1..K of add-alpha-smoothed exact counts.",
+    "N90.5": "Sanity gate: window=8 test ppl <= window=1 test ppl * 1.10.",
+    "N90.6": "Transformer comparison disclosed as not run (display-GPU TDR risk).",
+    "N90.7": "Cost accounting: footprint bytes; integer ops per token; never wall-clock.",
+    "N90.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir.",
+    "N90.9": "Dated snapshot; exact seeds, grammar, and ladder recorded for byte-repeat."
+  },
+  "corpus": {
+    "kind": "generated_dsl",
+    "programs": {"train": 40, "valid": 20, "test": 20},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "model": {
+    "window_ladder": [1, 2, 3, 4, 8],
+    "alpha": 1.0,
+    "interpolation": "uniform over orders 1..K",
+    "max_window": 8
+  },
+  "gate": {
+    "t1_tolerance": 0.0,
+    "kill_switch_more_memory_hurts": "fired if test_ppl(window=8) > test_ppl(window=1) * 1.10"
+  },
+  "output_dir": "logs/results/v16/m131_additive_next_token_smoke"
+}

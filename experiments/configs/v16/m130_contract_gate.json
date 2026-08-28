@@ -1,0 +1,37 @@
+{
+  "milestone": "M130",
+  "program": "v20 B3 - registered engineering measurement: contract-gated routing on the sealed corpus (12 Aug 2026)",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B3",
+  "registration_notes": {
+    "N89.1": "Engineering MEASUREMENT milestone, not a claim audit. It measures the B1/B2 library behaviour on the sealed corpus; it cannot promote or withdraw any sealed research claim.",
+    "N89.2": "Hypothesis registered before measurement: contract-gated routing rejects out-of-contract inputs with ZERO learned forward passes (100% rejection, guard FLOPs only), while in-contract inputs reach the learned path with accuracy equal to the sealed value within t1 = 0.002.",
+    "N89.3": "Sealed reference for the learned path: M126 cell atoms=8192 (width 32768), sealed accuracy 0.2228 (logs/results/v16/m126_atoms_extension). The ridge re-fit must reproduce it within t1 before the router result is read (known-value reproduction - programme rule).",
+    "N89.4": "In-contract set: the sealed M126 test codes (v16/m126/f8192_test.npy, float32, (N, 32768), finite). Out-of-contract probes are constructed from the SAME codes by corruption (NaN, inf, wrong width, out-of-range); the contract guard is the arbiter, and every probe's guard verdict is recorded so the probe set is verifiably outside the in-contract set.",
+    "N89.5": "Displacing neighbours (from M129): reject-option / selective classification (D5), energy-aware routing (D6), retrieval/rule-based tool selection (D1/D4). This milestone measures the same quantities the field measures (rejection, cost, accuracy preservation) on the sealed corpus; no novelty claim is made or licensed.",
+    "N89.6": "The router is rule-based (no LLM at inference - M127/M129 constraint). The learned path is the standard ridge fallback, used only when no programmatic primitive accepts the input.",
+    "N89.7": "Cost accounting: rejected inputs pay the guard FLOPs (a comparison over the code) and NOTHING else; learned-path inputs pay the ridge scoring MACs. Reported separately, never conflated. Footprint reported as parameter/MAC counts, not wall-clock.",
+    "N89.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir. The sealed run is launched with the full gates and writes to logs/results/v16/m130_contract_gate.",
+    "N89.9": "This evidence is a dated snapshot (not replayable as a corpus artifact); it records exact code paths, seeds, and config so a reader can repeat the run."
+  },
+  "sealed_reference": {
+    "atoms": 8192,
+    "width": 32768,
+    "cache_train": "v16/m126/f8192_train.npy",
+    "cache_test": "v16/m126/f8192_test.npy",
+    "sealed_accuracy": 0.2228,
+    "tolerance": 0.002
+  },
+  "numerics": {
+    "ridge_penalty": 1.0,
+    "block": 4096,
+    "probe_corruptions": ["nan", "inf", "wrong_width", "out_of_range", "dtype_int"],
+    "probe_rows": 256,
+    "probe_seed": 1234
+  },
+  "router": {
+    "task_classify": "domainnet_classify",
+    "task_gate": "code_contract_gate",
+    "reject_primitive_cost": "constant"
+  },
+  "output_dir": "logs/results/v16/m130_contract_gate"
+}

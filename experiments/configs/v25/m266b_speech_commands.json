@@ -1,0 +1,45 @@
+{
+  "milestone": "M266b",
+  "title": "Audio classification arm: frozen wav2vec2-base + ridge probe on Speech Commands v2",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M266 registered 21 Aug; M266b dispatched 21 Aug, local-first)",
+  "registered_before_any_accuracy": true,
+  "question": "Does a trained probe on frozen Wav2Vec2 features classify Speech Commands v2 held-out utterances, and where does the reading sit against the published fine-tuned anchor?",
+  "encoder": {
+    "checkpoint": "facebook/wav2vec2-base",
+    "license_recorded": "Apache-2.0",
+    "frozen": true,
+    "pooling": "mean of frame features over time",
+    "dtype": "fp32",
+    "downloads": "F: cache conventions"
+  },
+  "dataset": {
+    "source": "official speech_commands_v0.02 archive (download.tensorflow.org/data/speech_commands_v0.02.tar.gz, 2.43 GB), local extraction on F:; splits from testing_list.txt / validation_list.txt (the official convention)",
+    "license_recorded": "CC-BY-4.0",
+    "note": "the HF 'speech_commands' entry is a legacy script dataset unsupported by datasets 5.x"
+  },
+  "probe": {
+    "model": "closed-form ridge least squares on one-hot targets (Gram solve)",
+    "alpha": 1.0,
+    "input_standardisation": "per-column z-score fitted on the train split only",
+    "note": "the closed-form ridge IS the exact fit on frozen features — the registered 'head question' for this cell"
+  },
+  "anchors_reference_only": {
+    "note": "published numbers cited as context only — never a gate, never exceeded, never claimed",
+    "finetuned_ceiling": "Baevski et al. 2020 (arXiv:2006.11477), Wav2Vec 2.0: Speech Commands v2 ~98.1 fine-tuned — NOT this cell's frozen-probe regime"
+  },
+  "guard": {
+    "duration_range_seconds": [0.2, 3.0],
+    "energy_floor": 1e-4
+  },
+  "extraction": {
+    "batch": 32,
+    "throttle_seconds": 0.01,
+    "device": "cuda (9070 XT, HIP_VISIBLE_DEVICES=1)"
+  },
+  "smoke": {
+    "train_samples": 500,
+    "eval_samples": 200
+  },
+  "output_dir": "logs/results/v25/m266_audio_arm",
+  "feature_cache_relpath": "v25/m266_audio_arm"
+}

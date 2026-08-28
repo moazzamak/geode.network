@@ -1,0 +1,25 @@
+{
+  "milestone": "M225b",
+  "title": "Capacity arm: the M225 signal and gates at f_dim 32",
+  "question": "Does doubling the capacity restore the frozen traversability (>= 0.5) while KEEPING the inverse-relation generalisation (G6)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M225b REGISTERED (20 Aug, before the build)",
+  "note": "the only change vs the M225 run-2 config is f_dim 32; the frozen gate sets and thresholds are untouched - a new arm, not a repair",
+  "model": {"f_dim": 32, "mlp_hidden": 32, "seed": 11},
+  "training": {
+    "steps": 3000,
+    "lr": 0.001,
+    "rel_ordered_triple_tau": 0.5,
+    "rel_polar_rho": 0.3,
+    "margin_dissimilar": 0.1,
+    "inverse_analogy_tau": 0.5
+  },
+  "relations_file": "analysis/fingerprint_relations_v0.json",
+  "transform_relations_file": "analysis/fingerprint_relations_v1_transform.json",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID - determinism is the instrument contract",
+    "G3_pass_and_G6_pass": "capacity reconciles the two properties - the M226 product-migration trigger is restored",
+    "G3_fail_again": "the interference is structural - M225c (registered) adds the frozen-axis swap directions as an explicit training term; its G3 reading would be recorded as TRAINED-not-held-out",
+    "G6_fail": "the inverse-relation generalisation broke at higher capacity - scoped negative for this arm",
+    "ship": "prototype only; M226 remains gated on G1-G3+G6"
+  }
+}

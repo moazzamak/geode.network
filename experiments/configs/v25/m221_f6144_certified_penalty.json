@@ -1,0 +1,46 @@
+{
+  "milestone": "M221",
+  "title": "certified penalty selection, f6144 head (train-side fold, single test evaluation)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M221 registered 20 Aug before the build)",
+  "question": "What is the CERTIFIED best ridge penalty for the f6144 head, chosen on train-side data only?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy"
+  },
+  "schedule": {
+    "note": "the M141 cell-2 full schedule: m117 part1 (138k subsample), m140 ext600 (69k), m141 all-rest (202,832) = 409,832 rows",
+    "part_labels": ["corpus train_labels", "raw train_labels[ext_idx]", "raw train_labels[rest_idx]"]
+  },
+  "repair": {
+    "note": "the registered M182 premise repair: patch overlay at part1 rows 137749:138000 (config-registered digests are gates)",
+    "patch_relpath": "v16/m117/f6144_train_patch.npy",
+    "patch_start": 137749,
+    "rows": 251,
+    "original_sha256": "d7a0597da2f3130fb43a7ccb795a19b347dcb5e8ac691b6345a375f5885cf057",
+    "test_sha256": "1ef8499c7918289e749564ee59ddd9e59f770d66fb0d2ca3d99d6c48b9411b70",
+    "patch_sha256": "616880017ea8a2d0792d5c7126d66efa6c250c5183944d3e831a1796c87f28f8"
+  },
+  "penalties": [0.01, 0.1, 1.0, 10.0, 100.0],
+  "fold": {
+    "scheme": "per-class interleaved halves over the full schedule (even positions within each class's row sequence -> A, odd -> B; per-class PARITY is exact — the full schedule's classes are uneven)",
+    "balance_gate": "|A_c - B_c| <= 1 for every class"
+  },
+  "anchor": {
+    "value": 0.26153623188405795,
+    "source": "M182 SEALED repaired-view full-data f6144 aggregate (penalty 1.0); the config's corrupt-era value is superseded by the registered amendment",
+    "tolerance": 1e-9
+  },
+  "output_dir": "logs/results/v25/m221_f6144_certified_penalty"
+}

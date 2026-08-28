@@ -1,0 +1,600 @@
+{
+  "milestone": "M12.0",
+  "protocol": {
+    "design": "one_factor_at_a_time",
+    "routing": "exhaustive_exact",
+    "timing_repeats": 25,
+    "warmup_runs": 1,
+    "shortlisting_enabled": false,
+    "ray_marching_included": false,
+    "memory_measures": [
+      "tracemalloc_peak_python_bytes",
+      "process_peak_working_set_bytes",
+      "canonical_serialized_model_bytes"
+    ],
+    "hardware": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+      "python": "3.14.6",
+      "numpy": "2.5.1",
+      "execution_provider": "numpy_cpu"
+    }
+  },
+  "baseline": {
+    "class_count": 8,
+    "dimensions": 4,
+    "primitives_per_class": 2,
+    "batch_size": 64
+  },
+  "all_counter_invariants_passed": true,
+  "slopes": {
+    "class_count": {
+      "latency_p50_log_log_slope": 1.0032696133137808,
+      "primitive_sdf_pairs_log_log_slope": 1.000000000000001,
+      "serialized_bytes_log_log_slope": 0.9978410352528507
+    },
+    "dimensions": {
+      "latency_p50_log_log_slope": 0.09940112038280509,
+      "primitive_sdf_pairs_log_log_slope": 9.083980981737005e-16,
+      "serialized_bytes_log_log_slope": 1.101812160486571
+    },
+    "primitives_per_class": {
+      "latency_p50_log_log_slope": 1.0083726872396963,
+      "primitive_sdf_pairs_log_log_slope": 0.999999999999999,
+      "serialized_bytes_log_log_slope": 0.9190119649466781
+    },
+    "batch_size": {
+      "latency_p50_log_log_slope": 0.09817513321103177,
+      "primitive_sdf_pairs_log_log_slope": 0.9999999999999999,
+      "serialized_bytes_log_log_slope": 3.2654561280692305e-16
+    }
+  },
+  "conditions": [
+    {
+      "condition": {
+        "name": "baseline",
+        "axis": "baseline",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.0001799000019673258,
+        "p95": 0.0002236400032415986,
+        "p99": 0.0002453319996129721
+      },
+      "throughput_samples_per_second": {
+        "p50": 355753.1923297252,
+        "p95": 286174.2044014403,
+        "p99": 260870.9834060145
+      },
+      "peak_python_allocation_bytes": 17384,
+      "process_peak_working_set_bytes": 37527552,
+      "serialized_model_bytes": 4905,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 1024,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=4",
+        "axis": "class_count",
+        "class_count": 4,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 9.020000288728625e-05,
+        "p95": 9.601999481674283e-05,
+        "p99": 9.733599901665002e-05
+      },
+      "throughput_samples_per_second": {
+        "p50": 709534.3453588829,
+        "p95": 666527.8426867862,
+        "p99": 657516.239074634
+      },
+      "peak_python_allocation_bytes": 14752,
+      "process_peak_working_set_bytes": 37560320,
+      "serialized_model_bytes": 2454,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 256,
+        "shortlisted_candidate_pairs": 256,
+        "exact_class_sdf_pairs": 256,
+        "primitive_sdf_pairs": 512,
+        "score_values_materialized": 256
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=16",
+        "axis": "class_count",
+        "class_count": 16,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.0003612000000430271,
+        "p95": 0.0005510799936018879,
+        "p99": 0.0005867880041478202
+      },
+      "throughput_samples_per_second": {
+        "p50": 177187.15391023297,
+        "p95": 116135.5896476891,
+        "p99": 109068.35100173161
+      },
+      "peak_python_allocation_bytes": 22696,
+      "process_peak_working_set_bytes": 37568512,
+      "serialized_model_bytes": 9784,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 1024,
+        "shortlisted_candidate_pairs": 1024,
+        "exact_class_sdf_pairs": 1024,
+        "primitive_sdf_pairs": 2048,
+        "score_values_materialized": 1024
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=32",
+        "axis": "class_count",
+        "class_count": 32,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.0007252999930642545,
+        "p95": 0.000958100004936568,
+        "p99": 0.001074855997576378
+      },
+      "throughput_samples_per_second": {
+        "p50": 88239.35007859599,
+        "p95": 66798.87242484378,
+        "p99": 59542.85982895326
+      },
+      "peak_python_allocation_bytes": 33344,
+      "process_peak_working_set_bytes": 37699584,
+      "serialized_model_bytes": 19528,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 2048,
+        "shortlisted_candidate_pairs": 2048,
+        "exact_class_sdf_pairs": 2048,
+        "primitive_sdf_pairs": 4096,
+        "score_values_materialized": 2048
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=64",
+        "axis": "class_count",
+        "class_count": 64,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.001453899996704422,
+        "p95": 0.0015585199900669975,
+        "p99": 0.001578851991216652
+      },
+      "throughput_samples_per_second": {
+        "p50": 44019.53376784497,
+        "p95": 41064.600010198636,
+        "p99": 40535.781920053225
+      },
+      "peak_python_allocation_bytes": 54664,
+      "process_peak_working_set_bytes": 37818368,
+      "serialized_model_bytes": 39063,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 4096,
+        "shortlisted_candidate_pairs": 4096,
+        "exact_class_sdf_pairs": 4096,
+        "primitive_sdf_pairs": 8192,
+        "score_values_materialized": 4096
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "axis": "dimensions",
+        "class_count": 8,
+        "dimensions": 2,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.00017740001203492284,
+        "p95": 0.00018421999702695756,
+        "p99": 0.0001878159964689985
+      },
+      "throughput_samples_per_second": {
+        "p50": 360766.60461218574,
+        "p95": 347410.71019903803,
+        "p99": 340759.0471696805
+      },
+      "peak_python_allocation_bytes": 12224,
+      "process_peak_working_set_bytes": 37945344,
+      "serialized_model_bytes": 2837,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 1024,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=8",
+        "axis": "dimensions",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.00019150000298395753,
+        "p95": 0.0002040199964540079,
+        "p99": 0.00022310399450361723
+      },
+      "throughput_samples_per_second": {
+        "p50": 334203.65014491125,
+        "p95": 313694.7412624207,
+        "p99": 286861.7397119815
+      },
+      "peak_python_allocation_bytes": 27632,
+      "process_peak_working_set_bytes": 37949440,
+      "serialized_model_bytes": 10555,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 1024,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=16",
+        "axis": "dimensions",
+        "class_count": 8,
+        "dimensions": 16,
+        "primitives_per_class": 2,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.00021860000560991466,
+        "p95": 0.00023125999432522802,
+        "p99": 0.00024757599923759695
+      },
+      "throughput_samples_per_second": {
+        "p50": 292772.1791288795,
+        "p95": 276744.79620541213,
+        "p99": 258506.47961468852
+      },
+      "peak_python_allocation_bytes": 48176,
+      "process_peak_working_set_bytes": 37949440,
+      "serialized_model_bytes": 28023,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 1024,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "axis": "primitives_per_class",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 1,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 6.410000787582248e-05,
+        "p95": 7.032000576145946e-05,
+        "p99": 7.598400698043405e-05
+      },
+      "throughput_samples_per_second": {
+        "p50": 998439.8149214549,
+        "p95": 910125.0676386707,
+        "p99": 842282.508429439
+      },
+      "peak_python_allocation_bytes": 16704,
+      "process_peak_working_set_bytes": 38002688,
+      "serialized_model_bytes": 2691,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 512,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=4",
+        "axis": "primitives_per_class",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 4,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.00030520001018885523,
+        "p95": 0.00032566000299993897,
+        "p99": 0.00034068000270053744
+      },
+      "throughput_samples_per_second": {
+        "p50": 209698.55132179495,
+        "p95": 196523.98025683244,
+        "p99": 187859.57347856695
+      },
+      "peak_python_allocation_bytes": 18608,
+      "process_peak_working_set_bytes": 38002688,
+      "serialized_model_bytes": 9321,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 2048,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=8",
+        "axis": "primitives_per_class",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 8,
+        "batch_size": 64
+      },
+      "latency_seconds": {
+        "p50": 0.0005522999999811873,
+        "p95": 0.0006220400013262406,
+        "p99": 0.0006534199992893263
+      },
+      "throughput_samples_per_second": {
+        "p50": 115879.0512442151,
+        "p95": 102887.27391091686,
+        "p99": 97946.19091795136
+      },
+      "peak_python_allocation_bytes": 23456,
+      "process_peak_working_set_bytes": 38002688,
+      "serialized_model_bytes": 18161,
+      "routing_counters": {
+        "sample_count": 64,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 512,
+        "shortlisted_candidate_pairs": 512,
+        "exact_class_sdf_pairs": 512,
+        "primitive_sdf_pairs": 4096,
+        "score_values_materialized": 512
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=1",
+        "axis": "batch_size",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 1
+      },
+      "latency_seconds": {
+        "p50": 0.00014679999731015414,
+        "p95": 0.00015710000006947665,
+        "p99": 0.00016092800651676953
+      },
+      "throughput_samples_per_second": {
+        "p50": 6811.989225634884,
+        "p95": 6365.372371468843,
+        "p99": 6213.958785948143
+      },
+      "peak_python_allocation_bytes": 3216,
+      "process_peak_working_set_bytes": 38043648,
+      "serialized_model_bytes": 4905,
+      "routing_counters": {
+        "sample_count": 1,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 8,
+        "shortlisted_candidate_pairs": 8,
+        "exact_class_sdf_pairs": 8,
+        "primitive_sdf_pairs": 16,
+        "score_values_materialized": 8
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=16",
+        "axis": "batch_size",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 16
+      },
+      "latency_seconds": {
+        "p50": 0.00015749999147374183,
+        "p95": 0.00016381999885197728,
+        "p99": 0.00018872399756219232
+      },
+      "throughput_samples_per_second": {
+        "p50": 101587.30708672767,
+        "p95": 97668.17306876622,
+        "p99": 84779.89130517088
+      },
+      "peak_python_allocation_bytes": 6608,
+      "process_peak_working_set_bytes": 38047744,
+      "serialized_model_bytes": 4905,
+      "routing_counters": {
+        "sample_count": 16,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 128,
+        "shortlisted_candidate_pairs": 128,
+        "exact_class_sdf_pairs": 128,
+        "primitive_sdf_pairs": 256,
+        "score_values_materialized": 128
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=256",
+        "axis": "batch_size",
+        "class_count": 8,
+        "dimensions": 4,
+        "primitives_per_class": 2,
+        "batch_size": 256
+      },
+      "latency_seconds": {
+        "p50": 0.00026840000646188855,
+        "p95": 0.00029261999588925386,
+        "p99": 0.00030814000230748205
+      },
+      "throughput_samples_per_second": {
+        "p50": 953800.2750992881,
+        "p95": 874854.772730182,
+        "p99": 830791.1925844235
+      },
+      "peak_python_allocation_bytes": 60368,
+      "process_peak_working_set_bytes": 38051840,
+      "serialized_model_bytes": 4905,
+      "routing_counters": {
+        "sample_count": 256,
+        "nodes_executed": 1,
+        "compatible_candidate_pairs": 2048,
+        "shortlisted_candidate_pairs": 2048,
+        "exact_class_sdf_pairs": 2048,
+        "primitive_sdf_pairs": 4096,
+        "score_values_materialized": 2048
+      },
+      "counter_invariants": {
+        "compatible_pairs_equal_n_times_c": true,
+        "shortlisted_pairs_equal_compatible_pairs": true,
+        "exact_class_pairs_equal_n_times_c": true,
+        "primitive_pairs_equal_n_times_c_times_k": true,
+        "score_values_equal_n_times_c": true
+      }
+    }
+  ]
+}

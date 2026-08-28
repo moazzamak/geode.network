@@ -1,0 +1,99 @@
+training 3000 steps (v2 inverse set)
+  final loss 15.3347
+gates
+{
+ "g1_deterministic": true,
+ "g2_similarity_ordering": {
+  "passed": true,
+  "margin": 1.168371930585376,
+  "similar_cos": [
+   0.9591675996780396,
+   1.0,
+   0.9982016086578369,
+   0.9279205799102783
+  ],
+  "dissimilar_cos": [
+   -0.5153123140335083,
+   -0.5153123140335083,
+   -0.17696136236190796,
+   0.13258247077465057,
+   -0.3588031828403473,
+   0.013842576183378696,
+   0.04061774164438248
+  ]
+ },
+ "g3_traversality": {
+  "passed": true,
+  "min_cos": 0.5798824429512024,
+  "scores": [
+   0.7486994862556458,
+   0.6036281585693359,
+   0.7517188787460327,
+   0.5915777087211609,
+   0.5798824429512024,
+   0.6843441724777222,
+   0.5798824429512024,
+   0.6843441724777222,
+   0.5974152088165283,
+   0.7272965908050537,
+   0.6650881171226501,
+   0.6604912281036377
+  ],
+  "frozen_tasks": [
+   "domainnet",
+   "cifar10",
+   "mackey_glass",
+   "lorenz",
+   "dyck",
+   "tabular"
+  ]
+ },
+ "g4_continuity": {
+  "passed": null,
+  "note": "DEFERRED"
+ },
+ "g5_relational_recall": {
+  "ordered_triple_min": 0.5359002351760864,
+  "ordered_passed": true,
+  "polar_max": -0.46029412746429443,
+  "polar_passed": true,
+  "passed": true
+ },
+ "g6_inverse_analogy": {
+  "reference": "integration-differentiation",
+  "analogy_cos": {
+   "fft-ifft": 0.5694892406463623,
+   "convolution-deconvolution": 0.29703447222709656,
+   "exponent-logarithm": 0.6680645942687988,
+   "multiply-divide": 0.5099714398384094,
+   "translate-inverse_translate": 0.6070172786712646,
+   "sort-unsort": -0.14107981324195862
+  },
+  "passed": false,
+  "threshold": 0.5,
+  "held_out_pairs": [
+   "convolution-deconvolution",
+   "sort-unsort"
+  ],
+  "transform_polar_cos": {
+   "integration/differentiation": -0.45424684882164,
+   "fft/ifft": -0.31666192412376404
+  },
+  "polar_passed": true,
+  "held_out_cos": {
+   "convolution-deconvolution": 0.29703447222709656,
+   "sort-unsort": -0.14107981324195862
+  },
+  "trained_cos": {
+   "fft-ifft": 0.5694892406463623,
+   "exponent-logarithm": 0.6680645942687988,
+   "multiply-divide": 0.5099714398384094,
+   "translate-inverse_translate": 0.6070172786712646
+  },
+  "held_out_min": -0.14107981324195862,
+  "held_out_passed": false
+ },
+ "g3_trained_note": "the frozen-axis swap directions joined the training objective on this arm - G3 is TRAINED-not-held-out (registered)"
+}
+
+M225d complete -> logs\results\v25\m225d_wider_inverse\evidence.json

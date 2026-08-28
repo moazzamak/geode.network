@@ -1,0 +1,28 @@
+{
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; runs on the M143 SMOKE score cache (v16/m143_smoke/scores.npz, 2000 rows). MUST refuse the sealed output dir.",
+  "milestone": "M149",
+  "title": "Group splitting (SMOKE)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 7 splitting / section 9 M149",
+  "registration_notes": {
+    "N98.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143_smoke"
+  },
+  "phase2": {
+    "split_seed": 33,
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "kmeans_seed": 77,
+    "random_seed": 88,
+    "penalty_ladder": [1, 10, 100, 1000]
+  },
+  "gate": {
+    "margin": 0.005,
+    "row_floor": 20,
+    "registered": "domain passes iff fused(2-means) >= incumbent + 0.005 AND fused(2-means) >= fused(random) on its eval half; fired iff ZERO domains pass.",
+    "consequence_fired": "the split operation has no measured room on these groups; M149 closes as a scoped negative.",
+    "consequence_passed": "split-and-rebuild beats the incumbent on at least one domain and beats the random-split control."
+  },
+  "output_dir": "logs/results/v16/m149_group_split"
+}

@@ -1,0 +1,36 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+clip_linear (raw, M236 reproduction): 0.626655 (anchor 0.626655234828999, g2=True)
+concat_linear: 0.627703
+g3 rff determinism: True
+cv selection over the registered grid:
+  cv D4096_sigma0.5: 0.5917
+  cv D8192_sigma0.5: 0.6017
+  cv D16384_sigma0.5: 0.6110
+  cv D4096_sigma1.0: 0.5694
+  cv D8192_sigma1.0: 0.5779
+  cv D16384_sigma1.0: 0.5876
+  cv D4096_sigma2.0: 0.5451
+  cv D8192_sigma2.0: 0.5512
+  cv D16384_sigma2.0: 0.5587
+selected D=16384 sigma=0.5 (cv 0.6110)
+clip_rff: 0.619701
+rff_concat: 0.669525
+{
+ "gates_ok": true,
+ "arms": {
+  "clip_linear": 0.6266552348289988,
+  "concat_linear": 0.6277031532818901,
+  "clip_rff": 0.6197008669143564,
+  "rff_concat": 0.6695246260836429
+ },
+ "h26_3": {
+  "pass": true,
+  "bar": 0.6535,
+  "margin": 0.02,
+  "wall": 0.6335,
+  "beats_stroke_arm": true
+ },
+ "reading": "H26-3 PASS: the RFF map clears the wall by the registered margin - the quickdraw wall is a linearity ceiling, not a feature ceiling; the RFF arm also beats the M238 stroke arm"
+}
+M300 complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v26\m300_rff_quickdraw\evidence.json

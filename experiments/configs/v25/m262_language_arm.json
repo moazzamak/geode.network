@@ -1,0 +1,61 @@
+{
+  "milestone": "M262",
+  "title": "Language-inference arm: frozen BERT-base features + trained logistic probes for MNLI (matched/mismatched), SST-2, IMDb",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M262 registered 21 Aug, dispatched 21 Aug, local-first)",
+  "registered_before_any_accuracy": true,
+  "question": "Do frozen BERT-base features with trained probes form a measurable, admissible language-inference arm (MNLI matched/mismatched, SST-2, IMDb)?",
+  "encoder": {
+    "checkpoint": "bert-base-uncased",
+    "license": "Apache-2.0",
+    "frozen": true,
+    "pooling": "mean of last_hidden_state over attention_mask",
+    "max_length": 128,
+    "dtype": "fp32",
+    "downloads": "F: cache conventions (configure_external_cache_environment)"
+  },
+  "datasets": {
+    "nli": {
+      "hf_id": "multi_nli",
+      "splits": ["train", "validation_matched", "validation_mismatched"],
+      "license_recorded": "CC-BY-4.0 per dataset card (verify at audit)",
+      "tier": "probe-training train split + tier-1 held-out measurement"
+    },
+    "sst2": {
+      "hf_id": "glue",
+      "config_name": "sst2",
+      "splits": ["train", "validation"],
+      "license_recorded": "GLUE benchmark terms (verify at audit)",
+      "tier": "probe-training train split + tier-1 held-out measurement"
+    },
+    "imdb": {
+      "hf_id": "stanfordnlp/imdb",
+      "splits": ["train", "test"],
+      "license_recorded": "research-class; unclear commercial standing — evaluation-only until cleared by the licensing audit",
+      "tier": "held-out measurement only for the arm record"
+    }
+  },
+  "probe": {
+    "model": "closed-form ridge least squares on one-hot targets (Gram solve; convergence-free, deterministic)",
+    "alpha": 1.0,
+    "input_standardisation": "per-column z-score fitted on the train split only",
+    "note": "lbfgs iteration-cap DEFECT HYPOTHESIS REFUTED by mechanical reproduction (diag_m262_solver.py: logistic converged, n_iter=100 < 500; logistic and ridge tie at 0.516 on identical 30k features). The first-run readings were not instrument-broken — frozen-feature probing simply sits far below finetuning. Ridge adopted anyway: convergence-free, deterministic, diag-verified identical.",
+    "seed": 20260821
+  },
+  "extraction": {
+    "batch": 64,
+    "throttle_seconds": 0.01,
+    "device": "cuda (9070 XT, HIP_VISIBLE_DEVICES=1)",
+    "note": "throttle is the registered display-GPU TDR mitigation"
+  },
+  "anchors_reference_only": {
+    "note": "published numbers cited as context only — never a gate, never exceeded, never claimed",
+    "finetuned_ceiling": "Devlin et al. 2019 (arXiv:1810.04805): MNLI-m 84.6, SST-2 93.5 — full finetuning of all layers, NOT this cell's frozen-probe regime",
+    "frozen_probe_regime": "Tenney et al. 2019 (arXiv:1905.06316), layer-wise probing of frozen BERT: mean-pooled layer-12 probing reads far below the finetuned numbers; our readings sit in this family"
+  },
+  "smoke": {
+    "train_rows": 2000,
+    "eval_rows": 500
+  },
+  "output_dir": "logs/results/v25/m262_language_arm",
+  "feature_cache_relpath": "v25/m262_language_arm"
+}

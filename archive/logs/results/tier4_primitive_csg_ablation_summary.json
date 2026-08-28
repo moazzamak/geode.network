@@ -1,0 +1,103 @@
+{
+  "backend": {
+    "candidate_fitting": "OpenCL for sphere and diagonal ellipsoid; host eigendecomposition plus OpenCL scoring for full ellipsoid",
+    "device": "gfx1201",
+    "inference_and_csg": "OpenCL",
+    "output_labels_verified": true
+  },
+  "cells": 15,
+  "comparative_result": true,
+  "families": {
+    "diagonal_covariance": {
+      "A0": {
+        "accuracy_mean": 0.833375,
+        "additive_primitives_mean": 59.2,
+        "negative_log_likelihood_mean": 0.5090710453559735,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1_minus_A0": {
+        "accepted_carvings": 0,
+        "changed_predictions": 0,
+        "mean_pp": 0.0,
+        "t95_ci_pp": [0.0, 0.0]
+      },
+      "A2_minus_A0": {
+        "accepted_carvings": 0,
+        "changed_predictions": 0,
+        "mean_pp": 0.0,
+        "t95_ci_pp": [0.0, 0.0]
+      }
+    },
+    "full_covariance": {
+      "A0": {
+        "accuracy_mean": 0.814625,
+        "additive_primitives_mean": 92.0,
+        "negative_log_likelihood_mean": 0.5685375150479214,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1_minus_A0": {
+        "accepted_carvings": 9,
+        "changed_predictions": 11,
+        "mean_pp": -0.024999999999999467,
+        "t95_ci_pp": [-0.06750546129113962, 0.01750546129114068]
+      },
+      "A2_minus_A0": {
+        "accepted_carvings": 0,
+        "changed_predictions": 11,
+        "mean_pp": -0.024999999999999467,
+        "t95_ci_pp": [-0.06750546129113962, 0.01750546129114068]
+      }
+    },
+    "spherical_covariance": {
+      "A0": {
+        "accuracy_mean": 0.8380000000000001,
+        "additive_primitives_mean": 46.8,
+        "negative_log_likelihood_mean": 0.48466721777240396,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1_minus_A0": {
+        "accepted_carvings": 0,
+        "changed_predictions": 0,
+        "mean_pp": 0.0,
+        "t95_ci_pp": [0.0, 0.0]
+      },
+      "A2_minus_A0": {
+        "accepted_carvings": 0,
+        "changed_predictions": 0,
+        "mean_pp": 0.0,
+        "t95_ci_pp": [0.0, 0.0]
+      }
+    }
+  },
+  "paired_A0_accuracy_differences": {
+    "sphere_minus_diagonal_covariance": {
+      "mean_pp": 0.462499999999999,
+      "per_seed_pp": [
+        0.8750000000000036,
+        0.187499999999996,
+        0.187499999999996,
+        0.6874999999999964,
+        0.3750000000000031
+      ],
+      "t95_ci_pp": [0.07995084837972692, 0.8450491516202712]
+    },
+    "sphere_minus_full_covariance": {
+      "mean_pp": 2.337499999999999,
+      "per_seed_pp": [
+        3.874999999999995,
+        1.937500000000003,
+        2.0625000000000004,
+        1.187499999999997,
+        2.6249999999999996
+      ],
+      "t95_ci_pp": [1.0951086773182397, 3.579891322681758]
+    }
+  },
+  "production_performance_claim": false,
+  "protocol": "tier4_primitive_csg_ablation",
+  "readout": "multinomial",
+  "schema_version": 1,
+  "seeds": [11, 23, 37, 53, 71],
+  "source_artifact": "logs/results/tier4_primitive_csg_ablation_runs.jsonl",
+  "test_used_for_selection": false
+}

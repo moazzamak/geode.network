@@ -1,0 +1,260 @@
+{
+  "artifacts": [
+    {
+      "kind": "result",
+      "milestone": "E1",
+      "path": "logs/results/tier4_e2e_recovery_smoke.json",
+      "schema_version": 1,
+      "sha256": "1a70fc5fa9d1f8d2041fd029a0c0175cd220e37bed96ea9e94179f2ea58c6278",
+      "size_bytes": 1356
+    },
+    {
+      "kind": "result",
+      "milestone": "E1",
+      "path": "logs/results/tier4_e2e_local_executor.json",
+      "schema_version": 1,
+      "sha256": "89e21136c8176feb01ec23073203072b3d4c559ee8a65ec5cb48a716a65c17cc",
+      "size_bytes": 1513
+    },
+    {
+      "kind": "result",
+      "milestone": "E1",
+      "path": "logs/results/tier4_e2e_feature_recovery.json",
+      "schema_version": 1,
+      "sha256": "44a91a75605feac8f86404ed523a59a3e311a6528fb84de83e0321bcf3493b22",
+      "size_bytes": 1349
+    },
+    {
+      "kind": "result",
+      "milestone": "E1",
+      "path": "logs/results/tier4_e2e_class_recovery.json",
+      "schema_version": 1,
+      "sha256": "3f8b0f4de5caf3ffd8d930c27ad7520d8d9120558f8cd63e6db0bef639e5c028",
+      "size_bytes": 1500
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_refinement_checkpoint_smoke.json",
+      "schema_version": 1,
+      "sha256": "99efa3776de9a547ea0d76f5d8da324e55d59e5eab66459510db539d8f159918",
+      "size_bytes": 1603
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_tier6_refinement_resume.json",
+      "schema_version": 1,
+      "sha256": "96cee91cbffe6e4648b92044277c7fbc9a6910ec4b0e21dd80cd0c35b0bbaa11",
+      "size_bytes": 1042
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_representation_checkpoint_smoke.json",
+      "schema_version": 1,
+      "sha256": "364a300e2450ee54fb796b7a5f425ed867e5039bf8d7e04cd60d298ee4a6ec09",
+      "size_bytes": 839
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_production_representation_resume.json",
+      "schema_version": 1,
+      "sha256": "bea7e39c89817e3e14e955bf5f2183d40ab87f6a61901e04d44e14a3ee4b8b44",
+      "size_bytes": 840
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_distributed_sampler_resume.json",
+      "schema_version": 1,
+      "sha256": "a375c056e640349ab175a785bb5184f54243155456299e687da3033b4ca14f35",
+      "size_bytes": 1474
+    },
+    {
+      "kind": "result",
+      "milestone": "E2",
+      "path": "logs/results/e2_history_export_summary.json",
+      "schema_version": 1,
+      "sha256": "81628c871dfbf9215c1364d9555fba85963f623f98afe3fbe1c92a43aa60c585",
+      "size_bytes": 713
+    },
+    {
+      "kind": "result",
+      "milestone": "E3",
+      "path": "logs/results/e3_model_bundle_qualification.json",
+      "schema_version": 1,
+      "sha256": "d5c58e34913cdabfe700d34e842be4c1742423e224ed7e45f34e38612991d3e5",
+      "size_bytes": 811
+    },
+    {
+      "kind": "config",
+      "milestone": "E4",
+      "path": "experiments/configs/e4_cifar_qualification.json",
+      "schema_version": 1,
+      "sha256": "421a3f69e4941f79426e8c51008151fce05af87401ce82752dbcfe861a82b29b",
+      "size_bytes": 2057
+    },
+    {
+      "kind": "result",
+      "milestone": "E4",
+      "path": "logs/results/e4_cifar_qualification.json",
+      "schema_version": 1,
+      "sha256": "93ec13b20745a2496e78b506ed4fdfbde55054f36bc036ae4d6a81ebca993d83",
+      "size_bytes": 266438
+    },
+    {
+      "kind": "result",
+      "milestone": "E4",
+      "path": "logs/results/e4_cifar_recovery.json",
+      "schema_version": 1,
+      "sha256": "56a07e5e8889bd811f4aded5fff632faaa893e15aa9185d90faf5a8a65c77c93",
+      "size_bytes": 409
+    },
+    {
+      "kind": "result",
+      "milestone": "E5",
+      "path": "logs/results/e5_routing_qualification.json",
+      "schema_version": 1,
+      "sha256": "c4f687ea86a992cb9b9a9da6448b78be2ff602b0757a147ed9e5f1ed614fcd6e",
+      "size_bytes": 39681
+    },
+    {
+      "kind": "config",
+      "milestone": "E6",
+      "path": "experiments/configs/e6_transfer_qualification.json",
+      "schema_version": 1,
+      "sha256": "ffe61e280760b223fa0e842b6878ad5c085d5fa0595ab7be5ed187e5205fee71",
+      "size_bytes": 961
+    },
+    {
+      "kind": "result",
+      "milestone": "E6",
+      "path": "logs/results/e6_transfer_qualification.json",
+      "schema_version": 1,
+      "sha256": "ffe8dc65e0f92a9817ffb7648fdc773af06b11d2a67b9cbd7e70c04678f4b822",
+      "size_bytes": 5005
+    },
+    {
+      "kind": "config",
+      "milestone": "E7",
+      "path": "experiments/configs/e7_domainnet_qualification.json",
+      "schema_version": 1,
+      "sha256": "5d851a686cc1c2b5a81fa2f353eb8329c6aa777902cad4c09f2867da1ce553ea",
+      "size_bytes": 502
+    },
+    {
+      "kind": "config",
+      "milestone": "E7",
+      "path": "experiments/configs/e7_domainnet_local_small.json",
+      "schema_version": 1,
+      "sha256": "b8657f97bd8a0ed89ffae62bbe6357382c07b79afd0d4f52375606bfdb4dd9ba",
+      "size_bytes": 369
+    },
+    {
+      "kind": "acquisition",
+      "milestone": "E7",
+      "path": "logs/results/e7_domainnet_download.json",
+      "schema_version": null,
+      "sha256": "d2e8326e437e0e82eb524e29f70edb76773df017206758f406667a0319fcbf0b",
+      "size_bytes": 792
+    },
+    {
+      "kind": "result",
+      "milestone": "E7",
+      "path": "logs/results/e7_domainnet_preflight_python312.json",
+      "schema_version": 1,
+      "sha256": "8a1b6eaf6ac481dc07caead505502ab3810346a2ff3f0da3270e2ab5c251ffdf",
+      "size_bytes": 2128
+    },
+    {
+      "kind": "result",
+      "milestone": "E7",
+      "path": "logs/results/e7_local_cluster_rehearsal.json",
+      "schema_version": 1,
+      "sha256": "34b2937f0d2a9ec0423483e46d17f5a51ad34a1d6657669b0414d7dc5033d4fb",
+      "size_bytes": 4150
+    },
+    {
+      "kind": "result",
+      "milestone": "E7",
+      "path": "logs/results/e7_domainnet_local_small.json",
+      "schema_version": 1,
+      "sha256": "79fb60c101334a494d758e7db87a100a638bbd8a94e1af91fe3d9986ab802d54",
+      "size_bytes": 3778
+    },
+    {
+      "kind": "config",
+      "milestone": "E8",
+      "path": "experiments/configs/e8_cross_modal_qualification.json",
+      "schema_version": 1,
+      "sha256": "fe2bda022776ddf98d4aed8b5de8d44c73375acc44792682a162776c5562ec90",
+      "size_bytes": 560
+    },
+    {
+      "kind": "acquisition",
+      "milestone": "E8",
+      "path": "logs/results/e8_modelnet40_download.json",
+      "schema_version": null,
+      "sha256": "db48c729eccc81c7191149a900040b5a189e16633d019f9b020d61b633c25e16",
+      "size_bytes": 618
+    },
+    {
+      "kind": "result",
+      "milestone": "E8",
+      "path": "logs/results/e8_cross_modal_qualification.json",
+      "schema_version": 1,
+      "sha256": "72436f4d8b681f46d43fffca2db5e3652cadd5d3b849e97f89a8fe78bb65958b",
+      "size_bytes": 1691
+    },
+    {
+      "kind": "config",
+      "milestone": "E9",
+      "path": "experiments/configs/e9_transactional_adaptation.json",
+      "schema_version": 1,
+      "sha256": "777e19c08bb70d92e6ce8fc1926443960ae8ab643fa023327a041e5ae88a6719",
+      "size_bytes": 253
+    },
+    {
+      "kind": "result",
+      "milestone": "E9",
+      "path": "logs/results/e9_transactional_adaptation.json",
+      "schema_version": 1,
+      "sha256": "c58cf77ee7ba9de935941cd490bafc697fde280a1c04a094888a0e418475002a",
+      "size_bytes": 2587
+    },
+    {
+      "kind": "config",
+      "milestone": "E10",
+      "path": "experiments/configs/e10_production_rehearsal.json",
+      "schema_version": 1,
+      "sha256": "473c79dce245896f9ddbeb5a98f1e638ae2d00a66abe884c6edf22eca2247d7a",
+      "size_bytes": 199
+    },
+    {
+      "kind": "result",
+      "milestone": "E10",
+      "path": "logs/results/e10_production_rehearsal.json",
+      "schema_version": 1,
+      "sha256": "5c5bc089bbcfbdf3dbbea40e3f81fa9388f4b24ff60c4f788a9746b0bd46c5f5",
+      "size_bytes": 1919
+    }
+  ],
+  "milestone_status": {
+    "E0": "complete_contract_and_test_evidence",
+    "E1": "complete",
+    "E10": "complete",
+    "E2": "complete",
+    "E3": "complete",
+    "E4": "complete",
+    "E5": "complete_negative_promotion_result",
+    "E6": "complete",
+    "E7": "local_small_complete_multihost_blocked",
+    "E8": "complete",
+    "E9": "complete"
+  },
+  "repository_evidence_cutoff": "2026-07-26",
+  "schema_version": 1,
+  "study": "E11 final public study"
+}

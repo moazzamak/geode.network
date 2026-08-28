@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "milestone": "M86",
+  "program": "v13",
+  "purpose": "Artifact-only finalization. Verify every sealed v13 artifact, recompute every stored evidence hash from its own payload, reproduce every conclusion operand, replay one milestone byte-identically, and confirm the v12 ledger amendments the Section 15 kill switch requires.",
+  "registration_notes": [
+    "N86.1 - the verifier loads no features, trains nothing, and opens no final labels. It reads sealed evidence, hashes artifacts, recomputes hashes, and reproduces conclusion operands. Any v13 conclusion that cannot be reproduced from sealed evidence alone is a finalization failure and fails the run closed.",
+    "N86.2 - byte-identical replay is performed, not asserted. M85a is the designated replay target, fixed before the replay ran. It writes to a scratch directory and never over the sealed one. The comparison excludes generated_at, runtime_seconds and evidence_hash and nothing else; the list is fixed here rather than after a mismatch is seen.",
+    "N86.3 - stored evidence hashes are recomputed from their own payloads, because a file digest checked against a value recorded in the same repository proves only that the file has not changed since that value was written. The v13 milestones do not all hash the same way, so a fixed ordered list of exclusion rules is tried and the rule that reproduced each hash is recorded. A hash no rule reproduces fails closed; a milestone storing no evidence_hash is recorded as absent rather than silently counted as passing.",
+    "N86.4 - the v12 ledger amendments are verified, not assumed. Section 15 makes skipping the M77/M78 amendment Outcome F and a precondition of every architecture milestone that has since run.",
+    "N86.5 - the final labels are not opened. v13 built no final-label holdout; the corpus partitions into fit rows and evaluation rows and nothing else. The seal is recorded as never opened rather than opened and unused, because a final confirmation is meaningful only behind a passing gating conjunction and v13's did not pass.",
+    "N86.6 - M86 concludes; it does not measure. No new operand, no new arm, no re-fit, no new corpus."
+  ],
+  "hash_exclusion_rules": [
+    { "name": "whole_payload", "exclude": ["evidence_hash"] },
+    { "name": "without_generated_at", "exclude": ["evidence_hash", "generated_at"] },
+    {
+      "name": "without_generated_at_and_runtime",
+      "exclude": ["evidence_hash", "generated_at", "runtime_seconds"]
+    }
+  ],
+  "milestones": {
+    "m77_probe_degeneracy": {
+      "directory": "logs/results/v13/m77_probe_degeneracy",
+      "role": "v12 probe-degeneracy forensics, source of ledger amendment A1"
+    },
+    "m78_sample_adequacy": {
+      "directory": "logs/results/v13/m78_sample_adequacy",
+      "role": "v12 sample-adequacy forensics, source of ledger amendment A2"
+    },
+    "m80_sparse_dictionary": {
+      "directory": "logs/results/v13/m80_sparse_dictionary",
+      "role": "sparse dictionary fidelity gate"
+    },
+    "m81_sparse_head": {
+      "directory": "logs/results/v13/m81_sparse_head",
+      "role": "decisive milestone: accuracy and I5 at both task widths"
+    },
+    "m82_atom_naming": {
+      "directory": "logs/results/v13/m82_atom_naming",
+      "role": "atom nameability, and the R10 kill switch"
+    },
+    "m83_boundary_v2": {
+      "directory": "logs/results/v13/m83_boundary_v2",
+      "role": "open-set leg by synthetic negatives, second and operative attempt"
+    },
+    "m84_exposure_ladder": {
+      "directory": "logs/results/v13/m84_exposure_ladder",
+      "role": "open-set leg by real out-group exposure"
+    },
+    "m85_open_set_auroc": {
+      "directory": "logs/results/v13/m85_open_set_auroc",
+      "role": "the threshold-free open-set operand L2 registers as gating"
+    },
+    "m85_transfer_eval": {
+      "directory": "logs/results/v13/m85_transfer_eval",
+      "role": "corpus transfer separated from resolution"
+    },
+    "m85_frontier": {
+      "directory": "logs/results/v13/m85_frontier",
+      "role": "the assembled deliverable frontier"
+    }
+  },
+  "void_milestones": {
+    "m83_boundary": {
+      "directory": "logs/results/v13/m83_boundary",
+      "reason": "N83.8. The first M83 attempt placed its synthetic negatives between the class centroid and the data, so it measured how well boundaries rejected points they were simultaneously required to accept. Its recall figures are not operands. It is retained, verified, and recorded as void rather than deleted, because the distinction between a void run and a run that never happened is itself evidence.",
+      "superseded_by": "m83_boundary_v2"
+    },
+    "m78_sample_adequacy_void_r1": {
+      "directory": "logs/results/v13/m78_sample_adequacy_void_r1",
+      "reason": "Amendment R1. The stability operand was invalid, caught by a positive control that returned 40.45 degrees where near-zero was required.",
+      "superseded_by": "m78_sample_adequacy"
+    }
+  },
+  "v12_ledger": {
+    "path": "analysis/V12_FINAL_CLAIM_LEDGER.md",
+    "required_amendments": [
+      {
+        "heading": "## Amendment A1 — probe objective was ill-posed",
+        "evidence": "logs/results/v13/m77_probe_degeneracy/evidence.json",
+        "source_milestone": "m77_probe_degeneracy"
+      },
+      {
+        "heading": "## Amendment A2 — the transfer deficit was a rank artifact",
+        "evidence": "logs/results/v13/m78_sample_adequacy/evidence.json",
+        "source_milestone": "m78_sample_adequacy"
+      }
+    ]
+  },
+  "replay": {
+    "target": "m85_open_set_auroc",
+    "module": "experiments.tier4.eval_v13_m85_open_set_auroc",
+    "config": "experiments/configs/v13/m85_open_set_auroc.json",
+    "sealed_evidence": "logs/results/v13/m85_open_set_auroc/evidence.json",
+    "scratch_output": "logs/results/v13/m86_replay_scratch",
+    "volatile_fields": ["generated_at", "runtime_seconds", "evidence_hash"],
+    "rationale": "N86.2. The cheapest milestone that exercises the full path - closed-form Phase A subspace fit, Phase B Adam optimisation, coverage matching, and all three scorers - and it already carries an internal reproduction gate against M84's registered zero rung."
+  },
+  "expected_outcome": "C",
+  "outcome_note": "Outcome C is registered in ACCEPTANCE_CRITERIA_v13.md Section 10 as a success: a characterised (accuracy, I5) frontier without dominance. It was fixed as a success before M81 ran, so that a failure to dominate created no pressure to keep altering the setup until a win appeared.",
+  "output_dir": "logs/results/v13/m86_final_verification"
+}

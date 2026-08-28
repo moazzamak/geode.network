@@ -1,0 +1,16 @@
+rebuilding the sealed encoder (g1 pin)
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+g1 encoder pin: 0.000e+00 ok=True
+fitting the DomainNet 345-way head (sealed full-train codes)
+  head fitted on 409832 rows
+reading flowers through the frozen DomainNet head
+  p=0.1: modal flower (54/306), flower mass 0.176, adjacent mass 0.219
+  p=1.0: modal flower (54/306), flower mass 0.176, adjacent mass 0.219
+  p=10.0: modal flower (54/306), flower mass 0.176, adjacent mass 0.219
+{
+ "modal": "flower",
+ "flower_mass": 0.17647058823529413,
+ "adjacent_mass": 0.21895424836601307,
+ "expectation_confirmed": true
+}
+M175 cell B2 complete -> logs\results\v24\m175_cell_b2\evidence.json

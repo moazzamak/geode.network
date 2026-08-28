@@ -1,0 +1,7 @@
+verdict: names_unstable  sealed: True
+purity control 0.8954332783987295 (floor 0.5, null 0.0019305019305019303) passes True
+stability 0.8481038411458334 vs null 0.99755859375 margin -0.14945475260416666 passes False
+sparse_linear_budget_256: named 0.8983338749986348 matched-random 0.9053858666759124 withheld 0.3865968626466338 naming delta -0.007051991677277732 spread 0.007222540045766723
+sparse_linear_budget_512: named 0.8707784365393062 matched-random 0.8781203599138382 withheld 0.3820687464709203 naming delta -0.007341923374531989 spread 0.03360585670368277
+far-field rate 0.858642578125
+wrote C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v13\m82_atom_naming\evidence.json in 16.6 min

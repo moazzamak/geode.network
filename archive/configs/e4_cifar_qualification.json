@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "seeds": [11, 23, 37, 53, 71],
+  "deployment_seed": 11,
+  "id": {
+    "dataset": "cifar100_coarse",
+    "raw_path": "data/tier5/cifar100_superclass.npz",
+    "feature_path": "data/tier5/cifar100_mobilenetv2_15000_seed42.npz",
+    "feature_sample_count": 15000,
+    "feature_sample_seed": 42,
+    "official_train_count": 50000
+  },
+  "near_ood": {
+    "dataset": "cifar10",
+    "raw_path": "data/tier4/cifar10_features.npz",
+    "feature_path": "experiments/tier4/.feat_cache/cnn_ef3f8afbb077d64e_8000.npz",
+    "feature_key": "feats",
+    "feature_sample_count": 8000,
+    "feature_sample_seed": 42,
+    "official_train_count": 50000,
+    "development_validation_fraction": 0.5
+  },
+  "far_ood": {
+    "dataset": "svhn",
+    "feature_path": "data/tier7/svhn_test_mobilenetv2_4000_seed42.npz",
+    "split_seed": 42,
+    "validation_count": 1000,
+    "risk_control_count": 1000
+  },
+  "partition_fractions": {
+    "readout_calibration": 0.15,
+    "risk_control": 0.10,
+    "validation": 0.15
+  },
+  "model": {
+    "pca_components": 128,
+    "alpha": 2.0,
+    "max_iterations": 10,
+    "nudge_iterations": 0,
+    "consensus_threshold": 0.10,
+    "capture_threshold": 0.08
+  },
+  "baselines": [
+    "logistic_regression",
+    "nearest_centroid",
+    "shrinkage_gaussian",
+    "linear_svm",
+    "rbf_svm"
+  ],
+  "primary_endpoint": "balanced_accuracy",
+  "non_inferiority_margin": 0.05,
+  "margin_pilot_artifact": "logs/results/tier5_fitter_confirmation_runs.jsonl",
+  "margin_pilot_seed": 42,
+  "ood_selection_metric": "mean_near_far_auroc",
+  "authorized_ood_scores": ["minimum_sdf", "maximum_probability"],
+  "posthoc_ood_controls": ["sdf_energy", "mahalanobis", "gmm_nll", "knn_distance"],
+  "pretraining": {
+    "lane": "controlled",
+    "source_datasets": ["ImageNet-1K"],
+    "objective": "supervised classification",
+    "checkpoint": "MobileNetV2 IMAGENET1K_V1",
+    "overlap_risk": "No declared CIFAR or SVHN training data; public ImageNet provenance only"
+  }
+}

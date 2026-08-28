@@ -1,0 +1,120 @@
+
+=== i5_8 ===
+                               arm      acc       I5     null   margin   cited  <=bud
+-------------------------------------------------------------------------------------
+              sparse_linear_l1_0.0   87.89%   32.26%   15.20%  +17.06    31.8   0.00
+             sparse_linear_l1_0.03   87.50%   33.80%   11.97%  +21.83    29.7   0.00
+              sparse_linear_l1_0.1   84.77%   27.97%   11.78%  +16.19    23.0   0.00
+              sparse_linear_l1_0.3   84.96%   27.50%   10.16%  +17.34    14.8   0.08
+         sparse_linear_budget_1024   85.55%   33.51%   11.84%  +21.67    11.7   0.37
+          sparse_linear_budget_512   85.55%   32.39%   12.52%  +19.87     8.2   0.77
+          sparse_linear_budget_256   84.77%   38.43%   16.16%  +22.27     5.6   0.99
+        metric_field_shrinkage_0.1   88.67%   16.18%   13.90%   +2.29    32.0   0.00
+        metric_field_shrinkage_0.5   88.67%   19.97%   13.66%   +6.31    32.0   0.00
+        metric_field_shrinkage_1.0   89.06%   23.72%   18.04%   +5.68    32.0   0.00
+                     decision_list   78.52%   15.98%   12.04%   +3.94     1.0   1.00
+                               knn   87.50%   28.54%    8.58%  +19.95     8.8   1.00
+                      rbf_nystroem   77.93%   24.36%   11.45%  +12.90  2047.9   0.00
+          mlp_integrated_gradients   89.45%   32.46%   10.33%  +22.13   384.0   0.00
+            mlp_expected_gradients   89.45%   33.00%   16.02%  +16.98   384.0   0.00
+
+=== i5_128 ===
+                               arm      acc       I5     null   margin   cited  <=bud
+-------------------------------------------------------------------------------------
+              sparse_linear_l1_0.0   60.72%    6.30%    0.86%   +5.44    32.0   0.00
+             sparse_linear_l1_0.03   52.00%    4.56%    0.71%   +3.86    22.7   0.00
+              sparse_linear_l1_0.1   50.78%    3.75%    0.83%   +2.92    21.4   0.00
+              sparse_linear_l1_0.3   57.40%    8.21%    0.89%   +7.31    15.6   0.06
+         sparse_linear_budget_1024   44.13%    4.81%    0.86%   +3.94     5.2   0.97
+          sparse_linear_budget_512   35.16%    4.70%    0.65%   +4.04     3.5   1.00
+          sparse_linear_budget_256   22.51%    4.28%    0.78%   +3.50     2.3   1.00
+        metric_field_shrinkage_0.1   63.68%    2.04%    0.66%   +1.39    32.0   0.00
+        metric_field_shrinkage_0.5   66.09%    2.60%    0.57%   +2.02    32.0   0.00
+        metric_field_shrinkage_1.0   66.35%    2.29%    0.69%   +1.61    32.0   0.00
+                     decision_list   14.64%    7.86%    3.03%   +4.83     0.2   1.00
+                               knn   66.13%    3.29%    1.10%   +2.19     6.7   1.00
+                      rbf_nystroem   56.91%   10.02%    0.77%   +9.25  2048.0   0.00
+          mlp_integrated_gradients   66.05%    4.49%    0.98%   +3.51   384.0   0.00
+            mlp_expected_gradients   66.05%    4.04%    0.74%   +3.30   384.0   0.00
+
+{
+  "all_atom_arms_beat_own_null": true,
+  "conjunction_verdict": "confirmed",
+  "dominance_claim_blocked": false,
+  "final_labels_opened": false,
+  "h81_gate_passed": true,
+  "i5_128": {
+    "best_atom_arm_per_seed": [
+      "decision_list",
+      "decision_list",
+      "decision_list"
+    ],
+    "chance": 0.0078125,
+    "i5_mean": 0.06372450049509164,
+    "i5_per_seed": [
+      0.07856049674231494,
+      0.052961115001556175,
+      0.059651889741403806
+    ],
+    "i5_spread": 0.025599381740758764,
+    "knn_control_mean": 0.033117101234096516,
+    "knn_control_per_seed": [
+      0.0329193975113741,
+      0.03174059576354943,
+      0.03469131042736602
+    ],
+    "passes": true,
+    "seeds_measurable": 3,
+    "shuffled_null_mean": 0.027693602693602697,
+    "unconstrained_best_arm_per_seed": [
+      "sparse_linear_l1_0.3",
+      "sparse_linear_l1_0.3",
+      "sparse_linear_l1_0.3"
+    ],
+    "unconstrained_cited_atoms_mean": 15.690511067708334,
+    "unconstrained_i5_mean": 0.079597295196434,
+    "within_explanation_budget": [
+      true,
+      true,
+      true
+    ]
+  },
+  "i5_8": {
+    "best_atom_arm_per_seed": [
+      "sparse_linear_budget_256",
+      "sparse_linear_budget_512",
+      "sparse_linear_budget_512"
+    ],
+    "chance": 0.125,
+    "i5_mean": 0.4022007835795021,
+    "i5_per_seed": [
+      0.38430797844413406,
+      0.42361111111111116,
+      0.39868326118326114
+    ],
+    "i5_spread": 0.0393031326669771,
+    "knn_control_mean": 0.2636605099705786,
+    "knn_control_per_seed": [
+      0.28539146779993463,
+      0.24178244524354364,
+      0.2638076168682576
+    ],
+    "seeds_measurable": 3,
+    "shuffled_null_mean": 0.12031985912849756,
+    "unconstrained_best_arm_per_seed": [
+      "sparse_linear_budget_256",
+      "sparse_linear_budget_512",
+      "sparse_linear_budget_512"
+    ],
+    "unconstrained_cited_atoms_mean": 7.511067708333333,
+    "unconstrained_i5_mean": 0.4022007835795021,
+    "verdict": "confirms",
+    "within_explanation_budget": [
+      true,
+      true,
+      true
+    ]
+  },
+  "neither_width_reportable_alone": true,
+  "v12_reference_points_not_used_as_bars": true
+}

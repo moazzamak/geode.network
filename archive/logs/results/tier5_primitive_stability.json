@@ -1,0 +1,54 @@
+{
+  "reference_seed": 11,
+  "component_counts": {
+    "11": {
+      "0": 6,
+      "1": 6,
+      "2": 7,
+      "3": 6
+    },
+    "23": {
+      "0": 6,
+      "1": 10,
+      "2": 8,
+      "3": 5
+    },
+    "37": {
+      "0": 5,
+      "1": 6,
+      "2": 7,
+      "3": 8
+    },
+    "53": {
+      "0": 5,
+      "1": 7,
+      "2": 8,
+      "3": 6
+    },
+    "71": {
+      "0": 6,
+      "1": 10,
+      "2": 7,
+      "3": 7
+    }
+  },
+  "total_component_count_mean": 27.2,
+  "total_component_count_variance": 3.7600000000000002,
+  "matched_center_drift_mean": 0.39167315138498704,
+  "matched_precision_drift_mean": 0.5809091375359751,
+  "prediction_agreement_mean": 0.93,
+  "carve_region_overlap_mean": null,
+  "protocol": {
+    "data_seed": 101,
+    "construction_seeds": [
+      11,
+      23,
+      37,
+      53,
+      71
+    ],
+    "evaluation_count": 800,
+    "evaluation_used_for_fitting": false,
+    "geometry_variant": "additive"
+  }
+}

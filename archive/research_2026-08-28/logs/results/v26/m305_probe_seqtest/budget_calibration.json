@@ -1,0 +1,11 @@
+{
+  "budget_grid_results": {
+    "8000": 0.9552
+  },
+  "chosen_budget": 8000,
+  "target_power": 0.95,
+  "p0": 0.002,
+  "p1": 0.005,
+  "alpha": 0.01,
+  "beta": 0.01
+}

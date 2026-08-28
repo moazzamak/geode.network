@@ -1,0 +1,66 @@
+{
+  "config": {
+    "alpha": 2.0,
+    "artifact_path": "logs/results/tier6_variable_order_locked_single.json",
+    "calibration_fraction": 0.2,
+    "capture_threshold": 0.08,
+    "consensus_threshold": 0.1,
+    "dataset": "synthetic_variable_order",
+    "em_batch_size": 128,
+    "em_lr": 0.005,
+    "em_max_batches_per_epoch": 2,
+    "max_chars": 6000,
+    "max_iterations": 10,
+    "max_test_samples": 300,
+    "max_train_samples": 1000,
+    "n_em_epochs": 0,
+    "n_em_iters": 0,
+    "n_folds": 2,
+    "nudge_iterations": 0,
+    "nudge_lr": 0.02,
+    "pca_components": 8,
+    "representations": [
+      "temporal_state"
+    ],
+    "seed": 13,
+    "temporal_recurrence": 0.95,
+    "temporal_state_dim": 24,
+    "temporal_warmup": 32,
+    "use_gpu": false,
+    "use_subtractive": false,
+    "window": 2
+  },
+  "results": {
+    "temporal_state": {
+      "cv_acc_mean": 0.22029364694035353,
+      "cv_acc_std": 0.06413749078419738,
+      "test_acc_init": 0.4,
+      "test_acc_raw": 0.36666666666666664,
+      "test_acc_em": null,
+      "test_acc_final": 0.4,
+      "top5_init": 0.8866666666666667,
+      "top5_em": null,
+      "ppl_init": 5.099362337996704,
+      "ppl_em": null,
+      "ppl_final": 5.099362337996704,
+      "unigram_acc": 0.175,
+      "ngram_acc": 0.333889816360601,
+      "linear_acc": 0.31333333333333335,
+      "class_count": 8,
+      "sample_adequacy": {
+        "class_count": 8,
+        "min_count": 84,
+        "median_count": 122.0,
+        "max_count": 175,
+        "min_seed": 35,
+        "below_minimum": 0,
+        "below_recommended": 7
+      },
+      "epoch_history": [],
+      "epoch_monitor_policy": "Test metrics are observational only and are never used for gradients, sampling, early stopping, or hyperparameter selection."
+    }
+  },
+  "selection_metric": "forward_validation_accuracy",
+  "selected_representation": "temporal_state",
+  "test_used_for_selection": false
+}

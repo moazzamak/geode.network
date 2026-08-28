@@ -1,0 +1,57 @@
+{
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Tiny atoms (128), tiny VQ pool, few k-means iterations, gates bypassed. Its only job is to prove the code paths execute: parity guard, corpus, M108-exact whitener + candidate pool, random dictionary, VQ fit with dead-unit handling, full + top-k encodes, ridge heads, per-domain eval, MAC ledger, and both kill switches evaluate. Every accuracy it produces is meaningless.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "shared subsample, unchanged (digest + pixel identity still exercised)."
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "vq": "cuda"
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 128,
+    "topk": 16,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 2048,
+    "vq_fit_seed": 22,
+    "vq_fit_images": 200,
+    "vq_pool_size": 30000,
+    "vq_iters": 5,
+    "vq_batch": 8192
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0]
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

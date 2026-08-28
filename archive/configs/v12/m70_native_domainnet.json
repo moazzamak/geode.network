@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "milestone": "M70-D2-D3",
+  "seed": 70,
+  "class_counts": [8, 32, 128],
+  "samples_per_class": 100,
+  "geometry_per_class": 60,
+  "extent_per_class": 20,
+  "conformal_per_class": 20,
+  "minimum_native_short_edge": 256,
+  "rank": 32,
+  "extent_quantile": 0.95,
+  "penalty_weight": 16,
+  "miscoverage": 0.08,
+  "probe_replicates_per_axis_sign": 8,
+  "extraction_batch_size": 32,
+  "domainnet_download_record": {
+    "path": "logs/results/e7_domainnet_download.json",
+    "sha256": "d2e8326e437e0e82eb524e29f70edb76773df017206758f406667a0319fcbf0b"
+  },
+  "backbone": {
+    "id": "dinov2-small",
+    "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+    "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+    "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+    "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "token_pooling_policy": "cls_token",
+    "output_dimension": 384
+  },
+  "v11_parent_index": {
+    "path": "logs/results/v11/m68_final_replay/artifact_index.json",
+    "sha256": "cfc23d287b93bc10e94ebc25aef817a344c32ddc8a17f522b797eca422e932cd"
+  },
+  "final_labels_opened": false
+}

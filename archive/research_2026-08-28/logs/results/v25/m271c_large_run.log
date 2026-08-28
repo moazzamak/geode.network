@@ -1,0 +1,21 @@
+Using custom `forced_decoder_ids` from the (generation) config. This is deprecated in favor of the `task` and `language` flags/config options.
+Transcription using a multilingual Whisper will default to language detection followed by transcription instead of translation to English. This might be a breaking change for your use case. If you want to instead always translate your audio to English, make sure to pass `language='en'`. See https://github.com/huggingface/transformers/pull/28687 for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+  250/2620 running WER 0.0224
+  500/2620 running WER 0.0258
+  750/2620 running WER 0.0255
+  1000/2620 running WER 0.0239
+  1250/2620 running WER 0.0243
+  1500/2620 running WER 0.0267
+  1750/2620 running WER 0.0260
+  2000/2620 running WER 0.0249
+  2250/2620 running WER 0.0257
+  2500/2620 running WER 0.0262
+{
+ "n_samples": 2611,
+ "overall_wer": 0.026132304342012264,
+ "anchor_wer": 3.0,
+ "prior_rung_wer": 0.02793,
+ "n_flagged": 9
+}
+M271c complete -> logs\results\v25\m271_quality_ladder\evidence_whisper_large.json

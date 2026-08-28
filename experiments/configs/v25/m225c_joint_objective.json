@@ -1,0 +1,27 @@
+{
+  "milestone": "M225c",
+  "title": "Joint objective: frozen-axis swap directions as a training term + true held-out inverse pair",
+  "question": "Does the joint objective restore the frozen traversability (>= 0.5, TRAINED-not-held-out) while the inverse relation generalises to a TRUE held-out pair (convolution/deconvolution, excluded from training)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M225c REGISTERED (20 Aug, before the build)",
+  "model": {"f_dim": 32, "mlp_hidden": 32, "seed": 11},
+  "training": {
+    "steps": 3000,
+    "lr": 0.001,
+    "rel_ordered_triple_tau": 0.5,
+    "rel_polar_rho": 0.3,
+    "margin_dissimilar": 0.1,
+    "inverse_analogy_tau": 0.5,
+    "frozen_swap_tau": 0.5,
+    "note": "the frozen-axis swap directions join the objective as an explicit term (G3's reading is TRAINED-not-held-out); the inverse-pair hinge covers the reference + fft/ifft only"
+  },
+  "train_exclude": [["convolution", "deconvolution"]],
+  "relations_file": "analysis/fingerprint_relations_v0.json",
+  "transform_relations_file": "analysis/fingerprint_relations_v1_transform.json",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID - determinism is the instrument contract",
+    "G3_pass_and_G6_heldout_pass": "the joint objective reconciles both properties and the inverse relation generalises to an UNSEEN pair - the M226 product-migration trigger is restored",
+    "G3_fail": "even the explicit frozen-swap term cannot restore the traversability at these thresholds - scoped negative, the extended schema needs more than this",
+    "G6_heldout_fail": "the inverse relation does not generalise beyond trained pairs - scoped negative for the authored inverse set",
+    "ship": "prototype only; M226 remains gated"
+  }
+}

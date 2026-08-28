@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "milestone": "M90",
+  "registered_question": "Plan v14 sections 4 and 6.2: do domain-aware components or corrected coordinates recover rejection, without training anything?",
+  "registration_notes": [
+    "N90.1 - registered before any arm was run. H90 says the acceptance overlap is misspecification, one unimodal region per class across six domains. H91 says it is an artefact of unnormalised, un-centred coordinates in which domain is the dominant axis. Both are refuted unless an arm clears all three bars in the gate block against the sealed v13 values on identical rows.",
+    "N90.2 - if every arm ties or loses, that is the result and it is recorded as such. A null across the three cheapest available corrections is a materially stronger statement of v13's finding than v13 could make, because it rules out the explanations that do not require training anything. No arm is selected after its operands are seen and no losing arm is retuned.",
+    "N90.3 - R5. Every arm that has a free choice carries a null sharing structure, budget and split. The domain-centred arm's null centres by a random partition with matched group sizes; the mixture arm's null uses identical component count, identical component sizes and identical rank with cells drawn as disjoint random subsets instead of by domain. The cosine arm has no free parameter, so the baseline on identical rows is its null. An operand without its null is not evidence.",
+    "N90.4 - the standing floor of 10 fit samples per fitted tangent dimension is not waived for any arm. The mixture arm pays for 344 components with rank 10 against the baseline's 51, which is a real cost registered in advance and held constant by its null.",
+    "N90.5 - the mixture's class-level component covers every row of its class, so the domain cells are a refinement rather than a partition. The residual-as-component alternative was measured and rejected before this config was written: the smallest per-class residual is 11 rows at a threshold of 100 and 3 rows at 50, permitting ranks of 1 and 0. Recorded so the design is not mistaken for a convenience.",
+    "N90.6 - the domain-centred arm requires a domain label at evaluation time. DomainNet supplies one; an open world does not. The arm is an attribution of cause, not a deployable capability, and may not be reported as one.",
+    "N90.7 - coverage is matched per class over the union of that class's components, never per component. One offset scales all of a class's radii until 90 percent of its calibration rows are accepted by at least one component. Matching per component would fix each component's own coverage and defeat the arm.",
+    "N90.8 - instrument validation is per arm and runs before any figure in that arm is read (N85.4d). Far-field points are generated in each arm's own transformed space from that arm's own fit rows, so the control scales with the arm rather than with the baseline. An arm failing either control reports instrument_invalid and every operand below it is suppressed.",
+    "N90.9 - no figure here may revisit a v13 verdict. Outcome C stands as sealed, H83 and H84 stay refuted, and a threshold-free result may not overturn a threshold result (N85.4a)."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "The same 5760 rows M84 read, M85 ranked and M89 described."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged since M83."
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3 and N90.7, so every arm is read at the operating point v13 reported recall at."
+  },
+  "arms": [
+    {
+      "name": "baseline",
+      "transform": "identity",
+      "components": "class",
+      "rank": 51,
+      "rationale": "v13 exactly. Reproduces the sealed values and anchors every other arm."
+    },
+    {
+      "name": "cosine",
+      "transform": "l2_normalise",
+      "components": "class",
+      "rank": 51,
+      "rationale": "H91. M89 measured a median feature L2 norm of 46.81 with no normalisation anywhere in v13, so norm variation is currently inside every distance the boundary reads."
+    },
+    {
+      "name": "domain_centred",
+      "transform": "domain_centre",
+      "components": "class",
+      "rank": 51,
+      "rationale": "H91. Subtracts the fit-set mean of a row's own domain, attacking the 32.295 sibling-cell gap M89 measured directly."
+    },
+    {
+      "name": "domain_centred_null",
+      "transform": "random_group_centre",
+      "components": "class",
+      "rank": 51,
+      "rationale": "N90.3. Identical group count and identical group sizes, assigned at random instead of by domain."
+    },
+    {
+      "name": "domain_mixture",
+      "transform": "identity",
+      "components": "domain_cell",
+      "rank": 10,
+      "rationale": "H90. 216 cells at support >= 100 plus 128 class-level components, at the largest rank the standing floor permits."
+    },
+    {
+      "name": "domain_mixture_null",
+      "transform": "identity",
+      "components": "random_cell",
+      "rank": 10,
+      "rationale": "N90.3. Identical component count, sizes and rank, with cells drawn at random instead of by domain."
+    }
+  ],
+  "mixture": {
+    "minimum_cell_support": 100,
+    "floor_samples_per_dimension": 10,
+    "class_level_component": true,
+    "rationale": "N90.4 and N90.5."
+  },
+  "gate": {
+    "v13_acceptance_multiplicity_mean": 78.74169921875,
+    "v13_rejection_recall": 0.11875,
+    "v13_geometry_auroc": 0.585085105895996,
+    "multiplicity_bar": 40.0,
+    "auroc_margin": 0.02,
+    "rationale": "H90 and H91 are refuted unless an arm drives mean acceptance multiplicity below the multiplicity bar, exceeds v13's rejection recall, and exceeds v13's AUROC by more than the margin. All three, against the arm's own null where it has one."
+  },
+  "controls": {
+    "far_field_multiplier": 5.0,
+    "far_field_count": 2048,
+    "far_field_seed": 90001,
+    "far_field_floor": 0.99,
+    "known_split_tolerance": 0.02,
+    "rationale": "N90.8. Generated inside each arm's own transformed space from that arm's own fit rows."
+  },
+  "seeds": {
+    "random_group": 90002,
+    "random_cell": 90003,
+    "rationale": "Fixed before execution. The nulls are drawn once, not searched over."
+  },
+  "output_dir": "logs/results/v14/m90_representation_remedies"
+}

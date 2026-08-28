@@ -1,0 +1,64 @@
+{
+  "milestone": "M136",
+  "title": "The head objective axis: penalty ladder below 1.0, smoothed targets, and a batch-hinge margin objective on the sealed 6144-atom codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M136)",
+  "registered_before_any_accuracy": true,
+  "question": "Accuracy lives in the thin positive-margin tail (M128). Does the frozen-code accuracy depend on the head OBJECTIVE - under-regularised ridge (lambda < 1.0, never measured; lambda >= 1.0 is sealed at M108 and declines), smoothed targets (registered analytic expectation: predictions identical to lambda=1.0 ridge), or a true margin objective (batch multi-class hinge)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "atoms": 6144,
+    "width": 24576,
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "note": "Reuses the SEALED M117 6144-atom code memmaps (data_cache_root()/v16/m117). No re-encode, no GPU, CPU-only."
+  },
+  "head": {
+    "ridge": {
+      "penalty_ladder": [0.01, 0.1, 0.3, 1.0, 10.0],
+      "n": 138000,
+      "note": "One streaming Gram; solve_many. lambda >= 1.0 already sealed at M108 (monotone decline); lambda < 1.0 is the unmeasured direction."
+    },
+    "smoothed": {
+      "epsilon": 0.1,
+      "n": 138000,
+      "analytic_note": "For a standardised ridge with intercept, Y_s = (1-e)Y + e/345 implies cross_s = (1-e)*cross (the e/345 term cancels the centring exactly) and intercept_s = (1-e)*p_hat + e/345. Scores shift by a per-row constant, so argmax predictions are IDENTICAL to the lambda=1.0 ridge. The cell verifies the lemma numerically, it does not discover it."
+    },
+    "hinge": {
+      "n": 34500,
+      "lambdas": [0.0001, 0.001],
+      "epochs": 8,
+      "intercept": "class prior p_hat of the n=34500 cell, IDENTICAL to the ridge head's intercept, so the only registered difference between the arms is the objective",
+      "step_rule": "batch multi-class hinge subgradient: G accumulates X at the true class and -X at the best wrong class for every violating row, averaged over rows; W = (1 - 1/t) * W + (1/(lambda*t)) * G; t = epoch index; corpus order, deterministic",
+      "compute_note": "n=34500 is the registered compute ceiling (24576 x 345 weight matrix; full-data hinge is the escalation cell only)."
+    },
+    "same_cell_ridge": {
+      "n": 34500,
+      "penalty": 1.0,
+      "note": "Fresh ridge fit at n=34500 for the same-cell control (t2 anchor vs sealed Q(6144,34500))."
+    }
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "ridge lambda=1.0 at n=138000 reproduces M117 sealed Q(6144,138000) = 0.2248695652173913",
+    "t2_tolerance": 0.002,
+    "t2_reference": "ridge lambda=1.0 at n=34500 reproduces M117 sealed Q(6144,34500) = 0.09057971014492754",
+    "kill_switch_objective": "fired if NEITHER any lambda<1.0 ridge cell NOR any hinge cell beats its own same-cell ridge by >= +0.003. If fired: the head-objective axis is CLOSED and lambda=1.0 ridge remains the head (negative sealed and reported). If any cell beats the margin: the objective is a measured lever and that head escalates to full data.",
+    "margin_report": "f_true - max_other quantiles (q25/q50/q75/q95) and positive-margin share on the test set, for the hinge arm and its same-cell ridge control."
+  },
+  "numerics": {
+    "gram_dtype": "float64",
+    "block": 4096,
+    "seed": 109
+  }
+}

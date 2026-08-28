@@ -1,0 +1,22 @@
+{
+  "milestone": "M199-closure",
+  "cell": "anti-wash corner-case closure arms (synthetic)",
+  "title": "M199 closure — self-payment wash, dust storms, structural form-checks",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (25 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "self_payment": {
+    "sessions": 10,
+    "demand": 100.0,
+    "seed": 21
+  },
+  "dust_storm": {
+    "sizes": [1, 5, 50],
+    "min_session_fee": 5.0,
+    "seed": 22
+  },
+  "structural": {
+    "seed": 23
+  },
+  "scope_note": "synthetic-scenario instruments, not deployment claims",
+  "output_dir": "logs/results/v25/m199_closure"
+}

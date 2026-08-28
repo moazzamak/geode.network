@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "tiers": {
+    "tier1_ellipsoid": {
+      "feature_source": "synthetic oriented ellipsoid coordinates",
+      "metric": "mean absolute normalized SDF residual",
+      "sample_budget": 3000,
+      "split_policy": "seeded random 80/20 holdout with shuffled k-fold CV"
+    },
+    "tier1_sphere": {
+      "feature_source": "synthetic sphere coordinates",
+      "metric": "mean absolute normalized SDF residual",
+      "sample_budget": 3000,
+      "split_policy": "seeded random 80/20 holdout with shuffled k-fold CV"
+    },
+    "tier2": {
+      "feature_source": "ModelNet10 point-cloud coordinates from at most 32 shapes",
+      "metric": "mean absolute normalized SDF residual",
+      "sample_budget": "dataset-dependent concatenated points from 32 shapes",
+      "split_policy": "seeded random 80/20 point holdout with shuffled k-fold CV"
+    },
+    "tier3": {
+      "feature_source": "MNIST digit-0 pixel coordinates embedded as a manifold",
+      "metric": "mean absolute normalized SDF residual",
+      "sample_budget": "all sampled digit-0 manifold points",
+      "split_policy": "seeded random 80/20 point holdout with shuffled k-fold CV"
+    },
+    "tier4": {
+      "feature_source": "pretrained MobileNetV2 ImageNet backbone features from CIFAR-10",
+      "metric": "held-out calibrated classification accuracy",
+      "sample_budget": 8000,
+      "split_policy": "seeded random 80/20 holdout; transforms fitted independently inside shuffled CV folds"
+    },
+    "tier5": {
+      "feature_source": "pretrained MobileNetV2 ImageNet backbone features from CIFAR-100",
+      "metric": "held-out calibrated superclass classification accuracy",
+      "sample_budget": 60000,
+      "split_policy": "seeded random 80/20 holdout; transforms fitted independently inside shuffled CV folds"
+    },
+    "tier6": {
+      "feature_source": "fixed causal temporal reservoir states from WikiText-103 characters",
+      "metric": "calibrated next-character accuracy, top-5 accuracy, and probability perplexity",
+      "sample_budget": {
+        "test_pairs": 10000,
+        "train_pairs": 50000
+      },
+      "split_policy": "purged forward-chaining CV with separate chronological geometry and calibration ranges"
+    }
+  }
+}

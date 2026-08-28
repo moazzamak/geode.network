@@ -1,0 +1,164 @@
+{
+  "milestone": "m135_breakthrough_prior_art_litsearch",
+  "program": "pre-registration literature survey: which of the seven breakthrough directions (data axis, domain specialists, fixed code-geometry transforms, second-order pooling, scattering, shallow learned encoder, frontier-map framing) is ALREADY done in the literature? (13 Aug 2026)",
+  "registration_notes": {
+    "N94.1": "This is a SURVEY for the advisory breakthrough plan of 13 Aug 2026 - not a claim audit and NOT a novelty search. The hypothesis under test is that most of the seven directions are ALREADY established (they are named after classic pre-deep-learning image coding); the survey documents the displacing/presence evidence per direction, never an absence.",
+    "N94.2": "Question registered before search: for each of the seven directions (D1 data-axis scaling of frozen codes, D2 per-domain specialists, D3 fixed nonlinear/spatial code geometry, D4 second-order/bilinear pooling, D5 scattering/fixed filter banks, D6 shallow learned patch encoder, D7 frontier-map framing), what is the nearest prior art that already does it, and which direction survives as an unmeasured object for this programme?",
+    "N94.3": "Anchors are recall probes: each MUST be retrieved by a topic query that does NOT contain its title, else the search is insensitive and every 'not found' is worthless.",
+    "N94.4": "Query families are phrased to find displacing work (work that already measures or builds the direction), not work that merely agrees in spirit.",
+    "N94.5": "Empty queries are recorded, not dropped. Rate-limited queries are retried and residual failures recorded separately from genuinely empty results.",
+    "N94.6": "Absence from these indexes is UNRESOLVED, never 'new' or 'first'. Unauthenticated public search cannot support a novelty claim.",
+    "N94.7": "Title/abstract mark a source live; only primary text with a located passage may count as displacement.",
+    "N94.8": "This evidence is a dated snapshot and is NOT replayable: the indexes change and the network is not a sealed corpus. The run records its date and the exact query strings so a reader can repeat the search, not so the bytes can be reproduced.",
+    "N94.9": "Instrument reused from M127/M129/M132 (audit_v13_prior_art): arXiv two-stage AND-then-OR, Semantic Scholar with retry; S2 rate-limiting recorded as failures, not empty.",
+    "N94.10": "Recall probes pair a paper whose existence is not in doubt with a topic query that omits its title. A probe that fails means the family it covers cannot be searched for absence; the positive-control probes must ALL be retrieved or the run is broken rather than informative.",
+    "N94.11": "Local query-result cache (registered 13 Aug 2026, added AFTER the first live run of this config but BEFORE the cached re-run): successful results are stored in data/litsearch_cache.json keyed by (source, max_results, query) with fetched_at/origin provenance; a cached record is a dated snapshot and is marked from_cache in the evidence. Failures (HTTP 429) are never cached. Seed sources: m87/m88/m127/m129/m132/m135 evidence files.",
+    "N94.12": "The first live run (evidence logs/results/v16/m135_breakthrough_prior_art_litsearch/evidence.json) used this config WITHOUT the cache notes and WITH live fetches; its config hash reflects that state. The cached re-run (logs/results/v16/m135_breakthrough_prior_art_litsearch_cached) is a cache-only validation: zero network calls; any query missing from the cache is recorded as a failure. Both are dated snapshots and neither is replayable."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "wavelet scattering transform invariant representation",
+    "Fisher vector encoding image classification",
+    "bilinear pooling fine-grained visual recognition",
+    "sparse coding spatial pyramid image classification",
+    "random features large scale kernel machines",
+    "residual adapters multi-domain visual learning"
+  ],
+  "recall_probes": [
+    {
+      "id": "P1",
+      "must_retrieve": "Wavelet Scattering Transforms",
+      "query": "wavelet transform invariant image representation deep network",
+      "covers": ["D5"],
+      "positive_control": true
+    },
+    {
+      "id": "P2",
+      "must_retrieve": "Image Classification with the Fisher Vector Theory and Practice",
+      "query": "gradient encoding local descriptors image classification",
+      "covers": ["D3"],
+      "positive_control": true
+    },
+    {
+      "id": "P3",
+      "must_retrieve": "Bilinear CNN Models for Fine-grained Visual Recognition",
+      "query": "second order pooling fine-grained recognition",
+      "covers": ["D4"],
+      "positive_control": false
+    },
+    {
+      "id": "P4",
+      "must_retrieve": "Learning multiple visual domains with residual adapters",
+      "query": "domain specific parameters multi-domain image classification",
+      "covers": ["D2"],
+      "positive_control": false
+    },
+    {
+      "id": "P5",
+      "must_retrieve": "Aggregating local image descriptors into compact codes",
+      "query": "aggregating local descriptors compact codes retrieval",
+      "covers": ["D3"],
+      "positive_control": false
+    },
+    {
+      "id": "P6",
+      "must_retrieve": "Random Features for Large-Scale Kernel Machines",
+      "query": "random nonlinear feature mapping kernel machine learning",
+      "covers": ["D1", "D6", "D7"],
+      "positive_control": true
+    },
+    {
+      "id": "P7",
+      "must_retrieve": "Linear Spatial Pyramid Matching using Sparse Coding",
+      "query": "sparse coding spatial pyramid image classification",
+      "covers": ["D3", "D6"],
+      "positive_control": false
+    },
+    {
+      "id": "P8",
+      "must_retrieve": "Convolutional Kernel Networks",
+      "query": "unsupervised convolutional filters kernel approximation patches",
+      "covers": ["D6"],
+      "positive_control": false
+    }
+  ],
+  "claims": {
+    "D1": {
+      "statement": "Scaling the DATA axis for fixed/frozen (untrained) feature codes is already studied: accuracy-vs-training-set-size curves for non-learned encoders, and the frozen-construction vs trained-backbone data-scaling comparison.",
+      "queries": [
+        "random feature classifier more training data accuracy",
+        "frozen feature extractor linear probe dataset size",
+        "kernel ridge regression large dataset scaling",
+        "ridge classifier data size random projection"
+      ]
+    },
+    "D2": {
+      "statement": "Per-domain / per-group specialists routed by domain already exist: multi-domain networks with domain-specific branches, residual adapters, MoE-style routing over specialists.",
+      "queries": [
+        "multi-domain network domain specific branch",
+        "domain adaptation residual adapters per domain",
+        "mixture of experts domain routing classification",
+        "multi-domain image classification domain experts"
+      ]
+    },
+    "D3": {
+      "statement": "Fixed nonlinear/spatial code geometry is already the standard pre-deep image code: Fisher vectors, VLAD, power/signed-square-root normalization, spatial pyramids, multi-scale patches.",
+      "queries": [
+        "Fisher vector image classification encoding",
+        "VLAD aggregation local descriptors",
+        "signed square root power normalization descriptor",
+        "spatial pyramid matching image classification"
+      ]
+    },
+    "D4": {
+      "statement": "Second-order / covariance / bilinear pooling with closed-form or linear heads is already established.",
+      "queries": [
+        "bilinear pooling fine-grained recognition",
+        "second order pooling convolutional features",
+        "covariance descriptor image classification",
+        "global covariance pooling CNN classification"
+      ]
+    },
+    "D5": {
+      "statement": "Fixed filter-bank / scattering transforms (non-learned deep features) as classifiers are already established, including learned-scattering hybrids.",
+      "queries": [
+        "scattering network image classification",
+        "wavelet scattering transform deep features",
+        "fixed filter bank convolutional features classification",
+        "scattering transform small training set"
+      ]
+    },
+    "D6": {
+      "statement": "A shallow single-layer learned patch encoder / filter bank trained without backprop through a trunk already exists: dictionary learning, conv kernel networks, unsupervised patch feature learning.",
+      "queries": [
+        "convolutional kernel network patch dictionary",
+        "unsupervised feature learning patches classification",
+        "k-means dictionary image classification",
+        "dictionary learning image recognition sparse"
+      ]
+    },
+    "D7": {
+      "statement": "The frontier-map framing - comparing fixed/random constructions against trained backbones at matched cost, the 'price of learning' - is already measured.",
+      "queries": [
+        "random features versus deep networks comparison",
+        "fixed features versus learned features accuracy",
+        "untrained neural network performance comparison",
+        "random weights network representation comparison"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v16/m135_breakthrough_prior_art_litsearch"
+}

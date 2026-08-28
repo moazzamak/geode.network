@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "milestone": "M76",
+  "indexes": [
+    {
+      "path": "logs/results/v12/m70_d1_sample_sensitivity/artifact_index.json",
+      "sha256": "632e827a89a6ad9e09a7067a53cf0eeee4b99ebd5c57a5703cb19330f55bf25d"
+    },
+    {
+      "path": "logs/results/v12/m70_native_domainnet/artifact_index.json",
+      "sha256": "20c2dea882b41ecce8066f5b0d5468a8c9cff692686144e94f2d115ddf78b22a"
+    },
+    {
+      "path": "logs/results/v12/m71_gaussian_classifier/artifact_index.json",
+      "sha256": "f658ad7b1c4312ee18d94a373ed23ea342ec25bf4e42256e5db2c3f366e86866"
+    },
+    {
+      "path": "logs/results/v12/m72_metric_field_stage0/artifact_index.json",
+      "sha256": "c4a4701cba5fdf899fb7c75d7416279b8b5998d105774a5fe5adc1bf3b64bce6"
+    },
+    {
+      "path": "logs/results/v12/m73_projected_metric_fields/artifact_index.json",
+      "sha256": "5e1f39bdd22a25ba3e8f01ff45d910c32944590522834396d4bed606a72acc1b"
+    },
+    {
+      "path": "logs/results/v12/m74_confirmation_transfer/artifact_index.json",
+      "sha256": "09f2d9831e4036ed294a657219e8fb1a8a8937e3eaaab283d5b10c487db89bc7"
+    },
+    {
+      "path": "logs/results/v12/m75_inspectability/artifact_index.json",
+      "sha256": "6e5a71b8381ab2a1c0a62af056fca925b774ca58724c8798a4c536c1d0d89c7a"
+    }
+  ],
+  "evidence": {
+    "m70_d1": {
+      "path": "logs/results/v12/m70_d1_sample_sensitivity/evidence.json",
+      "sha256": "863e401de543626dee68a318bf50f2d4437baa4bfe8f53177874a60db3d1b512"
+    },
+    "m70_native": {
+      "path": "logs/results/v12/m70_native_domainnet/evidence.json",
+      "sha256": "64485398bc5d71d5206cc278e1ce7e97fa0ab2d12a357e97ef4704a4b8cebe7e"
+    },
+    "m71": {
+      "path": "logs/results/v12/m71_gaussian_classifier/evidence.json",
+      "sha256": "a09b79a4ae42f6be3ce137935959e79eec8cfece4b7be74380b028442f9eee23"
+    },
+    "m72": {
+      "path": "logs/results/v12/m72_metric_field_stage0/evidence.json",
+      "sha256": "642faf3d8eb01cf66f34690b882ec176f73c199e190bb6cf0cb839f7c0b27824"
+    },
+    "m73": {
+      "path": "logs/results/v12/m73_projected_metric_fields/evidence.json",
+      "sha256": "1f35ef34378314dcd5bb1556c89c65c534a98bc49d397f0b04ef85e7746e21d6"
+    },
+    "m74": {
+      "path": "logs/results/v12/m74_confirmation_transfer/evidence.json",
+      "sha256": "dca6d3e300d450b0d571abdf68abbc8da8f327f68639787cfc26e926a1d70f41"
+    },
+    "m75": {
+      "path": "logs/results/v12/m75_inspectability/evidence.json",
+      "sha256": "52fbe3135b1d234681b7ce74727f2f81cbd12ec7321af41f62c472e5fdb53f03"
+    }
+  },
+  "final_claim_ledger": {
+    "path": "analysis/V12_FINAL_CLAIM_LEDGER.md",
+    "sha256": "180d499eb9af8c35112d1260f81404ecc2a682fbaf8c7048df3e161e57e221d6"
+  },
+  "expected_outcome": "E",
+  "v11_amendment_required": false,
+  "final_labels_opened": false
+}

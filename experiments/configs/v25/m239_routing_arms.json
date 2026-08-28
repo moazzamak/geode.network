@@ -1,0 +1,28 @@
+{
+  "milestone": "M239",
+  "title": "Deployable per-domain arms + routing measurement (the M229 bar 1)",
+  "question": "What is the routing accuracy of the 6-way domain router on the cached CLIP features, and what does the routed system achieve vs the oracle?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M239 REGISTERED (20 Aug)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "features": {
+    "clip_train": "logs/results/v25/m236_clip_vitl14/features/clip_train.npy",
+    "clip_test": "logs/results/v25/m236_clip_vitl14/features/clip_test.npy"
+  },
+  "artifacts": {"labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"},
+  "training": {"epochs": 30, "lr": 0.001, "weight_decay": 0.0001,
+               "batch": 1024, "seed": 11},
+  "domain_names": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "routing_bar": 0.8,
+  "interpretation_registered_before_running": {
+    "g2_fail": "VOID - the schedule permutation must reconstruct the labels byte-exactly",
+    "g3_fail": "VOID - the router must be reproducible under the same seed",
+    "reading": "routing >= 0.8 meets the last unmeasured M229 bar; the routed-vs-oracle gap is the realised cost of routing"
+  }
+}

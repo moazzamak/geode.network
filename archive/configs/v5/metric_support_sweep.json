@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "milestone": "M18",
+  "seeds": [11, 23, 37],
+  "eigenvalue_floor": 1e-06,
+  "complexity_penalty": 0.0005,
+  "evaluation_samples_per_class": 128,
+  "candidate_ranks": [0, 2, 4],
+  "families": [
+    "spherical",
+    "diagonal",
+    "full",
+    "diagonal_low_rank",
+    "shared_full_diagonal",
+    "shared_low_rank_diagonal"
+  ],
+  "development": {
+    "dimensions": [4, 8],
+    "intrinsic_ranks": [1, 2],
+    "samples_per_class": [24, 64],
+    "condition_numbers": [2.0, 20.0],
+    "contamination_fractions": [0.0, 0.1],
+    "class_separations": [1.5, 3.0]
+  },
+  "test": {
+    "dimensions": [6, 12],
+    "intrinsic_ranks": [1, 3],
+    "samples_per_class": [32, 96],
+    "condition_numbers": [5.0, 50.0],
+    "contamination_fractions": [0.05, 0.15],
+    "class_separations": [2.0, 4.0]
+  },
+  "support_bins": {
+    "sample_dimension_edges": [3.0, 8.0],
+    "rank_fraction_edge": 0.25
+  },
+  "advancement": {
+    "minimum_resource_reduction": 0.2,
+    "require_lower_aggregate_loss": true
+  }
+}

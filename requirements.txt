@@ -1,0 +1,11 @@
+numpy
+scikit-learn
+scikit-image
+kagglehub
+datasets
+Pillow
+# CPU-only torch — install with:
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+ray[client]>=2.40; python_version < "3.14"

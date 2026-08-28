@@ -1,0 +1,46 @@
+{
+  "milestone": "M149b",
+  "title": "Group splitting against the real specialist incumbent (train-score children + fusion)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (M149 rescue, 14 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "With split children fit on the group's TRAIN rows and the real cached specialist as the incumbent, does the transactional split recover structure without losing accuracy?",
+  "registration_notes": {
+    "N101.1": "Registered AFTER M149's sealed negative (held-out incumbent re-fit weakened the baseline). This cell does NOT re-adjudicate M149; it re-tests on the train-score axis (epistemic rule 2) using the M143b train-score cache.",
+    "N101.2": "Per group (domain): proposal = seeded 2-means on the domain's 2415-dim train score vectors -> children X, Y; child ridges fit on their cluster's train rows; fusion = stacking over [X_scores, Y_scores] with the penalty ladder {1,10,100,1000,10000} selected on a seeded 80/20 slice of the group's train rows; evaluated on the group's TEST rows.",
+    "N101.3": "Incumbent = the REAL cached specialist's predictions on the group's test rows (v16/m143/scores.npz, never recomputed). Control = a seeded random split with the identical recipe.",
+    "N101.4": "Gate: a domain PASSES iff fused(2-means) >= incumbent + 0.005 AND fused(2-means) >= fused(random) on its test rows. Fired iff ZERO domains pass. Row floor: clusters below the floor or degenerate are SKIPPED, not failed.",
+    "N101.5": "The train-domain and test-domain assignments come from the sealed corpus loader (exact), never from a surrogate."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "train_cache": {
+    "cache_relpath": "v16/m143b"
+  },
+  "test_cache": {
+    "cache_relpath": "v16/m143"
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "kmeans_seed": 77,
+    "random_seed": 88,
+    "penalty_ladder": [1, 10, 100, 1000, 10000]
+  },
+  "gate": {
+    "margin": 0.005,
+    "row_floor": 200,
+    "registered": "domain passes iff fused(2-means) >= incumbent + 0.005 AND fused(2-means) >= fused(random) on its test rows; fired iff ZERO domains pass.",
+    "consequence_fired": "even with train-row children and the real incumbent, the split operation has no measured room; splitting stays registered but unproven on this corpus.",
+    "consequence_passed": "with train-row children and the real incumbent, split-and-rebuild beats the incumbent on at least one domain: the registry split is a measured, promotable operation."
+  },
+  "output_dir": "logs/results/v16/m149b_group_split"
+}

@@ -1,0 +1,25 @@
+seed 11: fitting the dictionary on 65536 rows ...
+  native_128             dense 0.5369  sparse 0.5239  retention 0.9759  knn 0.4600
+  degraded_128           dense 0.4446  sparse 0.3533  retention 0.7946  knn 0.3503
+  native_20              dense 0.7266  sparse 0.7375  retention 1.0151  knn 0.6750
+  degraded_20            dense 0.6547  sparse 0.6031  retention 0.9212  knn 0.5922
+  cifar100_20_matched    dense 0.7859  sparse 0.7078  retention 0.9006  knn 0.7625
+  cifar100_20_full       dense 0.8528  sparse 0.8178  retention 0.9590  knn 0.8576
+seed 23: fitting the dictionary on 65536 rows ...
+  native_128             dense 0.5420  sparse 0.5234  retention 0.9658  knn 0.4678
+  degraded_128           dense 0.4543  sparse 0.3452  retention 0.7598  knn 0.3584
+  native_20              dense 0.7297  sparse 0.7000  retention 0.9593  knn 0.6781
+  degraded_20            dense 0.6344  sparse 0.5734  retention 0.9039  knn 0.5703
+  cifar100_20_matched    dense 0.7609  sparse 0.7188  retention 0.9446  knn 0.7453
+  cifar100_20_full       dense 0.8536  sparse 0.8218  retention 0.9627  knn 0.8524
+seed 37: fitting the dictionary on 65536 rows ...
+  native_128             dense 0.5383  sparse 0.5178  retention 0.9619  knn 0.4697
+  degraded_128           dense 0.4500  sparse 0.3579  retention 0.7954  knn 0.3569
+  native_20              dense 0.7234  sparse 0.7281  retention 1.0065  knn 0.6578
+  degraded_20            dense 0.6422  sparse 0.5734  retention 0.8929  knn 0.5938
+  cifar100_20_matched    dense 0.8125  sparse 0.7328  retention 0.9019  knn 0.7797
+  cifar100_20_full       dense 0.8536  sparse 0.8278  retention 0.9698  knn 0.8622
+
+verdict         loss_is_resolution_not_corpus
+evidence_hash   46026f10a113c5dca015855b51bca4d2606d6af4c58b91c7a5bc63a475d94e51
+runtime         41.7 min

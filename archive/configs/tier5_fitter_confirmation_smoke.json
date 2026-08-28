@@ -1,0 +1,23 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier5_fitter_confirmation_runs.jsonl",
+  "bootstrap_resamples": 500,
+  "calibration_fraction": 0.2,
+  "capture_threshold": 0.08,
+  "consensus_threshold": 0.1,
+  "dataset": "cifar100_superclass",
+  "dataset_path": "data/tier5/cifar100_superclass.npz",
+  "feature_cache_path": "data/tier5/cifar100_mobilenetv2_15000_seed42.npz",
+  "fitters": [
+    "current",
+    "shrinkage_covariance"
+  ],
+  "max_iterations": 10,
+  "max_samples": 15000,
+  "nudge_iterations": 0,
+  "nudge_learning_rate": 0.02,
+  "pca_components": 128,
+  "seed": 42,
+  "selection_fraction": 0.15,
+  "use_gpu": true
+}

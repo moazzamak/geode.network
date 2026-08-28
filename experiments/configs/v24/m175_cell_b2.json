@@ -1,0 +1,69 @@
+{
+  "milestone": "M175",
+  "cell": "B2",
+  "title": "HEAD transfer: the frozen DomainNet 345-way head read on Flowers-102 (user-registered expectation)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does reading Flowers-102 through the FROZEN DomainNet head collapse predictions onto the generic DomainNet 'flower' class and its neighbours?",
+  "verdict": {
+    "expectation_confirmed": "modal predicted class is 'flower' OR flower-adjacent mass >= 0.5",
+    "consequence_pass": "the user's expectation holds: the frozen encoder+head read flowers as the generic DomainNet classes it knows",
+    "consequence_fail": "the frozen head does not collapse onto the generic flower classes; report the actual distribution"
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "spm_atoms": 1923,
+    "levels": [1, 2, 4]
+  },
+  "encoder_pin": {
+    "cache_relpath": "v16/m142_c2",
+    "train_file": "spm1923_fulltrain.npy",
+    "check_rows": 256,
+    "tolerance": 0.0
+  },
+  "head": {
+    "cache_relpath": "v16/m142_c2",
+    "train_file": "spm1923_fulltrain.npy",
+    "labels_relpath": "v16/m142_c2",
+    "labels_file": "m142_c2_fulltrain_labels.npz",
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "flower_adjacent": ["flower", "garden", "house_plant", "leaf", "cactus", "bush", "grass", "butterfly"],
+    "adjacent_mass_min": 0.5,
+    "note": "zero flowers labels anywhere in this cell"
+  },
+  "flowers": {
+    "dataset_root": "data/v5/datasets/flowers102",
+    "jpg_dir": "flowers-102/jpg",
+    "features_dir": "data/v5/features/m19_flowers102_s1/dinov2-small",
+    "feature_dimension": 384,
+    "image_size": 32,
+    "splits": {
+      "train": [5, 11, "features_train_b0c0bb74c51684d1.npz"],
+      "dev": [2, 12, "features_dev_b0c0bb74c51684d1.npz"],
+      "test": [3, 13, "features_test_b0c0bb74c51684d1.npz"]
+    }
+  },
+  "numerics": {
+    "torch_threads": 8,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v24/m175_cell_b2"
+}

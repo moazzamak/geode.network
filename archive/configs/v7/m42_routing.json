@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "milestone": "M42",
+  "parent_artifact_index": "logs/results/v7/m41_adaptation/artifact_index.json",
+  "parent_artifact_index_sha256": "640f653a7798506599dff5ddf5979962cead74ff8c2bdb2256866419b07e4ba5",
+  "source_config": "experiments/configs/v6/m30_directional_s2.json",
+  "seeds": [11, 23, 37],
+  "bundle_class_orders": [[0, 1, 2, 3], [4, 5, 6, 7], [8]],
+  "remaining_unknown_class": 9,
+  "new_class_support_samples": 50,
+  "profile_calibration_quantile": 0.95,
+  "gaussian_rank": 16,
+  "autoencoder_rank": 16,
+  "prototypes_per_class": 16,
+  "shortlist_size": 2,
+  "minimum_top1": 0.99,
+  "minimum_winner_inclusion": 0.999,
+  "minimum_prediction_agreement": 0.999,
+  "minimum_unknown_recall": 0.95,
+  "minimum_evaluation_reduction": 0.25,
+  "final_labels_opened": false
+}

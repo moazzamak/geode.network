@@ -1,0 +1,142 @@
+WARNING: You are currently using Node.js v25.5.0, which is not supported by Hardhat. This can lead to unexpected behavior. See https://v2.hardhat.org/nodejs-versions
+
+
+
+Version
+=======
+> solidity-coverage: v0.8.17
+
+Instrumenting for coverage...
+=============================
+
+> CreditLedger.sol
+> GeodeToken.sol
+> ProofAnchor.sol
+> VestingVault.sol
+
+Coverage skipped for:
+=====================
+
+> LinearProofVerifier.sol
+> mocks\MaliciousToken.sol
+
+Compilation:
+============
+
+Compiled 31 Solidity files successfully (evm target: cancun).
+
+Network Info
+============
+> HardhatEVM: v2.29.1
+> network:    hardhat
+
+
+
+  CreditLedger
+    initialize
+      Γ£ö sets pay token, dev fund, epoch cap, owner, recorder-zero (346ms)
+      Γ£ö cannot be initialised twice and rejects a zero token (49ms)
+    deposit / dev fund
+      Γ£ö splits 2.5% to the dev share and 97.5% to the pool
+      Γ£ö deposit(0) reverts and requires an allowance
+      Γ£ö the dev fund pulls its share, then has nothing to claim
+    stake / unstake
+      Γ£ö stake holds the pay token and unstake returns it
+    recordCredits
+      Γ£ö recorder credits contributors and drains the pool
+      Γ£ö non-recorder, shape mismatch, empty, and oversize batches revert (48ms)
+      Γ£ö zero-amount entries are skipped and pool overflow reverts
+      Γ£ö a staked payer cannot credit (self-payment exclusion, skipped) (41ms)
+    settle
+      Γ£ö settle pays after the delay (101ms)
+      Γ£ö the epoch cap limits then resets after a roll (82ms)
+      Γ£ö settle with nothing claimed reverts
+    slash and recorder role
+      Γ£ö owner slashes unclaimed credits (41ms)
+      Γ£ö owner sets and revokes the recorder
+    timelocked parameter changes
+      Γ£ö dev fund change is two-phase with a delay
+      Γ£ö epoch cap change is two-phase with a delay (zero disables)
+    pause
+      Γ£ö paused ledger blocks deposit, stake, record and settle; dev fund can still claim (49ms)
+    reentrancy guard (M202 exploit checklist)
+      Γ£ö settle reentry through the payout transfer is blocked (97ms)
+      Γ£ö unstake reentry is blocked by the transient guard (177ms)
+      Γ£ö dev-fund claim reentry is blocked by the transient guard (108ms)
+    upgradeability and admin release
+      Γ£ö upgrade rehearsal preserves state (v1 -> v2)
+      Γ£ö admin release: renounceOwnership freezes owner-only paths
+
+  GeodeToken
+    Γ£ö deploys with name, symbol, decimals, and owner
+    Γ£ö owner delegates and revokes the minter role
+    Γ£ö owner mints and balances update
+    Γ£ö mint(0) reverts ZeroMint
+    Γ£ö non-owner non-minter mint reverts NotMinter
+    Γ£ö holder burns own balance
+    Γ£ö burn beyond balance reverts
+    Γ£ö two-step ownership transfer completes via acceptOwnership
+    Γ£ö non-owner transferOwnership reverts
+    Γ£ö renounceOwnership clears owner (admin-release path)
+    Γ£ö token is the vault's underlying unit and transfers are standard
+
+  ProofAnchor (M214)
+    Γ£ö anchors a proof and records its block
+    Γ£ö re-anchoring the same hash is a no-op
+    Γ£ö distinct proofs get distinct hashes and records
+    Γ£ö rejects an empty proof
+    Γ£ö emits the Anchored event
+
+  VestingVault
+    initialize
+      Γ£ö sets token, dev fund, epoch cap and owner (79ms)
+      Γ£ö cannot be initialised twice
+      Γ£ö rejects a zero token address
+    stake / unstake
+      Γ£ö stake requires a transfer allowance and holds the tokens
+      Γ£ö stake(0) reverts ZeroAmount
+      Γ£ö unstake(0) reverts and over-amount reverts with detail
+    vest
+      Γ£ö mints into the vault and records the thaw-delay anchor
+      Γ£ö vest(0) reverts and non-owner reverts
+    thawBatch
+      Γ£ö thaws with the 2.5% dev cut routed to the dev fund
+      Γ£ö shape mismatch, empty batch and oversize batch revert
+      Γ£ö zero-amount entries are skipped silently
+      Γ£ö a staked payer cannot thaw (self-payment exclusion, skipped)
+      Γ£ö thaw before the delay reverts with the thaw timestamp
+      Γ£ö thaw beyond the vested balance reverts NothingToThaw
+      Γ£ö the per-epoch cap reverts CapExceeded and resets after a roll (69ms)
+      Γ£ö the epoch cap is disabled when zero (60ms)
+    slash
+      Γ£ö owner slashes vested-but-unthawed balances
+      Γ£ö slash(0), beyond-remaining, and non-owner revert
+    timelocked parameter changes
+      Γ£ö dev fund change is two-phase with a delay
+      Γ£ö epoch cap change is two-phase with a delay
+    pause
+      Γ£ö paused vault blocks stake, vest, thaw and unstake; unpause resumes (39ms)
+      Γ£ö unstake remains available while paused
+    reentrancy guard (M202 exploit checklist)
+      Γ£ö unstake reentry is blocked by the transient guard (67ms)
+      Γ£ö thawBatch reentry through the dev-cut transfer is blocked
+    upgradeability and admin release
+      Γ£ö upgrade rehearsal preserves state (v1 -> v2)
+      Γ£ö admin release: renounceOwnership freezes owner-only paths
+
+
+  65 passing (2s)
+
+-------------------|----------|----------|----------|----------|----------------|
+File               |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-------------------|----------|----------|----------|----------|----------------|
+ contracts\        |      100 |      100 |      100 |      100 |                |
+  CreditLedger.sol |      100 |      100 |      100 |      100 |                |
+  GeodeToken.sol   |      100 |      100 |      100 |      100 |                |
+  ProofAnchor.sol  |      100 |      100 |      100 |      100 |                |
+  VestingVault.sol |      100 |      100 |      100 |      100 |                |
+-------------------|----------|----------|----------|----------|----------------|
+All files          |      100 |      100 |      100 |      100 |                |
+-------------------|----------|----------|----------|----------|----------------|
+
+> Istanbul reports written to ./coverage/ and ./coverage.json

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "artifact": "V13-CLIP-EXEMPLAR-EMBEDDINGS",
+  "purpose": "A sealed CLIP embedding artifact for M82. Amendment R9 requires CLIP to enter as a hashed input artifact produced outside the frozen replay environment, exactly as the DINOv2 backbone enters as a frozen ONNX graph rather than a live model. Every corpus image is embedded once, so the artifact does not depend on any dictionary, seed, or exemplar selection made later.",
+  "produced_outside_frozen_venv": true,
+  "environment_note": "Runs in .venv-rocm on the RX 9070 XT. HIP_VISIBLE_DEVICES must be set to 1: device 0 is the 7800X3D integrated adapter and its presence raises hipErrorInvalidImage even when the discrete card is addressed explicitly. transformers 5.x cannot be used because this torch build has no torch.distributed.",
+  "model": {
+    "id": "openai/clip-vit-large-patch14",
+    "snapshot_dir": "~/.cache/huggingface/hub/models--openai--clip-vit-large-patch14/snapshots/32bd64288804d66eefd0ccbe215aa642df71cc41",
+    "local_files_only": true,
+    "projection_dim": 768,
+    "image_size": 224
+  },
+  "precision": {
+    "dtype": "float32",
+    "rationale": "Measured on the 9070 XT, float16 encodes the corpus in 2.9 minutes against float32's 17.3, but the naming channel reads nearest-neighbour rankings over cosine similarities and half precision can reorder near-ties. The v13 corpus builder already found the DirectML provider disagreeing with CPU by 11.7 percent relative, so numerical agreement in this program is measured rather than assumed. float32 is used and the CPU agreement control below reports what the choice bought."
+  },
+  "preprocessing": {
+    "rationale": "The cached CLIP snapshot has no preprocessor_config.json, so the transform is written out explicitly here rather than inferred. This is preferable for a sealed artifact: the preprocessing is part of the registered definition instead of a default that could change with a library version.",
+    "resize_shortest_side": 224,
+    "resample": "bicubic",
+    "center_crop": 224,
+    "rescale": 0.00392156862745098,
+    "mean": [0.48145466, 0.4578275, 0.40821073],
+    "std": [0.26862954, 0.26130258, 0.27577711],
+    "convert_mode": "RGB"
+  },
+  "corpus": {
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "index_path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "index_sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "expected_rows": 73728,
+    "parquet_root": "D:/geode-ml/data/cache/domainnet"
+  },
+  "vocabulary": {
+    "path": "logs/results/v13/naming_vocabulary/vocabulary.json",
+    "expected_hash": "e58714310c65841243826a4320ed5ed895c5ddc58c2bbc0d1beac0c031683ff9"
+  },
+  "batch_size": 256,
+  "text_batch_size": 256,
+  "integrity": {
+    "verify_image_path_matches_manifest": true,
+    "rationale": "Every image is fetched by (source_file, source_row) and its stored image_path is compared against the manifest's. An off-by-one in row-group indexing would otherwise embed the wrong images and remain invisible: naming would still produce plausible words, just for the wrong atoms."
+  },
+  "cpu_agreement_control": {
+    "sample_rows": 256,
+    "draw_seed": 8201,
+    "max_cosine_deviation": 0.001,
+    "rationale": "A positive control on the accelerator, in the role the shard-invariance control plays for the DINOv2 extraction. The same registered sample is embedded on GPU and on CPU and the two are compared by cosine similarity and by whether they retrieve the same nearest vocabulary term. This is gating: if the GPU disagrees with the CPU, the artifact is not sealed."
+  },
+  "output_dir": "logs/results/v13/clip_embeddings"
+}

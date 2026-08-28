@@ -1,0 +1,32 @@
+{
+  "bundle_ids": {
+    "expanded": "b338cdbb1af19a6c6719",
+    "original": "109ca4ee8eba801fe0eb",
+    "replacement": "d0a372ce889c2ac04e3a"
+  },
+  "milestone": "E3",
+  "original_artifacts": [
+    {
+      "path": "source.bin",
+      "sha256": "1a1f4502024df8a68d12e64bb2364ad6308d04ed0a7d5e8300a676ec70867140",
+      "size": 8
+    }
+  ],
+  "outcomes": {
+    "coordinated_class_expansion": true,
+    "corruption_rejected": true,
+    "negative_compatibility": {
+      "class_set": true,
+      "input_source": true,
+      "output_type": true,
+      "task": true
+    },
+    "pointer_unchanged_after_corruption": true,
+    "positive_swap": true,
+    "rollback_without_rebuild": true,
+    "stale_class_expansion_rejected": true,
+    "transform_mismatch_rejected": true
+  },
+  "passed": true,
+  "schema_version": 1
+}

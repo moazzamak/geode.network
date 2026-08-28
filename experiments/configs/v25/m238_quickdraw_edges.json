@@ -1,0 +1,28 @@
+{
+  "milestone": "M238",
+  "title": "Quickdraw-specific arm: Sobel edge histograms + CLIP, trained probe",
+  "question": "Does a stroke/edge representation push the quickdraw probe past its ~0.63 wall?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M238 (registered 20 Aug as the quickdraw-specific representation cell; now dispatched)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "features": {
+    "clip_train": "logs/results/v25/m236_clip_vitl14/features/clip_train.npy",
+    "clip_test": "logs/results/v25/m236_clip_vitl14/features/clip_test.npy"
+  },
+  "edge": {"size": 112, "bins": 8, "cells": 8, "threads": 6,
+           "note": "Sobel gradient magnitude+orientation histogram: 8 orientation bins x 8x8 spatial cells = 512 dims, L2-normalised; computed on grayscale native images resized to 112"},
+  "artifacts": {"labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"},
+  "training": {"epochs": 30, "lr": 0.001, "weight_decay": 0.0001,
+               "batch": 1024, "seed": 11},
+  "interpretation_registered_before_running": {
+    "g2_fail": "VOID - the schedule permutation must reconstruct the labels byte-exactly",
+    "g3_fail": "VOID - the probe must be reproducible under the same seed",
+    "reading": "quickdraw >= 0.8 closes the ladder; any improvement over 0.6335 is recorded; otherwise the wall stands with the stroke evidence"
+  }
+}

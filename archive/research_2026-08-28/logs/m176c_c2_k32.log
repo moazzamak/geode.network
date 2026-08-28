@@ -1,0 +1,55 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+streaming 224px decode + backbone encode
+fitting GMM k=32
+Initialization 0
+  Iteration 10
+  Iteration 20
+  Iteration 30
+  Iteration 40
+Initialization converged.
+  k 32: train 512/138000
+  k 32: train 4608/138000
+  k 32: train 8704/138000
+  k 32: train 12800/138000
+  k 32: train 16896/138000
+  k 32: train 20992/138000
+  k 32: train 25088/138000
+  k 32: train 29184/138000
+  k 32: train 33280/138000
+  k 32: train 37376/138000
+  k 32: train 41472/138000
+  k 32: train 45568/138000
+  k 32: train 49664/138000
+  k 32: train 53760/138000
+  k 32: train 57856/138000
+  k 32: train 61952/138000
+  k 32: train 66048/138000
+  k 32: train 70144/138000
+  k 32: train 74240/138000
+  k 32: train 78336/138000
+  k 32: train 82432/138000
+  k 32: train 86528/138000
+  k 32: train 90624/138000
+  k 32: train 94720/138000
+  k 32: train 98816/138000
+  k 32: train 102912/138000
+  k 32: train 107008/138000
+  k 32: train 111104/138000
+  k 32: train 115200/138000
+  k 32: train 119296/138000
+  k 32: train 123392/138000
+  k 32: train 127488/138000
+  k 32: train 131584/138000
+  k 32: train 135680/138000
+{
+ "32": {
+  "accuracy_by_penalty": {
+   "0.1": 0.5990144927536232,
+   "1.0": 0.5990144927536232,
+   "10.0": 0.5990144927536232
+  },
+  "width": 24576,
+  "encode_seconds": 2445.7
+ }
+}
+M176c-c2 complete -> logs\results\v24\m176c_c2_k32\evidence.json

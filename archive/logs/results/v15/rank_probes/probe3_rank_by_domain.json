@@ -1,0 +1,58 @@
+{
+  "probe": "rankme_effective_rank_by_domain",
+  "instrument": "RankMe, arXiv:2210.02885, used unmodified",
+  "note": "scoping evidence, not sealed, not a milestone",
+  "corpus": "DomainNet, resized to 32x32 to match probes 1 and 2",
+  "atoms": 512,
+  "per_domain_rows": 1000,
+  "seed": 11,
+  "whole_corpus_rankme": 65.3059310913086,
+  "per_domain": [
+    {
+      "domain": "clipart",
+      "rows": 1000,
+      "rankme": 55.16352844238281,
+      "ratio_to_whole": 0.8446940043662342
+    },
+    {
+      "domain": "infograph",
+      "rows": 1000,
+      "rankme": 55.28627014160156,
+      "ratio_to_whole": 0.8465734921427294
+    },
+    {
+      "domain": "painting",
+      "rows": 1000,
+      "rankme": 52.585453033447266,
+      "ratio_to_whole": 0.8052171089931177
+    },
+    {
+      "domain": "quickdraw",
+      "rows": 1000,
+      "rankme": 8.752289772033691,
+      "ratio_to_whole": 0.13401982983439176
+    },
+    {
+      "domain": "real",
+      "rows": 1000,
+      "rankme": 52.557525634765625,
+      "ratio_to_whole": 0.804789469447751
+    },
+    {
+      "domain": "sketch",
+      "rows": 1000,
+      "rankme": 22.46028709411621,
+      "ratio_to_whole": 0.3439241538829449
+    }
+  ],
+  "row_matched_controls": [
+    47.48851776123047,
+    47.94525909423828,
+    46.30858612060547
+  ],
+  "control_rows": 1000,
+  "mean_domain_rankme": 41.1342256863912,
+  "mean_control_rankme": 47.24745432535807,
+  "specialisation_ratio": 0.8706125287328791,
+  "cifar10_class_specialisation_ratio": 0.9107
+}

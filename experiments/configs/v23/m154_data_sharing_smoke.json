@@ -1,0 +1,43 @@
+{
+  "milestone": "M154",
+  "title": "SMOKE: M154 data-sharing plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M154",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (20000 train-score / 2000 test-score rows, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 20000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M154 pipeline (interaction features, stacking, gate) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "score_caches": {
+    "m143": "v16/m143/scores.npz",
+    "m143b": "v16/m143b/train_scores.npz"
+  },
+  "cell": {
+    "interaction": "each arm's 345-dim score vector GATED per domain (42 gated copies, 14,490 features) appended to the flat concat."
+  },
+  "anchors": {
+    "m143b_fused": 0.22431884057971013,
+    "m143b_global": 0.22460869565217392,
+    "tolerance": 1e-09
+  },
+  "gate": {
+    "registered": "fused(interaction) >= global + 0.005 on the sealed test scores.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m154_data_sharing_smoke"
+}

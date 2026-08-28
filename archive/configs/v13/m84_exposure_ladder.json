@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "milestone": "M84",
+  "registered_hypothesis": "H84: open-set competence is governed principally by out-group exposure, and the transition from zero exposure is a discontinuity rather than a slope.",
+  "registration_notes": [
+    "N84.1 - the exposure pool and the evaluation out-of-set are class-disjoint. Labels 128-247 expose, 248-344 evaluate, fixed positionally in the ledger before the exposure artifact was built. The runner asserts the disjointness on load rather than trusting the two configurations to agree. M83.2's figures are not this milestone's baseline because M83 read 206 classes and M84 reads 90.",
+    "N84.2 - the ladder is not rectangular. A cell needs N_out/diversity rows from each exposure class, and DomainNet cannot supply that at the low-diversity end: quickdraw holds exactly 500 rows per class and takes 78 of every 128 under the corpus domain quota. The cells (1000, 1), (10000, 1) and (10000, 10) are infeasible rather than omitted, and are listed here so that no reading of the result can treat the ladder as complete.",
+    "N84.3 - the null is moment-matched. Real out-group rows have no owner to permute, so M83's shuffled-owner null does not transfer. Every cell's null draws the same number of Gaussian negatives from the exposure sample's own mean and covariance, with the identical optimiser, budget, batch size and split. The covariance is not shrunk: at the small rungs it is rank-deficient, and a null confined to the span of the ten real rows a cell trained on is the honest matched control for that cell.",
+    "N84.4 - the zero rung is a known-value control. The untrained boundary at matched coverage rejects 0.11875 of this evaluation set, measured before the milestone was written. The rung splits into two arms because 'no negatives' and 'no training' are different configurations: untrained performs no optimisation and is the control; known_only spends the full budget on the known term alone and isolates what the negatives contribute from what training contributes.",
+    "N84.5 - M83.2 established that real out-of-set rows are not radially distinguishable from known ones on this corpus, so a uniform radius change cannot help and coverage matching would remove it anyway. The boundary is an ellipsoid, so the registered prediction is that any improvement appears as tangent-radius anisotropy rather than a smaller mean radius. Anisotropy is reported beside recall whichever way recall goes.",
+    "N84.6 - training starts at the matched-coverage point, not at the fitted radii. Measured on the sealed exposure pool before the runner existed: at the fitted radii the median min-over-class score is 19.46 and the fraction of rows with an active hinge is 0.0000, so the exposure term has exactly zero gradient from the first step and a ladder trained there would be flat for an instrumental reason indistinguishable from a real negative. At 90 percent matched coverage the median is 0.5448 and the active fraction is 0.9833. The gate enforces this: an exposure_validity clause runs first and returns exposure_term_inert, suppressing every figure below it, if the negatives cannot move the objective.",
+    "N84.7 - each exposure row's owner is the exact argmin over classes, computed once at initialisation and held fixed. The nearest-centroid proxy was rejected on measurement rather than taste: it agrees with the exact argmin for only 0.3065 of rows, is within the nearest eight for 0.7530 and has a 99th-percentile rank of 56. Owner drift during training is reported per fit and is never gated on, because rejection is always read with the exact minimum over all classes."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "N84.1. Only labels 248 and above are evaluated, so the boundary is never scored on a class it was exposed to. Seven of those 97 classes underfilled their domain quota when the artifact was built and are dropped by the stratified mask, leaving 5760 rows in 90 classes."
+  },
+  "exposure": {
+    "path": "logs/results/v13/exposure/artifact_index.json",
+    "feature_hash": "3582ad1155eeff9d1639ce801e32b73f116faa07effba0c3dde7e464a94b7011",
+    "stratified_only": true,
+    "last_label": 247,
+    "rationale": "N84.1. 120 classes at 128 rows each, of which 104 filled their domain quota and survive the stratified mask. The widest diversity rung needs 100, so the pool clears it with four classes to spare."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged from M83. The known control and the out-of-set rows are drawn from the same domain mixture, and the 64 evaluation rows are halved inside every class-and-domain group so that coverage is matched on one half and every acceptance figure is read on the other."
+  },
+  "geometry": {
+    "rank": 51,
+    "rank_rationale": "512 fit rows against the standing floor of 10 samples per fitted dimension gives 51.2. Unchanged from M83 so that the two milestones' boundaries are the same object.",
+    "phase_a_frozen": true
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3. Coverage is matched before any recall figure is read, on a calibration half the report figures never see. The same operating point initialises training under N84.6."
+  },
+  "training": {
+    "epochs": 40,
+    "batch_size": 512,
+    "exposure_batch_size": 512,
+    "learning_rate": 0.02,
+    "margin": 0.25,
+    "exposure_weight": 1.0,
+    "rationale": "Identical to M83's Phase B budget so that the two milestones differ in what the negatives are and in nothing else. The exposure sample is smaller than the corpus at every rung, so it cycles independently of the known batches and every exposure row is seen the same number of times per epoch."
+  },
+  "ladder": {
+    "cells": [
+      { "name": "zero", "count": 0, "diversity": 0 },
+      { "name": "n10_d1", "count": 10, "diversity": 1 },
+      { "name": "n100_d1", "count": 100, "diversity": 1 },
+      { "name": "n10_d10", "count": 10, "diversity": 10 },
+      { "name": "n100_d10", "count": 100, "diversity": 10 },
+      { "name": "n1000_d10", "count": 1000, "diversity": 10 },
+      { "name": "n100_d100", "count": 100, "diversity": 100 },
+      { "name": "n1000_d100", "count": 1000, "diversity": 100 },
+      { "name": "n10000_d100", "count": 10000, "diversity": 100 }
+    ],
+    "infeasible_cells": [
+      { "count": 1000, "diversity": 1, "reason": "needs 1000 images of one class clearing the 256px filter under the corpus domain profile", "kind": "supply" },
+      { "count": 10000, "diversity": 1, "reason": "needs 10000 images of one class; DomainNet holds at most 500 quickdraw rows per class", "kind": "supply" },
+      { "count": 10000, "diversity": 10, "reason": "needs 1000 images from each of ten classes", "kind": "supply" },
+      { "count": 10, "diversity": 100, "reason": "fewer negatives than classes to draw them from. The diversity axis is defined as an equal share per class, so this cell asks for a tenth of a row from each of 100 classes and does not exist for any dataset.", "kind": "arithmetic" }
+    ],
+    "infeasible_cells_note": "Three cells are infeasible in DomainNet and one is infeasible in arithmetic. The distinction matters to any reading of the ladder: the supply-limited three could be filled by a larger corpus, whereas count < diversity is not a cell at all under an equal-share definition. Registered as an amendment to N84.2, which declared only the supply-limited three.",
+    "sample_seed_offset": 84000,
+    "null_seed_offset": 84500
+  },
+  "arms": {
+    "exposure": { "negatives": "real", "epochs": 40 },
+    "moment_null": { "negatives": "moment_matched", "epochs": 40 }
+  },
+  "zero_rung_arms": {
+    "untrained": { "negatives": "none", "epochs": 0 },
+    "known_only": { "negatives": "none", "epochs": 40 }
+  },
+  "gate": {
+    "minimum_exposure_active_fraction": 0.5,
+    "minimum_exposure_active_fraction_rationale": "N84.6. Below this the exposure term is not supervising: most negatives already satisfy the hinge and contribute no gradient. At the raw fitted radii this reads 0.0000 and the milestone would be void.",
+    "untrained_rejection_expected": 0.11875,
+    "untrained_rejection_tolerance": 0.005,
+    "untrained_rejection_rationale": "N84.4. The value measured before the milestone was written. A disagreement means the evaluation set, the partition or the geometry is not the one that value was read on, and no ladder figure may be reported.",
+    "minimum_known_novel_acceptance": 0.85,
+    "minimum_known_novel_acceptance_rationale": "N83.3. A boundary that rejects the out-of-set by rejecting everything is not detecting novelty."
+  },
+  "seeds": [11, 23, 37],
+  "threading": {
+    "torch_threads_per_worker": 1,
+    "worker_count": 6,
+    "rationale": "M80's determinism defect. Every gated fit is single-threaded; parallelism is across independent seeded fits only, so the worker count cannot change any number."
+  },
+  "output_dir": "logs/results/v13/m84_exposure_ladder",
+  "final_labels_opened": false
+}

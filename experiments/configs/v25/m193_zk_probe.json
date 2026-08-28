@@ -1,0 +1,43 @@
+{
+  "milestone": "M193",
+  "title": "zk feasibility probe: prove the ms ridge head's scoring in zero knowledge (single-move Fiat-Shamir linear-relation argument)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M193 scope registered 19 Aug before the build)",
+  "registered_before_any_accuracy": true,
+  "question": "Can a host prove, in zero knowledge, that its claimed scores equal the anchored ridge head's computation on a committed input — and at what prove time, verify time, and proof size?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "anchor": {
+    "value": 0.24214492753623187,
+    "source": "M180 sealed V_ms (penalty 1.0, block 4096, RidgeAccumulator bit-exact path)",
+    "tolerance": 1e-9
+  },
+  "probe": {
+    "test_row": 0,
+    "fixed_point_scale": 65536,
+    "randomness_seed": 20260821,
+    "tamper_score_index": 42,
+    "thresholds": {
+      "prove_seconds": 60.0,
+      "verify_seconds": 5.0,
+      "proof_bytes_target": 8192,
+      "proof_bytes_note": "the <=8 KB target is the registered requirement for the log-sized (Bulletproofs) next cell; this probe reports the O(n) single-move size against it"
+    }
+  },
+  "output_dir": "logs/results/v25/m193_zk_probe"
+}

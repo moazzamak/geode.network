@@ -1,0 +1,21 @@
+{
+  "milestone": "M173",
+  "title": "MVP acceptance run: capabilities 1-10 with gates and anchors",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase C (M173) / section 6 capability list",
+  "registered_before_any_training": true,
+  "question": "Do all ten registered MVP capabilities pass their registered gates and anchors on the sealed M165-M172 evidence?",
+  "interpretation_registered_before_running": {
+    "cap1": "ingestion passes iff no crash, 5 distinct descriptor hashes among the 6 registered tasks (mg/lorenz share a descriptor by registration), and the OOV event is logged for the audio descriptor",
+    "cap2": "G1 determinism from the sealed M169 evidence",
+    "cap3": "G2 similarity ordering from the sealed M169 evidence",
+    "cap4": "G3 traversality from the sealed M169 evidence AND the M170 artifact file exists",
+    "cap5": "routing passes on the registered section-5 eps-advance rule (4/4); the raw nearest-arm R1 (3/4, dyck negative) is recorded",
+    "cap6": "fit-and-report passes iff the sealed C4 ridge anchor (0.2273623188405797, tol 1e-6) is reproduced from the sealed M142 evidence and the M171 competence matrix has all 4 tasks",
+    "cap7": "registry operations pass iff adding later tasks left earlier tasks' content hashes unchanged AND the M165/M168/M171 unit tests pass",
+    "cap8": "multi-task differentiation passes iff M172 is non-void with all G5 gates",
+    "cap9": "cold start passes iff both unknown-task demos fall back to the strongest general arm (gated on the fallback happening, not on beating specialists)",
+    "cap10": "repro-hash passes iff every sealed evidence file's sha256 matches its artifact index",
+    "cap_fail": "a failing capability is a scoped negative for that capability; acceptance is per-capability, not all-or-nothing"
+  },
+  "output_dir": "logs/results/v24/m173_acceptance"
+}

@@ -1,0 +1,1951 @@
+{
+  "config": {
+    "artifact_path": "logs/results/tier5_feature_outlier_confirmation.json",
+    "seeds": [
+      11,
+      23,
+      37,
+      53,
+      71
+    ],
+    "dimensions": 6,
+    "class_count": 4,
+    "geometry_per_class": 100,
+    "calibration_per_class": 40,
+    "test_per_class": 200,
+    "center_radius": 2.5,
+    "mode_offset": 0.8,
+    "noise_scale": 0.9,
+    "max_iterations": 30,
+    "scenarios": [
+      {
+        "name": "clean",
+        "kind": "clean"
+      },
+      {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      }
+    ]
+  },
+  "records": [
+    {
+      "scenario": {
+        "name": "clean",
+        "kind": "clean"
+      },
+      "audit": {
+        "kind": "clean"
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.87375,
+          "balanced_accuracy": 0.87375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.9025,
+          "balanced_accuracy": 0.9025,
+          "accuracy_change_from_clean": 0.0
+        },
+        "matched_gmm": {
+          "accuracy": 0.78125,
+          "balanced_accuracy": 0.78125,
+          "accuracy_change_from_clean": 0.0
+        },
+        "knn": {
+          "accuracy": 0.86,
+          "balanced_accuracy": 0.8600000000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.89875,
+          "balanced_accuracy": 0.89875,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.87125,
+          "balanced_accuracy": 0.87125,
+          "accuracy_change_from_clean": 0.0
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 22,
+        "additive_ellipsoids": 28,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1344,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 10752
+      },
+      "test_used_for_fitting": false,
+      "seed": 11
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0,
+        "indices": [
+          54,
+          253,
+          26,
+          51,
+          355,
+          387,
+          334,
+          295,
+          44,
+          359,
+          393,
+          275,
+          314,
+          127,
+          6,
+          108,
+          192,
+          29,
+          193,
+          345,
+          265,
+          389,
+          270,
+          188,
+          320,
+          322,
+          165,
+          313,
+          376,
+          208,
+          230,
+          338,
+          219,
+          68,
+          82,
+          8,
+          61,
+          321,
+          362,
+          288
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.85875,
+          "balanced_accuracy": 0.8587499999999999,
+          "accuracy_change_from_clean": -0.015000000000000013
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.8925,
+          "balanced_accuracy": 0.8925000000000001,
+          "accuracy_change_from_clean": -0.010000000000000009
+        },
+        "matched_gmm": {
+          "accuracy": 0.73,
+          "balanced_accuracy": 0.7300000000000001,
+          "accuracy_change_from_clean": -0.05125000000000002
+        },
+        "knn": {
+          "accuracy": 0.84875,
+          "balanced_accuracy": 0.84875,
+          "accuracy_change_from_clean": -0.011249999999999982
+        },
+        "linear_svm": {
+          "accuracy": 0.8975,
+          "balanced_accuracy": 0.8975,
+          "accuracy_change_from_clean": -0.0012500000000000844
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.845,
+          "balanced_accuracy": 0.845,
+          "accuracy_change_from_clean": -0.026249999999999996
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 20,
+        "additive_ellipsoids": 26,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1248,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9984
+      },
+      "test_used_for_fitting": false,
+      "seed": 11
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0,
+        "indices": [
+          70,
+          290,
+          120,
+          349,
+          46,
+          166,
+          264,
+          361,
+          49,
+          320,
+          20,
+          167,
+          332,
+          318,
+          186,
+          358,
+          319,
+          222,
+          359,
+          52,
+          334,
+          390,
+          326,
+          281,
+          323,
+          277,
+          179,
+          307,
+          41,
+          157,
+          369,
+          226,
+          308,
+          260,
+          284,
+          151,
+          128,
+          273,
+          363,
+          289
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.8575,
+          "balanced_accuracy": 0.8575,
+          "accuracy_change_from_clean": -0.016249999999999987
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.87125,
+          "balanced_accuracy": 0.8712499999999999,
+          "accuracy_change_from_clean": -0.03125
+        },
+        "matched_gmm": {
+          "accuracy": 0.83375,
+          "balanced_accuracy": 0.83375,
+          "accuracy_change_from_clean": 0.05249999999999999
+        },
+        "knn": {
+          "accuracy": 0.86,
+          "balanced_accuracy": 0.8600000000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.88625,
+          "balanced_accuracy": 0.88625,
+          "accuracy_change_from_clean": -0.012500000000000067
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.85125,
+          "balanced_accuracy": 0.85125,
+          "accuracy_change_from_clean": -0.020000000000000018
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 19,
+        "additive_ellipsoids": 22,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1056,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8448
+      },
+      "test_used_for_fitting": false,
+      "seed": 11
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0,
+        "indices": [
+          237,
+          61,
+          132,
+          99,
+          52,
+          92,
+          290,
+          101,
+          292,
+          71,
+          178,
+          146,
+          43,
+          148,
+          333,
+          257,
+          177,
+          331,
+          193,
+          335,
+          134,
+          118,
+          86,
+          354,
+          353,
+          168,
+          198,
+          322,
+          221,
+          45,
+          323,
+          58,
+          180,
+          32,
+          253,
+          39,
+          399,
+          192,
+          30,
+          85
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.83625,
+          "balanced_accuracy": 0.83625,
+          "accuracy_change_from_clean": -0.03749999999999998
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.7925,
+          "balanced_accuracy": 0.7925000000000001,
+          "accuracy_change_from_clean": -0.10999999999999999
+        },
+        "matched_gmm": {
+          "accuracy": 0.82,
+          "balanced_accuracy": 0.8200000000000001,
+          "accuracy_change_from_clean": 0.03874999999999995
+        },
+        "knn": {
+          "accuracy": 0.855,
+          "balanced_accuracy": 0.8550000000000001,
+          "accuracy_change_from_clean": -0.0050000000000000044
+        },
+        "linear_svm": {
+          "accuracy": 0.8925,
+          "balanced_accuracy": 0.8925000000000001,
+          "accuracy_change_from_clean": -0.006250000000000089
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.85875,
+          "balanced_accuracy": 0.85875,
+          "accuracy_change_from_clean": -0.012499999999999956
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 17,
+        "additive_ellipsoids": 21,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1008,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8064
+      },
+      "test_used_for_fitting": false,
+      "seed": 11
+    },
+    {
+      "scenario": {
+        "name": "clean",
+        "kind": "clean"
+      },
+      "audit": {
+        "kind": "clean"
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.85375,
+          "balanced_accuracy": 0.85375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.86375,
+          "balanced_accuracy": 0.86375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "matched_gmm": {
+          "accuracy": 0.76125,
+          "balanced_accuracy": 0.76125,
+          "accuracy_change_from_clean": 0.0
+        },
+        "knn": {
+          "accuracy": 0.81875,
+          "balanced_accuracy": 0.8187500000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.85375,
+          "balanced_accuracy": 0.85375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.84125,
+          "balanced_accuracy": 0.84125,
+          "accuracy_change_from_clean": 0.0
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 19,
+        "additive_ellipsoids": 22,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1056,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8448
+      },
+      "test_used_for_fitting": false,
+      "seed": 23
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0,
+        "indices": [
+          141,
+          108,
+          240,
+          364,
+          188,
+          257,
+          315,
+          232,
+          378,
+          187,
+          114,
+          150,
+          317,
+          10,
+          174,
+          384,
+          166,
+          85,
+          398,
+          61,
+          374,
+          239,
+          149,
+          327,
+          234,
+          79,
+          33,
+          337,
+          65,
+          262,
+          53,
+          226,
+          69,
+          387,
+          183,
+          54,
+          394,
+          277,
+          219,
+          42
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.81125,
+          "balanced_accuracy": 0.81125,
+          "accuracy_change_from_clean": -0.04249999999999998
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.85875,
+          "balanced_accuracy": 0.8587500000000001,
+          "accuracy_change_from_clean": -0.0050000000000000044
+        },
+        "matched_gmm": {
+          "accuracy": 0.75875,
+          "balanced_accuracy": 0.75875,
+          "accuracy_change_from_clean": -0.0024999999999999467
+        },
+        "knn": {
+          "accuracy": 0.82125,
+          "balanced_accuracy": 0.82125,
+          "accuracy_change_from_clean": 0.0025000000000000577
+        },
+        "linear_svm": {
+          "accuracy": 0.855,
+          "balanced_accuracy": 0.855,
+          "accuracy_change_from_clean": 0.0012499999999999734
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.81875,
+          "balanced_accuracy": 0.8187499999999999,
+          "accuracy_change_from_clean": -0.022500000000000075
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 21,
+        "additive_ellipsoids": 27,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1296,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 10368
+      },
+      "test_used_for_fitting": false,
+      "seed": 23
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0,
+        "indices": [
+          336,
+          394,
+          312,
+          252,
+          248,
+          52,
+          308,
+          135,
+          354,
+          165,
+          339,
+          359,
+          353,
+          22,
+          209,
+          41,
+          334,
+          153,
+          260,
+          389,
+          155,
+          102,
+          161,
+          231,
+          327,
+          240,
+          247,
+          305,
+          234,
+          333,
+          119,
+          12,
+          256,
+          277,
+          73,
+          178,
+          244,
+          34,
+          87,
+          90
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.81375,
+          "balanced_accuracy": 0.81375,
+          "accuracy_change_from_clean": -0.040000000000000036
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.84375,
+          "balanced_accuracy": 0.84375,
+          "accuracy_change_from_clean": -0.020000000000000018
+        },
+        "matched_gmm": {
+          "accuracy": 0.7775,
+          "balanced_accuracy": 0.7775,
+          "accuracy_change_from_clean": 0.016249999999999987
+        },
+        "knn": {
+          "accuracy": 0.81,
+          "balanced_accuracy": 0.8099999999999999,
+          "accuracy_change_from_clean": -0.008749999999999925
+        },
+        "linear_svm": {
+          "accuracy": 0.835,
+          "balanced_accuracy": 0.835,
+          "accuracy_change_from_clean": -0.018750000000000044
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.8125,
+          "balanced_accuracy": 0.8125,
+          "accuracy_change_from_clean": -0.028750000000000053
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 20,
+        "additive_ellipsoids": 26,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1248,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9984
+      },
+      "test_used_for_fitting": false,
+      "seed": 23
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0,
+        "indices": [
+          20,
+          144,
+          123,
+          262,
+          25,
+          255,
+          73,
+          39,
+          108,
+          116,
+          343,
+          267,
+          115,
+          65,
+          13,
+          190,
+          111,
+          176,
+          344,
+          133,
+          341,
+          216,
+          309,
+          151,
+          117,
+          384,
+          86,
+          106,
+          200,
+          15,
+          112,
+          56,
+          378,
+          313,
+          296,
+          250,
+          323,
+          68,
+          179,
+          229
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.81625,
+          "balanced_accuracy": 0.81625,
+          "accuracy_change_from_clean": -0.03749999999999998
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.82375,
+          "balanced_accuracy": 0.82375,
+          "accuracy_change_from_clean": -0.040000000000000036
+        },
+        "matched_gmm": {
+          "accuracy": 0.81375,
+          "balanced_accuracy": 0.81375,
+          "accuracy_change_from_clean": 0.05249999999999999
+        },
+        "knn": {
+          "accuracy": 0.83,
+          "balanced_accuracy": 0.8300000000000001,
+          "accuracy_change_from_clean": 0.011249999999999982
+        },
+        "linear_svm": {
+          "accuracy": 0.83625,
+          "balanced_accuracy": 0.8362499999999999,
+          "accuracy_change_from_clean": -0.01749999999999996
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.8375,
+          "balanced_accuracy": 0.8375,
+          "accuracy_change_from_clean": -0.003750000000000031
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 16,
+        "additive_ellipsoids": 24,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1152,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9216
+      },
+      "test_used_for_fitting": false,
+      "seed": 23
+    },
+    {
+      "scenario": {
+        "name": "clean",
+        "kind": "clean"
+      },
+      "audit": {
+        "kind": "clean"
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.79625,
+          "balanced_accuracy": 0.7962499999999999,
+          "accuracy_change_from_clean": 0.0
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.82,
+          "balanced_accuracy": 0.8200000000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "matched_gmm": {
+          "accuracy": 0.72375,
+          "balanced_accuracy": 0.72375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "knn": {
+          "accuracy": 0.805,
+          "balanced_accuracy": 0.805,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.81,
+          "balanced_accuracy": 0.8099999999999999,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.78375,
+          "balanced_accuracy": 0.78375,
+          "accuracy_change_from_clean": 0.0
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 23,
+        "additive_ellipsoids": 27,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1296,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 10368
+      },
+      "test_used_for_fitting": false,
+      "seed": 37
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0,
+        "indices": [
+          55,
+          223,
+          248,
+          240,
+          34,
+          207,
+          20,
+          360,
+          108,
+          293,
+          259,
+          391,
+          102,
+          306,
+          304,
+          4,
+          272,
+          162,
+          280,
+          2,
+          83,
+          182,
+          121,
+          128,
+          276,
+          390,
+          23,
+          217,
+          344,
+          353,
+          349,
+          261,
+          150,
+          253,
+          79,
+          142,
+          275,
+          95,
+          300,
+          120
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.79375,
+          "balanced_accuracy": 0.7937500000000001,
+          "accuracy_change_from_clean": -0.0025000000000000577
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.8225,
+          "balanced_accuracy": 0.8225,
+          "accuracy_change_from_clean": 0.0025000000000000577
+        },
+        "matched_gmm": {
+          "accuracy": 0.75625,
+          "balanced_accuracy": 0.7562500000000001,
+          "accuracy_change_from_clean": 0.03249999999999997
+        },
+        "knn": {
+          "accuracy": 0.80625,
+          "balanced_accuracy": 0.8062500000000001,
+          "accuracy_change_from_clean": 0.0012499999999999734
+        },
+        "linear_svm": {
+          "accuracy": 0.82,
+          "balanced_accuracy": 0.8200000000000001,
+          "accuracy_change_from_clean": 0.009999999999999898
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.765,
+          "balanced_accuracy": 0.7649999999999999,
+          "accuracy_change_from_clean": -0.018749999999999933
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 20,
+        "additive_ellipsoids": 25,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1200,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9600
+      },
+      "test_used_for_fitting": false,
+      "seed": 37
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0,
+        "indices": [
+          385,
+          219,
+          396,
+          213,
+          360,
+          207,
+          339,
+          325,
+          151,
+          130,
+          320,
+          147,
+          300,
+          18,
+          302,
+          126,
+          158,
+          87,
+          345,
+          92,
+          310,
+          394,
+          108,
+          10,
+          366,
+          144,
+          198,
+          282,
+          247,
+          317,
+          82,
+          165,
+          357,
+          193,
+          58,
+          22,
+          137,
+          235,
+          379,
+          95
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.7875,
+          "balanced_accuracy": 0.7875,
+          "accuracy_change_from_clean": -0.008750000000000036
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.8125,
+          "balanced_accuracy": 0.8125,
+          "accuracy_change_from_clean": -0.007499999999999951
+        },
+        "matched_gmm": {
+          "accuracy": 0.775,
+          "balanced_accuracy": 0.775,
+          "accuracy_change_from_clean": 0.05125000000000002
+        },
+        "knn": {
+          "accuracy": 0.79,
+          "balanced_accuracy": 0.79,
+          "accuracy_change_from_clean": -0.015000000000000013
+        },
+        "linear_svm": {
+          "accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "accuracy_change_from_clean": -0.010000000000000009
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.7825,
+          "balanced_accuracy": 0.7825,
+          "accuracy_change_from_clean": -0.0012499999999999734
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 19,
+        "additive_ellipsoids": 27,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1296,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 10368
+      },
+      "test_used_for_fitting": false,
+      "seed": 37
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0,
+        "indices": [
+          271,
+          294,
+          78,
+          140,
+          373,
+          152,
+          396,
+          247,
+          193,
+          29,
+          263,
+          372,
+          208,
+          182,
+          214,
+          363,
+          165,
+          51,
+          218,
+          50,
+          27,
+          239,
+          72,
+          311,
+          333,
+          366,
+          298,
+          276,
+          99,
+          104,
+          332,
+          249,
+          308,
+          74,
+          364,
+          37,
+          163,
+          355,
+          216,
+          132
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.80375,
+          "balanced_accuracy": 0.80375,
+          "accuracy_change_from_clean": 0.007499999999999951
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.77375,
+          "balanced_accuracy": 0.7737499999999999,
+          "accuracy_change_from_clean": -0.0462499999999999
+        },
+        "matched_gmm": {
+          "accuracy": 0.80875,
+          "balanced_accuracy": 0.80875,
+          "accuracy_change_from_clean": 0.08499999999999996
+        },
+        "knn": {
+          "accuracy": 0.79375,
+          "balanced_accuracy": 0.79375,
+          "accuracy_change_from_clean": -0.011250000000000093
+        },
+        "linear_svm": {
+          "accuracy": 0.815,
+          "balanced_accuracy": 0.815,
+          "accuracy_change_from_clean": 0.004999999999999893
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.795,
+          "balanced_accuracy": 0.7949999999999999,
+          "accuracy_change_from_clean": 0.011250000000000093
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 20,
+        "additive_ellipsoids": 29,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1392,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 11136
+      },
+      "test_used_for_fitting": false,
+      "seed": 37
+    },
+    {
+      "scenario": {
+        "name": "clean",
+        "kind": "clean"
+      },
+      "audit": {
+        "kind": "clean"
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.905,
+          "balanced_accuracy": 0.905,
+          "accuracy_change_from_clean": 0.0
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.91375,
+          "balanced_accuracy": 0.9137500000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "matched_gmm": {
+          "accuracy": 0.84375,
+          "balanced_accuracy": 0.84375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "knn": {
+          "accuracy": 0.89625,
+          "balanced_accuracy": 0.89625,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.89875,
+          "balanced_accuracy": 0.8987499999999999,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.88375,
+          "balanced_accuracy": 0.88375,
+          "accuracy_change_from_clean": 0.0
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 19,
+        "additive_ellipsoids": 28,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1344,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 10752
+      },
+      "test_used_for_fitting": false,
+      "seed": 53
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0,
+        "indices": [
+          93,
+          232,
+          2,
+          287,
+          305,
+          193,
+          180,
+          3,
+          183,
+          48,
+          346,
+          96,
+          108,
+          138,
+          163,
+          154,
+          125,
+          368,
+          34,
+          286,
+          242,
+          375,
+          277,
+          367,
+          273,
+          142,
+          311,
+          304,
+          204,
+          362,
+          250,
+          162,
+          382,
+          206,
+          186,
+          201,
+          6,
+          259,
+          194,
+          348
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.9,
+          "balanced_accuracy": 0.9,
+          "accuracy_change_from_clean": -0.0050000000000000044
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.90125,
+          "balanced_accuracy": 0.9012500000000001,
+          "accuracy_change_from_clean": -0.012499999999999956
+        },
+        "matched_gmm": {
+          "accuracy": 0.7925,
+          "balanced_accuracy": 0.7925,
+          "accuracy_change_from_clean": -0.05125000000000002
+        },
+        "knn": {
+          "accuracy": 0.89625,
+          "balanced_accuracy": 0.89625,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.89375,
+          "balanced_accuracy": 0.89375,
+          "accuracy_change_from_clean": -0.0050000000000000044
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.86875,
+          "balanced_accuracy": 0.86875,
+          "accuracy_change_from_clean": -0.015000000000000013
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 18,
+        "additive_ellipsoids": 25,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1200,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9600
+      },
+      "test_used_for_fitting": false,
+      "seed": 53
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0,
+        "indices": [
+          163,
+          238,
+          276,
+          143,
+          21,
+          212,
+          242,
+          337,
+          204,
+          319,
+          346,
+          180,
+          139,
+          195,
+          370,
+          304,
+          39,
+          117,
+          330,
+          399,
+          269,
+          160,
+          178,
+          207,
+          64,
+          44,
+          379,
+          208,
+          300,
+          185,
+          251,
+          363,
+          285,
+          249,
+          105,
+          221,
+          226,
+          345,
+          2,
+          325
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.8975,
+          "balanced_accuracy": 0.8975,
+          "accuracy_change_from_clean": -0.007500000000000062
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.9075,
+          "balanced_accuracy": 0.9075,
+          "accuracy_change_from_clean": -0.006249999999999978
+        },
+        "matched_gmm": {
+          "accuracy": 0.8625,
+          "balanced_accuracy": 0.8625,
+          "accuracy_change_from_clean": 0.018750000000000044
+        },
+        "knn": {
+          "accuracy": 0.8975,
+          "balanced_accuracy": 0.8974999999999999,
+          "accuracy_change_from_clean": 0.0012499999999999734
+        },
+        "linear_svm": {
+          "accuracy": 0.89875,
+          "balanced_accuracy": 0.8987499999999999,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.86625,
+          "balanced_accuracy": 0.86625,
+          "accuracy_change_from_clean": -0.01750000000000007
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 16,
+        "additive_ellipsoids": 22,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1056,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8448
+      },
+      "test_used_for_fitting": false,
+      "seed": 53
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0,
+        "indices": [
+          350,
+          310,
+          367,
+          320,
+          276,
+          383,
+          201,
+          76,
+          235,
+          388,
+          130,
+          374,
+          285,
+          171,
+          329,
+          335,
+          376,
+          7,
+          181,
+          303,
+          257,
+          244,
+          324,
+          93,
+          300,
+          90,
+          86,
+          268,
+          62,
+          12,
+          254,
+          15,
+          116,
+          139,
+          319,
+          359,
+          121,
+          154,
+          79,
+          358
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.86625,
+          "balanced_accuracy": 0.86625,
+          "accuracy_change_from_clean": -0.03875000000000006
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.7875,
+          "balanced_accuracy": 0.7875000000000001,
+          "accuracy_change_from_clean": -0.12624999999999997
+        },
+        "matched_gmm": {
+          "accuracy": 0.87625,
+          "balanced_accuracy": 0.87625,
+          "accuracy_change_from_clean": 0.03249999999999997
+        },
+        "knn": {
+          "accuracy": 0.89125,
+          "balanced_accuracy": 0.89125,
+          "accuracy_change_from_clean": -0.0050000000000000044
+        },
+        "linear_svm": {
+          "accuracy": 0.87375,
+          "balanced_accuracy": 0.87375,
+          "accuracy_change_from_clean": -0.025000000000000022
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.865,
+          "balanced_accuracy": 0.865,
+          "accuracy_change_from_clean": -0.018750000000000044
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 16,
+        "additive_ellipsoids": 22,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1056,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8448
+      },
+      "test_used_for_fitting": false,
+      "seed": 53
+    },
+    {
+      "scenario": {
+        "name": "clean",
+        "kind": "clean"
+      },
+      "audit": {
+        "kind": "clean"
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.93375,
+          "balanced_accuracy": 0.93375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.93625,
+          "balanced_accuracy": 0.9362499999999999,
+          "accuracy_change_from_clean": 0.0
+        },
+        "matched_gmm": {
+          "accuracy": 0.86375,
+          "balanced_accuracy": 0.86375,
+          "accuracy_change_from_clean": 0.0
+        },
+        "knn": {
+          "accuracy": 0.92625,
+          "balanced_accuracy": 0.92625,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.91875,
+          "balanced_accuracy": 0.9187500000000001,
+          "accuracy_change_from_clean": 0.0
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.90625,
+          "balanced_accuracy": 0.90625,
+          "accuracy_change_from_clean": 0.0
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 17,
+        "additive_ellipsoids": 29,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1392,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 11136
+      },
+      "test_used_for_fitting": false,
+      "seed": 71
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d3",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 3.0,
+        "indices": [
+          110,
+          195,
+          205,
+          179,
+          15,
+          111,
+          7,
+          239,
+          86,
+          385,
+          118,
+          107,
+          266,
+          56,
+          74,
+          24,
+          176,
+          47,
+          182,
+          339,
+          309,
+          46,
+          3,
+          287,
+          278,
+          1,
+          217,
+          340,
+          177,
+          80,
+          250,
+          355,
+          124,
+          73,
+          396,
+          21,
+          11,
+          148,
+          64,
+          279
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.93,
+          "balanced_accuracy": 0.93,
+          "accuracy_change_from_clean": -0.00374999999999992
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.9325,
+          "balanced_accuracy": 0.9325,
+          "accuracy_change_from_clean": -0.003750000000000031
+        },
+        "matched_gmm": {
+          "accuracy": 0.89125,
+          "balanced_accuracy": 0.8912499999999999,
+          "accuracy_change_from_clean": 0.02749999999999997
+        },
+        "knn": {
+          "accuracy": 0.92875,
+          "balanced_accuracy": 0.92875,
+          "accuracy_change_from_clean": 0.0024999999999999467
+        },
+        "linear_svm": {
+          "accuracy": 0.92375,
+          "balanced_accuracy": 0.9237500000000001,
+          "accuracy_change_from_clean": 0.0050000000000000044
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.9075,
+          "balanced_accuracy": 0.9075,
+          "accuracy_change_from_clean": 0.0012499999999999734
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 18,
+        "additive_ellipsoids": 23,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1104,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8832
+      },
+      "test_used_for_fitting": false,
+      "seed": 71
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d6",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 6.0,
+        "indices": [
+          266,
+          260,
+          225,
+          344,
+          41,
+          381,
+          211,
+          234,
+          60,
+          327,
+          126,
+          87,
+          274,
+          348,
+          355,
+          290,
+          175,
+          330,
+          224,
+          285,
+          10,
+          152,
+          303,
+          82,
+          45,
+          313,
+          139,
+          312,
+          264,
+          194,
+          308,
+          57,
+          228,
+          99,
+          88,
+          56,
+          212,
+          321,
+          7,
+          239
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.9225,
+          "balanced_accuracy": 0.9225,
+          "accuracy_change_from_clean": -0.011249999999999982
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.9325,
+          "balanced_accuracy": 0.9324999999999999,
+          "accuracy_change_from_clean": -0.003750000000000031
+        },
+        "matched_gmm": {
+          "accuracy": 0.9,
+          "balanced_accuracy": 0.8999999999999999,
+          "accuracy_change_from_clean": 0.036250000000000004
+        },
+        "knn": {
+          "accuracy": 0.92625,
+          "balanced_accuracy": 0.92625,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.9125,
+          "balanced_accuracy": 0.9125,
+          "accuracy_change_from_clean": -0.006249999999999978
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.89375,
+          "balanced_accuracy": 0.8937499999999999,
+          "accuracy_change_from_clean": -0.012499999999999956
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 15,
+        "additive_ellipsoids": 25,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1200,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 9600
+      },
+      "test_used_for_fitting": false,
+      "seed": 71
+    },
+    {
+      "scenario": {
+        "name": "feature_outliers_d10",
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0
+      },
+      "audit": {
+        "kind": "feature_outliers",
+        "rate": 0.1,
+        "distance": 10.0,
+        "indices": [
+          133,
+          199,
+          10,
+          162,
+          198,
+          360,
+          327,
+          323,
+          184,
+          191,
+          294,
+          240,
+          314,
+          167,
+          371,
+          74,
+          221,
+          396,
+          257,
+          202,
+          236,
+          138,
+          115,
+          119,
+          210,
+          256,
+          56,
+          340,
+          90,
+          346,
+          322,
+          389,
+          384,
+          44,
+          50,
+          260,
+          172,
+          353,
+          161,
+          287
+        ]
+      },
+      "methods": {
+        "geode": {
+          "accuracy": 0.90125,
+          "balanced_accuracy": 0.9012500000000001,
+          "accuracy_change_from_clean": -0.03249999999999997
+        },
+        "shrinkage_gaussian": {
+          "accuracy": 0.81125,
+          "balanced_accuracy": 0.81125,
+          "accuracy_change_from_clean": -0.125
+        },
+        "matched_gmm": {
+          "accuracy": 0.91625,
+          "balanced_accuracy": 0.91625,
+          "accuracy_change_from_clean": 0.05249999999999999
+        },
+        "knn": {
+          "accuracy": 0.92625,
+          "balanced_accuracy": 0.92625,
+          "accuracy_change_from_clean": 0.0
+        },
+        "linear_svm": {
+          "accuracy": 0.92125,
+          "balanced_accuracy": 0.92125,
+          "accuracy_change_from_clean": 0.0025000000000000577
+        },
+        "histogram_gradient_boosting": {
+          "accuracy": 0.9075,
+          "balanced_accuracy": 0.9075,
+          "accuracy_change_from_clean": 0.0012499999999999734
+        }
+      },
+      "geode_structure": {
+        "classes": 4,
+        "empty_classes": 0,
+        "experts": 18,
+        "additive_ellipsoids": 23,
+        "subtractive_ellipsoids": 0,
+        "fitted_parameters": 1104,
+        "candidate_evaluations": 0,
+        "approximate_model_bytes": 8832
+      },
+      "test_used_for_fitting": false,
+      "seed": 71
+    }
+  ],
+  "summary": {
+    "clean": {
+      "geode": {
+        "mean_accuracy": 0.8724999999999999,
+        "std_accuracy": 0.0468508271004899,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      },
+      "shrinkage_gaussian": {
+        "mean_accuracy": 0.8872499999999999,
+        "std_accuracy": 0.041013717217535904,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      },
+      "matched_gmm": {
+        "mean_accuracy": 0.79475,
+        "std_accuracy": 0.05197595597966429,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      },
+      "knn": {
+        "mean_accuracy": 0.8612500000000001,
+        "std_accuracy": 0.04565495591937418,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      },
+      "linear_svm": {
+        "mean_accuracy": 0.876,
+        "std_accuracy": 0.039277856356985656,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      },
+      "histogram_gradient_boosting": {
+        "mean_accuracy": 0.85725,
+        "std_accuracy": 0.042326114870136634,
+        "mean_accuracy_change_from_clean": 0.0,
+        "std_accuracy_change_from_clean": 0.0
+      }
+    },
+    "feature_outliers_d3": {
+      "geode": {
+        "mean_accuracy": 0.85875,
+        "std_accuracy": 0.0514963590946001,
+        "mean_accuracy_change_from_clean": -0.013749999999999995,
+        "std_accuracy_change_from_clean": 0.015041608956491318
+      },
+      "shrinkage_gaussian": {
+        "mean_accuracy": 0.8815,
+        "std_accuracy": 0.03771107264451648,
+        "mean_accuracy_change_from_clean": -0.005749999999999989,
+        "std_accuracy_change_from_clean": 0.005220153254455281
+      },
+      "matched_gmm": {
+        "mean_accuracy": 0.78575,
+        "std_accuracy": 0.05636155604665293,
+        "mean_accuracy_change_from_clean": -0.009000000000000008,
+        "std_accuracy_change_from_clean": 0.0365154077068845
+      },
+      "knn": {
+        "mean_accuracy": 0.86025,
+        "std_accuracy": 0.04595106092355211,
+        "mean_accuracy_change_from_clean": -0.0010000000000000009,
+        "std_accuracy_change_from_clean": 0.005208166663999906
+      },
+      "linear_svm": {
+        "mean_accuracy": 0.8779999999999999,
+        "std_accuracy": 0.03637134861398462,
+        "mean_accuracy_change_from_clean": 0.0019999999999999575,
+        "std_accuracy_change_from_clean": 0.005159941860137555
+      },
+      "histogram_gradient_boosting": {
+        "mean_accuracy": 0.841,
+        "std_accuracy": 0.047915289835291607,
+        "mean_accuracy_change_from_clean": -0.016250000000000007,
+        "std_accuracy_change_from_clean": 0.00951971638232988
+      }
+    },
+    "feature_outliers_d6": {
+      "geode": {
+        "mean_accuracy": 0.8557500000000001,
+        "std_accuracy": 0.050246890451051796,
+        "mean_accuracy_change_from_clean": -0.016750000000000022,
+        "std_accuracy_change_from_clean": 0.012005207203542971
+      },
+      "shrinkage_gaussian": {
+        "mean_accuracy": 0.8734999999999999,
+        "std_accuracy": 0.04300726682782806,
+        "mean_accuracy_change_from_clean": -0.013749999999999995,
+        "std_accuracy_change_from_clean": 0.010398317171542716
+      },
+      "matched_gmm": {
+        "mean_accuracy": 0.8297500000000001,
+        "std_accuracy": 0.04847937705870406,
+        "mean_accuracy_change_from_clean": 0.03500000000000001,
+        "std_accuracy_change_from_clean": 0.015411035007422436
+      },
+      "knn": {
+        "mean_accuracy": 0.8567499999999999,
+        "std_accuracy": 0.05126889895443434,
+        "mean_accuracy_change_from_clean": -0.004499999999999993,
+        "std_accuracy_change_from_clean": 0.006354132513569407
+      },
+      "linear_svm": {
+        "mean_accuracy": 0.8665,
+        "std_accuracy": 0.04233349737501024,
+        "mean_accuracy_change_from_clean": -0.009500000000000019,
+        "std_accuracy_change_from_clean": 0.006254998001598424
+      },
+      "histogram_gradient_boosting": {
+        "mean_accuracy": 0.8412499999999999,
+        "std_accuracy": 0.03939384469685589,
+        "mean_accuracy_change_from_clean": -0.016000000000000014,
+        "std_accuracy_change_from_clean": 0.009062284480195961
+      }
+    },
+    "feature_outliers_d10": {
+      "geode": {
+        "mean_accuracy": 0.84475,
+        "std_accuracy": 0.03527038417709679,
+        "mean_accuracy_change_from_clean": -0.027750000000000007,
+        "std_accuracy_change_from_clean": 0.017755280904564685
+      },
+      "shrinkage_gaussian": {
+        "mean_accuracy": 0.7977500000000001,
+        "std_accuracy": 0.01770240096710047,
+        "mean_accuracy_change_from_clean": -0.08949999999999998,
+        "std_accuracy_change_from_clean": 0.03834546909349265
+      },
+      "matched_gmm": {
+        "mean_accuracy": 0.8469999999999999,
+        "std_accuracy": 0.04230543700282508,
+        "mean_accuracy_change_from_clean": 0.05224999999999998,
+        "std_accuracy_change_from_clean": 0.018138357147217055
+      },
+      "knn": {
+        "mean_accuracy": 0.85925,
+        "std_accuracy": 0.04621011793968938,
+        "mean_accuracy_change_from_clean": -0.002000000000000024,
+        "std_accuracy_change_from_clean": 0.007524958471646224
+      },
+      "linear_svm": {
+        "mean_accuracy": 0.86775,
+        "std_accuracy": 0.03817230671573307,
+        "mean_accuracy_change_from_clean": -0.008250000000000025,
+        "std_accuracy_change_from_clean": 0.011499999999999982
+      },
+      "histogram_gradient_boosting": {
+        "mean_accuracy": 0.85275,
+        "std_accuracy": 0.03674574805334623,
+        "mean_accuracy_change_from_clean": -0.004499999999999993,
+        "std_accuracy_change_from_clean": 0.01047616341987851
+      }
+    }
+  }
+}

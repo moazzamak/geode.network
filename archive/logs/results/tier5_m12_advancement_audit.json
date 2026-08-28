@@ -1,0 +1,67 @@
+{
+  "milestone": "M12.7",
+  "status": "complete_with_negative_exit_gate",
+  "checks": {
+    "cost_instrumentation_complete": {
+      "passed": true,
+      "evidence": {
+        "class_latency_slope": 1.0032696133137808,
+        "primitive_latency_slope": 1.0083726872396963
+      }
+    },
+    "candidate_growth_sublinear": {
+      "passed": true,
+      "evidence": 0.4170287891571447
+    },
+    "exhaustive_route_agreement_at_least_99_percent": {
+      "passed": true,
+      "evidence": 1.0
+    },
+    "routing_has_net_latency_benefit": {
+      "passed": false,
+      "evidence": {
+        "scalar_maximum_speedup": 0.0990219913462463,
+        "batched_break_even_class_count": null,
+        "class_major_maximum_speedup": 0.8700228170870544,
+        "certified_topk_maximum_speedup": 0.5640254548969296
+      }
+    },
+    "certified_lookup_avoids_exhaustive_fallback": {
+      "passed": false,
+      "evidence": {
+        "break_even_conditions": [],
+        "candidate_slopes": {
+          "1": 1.000302198470969,
+          "2": 1.0010086448636064,
+          "4": 1.0015879379034365,
+          "8": 1.0032066277576368,
+          "16": 1.00704632032911
+        }
+      }
+    },
+    "bounded_growth_passes_final_quality_gate": {
+      "passed": false,
+      "evidence": {
+        "calibration_only_accepted": [],
+        "confirmed_accepted": [],
+        "best_confirmed_final_agreement": 0.9892578125
+      }
+    },
+    "real_feature_advancement_allowed": {
+      "passed": false,
+      "evidence": "Blocked because no toy routing or compression policy passed its complete advancement gate."
+    },
+    "open_set_and_semantic_metrics_preserved": {
+      "passed": true,
+      "evidence": "No candidate router or compressed model was bound; production and M11 open-set behavior remain unchanged."
+    }
+  },
+  "decision": {
+    "efficient_scalable_routing_claim_allowed": false,
+    "bind_candidate_router": false,
+    "bind_compression_policy": false,
+    "advance_to_real_features": false,
+    "authoritative_route": "exhaustive exact class SDF",
+    "measured_operating_envelope": "No alternative produced a complete quality-and-resource break-even over the tested range."
+  }
+}

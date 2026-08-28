@@ -1,0 +1,89 @@
+{
+  "milestone": "M268",
+  "cell": "cell 1",
+  "title": "M268 cell 1: one big vs many small — generalist vs specialists on a shared held-out mix",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M268 registered 21 Aug; cell 1 dispatched 22 Aug, amendment 30)",
+  "registered_before_any_accuracy": true,
+  "question": "On the same held-out mix read two ways, does routed per-representation specialization beat one generalist, and where does the routed arm's error come from (misroute vs correct-route arm error)?",
+  "arms": {
+    "generalist": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+      "role": "one generalist serving every task type",
+      "license_recorded": "Apache-2.0",
+      "max_new_tokens": 64,
+      "decoding": "greedy (do_sample=False), max_new_tokens 64, cudnn disabled (registered M267 env note)",
+      "anchor_note": "no accuracy anchor claimed in cell 1; published card numbers are context; contamination declared"
+    },
+    "specialists": {
+      "sentiment_en": {
+        "checkpoint": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+        "license_recorded": "Apache-2.0",
+        "id2label": {"0": "negative", "1": "positive"},
+        "anchor": "0.913 reproduced in M271a (sealed)"
+      },
+      "maths_primitive": {
+        "kind": "programmatic primitive",
+        "engine": "sympy exact integer arithmetic over a seeded generated expression tree",
+        "license_recorded": "BSD (sympy)",
+        "anchor": "determinism certificate — the truth values rebuilt from the seed and re-evaluated bit-exactly"
+      },
+      "logic_primitive": {
+        "kind": "programmatic primitive",
+        "engine": "deterministic boolean evaluator over a seeded generated expression tree",
+        "license_recorded": "stdlib only",
+        "anchor": "determinism certificate — the truth values rebuilt from the seed and re-evaluated bit-exactly"
+      }
+    }
+  },
+  "mix": {
+    "sentiment_en": {
+      "hf_id": "stanfordnlp/imdb",
+      "split": "test",
+      "rows": [0, 1000],
+      "license_recorded": "IMDb evaluation-only (standing research-class)",
+      "reuse_note": "third configuration on this corpus — recorded re-use, product-quality boundary stands"
+    },
+    "arithmetic": {
+      "n": 300,
+      "seed": 20260822,
+      "terms": [2, 5],
+      "digits": [2, 3],
+      "ops": ["+", "-", "*"],
+      "note": "integer arithmetic only (no division); intermediate and final values are exact integers; expression trees generated under the routing classifier's phrasing rules"
+    },
+    "boolean": {
+      "n": 200,
+      "seed": 20260822,
+      "depth": [2, 4],
+      "ops": ["and", "or", "not"],
+      "note": "literals are True/False constants; the final value is exact; trees generated under the routing classifier's phrasing rules"
+    }
+  },
+  "router": {
+    "kind": "deterministic task-type classifier (registered rules, marker-based)",
+    "rules": {
+      "sentiment": "arm input begins with 'Classify the sentiment'",
+      "logic": "arm input contains 'boolean expression' (case-insensitive)",
+      "arithmetic": "arm input contains 'arithmetic expression' (case-insensitive)"
+    },
+    "scope_note": "the mix is generated under the classifier's rules, so cell 1 measures arm quality given perfect routing; natural-query / fingerprint-router routing is cell 2"
+  },
+  "grading": {
+    "sentiment": "generalist answer text (lowercased): LAST occurrence of 'positive'/'negative'; specialist label string mapped from id2label",
+    "arithmetic": "generalist answer text: LAST regex match of -?\\d+ compared for exact integer equality with the exact tree value (echo-robust; raw answers recorded per item)",
+    "boolean": "generalist answer text (lowercased): LAST occurrence of 'true'/'false' (echo-robust; raw answers recorded per item)"
+  },
+  "prompts": {
+    "sentiment": "Classify the sentiment of this movie review as positive or negative. Answer with one word only.\nReview: {text}\nAnswer:",
+    "arithmetic": "Evaluate the following arithmetic expression. Answer with the integer only.\nExpression: {text}\nAnswer:",
+    "boolean": "Evaluate the following boolean expression. Answer with true or false only.\nExpression: {text}\nAnswer:"
+  },
+  "smoke": {
+    "sentiment_rows": 5,
+    "arithmetic_n": 5,
+    "boolean_n": 5
+  },
+  "output_dir": "logs/results/v25/m268_routing_study",
+  "evidence_filename": "evidence_cell1.json",
+  "feature_cache_relpath": "v25/m268_routing_study"
+}

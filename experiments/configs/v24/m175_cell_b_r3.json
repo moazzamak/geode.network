@@ -1,0 +1,56 @@
+{
+  "milestone": "M175",
+  "cell": "B-R3",
+  "title": "Flowers-native SPM at 32x32: whitener/dictionary vs the construction itself",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the SPM construction transfer to Flowers-102 five-shot when the whitener and dictionary are fitted ON flowers (everything else identical to cell B)?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "spm_atoms": 1923,
+    "levels": [1, 2, 4],
+    "note": "identical to cell B; only the whitener/candidate source changes (flowers train)"
+  },
+  "encoder_pin": {
+    "cache_relpath": "v16/m142_c2",
+    "train_file": "spm1923_fulltrain.npy",
+    "check_rows": 256,
+    "tolerance": 0.0
+  },
+  "flowers": {
+    "dataset_root": "data/v5/datasets/flowers102",
+    "jpg_dir": "flowers-102/jpg",
+    "features_dir": "data/v5/features/m19_flowers102_s1/dinov2-small",
+    "feature_dimension": 384,
+    "image_size": 32,
+    "splits": {
+      "train": [5, 11, "features_train_b0c0bb74c51684d1.npz"],
+      "dev": [2, 12, "features_dev_b0c0bb74c51684d1.npz"],
+      "test": [3, 13, "features_test_b0c0bb74c51684d1.npz"]
+    }
+  },
+  "reading": {
+    "high": "R3 >= 0.8: the blocker is the DomainNet-native whitener/dictionary — the construction transfers when fitted on flowers",
+    "low": "R3 <= 0.4: the SPM construction itself is weak at 32x32 fine-grained",
+    "between": "0.4 < R3 < 0.8: both contribute (recorded split)"
+  },
+  "output_dir": "logs/results/v24/m175_cell_b_r3"
+}

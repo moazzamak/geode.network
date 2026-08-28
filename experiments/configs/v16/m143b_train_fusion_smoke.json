@@ -1,0 +1,63 @@
+{
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; per-domain fit capped at 2000 rows, train scoring capped at 4000 rows, test side reads the M143 SMOKE test cache. MUST refuse the sealed output dir.",
+  "milestone": "M143b",
+  "title": "Integration layer fitted on TRAIN scores (SMOKE)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (M143 rescue, 14 Aug 2026)",
+  "registration_notes": {
+    "N100.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "_smoke_train_cap": 2000,
+    "_smoke_train_score_rows": 4000
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143b_smoke"
+  },
+  "test_cache": {
+    "cache_relpath": "v16/m143_smoke"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44
+  },
+  "gate": {
+    "registered": "fired if fused < global - 0.005 on test rows, OR competence < identity, OR identity < random.",
+    "consequence_fired": "even fitted on train scores, the integration layer does not recover the specialist gains.",
+    "consequence_passed": "fitted on train scores, the integration layer recovers the specialist gains."
+  },
+  "output_dir": "logs/results/v16/m143b_train_fusion"
+}

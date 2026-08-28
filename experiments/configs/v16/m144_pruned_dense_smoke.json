@@ -1,0 +1,43 @@
+{
+  "milestone": "M144",
+  "title": "SMOKE: M144 pruned-dense plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 9 (M144)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (4000 train / 1000 test rows, gates skipped, keep {1.0, 0.5}). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "_smoke_train_rows": 4000,
+  "_smoke_test_rows": 1000,
+  "question": "Does the M144 pipeline (parity guard, prune, encode, ridge) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "parity_guard": {
+    "resolution": 56,
+    "batch": 8,
+    "models": ["small"],
+    "bound_relative": 0.0001
+  },
+  "arms": {
+    "keep_fractions": [1.0, 0.5]
+  },
+  "frontier_context": {
+    "sealed_dense_ladder": { "r42": 0.197159420289855, "r56": 0.245014492753623, "r70": 0.311797101449275 },
+    "sparse_138k": { "pool2062": 0.206405797101449, "ms357_sqrt": 0.2239, "spm1923_sqrt": 0.2274 },
+    "sparse_full_data_best": 0.278550724637681
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 1024,
+    "batch": 32
+  },
+  "output_dir": "logs/results/v16/m144_pruned_dense_smoke"
+}

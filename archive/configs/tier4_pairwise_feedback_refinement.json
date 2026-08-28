@@ -1,0 +1,29 @@
+{
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "seeds": [101, 102, 103],
+  "episodes": [
+    {
+      "known_classes": [0, 1],
+      "proxy_unknown_classes": [6, 7],
+      "final_unknown_classes": [8, 9]
+    },
+    {
+      "known_classes": [2, 3],
+      "proxy_unknown_classes": [6, 7],
+      "final_unknown_classes": [8, 9]
+    },
+    {
+      "known_classes": [4, 5],
+      "proxy_unknown_classes": [6, 7],
+      "final_unknown_classes": [8, 9]
+    }
+  ],
+  "flag_fractions": [0.3],
+  "embedding_spaces": ["feedback_metric_l2"],
+  "clustering_methods": ["hdbscan"],
+  "hdbscan_minimum_cluster_sizes": [3],
+  "hdbscan_minimum_samples": 3,
+  "samples_per_slice": 100,
+  "pca_components": 8,
+  "representation": "mobilenetv2"
+}

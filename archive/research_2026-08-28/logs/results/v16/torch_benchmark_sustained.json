@@ -1,0 +1,34 @@
+{
+  "_note": "engineering measurement of the instrument, NOT evidence; no corpus, no accuracy, no operand",
+  "instrument": {
+    "torch": "2.11.0+rocm7.13.0a20260416",
+    "hip": "7.2.0",
+    "device": "AMD Radeon RX 9070 XT",
+    "gcnArchName": "gfx1201",
+    "total_memory_gb": 15.92
+  },
+  "trunk_training": {
+    "workload": "trunk training (DINOv2-small fwd+bwd+step)",
+    "batch": 32,
+    "steps": 60,
+    "seconds": 10.66,
+    "img_per_s": 180.18
+  },
+  "sparse_encode": {
+    "images": 1024,
+    "seconds": 0.81,
+    "img_per_s": 1264.18,
+    "phase_fraction": {
+      "whiten_cpu": 0.596,
+      "to_gpu": 0.024,
+      "gpu_kernels": 0.373,
+      "to_numpy": 0.007
+    },
+    "phase_seconds": {
+      "whiten_cpu": 1.14,
+      "to_gpu": 0.05,
+      "gpu_kernels": 0.71,
+      "to_numpy": 0.01
+    }
+  }
+}

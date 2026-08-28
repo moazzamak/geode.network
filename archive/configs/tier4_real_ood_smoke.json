@@ -1,0 +1,10 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier4_real_ood_smoke.json",
+  "id_dataset_path": "data/tier4/cifar10_features.npz",
+  "id_max_samples": 8000,
+  "max_iterations": 10,
+  "ood_feature_cache_path": "data/tier5/cifar100_mobilenetv2_15000_seed42.npz",
+  "pca_components": 128,
+  "seed": 42
+}

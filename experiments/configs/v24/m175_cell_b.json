@@ -1,0 +1,73 @@
+{
+  "milestone": "M175",
+  "cell": "B",
+  "title": "vision->vision transfer: frozen DomainNet-32 SPM encoder -> Flowers-102 (bounded S1, five-shot)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026); analysis/v24_m175_transfer_cells.md (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the frozen DomainNet-32 SPM code construction (sealed M142 C2: 6x6 patches, ZCA whitener, 1923 atoms, 21-bin pyramid, width 40383) transfer to Oxford Flowers-102 under the same exact ridge read?",
+  "verdict": {
+    "metric": "test accuracy (306 rows) per penalty, best-penalty per arm",
+    "transfer_holds": "SPM best-penalty test accuracy >= baseline best-penalty test accuracy",
+    "consequence_pass": "transfer holds: the DomainNet SPM construction's codes read Flowers-102 at least as well as the cached backbone CLS features under the same ridge read",
+    "consequence_fail": "scoped negative for THIS encoder: the SPM-1923 construction does not transfer to Flowers-102 five-shot; the deep-patch deployment arm (M176c-c1) is unaffected (registered)"
+  },
+  "disclosures": [
+    "Not a matched-cost fight: baseline width 384 vs SPM width 40,383.",
+    "The baseline reads full-resolution images (cached ONNX DINOv2 CLS features); the SPM arm reads 32x32 images. Information mismatch in the baseline's favour, disclosed.",
+    "Five-shot fit: 510 train rows, 102 classes.",
+    "The SPM arm codes are the RAW C2 output (no power-normalisation; C4's transform was measured on DomainNet only)."
+  ],
+  "corpus": {
+    "provenance": "verbatim copy of experiments/configs/v16/m142_c2.json corpus section (the encoder pin depends on this exact corpus)",
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "provenance": "verbatim copy of experiments/configs/v16/m142_c2.json sparse section (the encoder pin depends on these exact seeds)",
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "spm_atoms": 1923,
+    "levels": [1, 2, 4]
+  },
+  "encoder_pin": {
+    "cache_relpath": "v16/m142_c2",
+    "train_file": "spm1923_fulltrain.npy",
+    "check_rows": 256,
+    "tolerance": 0.0,
+    "note": "max-abs delta vs the sealed memmap must be EXACTLY 0.0 (bit-exact); any nonzero -> VOID"
+  },
+  "flowers": {
+    "dataset_root": "data/v5/datasets/flowers102",
+    "jpg_dir": "flowers-102/jpg",
+    "features_dir": "data/v5/features/m19_flowers102_s1/dinov2-small",
+    "feature_dimension": 384,
+    "image_size": 32,
+    "resize": "PIL BILINEAR (the DomainNet parquet pipeline's own filter)",
+    "splits": {
+      "train": [5, 11, "features_train_b0c0bb74c51684d1.npz"],
+      "dev": [2, 12, "features_dev_b0c0bb74c51684d1.npz"],
+      "test": [3, 13, "features_test_b0c0bb74c51684d1.npz"]
+    }
+  },
+  "cell": {
+    "penalty_ladder": [0.1, 1.0, 10.0]
+  },
+  "numerics": {
+    "torch_threads": 8,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v24/m175_cell_b"
+}

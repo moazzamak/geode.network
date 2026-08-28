@@ -1,0 +1,17 @@
+wikitext: train 80000 / test 20000 tokens, vocab 82 (fp 5c6f0917b424e3a7, cv 2)
+  window 1: uniform 11.7627 backoff 11.7627 footprint 8,424B ops/tok 33.7
+  window 2: uniform 9.9152 backoff 9.8706 footprint 69,600B ops/tok 53.8
+  window 4: uniform 11.0405 backoff 18.7373 footprint 1,062,936B ops/tok 71.8
+  window 8: uniform 16.1869 backoff 33.6968 footprint 12,026,040B ops/tok 83.2
+  window 16: uniform 24.8216 backoff 36.5642 footprint 73,665,000B ops/tok 92.6
+  window 32: uniform 35.9272 backoff 36.7404 footprint 330,522,304B ops/tok 108.8
+g1 bigram closed form: model 11.762672768608 closed 11.762672768608 delta 0.000e+00 ok=True
+g2 footprint monotone: [8424, 69600, 1062936, 12026040, 73665000, 330522304] ok=True
+{
+ "g1_delta": 0.0,
+ "uniform_wmax": 35.9272,
+ "backoff_wmax": 36.7404,
+ "gate_fired": true,
+ "better_variant": "uniform"
+}
+M175 cell A0 complete -> logs\results\v24\m175_cell_a0\evidence.json

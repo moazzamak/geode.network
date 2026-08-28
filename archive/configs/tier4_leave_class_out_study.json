@@ -1,0 +1,36 @@
+{
+  "artifact_path": "logs/results/tier4_leave_class_out_study.json",
+  "seed": 42,
+  "max_iterations": 10,
+  "minimum_known_coverage": 0.9,
+  "minimum_unknown_recall": 0.5,
+  "geometry_variant": "additive",
+  "problem": {
+    "seed": 42,
+    "dimensions": 4,
+    "class_count": 9,
+    "geometry_per_class": 30,
+    "calibration_per_class": 20,
+    "test_per_class": 40,
+    "center_radius": 3.0,
+    "mode_offset": 0.7,
+    "noise_scale": 0.7
+  },
+  "episodes": [
+    {
+      "known_classes": [0, 1, 2],
+      "proxy_unknown_classes": [3],
+      "final_unknown_classes": [6]
+    },
+    {
+      "known_classes": [0, 1, 2],
+      "proxy_unknown_classes": [4],
+      "final_unknown_classes": [7]
+    },
+    {
+      "known_classes": [0, 1, 2],
+      "proxy_unknown_classes": [5],
+      "final_unknown_classes": [8]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+device cuda; n_train 50000; hidden 512
+  epoch 2/10 loss 4.5011
+  epoch 4/10 loss 3.9472
+  epoch 6/10 loss 3.5508
+  epoch 8/10 loss 3.2421
+  epoch 10/10 loss 3.0744
+admission: {'admitted': True, 'replay_hash': '9aa94fd02a92eddd925eea9ed3560122bea1ccec6275721afe1a4c47f69c47eb', 'reasons': [], 'duplicate': False}
+{
+ "admitted": true,
+ "accuracy": 0.11663768115942029,
+ "replay_hash": "9aa94fd02a92eddd925eea9ed3560122bea1ccec6275721afe1a4c47f69c47eb"
+}
+M206 complete -> logs\results\v25\m206_dnn_probe\evidence.json

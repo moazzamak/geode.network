@@ -1,0 +1,15 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier4_full_runs.jsonl",
+  "baseline_rbf_sample_limit": 10000,
+  "bootstrap_resamples": 2000,
+  "calibration_fraction": 0.2,
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "feature_extractor": "cnn",
+  "max_iterations": null,
+  "max_samples": 8000,
+  "n_splits": 5,
+  "pca_components": 128,
+  "seed": 42,
+  "use_gpu": true
+}

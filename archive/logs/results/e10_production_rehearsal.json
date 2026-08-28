@@ -1,0 +1,63 @@
+{
+  "bad_canary": {
+    "coordinator_state": {
+      "phase": "stable",
+      "production_bundle_id": "377ad7127e3238eea88d",
+      "recovered_candidate_bundle_id": "24c445b170370858dd36"
+    },
+    "recovery_seconds": 0.005916299996897578
+  },
+  "bundles": {
+    "bad_canary": "24c445b170370858dd36",
+    "current": "377ad7127e3238eea88d",
+    "interrupted_canary": "3e5ba13abf9428f703ea",
+    "production": "377ad7127e3238eea88d"
+  },
+  "checks": {
+    "bad_canary_detected": true,
+    "bad_canary_parent_restored": true,
+    "bad_canary_within_rto": true,
+    "coordinator_loss_injected_after_activation": true,
+    "coordinator_parent_restored": true,
+    "coordinator_recovery_within_rto": true,
+    "journal_stable": true,
+    "no_partial_artifacts": true,
+    "recovery_point_objective_met": true,
+    "replicas_loaded": true,
+    "shadow_candidate_never_authoritative": true
+  },
+  "coordinator_loss": {
+    "fault_injection": "discard coordinator after candidate activation before journal completion",
+    "recovered_state": {
+      "phase": "stable",
+      "production_bundle_id": "377ad7127e3238eea88d",
+      "recovered_candidate_bundle_id": "3e5ba13abf9428f703ea"
+    },
+    "recovery_seconds": 0.002796799992211163
+  },
+  "gate_passed": true,
+  "milestone": "E10",
+  "qualification_status": "passed",
+  "recovery_objectives": {
+    "rpo_requests": 0,
+    "rto_seconds": 1.0
+  },
+  "schema_version": 1,
+  "shadow": {
+    "agreement": 0.0,
+    "candidate_bundle_id": "24c445b170370858dd36",
+    "candidate_controls_outputs": false,
+    "candidate_latency_seconds": 3.7999998312443495e-06,
+    "production_bundle_id": "377ad7127e3238eea88d",
+    "production_latency_seconds": 1.1899974197149277e-05
+  },
+  "telemetry": {
+    "latency_p95_seconds": 1.275499380426481e-05,
+    "replicas": 2,
+    "requests": 4,
+    "serving_bundle_ids": [
+      "377ad7127e3238eea88d",
+      "377ad7127e3238eea88d"
+    ]
+  }
+}

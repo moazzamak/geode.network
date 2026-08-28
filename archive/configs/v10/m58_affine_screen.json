@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "milestone": "M58",
+  "seed": 11,
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "ranks": [8, 16, 32],
+  "extent_quantiles": [0.90, 0.95, 0.99],
+  "outer_scale_policies": ["median_overshoot", "interquantile_range"],
+  "penalty_grid": [1, 4, 16, 64, 256, 1024],
+  "known_coverage_target": 0.92,
+  "knn_support_per_class": 256,
+  "gaussian_rank": 32,
+  "rbf_svm": {"C": 1.0, "gamma": "scale"},
+  "parent_locks": {
+    "m57_index": {
+      "path": "logs/results/v10/m57_identifiability/artifact_index.json",
+      "sha256": "018a4bd7e27af13c3e790b0314d3e7b1aa61aaf36e322a9d52a70685c53ace9b"
+    },
+    "v9_m53_config": {
+      "path": "experiments/configs/v9/m53_bounded_tube_s1.json",
+      "sha256": "e1e497bc60982ef2678edce24fcb1a5a4c4290ffe625a288bc48f284ae6cac60"
+    },
+    "v9_m53_evidence": {
+      "path": "logs/results/v9/m53_bounded_tube_s1/evidence.json",
+      "sha256": "5bfac23e08c2665b8bf94c0b9c61a41aa4c8b1f613f24bc65bfd930bdc41f696"
+    }
+  },
+  "gate": {
+    "minimum_balanced_accuracy_gain": 0.01,
+    "maximum_unknown_recall_loss": 0.02,
+    "maximum_accepted_known_accuracy_loss": 0.01,
+    "maximum_8x_tangent_acceptance": 0.0,
+    "maximum_4x_tangent_acceptance": 0.01,
+    "maximum_other_probe_acceptance": 0.05,
+    "minimum_prediction_class_count": 6,
+    "maximum_parameter_ratio": 2.0,
+    "maximum_fit_work_ratio": 2.0
+  },
+  "final_labels_opened": false
+}

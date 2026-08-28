@@ -1,0 +1,40 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+repair digests all match the registered values
+schedule rows: 409832; test 34500
+Q(n) ladder
+  n=34500: 0.0905797101
+  n=69000: 0.1524927536
+  n=138000: 0.2248695652
+    anchor n=138000: delta +0.000e+00 ok=True
+  n=276000: 0.2251014493
+  n=409832: 0.2615362319
+    anchor n=409832: delta +1.739e-04 ok=False
+LOO full rows: 409832
+  LOO full: 0.2615362319
+  LOO domain 0: 0.2545217391 (marginal +0.007014, left out 33525 rows)
+  LOO domain 1: 0.2606956522 (marginal +0.000841, left out 36023 rows)
+  LOO domain 2: 0.2610724638 (marginal +0.000464, left out 50416 rows)
+  LOO domain 3: 0.1638260870 (marginal +0.097710, left out 120750 rows)
+  LOO domain 4: 0.2184057971 (marginal +0.043130, left out 120906 rows)
+  LOO domain 5: 0.2544057971 (marginal +0.007130, left out 48212 rows)
+M182 VOID: a ladder anchor failed
+{
+ "anchors_ok": false,
+ "ladder": {
+  "34500": 0.09057971014492754,
+  "69000": 0.1524927536231884,
+  "138000": 0.2248695652173913,
+  "276000": 0.22510144927536233,
+  "409832": 0.26153623188405795
+ },
+ "loo_marginals": {
+  "0": 0.007014492753623147,
+  "1": 0.0008405797101448953,
+  "2": 0.0004637681159420093,
+  "3": 0.09771014492753621,
+  "4": 0.04313043478260867,
+  "5": 0.007130434782608663
+ }
+}
+M182 complete -> logs\results\v25\m182_contributions\evidence.json

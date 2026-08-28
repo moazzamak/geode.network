@@ -1,0 +1,2129 @@
+\documentclass[12pt,oneside]{report}
+
+\usepackage[a4paper,margin=1in,bindingoffset=0.25in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\onehalfspacing
+\setlength{\parindent}{0.3in}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.15}
+
+\newcommand{\systemname}{GEODE}
+\newcommand{\ba}{\operatorname{BA}}
+\newcommand{\utility}{U}
+\newcommand{\thesistitle}{Adaptation Utility and Transactional Safety in
+Open-World Recognition Systems}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\begin{titlepage}
+\centering
+\vspace*{0.8in}
+
+{\Large\bfseries \thesistitle\par}
+\vspace{0.3in}
+{\large A Study of Why Qualified Recognition, Discovery, and Adaptation
+Stages Fail to Compose\par}
+
+\vspace{0.8in}
+
+{\large by\par}
+\vspace{0.15in}
+{\Large Moazzam Abdullah Khan\par}
+
+\vfill
+
+A thesis-style report submitted in partial fulfillment\\
+of the requirements for the degree of\\[0.15in]
+{\large Master of Science\par}
+
+\vspace{0.5in}
+
+Department and University Name\\
+City, Country
+
+\vspace{0.5in}
+
+July 2026
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+
+\chapter*{Approval}
+\addcontentsline{toc}{chapter}{Approval}
+
+This thesis-style report has been prepared for academic review. Institutional
+approval language, degree title, department name, supervisor names, signatures,
+and submission date must be replaced with the requirements of the submitting
+university before formal deposit.
+
+\vspace{0.6in}
+
+\begin{tabular}{p{2.3in}p{2.3in}}
+\hrulefill & \hrulefill\\
+Supervisor & Date\\[0.5in]
+\hrulefill & \hrulefill\\
+Committee Member & Date\\[0.5in]
+\hrulefill & \hrulefill\\
+Committee Member & Date
+\end{tabular}
+
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+
+I declare that this report presents the research and experimental record of the
+\systemname\ project as described in the cited repository artifacts. All
+claims in the report are bounded by the preregistered protocols, completed
+experiments, and immutable evidence indexes. Any institutional declaration
+required by the degree-awarding university should replace this provisional
+text before submission.
+
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+
+The author may insert acknowledgments to supervisors, collaborators,
+institutions, funding bodies, and family here. This placeholder is deliberately
+non-specific so that no contribution or funding claim is implied.
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Open-world recognition systems must do more than reject unfamiliar inputs.
+They must accumulate rejected evidence, identify persistent candidate groups,
+request semantic supervision, integrate confirmed classes, route future
+inputs, and preserve auditability and rollback. Research commonly evaluates
+these stages independently, but strong stage-level performance does not imply
+that their outputs contain the information required by downstream stages.
+
+This thesis investigates stage composition in \systemname, an experimental
+framework for explicit geometric class models and transactional model
+lifecycles. The realized experiments use frozen 384-dimensional DINOv2
+features on bounded CIFAR-10 open-world episodes. The research progresses
+through three questions. First, can explicit geometric heads compete with
+standard discriminative controls under a frozen representation? Second, can
+independently qualified rejection, discovery, confirmation, adaptation, and
+routing mechanisms compose into a useful lifecycle? Third, does replacing
+stage metrics with post-integration adaptation utility resolve the composition
+failure?
+
+The predictive study found that a weighted rank-32 affine head reached 91.73\%
+balanced accuracy, remaining 5.03 percentage points behind a 96.77\% RBF SVM
+control. The open-world stage study retained a rank-32 class-conditional
+Gaussian with 92.08\% known coverage, 86.17\% unknown recall, 0.9561 AUROC,
+and 98.67\% review precision. HDBSCAN reached 100\% stage-wise group recall
+and review precision, while confirmed rank-16 insertion improved isolated
+new-class success by 43.33 points. These stages nevertheless failed to
+compose: grouped loops integrated 0 of 3 confirmable classes.
+
+The successor protocol registered adaptation utility---the change in balanced
+accuracy on known and discovered classes after integration---as the primary
+endpoint at 50 reviewed labels per episode. Density-core review sets covered
+only 34.0--39.1\% of the rejected region under a nearest-neighbor support
+diagnostic, compared with 99.37--99.78\% for boundary-inclusive sets. Across
+nine seed-by-arrival cells, utility selection beat core selection in all nine
+by 3.593 points on average, with a paired 95\% bootstrap interval of
+[2.794, 4.382]. The result was below the preregistered 5-point practical
+threshold, and six cells violated the 2-point remaining-unknown-recall band.
+Parent-scoped residual fusion repaired a prior locality defect, preserving
+100\% of unaffected predictions, but added at most 0.204 points of utility.
+
+The final outcome is a rigorous negative systems result. Pure discovery cores
+are insufficient statistics for adaptation; broader support improves utility;
+but representativeness alone does not preserve the remaining unknown space.
+The thesis contributes an adaptation-utility endpoint, typed stage-interface
+contracts, deterministic episode replay, confirmation-gated transactions,
+exact rollback, and artifact-only verification. It concludes that open-world
+recognition must be evaluated as a jointly constrained lifecycle rather than
+as a sequence of independently optimized benchmarks.
+
+\tableofcontents
+\listoftables
+
+\chapter*{List of Abbreviations}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+
+\begin{longtable}{>{\bfseries}p{1.0in}p{4.45in}}
+AUROC & Area under the receiver operating characteristic curve\\
+BA & Balanced accuracy\\
+CSG & Constructive solid geometry\\
+DDU & Deep Deterministic Uncertainty\\
+EVM & Extreme Value Machine\\
+GCD & Generalized category discovery\\
+GEODE & Geometric, explicit, open-world development environment used in this work\\
+NLL & Negative log likelihood\\
+OOD & Out-of-distribution\\
+SDF & Signed distance field\\
+\end{longtable}
+
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+
+\section{Motivation}
+
+Most classification benchmarks assume a closed world: training and evaluation
+share a fixed class inventory, and every input belongs to one of those classes.
+Deployed systems rarely enjoy that assumption. New products, species,
+documents, faults, behaviors, and domains appear after training. A system that
+must always choose a known label can become confidently wrong precisely when
+human attention is most valuable.
+
+Open-set recognition addresses part of this problem by allowing rejection.
+Open-world recognition extends the objective: a system should identify known
+classes, reject unfamiliar inputs, acquire supervision for novel classes, and
+incrementally expand its knowledge \cite{bendale2015}. This formulation is
+operationally demanding. Rejection creates an unresolved observation, not a
+new class. The system must decide what to retain, which rejected examples form
+a coherent candidate, which examples deserve limited review, how confirmation
+authorizes mutation, how a child model changes acceptance thresholds, and how
+the change can be reversed.
+
+Each stage has familiar local metrics. Rejection is summarized by AUROC,
+known coverage, and unknown recall. Discovery is summarized by cluster purity,
+adjusted Rand index, or category recall. Adaptation is summarized by target
+accuracy or forgetting. Routing is summarized by top-$k$ inclusion and compute
+reduction. These metrics are useful diagnostics, but they do not answer the
+system-level question: did the reviewed evidence create a better model without
+damaging what the system still does not know?
+
+\section{Research problem}
+
+The central problem of this thesis is \emph{interface sufficiency}. A producer
+stage may optimize a metric while discarding statistics required by its
+consumer. A clusterer can produce a pure density core that is easy to label,
+while an adapter needs support over the class boundary and low-density modes.
+A router can include the correct expert almost always, while hiding exactly
+the unknown cases that require exhaustive fallback. A transaction can roll
+back exactly while its forward edit changes predictions outside the declared
+region.
+
+The thesis therefore treats open-world recognition as a constrained lifecycle
+whose interfaces are explicit experimental objects.
+
+\section{Research questions}
+
+The work addresses four research questions:
+
+\begin{description}
+\item[RQ1:] Can compact explicit geometric class artifacts approach the
+predictive quality of matched discriminative controls under a frozen deep
+representation?
+
+\item[RQ2:] Do independently qualified rejection, discovery, human
+confirmation, adaptation, and routing stages compose into a review-efficient
+open-world loop?
+
+\item[RQ3:] Does selecting reviewed evidence for downstream adaptation utility,
+rather than density-core purity, improve post-integration performance at an
+equal human-review budget?
+
+\item[RQ4:] Can transactional controls---typed interfaces, confirmation
+lineage, edit locality, exact replay, and rollback---make lifecycle failures
+auditable without overstating predictive success?
+\end{description}
+
+\section{Thesis statement}
+
+The thesis advances the following bounded statement:
+
+\begin{quote}
+Stage-wise qualification is insufficient for open-world lifecycle
+qualification. At a fixed review budget, representative review selection
+improves adaptation utility over density-core selection, but safe lifecycle
+advancement additionally requires explicit preservation of known performance,
+remaining-unknown recall, lineage, locality, and rollback.
+\end{quote}
+
+This statement does not claim closed-set parity, autonomous semantic class
+creation, SDF necessity, authoritative learned routing, or successful
+end-to-end qualification.
+
+\section{Contributions}
+
+The research makes five contributions:
+
+\begin{enumerate}
+\item A controlled comparison separating the predictive value of explicit
+geometry from its auditability and editability.
+
+\item A preregistered stage-to-system study showing that strong rejection,
+discovery, and isolated adaptation results can fail to compose.
+
+\item A registered adaptation-utility endpoint at a fixed review budget, with
+known-class and remaining-unknown safety constraints.
+
+\item A quantified sufficient-statistics diagnosis showing that density cores
+are pure but geometrically unrepresentative in the realized episodes.
+
+\item A transactional evaluation harness with typed interfaces, immutable
+lineage, deterministic replay, human-confirmation gates, local edit scopes,
+and exact rollback.
+\end{enumerate}
+
+\section{Organization}
+
+Chapter 2 reviews open-world recognition, discovery, routing, explicit
+geometry, and lifecycle safety. Chapter 3 formalizes the problem and endpoint.
+Chapter 4 presents the \systemname\ architecture. Chapter 5 records how the
+methodology evolved, including failed hypotheses and the tests performed.
+Chapters 6 and 7 describe the v7 and v8 experimental protocols. Chapter 8
+reports results. Chapter 9 discusses the findings and answers the research
+questions. The remaining chapters cover validity, ethics, reproducibility, and
+conclusions. Appendices record gates, branch dispositions, and artifact
+commands.
+
+\chapter{Background and Related Work}
+
+\section{Open-set and open-world recognition}
+
+Bendale and Boult formalized open-world recognition through explicit rejection
+and incremental class addition \cite{bendale2015}. Their Nearest Non-Outlier
+method controls open-space risk using metric distance to class means. OpenMax
+later calibrated deep activation vectors using extreme-value theory
+\cite{bendale2016}. The Extreme Value Machine models Weibull tails over class
+margins, yielding incrementally updatable class boundaries \cite{rudd2018}.
+
+Feature-space baselines remain strong when representations are frozen.
+Maximum softmax probability is a common baseline \cite{hendrycks2017}.
+Mahalanobis scoring uses class-conditional feature distributions
+\cite{lee2018}; DDU combines deterministic features with density estimation
+\cite{mukhoti2023}; and deep nearest-neighbor distance can provide strong OOD
+detection without a parametric head \cite{sun2022}. DUQ and SNGP introduce
+distance awareness into discriminative models
+\cite{vanamersfoort2020,liu2020}.
+
+These methods play a role similar to the SDF in the original \systemname\
+motivation: they define a calibrated acceptance region with an outside signal.
+The literature suggests that the mechanism should be treated as substitutable.
+This thesis follows that implication by retaining a low-rank Gaussian when it
+outperforms geometric support.
+
+\section{Streaming novelty and emerging classes}
+
+The data-stream literature operationalized novelty buffering and class
+evolution before modern self-supervised representations. ECSMiner handles
+classification and novel-class detection under drift \cite{masud2011}. SAND
+and ECHO address scarce labels and evolving concepts
+\cite{haque2016sand,haque2016echo}. MINAS maintains micro-cluster summaries
+and recurring novelty \cite{faria2016}, while SENCForest targets streaming
+emerging classes \cite{mu2017}.
+
+This lineage demonstrates that reject-buffer-group-update loops are not novel
+in concept. The open problem examined here is the composition of modern frozen
+features, explicit human publication authority, transactional adaptation, and
+cross-model support routing under one measured endpoint.
+
+\section{Novel and generalized category discovery}
+
+Generalized category discovery clusters unlabeled data containing known and
+novel classes, often over strong self-supervised features \cite{vaze2022}.
+ORCA jointly learns seen and novel categories in open-world semi-supervised
+learning \cite{cao2022}. Grow and Merge and incremental GCD extend discovery
+across episodes \cite{zhang2022,zhao2023}.
+
+Clustering mechanisms include DBSCAN \cite{ester1996}, HDBSCAN
+\cite{campello2013}, and FINCH \cite{sarfraz2019}. Purity and category recovery
+are natural discovery metrics, but they do not measure whether a small reviewed
+subset supports a downstream class model. The present study isolates this
+difference.
+
+\section{Continual learning and modular routing}
+
+Continual learning studies acquisition under stability-plasticity constraints.
+The present work uses a narrower transactional setting: the representation is
+frozen, semantic mutation requires confirmation, and every child has an exact
+parent.
+
+Expert Gate routes examples among task experts using reconstruction error
+\cite{aljundi2017}. DEMix and Branch-Train-Merge provide modern modular
+precedents \cite{gururangan2021,li2022}. In \systemname, fingerprints establish
+structural compatibility, while empirical profiles estimate support. A
+profile may only become authoritative if it agrees with exhaustive inference
+and fails safely on unknown inputs.
+
+\section{Explicit geometry and low-rank class models}
+
+Signed distance fields and constructive solid geometry provide editable
+spatial representations \cite{requicha1980,park2019}. Their attraction in
+feature space is governance: an operator could inspect components, remove a
+lobe, merge regions, or roll back an edit. Predictive competitiveness,
+however, is a separate empirical question.
+
+The retained affine and Gaussian components use a center, orthonormal tangent
+basis, tangent variances, and residual variance. This construction relates to
+probabilistic PCA and mixtures of factor analyzers
+\cite{tipping1999,ghahramani1996}. Proper likelihood includes both normalized
+distance and volume terms; raw geometric support does not automatically yield
+cross-class comparability.
+
+\section{Research gap}
+
+Prior work validates each stage individually. What is uncommon is an
+end-to-end study in which:
+
+\begin{itemize}
+\item review cost is fixed;
+\item stage interfaces and sufficient statistics are registered;
+\item semantic mutation requires linked confirmation;
+\item child thresholds and routes carry lineage;
+\item exact rollback and locality are independently tested; and
+\item the primary endpoint is post-integration utility.
+\end{itemize}
+
+This thesis addresses that systems-level gap. Its novelty claim concerns the
+controlled composition study and audit boundary, not the existence of the
+discover-label-update loop or any individual mechanism.
+
+\chapter{Problem Formulation}
+
+\section{Open-world episode}
+
+Let $f(x)\in\mathbb{R}^d$ be a frozen representation. At the beginning of
+episode $e$, parent model $M_e$ recognizes class set $\mathcal{K}_e$. The
+stream contains known inputs and an arriving class $c_e\notin\mathcal{K}_e$;
+a separate set $\mathcal{R}_e$ remains unknown after the episode.
+
+The rejector maps an input to a known class or rejection. Rejected records enter
+a bounded buffer. A discovery policy forms a persistent review candidate.
+A review selector chooses at most $B$ examples. An authorized confirmation
+assigns semantic meaning, after which an adapter may publish child
+$M_{e+1}$. A router chooses compatible bundles or falls back to exhaustive
+evaluation.
+
+\section{Semantic states}
+
+Three states must remain distinct:
+
+\begin{description}
+\item[Rejected:] an acceptance score crosses a threshold.
+\item[Grouped:] rejected examples exhibit persistent structure.
+\item[Confirmed:] an authorized review assigns semantic meaning.
+\end{description}
+
+Only confirmation authorizes a semantic class or model mutation. Group IDs are
+persistent review objects, not provisional semantic labels.
+
+\section{Adaptation utility}
+
+The v8 primary endpoint is episode utility:
+
+\begin{equation}
+\utility_e =
+\ba_{\mathcal{K}_e\cup\{c_e\}}(M_{e+1})
+-
+\ba_{\mathcal{K}_e\cup\{c_e\}}(M_e).
+\label{eq:utility}
+\end{equation}
+
+The parent receives zero credit on the unavailable arriving class. This avoids
+the misleading comparison in which a no-update parent is evaluated only on
+classes it already knows.
+
+The cumulative endpoint after $N$ episodes is
+
+\begin{equation}
+\utility_{1:N} =
+\ba_{\mathcal{K}_1\cup\{c_1,\ldots,c_N\}}(M_{N+1})
+-
+\ba_{\mathcal{K}_1\cup\{c_1,\ldots,c_N\}}(M_1).
+\end{equation}
+
+\section{Constraints}
+
+Utility is evaluated subject to:
+
+\begin{align}
+\text{reviews}_e &\leq B,\\
+\ba_{\mathcal{K}_e}(M_e)-\ba_{\mathcal{K}_e}(M_{e+1})
+&\leq \epsilon,\\
+\operatorname{Recall}_{\mathcal{R}_e}(M_e)-
+\operatorname{Recall}_{\mathcal{R}_e}(M_{e+1})
+&\leq \delta.
+\end{align}
+
+The registered values are $B=50$, $\epsilon=0.01$, and $\delta=0.02$.
+Transactions must also satisfy confirmation, graph, lineage, replay, rollback,
+and routing-fallback invariants.
+
+\section{Interface sufficiency}
+
+For adjacent stages $P\rightarrow C$, let $S_C$ be the sufficient statistics
+needed by consumer $C$ and $E_P$ be the evidence emitted by producer $P$. An
+interface mismatch exists when
+
+\begin{equation}
+S_C \nsubseteq E_P.
+\end{equation}
+
+The central candidate mismatch is clusterer-to-review: the producer emits dense
+core members and persistence, while the adapter needs support over modes,
+covariance directions, and parent-boundary regions. The experiments compare
+review policies that alter $E_P$ at fixed cost.
+
+\section{Registered decisions}
+
+The pivotal utility-selected policy advances only if its mean gain over core
+selection is at least 5 points, the paired 95\% bootstrap lower bound is above
+zero, at least 7/9 cells are positive, and all safety and transaction
+constraints pass. The 5-point operand is a practical effect threshold. It is
+not replaced by a positive confidence interval after results are known.
+
+\chapter{The \systemname\ System}
+
+\section{Design objectives}
+
+\systemname\ separates five concerns:
+
+\begin{enumerate}
+\item frozen representation;
+\item class-conditional support geometry;
+\item calibrated decision or rejection;
+\item versioned lifecycle operations; and
+\item evidence and reproducibility.
+\end{enumerate}
+
+This separation allows a head to fail predictive parity while its transaction
+machinery remains useful. It also permits a Gaussian or kNN mechanism to
+replace an SDF without weakening a systems claim.
+
+\section{Explicit class components}
+
+For a component with center $\mu$, orthonormal tangent basis $V\in
+\mathbb{R}^{d\times r}$, tangent variance vector $\lambda$, and isotropic
+residual variance $\sigma^2$, define
+
+\begin{equation}
+q(x)=
+\sum_{j=1}^{r}\frac{(v_j^\top(x-\mu))^2}{\lambda_j}
++
+\frac{\lVert(I-VV^\top)(x-\mu)\rVert_2^2}{\sigma^2}.
+\end{equation}
+
+The corresponding Gaussian log likelihood is
+
+\begin{equation}
+\log p(x\mid k)=-\frac{1}{2}
+\left[
+q(x)+\sum_{j=1}^{r}\log\lambda_j+
+(d-r)\log\sigma^2+d\log(2\pi)
+\right].
+\end{equation}
+
+The volume terms are essential for cross-class comparison. A raw field that
+captures coverage can still be poorly calibrated for discrimination.
+
+\section{Immutable model bundles}
+
+A bundle records the representation identity, class order, components,
+readout, thresholds, router profile, parent hash, and schema version.
+Publication creates an immutable child rather than mutating the parent in
+place. Rollback changes the current pointer to the exact parent while retaining
+the full append-only history.
+
+\section{Review and confirmation}
+
+Rejected observations carry stable record IDs and representation lineage.
+Discovery produces persistent review IDs. Confirmation records reference those
+reviews and contain the authorized outcome. The adapter rejects missing,
+stale, or mismatched confirmation. This design prevents a coherent unlabeled
+cluster from silently becoming a semantic class.
+
+\section{Typed interfaces}
+
+The v8 protocol registers five interfaces:
+
+\begin{enumerate}
+\item rejector to buffer;
+\item buffer to clusterer;
+\item clusterer to review selector;
+\item review to adapter; and
+\item adapter to router.
+\end{enumerate}
+
+Seven versioned schemas encode endpoint evidence, episode replay, interface
+audits, threshold transfer, review selection, residual scope, and integrated
+routing. Six negative cases verify fail-closed behavior for leakage, stale
+class order, threshold mismatch, budget overflow, missing confirmation, and
+rollback-parent drift.
+
+\section{Research progression}
+
+The complete program is cumulative. Early studies tested primitive fitting,
+constructive operations, calibrated readouts, precision policies, scaling, and
+transactions. The thesis focuses on the progression most relevant to its
+questions:
+
+\begin{description}
+\item[v6/v6.1:] predictive competitiveness of explicit heads and lifecycle
+locality;
+\item[v7:] stage-wise open-world qualification and integrated composition;
+\item[v8:] adaptation utility, interface statistics, equal-budget review
+selection, and parent-scoped residuals.
+\end{description}
+
+Every milestone uses immutable parents and registered advancement gates.
+Failed gates close downstream branches rather than being silently redefined.
+
+\chapter{Evolution of the Research Methodology}
+
+\section{Why the methodological history matters}
+
+The final adaptation-utility protocol was not the initial methodology. It
+emerged after a sequence of increasingly restrictive experiments exposed
+different failure modes. Recording only the final protocol would hide why its
+endpoint, controls, and stopping rules exist. This chapter therefore separates
+the \emph{research process} from the final experimental methods.
+
+The progression can be summarized as:
+
+\begin{equation}
+\begin{aligned}
+\text{implementation correctness}
+&\rightarrow \text{geometric expressiveness}\\
+&\rightarrow \text{predictive competitiveness}\\
+&\rightarrow \text{stage qualification}\\
+&\rightarrow \text{lifecycle utility}.
+\end{aligned}
+\end{equation}
+
+Each transition occurred because the previous level proved necessary but
+insufficient. The methodology did not advance by treating every experiment as
+a success. Null, negative, blocked, and infeasible outcomes determined which
+questions were legitimate to ask next.
+
+\section{Phase I: implementation correctness and semantic tests}
+
+The recorded methodology begins with the repaired Tier-6 temporal baseline and
+M0 protocol lock, followed by M1 semantic correctness. The earliest methodology
+focused on whether the implemented geometric
+operations meant what their formulas and APIs claimed. These tests preceded
+performance comparisons because a predictive result is uninterpretable when
+the primitive semantics are wrong.
+
+The test families included:
+
+\begin{itemize}
+\item seeded-RNG ownership tests, which removed dependence on ambient NumPy
+state;
+\item normalized-softmin conservation tests, which detected an exact
+$\log(4)/2$ field shift under pruning;
+\item finite-difference gradient tests for hard constructive operations;
+\item scalar-versus-vectorized optimizer parity;
+\item CPU-versus-OpenCL numerical parity;
+\item serialization and constructor smoke tests; and
+\item numerical audits of approximate ellipsoid distance.
+\end{itemize}
+
+The ellipsoid audit established an important claim boundary. The implemented
+radial correction is exact for spheres but can deviate substantially for
+eccentric ellipsoids. Terminology was therefore narrowed from an exact metric
+distance claim to an implemented first-order correction. This pattern---test a
+semantic claim, then restrict the claim when the test fails---became a core
+methodological rule.
+
+\section{Phase II: M0--M4 baseline construction and causal ablation}
+
+M0 froze experiment configurations,
+dataset manifests, array fingerprints, seeds, split policies, resource
+accounting, and deterministic smoke artifacts. The purpose was to make later
+comparisons traceable to identical inputs.
+
+M2 then decomposed geometric fitting from decision readout. Geometry and
+calibration used disjoint data. Five readouts were compared on the same fitted
+artifact. Temperature scaling left accuracy unchanged at 84.69\% while
+reducing NLL from 1.48 to 0.50 and ECE from 0.60 to 0.03; multinomial readout
+added 0.19 accuracy points and reduced NLL to 0.49. This established that
+field quality and probability calibration had to be measured separately.
+
+M3 introduced eight matched classical baselines over identical transformed
+features and split hashes. Over five seeds, logistic regression reached
+84.02\%, RBF SVM 84.00\%, and the GEODE multinomial readout 83.11\%.
+The methodology thereafter required same-representation controls rather than
+comparing against unrelated published numbers.
+
+Early causal ablations examined additive geometry, held-out subtractive
+excision, and active repair. Subtractive constructive geometry showed null or
+slightly negative aggregate effects, and active repair generated no accepted
+candidates. The methodology therefore stopped treating more expressive CSG as
+automatically beneficial. Subtraction remained opt-in rather than becoming a
+default source of unmeasured complexity.
+
+The testing strategy expanded from unit semantics to:
+
+\begin{itemize}
+\item matched ablations with identical representations and budgets;
+\item seed-level and pooled paired intervals;
+\item corruption and leakage fixtures;
+\item runtime, memory, and serialized-state accounting; and
+\item append-only evidence manifests.
+\end{itemize}
+
+\section{Phase III: M5--M7 stress, sequence, and uncertainty studies}
+
+M5 asked whether alternative high-dimensional fitters improved robustness
+under fixed budgets. Seven synthetic fitters passed through a synthetic gate,
+a five-seed Tier-4 screen, and a locked Tier-5 confirmation. A shrinkage
+candidate gained 0.75 points on the selection screen but lost 1.56 points on
+confirmation, used 4.4 times as many primitives, and took 3.2 times longer.
+The current fitter was retained. This result motivated confirmation stages and
+resource co-primary metrics.
+
+M6 tested whether explicit geometric state could represent temporal context.
+Exact, reservoir, ensemble, and hybrid causal representations were compared
+through periodic synthetic gates, train-only tuning, and a locked
+50,000/10,000 WikiText episode. GEODE reached 30.36\%, below a linear model at
+34.64\%, a matched 5-gram at 44.50\%, and a practical 5-gram at 47.61\%.
+The result established representational flexibility, not competitive temporal
+learning.
+
+M7 expanded evaluation beyond top-1 accuracy to controlled shift, selective
+prediction, calibration, conformal diagnostics, and real CIFAR-100/SVHN OOD
+families. Maximum-probability AUROC reached 0.786 and 0.831 and exceeded the
+tested Mahalanobis and kNN scores, but FPR95 remained 0.579 and 0.431. The claim
+was restricted to relative ranking under the frozen fit.
+
+\section{Phase IV: M8--M10 editability, scaling, and open-set inference}
+
+M8 combined corruption tests, seed-stability tests, explicit insertion and
+deletion, rollback, and online updates. Broad robustness was rejected, while
+predictions remained 93.0\% seed-agreeing despite primitive drift. Behavioral
+edit gates showed that insertion, deletion, and rollback could be local and
+reversible in the tested setting.
+
+M9 measured editability rather than assuming that compact artifacts scaled.
+One-factor sweeps varied class count, dimension, and primitives per class over
+five repeats with operation counters. Locality gates passed and insertion
+stayed below 0.18 ms, but exhaustive inference and dense 128-dimensional
+snapshots exposed bounded scaling costs.
+
+M10 introduced support profiles, abstention, and leave-class-out selection in
+a locked three-episode toy matrix. No score, threshold, and geometry
+combination jointly reached 90\% known coverage and 50\% unknown recall across
+all episodes. The experiment showed that calibrated closed-set scores did not
+automatically produce reliable open-set inference.
+
+\section{Phase V: M11 discovery methodology}
+
+M11 was not one experiment but a long methodological sequence on accumulated
+unsupported observations. It began with bounded evidence, automatic
+clustering, stable review IDs, and confirmation-gated adaptation. Initial
+studies exposed category merging and fragmentation, after which the sequence
+tested:
+
+\begin{itemize}
+\item DBSCAN flag budgets and radius selection;
+\item HDBSCAN under variable-density hypotheses;
+\item PCA versus normalized raw MobileNet representations;
+\item corrected evaluation on the final accumulated partition rather than the
+first review snapshot;
+\item larger accumulation windows;
+\item FINCH without a supplied group count;
+\item DenStream-style fading micro-clusters;
+\item silhouette-selected $k$-means;
+\item transductive joint PCA;
+\item delayed must-link and cannot-link metric learning;
+\item COBRAS-style split and merge feedback;
+\item answer-blind active pair queries;
+\item missing, flipped, and contradictory-answer stress tests;
+\item independent confirmation of pairwise answers;
+\item 450-observation lower-tail reliability studies at each error rate; and
+\item a ResNet-18 representation control.
+\end{itemize}
+
+The evaluation boundary itself evolved. Early group metrics used first-review
+snapshots, which did not match the operational goal. M11.26 separated online
+review delay from autonomous partition quality and evaluated the complete
+flagged buffer, including noise. Under the corrected protocol, the retained
+normalized-MobileNet HDBSCAN policy reached 61.1\% distinct-group recall,
+79.8\% purity, and full two-group recovery in 4/9 cells, but noise-inclusive
+adjusted Rand index was only 0.059.
+
+Feedback studies showed positive mean improvements but weak lower-tail safety.
+At 12.5\% respondent error, independently confirmed constraints still accepted
+harmful constraints in 10.44\% of observations; fifth-percentile ARI change was
+negative. Constraints therefore remained analysis-only and unpersisted.
+M11.40 closed the sequence by retaining only the automatic review-grouping
+policy and prohibiting autonomous mutation.
+
+\section{Phase VI: M12 routing and scaling methodology}
+
+M12 began with one-factor synthetic sweeps over classes, dimensions, primitive
+counts, and batch size. Exhaustive inference exhibited approximately linear
+latency growth in class and primitive count. Subsequent iterations tested:
+
+\begin{itemize}
+\item conservative support-sphere lower bounds with exact early stopping;
+\item grouped active sample-class evaluation;
+\item incumbent initialization;
+\item nearest-neighbor indexes over support centroids;
+\item greedy primitive removal;
+\item disjoint confirmation streams for tentative pruning; and
+\item a complete exit audit with counters, agreement, fallback, and latency.
+\end{itemize}
+
+Some candidates preserved exact predictions, but they either evaluated too
+much of the exhaustive class set, failed normalized-score requirements, or did
+not improve tail latency. The methodology therefore rejected operation-count
+improvement as sufficient evidence for production routing.
+
+\section{Phase VII: M13--M15 primitive and field semantics}
+
+M13 reopened primitive-family comparisons under matched full-covariance,
+diagonal-covariance, and trace-matched spherical fits, including
+primitive-aware OpenCL paths and the full additive/excision/repair matrix.
+Spherical additive geometry reached 83.80\%, 0.463 points above diagonal, but
+subtraction again added no benefit and remained disabled.
+
+M14 reinterpreted frozen covariance primitives as hierarchical Gaussian
+mixtures. Proper probabilistic fields substantially improved NLL and ECE but
+not accuracy; for example, sphere multinomial NLL improved from 0.4847 to
+0.4772 while accuracy moved by $-0.15$ points. This reinforced the separation
+between calibration and classification.
+
+M15 tested auditable fusion of geometric and probabilistic field scores.
+Global and per-class covariance temperatures and hybrid readouts were fit under
+a matched five-seed protocol. Hybrid NLL improved over either field-only input
+within the accuracy tolerance, but a feature-space logistic control remained
+better. These findings motivated the later use of strong substitutable controls
+instead of making explicit-field identity the endpoint.
+
+\section{Phase VIII: E0--E11 systems qualification before research claims}
+
+The project next added resumability, content-addressed bundles, compatibility
+validation, activation, and rollback. This phase did not claim predictive
+superiority. Its question was whether experiments and model changes could
+survive interruption and be reproduced exactly.
+
+Failure-injection tests covered:
+
+\begin{itemize}
+\item class-fitting interruption and partial-class replacement;
+\item optimizer, momentum, scheduler, scaler, and RNG restoration;
+\item per-epoch cursor and distributed-sampler restoration;
+\item incompatible worker-topology rejection;
+\item corrupted bundle and fingerprint mismatch rejection;
+\item failed canaries and coordinator loss; and
+\item deterministic JSON/CSV history export.
+\end{itemize}
+
+These tests established the parent-child transaction model later used for
+adaptation. They also established a distinction that persists throughout the
+thesis: a mechanism may qualify operationally without qualifying
+predictively.
+
+\section{Phase IX: v5 metric and representation falsification}
+
+The v5 methodology introduced versioned stages, deterministic factorial
+registries, lineage guards, paired statistics, Pareto comparisons, and
+canonical result artifacts. Ten representation-by-head cells replayed
+byte-identically, while a deliberate split mismatch failed closed.
+
+Six precision families---spherical, diagonal, full, low-rank, shared, and
+policy-selected variants---were then tested. The adaptive metric-support policy
+lost 0.323 balanced-accuracy points and reduced neither parameter bytes nor
+deterministic fitting work. Both predictive and efficiency gates failed.
+
+This negative result changed the research strategy. Rather than adding more
+unregistered metric flexibility, the next program locked a strong
+representation and matched controls, then asked which geometric choices could
+close a measured predictive gap.
+
+\section{Phase X: v6 predictive methodology}
+
+\subsection{Locked parent and cheap falsification}
+
+M27 froze parent evidence, baseline predictions, teacher lineage, primitive
+budgets, and three evaluation seeds. The methodology used an S1 cheap
+falsification stage before the more expensive S2 confirmation stage.
+
+Boundary distillation into component-matched spheres was the first candidate.
+It reached only 79.80\% development accuracy, 6.30 points below the retained
+explicit model, and stopped at S1 despite exact replay. This rejected the
+hypothesis that imitating the RBF boundary with the existing primitive family
+was sufficient.
+
+\subsection{Subspaces and directional geometry}
+
+Ranked affine-subspace primitives were introduced next. Rank-32 radial scoring
+reached 89.00\%, improving the prior explicit head by 2.90 points and passing
+the cheap gate. Spherical caps then tested whether directional geometry
+explained additional error. Cosine caps beat matched Euclidean spheres by
+3.97 points over seeds 11, 23, and 37, with a positive seed-level interval.
+
+These results supported two intermediate conclusions: frozen deep features
+contain useful low-rank and directional structure, and primitive choice matters.
+They did not establish parity with the discriminative control.
+
+\subsection{Identifiable factorial and parity stopping rule}
+
+M31 crossed objective, primitive, score, and budget factors in an identifiable
+fractional factorial. The direct rank-32 radial family reached 90.77\%, but
+remained 6.00 points behind the RBF SVM. Because the registered parity operand
+failed, downstream parity-rescue branches closed.
+
+The v6.1 amendment allowed only bounded, mechanistically motivated tests:
+tangent caps, constrained nonnegative weights, a component-budget diagnostic,
+an independent locality frontier, and a separate few-shot feasibility track.
+Weighted affine readout improved the explicit model to 91.73\%, but the final
+5.03-point RBF deficit still exceeded the 2-point gate. The predictive program
+ended with Outcome D rather than extending the search indefinitely.
+
+\section{Phase XI: lifecycle claims separated from accuracy claims}
+
+The A3 edit suite tested 24 explicit transactions. Every transaction rolled
+back exactly, but unaffected-prediction preservation fell to 84.2\% against a
+99.9\% locality contract. This result showed that exact rollback and local
+forward behavior are different properties.
+
+The Flowers few-shot track separately tested feasibility. Rank-3 fitting was
+possible with five examples per class and replayed exactly; rank 32 required
+34 examples per class and was declared infeasible rather than estimated from
+insufficient support. This introduced a further methodological category:
+\emph{infeasible} is distinct from \emph{failed}.
+
+\section{Phase XII: v7 stage-wise open-world methodology}
+
+With predictive parity closed, the research question changed. The claim was no
+longer that explicit geometry matches an RBF classifier. It became whether an
+auditable open-world loop could qualify stage by stage and compose.
+
+M38 preregistered the claim boundary, immutable parents, schedule families, and
+semantic authority rules. M39 compared six matched rejection heads and retained
+the low-rank Gaussian, demonstrating that the system claim did not depend on
+retaining an SDF. M40 compared five grouping policies. M41 tested confirmation-
+gated updates. M42 tested empirical routing against exhaustive authority.
+M43 then admitted only stage-passing mechanisms into the integrated factorial.
+
+This sequential retention design reduced researcher degrees of freedom:
+
+\begin{enumerate}
+\item a mechanism had to pass its local gate before composition;
+\item failed routing remained shadow-only;
+\item semantic publication always required confirmation;
+\item integrated failure blocked untouched confirmation; and
+\item stage evidence could not be relabeled as lifecycle evidence.
+\end{enumerate}
+
+The final composition failure changed the methodology again. Purity,
+unknown-recall, and isolated target-gain gates had all appeared successful, but
+the composed loop integrated no grouped class.
+
+\section{Phase XIII: v8 endpoint redesign}
+
+The v8 program was registered as a new claim rather than a rescue of v6.1 or
+v7. Its guiding change was to replace per-stage advancement as the primary
+criterion with post-integration adaptation utility at a fixed review budget.
+
+M45 formalized interface contracts and six fail-closed mismatch tests. M46
+tested threshold transfer and audited sufficient statistics. M47 compared six
+review policies over nine paired cells. M49 independently tested whether
+parent-scoped fusion repaired locality.
+
+The pivotal design included explicit kill switches. M48 learned selection and
+M50 untouched lifecycle qualification could run only if M47 passed practical,
+statistical, safety, and transactional gates. M47 produced a consistent
+positive effect but failed the practical and safety operands. The downstream
+branches therefore remained closed.
+
+\section{Phase XIV: the joint-budget scaling frontier}
+
+The final programme phase moved from the stage-wise open-world setting to a
+controlled measurement of the frozen patch-dictionary classifier's scaling
+behaviour. The system under study is a deterministic encoder (whitened patch
+dictionary plus pooling) feeding a closed-form ridge head --- no learned
+backbone, no iterative optimisation. Two resources are available: dictionary
+size (the width of the head's feature space) and training data. All results
+are registered before measurement, gated by kill switches, anchored by exact
+reproduction of prior sealed numbers, and compared at matched per-image
+multiply-accumulate cost on a fixed 34{,}500-row DomainNet test set.
+
+The central finding rescinds an earlier negative. The single-stage accuracy
+``ceiling'' was a slice artifact: measured on the two-dimensional
+(dictionary-size $\times$ data) surface, the family is super-additive ---
+scaling both axes jointly beats the sum of scaling either axis alone
+(measured excess +0.0097/+0.0101 over a +0.005 margin), and 6{,}144-atom
+dictionaries reach 0.2249 at full data versus 0.2153 at 3{,}072 atoms. The
+compute is data-elastic: wider heads consume data more productively, with
+per-atom learning-curve steepness rising 0.094, 0.115, 0.134 across the atom
+ladder. The fitted learning-rate exponent is width-independent (gamma about
+$-0.012$), so data-elasticity is an absolute-gain effect, not a faster rate.
+
+Two structural limits were then measured. First, the atoms axis saturates:
+extending the dictionary past about 6{,}144 atoms at full data yields a flat,
+slowly declining ridge (0.2246 to 0.2205 from 6{,}144 to 16{,}384 atoms), so
+the remaining lever is data, not dictionary size. Second, the gap to a frozen
+DINOv2 trunk (0.22 versus 0.54 at the large end) is structural: the code
+space is dominated by a fixed eight-dimensional structure (effective rank
+7.8, flat across all dictionary sizes), and the correct class loses the
+argmax for roughly 78\% of test samples --- accuracy lives in a thin
+positive-margin tail. A spectral margin certificate was registered and
+failed (it cannot predict the argmax crossing) and is retained as an
+explanatory diagnostic only.
+
+The v19 phase closed four routes (closed-form depth, accuracy-preserving
+binary codes, spectral certificates, and dictionary growth past 6{,}144
+atoms) and opened one: the data axis, which is the steep one and the only
+remaining joint-budget lever. A follow-on engineering track (v20) measured
+the system-architecture implications: contract-gated routing of programmatic
+primitives rejects out-of-contract inputs with zero learned forward passes
+while preserving in-contract accuracy, and a fully programmatic variable-
+order memory (the ``how far back'' dial) shows a measured perplexity optimum
+as a next-token model on a constrained DSL, with footprint growing sharply
+past the optimum window. Details and reproduction steps are in the sealed
+evidence (\texttt{RESEARCH\_REPORT\_v19}, \texttt{ENGINEERING\_PLAN\_v20}).
+
+\section{Experiment and test ledger}
+
+Table~\ref{tab:evolution-ledger} records the principal hypothesis-driven
+experiments that led to the final thesis. ``Tests'' denotes focused regression
+tests attached to that milestone where recorded; factorial cells and seeds are
+reported separately because they are experimental observations, not software
+unit tests.
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{0.6in}
+>{\raggedright\arraybackslash}p{1.45in}
+>{\raggedright\arraybackslash}p{0.9in}
+>{\raggedright\arraybackslash}p{1.95in}}
+\caption{Evolution of the principal methodology and tests.}
+\label{tab:evolution-ledger}\\
+\toprule
+\textbf{Stage} & \textbf{Question or intervention} & \textbf{Design} &
+\textbf{Decision}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Stage} & \textbf{Question or intervention} & \textbf{Design} &
+\textbf{Decision}\\
+\midrule
+\endhead
+Tier 6 & Repair temporal state, calibration, and GPU semantics & WikiText real
+run and pipeline benchmark & Established 23.91\% isolated and 23.35\% pipeline
+baselines; no broad sequence claim.\\
+M0 & Freeze protocols, hashes, manifests, and resource counts & Canonical
+configs and smoke artifacts & Reproducible evidence base; no accuracy claim.\\
+M1 & Are primitive semantics and implementations correct? & 28 then 34 fast
+tests & RNG, pruning, CSG gradients, and CPU/GPU parity repaired.\\
+M2 & How much error belongs to calibration versus geometry? & 5 readouts on one
+split & Temperature and multinomial readouts sharply improved NLL/ECE.\\
+M3 & How does GEODE compare on identical features? & 8 baselines $\times$ 5
+seeds & GEODE trailed logistic by 0.91 points.\\
+M4 & Do subtractive CSG and active repair help causally? & 3 ablations $\times$
+5 seeds & Intervals included zero; active repair added no candidates.\\
+M5 & Which high-dimensional fitter survives confirmation? & 7 fitters; Tier-4
+screen and Tier-5 lock & Screen winner reversed on confirmation; current fitter
+retained.\\
+M6 & Can explicit state model temporal context competitively? & Synthetic gates
+and 50k/10k WikiText & Flexibility shown; linear and n-gram controls won.\\
+M7 & Are confidence and OOD scores reliable? & Controlled shift plus
+CIFAR-100/SVHN & Relative score ranking established; FPR95 limited claim.\\
+M8 & Are models robust, stable, and behaviorally editable? & 5-seed corruption,
+stability, edit tests & Broad robustness rejected; tested edits reversible.\\
+M9 & How does editability scale? & Class, dimension, and primitive sweeps; 5 repeats &
+Locality passed; exhaustive and snapshot costs exposed.\\
+M10 & Can calibrated scores support open-set inference? & 3 locked episodes &
+No cell passed known and unknown gates jointly.\\
+M11 & Can accumulated rejects form safe persistent groups? & 40 iterative
+studies and closure audit & Partial group recovery; semantics and mutation
+remained human-gated.\\
+M12 & Can exact routing become sublinear and faster? & 8 scaling, bound,
+indexing, pruning, and audit iterations & Exact candidates did not satisfy
+score, work, and tail-latency requirements jointly.\\
+M13 & Which primitive family and CSG policy helps? & 5-seed CPU screen and
+15-cell GPU matrix & Sphere additive retained; subtraction again null.\\
+M14 & Do probabilistic field semantics improve calibration? & Matched
+CPU and OpenCL comparisons & NLL and ECE improved; accuracy did not.\\
+M15 & Does geometric/probabilistic fusion help? & 5-seed matched readouts;
+179-test gate & Hybrid NLL improved; feature logistic remained better.\\
+E0--E2 & Can interrupted research resume exactly? & 19 focused tests growing
+to a 187-test gate & Feature, class, optimizer, sampler, RNG, and history state
+recovered exactly.\\
+E3--E4 & Can bundles and a real CIFAR lifecycle qualify? & 192 then 196 tests &
+Bundle lifecycle passed; CIFAR non-inferiority passed with weak near-OOD FPR95.\\
+E7 & Can distributed DomainNet execution qualify? & 3 logical nodes; 192-image
+episode & Local recovery passed; physical multi-host gate remained blocked.\\
+E10--E11 & Can serving recover and public artifacts reproduce? & Fault
+rehearsal and 30 frozen inputs & 1-second RTO/zero-request RPO passed; five
+outputs reproduced byte-identically.\\
+M16 & Can the protocol replay and reject split drift? & 10 cells; 15 tests &
+Byte-identical replay; deliberate split mismatch rejected.\\
+M18 & Do adaptive precision families improve accuracy or cost? & 6 families;
+13 tests & Lost 0.323 points; no resource reduction; stopped.\\
+M27 & Can v6 begin from immutable matched parents? & 3 heads; 254-test full
+gate & Parents, predictions, teacher, and budgets locked.\\
+M28 & Can RBF boundaries be distilled into matched spheres? & S1; 4 tests &
+79.80\%; 6.30 points below parent; stopped.\\
+M29 & Do low-rank affine subspaces help? & Rank sweep; 6 tests & Rank-32 radial
+gained 2.90 points; advanced.\\
+M30 & Does directional geometry matter? & 3 seeds; 6 tests & Cosine exceeded
+Euclidean by 3.97 points; mechanism retained.\\
+M31 & Which factor family approaches parity? & 9 cells $\times$ 3 seeds &
+90.77\%, 6.00 points behind RBF; parity branches closed.\\
+A1-T & Do tangent-space caps rescue the model? & S1; 10 tests & Worse than
+affine control; stopped.\\
+A1-W & Does constrained component weighting help? & S1; 10 tests & Added 2.60
+points and reduced NLL; advanced.\\
+A1-B & Is more component capacity monotonic? & 8 tests & Peaked then declined;
+classified as unstable.\\
+A2 & Does weighting close parity on all seeds? & 3 seeds; 7 tests & 91.73\%,
+5.03 points behind RBF; Outcome D.\\
+A3 & Are edits local and reversible? & 24 transactions; 7 tests & Rollback
+exact; locality only 84.2\%.\\
+A4 & Is five-shot fitting feasible? & 2 rank tiers; 4 tests & Rank 3 feasible;
+rank 32 blocked by sample count.\\
+v6.1 final & Can conclusions replay without source data? & 7 indexes, 65
+artifacts; 5 tests & 11 conclusions reproduced byte-identically.\\
+M38 & Are v7 claims, parents, and schedules frozen? & 3 schedule families; 10
+tests & Protocol and prior-art boundary locked.\\
+M39 & Which rejection head passes matched gates? & 6 heads $\times$ 3 seeds &
+Only rank-32 Gaussian retained.\\
+M40 & Which grouping policies create stable review objects? & 5 policies; 15
+cells & HDBSCAN primary; FINCH control.\\
+M41 & Which confirmed updates are safe? & 24 operation cells & New-class
+rank-16 insertion retained.\\
+M42 & Can empirical routing become authoritative? & 4 profiles; 12 cells & No;
+routing remained shadow-only.\\
+M43 & Do retained stages compose? & 36 factorial cells & Grouped arms integrated
+0/3 classes; Outcome C.\\
+v7 final & Can Outcome C replay artifact-only? & 6 indexes, 16 artifacts &
+8 conclusions reproduced twice.\\
+M45 & Can interfaces fail closed? & 7 schemas; 6 mismatch cases; 11 tests & All
+registered mismatches rejected.\\
+M46 & Do thresholds transfer and cores represent support? & 4 rules; 3 seeds;
+5 tests & Anchor quantile retained; core support defect identified.\\
+M47 & Does utility selection beat core at equal budget? & 6 policies; 54 arm
+cells; 3 tests & Positive 9/9, but practical and safety gates failed.\\
+M49 & Can parent-scoped residuals repair locality and utility? & 2 attempts; 2
+tests & 100\% locality; no residual retained.\\
+v8 final & Can Outcome D replay artifact-only? & 4 indexes, 11 artifacts; 1
+test & 6 conclusions reproduced twice without data access.\\
+\bottomrule
+\end{longtable}
+
+\section{Test taxonomy}
+
+The test count alone does not characterize the evidence. The final 374-test
+repository gate combines several distinct test classes:
+
+\begin{description}
+\item[Semantic unit tests] verify equations, normalization, gradients, shapes,
+and deterministic RNG behavior.
+
+\item[Property and invariant tests] verify conservation, orthonormality,
+monotonic fail-closed rules, graph consistency, and immutable class order.
+
+\item[Parity tests] compare scalar and vectorized implementations, CPU and GPU
+paths, and pre- and post-serialization predictions.
+
+\item[Failure-injection tests] interrupt fitting, corrupt bundles, alter
+fingerprints, remove confirmation, stale thresholds, exceed budgets, or lose
+workers and coordinators.
+
+\item[Leakage tests] reject split mismatch, partition overlap, use of
+validation examples as adaptation support, and final-label access.
+
+\item[Lifecycle tests] exercise publication, child lineage, pointer changes,
+rollback, stale-profile fallback, and audit history.
+
+\item[Statistical tests] implement paired comparisons, bootstrap intervals,
+seed consistency, and practical effect gates.
+
+\item[Artifact-replay tests] recompute frozen conclusions from indexed JSON
+without loading training data or opening sealed labels.
+\end{description}
+
+Software tests establish implementation and evidence integrity; they do not
+replace experimental replication. Conversely, repeated experimental cells do
+not prove that transaction and leakage invariants are implemented correctly.
+The methodology deliberately requires both.
+
+\section{How negative results shaped the final design}
+
+The main methodological changes can be traced directly to failures:
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{1.85in}
+>{\raggedright\arraybackslash}p{3.35in}}
+\toprule
+\textbf{Observed failure} & \textbf{Resulting methodological change}\\
+\midrule
+\endhead
+CSG subtraction was null or negative & Keep subtraction opt-in and require
+causal matched ablations.\\
+Adaptive metric support reduced neither error nor cost & Stop adding metric
+flexibility without a registered utility hypothesis.\\
+Explicit heads remained behind RBF & Treat acceptance heads as substitutable;
+separate editability from predictive superiority.\\
+Rollback passed while locality failed & Register locality independently and
+freeze affected regions from the parent.\\
+Strong stages failed to compose & Replace stage metrics with adaptation
+utility as the primary endpoint.\\
+Pure cores failed adaptation & Audit producer-consumer sufficient statistics
+and compare representative review policies.\\
+Utility gain harmed unknown recall & Make remaining-unknown recall a binding
+lifecycle constraint.\\
+Positive interval missed practical threshold & Preserve Outcome D and block
+post-hoc learned selection and untouched confirmation.\\
+\bottomrule
+\end{longtable}
+
+\section{Methodological maturity}
+
+The methodology matured from exploratory implementation to preregistered
+falsification. Early experiments discovered semantics and established
+baselines. Later programs froze parents, controls, budgets, seeds, effect-size
+thresholds, safety constraints, and branch dependencies before evaluation.
+This evolution reduces flexibility but strengthens the interpretation of a
+negative result.
+
+The final thesis is therefore not a report of one successful algorithm. It is
+a documented sequence of hypotheses in which each retained conclusion is tied
+to a testable gate, and each stopped branch remains part of the scientific
+record.
+
+\chapter{Stage-Wise Open-World Study}
+
+\section{Data and representation}
+
+The realized experiment uses immutable 384-dimensional CLS-token features from
+DINOv2-small \cite{oquab2024} on CIFAR-10. Each frozen seed contains 10,000
+training and 1,000 development examples. Seeds are 11, 23, and 37. In the v7
+leave-two-class-out protocol, classes 0--7 are known, class 8 is confirmable,
+and class 9 remains unknown.
+
+Broader CIFAR-100 and DomainNet tracks described in earlier planning were not
+executed in this chain and are not presented as evidence. Final confirmation
+labels remained sealed after the integrated gate failed.
+
+\section{Acceptance-head comparison}
+
+Six heads share the same representation and fitting data:
+
+\begin{enumerate}
+\item multinomial maximum posterior;
+\item 1-nearest-support distance;
+\item rank-32 class-conditional Gaussian;
+\item EVM-style Weibull margin approximation;
+\item weighted affine support; and
+\item sigmoid-calibrated RBF SVM evidence.
+\end{enumerate}
+
+A stratified train-only calibration split selects the novelty threshold at
+approximately 92\% known coverage. Retention requires at least 90\% known
+coverage and 50\% unknown recall on every seed, bounded known-accuracy loss,
+competitive review precision, corruption checks, and exact replay.
+
+\section{Persistent discovery}
+
+Rejected examples enter a bounded FIFO buffer of 2,000 records. Five
+deterministic windows compare no clustering, streaming centroid
+micro-clusters, HDBSCAN, FINCH, and silhouette-selected $k$-means. Groups need
+minimum size 10 and at least 70\% purity for scoring. A review ID persists when
+consecutive-window member overlap is at least 50\%.
+
+Discovery advancement requires category recovery, review precision, stable
+identities, replay, bounded resources, and no semantic publication.
+
+\section{Confirmation and adaptation}
+
+A deterministic oracle simulates delayed human confirmation while preserving
+the authority boundary. Outcomes are existing class, new class,
+corruption/irrelevant, or unresolved. Operations include no update, native
+Gaussian update, rank-16 affine insertion, full class-local refit, and a
+full-retraining control.
+
+New-class adaptation uses 50 confirmed supports. Passing requires at least
+5 points of target gain, at most 1 point of known regression, at most 2 points
+of remaining-unknown loss, stable NLL, graph validity, confirmation lineage,
+replay, and rollback.
+
+\section{Routing}
+
+Three independently owned bundles have class orders $\{0,1,2,3\}$,
+$\{4,5,6,7\}$, and $\{8\}$. Profiles include centroids and radii, rank-16
+Gaussians, compact prototypes, and undercomplete autoencoders. Structural
+fingerprints determine compatibility. Empirical profiles shortlist two
+bundles.
+
+Authority requires at least 99\% correct-bundle top-1, 99.9\% exhaustive-winner
+inclusion and final agreement, 95\% no-confident-route recall, 25\% exact-model
+evaluation reduction, lower tail latency, exact update replay, and complete
+stale-profile fallback.
+
+\section{Integrated factorial}
+
+Only retained mechanisms enter the integrated study: rank-32 Gaussian
+rejection, HDBSCAN or FINCH discovery, delayed confirmation, rank-16 insertion,
+and exhaustive routing. A no-grouping review-everything arm is retained as a
+burden control. The grouped review budget is 50.
+
+The integrated gate requires at least 75\% of confirmable classes integrated,
+25\% review reduction, known and unknown preservation, no unconfirmed
+publication, and all transaction contracts.
+
+\chapter{Adaptation-Utility Study}
+
+\section{Episode replay}
+
+The v8 study begins with classes 0--5 and introduces classes 6, 7, and 8 in
+order for each of the three seeds, producing nine seed-by-arrival cells. Class
+9 remains unknown. Each class is deterministically partitioned into geometry,
+anchor, review-candidate, and proxy-validation subsets.
+
+The proxy-validation subset scores a frozen candidate review set but never
+becomes adaptation support. Each episode records partition hashes, class order,
+selected IDs, confirmation IDs, thresholds, parent and child hashes, utility,
+safety metrics, and rollback evidence.
+
+\section{Threshold-transfer experiment}
+
+Adding a class changes score competition. Four rules are compared:
+
+\begin{enumerate}
+\item frozen pre-integration threshold;
+\item class-count heuristic;
+\item global anchor-quantile recalibration; and
+\item per-class anchor thresholds under a global fail-closed ceiling.
+\end{enumerate}
+
+The experiment consumes no review labels. Stale anchor lineage never lowers
+confidence and restores the parent threshold. The selected rule must preserve
+known accuracy and remaining-unknown recall over all three seeds.
+
+\section{Sufficient-statistics audit}
+
+The audit measures whether discovery outputs represent the candidate region.
+Frozen features include:
+
+\begin{itemize}
+\item distance to cluster center;
+\item distance to the parent decision boundary;
+\item low-rank subspace coverage;
+\item covariance trace ratio;
+\item omitted-region nearest-neighbor coverage; and
+\item class-mode coverage.
+\end{itemize}
+
+The audit also ranks measured interface mismatches by failure frequency,
+estimated utility, and implementation cost.
+
+\section{Equal-budget review policies}
+
+All eligible arms receive 50 labels:
+
+\begin{description}
+\item[Core-selected:] nearest examples to the candidate center.
+\item[Boundary-inclusive:] deterministic mixture of core, modes, and
+parent-boundary quantiles.
+\item[Coverage-selected:] farthest-first $k$-center support.
+\item[Utility-selected:] deterministic subsets ranked by a rank-3 proxy adapter
+on the disjoint validation partition.
+\item[Random-stratified:] seeded sampling over two candidate modes.
+\item[Review-everything:] all 300 candidates; diagnostic and ineligible.
+\end{description}
+
+The production adapter remains rank 16. All candidates in this controlled
+study belong to the arriving class, fixing purity at 100\% and isolating
+representativeness.
+
+\section{Statistical analysis}
+
+The primary comparison is paired by seed and arrival class. Mean utility
+difference is accompanied by a deterministic 10,000-resample paired percentile
+bootstrap interval. Cell signs are reported because a mean can conceal
+schedule-specific failures. Advancement requires practical effect, interval,
+cell consistency, and safety jointly.
+
+\section{Local residual branch}
+
+Two residual families are preregistered:
+
+\begin{enumerate}
+\item local target-class temperature; and
+\item bounded class-local affine correction.
+\end{enumerate}
+
+The parent freezes the affected region before fitting using selected support,
+a bounded nearest-neighbor radius, and component responsibility. Fusion is
+gated by this parent-only mask. Passing requires 5 points of utility gain,
+99.9\% unaffected-prediction preservation on every seed, known and unknown
+safety, local update work, replay, and rollback. At most two attempts are
+allowed.
+
+\chapter{Results}
+
+\section{Predictive competitiveness of explicit heads}
+
+The v6.1 weighted rank-32 affine head reaches 91.73\% balanced accuracy,
+improving its retained explicit predecessor by 0.97 points. The matched RBF SVM
+reaches 96.77\%, leaving a 5.03-point gap and failing the registered 2-point
+parity operand. A direct radial family peaks and then deteriorates as component
+budget increases, indicating instability rather than monotonic capacity gain.
+
+\begin{table}[ht]
+\centering
+\caption{Selected predictive results under frozen DINOv2 features.}
+\label{tab:predictive}
+\begin{tabular}{lrr}
+\toprule
+Head & Balanced accuracy & Difference from RBF \\
+\midrule
+Weighted affine rank 32 & 91.73\% & $-5.03$ points\\
+Direct radial rank 32 & 90.77\% & $-6.00$ points\\
+RBF SVM control & 96.77\% & ---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All lifecycle and replay gates pass for the selected explicit head. The result
+answers RQ1 negatively for predictive parity but positively for deterministic,
+editable artifact behavior. Editability is not evidence of accuracy
+leadership.
+
+\section{Acceptance-head results}
+
+The low-rank Gaussian is the only v7 acceptance head to pass every autonomy and
+review gate.
+
+\begin{table}[ht]
+\centering
+\caption{Three-seed mean acceptance-head results.}
+\label{tab:acceptance}
+\scriptsize
+\begin{tabular}{lrrrrc}
+\toprule
+Head & Coverage & Unknown recall & AUROC & Review precision & Retained\\
+\midrule
+Max posterior & 91.38\% & 60.17\% & 0.9053 & 69.33\% & No\\
+kNN support & 91.83\% & 67.00\% & 0.9045 & 86.67\% & No\\
+Low-rank Gaussian & 92.08\% & 86.17\% & 0.9561 & 98.67\% & Yes\\
+EVM-style margin & 100.00\% & 0.00\% & 0.5102 & 22.00\% & No\\
+Weighted affine & 90.75\% & 53.00\% & 0.8763 & 64.67\% & No\\
+RBF evidence & 93.08\% & 12.83\% & 0.4010 & 31.33\% & No\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This result reinforces the distinction between geometric coverage and
+calibrated discrimination. Proper density is retained over raw affine support.
+
+\section{Discovery results}
+
+\begin{table}[ht]
+\centering
+\caption{Persistent discovery results.}
+\label{tab:discovery}
+\begin{tabular}{lrrrc}
+\toprule
+Policy & Group recall & Review precision & Full cells & Pass\\
+\midrule
+No clustering & 0.00\% & 0.00\% & 0/9 & No\\
+Micro-clusters & 0.00\% & 98.67\% & 0/9 & No\\
+HDBSCAN & 100.00\% & 100.00\% & 9/9 & Yes\\
+FINCH & 83.33\% & 86.39\% & 8/9 & Yes\\
+$k$-means & 100.00\% & 98.67\% & 9/9 & Yes\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+HDBSCAN and FINCH produce stable review objects and pass stage gates. The
+micro-cluster result shows that sample-level review precision does not imply
+separation of distinct unknown classes.
+
+\section{Isolated adaptation and routing}
+
+Confirmed rank-16 insertion raises held-out class-8 success by 42\%, 52\%,
+and 36\% across seeds, a 43.33-point mean gain. Known accuracy and
+remaining-unknown recall remain within bounds, and all child bundles replay and
+roll back exactly.
+
+No routing profile qualifies for authority. Best top-1 is 93.53\%, best winner
+inclusion is 99.57\%, and best unknown fallback recall is 71.00\%. Profiles
+reduce exact model evaluations by approximately 50\%, but compute savings are
+not a safety result. Routing remains shadow-only.
+
+\section{Stage composition failure}
+
+\begin{table}[ht]
+\centering
+\caption{Integrated v7 delayed-confirmation results.}
+\label{tab:integrated}
+\begin{tabular}{lrrrr}
+\toprule
+Discovery & Integrated & Reviews & Review reduction & Unknown recall\\
+\midrule
+HDBSCAN & 0/3 & 50.00 & 78.78\% & 79.33\%\\
+FINCH & 0/3 & 15.33 & 93.49\% & 79.33\%\\
+Review everything & 3/3 & 235.67 & 0.00\% & 79.33\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Qualified HDBSCAN and FINCH loops integrate no confirmable classes. Reviewing
+all rejections integrates all three, but eliminates the human-budget advantage.
+Remaining-unknown recall is 6.83 points below the M39 stage baseline. All
+confirmation, graph, replay, rollback, and audit contracts pass. The failure is
+therefore one of utility and composition, not transaction correctness.
+
+\section{Threshold transfer}
+
+Frozen, class-count, and global anchor-quantile rules all preserve mean known
+accuracy and remaining-unknown recall in the isolated M46 episodes. The global
+anchor rule is retained because it directly recalibrates after class-order
+change. Per-class thresholds increase unknown rejection but cause 1.875 points
+of mean known regression, exceeding the one-point ceiling.
+
+\begin{table}[ht]
+\centering
+\caption{Threshold transfer over three seeds.}
+\label{tab:threshold}
+\begin{tabular}{lrrc}
+\toprule
+Rule & Known drop & Unknown drop & Pass\\
+\midrule
+Frozen parent & 0.000 & 0.000 & Yes\\
+Class-count heuristic & 0.000 & 0.000 & Yes\\
+Global anchor quantile & 0.000 & 0.000 & Yes\\
+Per-class anchor & 1.875 & $-8.667$ & No\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Representativeness audit}
+
+\begin{table}[ht]
+\centering
+\caption{Core and boundary-inclusive support diagnostics.}
+\label{tab:coverage}
+\small
+\begin{tabular}{crrrr}
+\toprule
+Seed & Core NN cov. & Boundary NN cov. & Core trace ratio & Boundary trace ratio\\
+\midrule
+11 & 34.04\% & 99.68\% & 0.663 & 1.078\\
+23 & 35.47\% & 99.78\% & 0.658 & 1.096\\
+37 & 39.14\% & 99.37\% & 0.679 & 1.068\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Core and boundary sets both cover two coarse modes, so mode count alone misses
+the defect. Nearest-neighbor support and covariance reveal that core sets omit
+most of the rejected region. Boundary-inclusive sets nearly recover full
+support, although the cheap M46 proxy utility improves by only 0.259 points.
+
+\section{Equal-budget utility}
+
+\begin{table}[ht]
+\centering
+\caption{Mean v8 adaptation utility over nine cells.}
+\label{tab:utility}
+\begin{tabular}{lrrr}
+\toprule
+Review policy & Mean $\utility_e$ & Labels & Remaining-unknown recall\\
+\midrule
+Core-selected & 6.36 & 50 & 59.72\%\\
+Boundary-inclusive & 9.71 & 50 & 75.98\%\\
+Coverage-selected & \textbf{10.62} & 50 & \textbf{82.50\%}\\
+Utility-selected & 9.96 & 50 & 78.15\%\\
+Random-stratified & 9.70 & 50 & 75.41\%\\
+Review-everything & 11.26 & 300 & 86.13\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Utility selection beats core selection in all nine paired cells. The mean
+difference is 3.593 points with paired 95\% bootstrap interval
+[2.794, 4.382]. The sign and interval operands pass, but the 5-point practical
+operand fails. Six cells also exceed the 2-point remaining-unknown-recall band.
+
+\begin{table}[ht]
+\centering
+\caption{Pivotal preregistered gate.}
+\label{tab:pivotal}
+\begin{tabular}{lrc}
+\toprule
+Operand & Observation & Pass\\
+\midrule
+Mean gain over core $\geq 5.0$ & 3.593 & No\\
+Paired 95\% lower bound $>0$ & 2.794 & Yes\\
+Positive cells $\geq 7/9$ & 9/9 & Yes\\
+Budget, safety, transaction conjunction & 6 recall violations & No\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Coverage selection is the strongest eligible deterministic arm, slightly
+outperforming utility selection. The rank-3 proxy therefore does not perfectly
+rank rank-16 production outcomes. Review-everything achieves the highest raw
+utility but is ineligible at six times the budget.
+
+\section{Local residuals}
+
+Both residual attempts preserve 100\% of unaffected predictions, improving on
+the earlier A3 minimum of 84.2\%. The local temperature adds 0.000 points of
+mean utility. The bounded affine correction adds 0.204 points. Maximum known
+regression is 0.125 points, but maximum remaining-unknown-recall drop is 4.333
+points. Neither residual is retained.
+
+This result separates locality from utility. Explicit parent-scoped fusion
+repairs the scope bug, but a correctly localized update is not necessarily a
+useful or safe update.
+
+\section{Final disposition}
+
+M47 produces registered Outcome D. Learned selection, same-harness head
+continuation, and untouched M50 lifecycle qualification are blocked. The
+positive bootstrap interval is reported as a diagnostic finding, not promoted
+to primary success.
+
+\chapter{Discussion}
+
+\section{Answer to RQ1}
+
+Compact explicit geometry did not reach predictive parity with the matched RBF
+control. The weighted affine head remained 5.03 points behind. Proper
+class-conditional Gaussian density also outperformed weighted affine support
+for rejection. These outcomes do not remove the governance value of explicit
+artifacts, but they reject the premise that editability itself implies
+competitive discrimination.
+
+\section{Answer to RQ2}
+
+Independently qualified stages did not compose. HDBSCAN achieved perfect
+stage-wise group metrics, and confirmed insertion delivered a large isolated
+gain, yet their grouped loop integrated no class. The review-everything control
+showed that the adapter could succeed when given broader support. The failure
+therefore lies at the clusterer-to-review-to-adapter interface.
+
+\section{Answer to RQ3}
+
+Selecting for downstream utility improves over core selection consistently:
+9/9 cells and a positive bootstrap interval. The improvement is nevertheless
+only 3.593 points and violates remaining-unknown safety in six cells. The
+answer is therefore qualified: adaptation utility is a more discriminating
+endpoint and reveals a real representativeness signal, but the implemented
+utility selector does not qualify the lifecycle.
+
+\section{Answer to RQ4}
+
+Transactional controls successfully distinguish predictive failure from
+systems failure. No unconfirmed class is published, every rollback restores
+the exact parent, stale lineages fail closed, and residual scope can be enforced
+to preserve all unaffected predictions. These controls do not create accuracy,
+but they make negative results attributable and reproducible.
+
+\section{Pure cores as insufficient statistics}
+
+Density-based discovery naturally prefers high-cohesion regions. Such cores
+are attractive review objects because they reduce ambiguity and label noise.
+The adapter, however, estimates a class region. It needs variance directions,
+boundary examples, and low-density modes. The measured 34--39\% support
+coverage provides a direct explanation for the v7 failure.
+
+This distinction generalizes beyond the specific adapter. A prototype learner,
+density estimator, margin model, or discriminative head can require different
+support statistics. Review selection should therefore be conditioned on the
+downstream update mechanism.
+
+\section{Adaptation and unknown preservation conflict}
+
+Broader support makes the new class easier to recognize, but it also expands
+acceptance into regions occupied by future unknowns. This creates a structural
+tradeoff. Utility on known plus discovered classes and recall on remaining
+unknowns cannot be optimized independently.
+
+A future objective should be explicitly constrained:
+
+\begin{equation}
+\max_{\pi}\ \mathbb{E}[\utility_e(\pi)]
+\quad\text{subject to}\quad
+\Delta\ba_{\text{known}}\geq-\epsilon,\quad
+\Delta R_{\text{unknown}}\geq-\delta,\quad
+\operatorname{cost}(\pi)\leq B.
+\end{equation}
+
+Here $\pi$ is the review policy. Unknown preservation is not a post-hoc
+diagnostic; it is part of the optimization problem.
+
+\section{Why coverage beats the utility proxy}
+
+The utility selector evaluates deterministic subsets with a rank-3 proxy, then
+deploys a rank-16 production adapter. This mismatch introduces proxy regret.
+Farthest-first coverage has no such model mismatch and reaches 10.62 points,
+compared with 9.96 for utility selection.
+
+Possible improvements include a better-fidelity cheap adapter, uncertainty in
+the subset ranking, direct constrained selection, or a learned policy trained
+across episodes. The registered kill switch correctly blocks these
+continuations after the pivotal endpoint fails; they remain future hypotheses.
+
+\section{Methodological implications}
+
+The results support four methodological recommendations:
+
+\begin{enumerate}
+\item Register a system-level endpoint before optimizing stages.
+\item Audit producer outputs against consumer sufficient statistics.
+\item Treat unknown recall as a lifecycle state variable after every update.
+\item Separate transaction correctness, locality, and predictive utility.
+\end{enumerate}
+
+\chapter{Validity, Limitations, and Ethics}
+
+\section{Internal validity}
+
+The use of frozen partitions, seeds, parent hashes, and deterministic replay
+reduces accidental variation. Paired cells isolate policy differences. The
+validation partition is disjoint from adaptation support. Fail-closed tests
+guard common lineage and leakage errors.
+
+Internal validity remains limited by the deterministic oracle and controlled
+candidate purity. Real review candidates may mix classes, and real reviewers
+may disagree. The utility proxy and production adapter differ in rank.
+
+\section{Construct validity}
+
+Balanced accuracy gives equal weight to classes and is appropriate for the
+episode inventory, but it does not capture calibration, severity-weighted
+errors, or real deployment value. The fixed 50-label budget approximates human
+cost but does not model variable review difficulty.
+
+Nearest-neighbor support coverage and covariance ratios diagnose
+representativeness but are not complete sufficient statistics. Their role is
+explanatory rather than universal.
+
+\section{External validity}
+
+The realized study uses CIFAR-10 and frozen DINOv2-small features. Results may
+change with more classes, long-tailed data, domain shift, natural streams,
+larger encoders, or representation adaptation. The held-out class order is
+specific. The study does not establish performance for medical, legal,
+security, or other high-stakes applications.
+
+\section{Statistical conclusion validity}
+
+There are nine paired development cells. The bootstrap interval describes this
+bounded schedule, not a broad population of domains. The untouched M50 schedule
+remains sealed, so there is no independent final confirmation. The
+preregistered practical threshold prevents a positive interval from being
+overinterpreted.
+
+\section{Ethics and governance}
+
+Open-world systems can assign meaning to coherent but irrelevant, private, or
+harmful groups. Automated class creation may amplify surveillance,
+discrimination, or feedback loops. This work prohibits autonomous semantic
+publication and records review authority, provenance, and rollback.
+
+Deployment would additionally require privacy-aware retention, deletion and
+appeal procedures, reviewer disagreement models, subgroup audits, access
+control, security review, and monitoring for distributional feedback. The
+experiments use public benchmark representations and simulated review; they do
+not involve human subjects or sensitive personal data.
+
+\section{Claim boundary}
+
+The evidence supports the claims that:
+
+\begin{itemize}
+\item adaptation utility is more discriminating than stage purity;
+\item boundary- and coverage-aware review improves utility over density cores
+in the frozen harness;
+\item global anchor recalibration transfers safely in the isolated M46
+episodes; and
+\item parent-only fusion repairs the observed locality leakage.
+\end{itemize}
+
+It does not support claims of closed-set parity, SDF necessity, autonomous
+class creation, learned-selector superiority, authoritative routing,
+head-substitution superiority, untouched confirmation, or qualified
+end-to-end operation.
+
+\chapter{Post-Lifecycle Geometric Support Studies}
+
+\section{Motivation and methodological evolution}
+
+The negative lifecycle result raised a narrower representation question:
+whether frozen class features occupy volumes, lie near class boundaries, or
+concentrate around higher-codimension supports. V9 first tested shell occupancy
+around the frozen A2 zero-level sets. None of 48 class-by-seed-by-score
+diagnostics contained enough negative own-class interior to form the registered
+equal-mass comparison, closing only that specific shell hypothesis.
+
+The distinct v9 affine-tube branch produced predictive and unknown-recall
+signal at ranks 16 and 32, but accepted 100\% of 8x tangent probes. This failure
+identified a score-unit defect: orthogonal residuals and tangent overshoot were
+not calibrated on comparable scales. V10 therefore registered dimensionless
+residuals, rank-normalized tangent penalties, calibration-only penalty
+selection, source-versus-system safety evidence, and controlled identifiability
+before any real-feature screen.
+
+\section{Controlled and real-feature results}
+
+In ambient dimension 64, the implementation recovered true ranks 8, 16, and 32
+in all nine seed cells, preserved 91.35\% pooled in-support coverage, and
+rejected every 8x tangent probe. Two-patch atlases improved controlled curved
+and two-mode supports, while full-dimensional volume, spherical-shell,
+random-orientation, and random-label controls behaved as registered.
+
+The frozen seed-11 screen then evaluated 18 rank-by-extent-by-scale cells.
+Sixteen were calibration-infeasible because minimum-system acceptance remained
+too high under tangent extrapolation. Only rank 8 with 0.99 extents was
+feasible. One scale policy regressed known balanced accuracy by 5.75 points;
+the other gained 0.875 points, missing the registered 1-point threshold. No
+global tube was retained, the real-data condition for a local atlas did not
+occur, and lifecycle testing remained blocked.
+
+\section{Resulting claim boundary}
+
+The combined v9--v10 record does not prove that frozen features fill volumes,
+nor does it universally disprove manifold structure. It shows that the tested
+zero-level shells were not calibrated supports and that the registered bounded
+affine family, despite controlled identifiability, did not satisfy joint
+predictive and open-space gates on the frozen features. Nonlinear manifolds or
+different learned representations remain untested rather than supported.
+
+\chapter{Reproducibility}
+
+\section{Artifact structure}
+
+The repository stores implementation code, tests, plans, claim ledgers,
+machine-readable evidence, and immutable artifact indexes. Key locations are:
+
+\begin{itemize}
+\item \texttt{analysis/V8\_FINAL\_CLAIM\_LEDGER.md};
+\item \texttt{analysis/RESEARCH\_IMPLEMENTATION\_PLAN\_v8.md};
+\item \texttt{logs/results/v8/m46\_diagnostics/};
+\item \texttt{logs/results/v8/m47\_review\_utility/};
+\item \texttt{logs/results/v8/m49\_local\_residuals/}; and
+\item \texttt{logs/results/v8/final\_outcome\_replay/};
+\item \texttt{analysis/V10\_FINAL\_CLAIM\_LEDGER.md}; and
+\item \texttt{logs/results/v10/m62\_final\_replay/}.
+\end{itemize}
+
+\section{Final replay}
+
+From the repository root on Windows:
+
+\begin{verbatim}
+.\.venv\Scripts\python.exe -m experiments.tier1.eval_v8_final_replay
+\end{verbatim}
+
+The command verifies four immutable milestone indexes, 11 indexed artifacts,
+and six conclusion operands. It runs twice and requires byte-identical output,
+loads no training data, and opens no final labels. The complete repository gate
+contains 374 tests at finalization.
+
+\section{Building this report}
+
+From the \texttt{analysis} directory:
+
+\begin{verbatim}
+tectonic MS_THESIS_REPORT.tex
+\end{verbatim}
+
+Tectonic resolves standard LaTeX packages automatically. The source uses an
+inline bibliography and no external figures, reducing archival dependencies.
+Institution-specific title, approval, declaration, margins, and binding rules
+must be adapted before university submission.
+
+\chapter{Conclusions and Future Work}
+
+\section{Conclusions}
+
+This thesis investigated open-world recognition as a composed, transactional
+lifecycle. The program first tested whether explicit geometric artifacts could
+serve as competitive class heads. They replayed and rolled back reliably but
+remained behind discriminative controls. It then qualified rejection,
+discovery, and confirmed adaptation stages independently. Those stages failed
+when composed.
+
+The successor study replaced stage metrics with adaptation utility at a fixed
+review budget. It found that density cores omit most of the candidate region
+and that representative selection improves downstream utility. The positive
+effect is consistent but insufficient: it misses the registered practical
+threshold and damages remaining-unknown recall.
+
+The principal conclusion is methodological. Open-world learning is not a
+pipeline whose stages can be optimized independently. Every update changes the
+known inventory, acceptance threshold, future unknown space, and routing
+state. Qualification must therefore occur at the lifecycle level under joint
+utility, safety, cost, lineage, locality, and rollback constraints.
+
+The post-lifecycle geometric studies reached the same methodological boundary
+from another direction. Synthetic identifiability and correctly scaled safety
+scores did not guarantee a useful real-feature support model. Most affine cells
+failed calibration safety, and the best safe cell missed its predictive gate.
+
+\section{Future work}
+
+The next research program should begin with new registration rather than reopen
+Outcome D. Promising directions are:
+
+\begin{enumerate}
+\item constrained review selection that predicts both adaptation gain and
+remaining-unknown loss;
+\item higher-fidelity but bounded proxy adapters;
+\item leave-one-episode-out selection learners with explicit uncertainty;
+\item evaluation over larger category inventories and natural class-arrival
+streams;
+\item real human-review studies with disagreement and variable cost;
+\item representation adaptation under strict parent and rollback contracts;
+\item mechanism-matched comparisons among Gaussian, EVM, kNN, and explicit
+geometry under the same lifecycle endpoint; and
+\item router training that treats unknown fallback as a primary safety target.
+\end{enumerate}
+
+Any continuation should retain the central discipline of this work: practical
+effect thresholds and safety constraints must be registered before tuning, and
+failed branches must remain visible.
+
+\begin{thebibliography}{32}
+
+\bibitem{bendale2015}
+A. Bendale and T. Boult.
+\newblock Towards open world recognition.
+\newblock In \emph{CVPR}, 2015.
+
+\bibitem{bendale2016}
+A. Bendale and T. Boult.
+\newblock Towards open set deep networks.
+\newblock In \emph{CVPR}, 2016.
+
+\bibitem{rudd2018}
+E. Rudd, L. Jain, W. Scheirer, and T. Boult.
+\newblock The extreme value machine.
+\newblock \emph{IEEE TPAMI}, 2018.
+
+\bibitem{masud2011}
+M. Masud et al.
+\newblock Classification and novel class detection in concept-drifting data
+streams under time constraints.
+\newblock \emph{IEEE TKDE}, 2011.
+
+\bibitem{haque2016sand}
+A. Haque et al.
+\newblock SAND: Semi-supervised adaptive novel class detection and
+classification over data stream.
+\newblock In \emph{AAAI}, 2016.
+
+\bibitem{haque2016echo}
+A. Haque et al.
+\newblock ECHO: A data stream classification method for detecting novel class
+drift.
+\newblock In \emph{ICDE}, 2016.
+
+\bibitem{faria2016}
+E. de Faria, A. Gama, and A. Carvalho.
+\newblock Novelty detection algorithm for data streams multi-class problems.
+\newblock \emph{Data Mining and Knowledge Discovery}, 2016.
+
+\bibitem{mu2017}
+X. Mu, F. Zhu, J. Du, E.-P. Lim, and Z.-H. Zhou.
+\newblock Classification under streaming emerging new classes.
+\newblock \emph{IEEE TKDE}, 2017.
+
+\bibitem{vaze2022}
+S. Vaze et al.
+\newblock Generalized category discovery.
+\newblock In \emph{CVPR}, 2022.
+
+\bibitem{cao2022}
+K. Cao, M. Brbi\'c, and J. Leskovec.
+\newblock Open-world semi-supervised learning.
+\newblock In \emph{ICLR}, 2022.
+
+\bibitem{zhang2022}
+Z. Zhang et al.
+\newblock Grow and Merge: A unified framework for continuous categories
+discovery.
+\newblock In \emph{NeurIPS}, 2022.
+
+\bibitem{zhao2023}
+B. Zhao and O. Mac Aodha.
+\newblock Incremental generalized category discovery.
+\newblock In \emph{ICCV}, 2023.
+
+\bibitem{aljundi2017}
+R. Aljundi, P. Chakravarty, and T. Tuytelaars.
+\newblock Expert Gate: Lifelong learning with a network of experts.
+\newblock In \emph{CVPR}, 2017.
+
+\bibitem{gururangan2021}
+S. Gururangan et al.
+\newblock DEMix layers: Disentangling domains for modular language modeling.
+\newblock arXiv:2108.05036, 2021.
+
+\bibitem{li2022}
+M. Li et al.
+\newblock Branch-Train-Merge: Embarrassingly parallel training of expert
+language models.
+\newblock arXiv:2208.03306, 2022.
+
+\bibitem{hendrycks2017}
+D. Hendrycks and K. Gimpel.
+\newblock A baseline for detecting misclassified and out-of-distribution
+examples in neural networks.
+\newblock In \emph{ICLR}, 2017.
+
+\bibitem{lee2018}
+K. Lee et al.
+\newblock A simple unified framework for detecting out-of-distribution samples
+and adversarial attacks.
+\newblock In \emph{NeurIPS}, 2018.
+
+\bibitem{mukhoti2023}
+J. Mukhoti et al.
+\newblock Deep deterministic uncertainty: A new simple baseline.
+\newblock \emph{TMLR}, 2023.
+
+\bibitem{sun2022}
+Y. Sun et al.
+\newblock Out-of-distribution detection with deep nearest neighbors.
+\newblock In \emph{ICML}, 2022.
+
+\bibitem{vanamersfoort2020}
+J. van Amersfoort et al.
+\newblock Uncertainty estimation using a single deep deterministic neural
+network.
+\newblock In \emph{ICML}, 2020.
+
+\bibitem{liu2020}
+J. Liu et al.
+\newblock Simple and principled uncertainty estimation with deterministic deep
+learning via distance awareness.
+\newblock In \emph{NeurIPS}, 2020.
+
+\bibitem{ester1996}
+M. Ester, H.-P. Kriegel, J. Sander, and X. Xu.
+\newblock A density-based algorithm for discovering clusters in large spatial
+databases with noise.
+\newblock In \emph{KDD}, 1996.
+
+\bibitem{campello2013}
+R. Campello, D. Moulavi, and J. Sander.
+\newblock Density-based clustering based on hierarchical density estimates.
+\newblock In \emph{PAKDD}, 2013.
+
+\bibitem{sarfraz2019}
+S. Sarfraz, V. Sharma, and R. Stiefelhagen.
+\newblock Efficient parameter-free clustering using first neighbor relations.
+\newblock In \emph{CVPR}, 2019.
+
+\bibitem{requicha1980}
+A. Requicha.
+\newblock Representations for rigid solids: Theory, methods, and systems.
+\newblock \emph{ACM Computing Surveys}, 1980.
+
+\bibitem{park2019}
+J. Park et al.
+\newblock DeepSDF: Learning continuous signed distance functions for shape
+representation.
+\newblock In \emph{CVPR}, 2019.
+
+\bibitem{tipping1999}
+M. Tipping and C. Bishop.
+\newblock Probabilistic principal component analysis.
+\newblock \emph{JRSS B}, 1999.
+
+\bibitem{ghahramani1996}
+Z. Ghahramani and G. Hinton.
+\newblock The EM algorithm for mixtures of factor analyzers.
+\newblock Technical Report CRG-TR-96-1, University of Toronto, 1996.
+
+\bibitem{oquab2024}
+M. Oquab et al.
+\newblock DINOv2: Learning robust visual features without supervision.
+\newblock \emph{TMLR}, 2024.
+
+\end{thebibliography}
+
+\appendix
+
+\chapter{Registered Gates}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{1.1in}
+>{\raggedright\arraybackslash}p{4.4in}}
+\toprule
+\textbf{Stage} & \textbf{Principal advancement conditions}\\
+\midrule
+\endhead
+Predictive head & Within 2 points of RBF control, lifecycle checks, exact replay
+and rollback.\\
+Rejection & Every seed: at least 90\% known coverage, 50\% unknown recall,
+bounded known loss, competitive review precision, exact replay.\\
+Discovery & Category recovery, at least 70\% precision, stable review IDs,
+resource limits, no semantic publication.\\
+Adaptation & At least 5 points target gain, at most 1 point known drop, at most
+2 points unknown-recall drop, confirmation, replay, rollback.\\
+Routing & At least 99\% top-1, 99.9\% winner inclusion and agreement, 95\%
+unknown fallback, and 25\% compute reduction.\\
+Integrated v7 & At least 75\% classes integrated, 25\% review reduction,
+known/unknown preservation, all safety contracts.\\
+Utility v8 & At least 5 points over core, positive paired interval, at least
+7/9 positive cells, budget and safety conjunction.\\
+Residual & At least 5 points utility, 99.9\% unaffected preservation per seed,
+known/unknown safety, local work, replay, rollback.\\
+\bottomrule
+\end{longtable}
+
+\chapter{Final Branch Disposition}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{1.1in}
+>{\raggedright\arraybackslash}p{0.9in}
+>{\raggedright\arraybackslash}p{3.4in}}
+\toprule
+\textbf{Branch} & \textbf{Status} & \textbf{Reason}\\
+\midrule
+\endhead
+Weighted affine parity & Failed & 91.73\%, 5.03 points behind RBF.\\
+Gaussian rejection & Passed & Only head satisfying all v7 acceptance gates.\\
+HDBSCAN discovery & Passed stage & Perfect stage-wise group recall and
+precision.\\
+FINCH discovery & Passed stage & Mechanistically distinct retained control.\\
+New-class insertion & Passed stage & 43.33-point isolated target gain with
+rollback.\\
+Authoritative routing & Closed & Accuracy and unknown-fallback gates missed.\\
+Integrated grouped loop & Failed & 0/3 classes integrated.\\
+M46 threshold transfer & Passed & Global anchor quantile retained.\\
+M47 utility selection & Outcome D & 3.593 points below 5-point gate; six safety
+violations.\\
+M48 learned selector & Blocked & Binding M47 kill switch.\\
+M49 residuals & Closed & Locality passed; utility and unknown safety failed.\\
+M50/E12 confirmation & Blocked & Untouched schedule remains sealed.\\
+\bottomrule
+\end{longtable}
+
+\chapter{Artifact-Only Verification}
+
+The final v8 verifier reports:
+
+\begin{itemize}
+\item four verified milestone indexes;
+\item 11 verified indexed artifacts;
+\item six reproduced conclusion operands;
+\item byte-identical output across two runs;
+\item no training-data loading; and
+\item no final-label access.
+\end{itemize}
+
+The final claim ledger is
+\texttt{analysis/V8\_FINAL\_CLAIM\_LEDGER.md}. The paper-length presentation is
+\texttt{analysis/FINAL\_RESEARCH\_PAPER.tex}. This thesis report provides the
+expanded academic narrative; it does not introduce new experimental claims.
+
+\end{document}

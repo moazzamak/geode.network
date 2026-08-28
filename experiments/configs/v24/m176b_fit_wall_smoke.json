@@ -1,0 +1,58 @@
+{
+  "milestone": "M176b",
+  "title": "SMOKE: M176b fit-wall plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase D (M176b)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Tiny cells (n=2000, widths 500/1000, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_n_train": 2000,
+  "_smoke_widths": [500, 1000],
+  "question": "Does the M176b pipeline (real fit, synthetic fit, escape check) run end-to-end on tiny cells?",
+  "interpretation_registered_before_running": {
+    "wall": "the first width where the fit raises MemoryError or exceeds the registered time budget is the measured wall.",
+    "escape": "LSQR within rel 1e-9 of the exact solve is a drop-in escape at this conditioning; otherwise the published preconditioned solvers are the ladder."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "anchor": {
+    "spm_ridge_reference": 0.2273623188405797,
+    "spm_ridge_tolerance": 1e-06,
+    "spm_cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz",
+    "n_train": 138000
+  },
+  "real_widths": {
+    "ms357_cache_relpath": "v16/m142_c3",
+    "ms357_train_file": "ms357_fulltrain.npy",
+    "width": 13244,
+    "n_train": 138000
+  },
+  "synthetic": {
+    "n_train": 2000,
+    "widths": [500, 1000],
+    "seed": 42
+  },
+  "escape": {
+    "n_train": 2000,
+    "source": "the real ms357 codes",
+    "penalty": 1.0,
+    "seed": 7,
+    "tolerance": 1e-09
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 16
+  },
+  "output_dir": "logs/results/v24/m176b_fit_wall_smoke"
+}

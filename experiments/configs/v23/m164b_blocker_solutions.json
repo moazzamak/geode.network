@@ -1,0 +1,36 @@
+{
+  "milestone": "M164b",
+  "title": "Blocker-solution literature search (M164 instrument, second dispatch: L1-L7 + cross-domain leads)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 6 dispatch entry (17 Aug 2026)",
+  "registered_before_any_search": true,
+  "question": "For each buildout blocker (v24 section 9 L1-L7): is there prior work that already solves it, and what cross-domain techniques (numerical linear algebra, sketching, Krylov, quantum-inspired, signal processing, physics) can be leveraged?",
+  "role": "displacement only: an unauthenticated public search cannot support novelty claims. Hits can displace or inform registered claims; absence proves nothing.",
+  "endpoint": "https://export.arxiv.org/api/query",
+  "max_results_per_query": 10,
+  "retries": 3,
+  "backoff_seconds_base": 2.0,
+  "gate": {
+    "anchor_rule": "every anchor query must return at least one hit in stage 1 (AND of quoted abs: phrases). If any anchor misses, stage 2 re-runs ALL queries uniformly with OR of the same phrases. If any anchor still misses, the whole search is VOID for claims.",
+    "rate_limit_rule": "HTTP 429 responses are retried with exponential backoff and recorded separately from genuinely empty results."
+  },
+  "queries": [
+    {"id": "a1", "kind": "anchor", "blocker": "L4", "phrases": ["randomized numerical linear algebra", "least squares"], "note": "the randomized NLA line (Drineas/Mahoney; Blendenpik territory)"},
+    {"id": "a2", "kind": "anchor", "blocker": "L4", "phrases": ["sketching", "ridge regression"], "note": "sketched ridge solvers"},
+    {"id": "a3", "kind": "anchor", "blocker": "L1", "phrases": ["scattering transform", "image classification"], "note": "Mallat scattering networks as fixed encoders"},
+    {"id": "a4", "kind": "anchor", "blocker": "L4", "phrases": ["quantum-inspired", "linear algebra"], "note": "dequantized/quantum-inspired matrix algorithms"},
+    {"id": "a5", "kind": "anchor", "blocker": "L1", "phrases": ["neural tangent kernel", "ridge"], "note": "NTK-ridge connections between trained and closed-form"},
+    {"id": "a6", "kind": "anchor", "blocker": "L1", "phrases": ["bag of visual words", "cnn"], "note": "BoW-over-CNN codes (the deep-patch code family)"},
+    {"id": "b1", "kind": "blocker", "blocker": "L1", "phrases": ["learned local descriptors", "efficient"], "note": "cheap learned patch/local descriptors"},
+    {"id": "b2", "kind": "blocker", "blocker": "L1", "phrases": ["efficient vision transformer", "compression"], "note": "efficient ViTs as better-code candidates"},
+    {"id": "b3", "kind": "blocker", "blocker": "L1", "phrases": ["post-training quantization", "vision"], "note": "PTQ quality across model families (M91 context)"},
+    {"id": "b4", "kind": "blocker", "blocker": "L4", "phrases": ["krylov subspace", "least squares"], "note": "Krylov solvers for large systems"},
+    {"id": "b5", "kind": "blocker", "blocker": "L4", "phrases": ["preconditioner", "kernel ridge"], "note": "preconditioned KRR solvers"},
+    {"id": "b6", "kind": "blocker", "blocker": "L4", "phrases": ["low rank approximation", "gram matrix"], "note": "low-rank Gram approximations"},
+    {"id": "b7", "kind": "blocker", "blocker": "L4", "phrases": ["quantum-inspired algorithm", "regression"], "note": "quantum-inspired regression algorithms"},
+    {"id": "b8", "kind": "blocker", "blocker": "L5", "phrases": ["mixed precision", "linear solver"], "note": "numerical stability of mixed-precision solvers"},
+    {"id": "b9", "kind": "blocker", "blocker": "L2", "phrases": ["frozen backbone", "domain generalization"], "note": "frozen features across corpora/domains"},
+    {"id": "b10", "kind": "blocker", "blocker": "L7", "phrases": ["closed form", "few shot"], "note": "closed-form few-shot adaptation"},
+    {"id": "b11", "kind": "blocker", "blocker": "L3", "phrases": ["sparse coding", "scalability"], "note": "scaling sparse/count codes beyond saturation"},
+    {"id": "b12", "kind": "blocker", "blocker": "L6", "phrases": ["task similarity", "model routing"], "note": "routing by task similarity"}
+  ]
+}

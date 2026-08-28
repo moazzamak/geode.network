@@ -1,0 +1,37 @@
+{
+  "milestone": "M266a",
+  "title": "Whisper ASR arm: frozen whisper-small.en, greedy decode, WER on LibriSpeech test-clean",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M266 registered 21 Aug; M266a dispatched 21 Aug, local-first)",
+  "registered_before_any_accuracy": true,
+  "question": "Does a frozen Whisper arm reproduce the published whisper-small.en LibriSpeech test-clean WER anchor, and what does the arm's own held-out WER read?",
+  "anchor": {
+    "model": "openai/whisper-small.en",
+    "published_wer_test_clean": 3.053,
+    "source": "official HF model card evaluation snippet (openai/whisper-small.en, 'Evaluation' section)",
+    "protocol": "per-sample greedy generate; tokenizer._normalize on reference and prediction; word-level WER (evaluate.load('wer') class metric)",
+    "honesty": "the anchor is the publisher's number, reproduced; our reading is ours, never the authors'"
+  },
+  "encoder": {
+    "checkpoint": "openai/whisper-small.en",
+    "license_recorded": "MIT per the project LICENSE (openai/whisper); HF card displays apache-2.0 — both recorded, audit verifies",
+    "frozen": true,
+    "decoding": "greedy (num_beams=1), fp32, GPU with the registered batch throttle"
+  },
+  "dataset": {
+    "hf_id": "librispeech_asr",
+    "config": "clean",
+    "split": "test",
+    "license_recorded": "CC-BY-4.0",
+    "expected_utterances": 2620
+  },
+  "guard": {
+    "note": "per-sample duration and RMS-energy recorded; inputs outside the registered ranges are flagged in evidence (all LibriSpeech test-clean samples are expected in-distribution)",
+    "duration_range_seconds": [0.5, 30.0],
+    "energy_floor": 1e-4
+  },
+  "smoke": {
+    "max_samples": 10
+  },
+  "output_dir": "logs/results/v25/m266_audio_arm",
+  "feature_cache_relpath": "v25/m266_audio_arm"
+}

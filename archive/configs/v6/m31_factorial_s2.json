@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "milestone": "M31",
+  "stage": "S2",
+  "seeds": [11, 23, 37],
+  "m30_config": "experiments/configs/v6/m30_directional_s2.json",
+  "m30_evidence": "logs/results/v6/m30_directional_s2/evidence.json",
+  "cells": [
+    {"id": "coverage_sphere_radial_component", "objective": "coverage", "primitive": "sphere", "score": "normalized_radial", "budget": "component"},
+    {"id": "direct_subspace_radial_component", "objective": "direct", "primitive": "subspace_r32", "score": "normalized_radial", "budget": "component"},
+    {"id": "teacher_directional_softmin_component", "objective": "teacher", "primitive": "directional", "score": "teacher_softmin", "budget": "component"},
+    {"id": "coverage_subspace_likelihood_component", "objective": "coverage", "primitive": "subspace_r32", "score": "proper_likelihood", "budget": "component"},
+    {"id": "direct_sphere_softmin_parameter", "objective": "direct", "primitive": "sphere", "score": "teacher_softmin", "budget": "parameter"},
+    {"id": "teacher_subspace_likelihood_component", "objective": "teacher", "primitive": "subspace_r32", "score": "proper_likelihood", "budget": "component"},
+    {"id": "coverage_directional_softmin_parameter", "objective": "coverage", "primitive": "directional", "score": "teacher_softmin", "budget": "parameter"},
+    {"id": "direct_directional_radial_component", "objective": "direct", "primitive": "directional", "score": "normalized_radial", "budget": "component"},
+    {"id": "teacher_subspace_softmin_component_control", "objective": "teacher", "primitive": "subspace_r32", "score": "teacher_softmin", "budget": "component", "mandatory_control": true}
+  ],
+  "factorial_baselines": {
+    "objective": "coverage",
+    "primitive": "sphere",
+    "score": "normalized_radial",
+    "budget": "component"
+  },
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "anchor_fraction": 0.2,
+    "sphere_seed_size": 386,
+    "subspace_rank": 32,
+    "variance_floor_fraction": 0.001,
+    "residual_floor_fraction": 0.05
+  },
+  "selection": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "component_count": 46,
+    "parameter_limit": 27020,
+    "maximum_candidate_evaluations": 5000,
+    "initial_components_per_class": 1,
+    "minimum_improvement": 1e-08
+  },
+  "temperature": {
+    "minimum": 0.05,
+    "maximum": 20.0
+  },
+  "statistics": {
+    "confidence": 0.95,
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 42
+  },
+  "advancement_gate": {
+    "maximum_same_space_gap": 0.02,
+    "minimum_accuracy_improvement": 0.005,
+    "minimum_nll_reduction_fraction": 0.02,
+    "maximum_accuracy_loss_for_nll": 0.0025,
+    "minimum_unaffected_prediction_preservation": 0.999,
+    "require_exact_replay": true,
+    "require_exact_rollback": true
+  },
+  "infeasible_cells": [
+    {
+      "primitive": "subspace_r32",
+      "budget": "parameter",
+      "reason": "27020 parameters permit only two rank-32 components, fewer than one per class."
+    }
+  ],
+  "test_labels_opened": false
+}

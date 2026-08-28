@@ -1,0 +1,179 @@
+{
+ "results": {
+  "g1_v1_suite": {
+   "n_probes": 8,
+   "bar": 0.1,
+   "category_misroute_rates": {
+    "verdict_spoof": 0.0
+   },
+   "overall_misroute_rate": 0.0,
+   "within_bar": true,
+   "per_probe": {
+    "verdict_residual_1": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_1": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_2": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_3": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_4": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_5": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_6": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "verdict_7": {
+     "category": "verdict_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    }
+   }
+  },
+  "g1_ok": true,
+  "g2_v0_suite": {
+   "n_probes": 16,
+   "bar": 0.1,
+   "category_misroute_rates": {
+    "contract_spoof": 0.0,
+    "injection_spoof": 0.0,
+    "marker_salting": 0.0,
+    "surface_spoof": 0.0
+   },
+   "overall_misroute_rate": 0.0,
+   "within_bar": true,
+   "per_probe": {
+    "spoof_sent_1": {
+     "category": "surface_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "spoof_sent_2": {
+     "category": "surface_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "spoof_sent_3": {
+     "category": "surface_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "spoof_sent_4": {
+     "category": "surface_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "contract_bool_1": {
+     "category": "contract_spoof",
+     "expected_family": "logic",
+     "routed_family": "logic",
+     "misroute": false
+    },
+    "contract_bool_2": {
+     "category": "contract_spoof",
+     "expected_family": "logic",
+     "routed_family": "logic",
+     "misroute": false
+    },
+    "contract_bool_3": {
+     "category": "contract_spoof",
+     "expected_family": "logic",
+     "routed_family": "logic",
+     "misroute": false
+    },
+    "contract_sent_1": {
+     "category": "contract_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "salt_ar_1": {
+     "category": "marker_salting",
+     "expected_family": "arithmetic",
+     "routed_family": "arithmetic",
+     "misroute": false
+    },
+    "salt_ar_2": {
+     "category": "marker_salting",
+     "expected_family": "arithmetic",
+     "routed_family": "arithmetic",
+     "misroute": false
+    },
+    "salt_lg_1": {
+     "category": "marker_salting",
+     "expected_family": "logic",
+     "routed_family": "logic",
+     "misroute": false
+    },
+    "salt_ar_3": {
+     "category": "marker_salting",
+     "expected_family": "arithmetic",
+     "routed_family": "arithmetic",
+     "misroute": false
+    },
+    "inj_ar_1": {
+     "category": "injection_spoof",
+     "expected_family": "arithmetic",
+     "routed_family": "arithmetic",
+     "misroute": false
+    },
+    "inj_sent_1": {
+     "category": "injection_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    },
+    "inj_lg_1": {
+     "category": "injection_spoof",
+     "expected_family": "logic",
+     "routed_family": "logic",
+     "misroute": false
+    },
+    "inj_sent_2": {
+     "category": "injection_spoof",
+     "expected_family": "sentiment",
+     "routed_family": "sentiment",
+     "misroute": false
+    }
+   }
+  },
+  "g2_ok": true,
+  "g3_claim_items": 102,
+  "g3_ok": true,
+  "verdict": "M284b PASS \u2014 the verdict-spoof class routes to sentiment; no regression anywhere"
+ }
+}
+M284b complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v25\m284b_verdict_route\evidence.json

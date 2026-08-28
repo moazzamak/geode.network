@@ -1,0 +1,19 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier6_real_runs.jsonl",
+  "calibration_fraction": 0.2,
+  "dataset": "wikitext103",
+  "max_iterations": null,
+  "max_test_samples": 10000,
+  "max_train_samples": 50000,
+  "n_folds": 2,
+  "nudge_iterations": 0,
+  "pca_components": 8,
+  "representation": "temporal_state",
+  "seed": 42,
+  "state_dim": 16,
+  "use_gpu": true,
+  "use_subtractive": false,
+  "warmup": 64,
+  "window": 3
+}

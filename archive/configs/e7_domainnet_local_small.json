@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "manifest_path": "domainnet/manifest.json",
+  "data_root": "domainnet/repository",
+  "class_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+  "source_domain_ids": [1, 2, 3, 4],
+  "validation_domain_id": 0,
+  "final_domain_id": 5,
+  "samples_per_class_domain": 4,
+  "image_size": 16,
+  "ray": {
+    "minimum_nodes": 2,
+    "max_retries": 1
+  }
+}

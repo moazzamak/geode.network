@@ -1,0 +1,57 @@
+{
+  "version": "v0",
+  "created": "2026-08-17",
+  "ratification": {
+    "status": "ratified",
+    "ratified_by": "user delegation (assistant-authored); the pinned 1.5B batch-1 proposal was incomplete (no per-axis vocabularies), so the ontology below carries the provisional M165 schema with the batch-2 corrections applied",
+    "open_for_revision": true
+  },
+  "supersedes": "logs/results/v24/m166_ontology_draft/draft.json",
+  "axes": {
+    "input.modality": ["image", "token-text", "numeric-series", "tabular", "graph", "audio", "control-signal"],
+    "input.submodality": ["camera-RGB", "pointcloud", "IR/thermal", "depth", "medical", "none"],
+    "input.value_kind": ["discrete", "continuous", "mixed"],
+    "input.temporal_structure": ["iid", "sequential", "delayed"],
+    "output.kind": ["class", "regression", "next-token", "action", "distribution", "ranking"],
+    "output.ordinality": ["nominal", "ordinal", "cardinal"],
+    "latent.recurrence": ["markov", "chaotic", "grammar-depth", "none"],
+    "latent.stationarity": ["stationary", "non-stationary"],
+    "latent.noise_regime": ["low", "medium", "high"],
+    "latent.label_cardinality": ["2", "3-10", "11-100", "101-1000", "1001+"],
+    "latent.sample_regime": ["tiny", "small", "medium", "large"],
+    "coupling": ["single-task", "mixture", "curriculum-position"]
+  },
+  "continuous_axes": {
+    "latent.label_cardinality": {
+      "bins": [["2", 2.0], ["3-10", 10.0], ["11-100", 100.0], ["101-1000", 1000.0]],
+      "open_bin": "1001+",
+      "rule": "inclusive upper bounds; above the top closed bin maps to the open bin and is logged"
+    }
+  },
+  "normalisation_rules": [
+    "categorical attributes must be registered tokens; anything else maps to <oov> and the event is logged (no-refusal)",
+    "continuous attributes quantise into the registered bins above",
+    "the canonical serialisation uses the frozen axis order and no alphabetic re-sort; the axis order is part of the schema",
+    "payload hashes cover content only; no wall-clock fields"
+  ],
+  "similarity_positive_controls": {
+    "known_similar": [
+      ["DomainNet image classification", "CIFAR-10 image classification"],
+      ["Mackey-Glass forecasting", "Lorenz-63 forecasting"],
+      ["DomainNet sketch domain", "DomainNet real domain"]
+    ],
+    "known_dissimilar": [
+      ["DomainNet image classification", "Mackey-Glass forecasting"],
+      ["DomainNet image classification", "Lorenz-63 forecasting"],
+      ["DomainNet image classification", "Dyck grammar next-token"],
+      ["DomainNet image classification", "tabular regression"],
+      ["CIFAR-10 image classification", "Mackey-Glass forecasting"],
+      ["CIFAR-10 image classification", "Dyck grammar next-token"]
+    ],
+    "correction_note": "the LLM draft marked CIFAR-10 + Mackey-Glass as known_similar; it is registered here as known_dissimilar (I3: proposals are hypotheses, not labels)"
+  },
+  "provenance": {
+    "grounded_in": "the sealed v16-v23 measurements (DomainNet, CIFAR-10, M147/M157 temporal axes), the M164/M164b/M164c reference ledgers, and the v24 section 3 schema",
+    "next_version_trigger": "M169's fingerprint gates (G2 ordering) fail on this control set"
+  }
+}

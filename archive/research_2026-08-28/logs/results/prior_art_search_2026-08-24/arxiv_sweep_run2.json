@@ -1,0 +1,833 @@
+{
+  "queries": [
+    {
+      "label": "decentralized AI marketplace",
+      "search": "all:\"decentralized AI\" AND all:\"marketplace\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "A Technical Policy Blueprint for Trustworthy Decentralized AI",
+          "summary": "Decentralized AI systems, such as federated learning, can play a critical role in further unlocking AI asset marketplaces (e.g., healthcare data marketplaces) thanks to increased asset privacy protection. Unlocking this big potential necessitates governance mechanisms that are transparent, scalable, and verifiable. However current governance approaches rely on bespoke, infrastructure-specific poli",
+          "link": "https://arxiv.org/abs/2512.11878v3",
+          "published": "2025-12-07"
+        },
+        {
+          "title": "Libraries, Integrations and Hubs for Decentralized AI using IPFS",
+          "summary": "AI requires heavy amounts of storage and compute. As a result, AI developers are regular users of centralised cloud services such as AWS, GCP and Azure, compute environments such as Jupyter and Colab notebooks, and AI Hubs such as HuggingFace and ActiveLoop. There services are associated with certain benefits and limitations that stem from the underlying infrastructure and governance systems with ",
+          "link": "https://arxiv.org/abs/2210.16651v1",
+          "published": "2022-10-29"
+        },
+        {
+          "title": "Decentralized Technologies for AI Hubs",
+          "summary": "AI requires heavy amounts of storage and compute with assets that are commonly stored in AI Hubs. AI Hubs have contributed significantly to the democratization of AI. However, existing implementations are associated with certain benefits and limitations that stem from the underlying infrastructure and governance systems with which they are built. These limitations include high costs, lack of monet",
+          "link": "https://arxiv.org/abs/2306.04274v1",
+          "published": "2023-06-07"
+        },
+        {
+          "title": "Decentralized AI: Permissionless LLM Inference on POKT Network",
+          "summary": "POKT Network's decentralized Remote Procedure Call (RPC) infrastructure, surpassing 740 billion requests since launching on MainNet in 2020, is well-positioned to extend into providing AI inference services with minimal design or implementation modifications. This litepaper illustrates how the network's open-source and permissionless design aligns incentives among model researchers, hardware opera",
+          "link": "https://arxiv.org/abs/2405.20450v1",
+          "published": "2024-05-30"
+        },
+        {
+          "title": "SwarmSearch: Decentralized Search Engine with Self-Funding Economy",
+          "summary": "Centralized search engines control what we see, read, believe, and vote. Consequently, they raise concerns over information control, censorship, and bias. Decentralized search engines offer a remedy to this problem, but their adoption has been hindered by their inferior quality and lack of a self-sustaining economic framework. We present SwarmSearch, a fully decentralized, AI-powered search engine",
+          "link": "https://arxiv.org/abs/2505.07452v2",
+          "published": "2025-05-12"
+        }
+      ]
+    },
+    {
+      "label": "ml marketplace + blockchain",
+      "search": "all:\"machine learning\" AND all:\"marketplace\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Practical Marketplace Optimization at Uber Using Causally-Informed Machine Learning",
+          "summary": "Budget allocation of marketplace levers, such as incentives for drivers and promotions for riders, has long been a technical and business challenge at Uber; understanding lever budget changes' impact and estimating cost efficiency to achieve predefined budgets is crucial, with the goal of optimal allocations that maximize business value; we introduce an end-to-end machine learning and optimization",
+          "link": "https://arxiv.org/abs/2407.19078v1",
+          "published": "2024-07-26"
+        },
+        {
+          "title": "Estimating Supply Incrementality in Two-sided Marketplaces: A Causal Machine Learning Approach",
+          "summary": "In two-sided marketplaces with heterogeneous products, it is important to understand the causal relationship between additional supply and marketplace outcomes, such as the total quantity transacted or transaction value in the marketplace. This paper studies a causal machine learning approach to estimating this relationship across product segments. We use the Airbnb marketplace as an example, focu",
+          "link": "https://arxiv.org/abs/2606.30999v1",
+          "published": "2026-06-30"
+        },
+        {
+          "title": "Trading off Relevance and Revenue in the Jobs Marketplace: Estimation, Optimization and Auction Design",
+          "summary": "We study the problem of position allocation in job marketplaces, where the platform determines the ranking of the jobs for each seeker. The design of ranking mechanisms is critical to marketplace efficiency, as it influences both short-term revenue from promoted job placements and long-term health through sustained seeker engagement. Our analysis focuses on the tradeoff between revenue and relevan",
+          "link": "https://arxiv.org/abs/2504.03618v1",
+          "published": "2025-04-04"
+        },
+        {
+          "title": "Dynamic Synthetic Controls vs. Panel-Aware Double Machine Learning for Geo-Level Marketing Impact Estimation",
+          "summary": "Accurately quantifying geo-level marketing lift in two-sided marketplaces is challenging: the Synthetic Control Method (SCM) often exhibits high power yet systematically under-estimates effect size, while panel-style Double Machine Learning (DML) is seldom benchmarked against SCM. We build an open, fully documented simulator that mimics a typical large-scale geo roll-out: N_unit regional markets a",
+          "link": "https://arxiv.org/abs/2508.20335v1",
+          "published": "2025-08-28"
+        },
+        {
+          "title": "Understanding Guest Preferences and Optimizing Two-sided Marketplaces: Airbnb as an Example",
+          "summary": "Airbnb is a community based on connection and belonging -- many hosts on Airbnb are everyday people who share their worlds to provide guests with the feeling of connection and being at home; Airbnb strives to connect people and places. Among our efforts to connect guests and hosts, we provide tools to enable hosts to set competitive prices, which helps improve affordability for guests while helpin",
+          "link": "https://arxiv.org/abs/2607.00280v1",
+          "published": "2026-07-01"
+        },
+        {
+          "title": "Network Based Pricing for 3D Printing Services in Two-Sided Manufacturing-as-a-Service Marketplace",
+          "summary": "This paper presents approaches to determine a network based pricing for 3D printing services in the context of a two-sided manufacturing-as-a-service marketplace. The intent is to provide cost analytics to enable service bureaus to better compete in the market by moving away from setting ad-hoc and subjective prices. A data mining approach with machine learning methods is used to estimate a price ",
+          "link": "https://arxiv.org/abs/1907.07673v1",
+          "published": "2019-07-17"
+        },
+        {
+          "title": "Dropbear: Machine Learning Marketplaces made Trustworthy with Byzantine Model Agreement",
+          "summary": "Marketplaces for machine learning (ML) models are emerging as a way for organizations to monetize models. They allow model owners to retain control over hosted models by using cloud resources to execute ML inference requests for a fee, preserving model confidentiality. Clients that rely on hosted models require trustworthy inference results, even when models are managed by third parties. While the",
+          "link": "https://arxiv.org/abs/2205.15757v1",
+          "published": "2022-05-31"
+        },
+        {
+          "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+          "summary": "The rise of distributed and privacy-preserving machine learning has sparked interest in decentralized gradient marketplaces, where participants trade intermediate artifacts like gradients. However, existing Federated Learning (FL) benchmarks overlook critical economic and systemic factors unique to such marketplaces-cost-effectiveness, fairness to sellers, and market stability-especially when a bu",
+          "link": "https://arxiv.org/abs/2509.05833v1",
+          "published": "2025-09-06"
+        },
+        {
+          "title": "Data Pricing in Machine Learning Pipelines",
+          "summary": "Machine learning is disruptive. At the same time, machine learning can only succeed by collaboration among many parties in multiple steps naturally as pipelines in an eco-system, such as collecting data for possible machine learning applications, collaboratively training models by multiple parties and delivering machine learning services to end users. Data is critical and penetrating in the whole ",
+          "link": "https://arxiv.org/abs/2108.07915v1",
+          "published": "2021-08-18"
+        },
+        {
+          "title": "Equitable Marketplace Mechanism Design",
+          "summary": "We consider a trading marketplace that is populated by traders with diverse trading strategies and objectives. The marketplace allows the suppliers to list their goods and facilitates matching between buyers and sellers. In return, such a marketplace typically charges fees for facilitating trade. The goal of this work is to design a dynamic fee schedule for the marketplace that is equitable and pr",
+          "link": "https://arxiv.org/abs/2209.15418v1",
+          "published": "2022-09-22"
+        },
+        {
+          "title": "PredictChain: Empowering Collaboration and Data Accessibility for AI in a Decentralized Blockchain-based Marketplace",
+          "summary": "Limited access to computing resources and training data poses significant challenges for individuals and groups aiming to train and utilize predictive machine learning models. Although numerous publicly available machine learning models exist, they are often unhosted, necessitating end-users to establish their computational infrastructure. Alternatively, these models may only be accessible through",
+          "link": "https://arxiv.org/abs/2307.15168v1",
+          "published": "2023-07-27"
+        },
+        {
+          "title": "A Framework for Fairness in Two-Sided Marketplaces",
+          "summary": "Many interesting problems in the Internet industry can be framed as a two-sided marketplace problem. Examples include search applications and recommender systems showing people, jobs, movies, products, restaurants, etc. Incorporating fairness while building such systems is crucial and can have a deep social and economic impact (applications include job recommendations, recruiters searching for can",
+          "link": "https://arxiv.org/abs/2006.12756v1",
+          "published": "2020-06-23"
+        },
+        {
+          "title": "Collaborative Machine Learning Markets with Data-Replication-Robust Payments",
+          "summary": "We study the problem of collaborative machine learning markets where multiple parties can achieve improved performance on their machine learning tasks by combining their training data. We discuss desired properties for these machine learning markets in terms of fair revenue distribution and potential threats, including data replication. We then instantiate a collaborative market for cases where pa",
+          "link": "https://arxiv.org/abs/1911.09052v1",
+          "published": "2019-11-08"
+        },
+        {
+          "title": "DaDaDa: A Dataset for Data Pricing in Data Marketplaces",
+          "summary": "High-quality data drives machine learning advances across industries. Recognizing the value of data, data transactions are increasingly common, giving rise to many data marketplaces, e.g., AWS Marketplace, Databricks, and Datarade. However, determining the appropriate prices for data products remains a significant challenge due to the unique properties of data products. Traditional pricing methods",
+          "link": "https://arxiv.org/abs/2607.08785v1",
+          "published": "2026-06-13"
+        },
+        {
+          "title": "GCF: Generalized Causal Forest for Heterogeneous Treatment Effect Estimation in Online Marketplace",
+          "summary": "Uplift modeling is a rapidly growing approach that utilizes causal inference and machine learning methods to directly estimate the heterogeneous treatment effects, which has been widely applied to various online marketplaces to assist large-scale decision-making in recent years. The existing popular models, like causal forest (CF), are limited to either discrete treatments or posing parametric ass",
+          "link": "https://arxiv.org/abs/2203.10975v2",
+          "published": "2022-03-21"
+        }
+      ]
+    },
+    {
+      "label": "verifiable inference",
+      "search": "all:\"verifiable inference\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Repeated-Game Security for Restaking-Based Verifiable Inference",
+          "summary": "Restaking-based protocols enable verifiable LLM inference without the high proving cost of zkML or the hardware trust assumptions of TEEs. Their security is commonly justified by a one-round slashing condition: a rational provider should not cheat when the expected penalty exceeds the cost saving from dishonest inference. This paper shows that this condition can overstate security when inference i",
+          "link": "https://arxiv.org/abs/2608.09055v1",
+          "published": "2026-08-10"
+        },
+        {
+          "title": "TOPLOC: A Locality Sensitive Hashing Scheme for Trustless Verifiable Inference",
+          "summary": "Large language models (LLMs) have proven to be very capable, but access to frontier models currently relies on inference providers. This introduces trust challenges: how can we be sure that the provider is using the model configuration they claim? We propose TOPLOC, a novel method for verifiable inference that addresses this problem. TOPLOC leverages a compact locality-sensitive hashing mechanism ",
+          "link": "https://arxiv.org/abs/2501.16007v2",
+          "published": "2025-01-27"
+        },
+        {
+          "title": "Privacy-Preserving Mechanisms Enable Cheap Verifiable Inference of LLMs",
+          "summary": "As large language models (LLMs) continue to grow in size, fewer users are able to host and run models locally. This has led to increased use of third-party hosting services. However, in this setting, there is a lack of guarantees on the computation performed by the inference provider. For example, a dishonest provider may replace an expensive large model with a cheaper-to-run weaker model and retu",
+          "link": "https://arxiv.org/abs/2602.17223v1",
+          "published": "2026-02-19"
+        },
+        {
+          "title": "TensorCommitments: A Lightweight Verifiable Inference for Language Models",
+          "summary": "Most large language models (LLMs) run on external clouds: users send a prompt, pay for inference, and must trust that the remote GPU executes the LLM without any adversarial tampering. We critically ask how to achieve verifiable LLM inference, where a prover (the service) must convince a verifier (the client) that an inference was run correctly without rerunning the LLM. Existing cryptographic wor",
+          "link": "https://arxiv.org/abs/2602.12630v1",
+          "published": "2026-02-13"
+        },
+        {
+          "title": "Zero-Knowledge Proof Based Verifiable Inference of Models",
+          "summary": "Recent advances in artificial intelligence (AI), particularly deep learning, have led to widespread adoption across various applications. Yet, a fundamental challenge persists: how can we verify the correctness of AI model inference when model owners cannot (or will not) reveal their parameters? These parameters represent enormous training costs and valuable intellectual property, making transpare",
+          "link": "https://arxiv.org/abs/2511.19902v1",
+          "published": "2025-11-25"
+        },
+        {
+          "title": "Jolt Atlas: Verifiable Inference via Lookup Arguments in Zero Knowledge",
+          "summary": "We present Jolt Atlas, a zero-knowledge machine learning (zkML) framework that extends the Jolt proving system to model inference. Unlike zkVMs (zero-knowledge virtual machines), which emulate CPU instruction execution, Jolt Atlas adapts Jolt's lookup-centric approach and applies it directly to ONNX tensor operations. The ONNX computational model eliminates the need for CPU registers and simplifie",
+          "link": "https://arxiv.org/abs/2602.17452v1",
+          "published": "2026-02-19"
+        },
+        {
+          "title": "SVIP: Towards Verifiable Inference of Open-source Large Language Models",
+          "summary": "The ever-increasing size of open-source Large Language Models (LLMs) renders local deployment impractical for individual users. Decentralized computing has emerged as a cost-effective solution, allowing individuals and small companies to perform LLM inference for users using surplus computational power. However, a computing provider may stealthily substitute the requested LLM with a smaller, less ",
+          "link": "https://arxiv.org/abs/2410.22307v3",
+          "published": "2024-10-29"
+        },
+        {
+          "title": "NanoZK: Privacy-Preserving Verifiable Inference for Large Language Models via Layerwise Zero-Knowledge Proofs",
+          "summary": "We present NanoZK, a zero-knowledge proof system for verifiable LLM inference: clients and third-party auditors check that a provider executed the advertised model on a committed input without learning weights or activations. NanoZK introduces a layerwise proof framework that decomposes transformer inference into independently provable layers linked by a SHA-256 commitment chain, yielding constant",
+          "link": "https://arxiv.org/abs/2603.18046v2",
+          "published": "2026-03-17"
+        },
+        {
+          "title": "Slalom: Fast, Verifiable and Private Execution of Neural Networks in Trusted Hardware",
+          "summary": "As Machine Learning (ML) gets applied to security-critical or sensitive domains, there is a growing need for integrity and privacy for outsourced ML computations. A pragmatic solution comes from Trusted Execution Environments (TEEs), which use hardware and software protections to isolate sensitive computations from the untrusted software stack. However, these isolation guarantees come at a price i",
+          "link": "https://arxiv.org/abs/1806.03287v2",
+          "published": "2018-06-08"
+        },
+        {
+          "title": "On Polynomial Approximations for Privacy-Preserving and Verifiable ReLU Networks",
+          "summary": "Outsourcing deep neural networks (DNNs) inference tasks to an untrusted cloud raises data privacy and integrity concerns. While there are many techniques to ensure privacy and integrity for polynomial-based computations, DNNs involve non-polynomial computations. To address these challenges, several privacy-preserving and verifiable inference techniques have been proposed based on replacing the non",
+          "link": "https://arxiv.org/abs/2011.05530v4",
+          "published": "2020-11-11"
+        },
+        {
+          "title": "Using Z3 to Verify Inferences in Fragments of Linear Logic",
+          "summary": "Linear logic is a substructural logic proposed as a refinement of classical and intuitionistic logics, with applications in programming languages, game semantics, and quantum physics. We present a template for Gentzen-style linear logic sequents that supports verification of logic inference rules using automatic theorem proving. Specifically, we use the Z3 Theorem Prover [8] to check targeted infe",
+          "link": "https://arxiv.org/abs/2309.13796v1",
+          "published": "2023-09-25"
+        },
+        {
+          "title": "SkillGen: Verified Inference-Time Agent Skill Synthesis",
+          "summary": "Skills are a promising way to improve LLM agent capabilities without retraining, while keeping the added procedure reusable and controllable. However, high-quality skills are still largely written by hand. We introduce SkillGen, a multi-agent framework that synthesizes a single auditable skill from trajectories generated by a base agent. The output is a human-readable artifact that can be inspecte",
+          "link": "https://arxiv.org/abs/2605.10999v1",
+          "published": "2026-05-09"
+        },
+        {
+          "title": "Verifiable and Confidential DNN Inference on Low-End Edge Devices",
+          "summary": "Deploying deep neural network (DNN) inference on low-end edge devices raises two key challenges: protecting model confidentiality against a potentially compromised edge system and enabling verifiable inference without incurring prohibitive overhead. Existing approaches either house partial models and inference software within trusted execution environments (TEEs), resulting in high cost and an app",
+          "link": "https://arxiv.org/abs/2606.07470v1",
+          "published": "2026-06-05"
+        },
+        {
+          "title": "A Survey of Zero-Knowledge Proof Based Verifiable Machine Learning",
+          "summary": "Machine learning is increasingly deployed through outsourced and cloud-based pipelines, which improve accessibility but also raise concerns about computational integrity, data privacy, and model confidentiality. Zero-knowledge proofs (ZKPs) provide a compelling foundation for verifiable machine learning because they allow one party to certify that a training, testing, or inference result was produ",
+          "link": "https://arxiv.org/abs/2502.18535v2",
+          "published": "2025-02-25"
+        },
+        {
+          "title": "DiFR: Inference Verification Despite Nondeterminism",
+          "summary": "As demand for LLM inference grows, it is becoming increasingly important that providers and their customers can verify that inference processes are performed correctly, without errors or tampering. However, re-running the same inference process twice often leads to different results due to benign numerical noise, making it difficult to distinguish legitimate variation from actual problems. To addr",
+          "link": "https://arxiv.org/abs/2511.20621v1",
+          "published": "2025-11-25"
+        }
+      ]
+    },
+    {
+      "label": "incentive mechanism + model market",
+      "search": "all:\"incentive\" AND all:\"model market\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "How sensitive are equilibrium pricing models to real-world distortions?",
+          "summary": "In both finance and economics, quantitative models are usually studied as isolated mathematical objects --- most often defined by very strong simplifying assumptions concerning rationality, efficiency and the existence of disequilibrium adjustment mechanisms. This raises the important question of how sensitive such models might be to real-world effects that violate the assumptions. We show how the",
+          "link": "https://arxiv.org/abs/1010.0027v1",
+          "published": "2010-09-30"
+        },
+        {
+          "title": "Deep Learning for Double Auction",
+          "summary": "Auctions are important mechanisms extensively implemented in various markets, e.g., search engines' keyword auctions, antique auctions, etc. Finding an optimal auction mechanism is extremely difficult due to the constraints of imperfect information, incentive compatibility (IC), and individual rationality (IR). In addition to the traditional economic methods, some recently attempted to find the op",
+          "link": "https://arxiv.org/abs/2504.05355v2",
+          "published": "2025-04-07"
+        },
+        {
+          "title": "A multi-asset, agent-based approach applied to DeFi lending protocol modelling",
+          "summary": "We assess the market risk of the DeFi lending protocols using a multi-asset agent-based model to simulate ensembles of users subject to price-driven liquidation risk. Our multi-asset methodology shows that the protocol's systemic risk is small under stress and that enough collateral is always present to underwrite active loans. Our simulations use a wide variety of historical data to model market ",
+          "link": "https://arxiv.org/abs/2211.08870v2",
+          "published": "2022-11-16"
+        },
+        {
+          "title": "Secure and Reliable Transfer Learning Framework for 6G-enabled Internet of Vehicles",
+          "summary": "In the coming 6G era, Internet of Vehicles (IoV) has been evolving towards 6G-enabled IoV with super-high data rate, seamless networking coverage, and ubiquitous intelligence by Artificial Intelligence (AI). Transfer Learning (TL) has great potential to empower promising 6G-enabled IoV, such as smart driving assistance, with its outstanding features including enhancing quality and quantity of trai",
+          "link": "https://arxiv.org/abs/2111.05804v1",
+          "published": "2021-11-10"
+        }
+      ]
+    },
+    {
+      "label": "model marketplace",
+      "search": "all:\"model marketplace\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Golden Grain: Building a Secure and Decentralized Model Marketplace for MLaaS",
+          "summary": "ML-as-a-service (MLaaS) becomes increasingly popular and revolutionizes the lives of people. A natural requirement for MLaaS is, however, to provide highly accurate prediction services. To achieve this, current MLaaS systems integrate and combine multiple well-trained models in their services. Yet, in reality, there is no easy way for MLaaS providers, especially for startups, to collect sufficient",
+          "link": "https://arxiv.org/abs/2011.06458v5",
+          "published": "2020-11-12"
+        },
+        {
+          "title": "Data Valuation and Selection in a Federated Model Marketplace",
+          "summary": "In the era of Artificial Intelligence (AI), marketplaces have become essential platforms for facilitating the exchange of data products to foster data sharing. Model transactions provide economic solutions in data marketplaces that enhance data reusability and ensure the traceability of data ownership. To establish trustworthy data marketplaces, Federated Learning (FL) has emerged as a promising p",
+          "link": "https://arxiv.org/abs/2509.18104v1",
+          "published": "2025-09-09"
+        },
+        {
+          "title": "Moderating Model Marketplaces: Platform Governance Puzzles for AI Intermediaries",
+          "summary": "The AI development community is increasingly making use of hosting intermediaries such as Hugging Face provide easy access to user-uploaded models and training data. These model marketplaces lower technical deployment barriers for hundreds of thousands of users, yet can be used in numerous potentially harmful and illegal ways. In this article, we explain ways in which AI systems, which can both `c",
+          "link": "https://arxiv.org/abs/2311.12573v3",
+          "published": "2023-11-21"
+        },
+        {
+          "title": "Policy or Community?: Supporting Individual Model Creators' Open Model Development in Model Marketplaces",
+          "summary": "Lightweight fine-tuning techniques and the rise of 'open' AI model marketplaces have enabled individuals to easily build and release generative models. Yet, this accessibility also raises risks, including the production of harmful and infringing content. While platforms offer policies and responsible AI tools, their effectiveness may be limited, as creators engage with partially open models that v",
+          "link": "https://arxiv.org/abs/2602.19354v1",
+          "published": "2026-02-22"
+        },
+        {
+          "title": "FL-Market: Trading Private Models in Federated Learning",
+          "summary": "The difficulty in acquiring a sufficient amount of training data is a major bottleneck for machine learning (ML) based data analytics. Recently, commoditizing ML models has been proposed as an economical and moderate solution to ML-oriented data acquisition. However, existing model marketplaces assume that the broker can access data owners' private training data, which may not be realistic in prac",
+          "link": "https://arxiv.org/abs/2106.04384v4",
+          "published": "2021-06-08"
+        },
+        {
+          "title": "Dropbear: Machine Learning Marketplaces made Trustworthy with Byzantine Model Agreement",
+          "summary": "Marketplaces for machine learning (ML) models are emerging as a way for organizations to monetize models. They allow model owners to retain control over hosted models by using cloud resources to execute ML inference requests for a fee, preserving model confidentiality. Clients that rely on hosted models require trustworthy inference results, even when models are managed by third parties. While the",
+          "link": "https://arxiv.org/abs/2205.15757v1",
+          "published": "2022-05-31"
+        },
+        {
+          "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection",
+          "summary": "Machine learning (ML) models have become essential tools in various scenarios. Their effectiveness, however, hinges on a substantial volume of data for satisfactory performance. Model marketplaces have thus emerged as crucial platforms bridging model consumers seeking ML solutions and data owners possessing valuable data. These marketplaces leverage model trading mechanisms to properly incentive d",
+          "link": "https://arxiv.org/abs/2502.08284v1",
+          "published": "2025-02-12"
+        },
+        {
+          "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+          "summary": "The rise of distributed and privacy-preserving machine learning has sparked interest in decentralized gradient marketplaces, where participants trade intermediate artifacts like gradients. However, existing Federated Learning (FL) benchmarks overlook critical economic and systemic factors unique to such marketplaces-cost-effectiveness, fairness to sellers, and market stability-especially when a bu",
+          "link": "https://arxiv.org/abs/2509.05833v1",
+          "published": "2025-09-06"
+        },
+        {
+          "title": "Competitive Equilibria in Matching Markets with Budgets",
+          "summary": "We study competitive equilibria in the classic Shapley-Shubik assignment model with indivisible goods and unit-demand buyers, with budget constraints: buyers can specify a maximum price they are willing to pay for each item, beyond which they cannot afford the item. This single discontinuity introduced by the budget constraint fundamentally changes the properties of equilibria: in the assignment m",
+          "link": "https://arxiv.org/abs/1004.2565v2",
+          "published": "2010-04-15"
+        }
+      ]
+    },
+    {
+      "label": "decentralized inference network",
+      "search": "all:\"decentralized\" AND all:\"inference\" AND all:\"network\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Approximate Decentralized Bayesian Inference",
+          "summary": "This paper presents an approximate method for performing Bayesian inference in models with conditional independence over a decentralized network of learning agents. The method first employs variational inference on each individual learning agent to generate a local approximate posterior, the agents transmit their local posteriors to other agents in the network, and finally each agent combines its ",
+          "link": "https://arxiv.org/abs/1403.7471v3",
+          "published": "2014-03-28"
+        },
+        {
+          "title": "Distributed Learning and Inference Systems: A Networking Perspective",
+          "summary": "Machine learning models have achieved, and in some cases surpassed, human-level performance in various tasks, mainly through centralized training of static models and the use of large models stored in centralized clouds for inference. However, this centralized approach has several drawbacks, including privacy concerns, high storage demands, a single point of failure, and significant computing requ",
+          "link": "https://arxiv.org/abs/2501.05323v1",
+          "published": "2025-01-09"
+        },
+        {
+          "title": "Privacy-Preserving Decentralized Inference with Graph Neural Networks in Wireless Networks",
+          "summary": "As an efficient neural network model for graph data, graph neural networks (GNNs) recently find successful applications for various wireless optimization problems. Given that the inference stage of GNNs can be naturally implemented in a decentralized manner, GNN is a potential enabler for decentralized control/management in the next-generation wireless communications. Privacy leakage, however, may",
+          "link": "https://arxiv.org/abs/2208.06963v2",
+          "published": "2022-08-15"
+        },
+        {
+          "title": "Empirical Likelihood Inference over Decentralized Networks",
+          "summary": "As a nonparametric statistical inference approach, empirical likelihood has been found very useful in numerous occasions. However, it encounters serious computational challenges when applied directly to the modern massive dataset. This article studies empirical likelihood inference over decentralized distributed networks, where the data are locally collected and stored by different nodes. To fully",
+          "link": "https://arxiv.org/abs/2401.12836v1",
+          "published": "2024-01-23"
+        },
+        {
+          "title": "Decentralized AI: Permissionless LLM Inference on POKT Network",
+          "summary": "POKT Network's decentralized Remote Procedure Call (RPC) infrastructure, surpassing 740 billion requests since launching on MainNet in 2020, is well-positioned to extend into providing AI inference services with minimal design or implementation modifications. This litepaper illustrates how the network's open-source and permissionless design aligns incentives among model researchers, hardware opera",
+          "link": "https://arxiv.org/abs/2405.20450v1",
+          "published": "2024-05-30"
+        },
+        {
+          "title": "Context-Aware Inference via Performance Forecasting in Decentralized Learning Networks",
+          "summary": "In decentralized learning networks, predictions from many participants are combined to generate a network inference. While many studies have demonstrated performance benefits of combining multiple model predictions, existing strategies using linear pooling methods (ranging from simple averaging to dynamic weight updates) face a key limitation. Dynamic prediction combinations that rely on historica",
+          "link": "https://arxiv.org/abs/2510.06444v1",
+          "published": "2025-10-07"
+        },
+        {
+          "title": "Decentralized LLM Inference over Edge Networks with Energy Harvesting",
+          "summary": "Large language models have significantly transformed multiple fields with their exceptional performance in natural language tasks, but their deployment in resource-constrained environments like edge networks presents an ongoing challenge. Decentralized techniques for inference have emerged, distributing the model blocks among multiple devices to improve flexibility and cost effectiveness. However,",
+          "link": "https://arxiv.org/abs/2408.15907v1",
+          "published": "2024-08-28"
+        },
+        {
+          "title": "Decentralized Statistical Inference with Unrolled Graph Neural Networks",
+          "summary": "In this paper, we investigate the decentralized statistical inference problem, where a network of agents cooperatively recover a (structured) vector from private noisy samples without centralized coordination. Existing optimization-based algorithms suffer from issues of model mismatch and poor convergence speed, and thus their performance would be degraded, provided that the number of communicatio",
+          "link": "https://arxiv.org/abs/2104.01555v1",
+          "published": "2021-04-04"
+        },
+        {
+          "title": "On the Relationship Between Inference and Data Privacy in Decentralized IoT Networks",
+          "summary": "In a decentralized Internet of Things (IoT) network, a fusion center receives information from multiple sensors to infer a public hypothesis of interest. To prevent the fusion center from abusing the sensor information, each sensor sanitizes its local observation using a local privacy mapping, which is designed to achieve both inference privacy of a private hypothesis and data privacy of the senso",
+          "link": "https://arxiv.org/abs/1811.10322v3",
+          "published": "2018-11-26"
+        },
+        {
+          "title": "Parallax: Efficient LLM Inference Service over Decentralized Environment",
+          "summary": "Deploying a large language model (LLM) inference service remains costly because centralized serving depends on specialized GPU clusters and high-bandwidth interconnects in datacenters. An appealing alternative is to leverage collaborative decentralized GPU pools. However, heterogeneity in GPU and limited interconnected network bandwidth, along with potentially dynamic availability, make efficient ",
+          "link": "https://arxiv.org/abs/2509.26182v1",
+          "published": "2025-09-30"
+        },
+        {
+          "title": "Decentralized Inference with Graph Neural Networks in Wireless Communication Systems",
+          "summary": "Graph neural network (GNN) is an efficient neural network model for graph data and is widely used in different fields, including wireless communications. Different from other neural network models, GNN can be implemented in a decentralized manner with information exchanges among neighbors, making it a potentially powerful tool for decentralized control in wireless communication systems. The main b",
+          "link": "https://arxiv.org/abs/2104.09027v2",
+          "published": "2021-04-19"
+        },
+        {
+          "title": "Speculative Decoding in Decentralized LLM Inference: Turning Communication Latency into Computation Throughput",
+          "summary": "Speculative decoding accelerates large language model (LLM) inference by using a lightweight draft model to propose tokens that are later verified by a stronger target model. While effective in centralized systems, its behavior in decentralized settings, where network latency often dominates compute, remains under-characterized. We present Decentralized Speculative Decoding (DSD), a plug-and-play ",
+          "link": "https://arxiv.org/abs/2511.11733v1",
+          "published": "2025-11-13"
+        },
+        {
+          "title": "Semi-decentralized Inference in Heterogeneous Graph Neural Networks for Traffic Demand Forecasting: An Edge-Computing Approach",
+          "summary": "Prediction of taxi service demand and supply is essential for improving customer's experience and provider's profit. Recently, graph neural networks (GNNs) have been shown promising for this application. This approach models city regions as nodes in a transportation graph and their relations as edges. GNNs utilize local node features and the graph structure in the prediction. However, more efficie",
+          "link": "https://arxiv.org/abs/2303.00524v2",
+          "published": "2023-02-28"
+        },
+        {
+          "title": "Task-Oriented Edge Networks: Decentralized Learning Over Wireless Fronthaul",
+          "summary": "This paper studies task-oriented edge networks where multiple edge internet-of-things nodes execute machine learning tasks with the help of powerful deep neural networks (DNNs) at a network cloud. Separate edge nodes (ENs) result in a partially observable system where they can only get partitioned features of the global network states. These local observations need to be forwarded to the cloud via",
+          "link": "https://arxiv.org/abs/2312.01288v1",
+          "published": "2023-12-03"
+        },
+        {
+          "title": "DeServe: Towards Affordable Offline LLM Inference via Decentralization",
+          "summary": "The rapid growth of generative AI and its integration into everyday workflows have significantly increased the demand for large language model (LLM) inference services. While proprietary models remain popular, recent advancements in open-source LLMs have positioned them as strong contenders. However, deploying these models is often constrained by the high costs and limited availability of GPU reso",
+          "link": "https://arxiv.org/abs/2501.14784v1",
+          "published": "2025-01-04"
+        }
+      ]
+    },
+    {
+      "label": "proof of inference",
+      "search": "all:\"proof of inference\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "HadAgent: Harness-Aware Decentralized Agentic AI Serving with Proof-of-Inference Blockchain Consensus",
+          "summary": "Proof-of-Work (PoW) blockchain consensus consumes vast computational resources without producing useful output, while the rapid growth of large language model (LLM) agents has created unprecedented demand for GPU computation. We present HadAgent, a decentralized agentic AI serving system that replaces hash-based mining with Proof-of-Inference (PoI), a consensus mechanism in which nodes earn block-",
+          "link": "https://arxiv.org/abs/2604.18614v1",
+          "published": "2026-04-15"
+        },
+        {
+          "title": "SEPIA: Search for Proofs Using Inferred Automata",
+          "summary": "This paper describes SEPIA, a tool for automated proof generation in Coq. SEPIA combines model inference with interactive theorem proving. Existing proof corpora are modelled using state-based models inferred from tactic sequences. These can then be traversed automatically to identify proofs. The SEPIA system is described and its performance evaluated on three Coq datasets. Our results show that S",
+          "link": "https://arxiv.org/abs/1505.07987v1",
+          "published": "2015-05-29"
+        },
+        {
+          "title": "The Long Way to Deforestation (Technical Report): A Type Inference and Elaboration Technique for Removing Intermediate Data Structures",
+          "summary": "Deforestation is a compiler optimization that removes intermediate data structure allocations from functional programs to improve their efficiency. This is an old idea, but previous approaches have proved limited or impractical: they either only worked on compositions of predefined combinators (shortcut fusion), or involved the aggressive unfolding of recursive definitions until a depth limit was ",
+          "link": "https://arxiv.org/abs/2410.02232v2",
+          "published": "2024-10-03"
+        },
+        {
+          "title": "Towards Verifiable AI with Lightweight Cryptographic Proofs of Inference",
+          "summary": "When large AI models are deployed as cloud-based services, clients have no guarantee that responses are correct or were produced by the intended model. Rerunning inference locally is infeasible for large models, and existing cryptographic proof systems -- while providing strong correctness guarantees -- introduce prohibitive prover overhead (e.g., hundreds of seconds per query for billion-paramete",
+          "link": "https://arxiv.org/abs/2603.19025v1",
+          "published": "2026-03-19"
+        },
+        {
+          "title": "Automating the Generation of High School Geometry Proofs using Prolog in an Educational Context",
+          "summary": "When working on intelligent tutor systems designed for mathematics education and its specificities, an interesting objective is to provide relevant help to the students by anticipating their next steps. This can only be done by knowing, beforehand, the possible ways to solve a problem. Hence the need for an automated theorem prover that provide proofs as they would be written by a student. To achi",
+          "link": "https://arxiv.org/abs/2002.12551v1",
+          "published": "2020-02-28"
+        },
+        {
+          "title": "TensorCommitments: A Lightweight Verifiable Inference for Language Models",
+          "summary": "Most large language models (LLMs) run on external clouds: users send a prompt, pay for inference, and must trust that the remote GPU executes the LLM without any adversarial tampering. We critically ask how to achieve verifiable LLM inference, where a prover (the service) must convince a verifier (the client) that an inference was run correctly without rerunning the LLM. Existing cryptographic wor",
+          "link": "https://arxiv.org/abs/2602.12630v1",
+          "published": "2026-02-13"
+        },
+        {
+          "title": "Mining State-Based Models from Proof Corpora",
+          "summary": "Interactive theorem provers have been used extensively to reason about various software/hardware systems and mathematical theorems. The key challenge when using an interactive prover is finding a suitable sequence of proof steps that will lead to a successful proof requires a significant amount of human intervention. This paper presents an automated technique that takes as input examples of succes",
+          "link": "https://arxiv.org/abs/1405.3623v1",
+          "published": "2014-05-14"
+        },
+        {
+          "title": "SAKSHI: Decentralized AI Platforms",
+          "summary": "Large AI models (e.g., Dall-E, GPT4) have electrified the scientific, technological and societal landscape through their superhuman capabilities. These services are offered largely in a traditional web2.0 format (e.g., OpenAI's GPT4 service). As more large AI models proliferate (personalizing and specializing to a variety of domains), there is a tremendous need to have a neutral trust-free platfor",
+          "link": "https://arxiv.org/abs/2307.16562v1",
+          "published": "2023-07-31"
+        },
+        {
+          "title": "Exact uniform approximation and Dirichlet spectrum in dimension at least two",
+          "summary": "For $m\\geq 2$, we determine the Dirichlet spectrum in $\\Rm$ with respect to simultaneous approximation and the maximum norm as the entire interval $[0,1]$. This complements previous work of several authors, especially Akhunzhanov and Moshchevitin, who considered $m=2$ and Euclidean norm. We construct explicit examples of real Liouville vectors realizing any value in the unit interval. In particula",
+          "link": "https://arxiv.org/abs/2202.04951v3",
+          "published": "2022-02-10"
+        },
+        {
+          "title": "ZK-SenseLM: Verifiable Large-Model Wireless Sensing with Selective Abstention and Zero-Knowledge Attestation",
+          "summary": "ZK-SenseLM is a secure and auditable wireless sensing framework that pairs a large-model encoder for Wi-Fi channel state information (and optionally mmWave radar or RFID) with a policy-grounded decision layer and end-to-end zero-knowledge proofs of inference. The encoder uses masked spectral pretraining with phase-consistency regularization, plus a light cross-modal alignment that ties RF features",
+          "link": "https://arxiv.org/abs/2510.25677v3",
+          "published": "2025-10-29"
+        },
+        {
+          "title": "Token Inflation: How Dishonest Providers Can Overcharge for Large Language Model Usage",
+          "summary": "Per-token billing is now the standard pricing model for commercial large language models (LLMs), so the honesty of reported token counts directly affects what users pay. We show that this kind of billing is hard to audit by design: providers hide the model, the tokenizer, and the execution to protect their IP, mitigate jailbreaks, and preserve user privacy, which means an auditor can only inspect ",
+          "link": "https://arxiv.org/abs/2605.30040v1",
+          "published": "2026-05-28"
+        },
+        {
+          "title": "Pythagoras-Prover: Advancing Efficient Formal Proving via Augmented Lean Formalisation",
+          "summary": "Modern Lean theorem provers achieve strong performance only with substantial training and inference compute, driven in part by scarce verified proof data and the long reasoning traces of formal proof search, making both supervised fine-tuning (SFT) and sampling expensive. We introduce Pythagoras-Prover, a compute-efficient open-source family of Lean theorem provers built for practical compute budg",
+          "link": "https://arxiv.org/abs/2606.12594v1",
+          "published": "2026-06-10"
+        }
+      ]
+    },
+    {
+      "label": "zkML / zero-knowledge ML",
+      "search": "all:\"zkML\" OR all:\"zero knowledge machine learning\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Artemis: Efficient Commit-and-Prove SNARKs for zkML",
+          "summary": "Ensuring that AI models are both verifiable and privacy-preserving is important for trust, accountability, and compliance. To address these concerns, recent research has focused on developing zero-knowledge machine learning (zkML) techniques that enable the verification of various aspects of ML models without revealing sensitive information. However, while recent zkML advances have made significan",
+          "link": "https://arxiv.org/abs/2409.12055v2",
+          "published": "2024-09-18"
+        },
+        {
+          "title": "Trust the Process: Zero-Knowledge Machine Learning to Enhance Trust in Generative AI Interactions",
+          "summary": "Generative AI, exemplified by models like transformers, has opened up new possibilities in various domains but also raised concerns about fairness, transparency and reliability, especially in fields like medicine and law. This paper emphasizes the urgency of ensuring fairness and quality in these domains through generative AI. It explores using cryptographic techniques, particularly Zero-Knowledge",
+          "link": "https://arxiv.org/abs/2402.06414v1",
+          "published": "2024-02-09"
+        },
+        {
+          "title": "ezDPS: An Efficient and Zero-Knowledge Machine Learning Inference Pipeline",
+          "summary": "Machine Learning as a service (MLaaS) permits resource-limited clients to access powerful data analytics services ubiquitously. Despite its merits, MLaaS poses significant concerns regarding the integrity of delegated computation and the privacy of the server's model parameters. To address this issue, Zhang et al. (CCS'20) initiated the study of zero-knowledge Machine Learning (zkML). Few zkML sch",
+          "link": "https://arxiv.org/abs/2212.05428v2",
+          "published": "2022-12-11"
+        },
+        {
+          "title": "zkComposer: Decomposing Proof Construction to Scale zkML",
+          "summary": "Zero-knowledge machine learning (zkML) enables a server to perform verifiable inference while keeping model parameters private from the client. However, existing zkML systems incur prohibitive proof-generation costs. We observe that proof generation exhibits limited parallelism; that is, prover time does not decrease significantly as the number of threads increases. This limitation is because exis",
+          "link": "https://arxiv.org/abs/2607.08095v1",
+          "published": "2026-07-09"
+        },
+        {
+          "title": "Bionetta: Efficient Client-Side Zero-Knowledge Machine Learning Proving",
+          "summary": "In this report, we compare the performance of our UltraGroth-based zero-knowledge machine learning framework Bionetta to other tools of similar purpose such as EZKL, Lagrange's deep-prove, or zkml. The results show a significant boost in the proving time for custom-crafted neural networks: they can be proven even on mobile devices, enabling numerous client-side proving applications. While our sche",
+          "link": "https://arxiv.org/abs/2510.06784v2",
+          "published": "2025-10-08"
+        },
+        {
+          "title": "Knowledge is Overrated: A zero-knowledge machine learning and cryptographic hashing-based framework for verifiable, low latency inference at the LHC",
+          "summary": "Low latency event-selection (trigger) algorithms are essential components of Large Hadron Collider (LHC) operation. Modern machine learning (ML) models have shown great offline performance as classifiers and could improve trigger performance, thereby improving downstream physics analyses. However, inference on such large models does not satisfy the $40\\text{MHz}$ online latency constraint at the L",
+          "link": "https://arxiv.org/abs/2511.12592v1",
+          "published": "2025-11-16"
+        },
+        {
+          "title": "DSperse: A Framework for Targeted Verification in Zero-Knowledge Machine Learning",
+          "summary": "DSperse is a modular framework for distributed machine learning inference with strategic cryptographic verification. Operating within the emerging paradigm of distributed zero-knowledge machine learning, DSperse avoids the high cost and rigidity of full-model circuitization by enabling targeted verification of strategically chosen subcomputations. These verifiable segments, or \"slices\", may cover ",
+          "link": "https://arxiv.org/abs/2508.06972v3",
+          "published": "2025-08-09"
+        },
+        {
+          "title": "JSTprove: Pioneering Verifiable AI for a Trustless Future",
+          "summary": "The integration of machine learning (ML) systems into critical industries such as healthcare, finance, and cybersecurity has transformed decision-making processes, but it also brings new challenges around trust, security, and accountability. As AI systems become more ubiquitous, ensuring the transparency and correctness of AI-driven decisions is crucial, especially when they have direct consequenc",
+          "link": "https://arxiv.org/abs/2510.21024v1",
+          "published": "2025-10-23"
+        },
+        {
+          "title": "opp/ai: Optimistic Privacy-Preserving AI on Blockchain",
+          "summary": "The convergence of Artificial Intelligence (AI) and blockchain technology is reshaping the digital world, offering decentralized, secure, and efficient AI services on blockchain platforms. Despite the promise, the high computational demands of AI on blockchain raise significant privacy and efficiency concerns. The Optimistic Privacy-Preserving AI (opp/ai) framework is introduced as a pioneering so",
+          "link": "https://arxiv.org/abs/2402.15006v1",
+          "published": "2024-02-22"
+        },
+        {
+          "title": "A Survey of Zero-Knowledge Proof Based Verifiable Machine Learning",
+          "summary": "Machine learning is increasingly deployed through outsourced and cloud-based pipelines, which improve accessibility but also raise concerns about computational integrity, data privacy, and model confidentiality. Zero-knowledge proofs (ZKPs) provide a compelling foundation for verifiable machine learning because they allow one party to certify that a training, testing, or inference result was produ",
+          "link": "https://arxiv.org/abs/2502.18535v2",
+          "published": "2025-02-25"
+        },
+        {
+          "title": "opML: Optimistic Machine Learning on Blockchain",
+          "summary": "The integration of machine learning with blockchain technology has witnessed increasing interest, driven by the vision of decentralized, secure, and transparent AI services. In this context, we introduce opML (Optimistic Machine Learning on chain), an innovative approach that empowers blockchain systems to conduct AI model inference. opML lies a interactive fraud proof protocol, reminiscent of the",
+          "link": "https://arxiv.org/abs/2401.17555v2",
+          "published": "2024-01-31"
+        },
+        {
+          "title": "Deep Learning for Dynamic NFT Valuation",
+          "summary": "I study the price dynamics of non-fungible tokens (NFTs) and propose a deep learning framework for dynamic valuation of NFTs. I use data from the Ethereum blockchain and OpenSea to train a deep learning model on historical trades, market trends, and traits/rarity features of Bored Ape Yacht Club NFTs. After hyperparameter tuning, the model is able to predict the price of NFTs with high accuracy. I",
+          "link": "https://arxiv.org/abs/2312.05346v1",
+          "published": "2023-12-08"
+        },
+        {
+          "title": "Jolt Atlas: Verifiable Inference via Lookup Arguments in Zero Knowledge",
+          "summary": "We present Jolt Atlas, a zero-knowledge machine learning (zkML) framework that extends the Jolt proving system to model inference. Unlike zkVMs (zero-knowledge virtual machines), which emulate CPU instruction execution, Jolt Atlas adapts Jolt's lookup-centric approach and applies it directly to ONNX tensor operations. The ONNX computational model eliminates the need for CPU registers and simplifie",
+          "link": "https://arxiv.org/abs/2602.17452v1",
+          "published": "2026-02-19"
+        },
+        {
+          "title": "Privacy-Preserving Decentralized AI with Confidential Computing",
+          "summary": "This paper addresses privacy protection in decentralized Artificial Intelligence (AI) using Confidential Computing (CC) within the Atoma Network, a decentralized AI platform designed for the Web3 domain. Decentralized AI distributes AI services among multiple entities without centralized oversight, fostering transparency and robustness. However, this structure introduces significant privacy challe",
+          "link": "https://arxiv.org/abs/2410.13752v2",
+          "published": "2024-10-17"
+        },
+        {
+          "title": "Optimistic TEE-Rollups: A Hybrid Architecture for Scalable and Verifiable Generative AI Inference on Blockchain",
+          "summary": "The rapid integration of Large Language Models (LLMs) into decentralized physical infrastructure networks (DePIN) is currently bottlenecked by the Verifiability Trilemma, which posits that a decentralized inference system cannot simultaneously achieve high computational integrity, low latency, and low cost. Existing cryptographic solutions, such as Zero-Knowledge Machine Learning (ZKML), suffer fr",
+          "link": "https://arxiv.org/abs/2512.20176v1",
+          "published": "2025-12-23"
+        }
+      ]
+    },
+    {
+      "label": "data marketplace + incentive",
+      "search": "all:\"data marketplace\" AND all:\"incentive\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "D2M: A Decentralized, Privacy-Preserving, Incentive-Compatible Data Marketplace for Collaborative Learning",
+          "summary": "The rising demand for collaborative machine learning and data analytics calls for secure and decentralized data sharing frameworks that balance privacy, trust, and incentives. Existing approaches, including federated learning (FL) and blockchain-based data markets, fall short: FL often depends on trusted aggregators and lacks Byzantine robustness, while blockchain frameworks struggle with computat",
+          "link": "https://arxiv.org/abs/2512.10372v1",
+          "published": "2025-12-11"
+        },
+        {
+          "title": "Wibson: A Decentralized Data Marketplace",
+          "summary": "Our aim is for Wibson to be a blockchain-based, decentralized data marketplace that provides individuals a way to securely and anonymously sell information in a trusted environment. The combination of the Wibson token and blockchain-enabled smart contracts hopes to allow Data Sellers and Data Buyers to transact with each other directly while providing individuals the ability to maintain anonymity ",
+          "link": "https://arxiv.org/abs/1812.09966v1",
+          "published": "2018-12-24"
+        },
+        {
+          "title": "Secure Exchange of Digital Goods in a Decentralized Data Marketplace",
+          "summary": "We are tackling the problem of trading real-world private information using only cryptographic protocols and a public blockchain to guarantee honest transactions. In this project, we consider three types of agents --buyers, sellers and notaries-- interacting in a decentralized privacy-preserving data marketplace (dPDM) such as the Wibson data marketplace. This framework offers infrastructure and f",
+          "link": "https://arxiv.org/abs/1907.12625v1",
+          "published": "2019-07-29"
+        },
+        {
+          "title": "Learn then Decide: A Learning Approach for Designing Data Marketplaces",
+          "summary": "As data marketplaces become increasingly central to the digital economy, it is crucial to design efficient pricing mechanisms that optimize revenue while ensuring fair and adaptive pricing. We introduce the Maximum Auction-to-Posted Price (MAPP) mechanism, a novel two-stage approach that first estimates the bidders' value distribution through auctions and then determines the optimal posted price b",
+          "link": "https://arxiv.org/abs/2503.10773v2",
+          "published": "2025-03-13"
+        },
+        {
+          "title": "Incentivizing Truthful Data Contributions in a Marketplace for Mean Estimation",
+          "summary": "We study a data marketplace where a broker intermediates between buyers, who seek to estimate the mean \\(\u03bc\\) of an unknown normal distribution \\(\\Ncal(\u03bc, \u03c3^2)\\), and contributors, who can collect data from this distribution at a cost. The broker delegates data collection work to contributors, aggregates reported datasets, sells it to buyers, and redistributes revenue as payments to contributors. W",
+          "link": "https://arxiv.org/abs/2502.16052v4",
+          "published": "2025-02-22"
+        },
+        {
+          "title": "Selling Data at an Auction under Privacy Constraints",
+          "summary": "Private data query combines mechanism design with privacy protection to produce aggregated statistics from privately-owned data records. The problem arises in a data marketplace where data owners have personalised privacy requirements and private data valuations. We focus on the case when the data owners are single-minded, i.e., they are willing to release their data only if the data broker guaran",
+          "link": "https://arxiv.org/abs/2005.09248v1",
+          "published": "2020-05-19"
+        },
+        {
+          "title": "Smart Contract Coordinated Privacy Preserving Crowd-Sensing Campaigns",
+          "summary": "Crowd-sensing has emerged as a powerful data retrieval model, enabling diverse applications by leveraging active user participation. However, data availability and privacy concerns pose significant challenges. Traditional methods like data encryption and anonymization, while essential, may not fully address these issues. For instance, in sparsely populated areas, anonymized data can still be trace",
+          "link": "https://arxiv.org/abs/2408.10648v1",
+          "published": "2024-08-20"
+        },
+        {
+          "title": "Wibson Protocol for Secure Data Exchange and Batch Payments",
+          "summary": "Wibson is a blockchain-based, decentralized data marketplace that provides individuals a way to securely and anonymously sell information in a trusted environment. The combination of the Wibson token and blockchain-enabled smart contracts hopes to allow Data Sellers and Data Buyers to transact with each other directly while providing individuals the ability to maintain anonymity as desired. The Wi",
+          "link": "https://arxiv.org/abs/2001.08832v2",
+          "published": "2020-01-23"
+        },
+        {
+          "title": "A Cram\u00e9r-von Mises Approach to Incentivizing Truthful Data Sharing",
+          "summary": "Modern data marketplaces and data sharing consortia increasingly rely on incentive mechanisms to encourage agents to contribute data. However, schemes that reward agents based on the quantity of submitted data are vulnerable to manipulation, as agents may submit fabricated or low-quality data to inflate their rewards. Prior work has proposed comparing each agent's data against others' to promote h",
+          "link": "https://arxiv.org/abs/2506.07272v2",
+          "published": "2025-06-08"
+        }
+      ]
+    },
+    {
+      "label": "ANCHOR liveness: Bittensor (title)",
+      "search": "all:\"Bittensor\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Bittensor Protocol: The Bitcoin in Decentralized Artificial Intelligence? A Critical and Empirical Analysis",
+          "summary": "This paper investigates whether Bittensor can be considered the Bitcoin of decentralized Artificial Intelligence by directly comparing its tokenomics, decentralization properties, consensus mechanism, and incentive structure against those of Bitcoin. Leveraging on-chain data from all 64 active Bittensor subnets, we first document considerable concentration in both stake and rewards. We further sho",
+          "link": "https://arxiv.org/abs/2507.02951v1",
+          "published": "2025-06-29"
+        },
+        {
+          "title": "Bittensor Agent Arenas as a Trajectory Primitive: Distilling a Shopping Agent from ShoppingBench Subnet Traces",
+          "summary": "Small-model agentic post-training is bottlenecked less by the algorithm than by the trajectory substrate it consumes. Leading recipes (RLVR, group-relative RL, rejection-sampled re-SFT) all need multi-turn traces carrying per-trajectory supervision, and the two existing sources fall short: frontier-synthesised data inherits the synthesizer's biases and collapses the long tail, while unfiltered pro",
+          "link": "https://arxiv.org/abs/2606.10064v1",
+          "published": "2026-06-08"
+        },
+        {
+          "title": "Common Risk Factors in Decentralized AI Subnets",
+          "summary": "I derive a size premium from the constant-product automated market maker used to price Bittensor subnet tokens and test the prediction using daily data on 128 subnets. A small-minus-big factor earns 1.01% daily (Newey-West t = 3.28). The December 2025 halving of token emissions, which the theory predicts should halve the premium, reduces it from 1.17% to 0.51% (p = 0.044). Exact slippage calculati",
+          "link": "https://arxiv.org/abs/2603.29751v1",
+          "published": "2026-03-31"
+        },
+        {
+          "title": "Agentic, Context-Aware Risk Intelligence in the Internet of Value",
+          "summary": "The Internet of Value (IoV) is a heterogeneous, partially-trusted network in which the dominant marginal risk is composite (route, sentiment, liquidity, and the policy a system is willing to commit to) rather than a property of any single chain. We argue that a risk primitive adequate for this regime is a composition of five engines: a prediction engine over price, liquidity, volatility, and route",
+          "link": "https://arxiv.org/abs/2605.05878v1",
+          "published": "2026-05-07"
+        },
+        {
+          "title": "Gradients: When Markets Meet Fine-tuning -- A Distributed Approach to Model Optimisation",
+          "summary": "Current AutoML platforms leave substantial performance untapped. Testing 180 fine-tuning tasks across models from 70M to 70B parameters, we found that HuggingFace AutoTrain, TogetherAI, Databricks, and Google Cloud consistently produce suboptimal configurations. Gradients, built on the Bittensor network, attacks this problem through competition. Independent miners race to find optimal hyperparamet",
+          "link": "https://arxiv.org/abs/2506.07940v2",
+          "published": "2025-06-09"
+        },
+        {
+          "title": "Option Pricing on Automated Market Maker Tokens",
+          "summary": "We derive the stochastic price process for tokens whose sole price discovery mechanism is a constant-product automated market maker (AMM). When the net flow into the pool follows a diffusion, the token price follows a constant elasticity of variance (CEV) process, nesting Black-Scholes as the limiting case of infinite liquidity. We obtain closed-form European option prices and introduce liquidity-",
+          "link": "https://arxiv.org/abs/2603.29763v1",
+          "published": "2026-03-31"
+        },
+        {
+          "title": "Incentivizing Permissionless Distributed Learning of LLMs",
+          "summary": "We describe an incentive system for distributed deep learning of foundational models where peers are rewarded for contributions. The incentive system, \\textit{Gauntlet}, has been deployed on the bittensor blockchain and used to train a 1.2B LLM with completely permissionless contributions of pseudo-gradients: no control over the users that can register or their hardware. \\textit{Gauntlet} can be a",
+          "link": "https://arxiv.org/abs/2505.21684v1",
+          "published": "2025-05-27"
+        },
+        {
+          "title": "BitTensor: A Peer-to-Peer Intelligence Market",
+          "summary": "As with other commodities, markets could help us efficiently produce machine intelligence. We propose a market where intelligence is priced by other intelligence systems peer-to-peer across the internet. Peers rank each other by training neural networks which learn the value of their neighbors. Scores accumulate on a digital ledger where high ranking peers are monetarily rewarded with additional w",
+          "link": "https://arxiv.org/abs/2003.03917v3",
+          "published": "2020-03-09"
+        },
+        {
+          "title": "BTLM-3B-8K: 7B Parameter Performance in a 3B Parameter Model",
+          "summary": "We introduce the Bittensor Language Model, called \"BTLM-3B-8K\", a new state-of-the-art 3 billion parameter open-source language model. BTLM-3B-8K was trained on 627B tokens from the SlimPajama dataset with a mixture of 2,048 and 8,192 context lengths. BTLM-3B-8K outperforms all existing 3B parameter models by 2-5.5% across downstream tasks. BTLM-3B-8K is even competitive with some 7B parameter mod",
+          "link": "https://arxiv.org/abs/2309.11568v1",
+          "published": "2023-09-20"
+        },
+        {
+          "title": "Continuously Evolving Deepfake Detection: An Architecture and Public-Benchmark Evaluation of a Dynamic Detection System",
+          "summary": "Deepfake detectors that achieve near-perfect scores on academic benchmarks collapse on real-world content: recent in-the-wild evaluations report AUC drops of 45-50% for state-of-the-art open-source models. We argue this gap is structural: static detectors are trained once against a moving generative frontier. We present BitMind Forensics (BMF), trained through Bittensor SN34, an open adversarial c",
+          "link": "https://arxiv.org/abs/2607.13234v1",
+          "published": "2026-07-14"
+        },
+        {
+          "title": "Incentivised Orchestrated Training Architecture (IOTA): A Technical Primer for Release",
+          "summary": "In August 2024, Bittensor's Subnet 9 (SN9) demonstrated that a distributed network of incentivized, permissionless actors could each pretrain large language models (LLMs) ranging from 700 million to 14 billion parameters, while surpassing established baselines. While that work validated blockchain-based decentralized pretraining as viable, it contained core issues: (i) every miner had to fit an en",
+          "link": "https://arxiv.org/abs/2507.17766v1",
+          "published": "2025-07-16"
+        }
+      ]
+    },
+    {
+      "label": "ANCHOR sensitivity: blockchain ML network (no title)",
+      "search": "all:\"blockchain\" AND all:\"machine learning\" AND all:\"network\"",
+      "http_status": 200,
+      "entries": [
+        {
+          "title": "Distributed creation of Machine learning agents for Blockchain analysis",
+          "summary": "Creating efficient deep neural networks involves repetitive manual optimization of the topology and the hyperparameters. This human intervention significantly inhibits the process. Recent publications propose various Neural Architecture Search (NAS) algorithms that automate this work. We have applied a customized NAS algorithm with network morphism and Bayesian optimization to the problem of crypt",
+          "link": "https://arxiv.org/abs/1909.03848v1",
+          "published": "2019-09-06"
+        },
+        {
+          "title": "Ownership preserving AI Market Places using Blockchain",
+          "summary": "We present a blockchain based system that allows data owners, cloud vendors, and AI developers to collaboratively train machine learning models in a trustless AI marketplace. Data is a highly valued digital asset and central to deriving business insights. Our system enables data owners to retain ownership and privacy of their data, while still allowing AI developers to leverage the data for traini",
+          "link": "https://arxiv.org/abs/2001.09011v1",
+          "published": "2020-01-18"
+        },
+        {
+          "title": "Identity Inference on Blockchain using Graph Neural Network",
+          "summary": "The anonymity of blockchain has accelerated the growth of illegal activities and criminal behaviors on cryptocurrency platforms. Although decentralization is one of the typical characteristics of blockchain, we urgently call for effective regulation to detect these illegal behaviors to ensure the safety and stability of user transactions. Identity inference, which aims to make a preliminary infere",
+          "link": "https://arxiv.org/abs/2104.06559v1",
+          "published": "2021-04-14"
+        },
+        {
+          "title": "Carbon price fluctuation prediction using blockchain information A new hybrid machine learning approach",
+          "summary": "In this study, the novel hybrid machine learning approach is proposed in carbon price fluctuation prediction. Specifically, a research framework integrating DILATED Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) neural network algorithm is proposed. The advantage of the combined framework is that it can make feature extraction more efficient. Then, based on the DILATED CNN-L",
+          "link": "https://arxiv.org/abs/2411.02709v1",
+          "published": "2024-11-05"
+        },
+        {
+          "title": "Transaction Confirmation Time Prediction in Ethereum Blockchain Using Machine Learning",
+          "summary": "Blockchain offers a decentralized, immutable, transparent system of records. It offers a peer-to-peer network of nodes with no centralised governing entity making it unhackable and therefore, more secure than the traditional paper-based or centralised system of records like banks etc. While there are certain advantages to the paper-based recording approach, it does not work well with digital relat",
+          "link": "https://arxiv.org/abs/1911.11592v1",
+          "published": "2019-11-25"
+        },
+        {
+          "title": "Can Blockchains Reliably Train Machine Learning Models?",
+          "summary": "Large proof of work (PoW) networks allow anyone to earn rewards by running computation-intensive hash puzzles for profit, yet they typically consume electricity comparable to that of medium-sized countries. Repurposing computing resources from hash puzzles to machine learning training can benefit the energy sector as a whole, since this computing power is no longer wasted on solving hash puzzles b",
+          "link": "https://arxiv.org/abs/2307.07066v2",
+          "published": "2023-07-13"
+        },
+        {
+          "title": "Data Depth and Core-based Trend Detection on Blockchain Transaction Networks",
+          "summary": "Blockchains are significantly easing trade finance, with billions of dollars worth of assets being transacted daily. However, analyzing these networks remains challenging due to the sheer volume and complexity of the data. We introduce a method named InnerCore that detects market manipulators within blockchain-based networks and offers a sentiment indicator for these networks. This is achieved thr",
+          "link": "https://arxiv.org/abs/2303.14241v2",
+          "published": "2023-03-24"
+        },
+        {
+          "title": "Proof of AutoML: SDN based Secure Energy Trading with Blockchain in Disaster Case",
+          "summary": "In disaster scenarios where conventional energy infrastructure is compromised, secure and traceable energy trading between solar-powered households and mobile charging units becomes a necessity. To ensure the integrity of such transactions over a blockchain network, robust and unpredictable nonce generation is vital. This study proposes an SDN-enabled architecture where machine learning regressors",
+          "link": "https://arxiv.org/abs/2509.10291v1",
+          "published": "2025-09-12"
+        },
+        {
+          "title": "FinML-Chain: A Blockchain-Integrated Dataset for Enhanced Financial Machine Learning",
+          "summary": "Machine learning is critical for innovation and efficiency in financial markets, offering predictive models and data-driven decision-making. However, challenges such as missing data, lack of transparency, untimely updates, insecurity, and incompatible data sources limit its effectiveness. Blockchain technology, with its transparency, immutability, and real-time updates, addresses these challenges.",
+          "link": "https://arxiv.org/abs/2411.16277v1",
+          "published": "2024-11-25"
+        },
+        {
+          "title": "Detecting Sybil Addresses in Blockchain Airdrops: A Subgraph-based Feature Propagation and Fusion Approach",
+          "summary": "Sybil attacks pose a significant security threat to blockchain ecosystems, particularly in token airdrop events. This paper proposes a novel sybil address identification method based on subgraph feature extraction lightGBM. The method first constructs a two-layer deep transaction subgraph for each address, then extracts key event operation features according to the lifecycle of sybil addresses, in",
+          "link": "https://arxiv.org/abs/2505.09313v1",
+          "published": "2025-05-14"
+        },
+        {
+          "title": "Cascading Machine Learning to Attack Bitcoin Anonymity",
+          "summary": "Bitcoin is a decentralized, pseudonymous cryptocurrency that is one of the most used digital assets to date. Its unregulated nature and inherent anonymity of users have led to a dramatic increase in its use for illicit activities. This calls for the development of novel methods capable of characterizing different entities in the Bitcoin network. In this paper, a method to attack Bitcoin anonymity ",
+          "link": "https://arxiv.org/abs/1910.06560v1",
+          "published": "2019-10-15"
+        },
+        {
+          "title": "Towards Quantum-Ready Blockchain Fraud Detection via Ensemble Graph Neural Networks",
+          "summary": "Blockchain Business applications and cryptocurrencies such as enable secure, decentralized value transfer, yet their pseudonymous nature creates opportunities for illicit activity, challenging regulators and exchanges in anti money laundering (AML) enforcement. Detecting fraudulent transactions in blockchain networks requires models that can capture both structural and temporal dependencies while ",
+          "link": "https://arxiv.org/abs/2509.23101v1",
+          "published": "2025-09-27"
+        },
+        {
+          "title": "A Secured Triad of IoT, Machine Learning, and Blockchain for Crop Forecasting in Agriculture",
+          "summary": "To improve crop forecasting and provide farmers with actionable data-driven insights, we propose a novel approach integrating IoT, machine learning, and blockchain technologies. Using IoT, real-time data from sensor networks continuously monitor environmental conditions and soil nutrient levels, significantly improving our understanding of crop growth dynamics. Our study demonstrates the exception",
+          "link": "https://arxiv.org/abs/2505.01196v1",
+          "published": "2025-05-02"
+        },
+        {
+          "title": "Simulated Blockchains for Machine Learning Traceability and Transaction Values in the Monero Network",
+          "summary": "Monero is a popular crypto-currency which focuses on privacy. The blockchain uses cryptographic techniques to obscure transaction values as well as a `ring confidential transaction' which seeks to hide a real transaction among a variable number of spoofed transactions. We have developed training sets of simulated blockchains of 10 and 50 agents, for which we have control over the ground truth and ",
+          "link": "https://arxiv.org/abs/2001.03937v1",
+          "published": "2020-01-12"
+        },
+        {
+          "title": "Blockchain-Enabled Variational Information Bottleneck for IoT Networks",
+          "summary": "In Internet of Things (IoT) networks, the amount of data sensed by user devices may be huge, resulting in the serious network congestion. To solve this problem, intelligent data compression is critical. The variational information bottleneck (VIB) approach, combined with machine learning, can be employed to train the encoder and decoder, so that the required transmission data size can be reduced s",
+          "link": "https://arxiv.org/abs/2403.06129v1",
+          "published": "2024-03-10"
+        }
+      ]
+    }
+  ],
+  "residual_failures": [],
+  "empty_results": []
+}

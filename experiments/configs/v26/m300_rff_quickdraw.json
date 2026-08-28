@@ -1,0 +1,63 @@
+{
+  "milestone": "M300",
+  "title": "Hash-seeded random Fourier features against the quickdraw wall",
+  "question": "Is the quickdraw wall (~0.63 across four frozen backbones) a linearity ceiling rather than a feature ceiling?",
+  "registered_in": "analysis/SCIENCE_LAYER_PLAN_2026-08-28.md M300 REGISTRATION AMENDMENT (28 Aug 2026, before the build)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "features": {
+    "clip_train": "logs/results/v25/m236_clip_vitl14/features/clip_train.npy",
+    "clip_test": "logs/results/v25/m236_clip_vitl14/features/clip_test.npy",
+    "dino_train": "logs/results/v25/m234_vitb14/features/vitb14_train_dino.npy",
+    "dino_test": "logs/results/v25/m234_vitb14/features/vitb14_test_dino.npy",
+    "note": "cached native-res extractions; train in schedule order (perm), test in file order (test_index)"
+  },
+  "artifacts": {
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "rff": {
+    "seed": 20260828,
+    "grid_dims": [4096, 8192, 16384],
+    "grid_sigma": [0.5, 1.0, 2.0],
+    "cv_folds": 5,
+    "cv_seed": 107,
+    "input": "per-block L2-normalised",
+    "note": "phi(z) = sqrt(2/D) cos(omega^T z + b); omega ~ N(0, sigma^-2 I), b ~ U[0, 2pi); the generator is seeded by the registered seed (the artifact-hash stand-in); (D, sigma) selected by train-side 5-fold CV on quickdraw train rows only; the sealed quickdraw test is evaluated once at the selected pair"
+  },
+  "training": {
+    "epochs": 30,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch": 1024,
+    "seed": 11,
+    "note": "the M233/M236 trained-probe recipe (nn.Linear + AdamW) - all four wall references are trained probes, so the same head isolates the nonlinearity contribution; arm (a) is the exact M236 reproduction on RAW CLIP features (the g2 anchor)"
+  },
+  "wall_references": {
+    "dino_s": 0.604,
+    "dino_b": 0.6302,
+    "clip_l": 0.6267,
+    "mlp_concat": 0.6335,
+    "stroke_arm_m238": 0.6467,
+    "note": "all sealed; the wall is the MLP-concat 0.6335; the stroke arm is the above-wall different-feature-type reference"
+  },
+  "gate_h26_3": {
+    "arm": "rff_concat",
+    "margin": 0.02,
+    "bar": 0.6535,
+    "note": ">= +0.02 absolute over the 0.6335 wall on the sealed quickdraw test, single evaluation"
+  },
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - premise (feature shapes, schedule alignment)",
+    "g2_fail": "VOID - the clip_linear arm (raw CLIP, the M236 recipe) must reproduce 0.626655234828999 at 1e-9 (instrument identity)",
+    "g3_fail": "VOID - the RFF map must be deterministic under the registered seed",
+    "g4_fail": "VOID - the CV selection must touch train rows only",
+    "g5_fail": "VOID - accuracies must be valid",
+    "reading": "rff_concat >= 0.6535 clears the wall (H26-3 pass: the wall is a linearity ceiling); >= 0.6467 also beats the stroke arm (secondary reading); a fail records the wall as a feature ceiling, not a linearity ceiling - publishable either way, and the kill-criterion input of plan section 5"
+  }
+}

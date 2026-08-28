@@ -1,0 +1,1052 @@
+{
+  "protocol": {
+    "seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "stream_families": [
+      "heavy_tailed",
+      "anisotropic",
+      "abrupt_drift",
+      "intermittent_unseen"
+    ],
+    "minimum_known_separation": 2.5,
+    "oracle_used_only_after_review": true,
+    "automatic_mutation_enabled": false
+  },
+  "summary": {
+    "review_count": 42,
+    "accepted_transactions": 4,
+    "decision_counts": {
+      "quarantine": 39,
+      "update_existing": 0,
+      "create_new": 3
+    },
+    "decision_accuracy": 0.07142857142857142,
+    "published_mutations": 0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-4566852681b3",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5555555555555556,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9166666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-cde4327d1119",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ac71df56935a",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4782608695652174,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-99c5df3850cd",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.30769230769230765,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-5027b4e15005",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.26666666666666666,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e2358250afbf",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4782608695652174,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-7259fc08a5d7",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6363636363636364,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2dbf24da37e8",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.47058823529411764,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ca851e4ab90d",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.782608695652174,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "heavy_tailed",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-af5f72a0ee82",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4545454545454545,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9166666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-55f2cd9f0eba",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.49999999999999994,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9166666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-602c544545f1",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5217391304347826,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-3b47403b551a",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.375,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9583333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e3e9848c423e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5416666666666666,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-4696a231ec3e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.18181818181818188,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-30a9ff4af12d",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.7727272727272727,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-41459915a2d3",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.36363636363636365,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8333333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e21fcd305c7d",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.1111111111111111,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e47b7f602422",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.45000000000000007,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-239bd3f6d337",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6086956521739131,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "anisotropic",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-ae1ffab43465",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.2272727272727273,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.8333333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1cbb60e8a6c0",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.22222222222222227,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.7916666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1b7a7b590fd6",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.368421052631579,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-77aae142b983",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.2941176470588235,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9583333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-f02309ab2e18",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.13043478260869562,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9166666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-62e3b9b2fc70",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.2631578947368421,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-b067667fdbdc",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6956521739130435,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-cdaf1566c3cc",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.17647058823529413,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8541666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-eb177a14bcd1",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.2666666666666667,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-717b032588a9",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5217391304347826,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-20aa8532be3a",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5238095238095238,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "abrupt_drift",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-20f88dcd66fa",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.14285714285714285,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.8541666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-c1c6df19426c",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.2727272727272728,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.7916666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-0cd0d79df5ac",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6363636363636364,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9166666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-3bdefc76054a",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.375,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.8958333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-d43d0076e0b8",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-6bd6161c0709",
+          "expected_action": "create_new",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain"
+          ],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.4666666666666667,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2fb66b5448fc",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.35,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 0.7916666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-e6e3b7e2022e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.23529411764705885,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-2039e80057f5",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5217391304347826,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "intermittent_unseen",
+        "review_only": true,
+        "oracle_used_only_after_review": true,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-1bb45769bb06",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.40909090909090906,
+            "replay_accuracy_before": 0.9583333333333334,
+            "replay_accuracy_after": 0.8541666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": null,
+          "review_id": "review-6e37ba694519",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.23076923076923078,
+            "replay_accuracy_before": 0.9583333333333334,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+g1: rebuilding the sealed DomainNet encoder
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+g1 encoder pin: 0.000e+00 ok=True
+fitting the flowers-native whitener + dictionary
+R3 flowers-native SPM: {'0.1': 0.1895424836601307, '1.0': 0.1895424836601307, '10.0': 0.1895424836601307} best 0.1895
+{
+ "r3": {
+  "0.1": 0.1895424836601307,
+  "1.0": 0.1895424836601307,
+  "10.0": 0.1895424836601307
+ },
+ "best": 0.1895424836601307,
+ "g1_delta": 0.0,
+ "reading": "R3 <= 0.4: the SPM construction itself is weak at 32x32 fine-grained"
+}
+M175 cell B R3 complete -> logs\results\v24\m175_cell_b_r3\evidence.json

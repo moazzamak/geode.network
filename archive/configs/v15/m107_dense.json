@@ -1,0 +1,157 @@
+{
+  "milestone": "M107",
+  "title": "The dense comparator: what does a sparse model's compute buy against a dense one's?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.14",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "ONE fixed subsample, drawn per class and shared by EVERY arm in both families: 345 * 400 = 138,000 train rows and 345 * 100 = 34,500 test rows. Section 7.14 design item 1 and restriction 8. The subsample exists because DINOv2-large at 224 costs roughly 4.5 images per second on this machine's sixteen cores and the full 409,832-row train split would cost it more than a day. It is drawn PER CLASS rather than per domain because the head is a 345-way classifier and a class that appears 200 times in one arm's fit and 900 times in another's would make the two arms incomparable for a reason that has nothing to do with the representation. The domain composition that falls out of the per-class draw is reported, not controlled: the sparse mixture routes on it and the dense arms never see it. THE SUBSAMPLE IS DISCLOSED WITH EVERY M107 FIGURE and no M107 accuracy may be quoted as this program's best.",
+    "_floor_note": "138,000 train rows over the section 5.3 floor of ten rows per fitted dimension permits a sparse generalist of 138000 / (4 * 10) = 3,450 atoms, which is above the top of the registered sparse ladder. The ladder is therefore bounded by the registration and not truncated by the floor.",
+    "_identity_note": "A row's position in the decoded 32x32 cache is its position in the parquet stream, because both walk sorted(glob) and then row groups in order. That identity is the ONLY reason a 32x32 row index may address an original-resolution image, and the runner aborts if the two ever disagree in count. Without it the dense arms and the sparse arms would be describing different pictures."
+  },
+  "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "_note": "The M104 pipeline, unchanged, so the sparse side of M107 is the same construction sections 2.9.7, M103 and M104 measured. Changing it to give the sparse arms more pixels would make M107 incomparable to them, which is why the resolution asymmetry is measured by arm (d5) instead of removed."
+  },
+  "sparse": {
+    "budgets": [128, 256, 512, 1024, 2048, 3072],
+    "mixture_budgets": [128, 256],
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "_note": "Section 7.14 design item 3. The generalist takes a prefix of one seeded permutation of the shared pool, so its 3,072-atom dictionary CONTAINS its 128-atom dictionary exactly and the ladder is nested rather than six unrelated draws. Each of the six mixture experts holds its own seeded permutation, exactly as in M104, so the mixture is a mixture of genuinely different dictionaries rather than six copies of one.",
+    "_single_seed_note": "ONE dictionary seed, not three. M104 runs three because its operand is a difference between allocation rules and that difference has to survive the draw. M107's operand is a difference between FAMILIES that is expected to be more than an order of magnitude, and the sparse side's seed spread was measured by M104 on the same corpus and the same pipeline. Spending three seeds here would triple the cheap half of the run while leaving the dense half, which has no seed at all because the weights are downloaded, exactly as it is. The single seed is a disclosed limitation of every sparse M107 figure.",
+    "_mixture_note": "The mixture is scored under ORACLE routing and every sentence quoting it must say so (section 7.10 restriction 4). Under oracle routing an image is encoded by exactly one expert, so a uniform mixture at A atoms per expert costs the same per image as a generalist at A atoms while holding six times the parameters. That asymmetry favours the mixture and is reported, not matched away.",
+    "_mixture_budget_note": "THE MIXTURE LADDER STOPS AT 256 ATOMS AND THE SECTION 5.3 FLOOR IS WHY. An expert fits on its own domain's rows, and the per-class subsample leaves clipart with 11,224 of the 138,000 train rows. At A atoms an expert fits 4A features, so clipart clears ten rows per fitted dimension at 256 atoms (10.96) and fails at 512 (5.48). Budgets above 256 would be voided by the floor, and running an arm that is known in advance to be inadmissible wastes compute and clutters the record. This is the subsample's doing, disclosed under restriction 8: at the full train split the mixture would reach 512 and beyond. The GENERALIST ladder is unaffected -- it fits on all 138,000 rows and clears the floor at 3,072 atoms (11.23) -- so M107's actual question, dense against sparse, is measured across the whole ladder. What narrows is kill switch 3, which becomes decidable at two budgets instead of six, and that is stated wherever kill switch 3 is reported. Capping each expert at its own floor and redistributing, as M104 does, was considered and rejected: it would turn a uniform mixture into an allocation experiment, which is M104's operand and not M107's."
+  },
+  "dense": {
+    "source": "onnx-community DINOv2 ONNX exports, used unmodified",
+    "batch": 32,
+    "feature": "CLS token concatenated with the mean of the patch tokens, 2*width columns",
+    "_feature_note": "Section 7.14 design item 2. This is DINOv2's own published linear-evaluation feature. Using the CLS token alone, or a tuned pooling, would be handicapping or flattering the dense arm respectively; the published one is neither.",
+    "_preprocessing_note": "Images are resized directly to the arm's square resolution, rescaled to [0,1] and normalised with the ImageNet mean and standard deviation DINOv2 publishes. Resize-and-centre-crop was rejected because it would discard image content the sparse arms DO see, which would make the dense arm's disadvantage an artefact of preprocessing rather than a property of the model.",
+    "_order_note": "Dense arms read their train rows in corpus order rather than the run's shuffled order. The accumulator only ever sums and a Gram is order-invariant, and no dense arm has a validation split to carve off, so the shuffle buys nothing here and would turn a sequential scan of a 21 GB memory-mapped file into a random walk.",
+    "_cost_order_note": "The arms are listed cheapest first so that a run interrupted at any point has produced the widest ladder it could, and so that DINOv2-large, which is most of the wall clock, is the last thing standing. Arms d1 and d5 are adjacent because section 7.14 restriction 7 binds them to be reported together or not at all.",
+    "arms": [
+      {
+        "name": "d4a_small_28",
+        "model": "small",
+        "resolution": 28,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d4b_small_42",
+        "model": "small",
+        "resolution": 42,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d4c_small_56",
+        "model": "small",
+        "resolution": 56,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d4d_small_70",
+        "model": "small",
+        "resolution": 70,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d4e_small_98",
+        "model": "small",
+        "resolution": 98,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d4f_small_140",
+        "model": "small",
+        "resolution": 140,
+        "pixels": "original",
+        "disclosure": "OUT OF DISTRIBUTION. DINOv2 is trained at 224 and interpolates its position embeddings here. A LOWER BOUND ON DENSE, never 'the dense curve'. Section 7.14 restriction 2."
+      },
+      {
+        "name": "d1_small_224",
+        "model": "small",
+        "resolution": 224,
+        "pixels": "original",
+        "disclosure": "IN DISTRIBUTION. DINOv2-small at its training resolution, reading original-resolution DomainNet images. Section 7.14 restriction 7 binds this arm to d5: neither is admissible alone."
+      },
+      {
+        "name": "d5_small_224_from_32",
+        "model": "small",
+        "resolution": 224,
+        "pixels": "upsampled_from_32",
+        "disclosure": "THE INFORMATION-MATCHED CONTROL. The identical model at the identical token count, fed the identical 32x32 tensors the sparse arms read, bilinearly upsampled. (d1) minus (d5) is what the extra pixels are worth; (d5) minus the sparse ladder is what the architecture is worth. Section 7.14 design item 2b and restriction 7."
+      },
+      {
+        "name": "d2_base_224",
+        "model": "base",
+        "resolution": 224,
+        "pixels": "original",
+        "disclosure": "IN DISTRIBUTION. DINOv2-base at its training resolution."
+      },
+      {
+        "name": "d3_large_224",
+        "model": "large",
+        "resolution": 224,
+        "pixels": "original",
+        "disclosure": "IN DISTRIBUTION. DINOv2-large at its training resolution. This arm is most of the run's wall clock and is deliberately last."
+      }
+    ]
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [1.0, 10.0, 100.0, 1000.0, 10000.0],
+    "selection_validation_fraction": 0.1,
+    "selection_arm": "s_generalist_128",
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_note": "Identical to M104's head: one multi-output ridge from standardised features to one-hot targets, solved from the normal equations, with an unpenalised intercept. THE SAME HEAD RUNS ON BOTH FAMILIES. That is the whole design: the only thing that differs between a dense arm and a sparse arm is what produced the features.",
+    "_selection_note": "Section 7.14 design item 5. The constant is chosen ONCE, on the SPARSE generalist at the smallest budget, against a validation split carved out of TRAIN, and applied unchanged to every other arm in both families. Choosing it on the sparse side is AGAINST INTEREST: it denies the dense arms a constant tuned to them. The full grid is recorded for every arm as sensitivity; reading the best constant per arm off that record would be choosing the answer, and the gate reads only the pre-registered constant.",
+    "_sample_floor_note": "Section 5.3 as amended by section 7.10 execution-time amendments 4 and 5, read per fitted dimension on the rows each arm actually fits. DINOv2-large's 2,048 features on 138,000 rows gives 67.4 rows per fitted dimension; the sparse generalist at 3,072 atoms gives 11.2. Both clear the floor of ten and THE SPARSE SIDE CLEARS IT BY LESS, which is disclosed rather than averaged away."
+  },
+  "compute_ledger": {
+    "operand": "test accuracy against analytic inference MACs per image, both families on one axis",
+    "_note": "Section 7.14 design item 4 and restriction 5. Transformer MACs are computed analytically from tokens, width, depth and the MLP hidden size READ OFF THE ONNX GRAPH ITSELF rather than quoted from a paper, because they drive an operand and R7 forbids an external figure being one. Wall clock is recorded and is NOT an operand: the ratio between these two families would measure onnxruntime against numpy.",
+    "_exclusion_note": "The sparse ledger excludes patch extraction and per-patch contrast normalisation, exactly as section 2.9.3 limitation (iv) discloses. The dense ledger excludes layer norms, GELU and the softmax. Both exclusions are elementwise, both are small next to the matrix multiplies they sit between, and each favours the family it is excluded from, so neither side is quietly subsidised."
+  },
+  "gate": {
+    "registered_prediction": "The dense ladder dominates the sparse ladder in accuracy at every MAC budget where the two overlap, and the sparse ladder does not reach the dense ladder's accuracy at any budget within reach of this corpus. THIS PREDICTION IS AGAINST THE PROGRAM'S OWN THESIS and is registered anyway.",
+    "kill_switch_1": "If the dense curve is above the sparse curve at every overlapping MAC budget, then section 3.2 Q2's efficiency claim is REFUTED at this scale on this corpus, the admissible reading of M104-M106 collapses to 'efficiency relative to a uniform mixture', and that is the headline under section 11.1. It may not be reported as a footnote, a limitation, or future work.",
+    "kill_switch_2": "If the sparse curve is above the dense curve at some budget, the admissible claim is bounded to that budget, this corpus and that accuracy level, must quote the accuracy achieved alongside the MAC figure, and must still carry the LVD-142M caveat and the oracle-routing caveat. A crossing at an accuracy nobody would deploy is not an efficiency result and may not be reported as one.",
+    "kill_switch_3": "If the sparse generalist beats the sparse mixture under ORACLE routing at matched MACs on this corpus, then M104's partition is not buying anything here either, and M107 must say so beside M104's own kill switch 3 rather than leaving the two unreconciled.",
+    "_comparison_note": "A sparse point at M MACs is compared against the best dense point at or below M MACs. Comparing it against a dense point ABOVE it would let the sparse side win by being cheaper, which is not what dominance means; comparing against the nearest dense point in either direction would let the choice of neighbour decide the answer."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "onnx_threads": 16,
+    "_note": "The encode runs in float32 on both sides and the normal equations accumulate in float64 on both sides. Neither family gets a numeric advantage over the other."
+  },
+  "_amendments": [
+    "AMENDMENT 1, registered before measurement. Section 7.14 design item 2 registers the resolution sweep as {140, 98, 70, 42}. Computing the analytic MACs before running anything showed that this leaves the two ladders overlapping at essentially ONE point: the sparse ladder tops out around 255 million MACs and the lowest registered dense point sits at 215 million. A comparison with one overlap point is an anecdote. Resolutions 28 and 56 are therefore added, giving dense points at roughly 107 and 367 million MACs and bracketing the sparse ladder's top three budgets. THE AMENDMENT RUNS AGAINST THE SPARSE SIDE: it puts more dense points inside the sparse ladder's own MAC range, which is exactly where the sparse side has to win for section 3.2 Q2 to survive. It was made before any accuracy existed, from arithmetic on the model geometry alone.",
+    "AMENDMENT 2, registered before measurement. The section 5.3 floor VOIDS an arm rather than merely being reported beside it, and a voided arm contributes to no kill switch and appears on no curve. This is M104 execution-time amendment 5's lesson applied in advance: there, an atom cap was computed from a row count the fitted model did not actually use, and the guard silently guarded nothing. Here the floor is read on the rows each arm actually fits, an arm below it is marked void, and the run ABORTS outright if the arm section 7.14 design item 5 chooses the head constant on is itself void, because every other arm inherits that constant. The smoke configuration is deliberately sized below the floor so that the voiding path is exercised rather than assumed.",
+    "AMENDMENT 3, registered before measurement. The instrument PROVES, rather than asserts, that a 32x32 row index addresses the same picture in the parquet stream. Every dense figure M107 produces is a claim about the same images the sparse arms saw, and that claim rests entirely on the decoded cache and the parquet enumerating rows in the same order. At startup the runner decodes the first 64 selected rows of each split straight from the parquet at 32x32 and requires them to be BITWISE equal to the cached tensors; a mismatch aborts the run. The check was itself negative-controlled: flipping one byte of one cached image makes it fire.",
+    "AMENDMENT 4, registered before measurement. ONE dictionary seed on the sparse side rather than M104's three. M104 spends three because its operand is a difference between allocation rules, which must survive the draw. M107's operand is a difference between FAMILIES expected to exceed an order of magnitude, and the dense side has no seed at all because its weights are downloaded. Three seeds would triple the cheap half of the run and leave the expensive half untouched. This is recorded as a LIMITATION of every sparse M107 figure and not as a tightening: unlike amendments 1 to 3 it does not make the milestone harder.",
+    "AMENDMENT 5, registered before measurement. THE MIXTURE LADDER RUNS ONLY AT 128 AND 256 ATOMS, and the section 5.3 floor is the reason. Counting the subsample's rows per domain -- arithmetic, before anything ran -- showed clipart holds 11,224 of the 138,000 train rows, so a mixture expert clears ten rows per fitted dimension at 256 atoms (10.96) and fails at 512 (5.48). Section 7.14 design item 3 registers the mixture at all six budgets; four of those would be voided on arrival. Kill switch 3 therefore becomes decidable at TWO budgets instead of six, which narrows M107 and is registered as such rather than discovered in the output. The generalist ladder is untouched and still clears the floor at 3,072 atoms (11.23), so M107's actual question is measured across its whole range. Capping each expert at its own floor and redistributing, as M104 does, was considered and rejected: it would turn a uniform mixture into an allocation experiment, which is M104's operand and not M107's."
+  ]
+}

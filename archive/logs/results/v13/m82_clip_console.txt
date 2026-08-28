@@ -1,0 +1,17 @@
+loading CLIP on cuda:0
+embedding vocabulary
+  objects (345, 768)  styles (6, 768)
+embedding 73728 corpus images
+  embedded 8192/73728  67 img/s
+  embedded 16384/73728  69 img/s
+  embedded 24576/73728  69 img/s
+  embedded 32768/73728  70 img/s
+  embedded 40960/73728  70 img/s
+  embedded 49152/73728  69 img/s
+  embedded 57344/73728  68 img/s
+  embedded 65536/73728  65 img/s
+  embedded 73728/73728  65 img/s
+  done in 18.9 min (65 img/s)
+running the CPU agreement control
+  max cosine deviation 1.19e-07 (tolerance 1e-03), nearest-term agreement 1.0000
+sealed to C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v13\clip_embeddings

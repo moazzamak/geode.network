@@ -1,0 +1,377 @@
+{
+  "advancement_gate": {
+    "accuracy_improved": false,
+    "accuracy_tolerance": 0.0025,
+    "accuracy_within_tolerance": true,
+    "negative_log_likelihood_improved": false,
+    "negative_log_likelihood_within_tolerance": true,
+    "nll_tolerance": 0.01,
+    "passed": false,
+    "scope": "stop M15.2 if false; otherwise advance to mixture weights"
+  },
+  "all_optimizers_converged": true,
+  "all_readouts_converged": true,
+  "calibration_nll_improvement": {
+    "mean": -0.0072531000948472864,
+    "per_seed": [
+      -0.016681921023498192,
+      0.0,
+      -0.019583579450738242,
+      0.0,
+      0.0
+    ]
+  },
+  "duplicate_retries": 0,
+  "grouped_test_results": {
+    "feature_control": {
+      "accuracy_mean": 0.8397500000000001,
+      "accuracy_std": 0.005295930041078726,
+      "brier_score_mean": 0.23072924789122728,
+      "brier_score_std": 0.0019720795292121466,
+      "expected_calibration_error_mean": 0.02078634183224602,
+      "expected_calibration_error_std": 0.008011178566241268,
+      "negative_log_likelihood_mean": 0.4653777532801688,
+      "negative_log_likelihood_std": 0.0071229286749692365,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "geometric": {
+      "accuracy_mean": 0.8394999999999999,
+      "accuracy_std": 0.004406139183003634,
+      "brier_score_mean": 0.23155068332455414,
+      "brier_score_std": 0.0012606834789954306,
+      "expected_calibration_error_mean": 0.02118147294882372,
+      "expected_calibration_error_std": 0.00543353243898542,
+      "negative_log_likelihood_mean": 0.4704362969674779,
+      "negative_log_likelihood_std": 0.006532102913831294,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid": {
+      "accuracy_mean": 0.8387499999999999,
+      "accuracy_std": 0.003977475644174292,
+      "brier_score_mean": 0.23157961427646537,
+      "brier_score_std": 0.0014353534301342482,
+      "expected_calibration_error_mean": 0.018800295820895707,
+      "expected_calibration_error_std": 0.0036961416296717444,
+      "negative_log_likelihood_mean": 0.4674968133145489,
+      "negative_log_likelihood_std": 0.006425341316062577,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid_global_temperature": {
+      "accuracy_mean": 0.8391250000000001,
+      "accuracy_std": 0.004388372420385494,
+      "brier_score_mean": 0.23136165810112855,
+      "brier_score_std": 0.0015763999664862925,
+      "expected_calibration_error_mean": 0.02012767832811832,
+      "expected_calibration_error_std": 0.0044142656085333345,
+      "negative_log_likelihood_mean": 0.4670525001928804,
+      "negative_log_likelihood_std": 0.00666992837889306,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid_per_class_temperature": {
+      "accuracy_mean": 0.8391249999999999,
+      "accuracy_std": 0.00401656725326487,
+      "brier_score_mean": 0.23137457974029485,
+      "brier_score_std": 0.0015911436588841028,
+      "expected_calibration_error_mean": 0.019802910183879658,
+      "expected_calibration_error_std": 0.004095933745943713,
+      "negative_log_likelihood_mean": 0.4670867359893657,
+      "negative_log_likelihood_std": 0.006641432365910151,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic": {
+      "accuracy_mean": 0.8398749999999999,
+      "accuracy_std": 0.0033482738089946956,
+      "brier_score_mean": 0.23162689571372425,
+      "brier_score_std": 0.0013496906065682966,
+      "expected_calibration_error_mean": 0.02484900029882584,
+      "expected_calibration_error_std": 0.0089346286704468,
+      "negative_log_likelihood_mean": 0.46900813864530805,
+      "negative_log_likelihood_std": 0.006821504649213301,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic_global_temperature": {
+      "accuracy_mean": 0.8393750000000001,
+      "accuracy_std": 0.003029799910885198,
+      "brier_score_mean": 0.23096001117167114,
+      "brier_score_std": 0.0013614162844569433,
+      "expected_calibration_error_mean": 0.023110375022059766,
+      "expected_calibration_error_std": 0.008369777685385264,
+      "negative_log_likelihood_mean": 0.46748530340812966,
+      "negative_log_likelihood_std": 0.007490563630924453,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic_per_class_temperature": {
+      "accuracy_mean": 0.83925,
+      "accuracy_std": 0.0028090256317805273,
+      "brier_score_mean": 0.23094928350316674,
+      "brier_score_std": 0.0013418018692515875,
+      "expected_calibration_error_mean": 0.02345796615057134,
+      "expected_calibration_error_std": 0.007911097844682424,
+      "negative_log_likelihood_mean": 0.46755535121155545,
+      "negative_log_likelihood_std": 0.007394399489469811,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    }
+  },
+  "matched_frozen_models": true,
+  "paired_differences": {
+    "hybrid_per_class_temperature": {
+      "baseline": "hybrid_global_temperature",
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ],
+      "tuned_minus_accuracy": {
+        "mean": -2.2204460492503132e-17,
+        "per_seed": [
+          -0.0006250000000000977,
+          0.0,
+          0.0006249999999999867,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_brier_score": {
+        "mean": 1.2921639166346698e-05,
+        "per_seed": [
+          2.311111634611951e-05,
+          0.0,
+          4.1497079485613986e-05,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_expected_calibration_error": {
+        "mean": -0.0003247681442386602,
+        "per_seed": [
+          -0.000338238286401088,
+          0.0,
+          -0.001285602434792213,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_negative_log_likelihood": {
+        "mean": 3.42357964852269e-05,
+        "per_seed": [
+          3.386885072526047e-05,
+          0.0,
+          0.00013731013170087403,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "probabilistic_per_class_temperature": {
+      "baseline": "probabilistic_global_temperature",
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ],
+      "tuned_minus_accuracy": {
+        "mean": -0.00012499999999999735,
+        "per_seed": [
+          -0.0006249999999999867,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_brier_score": {
+        "mean": -1.0727668504378896e-05,
+        "per_seed": [
+          -6.298487619957327e-05,
+          0.0,
+          9.346533677678792e-06,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_expected_calibration_error": {
+        "mean": 0.00034759112851157694,
+        "per_seed": [
+          -0.0006961757508381419,
+          0.0,
+          0.0024341313933960267,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_negative_log_likelihood": {
+        "mean": 7.004780342574346e-05,
+        "per_seed": [
+          -8.022588148570708e-05,
+          0.0,
+          0.0004304648986144244,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "per_class_temperatures": [
+    {
+      "maximum": 3.318495730783702,
+      "mean": 2.415531380257318,
+      "minimum": 1.8934071978981477,
+      "seed": 11,
+      "values": [
+        2.1104143587110937,
+        2.3746426151388937,
+        2.2408481203629655,
+        3.318495730783702,
+        2.3336152689337255,
+        2.1180707462219415,
+        2.7176346708597467,
+        1.8934071978981477,
+        2.6531273751276556,
+        2.395057718535309
+      ]
+    },
+    {
+      "maximum": 2.518613946099322,
+      "mean": 2.518613946099322,
+      "minimum": 2.518613946099322,
+      "seed": 23,
+      "values": [
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322,
+        2.518613946099322
+      ]
+    },
+    {
+      "maximum": 3.2432756257620348,
+      "mean": 2.434572873127545,
+      "minimum": 1.768578947298194,
+      "seed": 37,
+      "values": [
+        1.768578947298194,
+        2.3163167530358835,
+        1.9174285298141183,
+        2.795636918046796,
+        2.7677727530348726,
+        2.8108244737688746,
+        3.2432756257620348,
+        2.1717625365369497,
+        2.5378362776190797,
+        2.0162959163586525
+      ]
+    },
+    {
+      "maximum": 2.395393423776348,
+      "mean": 2.395393423776348,
+      "minimum": 2.395393423776348,
+      "seed": 53,
+      "values": [
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348,
+        2.395393423776348
+      ]
+    },
+    {
+      "maximum": 2.277575105486398,
+      "mean": 2.277575105486398,
+      "minimum": 2.277575105486398,
+      "seed": 71,
+      "values": [
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398,
+        2.277575105486398
+      ]
+    }
+  ],
+  "protocol": "tier4_per_class_covariance_temperature",
+  "schema_version": 1,
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_winners": {
+    "hybrid": 1,
+    "hybrid_global_temperature": 1,
+    "probabilistic": 1,
+    "probabilistic_global_temperature": 2
+  },
+  "source_artifact": "logs/results/tier4_per_class_covariance_temperature_runs.jsonl",
+  "source_rows": 5,
+  "test_used_for_selection": false,
+  "unique_experiments": 5
+}

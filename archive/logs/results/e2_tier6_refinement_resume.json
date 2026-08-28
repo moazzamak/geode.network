@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "run_id": "e2-tier6-loop-smoke",
+  "failure_after_global_epoch": 2,
+  "checkpoint_count": 4,
+  "latest_checkpoint_epoch": 4,
+  "latest_checkpoint_global_step": 12,
+  "epoch_history_count": 4,
+  "epoch_history_exact": true,
+  "score_scales_exact": true,
+  "geometry_exact": true,
+  "geometry_sha256": {
+    "class-0-center": "9d633d81ba061875b07dca6c6a90a437f09d6b2cf06908738bbd6d4fd81d306f",
+    "class-0-orientation": "c68673617973e5dbd6b0865051acc0742d2fe869c9758d6f2db5a63bd0c3bdbe",
+    "class-0-radii": "1c1384e0f6f0bb0bb44d93661064fb72418ce53994a1388b06858c221632a795",
+    "class-1-center": "0070e7b3fa570332bd961ccf106ebeee092dd6d5661e685f5f20bcf25dbc22e8",
+    "class-1-orientation": "b78076a1bd28192bc4d3a0dbebe07c7129120117e45924d054d923d10eae6b3b",
+    "class-1-radii": "06c03c058b685012e52ae32d7ea29a945b26b3841148cb61176464c6e76e587c"
+  },
+  "sampler_progress_validated": true,
+  "regression_test_count": 157,
+  "regression_test_seconds": 9.583,
+  "performance_claim": false
+}

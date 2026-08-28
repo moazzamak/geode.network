@@ -1,0 +1,15 @@
+{
+  "class_count": 16,
+  "dimensions": 8,
+  "primitives_per_class": [4, 8, 16],
+  "budget_ratios": [0.25, 0.5, 0.75],
+  "calibration_count": 256,
+  "confirmation_count": 512,
+  "evaluation_count": 1024,
+  "seeds": [1201, 1202, 1203],
+  "timing_repeats": 10,
+  "minimum_calibration_agreement": 0.99,
+  "maximum_calibration_score_drift": 0.25,
+  "exit_minimum_agreement": 0.99,
+  "exit_maximum_score_drift": 0.3
+}

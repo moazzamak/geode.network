@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "milestone": "M83",
+  "registered_hypothesis": "H83: boundary supervision expressed in an absolute length trains a class boundary that v12's relative placement could not, and the resulting boundary rejects genuinely unseen classes at matched known-class coverage.",
+  "registration_notes": [
+    "N83.1 - a boundary that moves is satisfiable by noise. The shuffled-owner null shares the geometry, probe count, distances, optimiser, step budget and split, and movement alone is necessary but not sufficient: the trained boundary must also improve real out-of-set recall at matched coverage over its own initialisation. The v12-form arm is retained as the instrument's negative end. If it does not fail the degeneracy test while the absolute arm passes, M83 is void.",
+    "N83.2 - the out-of-set rows are domain-stratified to the corpus and per-domain recall is reported beside every aggregate. Sketch is 0 of 13865 rows because the corpus itself holds only 158 sketch rows; no sketch claim is available.",
+    "N83.3 - known-class coverage is matched at 90 percent before any recall figure is read, and the known-class novel-image control must be accepted at that operating point.",
+    "N83.4 - Phase A is a closed-form SVD fit and is exactly converged, which is stronger than the registered iterative fit. Recorded so the deviation is visible.",
+    "N83.5 - the degeneracy contract is read on the mean probe score, not on the hinged objective. A probe already outside its boundary contributes zero gradient, so a saturated healthy objective and a scale-blind one are indistinguishable under the hinge. The hinged gradient and the active fraction are reported as context, never as verdict.",
+    "N83.6 - probes are placed at multiples of one global radius shared by every class rather than at multiples of the inter-centroid distance. Boundaries sit at roughly four percent of the centroid distance, so a ladder measured in that unit lands entirely outside the band where supervision does work. The unit is a single scalar over frozen geometry and cannot carry any individual class's extent, which is the property that blocks the v12 cancellation.",
+    "N83.7 - the known-class evaluation rows are selected by domain quota rather than by position, which is a deliberate deviation from the M80 and M81 partition. The corpus is class-major and every class stores its 350 quickdraw rows first, so taking rows 512 to 576 of each class yields a held-out set containing zero quickdraw against an out-of-set that is 61 percent quickdraw. Under that split the rejection comparison measures domain, not novelty, and N83.2's guarantee was void on the known side even though it held on the unseen side. The quota split matches the two profiles to a deviation of 0.0 and, as a side effect, makes the fit set domain-representative as well: quickdraw falls from 68.4 percent of the fit rows to 60.7 percent against a corpus share of 60.8 percent. This was found from a smoke run and changed before any evidence was sealed; it is a defect in the measurement setup, not a result that was disliked.",
+    "N83.7a - the same positional split underlies M80 and M81, whose held-out accuracy figures were therefore read on evaluation rows containing no quickdraw at all while their dictionaries were fitted on rows that were 68 percent quickdraw. Those milestones' evidence is sealed and is not retouched. The figures stand as measured; what they measure is narrower than their prose implies, and any later claim resting on them must say so.",
+    "N83.8 - M83.1's probe ladder lay entirely inside the known cloud and its evidence is void, not negative. N83.6's unit is the median fitted tangent scale, a per-direction spread inside a rank-51 subspace of 384 dimensions, while the distance from a row to its own centroid is dominated by the 333 residual dimensions that subspace does not describe. On this corpus the unit is 2.87 and the multipliers 1 to 3 placed every probe between 2.87 and 8.61, against a median row distance of 30.19 and a tenth percentile of 24.36. No boundary can accept rows at 24 to 30 and reject points at 5 to 8 along the same rays, so the supervision was asked for something incoherent rather than merely hard. The signature in M83.1's sealed evidence is that all four arms, including the untrained one, rejected exactly zero held-out probes. The placement unit becomes the median distance from a fit row to its own centroid, and the probe ladder is now checked before anything else in the gate: a run whose probes do not reach past the known cloud returns probe_ladder_interior and reports no recall figure at all. The diagnostic is a comparison of raw distances involving no radius, no arm and no outcome, so applying it cannot be a rescue of a result that was disliked."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "class_range": [128, 345],
+    "stratified_only": true,
+    "stratified_rationale": "N83.2. The stratified mask holds the 13184 rows whose per-class domain quota was filled exactly, so the evaluation set matches the corpus domain profile to within 0.0057. The 11 underfilled classes are excluded rather than partially represented."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7. The evaluation rows are chosen by domain quota, not by position. The quota is the one the out-of-set builder used, so the known control and the unseen rows are drawn from the same mixture to a maximum profile deviation of 0.0. The 64 evaluation rows are then halved inside every class-and-domain group: coverage is matched on the calibration half and every acceptance figure is read on the report half, so no operating point is chosen on the data it is scored against, and both halves carry the same profile as the whole.",
+    "deviation_from_m80": "M80 and M81 took the first 512 rows of each class as the fit set and the next 64 as held-out. That is not a neutral split of this corpus and it is not reused here; see N83.7."
+  },
+  "geometry": {
+    "rank": 51,
+    "rank_rationale": "512 fit rows against the standing floor of 10 samples per fitted dimension gives 51.2. The standing cap is 53, which would need 536 rows. Any negative recorded below the floor is void, so the floor binds first.",
+    "phase_a_frozen": true
+  },
+  "boundary": {
+    "parameterisation": "per_class_log_radii",
+    "shape": "(classes, rank + 1)",
+    "acceptance": "score <= 1",
+    "parameterisation_rationale": "A scalar threshold would be fully determined by the 90 percent coverage match, leaving the out-of-set operand vacuous. Only the shape of the boundary survives coverage matching, so shape displacement is the honest operand and a per-axis radius is the smallest parameterisation that has one."
+  },
+  "probes": {
+    "train_families": ["axis_tangent", "normal"],
+    "held_out_families": ["masking", "random_direction"],
+    "multipliers": [1.0, 1.5, 2.0, 3.0],
+    "multiplier_rationale": "N83.8. Multiples of the data extent unit. At 1.0 a probe sits at the median distance of a row from its own centroid, so the ladder straddles the edge of the known cloud and the upper rungs are clearly outside it. Under N83.6's unit the same multipliers put every probe between 2.87 and 8.61 while rows sit at a median 30.19, which is why M83.1 is void.",
+    "placement_unit": "data_extent",
+    "placement_unit_rationale": "N83.8. The median distance from a fit row to its own class centroid. The requirement the unit must meet is only that it not depend on the learnable radii, so that the v12 cancellation cannot reappear; a statistic of frozen fit data satisfies that as completely as N83.6's tangent median did, while landing the ladder where a negative is actually negative. Registered here rather than hardcoded so the choice that voided M83.1 is a recorded decision.",
+    "seed_offset": 83300
+  },
+  "training": {
+    "epochs": 40,
+    "batch_size": 512,
+    "learning_rate": 0.02,
+    "margin": 0.25,
+    "probe_weight": 1.0,
+    "optimizer": "adam",
+    "optimizer_caution": "Adam divides by the running root mean square of the gradient, so a dead term still produces movement from pure numerical noise. Displacement is therefore never read as evidence on its own; see N83.1."
+  },
+  "arms": {
+    "v12_relative": {
+      "placement": "relative",
+      "role": "negative_control",
+      "role_rationale": "N83.1 makes this gating in the opposite direction: it must fail the degeneracy contract."
+    },
+    "m83_absolute": {
+      "placement": "absolute",
+      "role": "hypothesis"
+    },
+    "shuffled_null": {
+      "placement": "absolute",
+      "shuffle_owners": true,
+      "role": "null",
+      "shuffle_seed_offset": 83400
+    },
+    "untrained": {
+      "placement": "absolute",
+      "epochs": 0,
+      "role": "initialisation_baseline",
+      "role_rationale": "The fitted ellipsoid matched to the same 90 percent coverage. The trained boundary must beat this, not merely beat chance."
+    }
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "matched_before_reading": true
+  },
+  "seeds": [11, 23, 37],
+  "gate": {
+    "degeneracy_is_gating": true,
+    "maximum_gradient_norm_for_degeneracy": 1e-9,
+    "maximum_rescale_spread_for_degeneracy": 1e-9,
+    "minimum_gradient_norm_for_live": 1e-6,
+    "relative_arm_must_read_degenerate": true,
+    "absolute_arm_must_read_live": true,
+    "gate_rationale": "Plan section 15: any objective failing the M83 degeneracy test is void and its results may not be recorded as evidence, retroactively across all v13 milestones. The instrument separated the two arms by fifteen orders of magnitude in development, so 1e-9 sits far from both readings.",
+    "recall_must_exceed_untrained": true,
+    "recall_must_exceed_shuffled_null": true,
+    "known_novel_control_must_be_accepted": true
+  },
+  "threading": { "torch_threads_per_worker": 1, "workers": 3 },
+  "output_dir": "logs/results/v13/m83_boundary_v2"
+}

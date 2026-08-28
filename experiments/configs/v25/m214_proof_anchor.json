@@ -1,0 +1,13 @@
+{
+  "milestone": "M214",
+  "cell": "per-query on-chain proof-hash anchor for the M193b log-sized proof",
+  "n": 16384,
+  "seed": 9,
+  "note": "the proof is synthetic (registered seed); the anchor cost depends on calldata size (1,024 bytes), not content",
+  "hardhat": {
+    "cwd": "infrastructure/evm",
+    "cmd": ["npx", "hardhat", "run", "scripts/anchor_proof.js"],
+    "timeout_seconds": 300,
+    "note": "the anchor JSON path is passed via the POST_ANCHOR_PATH env var"
+  }
+}

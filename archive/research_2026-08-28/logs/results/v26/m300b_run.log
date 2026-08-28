@@ -1,0 +1,20 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+clip_linear anchor: 0.626655 (g2=True)
+extension cv:
+  cv D32768_sigma0.25: 0.6116
+  cv D65536_sigma0.25: 0.6149
+  cv D32768_sigma0.5: 0.6188
+  cv D65536_sigma0.5: 0.6229
+extension selected D=65536 sigma=0.5 (cv 0.6229)
+rff_concat at (65536, 0.5): 0.675336
+{
+ "gates_ok": true,
+ "extension_selected": {
+  "D": 65536,
+  "sigma": 0.5,
+  "cv": 0.6228571428571429
+ },
+ "test_at_extension_winner": 0.6753358102314947,
+ "reading": "the extension's winner beats M300 on both CV and the sealed test: the wall break deepens and the recipe's headroom is larger than measured"
+}

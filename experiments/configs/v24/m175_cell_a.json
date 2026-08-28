@@ -1,0 +1,41 @@
+{
+  "milestone": "M175",
+  "cell": "A",
+  "title": "text->text transfer: the wikitext-fitted additive encoder read on a Wikipedia dump slice",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026); analysis/v24_m175_transfer_cells.md (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the frozen wikitext-fitted additive encoder stay informative when read on unseen Wikipedia text, relative to its own held-out wikitext test?",
+  "verdict": {
+    "metric": "out-domain perplexity on the Wikipedia slice vs in-domain test perplexity, same frozen encoder",
+    "transfer_holds": "out-domain ppl <= 2.0 x in-domain ppl",
+    "consequence_pass": "the additive text encoder stays informative off-domain; A/D proceed with this construction",
+    "consequence_fail": "scoped negative for text->text transfer of this construction (collapses off-domain)"
+  },
+  "corpus": {
+    "sub_cache_file": "data/tier6/wikitext103_100000.npz",
+    "full_cache_file": "data/tier6/wikitext103_full.npz",
+    "sub_vocab_fingerprint": "5c6f0917b424e3a7"
+  },
+  "slices": {
+    "fit_rows": 60000,
+    "valid_rows": 20000,
+    "wiki_start": 100000,
+    "wiki_rows": 100000,
+    "note": "wiki slice = full train ids [100000:200000]; disjoint by construction (100k train is the verified full-stream prefix; 100k test is the other stream)"
+  },
+  "model": {
+    "window_ladder": [1, 2, 4, 8, 16, 32],
+    "alpha": 1.0,
+    "variants": ["uniform", "backoff"]
+  },
+  "anchors": {
+    "g0": "the 100k train ids equal the full train stream's first 80000 ids (prefix pin)",
+    "g1": "the selected arm reproduces the A0 sealed test ppl (A0's exact 80k fit, 20k test) with delta 0.0",
+    "a0_evidence": "logs/results/v24/m175_cell_a0/evidence.json"
+  },
+  "selection": {
+    "rule": "argmin VALID perplexity over variant x window; the full table is reported",
+    "registered_before_any_test_number": true
+  },
+  "output_dir": "logs/results/v24/m175_cell_a"
+}

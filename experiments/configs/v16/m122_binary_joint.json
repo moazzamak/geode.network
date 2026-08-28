@@ -1,0 +1,78 @@
+{
+  "milestone": "M122",
+  "title": "Binary joint surface: does the binary-vs-float gap narrow when atoms, bits and data rise jointly (does the joint budget buy back M114's bit loss)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v19.md section 5.1 (M122)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "whiten": "cpu",
+    "hash": "cpu",
+    "encode": "gpu",
+    "ridge": "cpu",
+    "_note": "sign-code projection on CPU numpy (float64); the Hamming GEMM (sign-GEMM identity, bit-identical to the CPU hardware-POPCNT path) on the GPU; ridge on CPU. HIP_VISIBLE_DEVICES=1, gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms_ladder": [3072, 6144],
+    "bits_ladder": [108, 216],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "dictionary_rule": "at each atom count, the prefix of the seeded permutation of the shared 8192-whitened-patch pool (seed 11) - M108/M113/M114/M117/M118 exact, so (3072,108) is the sealed anchor",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "hash_fit_seed": 33,
+    "hash_fit_images": 200,
+    "hash_pool_size": 100000,
+    "hash_iters": 50,
+    "arms": ["b_random", "c_itq"],
+    "bits_construction": "108 bits = the single M114/M118 projection (ITQ seed 33 / seeded Gaussian seed 33). 216 bits = TWO INDEPENDENT 108-bit projections CONCATENATED (seeds 33 and 34 for ITQ, and 33 and 34 for the Gaussian control). Registered note: v19 section 5.1's heading says '256' but its construction sentence says 'two independent 108-bit projections concatenated' = 216; the construction is followed exactly (216 = 2 x 108). Disclosed: NOT a linear-cap violation - two independent projections of the SAME whitened patch, so the code is genuinely 216 bits and the encode cost is ~2x a 108-bit encode.",
+    "hamming": "sign-GEMM identity (bit-identical to packed uint64 XOR + POPCNT); triangle kernel on Hamming, soft assignment over ALL atoms"
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0]
+  },
+  "scaling": {
+    "n_ladder": [69000, 138000],
+    "subsample_rule": "first n rows of the M107-shuffled train order (nested, deterministic)",
+    "test_set": "the full 34500-row shared test set, identical for every cell and arm",
+    "float_reference": "M117 sealed surface: (3072,69000)=0.1530, (3072,138000)=0.2153, (6144,69000)=0.1525, (6144,138000)=0.2249"
+  },
+  "reuse": {
+    "_note": "the (atoms=3072, bits=108) cells are REUSED from M118's sealed code memmaps (data_cache_root/v16/m118/{arm}_{split}.npy) - the codes are image functions and M118's construction is identical (same whitener, same dictionary prefix, same hash seeds). The t1 gate below verifies the reuse mechanically by re-fitting b_random and c_itq at n=138000 against M118's sealed 0.1842 / 0.1820. All other cells are freshly encoded."
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "t1_reference": "reused (3072,108) cells re-fit at n=138000 must reproduce M118 sealed b_random 0.1842 and c_itq 0.1820 within 0.002, else the run voids",
+    "kill_switch_1_joint_buyback": "fired (fail) if for EITHER arm the binary-vs-float gap at (6144, 138000, 216 bits) does NOT narrow by >= 0.01 vs the gap at (3072, 138000, 108 bits). gaps use the M117 float references (0.2153 at 3072/138000, 0.2249 at 6144/138000). If the joint budget (wider head + more bits + more data) narrows the gap >= 0.01, the binary axis re-opens as a QUALITY route; if not, it is cost-only and M114/M118 verdicts stand.",
+    "registered_prediction": "M117 showed atoms help at full data; M118 showed the 108-bit loss is intrinsic at fixed atoms. If the loss is a fixed-capacity artifact, more bits (216) AND a wider head (6144) AND more data should narrow it; if the loss is intrinsic to the Hamming code itself, the gap persists."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

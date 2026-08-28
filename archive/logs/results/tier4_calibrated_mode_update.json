@@ -1,0 +1,168 @@
+{
+  "protocol": {
+    "seeds": [
+      81,
+      82,
+      83,
+      84,
+      85
+    ],
+    "mutation_published": false
+  },
+  "summary": {
+    "accepted_transactions": 5,
+    "valid_graphs": 5,
+    "unchanged_live_graphs": 5,
+    "source_accuracy_mean": 1.0,
+    "downstream_accuracy_mean": 1.0,
+    "old_mode_accuracy_minimum": 1.0,
+    "new_mode_accuracy_minimum": 1.0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 81,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "transaction_accepted": true,
+        "class_fusion_mode": "hard_min",
+        "radius_scale": 0.999999999,
+        "fit_positive_coverage": 0.8666666666666667,
+        "exclusion_violations": 0,
+        "source_calibrator_width": 2,
+        "downstream_input_width": 2,
+        "downstream_calibrator_width": 2,
+        "validation_issues": [],
+        "candidate_graph_executed": true,
+        "live_graph_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0,
+        "old_mode_source_accuracy": 1.0,
+        "new_mode_source_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 82,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "transaction_accepted": true,
+        "class_fusion_mode": "hard_min",
+        "radius_scale": 0.999999999,
+        "fit_positive_coverage": 0.7666666666666667,
+        "exclusion_violations": 0,
+        "source_calibrator_width": 2,
+        "downstream_input_width": 2,
+        "downstream_calibrator_width": 2,
+        "validation_issues": [],
+        "candidate_graph_executed": true,
+        "live_graph_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0,
+        "old_mode_source_accuracy": 1.0,
+        "new_mode_source_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 83,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "transaction_accepted": true,
+        "class_fusion_mode": "hard_min",
+        "radius_scale": 0.999999999,
+        "fit_positive_coverage": 0.8,
+        "exclusion_violations": 0,
+        "source_calibrator_width": 2,
+        "downstream_input_width": 2,
+        "downstream_calibrator_width": 2,
+        "validation_issues": [],
+        "candidate_graph_executed": true,
+        "live_graph_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0,
+        "old_mode_source_accuracy": 1.0,
+        "new_mode_source_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 84,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "transaction_accepted": true,
+        "class_fusion_mode": "hard_min",
+        "radius_scale": 0.999999999,
+        "fit_positive_coverage": 0.8,
+        "exclusion_violations": 0,
+        "source_calibrator_width": 2,
+        "downstream_input_width": 2,
+        "downstream_calibrator_width": 2,
+        "validation_issues": [],
+        "candidate_graph_executed": true,
+        "live_graph_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0,
+        "old_mode_source_accuracy": 1.0,
+        "new_mode_source_accuracy": 1.0
+      }
+    },
+    {
+      "protocol": {
+        "seed": 85,
+        "geometry_count": 90,
+        "calibration_count": 72,
+        "test_count": 120,
+        "test_used_for_fitting_or_calibration": false,
+        "mutation_published": false
+      },
+      "update": {
+        "transaction_accepted": true,
+        "class_fusion_mode": "hard_min",
+        "radius_scale": 0.999999999,
+        "fit_positive_coverage": 0.9,
+        "exclusion_violations": 0,
+        "source_calibrator_width": 2,
+        "downstream_input_width": 2,
+        "downstream_calibrator_width": 2,
+        "validation_issues": [],
+        "candidate_graph_executed": true,
+        "live_graph_unchanged": true
+      },
+      "observational_test": {
+        "source_accuracy": 1.0,
+        "downstream_accuracy": 1.0,
+        "old_mode_source_accuracy": 1.0,
+        "new_mode_source_accuracy": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "milestone": "M268",
+  "cell": "cell 4 — routing quality on natural queries",
+  "title": "M268 cell 4: marker router vs embedding nearest-centroid router on natural-query phrasings",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (dispatched 22 Aug, after cells 1-3)",
+  "registered_before_any_accuracy": true,
+  "question": "The marker classifier routes perfectly on the generated mix (cell 1, by construction). How do the routing instruments behave on NATURAL phrasings, and does routed accuracy survive imperfect routing?",
+  "routers": {
+    "marker": "the sealed cell-1 deterministic marker classifier (registered rules, unchanged)",
+    "embedding": "cosine nearest-centroid in frozen BERT feature space — the Router class's own cosine rule with arm fingerprints = frozen centroid embeddings (measured-not-learned references, deterministic)",
+    "scope_note": "the descriptor-DSL fingerprint path is unchanged; this cell measures the routing RULE on natural phrasings"
+  },
+  "mix": {
+    "sentiment": {
+      "hf_id": "stanfordnlp/imdb",
+      "split": "test",
+      "rows": [2500, 2800],
+      "license_recorded": "IMDb evaluation-only (standing research-class)",
+      "reuse_note": "declared re-use (one held-out read per configuration)"
+    },
+    "arithmetic": {
+      "n": 200,
+      "seed": 20260822,
+      "note": "word-problem phrasings with number words; ops + - *; small integers; reference exact",
+      "templates": [
+        "What is {a} {op_word} {b}?",
+        "If I take {a} and {op_word2} {b}, what do I get?",
+        "Compute {a} {op_word} {b}.",
+        "What does {a} {op_word2} {b} equal?"
+      ]
+    },
+    "boolean": {
+      "n": 200,
+      "seed": 20260823,
+      "note": "natural boolean questions over stated literals; reference exact"
+    }
+  },
+  "arms": {
+    "sentiment": "distilbert-sst-2 (Apache-2.0), label contract",
+    "arithmetic": "sympy-exact primitive, exact contract",
+    "logic": "deterministic boolean evaluator, exact contract"
+  },
+  "generalist": {
+    "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+    "license_recorded": "Apache-2.0",
+    "max_new_tokens": 64,
+    "anchor_note": "no accuracy anchor claimed; product-quality reading declared"
+  },
+  "grading": {
+    "sentiment": "last occurrence of positive/negative (the sealed cell-1 grader)",
+    "arithmetic": "last integer match vs the exact value",
+    "boolean": "last occurrence of true/false"
+  },
+  "smoke": {
+    "sentiment_rows": 5,
+    "arithmetic_n": 5,
+    "boolean_n": 5
+  },
+  "output_dir": "logs/results/v25/m268_routing_study",
+  "evidence_filename": "evidence_natural_routing.json",
+  "feature_cache_relpath": "v25/m268_routing_study"
+}

@@ -1,0 +1,49 @@
+{
+  "milestone": "M152",
+  "title": "SMOKE: M152 p-grid plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M152",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (20000 train / 2000 test rows, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 20000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M152 pipeline (p-grid fits, ladder scoring, anchor checks, trained-head read) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "m142_cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "cell": {
+    "p_screen": [0.25],
+    "p_anchors": [0.5],
+    "penalty_ladder": [0.1, 1.0],
+    "n_138k": 138000,
+    "two_stage": "smoke: one p, two penalties."
+  },
+  "anchors": {
+    "spm_sqrt_full_best": 0.27855072463768116,
+    "spm_sqrt_138k": 0.2273623188405797,
+    "tolerance": 1e-09
+  },
+  "gate": {
+    "registered": "stage 2 only: promoted p's full-data best >= sealed p=0.5 best + 0.005.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m152_pgrid_smoke"
+}

@@ -1,0 +1,105 @@
+M87 prior-art audit ù executing registered query families.
+This run adjudicates nothing (N87.6) and is not replayable (N87.8).
+
+Anchors (their absence would mean the search itself is broken):
+    [arxiv            ]  20 hits and       outlier exposure out-of-distribution detection
+    [semantic_scholar ]  20 hits relevance outlier exposure out-of-distribution detection
+    [arxiv            ]  20 hits and       generalized category discovery
+    [semantic_scholar ]  20 hits relevance generalized category discovery
+    [arxiv            ]  20 hits and       sparse autoencoder interpretability features
+  ! [semantic_scholar ]   0 hits relevance sparse autoencoder interpretability features
+
+C1 ù Outlier exposure degrades rather than improves rejection for a union of per-class density models.
+    [arxiv            ]  20 hits or        outlier exposure degrades out-of-distribution detection
+  ! [semantic_scholar ]   0 hits relevance outlier exposure degrades out-of-distribution detection
+    [arxiv            ]  20 hits or        outlier exposure harmful negative result OOD
+    [semantic_scholar ]  20 hits relevance outlier exposure harmful negative result OOD
+    [arxiv            ]  20 hits or        outlier exposure Mahalanobis class conditional Gaussian
+  ! [semantic_scholar ]   0 hits relevance outlier exposure Mahalanobis class conditional Gaussian
+    [arxiv            ]  20 hits or        class conditional density model outlier exposure training
+  ! [semantic_scholar ]   0 hits relevance class conditional density model outlier exposure training
+    [arxiv            ]  20 hits or        one-class classifier per class outlier exposure failure
+  ! [semantic_scholar ]   0 hits relevance one-class classifier per class outlier exposure failure
+    [arxiv            ]   1 hits and       union of acceptance regions open set rejection
+  ! [semantic_scholar ]   0 hits relevance union of acceptance regions open set rejection
+    [arxiv            ]  20 hits or        per-class ellipsoid novelty rejection multiclass
+  ! [semantic_scholar ]   0 hits relevance per-class ellipsoid novelty rejection multiclass
+    [arxiv            ]  20 hits or        outlier exposure fails distance based OOD detector
+  ! [semantic_scholar ]   0 hits relevance outlier exposure fails distance based OOD detector
+
+C2 ù Domain-pooled OOD AUROC conceals within-domain performance; the pooled score separates domain rather than novelty.
+    [arxiv            ]  20 hits or        Simpson's paradox AUROC evaluation
+    [semantic_scholar ]  20 hits relevance Simpson's paradox AUROC evaluation
+    [arxiv            ]  20 hits or        pooled versus stratified AUROC subgroup evaluation
+  ! [semantic_scholar ]   0 hits relevance pooled versus stratified AUROC subgroup evaluation
+    [arxiv            ]  20 hits or        out-of-distribution detection evaluation domain confound AUROC
+    [semantic_scholar ]  20 hits relevance out-of-distribution detection evaluation domain confound AUROC
+    [arxiv            ]   1 hits and       group conditional AUROC out-of-distribution detection
+  ! [semantic_scholar ]   0 hits relevance group conditional AUROC out-of-distribution detection
+    [arxiv            ]  20 hits or        subpopulation reversal AUROC aggregation artifact
+  ! [semantic_scholar ]   0 hits relevance subpopulation reversal AUROC aggregation artifact
+    [arxiv            ]  20 hits or        AUROC pooling across datasets misleading OOD benchmark
+  ! [semantic_scholar ]   0 hits relevance AUROC pooling across datasets misleading OOD benchmark
+
+C3 ù Cross-corpus representation transfer loss is attributable to input resolution rather than corpus identity, isolated by a degraded-resolution control arm.
+    [arxiv            ]  20 hits or        image resolution confound frozen features transfer learning
+  ! [semantic_scholar ]   0 hits relevance image resolution confound frozen features transfer learning
+    [arxiv            ]  20 hits or        input resolution domain shift representation quality vision transformer
+  ! [semantic_scholar ]   0 hits relevance input resolution domain shift representation quality vision transformer
+    [arxiv            ]  20 hits or        low resolution CIFAR upsampling ViT feature degradation
+  ! [semantic_scholar ]   0 hits relevance low resolution CIFAR upsampling ViT feature degradation
+    [arxiv            ]  20 hits or        dictionary learning transfer across datasets resolution control
+  ! [semantic_scholar ]   0 hits relevance dictionary learning transfer across datasets resolution control
+    [arxiv            ]   1 hits and       resolution matched control transfer evaluation confound
+  ! [semantic_scholar ]   0 hits relevance resolution matched control transfer evaluation confound
+    [arxiv            ]   1 hits and       sparse coding dictionary generalization unseen dataset
+  ! [semantic_scholar ]   0 hits relevance sparse coding dictionary generalization unseen dataset
+
+C4 ù Exemplar-mediated concept naming channels are not independent, so their agreement cannot evidence naming correctness.
+    [arxiv            ]  20 hits or        concept naming top activating exemplars confound
+    [semantic_scholar ]  20 hits relevance concept naming top activating exemplars confound
+    [arxiv            ]   5 hits and       automated concept interpretation independence validation
+  ! [semantic_scholar ]   0 hits relevance automated concept interpretation independence validation
+    [arxiv            ]  20 hits or        network dissection critique interpretability labels unreliable
+  ! [semantic_scholar ]   0 hits relevance network dissection critique interpretability labels unreliable
+    [arxiv            ]  20 hits or        concept bottleneck naming validation without joint text space
+  ! [semantic_scholar ]   0 hits relevance concept bottleneck naming validation without joint text space
+    [arxiv            ]  20 hits or        automated neuron labeling evaluation agreement misleading
+  ! [semantic_scholar ]   0 hits relevance automated neuron labeling evaluation agreement misleading
+    [arxiv            ]  20 hits or        sparse autoencoder feature naming reliability critique
+    [semantic_scholar ]  20 hits relevance sparse autoencoder feature naming reliability critique
+
+C5 ù Simulatability metrics require a null explanation matched in structure, citation budget and split.
+    [arxiv            ]  20 hits or        simulatability forward simulation evaluation control baseline
+  ! [semantic_scholar ]   0 hits relevance simulatability forward simulation evaluation control baseline
+    [arxiv            ]  15 hits and       randomized explanation baseline interpretability evaluation
+  ! [semantic_scholar ]   0 hits relevance randomized explanation baseline interpretability evaluation
+    [arxiv            ]   1 hits and       sanity checks saliency maps randomization
+  ! [semantic_scholar ]   0 hits relevance sanity checks saliency maps randomization
+    [arxiv            ]   1 hits and       null model explanation evaluation control interpretability
+  ! [semantic_scholar ]   0 hits relevance null model explanation evaluation control interpretability
+    [arxiv            ]   1 hits and       forward simulation human study explanation baseline
+    [semantic_scholar ]  20 hits relevance forward simulation human study explanation baseline
+    [arxiv            ]  20 hits or        shuffled explanation control interpretability metric
+    [semantic_scholar ]  20 hits relevance shuffled explanation control interpretability metric
+
+Anchors returned 100 hits; instrument live: True.
+  C1: 161 hits across 16 queries
+  C2: 141 hits across 12 queries
+  C3: 82 hits across 12 queries
+  C4: 145 hits across 12 queries
+  C5: 98 hits across 12 queries
+
+26 queries failed and are recorded as failures, not as empty results:
+  semantic_scholar  429 HTTPError 429:   sparse autoencoder interpretability features
+  semantic_scholar  429 HTTPError 429:   outlier exposure degrades out-of-distribution detection
+  semantic_scholar  429 HTTPError 429:   outlier exposure Mahalanobis class conditional Gaussian
+  semantic_scholar  429 HTTPError 429:   class conditional density model outlier exposure training
+  semantic_scholar  429 HTTPError 429:   one-class classifier per class outlier exposure failure
+  semantic_scholar  429 HTTPError 429:   union of acceptance regions open set rejection
+  semantic_scholar  429 HTTPError 429:   per-class ellipsoid novelty rejection multiclass
+  semantic_scholar  429 HTTPError 429:   outlier exposure fails distance based OOD detector
+  semantic_scholar  429 HTTPError 429:   pooled versus stratified AUROC subgroup evaluation
+  semantic_scholar  429 HTTPError 429:   group conditional AUROC out-of-distribution detection
+
+Wrote logs\results\v13\m87_prior_art_audit\evidence.json

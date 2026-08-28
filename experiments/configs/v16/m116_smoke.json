@@ -1,0 +1,64 @@
+{
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Tiny atoms (128), tiny ladder (2000/4000/8000), dense at r28 instead of r42, gates bypassed. Its only job is to prove the code paths execute: parity guard, corpus, sparse frozen codes memmap, dense trunk features memmap, ridge fit + full-test score at every ladder point for BOTH families, t1 references, the data-scaling kill switch evaluates, evidence writes. Every accuracy it produces is meaningless.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "dense_trunk": "cuda"
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 128,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "layer0_dictionary": "M108/M113 arm (a) exact construction (prefix of the seeded permutation of the shared pool)",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "head": "closed_form_ridge_1.0"
+  },
+  "dense": {
+    "model": "small",
+    "resolution": 28,
+    "protocol": "t1: frozen DINOv2-small trunk + closed-form ridge head penalty 1.0 (r28 only in smoke for speed)"
+  },
+  "scaling": {
+    "n_ladder": [2000, 4000, 8000],
+    "subsample_rule": "first n rows of the shuffled train order (nested)",
+    "test_set": "full 34500-row shared test set"
+  },
+  "gate": {
+    "t1_sparse_tolerance": 0.002,
+    "t1_dense_tolerance": 0.002,
+    "kill_switch_data_scaling": "fired (fail) if Delta_S < 0.5 * Delta_T"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "program": "v7",
+  "milestone": "M38",
+  "parent_file_locks": [
+    {
+      "id": "v61_claim_ledger",
+      "path": "analysis/CLAIM_LEDGER_v6_1.md",
+      "sha256": "7d49e412fc4122eee7f68aee24f34fa6ee86312f7b025dd63d1cb8298931736a"
+    },
+    {
+      "id": "v61_final_index",
+      "path": "logs/results/v6_1/final_artifact_replay/artifact_index.json",
+      "sha256": "314ac59e1d19fbb906f1d91a33eafcb38a4e41efaa27944f4c2e810056d9a16d"
+    },
+    {
+      "id": "v61_final_verification",
+      "path": "logs/results/v6_1/final_artifact_replay/verification.json",
+      "sha256": "75331dddec99182aa7c8709f01b62a4b4528322f6ab3dc215ec4916f84591f40"
+    }
+  ],
+  "seeds": [11, 23, 37],
+  "stages": {
+    "S0": "synthetic_contract",
+    "S1": "seed_11_falsification",
+    "S2": "three_seed_retention",
+    "S3": "integrated_development",
+    "S4": "untouched_confirmation"
+  },
+  "schedules": [
+    {
+      "id": "synthetic_causal",
+      "dataset": "deterministic_synthetic",
+      "events": ["known", "novel", "known_extension", "corruption", "recurrence", "no_compatible_expert"],
+      "development_windows": [0, 1, 2, 3, 4, 5],
+      "confirmation_windows": [6, 7, 8],
+      "final_labels_sealed": true
+    },
+    {
+      "id": "cifar100_class_stream",
+      "dataset": "CIFAR-100",
+      "representation": "DINOv2_frozen",
+      "known_class_count": 60,
+      "development_novel_class_count": 20,
+      "confirmation_novel_class_count": 20,
+      "arrival_order": "seeded_class_block_interleave",
+      "final_labels_sealed": true
+    },
+    {
+      "id": "domainnet_bundle_routing",
+      "dataset": "DomainNet",
+      "representation": "DINOv2_frozen",
+      "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+      "episodes": ["compatible", "ambiguous", "no_compatible_expert", "stale_profile"],
+      "final_labels_sealed": true
+    }
+  ],
+  "review_policy": {
+    "responses": ["existing_class", "new_class", "corruption_or_irrelevant", "unresolved"],
+    "semantic_publication_requires_confirmation": true,
+    "mutation_requires_confirmation": true,
+    "development_budget_per_1000": 50,
+    "confirmation_budget_per_1000": 50
+  },
+  "routing_policy": {
+    "compatibility_identity": "ModelFingerprint",
+    "empirical_support": "SupportProfile",
+    "authoritative_default": "exhaustive",
+    "stale_profile_action": "exhaustive_fallback",
+    "semantic_route_can_override_unknown": false
+  },
+  "resource_limits": {
+    "maximum_rejection_records": 10000,
+    "maximum_clusters": 200,
+    "maximum_records_per_cluster": 500,
+    "maximum_exact_model_evaluations_per_sample": 64
+  },
+  "closed_claims": [
+    "v61_predictive_rescue",
+    "autonomous_semantic_publication",
+    "unconfirmed_live_mutation",
+    "absolute_novelty_claim"
+  ],
+  "literature_audit": {
+    "path": "analysis/PRIOR_ART_AUDIT_v7.md",
+    "search_date": "2026-07-26",
+    "all_seven_stage_system_found": false,
+    "outcome_e_triggered": false,
+    "unresolved_scope": ["patents", "non_english_sources", "closed_source_industrial_systems"]
+  },
+  "training_data_loaded": false,
+  "final_labels_opened": false
+}

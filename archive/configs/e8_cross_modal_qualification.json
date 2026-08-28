@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "seed": 11,
+  "required_pointcloud_dataset": "ModelNet40",
+  "pointcloud_manifest": "modelnet40/manifest.json",
+  "pointcloud_path": "modelnet40/modelnet40_2048.npz",
+  "pointcloud_shapes": 8,
+  "pointcloud_max_iterations": 30,
+  "text_path": "data/tier6/wikitext103_full.npz",
+  "text_train_prefix": 200000,
+  "text_test_prefix": 100000,
+  "text_train_pairs": 8000,
+  "text_test_pairs": 2000,
+  "text_active_classes": 32,
+  "text_window": 3,
+  "text_pca_components": 8,
+  "text_max_iterations": 3,
+  "alpha": 2.0
+}

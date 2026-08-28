@@ -1,0 +1,19 @@
+{
+  "artifact_path": "modelnet40_2048.npz",
+  "artifact_sha256": "bd513644da2f9367283dba73f30b982d708e4e66715bca70807c4dde624f24af",
+  "cache_root": "D:\\geode-ml\\data\\cache",
+  "class_count": 40,
+  "points_per_shape": 2048,
+  "source_repository": "jxie/modelnet40-2048",
+  "source_revision": "5ae9a4a64ed57c5340517862ab0b0bf5d8a99831",
+  "split_samples": {
+    "test": 2468,
+    "train": 9840
+  },
+  "total_samples": 12308,
+  "verified_files": [
+    "repository/data/train-00000-of-00001-4fece5076596e98a.parquet",
+    "repository/data/test-00000-of-00001-baa2ae7c6a5df7e0.parquet",
+    "modelnet40_2048.npz"
+  ]
+}

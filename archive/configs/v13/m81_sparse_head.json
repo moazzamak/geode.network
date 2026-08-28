@@ -1,0 +1,99 @@
+{
+  "milestone": "M81",
+  "title": "Sparse head over the M80 concept dictionary and the decisive I5 measurement",
+  "corpus": {
+    "root": "logs/results/v13/domainnet_large",
+    "index_sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "final_labels_opened": false
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_per_class": 64
+  },
+  "dictionary": {
+    "dictionary_size": 8192,
+    "active_atoms": 32,
+    "epochs": 40,
+    "batch_size": 1024,
+    "learning_rate": 0.001,
+    "_note": "Cell carried from M80 under N80.2: the only admissible cells were m=8192 at k=32 and k=16, and k=32 has the smaller probe deficit (0.51 points) while still beating its random-dictionary null by 3.77 points. The dictionary seed is the run seed, so the three seeds vary the learned basis and not only the head."
+  },
+  "seeds": [11, 23, 37],
+  "i5_eight": {
+    "classes": [1, 3, 23, 26, 62, 99, 105, 127],
+    "draw_seed": 8101,
+    "_note": "Drawn once by numpy default_rng(8101).choice(128, 8, replace=False), sorted, and frozen here so the draw cannot be repeated until it flatters a result. The heads are retrained on these 8 classes; the dictionary is NOT refit, so the basis stays the registered 128-class M80 basis."
+  },
+  "heads": {
+    "sparse_linear": {
+      "epochs": 20,
+      "batch_size": 1024,
+      "learning_rate": 0.01,
+      "l1_penalties": [0.0, 0.03, 0.1, 0.3],
+      "atom_budgets": [1024, 512, 256],
+      "_note": "L1 is applied as a proximal soft-threshold, not as a loss term; see N81.4. Both axes are swept because the explanation-length budget is the quantity under test, so the (I5, citations) trade must be measured rather than assumed at one operating point."
+    },
+    "metric_field": {
+      "variance_shrinkage": [0.1, 0.5, 1.0]
+    },
+    "decision_list": {
+      "max_rules": 256
+    }
+  },
+  "controls": {
+    "knn": {
+      "neighbors": 10
+    },
+    "rbf": {
+      "nystroem_components": 2048,
+      "gamma": null
+    },
+    "mlp": {
+      "hidden": 512,
+      "epochs": 20,
+      "batch_size": 1024,
+      "learning_rate": 0.001
+    }
+  },
+  "explanations": {
+    "top_count": 8,
+    "budget": 10,
+    "integrated_gradients": {
+      "steps": 32
+    },
+    "expected_gradients": {
+      "samples": 32,
+      "seed": 8102
+    },
+    "_note": "budget is the M79 deployment constraint: an explanation citing more than 10 atoms per decision fails the deployment context even where the gate passes."
+  },
+  "i5": {
+    "train_fraction": 0.7,
+    "max_iter": 2000,
+    "_note": "Explanations are standardised on the probe-training rows only before the logistic probe; see N81.3."
+  },
+  "gate": {
+    "rule": "R4 conjunction: I5-8 and I5-128 are both required and neither may be reported alone.",
+    "accuracy_comparability_points": 5.0,
+    "accuracy_comparability_sensitivity_points": [2.5, 5.0, 10.0, 15.0, 100.0],
+    "degeneracy_floor": 0.5,
+    "_comparability_note": "H81 claims an atom head is more simulable than a dense head OF COMPARABLE ACCURACY, so an atom arm more than this many balanced-accuracy points below the best dense control cannot carry the verdict. See N81.7. The degeneracy floor requires an arm to emit at least this fraction of the label space; see N81.8. Both conditions were added after the first run, in which a decision list with 15.74% accuracy emitting 36 of 128 classes carried the I5-128 pass. Because the tolerance was chosen with the data in view, the verdict is recomputed across the sensitivity points above and only a conclusion stable across all of them may be claimed.",
+    "i5_eight": {
+      "chance": 0.125,
+      "confirms_at_or_above": 0.40,
+      "refutes_at_or_below": 0.25,
+      "_note": "The original v12 rule, retained unchanged. v12 reference points on 8-way CIFAR-10: GEODE 17.737, RBF 22.772, kNN 25.246, chance 12.500. These are reference points, never bars: every control is re-measured on v13."
+    },
+    "i5_128": {
+      "chance": 0.0078125,
+      "rule": "strictly above the re-measured kNN control on the identical protocol, by more than the spread across seeds 11/23/37"
+    },
+    "shuffled_explanation_null_required": true,
+    "_note": "Amendment R5: every comparative operand carries a null sharing its structure, budget and split. The shuffled-explanation null must collapse toward chance or the I5 number is uninterpretable."
+  },
+  "threading": {
+    "torch_threads_per_worker": 1,
+    "workers": 3,
+    "_note": "Single-threaded torch is mandatory for gated evidence: at 8 threads the dictionary fit was measured non-reproducible (hash 0e3d8824e18860c4 vs 1b849eff3813577c at one thread)."
+  }
+}

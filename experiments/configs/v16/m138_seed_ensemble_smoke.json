@@ -1,0 +1,43 @@
+{
+  "milestone": "M138",
+  "title": "SMOKE: seed-ensemble plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 1 (M138)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (train cap 2000, test 1200, skip gates). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "_smoke_train_cap": 2000,
+  "_smoke_test_rows": 1200,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "member_atoms": 3072,
+    "member_seeds": [11, 22],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192
+  },
+  "ensemble": { "rule": "per-row L2 normalisation, average, argmax", "member_penalty": 1.0, "n": 2000 },
+  "gate": { "t1_tolerance": 0.002 },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 512,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05
+  }
+}

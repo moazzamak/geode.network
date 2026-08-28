@@ -1,0 +1,45 @@
+{
+  "milestone": "M268",
+  "cell": "cell 3 — programming tier (d-code)",
+  "title": "M268 cell 3: code specialist vs generalist, single-sample pass@1, HumanEval graded by sandboxed execution",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (amendment 34, 22 Aug)",
+  "registered_before_any_accuracy": true,
+  "question": "Does a code-specialized checkpoint beat the generalist on HumanEval when graded by real execution, under the registered sandbox guard?",
+  "arms": {
+    "coder": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-Coder-1.5B-Instruct",
+      "license_recorded": "Apache-2.0",
+      "max_new_tokens": 512,
+      "decoding": "greedy (do_sample=False)"
+    },
+    "generalist": {
+      "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-1.5B-Instruct",
+      "license_recorded": "Apache-2.0",
+      "max_new_tokens": 512,
+      "decoding": "greedy (do_sample=False)"
+    }
+  },
+  "corpus": {
+    "path": "F:/geode-ml/data/cache/humaneval/HumanEval.jsonl",
+    "provenance": "official MIT-licensed openai/human-eval repository (data/HumanEval.jsonl); the HF mirror carries no license metadata and was excluded by G6",
+    "license_recorded": "MIT (source repository)",
+    "n_problems": 164
+  },
+  "prompt": "Complete the following Python function. Return only the function code, without any explanation or markdown fences.\n{prompt}",
+  "sandbox": {
+    "kind": "guarded tool arm (registered)",
+    "isolation": "subprocess python -I -B, no shell, timeout 5s, temp working directory",
+    "grading": "exec(candidate); run the problem's check(entry_point); a clean exit prints GEODE_CHECK_PASS",
+    "environment_fingerprint": "recorded in evidence (platform + python version + flags)"
+  },
+  "declarations": {
+    "contamination": "HumanEval sits in the training corpora of code LLMs (the Codex/StarCoder line) — product-quality reading, published anchors cited, never SOTA",
+    "holdout": "one held-out read per arm; single-sample pass@1 (n=1, greedy)"
+  },
+  "smoke": {
+    "problems": 5
+  },
+  "output_dir": "logs/results/v25/m268_routing_study",
+  "evidence_filename": "evidence_code.json",
+  "feature_cache_relpath": "v25/m268_routing_study"
+}

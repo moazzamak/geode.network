@@ -1,0 +1,34 @@
+{
+  "milestone": "M277",
+  "title": "M277 execution-feedback loop on the code arm: pass@k with the sealed sandbox test-runner as the verifier",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (the M272-M281 wave)",
+  "registered_before_any_accuracy": true,
+  "question": "The sealed single-shot pass@1 is 0.598. What does the same coder read when a failed sandbox run's trace is fed back for a fix, up to k registered attempts?",
+  "arm": {
+    "checkpoint_path": "F:/geode-ml/data/cache/huggingface/Qwen2.5-Coder-1.5B-Instruct",
+    "license_recorded": "Apache-2.0",
+    "max_new_tokens": 512,
+    "decoding": "greedy (do_sample=False)"
+  },
+  "loop": {
+    "k": 3,
+    "verifier": "the sealed cell-3 sandbox (python -I -B, no shell, 5s timeout, temp cwd)",
+    "feedback_prompt": "The following function failed its tests. Fix the function so all tests pass. Return only the function code, without explanation or markdown fences.\nPrevious attempt:\n{attempt}\nTest failure trace:\n{trace}\nProblem:\n{prompt}"
+  },
+  "corpus": {
+    "path": "F:/geode-ml/data/cache/humaneval/HumanEval.jsonl",
+    "provenance": "official MIT-licensed openai/human-eval repository",
+    "license_recorded": "MIT (source repository)",
+    "n_problems": 164
+  },
+  "declarations": {
+    "contamination": "HumanEval sits in the training corpora of code LLMs — product-quality reading, published anchors cited, never SOTA",
+    "holdout": "one held-out read per configuration; pass@k over k greedy attempts with verifier feedback"
+  },
+  "smoke": {
+    "problems": 5
+  },
+  "output_dir": "logs/results/v25/m277_code_loop",
+  "evidence_filename": "evidence.json",
+  "feature_cache_relpath": "v25/m277_code_loop"
+}

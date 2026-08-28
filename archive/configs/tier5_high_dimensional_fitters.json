@@ -1,0 +1,19 @@
+{
+  "anisotropy": 8.0,
+  "artifact_path": "logs/results/tier5_high_dimensional_fitters.json",
+  "dimensions": [3, 6, 9, 12, 19],
+  "fit_samples": 300,
+  "fitters": [
+    "quadric_svd",
+    "full_covariance",
+    "diagonal_covariance",
+    "shrinkage_covariance",
+    "minimum_covariance_determinant",
+    "low_rank_covariance",
+    "gmm_covariance"
+  ],
+  "label_noise": 0.05,
+  "outlier_rate": 0.1,
+  "seeds": [11, 23, 37, 53, 71],
+  "test_samples": 1000
+}

@@ -1,0 +1,43 @@
+{
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; 20000 train / 2000 test rows, no trained-head read, no ext600, no gates. MUST refuse the sealed output dir.",
+  "milestone": "M142",
+  "title": "Construction factorial screen - cell C1 (SMOKE)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 Phase A / section 9 M142",
+  "registration_notes": {
+    "N99.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy"
+  },
+  "cell_c1": {
+    "p_ladder": [1.0, 0.5],
+    "penalty_ladder": [1.0],
+    "trained_epochs": 8,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "gate_registered": "fired if the best (p, penalty) ridge read at 138k < 0.22487 + 0.005, or the p=1.0 anchor misses by more than 0.002.",
+    "consequence_fired": "power-normalisation does not lift the sealed codes at matched cost (scoped negative).",
+    "consequence_passed": "power-normalisation lifts the sealed codes at matched cost."
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 16
+  },
+  "output_dir": "logs/results/v16/m142_factorial"
+}

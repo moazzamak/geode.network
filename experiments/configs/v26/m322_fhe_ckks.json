@@ -1,0 +1,21 @@
+{
+  "milestone": "M322e-D",
+  "stage": "CKKS backend",
+  "title": "TenSEAL CKKS head evaluation: registered noise gates vs the integer path + honest single-query budget",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md §8.22 M322e-D (27 Aug 2026)",
+  "n_rows": 20,
+  "qg3a_bound": 4294967296.0,
+  "qg3b_agreement": 0.999,
+  "smoke_d": 64,
+  "smoke_c": 8,
+  "registered_checks": {
+    "qg3a": "max |decoded*2^64 - integer_MAC| <= 2^32 (the CKKS noise gate at poly degree 8192, coeff bits [60,40,40,60], scale 2^40)",
+    "qg3b": "argmax agreement between the decoded vector and the integer-path argmax >= 0.999 on n_rows = 20 real held-out rows",
+    "g5": "per-query wall time (encrypt, evaluate, decrypt) and ciphertext bytes are RECORDED — measured numbers, never asserted"
+  },
+  "interpretation_registered_before_running": {
+    "qg3_pass": "the CKKS backend reproduces the registered arithmetic within the registered noise bound on the real head; the chain QG1/QG1b/QG2 -> QG3a/QG3b -> G5 is complete",
+    "qg3_fail": "the CKKS noise exceeds the registered bound or the argmax disagrees — a negative finding; parameters or scheme are re-registered, never silently widened",
+    "g5": "no pre-committed latency bound; the M195 band is the pricing context"
+  }
+}

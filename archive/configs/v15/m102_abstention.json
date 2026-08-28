@@ -1,0 +1,102 @@
+{
+  "milestone": "M102",
+  "title": "Abstention as the objective — Tier A gate-quality measurement",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.7",
+  "hypothesis": "H110",
+  "tier": "A",
+  "_tier_note": "Tier A runs every arm on the sealed 384-dimensional DINOv2 feature, so every arm pays the full 6,065,759,232-MAC trunk and NO ARM SAVES ANYTHING. Tier A measures gate quality only. Plan section 11.2 item 20 forbids reporting any Tier A result in the language of compute saving. Tier B, which would re-fit stage-1 on a cheap input so that a non-deferred row genuinely never pays the trunk, is conditional on Tier A confirming H110 and is not run here.",
+  "corpus_index": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85"
+  },
+  "partition": {
+    "fit_per_class": 448,
+    "calibration_per_class": 64,
+    "evaluation_per_class": 64,
+    "_note": "576 rows per class exactly, class-major. The split is a seeded within-class permutation so that the three seeds vary split membership and not only the fit. The calibration split is disjoint from both fit and evaluation and exists so that the temperature of arm (b-prime) and every deferral threshold are chosen WITHOUT touching evaluation rows. Choosing a threshold on the evaluation split would make every reported deferral rate optimistic."
+  },
+  "seeds": [11, 23, 37],
+  "sample_adequacy": {
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_note": "Plan section 5.3, never waived. A stage-1 arm at d PCA dimensions fits a d-vector mean per class from fit_per_class rows, so the ratio is fit_per_class / d. At 448 rows: d=8 -> 56, d=16 -> 28, d=32 -> 14 all pass; d=64 -> 7 FAILS. The d=64 arm is therefore run and reported as VOID, not as negative (M83.1 / N83.8). This matters because the planning probe in plan section 2.8 took its headline 44.4% figure from d=64, which this milestone cannot admit. The primary operating point is d=32, whose probe reading was 45.4% and which passes the floor."
+  },
+  "stage_one": {
+    "pca_dimensions": [8, 16, 32, 64],
+    "primary_dimensions": 32,
+    "_pca_note": "The PCA basis is fitted on the fit split only, across all classes jointly, so it never sees calibration or evaluation rows. Its own adequacy is 448*128=57344 rows for at most 64 components and is not at issue; the floor above concerns the per-class means."
+  },
+  "stage_two": {
+    "family": "weighted_knn",
+    "neighbors": 10,
+    "weighting": "inverse_distance",
+    "_note": "Carried unchanged from the M81 kNN control so that the expensive stage is the program's existing best head rather than a new one. Its reading on this milestone's split will NOT equal M81's sealed 0.661255 because the split differs; the two are not interchangeable and the evidence file records both."
+  },
+  "deferral_rates": [0.25, 0.4, 0.5, 0.6, 0.75],
+  "primary_deferral_rate": 0.5,
+  "_deferral_note": "Registered before the run. 0.50 is primary because the planning probe located the oracle/full-model crossover there. The other rates are reported but do not carry the verdict, so the operating point cannot be chosen after seeing which rate flatters an arm.",
+  "arms": {
+    "a_ncm_margin": {
+      "label": "(a) nearest class mean, gate = top-2 distance margin",
+      "role": "baseline reproduced from the plan section 2.8 planning probe"
+    },
+    "b_sparse_margin": {
+      "label": "(b) sparse linear stage-1 fitted for accuracy, gate = logit margin",
+      "role": "accuracy-fitted comparator; differs from (c) ONLY in the objective",
+      "epochs": 40,
+      "batch_size": 1024,
+      "learning_rate": 0.01,
+      "l1_penalty": 0.01
+    },
+    "b_prime_sparse_temperature": {
+      "label": "(b') arm (b) with a temperature-scaled gate",
+      "role": "the cheap baseline that could make H110 unnecessary; plan section 8.9 D6",
+      "temperature_grid_min": 0.05,
+      "temperature_grid_max": 20.0,
+      "temperature_grid_points": 200,
+      "_note": "Temperature is fitted on the CALIBRATION split by negative-log-likelihood minimisation, the Guo et al. (2017) procedure. Guo et al. report ECE 5.48% -> 1.86% on ImageNet ResNet-152 from this single scalar, which is why a plan that omitted this arm would be crediting H110 with a win the baseline could have had."
+    },
+    "c_sparse_selective": {
+      "label": "(c) sparse selective model, classifier and gate trained jointly",
+      "role": "the arm H110 is about",
+      "epochs": 40,
+      "batch_size": 1024,
+      "learning_rate": 0.01,
+      "l1_penalty": 0.01,
+      "coverage_penalty": 32.0,
+      "_note": "SelectiveNet formulation (Geifman & El-Yaniv 2019, arXiv:1901.09192): selective risk E[g*loss]/E[g] plus a quadratic penalty for falling below target coverage. The gate g shares the sparse trunk with the classifier f and is trained in the same pass. One model is trained per target coverage, i.e. per deferral rate, because the coverage constraint is part of the objective. Plan section 8.9 D2 and section 11.2 item 22: joint gate training is established prior art and is not presented as new."
+    },
+    "d_dense_gate": {
+      "label": "(d) budget-matched dense gate over arm (b)",
+      "role": "R5 null for the sparsity claim: shows whether a DENSE gate of matched size does the same job",
+      "hidden": 64,
+      "epochs": 40,
+      "batch_size": 1024,
+      "learning_rate": 0.001,
+      "_note": "Trained on the CALIBRATION split to predict whether arm (b)'s stage-1 prediction is correct — the directly supervised form of the question a gate is asked. Its parameter count is reported beside arm (c)'s gate; if it is not within the registered budget ratio the comparison is reported as unmatched rather than silently used."
+    }
+  },
+  "nulls": {
+    "random_deferral_draws": 32,
+    "_note": "Amendment R5: an operand without its null is not evidence. Every (arm, rate) point carries a random-deferral null of IDENTICAL size, averaged over this many draws with its spread reported, and an oracle that defers exactly the stage-1 errors. The reported quantity is the recovered fraction (arm - null) / (oracle - null), which is undefined when oracle <= null and is emitted as null in that case rather than as a number."
+  },
+  "gate": {
+    "hypothesis": "H110",
+    "recovered_fraction_bar": 0.6,
+    "baseline_recovered_fraction_probe": {
+      "d64_rate50": 0.444,
+      "d32_rate50": 0.454
+    },
+    "rule": "H110 confirms if arm (c) exceeds the recovered_fraction_bar at the primary deferral rate on the primary dimensions, by more than the spread across seeds, AND exceeds arm (b) by more than the spread. H110 is REFUTED BY SUFFICIENCY OF THE BASELINE if arm (b') reaches the bar, regardless of arm (c) — plan section 7.7 second kill switch.",
+    "_bar_note": "0.6 was registered in the plan before this milestone was written and is not adjustable here. It sits above both probe baselines above, so the bar does not depend on which stage-1 width anchors it.",
+    "sparsity_operand": "arm (c) versus arm (d) — whether a SPARSE gate matches a budget-matched DENSE one. Arm (c) versus arm (b) is the separate operand about the objective."
+  },
+  "compute_ledger": {
+    "trunk_macs_per_input": 6065759232,
+    "_trunk_note": "Frozen DINOv2 ViT-S/14, 257 tokens, d=384, 12 layers, MLP ratio 4, as derived in plan section 2.6.2. EVERY Tier A arm pays this on EVERY input including deferred ones, so the trunk term is constant across all arms and no Tier A comparison can show a saving. The ledger reports head-and-gate MACs excluding the trunk, and the plan requires this unchanged-trunk statement to appear in the same table.",
+    "report_excluding_trunk": true
+  },
+  "threading": {
+    "torch_threads": 1,
+    "_note": "Single-threaded torch is mandatory for gated evidence; carried from M80 where multi-threaded fits were measured non-reproducible."
+  }
+}

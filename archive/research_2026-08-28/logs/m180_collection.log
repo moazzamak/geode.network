@@ -1,0 +1,25 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+loaded codes: spm (409832, 40383) ms (409832, 13244) pool (409832, 8248); labels (409832,)
+assemble+LU equivalence gate: rel 0.000e+00 passed=True
+building the six standardised block Grams (one pass) ...
+blocks built
+  anchor V_spm: 0.2604927536 vs sealed 0.2604927536231884 delta 0.000e+00 ok=True backward=1.57e-18
+  anchor V_ms: 0.2421449275 vs sealed 0.24214492753623187 delta 0.000e+00 ok=True backward=2.41e-18
+  anchor V_pool: 0.2275362319 vs sealed 0.22753623188405797 delta 0.000e+00 ok=True backward=2.77e-18
+  anchor V_spm_ms: 0.2831304348 vs sealed 0.2831304347826087 delta 0.000e+00 ok=True backward=1.08e-18
+  measured V_spm_pool = 0.2672173913 backward=1.88e-18
+  measured V_ms_pool = 0.2648115942 backward=1.88e-18
+  measured V_spm_ms_pool = 0.2864057971 backward=5.82e-10
+{
+ "anchors_ok": true,
+ "game": {
+  "V_spm": 0.2604927536231884,
+  "V_ms": 0.24214492753623187,
+  "V_pool": 0.22753623188405797,
+  "V_spm_ms": 0.2831304347826087,
+  "V_spm_pool": 0.26721739130434785,
+  "V_ms_pool": 0.26481159420289857,
+  "V_spm_ms_pool": 0.28640579710144926
+ }
+}
+M180 collection complete -> logs\results\v25\m180_collection\evidence.json

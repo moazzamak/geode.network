@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "artifact": "V13-EXPOSURE",
+  "purpose": "Sealed out-group exposure pool for M84's ladder. Holds DINOv2-small features for DomainNet labels 128-247 at 128 rows per class, domain-stratified to the v13 corpus by the same rule as the out-of-set artifact, so that an exposure-trained boundary cannot be rejecting rendering style.",
+  "milestone_registered_by": "M84",
+  "registration_notes": [
+    "N84.1 - the exposure pool and the evaluation out-of-set are class-disjoint. Labels 128-247 expose and labels 248-344 evaluate. Training on the classes the boundary is scored against is not open-set detection. The split is positional and was fixed in the ledger before this artifact was built, so no data-dependent choice enters it. The evaluation half needs no new extraction: it is the already-sealed V13-OPENSET artifact restricted to labels 248 and above.",
+    "N84.2 - 128 rows per class is the ladder's requirement, not a round number. The densest feasible cell is N_out 10000 at diversity 100, which draws 100 rows from each of 100 exposure classes; 128 leaves margin for classes that underfill. Raw availability caps the pool well below this at the low-diversity end, which is why the ladder is not rectangular and why (1000, 1), (10000, 1) and (10000, 10) are declared infeasible rather than omitted.",
+    "N84.3 - the moment-matched null is generated at fit time from this artifact's own rows, not extracted, so it shares this sample's mean and covariance exactly and carries none of its content.",
+    "Row overlap with V13-OPENSET is expected and harmless. Both builders take a deterministic prefix scan, so the first 64 rows of each class 128-247 are the same images in both artifacts. Those classes are never evaluated in M84, so no evaluation row is ever trained on. The control that matters is class disjointness, and the M84 runner asserts it on load."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "class_count": 128,
+    "samples_per_class": 576,
+    "domain_counts": [9939, 8029, 7195, 44800, 3607, 158],
+    "domain_counts_rationale": "Read from logs/results/v13/domainnet_large/selection_manifest.json and sealed here so the stratification target cannot drift. Sums to 73728. Identical to the value sealed in m83_openset.json."
+  },
+  "unseen_classes": {
+    "first_label": 128,
+    "last_label": 247,
+    "count": 120,
+    "rationale": "N84.1's exposure half. 120 classes gives headroom over the 100 that the widest diversity rung needs, so the pool still reaches diversity 100 after underfilled classes are excluded."
+  },
+  "samples_per_unseen_class": 128,
+  "samples_per_unseen_class_rationale": "Twice the out-of-set artifact's per-class depth. 120 x 128 = 15360 images, which extracts in about three minutes at the measured 84.9 images per second.",
+  "domain_quota_per_unseen_class": [17, 14, 13, 78, 6, 0],
+  "domain_quota_rationale": "The largest-remainder allocation of 128 samples across the corpus's own domain distribution, recomputed by the builder from the sealed domain counts, which refuses to run if it disagrees. It is not the out-of-set quota doubled: largest remainder at 128 lands on 17/14/13 where doubling 9/7/6 would give 18/14/12. Sketch draws zero for the same reason it does in the out-of-set artifact - the corpus holds only 158 sketch images in 73728, and matching the corpus means matching that absence.",
+  "minimum_native_short_edge": 256,
+  "minimum_native_short_edge_rationale": "Identical to the corpus and out-of-set filters. Exposure admitted under a different resolution filter would differ from the evaluation rows in image size as well as in class.",
+  "selection_rule": "prefix_scan_per_class_domain_cell",
+  "selection_rule_rationale": "For each (class, domain) cell the builder accepts the first images in shard order that clear the short-edge filter. No random number generator participates in selection, so the artifact is a function of the shards and this configuration alone. Classes that cannot fill every cell are recorded as underfilled and excluded from the stratified set; their features are retained so the exclusion can be audited.",
+  "extraction_batch_size": 1,
+  "extraction_batch_size_rationale": "The frozen DINOv2-small INT8 graph derives activation scales from the whole input tensor, so above batch size one an image's features depend on its batch neighbours. Batch size one makes the artifact a function of (image, backbone) and lets extraction shard freely across processes.",
+  "dispatch_chunk_size": 512,
+  "execution_provider": "CPUExecutionProvider",
+  "domainnet_download_record": {
+    "path": "logs/results/e7_domainnet_download.json"
+  },
+  "backbone": {
+    "id": "dinov2-small",
+    "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+    "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+    "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+    "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "token_pooling_policy": "cls_token",
+    "output_dimension": 384
+  },
+  "corpus_disjointness_control": {
+    "description": "Every selected exposure row must be absent from the corpus selection manifest, keyed on (source_file, source_row). The two sets are disjoint by class construction, so this control should pass trivially; it is run because a silent label-range error would otherwise leak known-class rows into the exposure pool and let the boundary train against the classes it must accept.",
+    "maximum_shared_rows": 0
+  },
+  "shard_invariance_control": {
+    "description": "Extract a probe set under two worker counts and require bitwise identity. This passes only if features are genuinely per-image. Repeated here because an artifact this milestone trains on must be a function of its images alone.",
+    "probe_images": 96,
+    "worker_counts": [3, 11],
+    "maximum_absolute_difference": 0.0
+  },
+  "output_dir": "logs/results/v13/exposure",
+  "final_labels_opened": false
+}

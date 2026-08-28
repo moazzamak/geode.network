@@ -1,0 +1,176 @@
+{
+  "protocol": {
+    "seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "automatic_mutation_enabled": false
+  },
+  "summary": {
+    "proposal_count": 7,
+    "decision_accuracy": 0.7142857142857143,
+    "validated_transactions": 5,
+    "published_mutations": 0,
+    "quarantined": 2
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 61,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": "unknown-d2394292110d",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.625,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": "unknown-2b8432506da4",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.7083333333333334,
+            "replay_accuracy_before": 1.0,
+            "replay_accuracy_after": 1.0,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": "unknown-51081e331ee2",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6956521739130435,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": "unknown-b39ebab4915e",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "insufficient_proposal_gain",
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.3157894736842105,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.8333333333333334,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": "unknown-873d357db109",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.7727272727272727,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.9791666666666666,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        },
+        {
+          "temporary_unknown_id": "unknown-6d063c457e35",
+          "expected_action": "update_existing",
+          "decision_action": "quarantine",
+          "failed_gates": [
+            "replay_regression"
+          ],
+          "transaction_validated": false,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.5909090909090909,
+            "replay_accuracy_before": 0.9791666666666666,
+            "replay_accuracy_after": 0.875,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "candidate_model_family": "geode_ellipsoid",
+        "automatic_mutation_enabled": false
+      },
+      "outcomes": [
+        {
+          "temporary_unknown_id": "unknown-6a14c3a9d48f",
+          "expected_action": "create_new",
+          "decision_action": "create_new",
+          "failed_gates": [],
+          "transaction_validated": true,
+          "mutation_published": false,
+          "evidence": {
+            "proposal_gain": 0.6666666666666666,
+            "replay_accuracy_before": 0.9375,
+            "replay_accuracy_after": 0.9375,
+            "ood_unknown_recall_before": 1.0,
+            "ood_unknown_recall_after": 1.0
+          }
+        }
+      ]
+    }
+  ]
+}

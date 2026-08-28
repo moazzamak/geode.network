@@ -1,0 +1,85 @@
+{
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_metric": "multinomial_accuracy",
+  "test_used_for_selection": false,
+  "comparisons": {
+    "shrinkage_covariance": {
+      "selection": {
+        "mean_seed_difference": 0.007504996976269873,
+        "seed_standard_deviation": 0.008246834682359348,
+        "wins": 4,
+        "ties": 1,
+        "pooled_paired_bootstrap": {
+          "difference": 0.007499999999999951,
+          "lower": 0.0016666666666665941,
+          "upper": 0.013749999999999932,
+          "confidence": 0.95
+        }
+      },
+      "test": {
+        "mean_seed_difference": 0.007124999999999981,
+        "seed_standard_deviation": 0.011769929906333345,
+        "wins": 4,
+        "ties": 0,
+        "pooled_paired_bootstrap": {
+          "difference": 0.007125000000000048,
+          "lower": 0.0023750000000000134,
+          "upper": 0.012124999999999941,
+          "confidence": 0.95
+        }
+      }
+    },
+    "minimum_covariance_determinant": {
+      "selection": {
+        "mean_seed_difference": -0.7174915052533694,
+        "seed_standard_deviation": 0.013017323729486573,
+        "wins": 0,
+        "ties": 0,
+        "pooled_paired_bootstrap": {
+          "difference": -0.7175,
+          "lower": -0.73125,
+          "upper": -0.70375,
+          "confidence": 0.95
+        }
+      },
+      "test": {
+        "mean_seed_difference": -0.7266250000000001,
+        "seed_standard_deviation": 0.006393355926272203,
+        "wins": 0,
+        "ties": 0,
+        "pooled_paired_bootstrap": {
+          "difference": -0.726625,
+          "lower": -0.7368750000000001,
+          "upper": -0.715996875,
+          "confidence": 0.95
+        }
+      }
+    }
+  },
+  "resources": {
+    "current": {
+      "mean_fit_seconds": 0.47654367999639363,
+      "mean_experts": 34.6,
+      "mean_additive_ellipsoids": 47.2,
+      "mean_empty_classes": 0.0
+    },
+    "shrinkage_covariance": {
+      "mean_fit_seconds": 1.0042778400005772,
+      "mean_experts": 47.4,
+      "mean_additive_ellipsoids": 106.0,
+      "mean_empty_classes": 0.2
+    },
+    "minimum_covariance_determinant": {
+      "mean_fit_seconds": 3.3123133999994026,
+      "mean_experts": 0.0,
+      "mean_additive_ellipsoids": 0.0,
+      "mean_empty_classes": 10.0
+    }
+  }
+}

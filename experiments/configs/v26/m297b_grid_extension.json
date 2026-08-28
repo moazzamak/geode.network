@@ -1,0 +1,38 @@
+{
+  "milestone": "M297b",
+  "title": "M297 boundary-flag extension: exact-LOOCV lambda over {50, 100, 300, 1000} (same sealed machinery, cached eigendecomposition)",
+  "question": "Does the LOOCV curve turn upward inside {50, 100, 300, 1000}, or does lambda* still sit on the grid boundary?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md §8.38 (27 Aug 2026, before dispatch)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters (the m109 _load_corpus digest gate)"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz",
+    "labels_note": "the M142 cell-2 schedule labels - the ms codes are aligned to THIS order (the M228 discipline)"
+  },
+  "lambda_grid": [50.0, 100.0, 300.0, 1000.0],
+  "anchor_penalty": 1.0,
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09,
+             "source": "the sealed ms full-train penalty-1.0 aggregate (M228)"},
+  "m297_reference": {"lambda_star": 30.0, "loocv_at_30": 0.002815,
+                     "test_at_30": 0.23516,
+                     "note": "the M297 sealed top-of-grid reading"},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - row counts are a premise",
+    "g2_fail": "VOID - the LU path must reproduce the sealed anchor or the instrument is not the sealed one",
+    "g3_fail": "VOID - the LOOCV machinery must be finite and the hat-margin validity rule applied as registered",
+    "g4_fail": "VOID - the cached eigendecomposition must reproduce the sealed M296 conditioning",
+    "turns_upward": "lambda* is the interior minimizer; the M297 boundary flag closes with a measured lambda*",
+    "still_descending": "the flag stands: at this scale the LOOCV-selected lambda grows without bound (the ridge degenerates toward the class-prior readout, the direction the M298a collapse measured); recorded honestly, no further grid without a new registered reason"
+  }
+}

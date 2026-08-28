@@ -1,0 +1,30 @@
+{
+  "milestone": "M177",
+  "cell": "audit API v0 + two bit-exact replays",
+  "title": "Audit ladder spec + audit API v0; replay two sealed milestones bit-exact (H6)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026); analysis/v25_audit_ladder_spec.md",
+  "registered_before_any_accuracy": true,
+  "replay_targets": {
+    "m175_a0": {
+      "runner": "a0",
+      "config": "experiments/configs/v24/m175_cell_a0.json",
+      "evidence": "logs/results/v24/m175_cell_a0/evidence.json",
+      "note": "additive next-token on wikitext-103; deterministic; ~12 s"
+    },
+    "m175_c": {
+      "runner": "c",
+      "config": "experiments/configs/v24/m175_cell_c.json",
+      "evidence": "logs/results/v24/m175_cell_c/evidence.json",
+      "note": "cross-modality contract guard demonstration; deterministic; sub-second"
+    }
+  },
+  "comparison_rules": {
+    "bit_exact": "evidence content hashes equal (timing fields excluded: runtime_seconds)",
+    "equal_excluding_timing": "full evidence-dict equality with timing fields removed",
+    "scratch": "replays run into fresh scratch dirs; sealed evidence never overwritten"
+  },
+  "gate_h6": {
+    "passes": "both replays bit_exact AND equal_excluding_timing"
+  },
+  "output_dir": "logs/results/v25/m177_audit"
+}

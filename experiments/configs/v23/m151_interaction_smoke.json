@@ -1,0 +1,64 @@
+{
+  "milestone": "M151",
+  "title": "SMOKE: M151 interaction plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M151",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (20000 train / 2000 test rows, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 20000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M151 pipeline (row-identity premise, blockwise concat, ridge ladder, trained-head read) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "m142_cache_relpath": "v16/m142_c2",
+    "m142_c3_cache_relpath": "v16/m142_c3",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "ms_train_file": "ms357_fulltrain.npy",
+    "ms_test_file": "ms357_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "sparse": {
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms_by_scale": { "3": 1950, "5": 850, "7": 511 },
+    "pool_atoms": 2062,
+    "note": "the C3 recipe (per-scale whiteners + dictionaries, the M117/M126 recipe)."
+  },
+  "anchors": {
+    "spm_full_data": 0.2604927536231884,
+    "ms_full_data": 0.24214492753623187,
+    "tolerance": 1e-09
+  },
+  "cell": {
+    "penalty_ladder": [1.0],
+    "power_ladder": [null],
+    "n_138k": 138000,
+    "concat_width": 53627,
+    "note": "SMOKE: one penalty, raw codes only, to keep the 53,627-dim solves bounded."
+  },
+  "gate": {
+    "registered": "best concat cell (ridge read) >= best single construction + 0.005; trained-head read is the co-adaptation control.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m151_interaction_smoke"
+}

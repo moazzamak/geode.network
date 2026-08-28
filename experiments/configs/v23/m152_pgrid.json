@@ -1,0 +1,47 @@
+{
+  "milestone": "M152",
+  "title": "Power-exponent refinement on cached codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M152",
+  "registered_before_any_accuracy": true,
+  "question": "Does p in {0.25, 0.33, 0.66} beat the sealed p=0.5 anywhere?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "m142_cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "cell": {
+    "p_screen": [0.25, 0.33, 0.66],
+    "p_anchors": [0.5, 1.0],
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "n_138k": 138000,
+    "two_stage": "STAGE 1 screens the new p values at 138k (each fit is one Gram accumulation + solves); STAGE 2 promotes AT MOST ONE p (the 138k winner) to the full-data fit and the registered gate. Registered in the section 6 amendment to bound compute.",
+    "trained_note": "trained-head read at the stage-2 winning p under the C4 trained-head protocol (8 epochs, lr 0.001, seed 201)."
+  },
+  "anchors": {
+    "spm_sqrt_full_best": 0.27855072463768116,
+    "spm_sqrt_138k": 0.2273623188405797,
+    "tolerance": 1e-09,
+    "note": "the sealed p=0.5 and p=1.0 cells reproduce exactly (C4 protocol): full-data best p0.5_lambda0.1 = 0.278551; 138k p0.5_lambda1.0 = 0.227362 (the C4 cells_138k penalty-1.0 protocol)."
+  },
+  "gate": {
+    "registered": "stage 2 only: the promoted p's full-data best cell >= sealed p=0.5 best + 0.005 at identical cost, else archived as a scoped negative. A stage-1 p that does not beat p=0.5 at 138k is not promoted.",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m152_pgrid"
+}

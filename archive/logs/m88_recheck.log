@@ -1,0 +1,135 @@
+M87 prior-art audit ù executing registered query families.
+This run adjudicates nothing (N87.6) and is not replayable (N87.8).
+
+Recall probes (N88.2) ù can the instrument find work known to exist?
+    [arxiv            ]   2 hits and       anomaly detection auxiliary dataset of outliers improves detection
+    [openalex         ]  20 hits relevance anomaly detection auxiliary dataset of outliers improves detection
+  ! [semantic_scholar ]   0 hits relevance anomaly detection auxiliary dataset of outliers improves detection
+  P1: FOUND in arxiv, openalex  <- Deep Anomaly Detection with Outlier Exposure
+    [arxiv            ]  20 hits or        how many outlier images are needed for anomaly detection one-class
+    [openalex         ]  20 hits relevance how many outlier images are needed for anomaly detection one-class
+  ! [semantic_scholar ]   0 hits relevance how many outlier images are needed for anomaly detection one-class
+  P2: NOT RETRIEVED  <- Exposing Outlier Exposure
+    [arxiv            ]   2 hits and       train test resolution discrepancy classification accuracy
+    [openalex         ]  20 hits relevance train test resolution discrepancy classification accuracy
+  ! [semantic_scholar ]   0 hits relevance train test resolution discrepancy classification accuracy
+  P3: FOUND in arxiv, openalex  <- Fixing the train-test resolution discrepancy
+    [arxiv            ]  20 hits or        randomizing model weights leaves saliency maps unchanged
+    [openalex         ]  20 hits relevance randomizing model weights leaves saliency maps unchanged
+  ! [semantic_scholar ]   0 hits relevance randomizing model weights leaves saliency maps unchanged
+  P4: NOT RETRIEVED  <- Sanity Checks for Saliency Maps
+    [arxiv            ]  20 hits or        do explanations help users predict model behaviour forward simulation
+    [openalex         ]  20 hits relevance do explanations help users predict model behaviour forward simulation
+  ! [semantic_scholar ]   0 hits relevance do explanations help users predict model behaviour forward simulation
+  P5: FOUND in arxiv  <- Which Algorithmic Explanations Help Users Predict Model Beha
+    [arxiv            ]  20 hits or        benchmark separating covariate shift from semantic shift detection
+    [openalex         ]  20 hits relevance benchmark separating covariate shift from semantic shift detection
+  ! [semantic_scholar ]   0 hits relevance benchmark separating covariate shift from semantic shift detection
+  P6: NOT RETRIEVED  <- Full-Spectrum Out-of-Distribution Detection
+    [arxiv            ]   2 hits and       quantifying interpretability of individual units visual concepts
+    [openalex         ]  20 hits relevance quantifying interpretability of individual units visual concepts
+  ! [semantic_scholar ]   0 hits relevance quantifying interpretability of individual units visual concepts
+  P7: FOUND in arxiv, openalex  <- Network Dissection
+
+Anchors (their absence would mean the search itself is broken):
+    [arxiv            ]  20 hits and       outlier exposure out-of-distribution detection
+    [openalex         ]  20 hits relevance outlier exposure out-of-distribution detection
+  ! [semantic_scholar ]   0 hits relevance outlier exposure out-of-distribution detection
+    [arxiv            ]  20 hits and       generalized category discovery
+    [openalex         ]  20 hits relevance generalized category discovery
+  ! [semantic_scholar ]   0 hits relevance generalized category discovery
+    [arxiv            ]  20 hits and       sparse autoencoder interpretability features
+    [openalex         ]  20 hits relevance sparse autoencoder interpretability features
+    [semantic_scholar ]  20 hits relevance sparse autoencoder interpretability features
+
+C1 ù Outlier exposure degrades rather than improves rejection for a union of per-class density models.
+    [arxiv            ]  20 hits or        outlier exposure degrades out-of-distribution detection
+    [openalex         ]  20 hits relevance outlier exposure degrades out-of-distribution detection
+  ! [semantic_scholar ]   0 hits relevance outlier exposure degrades out-of-distribution detection
+    [arxiv            ]  20 hits or        outlier exposure harmful negative result OOD
+    [openalex         ]  20 hits relevance outlier exposure harmful negative result OOD
+  ! [semantic_scholar ]   0 hits relevance outlier exposure harmful negative result OOD
+    [arxiv            ]  20 hits or        outlier exposure Mahalanobis class conditional Gaussian
+    [openalex         ]  20 hits relevance outlier exposure Mahalanobis class conditional Gaussian
+  ! [semantic_scholar ]   0 hits relevance outlier exposure Mahalanobis class conditional Gaussian
+    [arxiv            ]  20 hits or        class conditional density model outlier exposure training
+    [openalex         ]  20 hits relevance class conditional density model outlier exposure training
+  ! [semantic_scholar ]   0 hits relevance class conditional density model outlier exposure training
+    [arxiv            ]  20 hits or        one-class classifier per class outlier exposure failure
+    [openalex         ]  20 hits relevance one-class classifier per class outlier exposure failure
+  ! [semantic_scholar ]   0 hits relevance one-class classifier per class outlier exposure failure
+    [arxiv            ]   1 hits and       union of acceptance regions open set rejection
+    [openalex         ]  20 hits relevance union of acceptance regions open set rejection
+    [semantic_scholar ]  16 hits relevance union of acceptance regions open set rejection
+    [arxiv            ]  20 hits or        per-class ellipsoid novelty rejection multiclass
+    [openalex         ]   8 hits relevance per-class ellipsoid novelty rejection multiclass
+  ! [semantic_scholar ]   0 hits relevance per-class ellipsoid novelty rejection multiclass
+    [arxiv            ]  20 hits or        outlier exposure fails distance based OOD detector
+    [openalex         ]  20 hits relevance outlier exposure fails distance based OOD detector
+  ! [semantic_scholar ]   0 hits relevance outlier exposure fails distance based OOD detector
+
+C3 ù Cross-corpus representation transfer loss is attributable to input resolution rather than corpus identity, isolated by a degraded-resolution control arm.
+    [arxiv            ]  20 hits or        image resolution confound frozen features transfer learning
+    [openalex         ]  20 hits relevance image resolution confound frozen features transfer learning
+  ! [semantic_scholar ]   0 hits relevance image resolution confound frozen features transfer learning
+    [arxiv            ]  20 hits or        input resolution domain shift representation quality vision transformer
+    [openalex         ]  20 hits relevance input resolution domain shift representation quality vision transformer
+  ! [semantic_scholar ]   0 hits relevance input resolution domain shift representation quality vision transformer
+    [arxiv            ]  20 hits or        low resolution CIFAR upsampling ViT feature degradation
+    [openalex         ]  20 hits relevance low resolution CIFAR upsampling ViT feature degradation
+    [semantic_scholar ]  20 hits relevance low resolution CIFAR upsampling ViT feature degradation
+    [arxiv            ]  20 hits or        dictionary learning transfer across datasets resolution control
+    [openalex         ]  20 hits relevance dictionary learning transfer across datasets resolution control
+    [semantic_scholar ]  20 hits relevance dictionary learning transfer across datasets resolution control
+    [arxiv            ]   1 hits and       resolution matched control transfer evaluation confound
+    [openalex         ]  20 hits relevance resolution matched control transfer evaluation confound
+  ! [semantic_scholar ]   0 hits relevance resolution matched control transfer evaluation confound
+    [arxiv            ]   1 hits and       sparse coding dictionary generalization unseen dataset
+    [openalex         ]  20 hits relevance sparse coding dictionary generalization unseen dataset
+  ! [semantic_scholar ]   0 hits relevance sparse coding dictionary generalization unseen dataset
+
+C5 ù Simulatability metrics require a null explanation matched in structure, citation budget and split.
+    [arxiv            ]  20 hits or        simulatability forward simulation evaluation control baseline
+    [openalex         ]  20 hits relevance simulatability forward simulation evaluation control baseline
+    [semantic_scholar ]  20 hits relevance simulatability forward simulation evaluation control baseline
+    [arxiv            ]  15 hits and       randomized explanation baseline interpretability evaluation
+    [openalex         ]  20 hits relevance randomized explanation baseline interpretability evaluation
+  ! [semantic_scholar ]   0 hits relevance randomized explanation baseline interpretability evaluation
+    [arxiv            ]   1 hits and       sanity checks saliency maps randomization
+    [openalex         ]  20 hits relevance sanity checks saliency maps randomization
+  ! [semantic_scholar ]   0 hits relevance sanity checks saliency maps randomization
+    [arxiv            ]   1 hits and       null model explanation evaluation control interpretability
+    [openalex         ]  20 hits relevance null model explanation evaluation control interpretability
+  ! [semantic_scholar ]   0 hits relevance null model explanation evaluation control interpretability
+    [arxiv            ]   1 hits and       forward simulation human study explanation baseline
+    [openalex         ]  20 hits relevance forward simulation human study explanation baseline
+  ! [semantic_scholar ]   0 hits relevance forward simulation human study explanation baseline
+    [arxiv            ]  20 hits or        shuffled explanation control interpretability metric
+    [openalex         ]  20 hits relevance shuffled explanation control interpretability metric
+  ! [semantic_scholar ]   0 hits relevance shuffled explanation control interpretability metric
+
+Recall probes: 4/7 retrieved.
+  NOT retrieved: P2, P4, P6
+  Absence from C1, C2, C5 is therefore not evidence of absence (N88.2).
+  POSITIVE CONTROL FAILED. This run has broken something rather than found something.
+
+Anchors returned 140 hits; instrument live: True.
+  C1: 305 hits across 24 queries
+  C3: 242 hits across 18 queries
+  C5: 198 hits across 18 queries
+
+25 queries failed and are recorded as failures, not as empty results:
+  semantic_scholar  429 HTTPError 429:   outlier exposure out-of-distribution detection
+  semantic_scholar  429 HTTPError 429:   generalized category discovery
+  semantic_scholar  429 HTTPError 429:   anomaly detection auxiliary dataset of outliers improves detection
+  semantic_scholar  429 HTTPError 429:   how many outlier images are needed for anomaly detection one-class
+  semantic_scholar  429 HTTPError 429:   train test resolution discrepancy classification accuracy
+  semantic_scholar  429 HTTPError 429:   randomizing model weights leaves saliency maps unchanged
+  semantic_scholar  429 HTTPError 429:   do explanations help users predict model behaviour forward simulation
+  semantic_scholar  429 HTTPError 429:   benchmark separating covariate shift from semantic shift detection
+  semantic_scholar  429 HTTPError 429:   quantifying interpretability of individual units visual concepts
+  semantic_scholar  429 HTTPError 429:   outlier exposure degrades out-of-distribution detection
+  semantic_scholar  429 HTTPError 429:   outlier exposure harmful negative result OOD
+  semantic_scholar  429 HTTPError 429:   outlier exposure Mahalanobis class conditional Gaussian
+
+Wrote logs\results\v13\m88_prior_art_recheck\evidence.json

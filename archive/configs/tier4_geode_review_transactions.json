@@ -1,0 +1,11 @@
+{
+  "artifact_path": "logs/results/tier4_geode_review_transactions.json",
+  "seeds": [61, 62, 63, 64, 65],
+  "stream_families": [
+    "heavy_tailed",
+    "anisotropic",
+    "abrupt_drift",
+    "intermittent_unseen"
+  ],
+  "minimum_known_separation": 2.5
+}

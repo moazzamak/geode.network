@@ -1,0 +1,77 @@
+{
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; reduced series, reduced ladders, no mlp, no gates, DSL anchor on 2 programs only. MUST refuse the sealed output dir.",
+  "milestone": "M147",
+  "program": "v22 temporal-memory screen (14 Aug 2026) - SMOKE",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 Phase T / section 9 M147",
+  "registration_notes": {
+    "N96.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory; smoke skips the mlp arm and all gates."
+  },
+  "mackey_glass": {
+    "tau": 17.0,
+    "beta": 0.2,
+    "gamma": 0.1,
+    "n": 10.0,
+    "dt": 0.1,
+    "x0": 1.2,
+    "seed": 7,
+    "discard": 2000,
+    "sample_every": 10,
+    "train_points": 5000,
+    "test_points": 1000,
+    "_smoke_train": 600,
+    "_smoke_test": 200
+  },
+  "tap_delay": {
+    "k_ladder": [2, 4]
+  },
+  "programmatic": {
+    "ewma_alpha": 0.3,
+    "window": 4
+  },
+  "reservoir": {
+    "seeds": [21],
+    "units_ladder": [64],
+    "rho_ladder": [0.9],
+    "warmup_steps": 50,
+    "ridge_penalty": 1.0
+  },
+  "mlp": {
+    "seed": 31,
+    "hidden": 32,
+    "epochs": 200,
+    "lr": 0.01
+  },
+  "t1_anchor": {
+    "units": 128,
+    "seed": 300,
+    "spectral_radius": 0.9,
+    "warmup_steps": 128,
+    "ridge_penalty": 1.0,
+    "sealed_ppl": 29.7193,
+    "tolerance": 0.01
+  },
+  "dsl_corpus": {
+    "kind": "generated_dsl",
+    "reuse": "M131 generator (same seeds 900/901/902, same grammar)",
+    "programs": {"train": 5000, "valid": 500, "test": 500},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "gate": {
+    "relative_margin": 0.05,
+    "min_seeds": 2,
+    "registered": "reservoir best NRMSFE <= (1 - 0.05) x best non-recurrent arm on >= 2 of 3 seeds, and t1 anchor within 0.01 ppl.",
+    "consequence_fired": "the reservoir's recurrence does not earn its keep on the chaotic-series axis; M147 closes as a scoped negative.",
+    "consequence_passed": "the reservoir beats all non-recurrent arms by the registered margin on the chaotic-series axis."
+  },
+  "output_dir": "logs/results/v16/m147_temporal_memory"
+}

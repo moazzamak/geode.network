@@ -1,0 +1,74 @@
+{
+  "milestone": "M142",
+  "cell": "C3",
+  "title": "SMOKE: C3 multi-scale plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md (M142 C3)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (4000 train / 1000 test rows, gates skipped, t1 check 64 rows). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "_smoke_train_rows": 4000,
+  "_smoke_test_rows": 1000,
+  "question": "Does the C3 multi-scale pipeline (per-scale whiteners, encode, anchors, ladders, per-scale reads) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms_by_scale": { "3": 1950, "5": 850, "7": 511 },
+    "pool_atoms": 2062,
+    "note": "same construction as the full config; only the cells shrink"
+  },
+  "matched_cost": {
+    "pool_total": 175197198,
+    "split_rule": "equal MAC share per scale after the per-scale whitening sum",
+    "cost_tolerance_fraction": 0.005
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy",
+    "rest_relpath": "v16/m141",
+    "rest_file": "f6144_all_rest.npy"
+  },
+  "anchors": {
+    "t1_check_rows": 64,
+    "t1_tolerance": 1e-05,
+    "t2_reference": 0.26136231884058,
+    "t2_tolerance": 0.002,
+    "t4_reference": 0.227536231884058,
+    "t4_tolerance": 0.002
+  },
+  "cell_c3": {
+    "penalty_ladder": [1.0],
+    "trained_epochs": 1,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "gate_registered": "skipped in smoke",
+    "consequence_fired": "n/a (smoke)",
+    "consequence_passed": "n/a (smoke)"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 1024,
+    "encode_throttle_seconds": 0.05
+  },
+  "output_dir": "logs/results/v16/m142_c3_smoke"
+}

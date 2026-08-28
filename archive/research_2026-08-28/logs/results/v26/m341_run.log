@@ -1,0 +1,24 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+g1 premise: True (ms (409832, 13244), dino (409832, 384), test 34500)
+ms_only: 0.24214492753623187
+concat: 0.54785507246376808
+dino_only: 0.48449275362318839
+g2 anchors: True
+g3 cca instrument: True (max_offdiag 0.0309)
+cca_aligned: 0.51055072463768114
+{
+ "gates_ok": true,
+ "arms": {
+  "single_encoder_ms": 0.24214492753623187,
+  "dino_only": 0.4844927536231884,
+  "concatenated": 0.5478550724637681,
+  "aligned_cca": 0.5105507246376811
+ },
+ "chain_links": {
+  "first_link_aligned_gt_concat": false,
+  "second_link_concat_gt_single": true,
+  "full_chain": false
+ },
+ "reading": "the second link holds (concatenated > single-encoder, carried by the M230 anchor) but the first link fails: alignment loses to raw concatenation even on a clean cell - the federation thesis carries bridges as optional (measured, priced) rather than load-bearing"
+}

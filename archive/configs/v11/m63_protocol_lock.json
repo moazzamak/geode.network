@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "milestone": "M63",
+  "seeds": [11, 23, 37],
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "ranks": [8, 16, 32],
+  "patch_counts": [1, 2, 4],
+  "extent_policies": ["quantile", "negative_guided", "negative_guided_iqr"],
+  "extent_quantiles": [0.95, 0.99],
+  "miscoverage": 0.08,
+  "known_coverage_target": 0.92,
+  "contrast_margin_grid": [0, 0.05, 0.1, 0.2],
+  "tangent_multipliers": [0.5, 1, 2, 4, 8],
+  "masking_multipliers": [2, 4, 8],
+  "minimum_conformal_class_count": 12,
+  "delegated_head_lineage": {
+    "family": "rbf_svm",
+    "representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+    "fit_partition": "geometry_fit",
+    "calibration_partition": "score_calibration",
+    "excluded_classes": [8, 9]
+  },
+  "parent_locks": {
+    "a2_parent": {
+      "path": "logs/results/v6_1/a2_weighted_s2/evidence.json",
+      "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65"
+    },
+    "source_config": {
+      "path": "experiments/configs/v6/m30_directional_s2.json",
+      "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+    },
+    "v7_gaussian_control": {
+      "path": "logs/results/v7/m39_acceptance_heads/evidence.json",
+      "sha256": "3934d5fe9b6d366543ec9c2afa637ffae9748e3a2432f8d9571bd46e8ac6c5f2"
+    },
+    "v8_final_index": {
+      "path": "logs/results/v8/final_outcome_replay/artifact_index.json",
+      "sha256": "35ec9a1e1a1dd84de0c9cd14183cfdf8a4cce4e270b8154e9d7af806c1f2647f"
+    },
+    "v9_partitions": {
+      "path": "logs/results/v9/m51_surface_diagnostics/partition_manifest.json",
+      "sha256": "2dd38edd3094557bb7047c928f0e69259f207f9fe6064e190d1837b893d7e7e5"
+    },
+    "v9_partition_config": {
+      "path": "experiments/configs/v9/m51_surface_diagnostics.json",
+      "sha256": "b6c4ad8c1b03f4c62b2a32a6b40f8dc274701df1376d0cc618d875e53f8c0dff"
+    },
+    "v10_identifiability_index": {
+      "path": "logs/results/v10/m57_identifiability/artifact_index.json",
+      "sha256": "018a4bd7e27af13c3e790b0314d3e7b1aa61aaf36e322a9d52a70685c53ace9b"
+    },
+    "v10_screen_index": {
+      "path": "logs/results/v10/m58_affine_screen/artifact_index.json",
+      "sha256": "0866bf57a0996659c5c74f75ace4fe738a2f32dfe739ff8b7addfdd3caaf4411"
+    },
+    "v10_final_claim": {
+      "path": "analysis/V10_FINAL_CLAIM_LEDGER.md",
+      "sha256": "32350badaa36bb05cdf3bef7f0c9daa1533de266a4824a2d9329e250bf499650"
+    },
+    "v10_final_index": {
+      "path": "logs/results/v10/m62_final_replay/artifact_index.json",
+      "sha256": "836d635f049289550ebb65eb5d389fb9824ad60eb423ca860310f139ada3eaa3"
+    }
+  },
+  "resource_contract": {
+    "maximum_parameter_ratio": 2.0,
+    "maximum_fit_work_ratio": 2.0,
+    "record_latency": true,
+    "record_peak_temporary_bytes": true
+  },
+  "final_labels_opened": false
+}

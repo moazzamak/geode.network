@@ -1,0 +1,29 @@
+{
+  "milestone": "M171",
+  "title": "Router + registry integration, R1 gate — SMOKE (inadmissible as evidence)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase C (M171)",
+  "registered_before_any_training": true,
+  "_smoke_note": "inadmissible: tiny data + short training, crash check only",
+  "_smoke_rows": 120,
+  "question": "Smoke: does the M171 runner run end-to-end without crashing?",
+  "interpretation_registered_before_running": {
+    "smoke": "inadmissible as evidence; only checks the pipeline runs"
+  },
+  "cell": {
+    "n_rows": 1000,
+    "train_frac": 0.6,
+    "window": 10,
+    "penalties": [1e-6, 1e-4, 0.01, 1.0],
+    "tasks": ["mackey_glass", "lorenz", "dyck", "tabular"],
+    "cold_start_demos": ["audio", "cifar10"]
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 10,
+    "lr": 0.001,
+    "note": "10 steps only (smoke)"
+  },
+  "output_dir": "logs/results/v24/m171_router_smoke"
+}

@@ -1,0 +1,46 @@
+{
+  "milestone": "M268",
+  "cell": "cell 2 — pivot-first cross-representation chain",
+  "title": "M268 cell 2: English->Chinese pivot chain — opus-mt-en-zh -> Erlangshen sentiment, graded against English gold labels",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (amendment 32, 22 Aug)",
+  "registered_before_any_accuracy": true,
+  "question": "Does sentiment survive the English->Chinese pivot? The Chinese arm is measured through the chain against the English gold labels, and the pivot-vs-direct gap is the registered admission test for a pairwise specialist.",
+  "arms": {
+    "mt": {
+      "checkpoint": "Helsinki-NLP/opus-mt-en-zh",
+      "license_recorded": "Apache-2.0",
+      "decoding": "greedy (num_beams=1)",
+      "note": "reviews truncated to 512 tokens (Marian limit) — truncation count recorded"
+    },
+    "zh_sentiment": {
+      "checkpoint": "IDEA-CCNL/Erlangshen-Roberta-110M-Sentiment",
+      "license_recorded": "Apache-2.0",
+      "id2label": {"0": "negative", "1": "positive"}
+    },
+    "en_sentiment": {
+      "checkpoint": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+      "license_recorded": "Apache-2.0",
+      "id2label": {"0": "negative", "1": "positive"},
+      "anchor": "0.913 reproduced in M271a (sealed)"
+    }
+  },
+  "mix": {
+    "hf_id": "stanfordnlp/imdb",
+    "split": "test",
+    "rows": [2000, 2500],
+    "license_recorded": "IMDb evaluation-only (standing research-class)",
+    "reuse_note": "declared re-use; these rows are also read by the concurrent cell-1b configuration (one held-out read per configuration)"
+  },
+  "metrics": {
+    "direct_accuracy": "distilbert-sst-2 label vs gold, same rows",
+    "pivot_accuracy": "Erlangshen label on the opus-mt translation vs gold, same rows",
+    "arm_agreement": "pivot label vs direct label (sentiment survival through translation)",
+    "target_gap": "direct_accuracy - pivot_accuracy (the registered admission test for a pairwise specialist)"
+  },
+  "smoke": {
+    "rows": 8
+  },
+  "output_dir": "logs/results/v25/m268_routing_study",
+  "evidence_filename": "evidence_pivot.json",
+  "feature_cache_relpath": "v25/m268_routing_study"
+}

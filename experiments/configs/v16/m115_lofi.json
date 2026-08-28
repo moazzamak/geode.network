@@ -1,0 +1,72 @@
+{
+  "milestone": "M115",
+  "title": "Closed-form LoFi stack: does closed-form depth raise the effective degree (lift the single-stage ceiling) at a measured training-cost ratio vs dense?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.1 (M115)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107..M114's exact shared subsample, unchanged."
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "vq": "cuda",
+    "svd": "cuda",
+    "_note": "whitening and ridge on numpy CPU (M107 arithmetic); frozen encode, SVD of the label cross-covariance, and the layer-1/2 VQ encode on the GPU ('cuda' = ROCm/HIP). HIP_VISIBLE_DEVICES=1, gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 3072,
+    "k_projection": 256,
+    "atoms_layer2": 2048,
+    "atoms_layer3": 2048,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "layer0_dictionary": "M108/M113 arm (a) exact: prefix of the seeded permutation of the shared 8192-whitened-patch pool - IDENTICAL to the dictionary M113 measured at 0.2153",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "layer_rule": "Neural LoFi (Dandi et al. 2026) instantiated closed-form: each layer selects the directions of maximal accessible low-degree correlation to the label = the top-k left singular vectors of the label cross-covariance C = F^T Y (centered one-hot), k <= 345 = classes; then whiten (center + per-dim standardize), fit a mini-batch k-means (VQ) dictionary on the whitened projection, triangle-encode (soft assignment over ALL atoms), ridge head. Effective degree ~ 2^(L+1) in pixels: layer 1 = degree 4, layer 2 = degree 8.",
+    "vq_fit_seed": 22,
+    "vq_iters": 40,
+    "vq_batch": 131072,
+    "_degrees_note": "the frozen triangle kernel is degree 2 in pixels; each VQ layer's distance is quadratic in its input, so the effective degree doubles per layer."
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0],
+    "_note": "M108's chosen head constant, applied unchanged at every layer."
+  },
+  "gate": {
+    "t1_layer0_tolerance": 0.002,
+    "kill_switch_1_degree": "if the best L does not beat L=0 by >= +0.01 overall, closed-form depth does not lift the single-stage ceiling -> B1 fails and the long-term thesis is dead on the quality axis",
+    "kill_switch_2_training_cost": "the closed-form stack's total training cost to reach its accuracy vs the dense transformer's ledgered training cost; fired (fail) if the ratio < 10x at the registered accuracy point (dense figure from M109 evidence where available, else reported pending)",
+    "registered_prediction": "the theory (Defilippis et al. 2026: a spectral estimator achieves optimal scaling for hierarchical targets; Bardone et al. 2026: higher cumulants become cheap with shared latent structure) predicts a modest degree-lift; whether it clears +0.01 is the open question. Prior art: Dandi 2605.13612, Defilippis 2602.05846, Bardone 2603.12901, Saiapin 2512.02547, PCANet 1404.3606, Tariyal 1602.00203, Mairal 1009.5358."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "milestone": "M176c-anchor",
+  "title": "Anchor reproduction on the verified rental (chunked Gram variant)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_training": true,
+  "question": "Does the rental, cleared bit-exact by M176c-dvc, reproduce the three sealed DomainNet anchors within their registered tolerances?",
+  "interpretation_registered_before_running": {
+    "premise_fail": "VOID — the dvc evidence is missing or not bit-exact",
+    "A1_fail": "the 138k anchor missed 1e-6 — the SPM bin sums are not bit-exact on this torch version even though the pool check was; the rental then serves with the registered full-data tolerances only",
+    "A2_A3_fail": "the rental cannot reproduce the sealed full-data anchors within 0.002 — it is VOID for the anchor stage; M176c candidates get a device-independent design",
+    "all_pass": "the rental is fully cleared: the anchor stage and the candidate ladder may produce admissible numbers on it"
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "spm_atoms": 1923
+  },
+  "anchors": {
+    "n_138k": 138000,
+    "a1_value": 0.2273623188405797,
+    "a1_tolerance": 1e-06,
+    "a1_note": "p=0.5 power-normalised SPM codes at 138k rows, penalty 1.0 (the sealed C4 cells_138k.p0.5)",
+    "a2_value": 0.2604927536231884,
+    "a2_tolerance": 0.002,
+    "a2_note": "raw SPM full data, penalty 1.0 (the sealed C2 read Q_SPM(1923, 409832))",
+    "a3_value": 0.27855072463768116,
+    "a3_tolerance": 0.002,
+    "a3_note": "p=0.5 power-normalised SPM full data, penalty 0.1 (the sealed C4 full_data_cells p0.5_lambda0.1)"
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 4,
+    "seed": 11
+  },
+  "output_dir": "logs/results/v24/m176c_anchor"
+}

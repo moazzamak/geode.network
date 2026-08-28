@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "run_id": "f81b84190fca621b",
+  "dataset": "CIFAR-10 public cache",
+  "dataset_sha256": "0287a3f4d1aa16cdd168a8506adb0efb74d3d9be7cd07652f538eab9c175bac7",
+  "sample_count": 3500,
+  "failure_injected_during": "features",
+  "feature_loader_calls": 2,
+  "interrupted_status": {
+    "attempt_id": "attempt-1",
+    "complete": false,
+    "run_id": "f81b84190fca621b",
+    "stages": [
+      {
+        "error": null,
+        "name": "features",
+        "state": null,
+        "status": "partial"
+      },
+      {
+        "error": null,
+        "name": "transform",
+        "state": null,
+        "status": "pending"
+      },
+      {
+        "error": null,
+        "name": "assembly",
+        "state": null,
+        "status": "pending"
+      }
+    ]
+  },
+  "completed": true,
+  "completed_stage_count": 13,
+  "assembly_output_hashes": {
+    "summary.json": "e0a65fee82035b7cc5b2a7b9fad5edc36fdbde5fd22370965c3001744248026e",
+    "validation_predictions.npy": "b88eabd9a03a501cd02726a298a2d6c386b57da835d5d673eddc6fd954b4d1d5",
+    "validation_scores.npy": "5fd6c9a965f6579f02336794a1ed010f7fb7138d28f22ef6ee9c0e8f2d5cc2a7"
+  },
+  "matches_e1_1_baseline": true,
+  "metric_count": 1,
+  "final_test_observed": false,
+  "regression_test_count": 118,
+  "regression_test_seconds": 8.558
+}

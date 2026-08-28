@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "milestone": "M30",
+  "stage": "S2",
+  "seeds": [11, 23, 37],
+  "seed_inputs": {
+    "11": {
+      "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_pilot",
+      "parent_representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+      "directional_representation_hash": "72d2407ef8665c36d6f901f25e45a01d2058634c4255139b6b67a94f8c1de21f"
+    },
+    "23": {
+      "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_s2_seed23",
+      "parent_representation_hash": "6172b175cc163cbec17e90d102340d4cb63abf356922d28b0232bbc1b2c04219",
+      "directional_representation_hash": "1b5d9211787435ce3fe3e4d210512d72215fe5cd25bf4089c46ebbb563b9e59f"
+    },
+    "37": {
+      "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_s2_seed37",
+      "parent_representation_hash": "a7bbdfb013bce429e30d7ffbf6043a088a84359a14b5f2c2e6d46540323132f7",
+      "directional_representation_hash": "598b8cc22b2bc26bc0373c749b91fce2087ea4d1cc17f2f5c144fe1b18a88586"
+    }
+  },
+  "geometries": ["euclidean_sphere", "cosine_cap"],
+  "teacher": {
+    "family": "rbf_svm",
+    "C": 1.0,
+    "kernel": "rbf",
+    "calibration": "sigmoid",
+    "calibration_folds": 3
+  },
+  "weighted_knn": {
+    "n_neighbors": 20,
+    "temperature": 0.07,
+    "query_batch_size": 1024
+  },
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "seed_size": 386,
+    "anchor_fraction": 0.2
+  },
+  "objective": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "teacher_weight": 1.0,
+    "ground_truth_weight": 0.0,
+    "complexity_penalty": 0.0,
+    "minimum_improvement": 1e-08,
+    "initial_components_per_class": 1
+  },
+  "budget": {
+    "mode": "exact_component_matched",
+    "component_count": 46
+  },
+  "statistics": {
+    "confidence": 0.95,
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 42
+  },
+  "advancement_gate": {
+    "minimum_mean_accuracy_improvement": 0.005,
+    "paired_interval_must_exclude_zero": true,
+    "minimum_gap_closure_fraction": 0.25,
+    "require_nll_non_regression_for_gap_closure": true,
+    "require_parameter_match": true,
+    "require_exact_replay": true
+  },
+  "test_labels_opened": false
+}

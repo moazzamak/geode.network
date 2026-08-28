@@ -1,0 +1,82 @@
+{
+  "milestone": "M145",
+  "title": "Residual-targeted growth on M143's fused system: one new closed-form specialist fitted on the fused system's error rows, appended and re-fused, vs static fusion and the blind-greedy control",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 9 M145 / Remaining-milestones recipe (15 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does growing one new closed-form specialist on the fused system's residual errors beat static fusion by the registered margin at both growth budgets, with blind greedy selection (the M108/E8 prior) unable to explain the gain?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "pool_size": 8192,
+    "pool_seed": 11,
+    "permutation_seed": [11, 100],
+    "growth_atoms": [32, 64],
+    "growth_budgets_note": "AMENDED 15 Aug 2026 BEFORE any growth measurement: the measured static premise (a1, bitwise exact) gives 2,760 fit-half error rows of 17,250 — the stacking head fits its own half nearly perfectly. The originally registered {128, 256} are below the section 5.3 floor (6 and 3 rows/dim) and are VOID, not skipped. Budgets amended to the floor-feasible rungs {32, 64} (22 and 11 rows/dim). Registered in plan §12 before any growth accuracy was measured.",
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_head_penalty": 1.0,
+    "growth_dictionary_note": "first g atoms of the GLOBAL pool in the [11,100]-seeded permutation order = a prefix of the f6144 global dictionary (asserted in-run, anchor a3).",
+    "control_dictionary_note": "first g atoms of the M108 arm (c) blind-greedy order: group-OMP forward selection against a centred one-hot (select_discriminative, M103 L227-280), run on the FIT-half rows with the M108 GPU port and order-parity check.",
+    "head_fit_note": "growth and control heads are fitted on the SAME rows (the fit-half error rows of the static fusion) with the same ridge penalty; the arms differ ONLY in how the dictionary is chosen."
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143",
+    "note": "The M143 sealed score matrices: 6 x 512-atom A5 specialist score matrices + the global f6144 head scores on the sealed test rows (34,500). Reused unmodified."
+  },
+  "anchors": {
+    "static_fused": 0.1462608695652174,
+    "static_global": 0.22510144927536233,
+    "d0_own_domain": 0.19357142857142856,
+    "a1_tolerance": 1e-9,
+    "a2_tolerance": 0.002,
+    "a1_note": "recomputed from the SAME cached score matrices with the SAME M143 phase-2 code (split seed 33, valid slice seed 55); expected bitwise identity.",
+    "a2_note": "the shared encode path is re-validated against the M143 sealed d0 anchor (512-atom domain-0 dictionary, own-domain accuracy 0.19357142857142856) before any NEW dictionary's codes are trusted."
+  },
+  "control": {
+    "mechanism": "M108 arm (c) blind greedy (group-OMP vs centred one-hot) on the fit-half rows",
+    "parity_subset_rows": 512,
+    "parity_budget": 32
+  },
+  "phase2": {
+    "split_seed": 33,
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44
+  },
+  "premise": {
+    "fit_floor": 10.0,
+    "floor_note": "ceil(n_error_rows / (4 * g)) >= 10 is a GATING premise check, run in-run before any growth/control fit; a budget below the floor is void, not negative."
+  },
+  "gate": {
+    "registered": "per budget g on the eval half: growth_fused >= static_fused + 0.005 AND growth_fused > control_fused. control >= growth at any budget means the gain is not residual targeting's and that budget's growth claim fails.",
+    "margin": 0.005,
+    "consequence_passed": "residual-targeted growth lifts the fused system beyond static fusion, and blind greedy selection cannot reproduce the lift: the growth mechanism is the targeting, not the dictionary draw.",
+    "consequence_fired": "growth does not clear the registered margin over static fusion, or the blind-greedy control reaches it: M145 closes as a scoped negative on this corpus and static fusion stands."
+  },
+  "ops_ledger": {
+    "note": "specialist encode MACs per arm = n_test rows x _inference_macs(g); the control additionally pays its pool encode + OMP selection MACs (disclosed); the growth-vs-static comparison discloses growth's added ops rather than matching them away (a grown system adds a component by construction); growth-vs-control is the matched-cost comparison."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v16/m145_growth"
+}

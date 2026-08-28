@@ -1,0 +1,141 @@
+{
+  "milestone": "m148_v22_final_prior_art_litsearch",
+  "program": "FINAL pre-execution literature survey for the v22 plan (14 Aug 2026): who has already claimed each mechanism the v22 plan relies on — the temporal branch (reservoir computing, delay-line memory, growing reservoirs), the integration layer (stacking/score fusion, classifier selection/competence routing), residual growth over fixed features, and the pruned-dense baseline? This survey ADJUDICATES CLAIM STATUS ONLY. It never supports a novelty claim (N95.6).",
+  "registration_notes": {
+    "N95.1": "This is the FINAL survey for RESEARCH_IMPLEMENTATION_PLAN_v22. It covers the six v22 claim families that the M135 survey did NOT cover (M135 covered the seven image-construction directions: data axis, domain specialists, fixed code geometry, second-order pooling, scattering, shallow learned encoder, frontier-map framing). M135's adjudications are carried over verbatim into the final claim ledger; this survey only adds the new families.",
+    "N95.2": "Question registered BEFORE search: for each of R1 reservoir computing/ESN, R2 delay-line/autoregressive memory, R3 growing/incremental reservoirs, R4 stacking/score fusion/classifier selection, R5 boosting over fixed base learners, R6 pruned-dense baselines — who already claims it, at what level (mechanism / benchmark / research program), and what therefore remains for this programme (sealed matched-cost measurement only).",
+    "N95.3": "Anchors are recall probes: each MUST be retrieved by a topic query that does NOT contain its title, else the search is insensitive and every 'not found' is worthless.",
+    "N95.4": "Query families are phrased to find displacing work (work that already measures or builds the mechanism), not work that merely agrees in spirit.",
+    "N95.5": "Empty queries are recorded, not dropped. Rate-limited queries are retried and residual failures recorded separately from genuinely empty results.",
+    "N95.6": "Absence from these indexes is UNRESOLVED, never 'new' or 'first'. Unauthenticated public search cannot support a novelty claim.",
+    "N95.7": "Title/abstract mark a source live; only primary text with a located passage may count as displacement.",
+    "N95.8": "This evidence is a dated snapshot and is NOT replayable: the indexes change and the network is not a sealed corpus. The run records its date and the exact query strings so a reader can repeat the search, not so the bytes can be reproduced.",
+    "N95.9": "Instrument reused from M127/M129/M132/M135 (audit_v13_prior_art): arXiv two-stage AND-then-OR, Semantic Scholar with retry; S2 rate-limiting recorded as failures, not empty. The local query-result cache (N94.11) is reused; failures are never cached.",
+    "N95.10": "Positive-control probes pair papers whose existence is not in doubt with topic queries that omit their titles. Probe failures are reported per family; a family whose probe failed cannot be searched for absence.",
+    "N95.11": "Carried-over M135 adjudications (D1-D7) are NOT re-run here; their queries are served from the cache when shared, and the final ledger cites M135's evidence file directly.",
+    "N95.12": "Adjudication output: analysis/PRIOR_ART_V22_FINAL.md — a claim-status ledger for every v22 mechanism (carried M135 rows + new R1-R6 rows), written only after this run completes."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "echo state network reservoir computing",
+    "liquid state machine cortical microcircuit",
+    "time delay neural network phoneme recognition",
+    "stacked generalization ensemble learning",
+    "gradient boosting machine approximation",
+    "neural network pruning"
+  ],
+  "recall_probes": [
+    {
+      "id": "P-A",
+      "must_retrieve": "The echo state approach to analysing and training recurrent neural networks",
+      "query": "random recurrent network training linear readout",
+      "covers": ["R1"],
+      "positive_control": true
+    },
+    {
+      "id": "P-B",
+      "must_retrieve": "Real-time computing without stable states",
+      "query": "neural microcircuits time varying stimuli fading memory",
+      "covers": ["R1"],
+      "positive_control": false
+    },
+    {
+      "id": "P-C",
+      "must_retrieve": "Detecting strange attractors in turbulence",
+      "query": "delay coordinates embedding attractor reconstruction time series",
+      "covers": ["R2"],
+      "positive_control": false
+    },
+    {
+      "id": "P-D",
+      "must_retrieve": "Stacked generalization",
+      "query": "combine predictions multiple learners generalizer",
+      "covers": ["R4"],
+      "positive_control": false
+    },
+    {
+      "id": "P-E",
+      "must_retrieve": "Greedy function approximation: a gradient boosting machine",
+      "query": "stagewise additive expansion weak learners loss",
+      "covers": ["R5"],
+      "positive_control": false
+    },
+    {
+      "id": "P-F",
+      "must_retrieve": "Phoneme recognition using time-delay neural networks",
+      "query": "delay line hidden units speech recognition network",
+      "covers": ["R2"],
+      "positive_control": false
+    }
+  ],
+  "claims": {
+    "R1": {
+      "statement": "Reservoir computing / echo state networks — a fixed random recurrent reservoir with a closed-form ridge readout — is already claimed: the construction, the echo-state property, memory capacity, and ridge readouts are established (Jaeger 2001/2007; Maass LSM 2002).",
+      "queries": [
+        "echo state network ridge regression readout",
+        "reservoir computing random recurrent neural network",
+        "reservoir computing time series prediction benchmark",
+        "deep echo state network stacked reservoirs"
+      ]
+    },
+    "R2": {
+      "statement": "Delay-line / autoregressive memory for sequence prediction — tap-delay lines, time-delay embeddings, NARX autoregressive-exogenous models, TDNNs — is classical, already claimed.",
+      "queries": [
+        "time delay embedding nonlinear time series prediction",
+        "NARX network autoregressive exogenous input",
+        "time delay neural network sequential processing",
+        "autoregressive linear model time series prediction"
+      ]
+    },
+    "R3": {
+      "statement": "Growing / incremental reservoirs — appending reservoir neurons over time, growing ESNs — is already claimed.",
+      "queries": [
+        "growing echo state network incremental reservoir",
+        "incremental reservoir computing online learning",
+        "evolving reservoir topology time series",
+        "reservoir computing growth mechanism neurons"
+      ]
+    },
+    "R4": {
+      "statement": "Late fusion / score-level fusion / stacking, and competence-based classifier selection — the v22 integration layer — are already claimed.",
+      "queries": [
+        "stacked generalization ensemble learning",
+        "score level fusion multiple classifiers",
+        "dynamic classifier selection competence",
+        "late fusion prediction combination classifiers"
+      ]
+    },
+    "R5": {
+      "statement": "Residual/greedy growth over fixed base learners — boosting, including boosting of random features — is already claimed.",
+      "queries": [
+        "boosting random features generalization",
+        "gradient boosting additive model weak learners",
+        "residual learning additive weak learners",
+        "boosting kernel ridge regression"
+      ]
+    },
+    "R6": {
+      "statement": "Pruned-dense baselines — structured pruning, magnitude pruning, lottery tickets, and pruned-vs-efficient trade-offs — are already claimed.",
+      "queries": [
+        "structured pruning convolutional network",
+        "magnitude pruning lottery ticket hypothesis",
+        "pruning network accuracy computation tradeoff",
+        "pruned network inference efficiency"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v16/m148_v22_final_prior_art_litsearch"
+}

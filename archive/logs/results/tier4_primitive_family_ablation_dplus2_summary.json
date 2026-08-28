@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "protocol": "tier4_primitive_family_ablation_dplus2",
+  "comparative_result": true,
+  "sphere_seed_rule": "d_plus_2",
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_winners": {
+    "spherical_covariance": 5
+  },
+  "families": {
+    "full_covariance": {
+      "accuracy_mean": 0.8102500000000001,
+      "negative_log_likelihood_mean": 0.5657348420116931,
+      "fit_seconds_mean": 0.24079682000447064,
+      "primitives_mean": 58.6
+    },
+    "diagonal_covariance": {
+      "accuracy_mean": 0.7841250000000001,
+      "negative_log_likelihood_mean": 0.7081500065588593,
+      "fit_seconds_mean": 0.177620000008028,
+      "primitives_mean": 46.0
+    },
+    "spherical_covariance": {
+      "accuracy_mean": 0.8396250000000001,
+      "negative_log_likelihood_mean": 0.4684826232104206,
+      "fit_seconds_mean": 0.3643266000028234,
+      "primitives_mean": 139.8
+    }
+  },
+  "paired_accuracy_differences": {
+    "sphere_minus_diagonal_covariance": {
+      "mean_pp": 5.5500000000000025,
+      "per_seed_pp": [
+        6.937500000000007,
+        4.249999999999998,
+        4.625000000000002,
+        2.6874999999999982,
+        9.250000000000004
+      ],
+      "t95_ci_pp": [
+        2.3628461453896685,
+        8.737153854610337
+      ]
+    },
+    "sphere_minus_full_covariance": {
+      "mean_pp": 2.9375000000000013,
+      "per_seed_pp": [
+        3.0000000000000027,
+        2.6249999999999996,
+        3.0000000000000027,
+        2.562500000000001,
+        3.500000000000003
+      ],
+      "t95_ci_pp": [
+        2.4718760006735883,
+        3.4031239993264144
+      ]
+    }
+  },
+  "test_used_for_selection": false
+}

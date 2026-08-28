@@ -1,0 +1,2770 @@
+{
+  "protocol": {
+    "seed": 42,
+    "episode_count": 3,
+    "proxy_unknown_pool": [
+      3,
+      4,
+      5
+    ],
+    "final_unknown_pool": [
+      6,
+      7,
+      8
+    ],
+    "proxy_and_final_pools_disjoint": true,
+    "minimum_known_coverage": 0.9,
+    "minimum_unknown_recall": 0.5,
+    "geometry_variant": "additive",
+    "final_unknown_used_for_selection": false
+  },
+  "episodes": [
+    {
+      "protocol": {
+        "seed": 42,
+        "known_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_classes": [
+          3
+        ],
+        "final_unknown_classes": [
+          6
+        ],
+        "geometry_classes": [
+          0,
+          1,
+          2
+        ],
+        "geometry_variant": "additive",
+        "readout_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_used_for_selection": true,
+        "final_unknown_used_for_selection": false,
+        "final_test_used_for_selection": false,
+        "readout_calibration_count": 15,
+        "known_carve_count": 12,
+        "id_validation_count": 33,
+        "proxy_unknown_validation_count": 20,
+        "id_test_count": 120,
+        "final_unknown_test_count": 40
+      },
+      "selection": {
+        "score": "sdf_energy",
+        "threshold": 7.47926456444961,
+        "production_binding_supported": true
+      },
+      "carve_audit": {
+        "candidate_count": 0,
+        "accepted_count": 0
+      },
+      "validation": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 7.479765751986365
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 9.310803568485014,
+            "1": 7.479765751986365,
+            "2": 7.479765751986365
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 2.6539575348648197
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 2.8886233130815926,
+            "1": 2.420736998770905,
+            "2": 1.2403540753057416
+          },
+          "fallback_classes": []
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 2.7007534623480347
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 2.8072533677549605,
+            "1": 2.7007534623480347,
+            "2": 2.7007534623480347
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 0.9647665573836837
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 0.9867722213944224,
+            "1": 0.7481553478816005,
+            "2": 0.36285830358799204
+          },
+          "fallback_classes": []
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 7.47926456444961
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 8.657358847903895,
+            "1": 7.47926456444961,
+            "2": 7.47926456444961
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 2.4625793303481998
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 2.6685043654651976,
+            "1": 2.3978249075560187,
+            "2": 0.8996541374402921
+          },
+          "fallback_classes": []
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.30454545454545456,
+            "aupr_out": 0.3286014148663769,
+            "aupr_in": 0.572611947632736,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_threshold": 0.011153658732127036
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.30454545454545456,
+            "aupr_out": 0.3286014148663769,
+            "aupr_in": 0.572611947632736,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_thresholds": {
+            "0": 0.041602091849600176,
+            "1": 0.011153658732127036,
+            "2": 0.011153658732127036
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.30454545454545456,
+            "aupr_out": 0.3286014148663769,
+            "aupr_in": 0.572611947632736,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_threshold": 0.47607259157451937
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.30454545454545456,
+            "aupr_out": 0.3286014148663769,
+            "aupr_in": 0.572611947632736,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_thresholds": {
+            "0": 0.47607259157451937,
+            "1": 0.1295437885965989,
+            "2": 0.4871879322702753
+          },
+          "fallback_classes": []
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 5.343755360781984
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 5.343755360781984,
+            "1": 5.617633059827693,
+            "2": 5.343755360781984
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 2.790326965228903
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 3.215696998101271,
+            "1": 2.616869502147598,
+            "2": 1.841824356503513
+          },
+          "fallback_classes": []
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 22.627746000487864
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 27.045043753254834,
+            "1": 22.627746000487864,
+            "2": 22.627746000487864
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 8.695413966745022
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 10.099274478304409,
+            "1": 8.695413966745022,
+            "2": 7.708584406266645
+          },
+          "fallback_classes": []
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 3.706979096184823
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 3.706979096184823,
+            "1": 3.714530534298772,
+            "2": 3.706979096184823
+          },
+          "fallback_classes": [
+            2
+          ]
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_threshold": 1.810489496644928
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 1.0,
+            "aupr_out": 1.0000000000000002,
+            "aupr_in": 0.9999999999999999,
+            "fpr95": 0.0
+          },
+          "selected_thresholds": {
+            "0": 1.8191767723623042,
+            "1": 1.728803285157877,
+            "2": 1.529269494453314
+          },
+          "fallback_classes": []
+        }
+      },
+      "final_test": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 0.7185416666666667,
+            "aupr_out": 0.5566740017211755,
+            "aupr_in": 0.8658364263682915,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "threshold": 7.479765751986365,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 0.7185416666666667,
+            "aupr_out": 0.5566740017211755,
+            "aupr_in": 0.8658364263682915,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.7185416666666667,
+            "aupr_out": 0.5566740017211755,
+            "aupr_in": 0.8658364263682915,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "known_coverage": 0.9166666666666666,
+            "true_positive_rate": 0.325
+          },
+          "known_coverage": 0.9166666666666666,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6727272727272727,
+          "open_set_accuracy": 0.54375
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.7185416666666667,
+            "aupr_out": 0.5566740017211755,
+            "aupr_in": 0.8658364263682915,
+            "fpr95": 0.825
+          },
+          "operating_point": {
+            "known_coverage": 0.8833333333333333,
+            "true_positive_rate": 0.375
+          },
+          "known_coverage": 0.8833333333333333,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.660377358490566,
+          "open_set_accuracy": 0.53125
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.725,
+            "aupr_out": 0.5799814878776124,
+            "aupr_in": 0.8767704063935395,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "threshold": 2.7007534623480347,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 0.725,
+            "aupr_out": 0.5799814878776124,
+            "aupr_in": 0.8767704063935395,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.725,
+            "aupr_out": 0.5799814878776124,
+            "aupr_in": 0.8767704063935395,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "known_coverage": 0.9333333333333333,
+            "true_positive_rate": 0.275
+          },
+          "known_coverage": 0.9333333333333333,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6696428571428571,
+          "open_set_accuracy": 0.5375
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.725,
+            "aupr_out": 0.5799814878776124,
+            "aupr_in": 0.8767704063935395,
+            "fpr95": 0.8
+          },
+          "operating_point": {
+            "known_coverage": 0.85,
+            "true_positive_rate": 0.35
+          },
+          "known_coverage": 0.85,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6470588235294118,
+          "open_set_accuracy": 0.5
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.7120833333333333,
+            "aupr_out": 0.5358046696393395,
+            "aupr_in": 0.8618820178349219,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "threshold": 7.47926456444961,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 0.7120833333333333,
+            "aupr_out": 0.5358046696393395,
+            "aupr_in": 0.8618820178349219,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 0.7120833333333333,
+            "aupr_out": 0.5358046696393395,
+            "aupr_in": 0.8618820178349219,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "known_coverage": 0.9166666666666666,
+            "true_positive_rate": 0.275
+          },
+          "known_coverage": 0.9166666666666666,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6727272727272727,
+          "open_set_accuracy": 0.53125
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.7120833333333333,
+            "aupr_out": 0.5358046696393395,
+            "aupr_in": 0.8618820178349219,
+            "fpr95": 0.85
+          },
+          "operating_point": {
+            "known_coverage": 0.8666666666666667,
+            "true_positive_rate": 0.375
+          },
+          "known_coverage": 0.8666666666666667,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6634615384615384,
+          "open_set_accuracy": 0.525
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.6477083333333333,
+            "aupr_out": 0.454518891577542,
+            "aupr_in": 0.8632585845531464,
+            "fpr95": 0.6833333333333333
+          },
+          "operating_point": {
+            "threshold": 0.011153658732127036,
+            "false_positive_rate": 0.875,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.125,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 1.0,
+          "open_set_accuracy": 0.34375
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.6477083333333333,
+            "aupr_out": 0.454518891577542,
+            "aupr_in": 0.8632585845531464,
+            "fpr95": 0.6833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.125,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.125,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 1.0,
+          "open_set_accuracy": 0.34375
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.6477083333333333,
+            "aupr_out": 0.454518891577542,
+            "aupr_in": 0.8632585845531464,
+            "fpr95": 0.6833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9416666666666667,
+            "true_positive_rate": 0.225
+          },
+          "known_coverage": 0.9416666666666667,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6991150442477876,
+          "open_set_accuracy": 0.55
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6477083333333333,
+            "aupr_out": 0.454518891577542,
+            "aupr_in": 0.8632585845531464,
+            "fpr95": 0.6833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9,
+            "true_positive_rate": 0.25
+          },
+          "known_coverage": 0.9,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6851851851851852,
+          "open_set_accuracy": 0.525
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.4997916666666667,
+            "aupr_out": 0.3068049918482282,
+            "aupr_in": 0.7286286206657089,
+            "fpr95": 0.9916666666666667
+          },
+          "operating_point": {
+            "threshold": 5.343755360781984,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 0.4997916666666667,
+            "aupr_out": 0.3068049918482282,
+            "aupr_in": 0.7286286206657089,
+            "fpr95": 0.9916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 0.4997916666666667,
+            "aupr_out": 0.3068049918482282,
+            "aupr_in": 0.7286286206657089,
+            "fpr95": 0.9916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8333333333333334,
+            "true_positive_rate": 0.15
+          },
+          "known_coverage": 0.8333333333333334,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.65,
+          "open_set_accuracy": 0.44375
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.4997916666666667,
+            "aupr_out": 0.3068049918482282,
+            "aupr_in": 0.7286286206657089,
+            "fpr95": 0.9916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.7416666666666667,
+            "true_positive_rate": 0.2
+          },
+          "known_coverage": 0.7416666666666667,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6067415730337079,
+          "open_set_accuracy": 0.3875
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.6933333333333334,
+            "aupr_out": 0.5170432931560609,
+            "aupr_in": 0.8412073659707844,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "threshold": 22.627746000487864,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 0.6933333333333334,
+            "aupr_out": 0.5170432931560609,
+            "aupr_in": 0.8412073659707844,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 0.6933333333333334,
+            "aupr_out": 0.5170432931560609,
+            "aupr_in": 0.8412073659707844,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "known_coverage": 0.9166666666666666,
+            "true_positive_rate": 0.35
+          },
+          "known_coverage": 0.9166666666666666,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6727272727272727,
+          "open_set_accuracy": 0.55
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6933333333333334,
+            "aupr_out": 0.5170432931560609,
+            "aupr_in": 0.8412073659707844,
+            "fpr95": 0.9
+          },
+          "operating_point": {
+            "known_coverage": 0.9,
+            "true_positive_rate": 0.275
+          },
+          "known_coverage": 0.9,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6666666666666666,
+          "open_set_accuracy": 0.51875
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.6391666666666668,
+            "aupr_out": 0.4364163953292185,
+            "aupr_in": 0.8123950702830427,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "threshold": 3.706979096184823,
+            "false_positive_rate": 0.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 0.6391666666666668,
+            "aupr_out": 0.4364163953292185,
+            "aupr_in": 0.8123950702830427,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 1.0,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 1.0,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6833333333333333,
+          "open_set_accuracy": 0.5125
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 0.6391666666666668,
+            "aupr_out": 0.4364163953292185,
+            "aupr_in": 0.8123950702830427,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.9083333333333333,
+            "true_positive_rate": 0.225
+          },
+          "known_coverage": 0.9083333333333333,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6605504587155964,
+          "open_set_accuracy": 0.50625
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6391666666666668,
+            "aupr_out": 0.4364163953292185,
+            "aupr_in": 0.8123950702830427,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.25
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.6833333333333333,
+          "accepted_known_accuracy": 0.6476190476190476,
+          "open_set_accuracy": 0.4875
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 43,
+        "known_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_classes": [
+          4
+        ],
+        "final_unknown_classes": [
+          7
+        ],
+        "geometry_classes": [
+          0,
+          1,
+          2
+        ],
+        "geometry_variant": "additive",
+        "readout_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_used_for_selection": true,
+        "final_unknown_used_for_selection": false,
+        "final_test_used_for_selection": false,
+        "readout_calibration_count": 15,
+        "known_carve_count": 12,
+        "id_validation_count": 33,
+        "proxy_unknown_validation_count": 20,
+        "id_test_count": 120,
+        "final_unknown_test_count": 40
+      },
+      "selection": {
+        "score": "mahalanobis",
+        "threshold": 1.0089337254233974,
+        "production_binding_supported": false
+      },
+      "carve_audit": {
+        "candidate_count": 0,
+        "accepted_count": 0
+      },
+      "validation": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 0.6954545454545454,
+            "aupr_out": 0.6580188539468144,
+            "aupr_in": 0.7667829299438172,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_threshold": -2.173320613903002
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 0.6954545454545454,
+            "aupr_out": 0.6580188539468144,
+            "aupr_in": 0.7667829299438172,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_thresholds": {
+            "0": 0.11924191303302664,
+            "1": 4.01607179713132,
+            "2": -2.173320613903002
+          },
+          "fallback_classes": []
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.6954545454545454,
+            "aupr_out": 0.6580188539468144,
+            "aupr_in": 0.7667829299438172,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_threshold": 3.1282333425039943
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6954545454545454,
+            "aupr_out": 0.6580188539468144,
+            "aupr_in": 0.7667829299438172,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_thresholds": {
+            "0": 3.43895556100865,
+            "1": 2.489405158756552,
+            "2": 3.1282333425039943
+          },
+          "fallback_classes": []
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.6954545454545455,
+            "aupr_out": 0.6148706476057484,
+            "aupr_in": 0.79232869855806,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_threshold": -0.6387814911846095
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 0.6954545454545455,
+            "aupr_out": 0.6148706476057484,
+            "aupr_in": 0.79232869855806,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_thresholds": {
+            "0": 0.0413197079592951,
+            "1": 0.997533087837218,
+            "2": -0.6387814911846095
+          },
+          "fallback_classes": []
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.6954545454545455,
+            "aupr_out": 0.6148706476057484,
+            "aupr_in": 0.79232869855806,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_threshold": 0.966806198134417
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6954545454545455,
+            "aupr_out": 0.6148706476057484,
+            "aupr_in": 0.79232869855806,
+            "fpr95": 0.5757575757575758
+          },
+          "selected_thresholds": {
+            "0": 0.985875487420882,
+            "1": 0.4856469202068349,
+            "2": 1.011496249561772
+          },
+          "fallback_classes": []
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.6757575757575758,
+            "aupr_out": 0.627046541965123,
+            "aupr_in": 0.7550458711380511,
+            "fpr95": 0.6060606060606061
+          },
+          "selected_threshold": -2.3368354788384353
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 0.6757575757575758,
+            "aupr_out": 0.627046541965123,
+            "aupr_in": 0.7550458711380511,
+            "fpr95": 0.6060606060606061
+          },
+          "selected_thresholds": {
+            "0": -0.19543381522275066,
+            "1": 3.3017100734728775,
+            "2": -2.3368354788384353
+          },
+          "fallback_classes": []
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 0.6757575757575758,
+            "aupr_out": 0.627046541965123,
+            "aupr_in": 0.7550458711380511,
+            "fpr95": 0.6060606060606061
+          },
+          "selected_threshold": 2.854925151534821
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6757575757575758,
+            "aupr_out": 0.627046541965123,
+            "aupr_in": 0.7550458711380511,
+            "fpr95": 0.6060606060606061
+          },
+          "selected_thresholds": {
+            "0": 2.8820791911350274,
+            "1": 2.159784218054777,
+            "2": 2.791254112430535
+          },
+          "fallback_classes": []
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.5348484848484849,
+            "aupr_out": 0.5244988308579114,
+            "aupr_in": 0.6886838356955226,
+            "fpr95": 0.8484848484848485
+          },
+          "selected_threshold": 0.023609070279078215
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.5348484848484849,
+            "aupr_out": 0.5244988308579114,
+            "aupr_in": 0.6886838356955226,
+            "fpr95": 0.8484848484848485
+          },
+          "selected_thresholds": {
+            "0": 0.023609070279078215,
+            "1": 0.17743313112735704,
+            "2": 0.227387611609827
+          },
+          "fallback_classes": []
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.5348484848484849,
+            "aupr_out": 0.5244988308579114,
+            "aupr_in": 0.6886838356955226,
+            "fpr95": 0.8484848484848485
+          },
+          "selected_threshold": 0.33195727260422475
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.5348484848484849,
+            "aupr_out": 0.5244988308579114,
+            "aupr_in": 0.6886838356955226,
+            "fpr95": 0.8484848484848485
+          },
+          "selected_thresholds": {
+            "0": 0.25213799738336423,
+            "1": 0.2833116496816331,
+            "2": 0.4490484823107795
+          },
+          "fallback_classes": []
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.7333333333333334,
+            "aupr_out": 0.6950192750733175,
+            "aupr_in": 0.7910194833560413,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_threshold": 1.0089337254233974
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 0.7333333333333334,
+            "aupr_out": 0.6950192750733175,
+            "aupr_in": 0.7910194833560413,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_thresholds": {
+            "0": 1.0089337254233974,
+            "1": 3.568220089819651,
+            "2": 1.1182963803882158
+          },
+          "fallback_classes": []
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 0.7333333333333334,
+            "aupr_out": 0.6950192750733175,
+            "aupr_in": 0.7910194833560413,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_threshold": 3.0992563044208867
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.7333333333333334,
+            "aupr_out": 0.6950192750733175,
+            "aupr_in": 0.7910194833560413,
+            "fpr95": 0.9090909090909091
+          },
+          "selected_thresholds": {
+            "0": 3.252245398428838,
+            "1": 2.960855160745341,
+            "2": 3.215696998101271
+          },
+          "fallback_classes": []
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.6363636363636364,
+            "aupr_out": 0.5172761693793682,
+            "aupr_in": 0.7271541359919622,
+            "fpr95": 0.7878787878787878
+          },
+          "selected_threshold": 3.4110959984369162
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 0.6363636363636364,
+            "aupr_out": 0.5172761693793682,
+            "aupr_in": 0.7271541359919622,
+            "fpr95": 0.7878787878787878
+          },
+          "selected_thresholds": {
+            "0": 4.645731566059499,
+            "1": 10.035052347606467,
+            "2": 3.4110959984369162
+          },
+          "fallback_classes": []
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 0.6363636363636364,
+            "aupr_out": 0.5172761693793682,
+            "aupr_in": 0.7271541359919622,
+            "fpr95": 0.7878787878787878
+          },
+          "selected_threshold": 9.953944169433328
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6363636363636364,
+            "aupr_out": 0.5172761693793682,
+            "aupr_in": 0.7271541359919622,
+            "fpr95": 0.7878787878787878
+          },
+          "selected_thresholds": {
+            "0": 10.443029146247104,
+            "1": 8.106442559447192,
+            "2": 15.112711377999885
+          },
+          "fallback_classes": []
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.6530303030303032,
+            "aupr_out": 0.6132374881239047,
+            "aupr_in": 0.7530307421386905,
+            "fpr95": 0.8787878787878788
+          },
+          "selected_threshold": 0.8788128640646424
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 0.6530303030303032,
+            "aupr_out": 0.6132374881239047,
+            "aupr_in": 0.7530307421386905,
+            "fpr95": 0.8787878787878788
+          },
+          "selected_thresholds": {
+            "0": 0.9991435110741377,
+            "1": 2.224017176716164,
+            "2": 0.8788128640646424
+          },
+          "fallback_classes": []
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 0.6530303030303032,
+            "aupr_out": 0.6132374881239047,
+            "aupr_in": 0.7530307421386905,
+            "fpr95": 0.8787878787878788
+          },
+          "selected_threshold": 1.8972443809892061
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6530303030303032,
+            "aupr_out": 0.6132374881239047,
+            "aupr_in": 0.7530307421386905,
+            "fpr95": 0.8787878787878788
+          },
+          "selected_thresholds": {
+            "0": 1.8972443809892061,
+            "1": 1.9776216798477306,
+            "2": 1.810489496644928
+          },
+          "fallback_classes": []
+        }
+      },
+      "final_test": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9081001200141833,
+            "aupr_in": 0.9900449693550127,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "threshold": -2.173320613903002,
+            "false_positive_rate": 0.9333333333333333,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.06666666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.75,
+          "open_set_accuracy": 0.2875
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9081001200141833,
+            "aupr_in": 0.9900449693550127,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.4666666666666667,
+            "true_positive_rate": 0.975
+          },
+          "known_coverage": 0.4666666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8392857142857143,
+          "open_set_accuracy": 0.5375
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9081001200141833,
+            "aupr_in": 0.9900449693550127,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8833333333333333,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.8833333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6792452830188679,
+          "open_set_accuracy": 0.68125
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9081001200141833,
+            "aupr_in": 0.9900449693550127,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8666666666666667,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.8666666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6730769230769231,
+          "open_set_accuracy": 0.66875
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.9866666666666667,
+            "aupr_out": 0.9681078129081271,
+            "aupr_in": 0.9954165188177369,
+            "fpr95": 0.058333333333333334
+          },
+          "operating_point": {
+            "threshold": -0.6387814911846095,
+            "false_positive_rate": 0.9083333333333333,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.09166666666666666,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8181818181818182,
+          "open_set_accuracy": 0.30625
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 0.9866666666666667,
+            "aupr_out": 0.9681078129081271,
+            "aupr_in": 0.9954165188177369,
+            "fpr95": 0.058333333333333334
+          },
+          "operating_point": {
+            "known_coverage": 0.5083333333333333,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.5083333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8524590163934426,
+          "open_set_accuracy": 0.575
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.9866666666666667,
+            "aupr_out": 0.9681078129081271,
+            "aupr_in": 0.9954165188177369,
+            "fpr95": 0.058333333333333334
+          },
+          "operating_point": {
+            "known_coverage": 0.9416666666666667,
+            "true_positive_rate": 0.975
+          },
+          "known_coverage": 0.9416666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6991150442477876,
+          "open_set_accuracy": 0.7375
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9866666666666667,
+            "aupr_out": 0.9681078129081271,
+            "aupr_in": 0.9954165188177369,
+            "fpr95": 0.058333333333333334
+          },
+          "operating_point": {
+            "known_coverage": 0.8833333333333333,
+            "true_positive_rate": 0.975
+          },
+          "known_coverage": 0.8833333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6792452830188679,
+          "open_set_accuracy": 0.69375
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.9656250000000001,
+            "aupr_out": 0.9020748366826319,
+            "aupr_in": 0.9887865446528482,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "threshold": -2.3368354788384353,
+            "false_positive_rate": 0.9166666666666666,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.08333333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.7,
+          "open_set_accuracy": 0.29375
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 0.9656250000000001,
+            "aupr_out": 0.9020748366826319,
+            "aupr_in": 0.9887865446528482,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.4666666666666667,
+            "true_positive_rate": 0.975
+          },
+          "known_coverage": 0.4666666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8214285714285714,
+          "open_set_accuracy": 0.53125
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 0.9656250000000001,
+            "aupr_out": 0.9020748366826319,
+            "aupr_in": 0.9887865446528482,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8916666666666667,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.8916666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6822429906542056,
+          "open_set_accuracy": 0.6875
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9656250000000001,
+            "aupr_out": 0.9020748366826319,
+            "aupr_in": 0.9887865446528482,
+            "fpr95": 0.11666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6761904761904762,
+          "open_set_accuracy": 0.675
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.5952083333333333,
+            "aupr_out": 0.4130391236639622,
+            "aupr_in": 0.8110493715057906,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "threshold": 0.023609070279078215,
+            "false_positive_rate": 0.7916666666666666,
+            "true_positive_rate": 0.8
+          },
+          "known_coverage": 0.20833333333333334,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 1.0,
+          "open_set_accuracy": 0.35625
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.5952083333333333,
+            "aupr_out": 0.4130391236639622,
+            "aupr_in": 0.8110493715057906,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.4166666666666667,
+            "true_positive_rate": 0.6
+          },
+          "known_coverage": 0.4166666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.86,
+          "open_set_accuracy": 0.41875
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.5952083333333333,
+            "aupr_out": 0.4130391236639622,
+            "aupr_in": 0.8110493715057906,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8333333333333334,
+            "true_positive_rate": 0.3
+          },
+          "known_coverage": 0.8333333333333334,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.77,
+          "open_set_accuracy": 0.55625
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.5952083333333333,
+            "aupr_out": 0.4130391236639622,
+            "aupr_in": 0.8110493715057906,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8583333333333333,
+            "true_positive_rate": 0.4
+          },
+          "known_coverage": 0.8583333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.7572815533980582,
+          "open_set_accuracy": 0.5875
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.9841666666666666,
+            "aupr_out": 0.9657968489668707,
+            "aupr_in": 0.994369651209502,
+            "fpr95": 0.08333333333333333
+          },
+          "operating_point": {
+            "threshold": 1.0089337254233974,
+            "false_positive_rate": 0.9416666666666667,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.058333333333333334,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.2857142857142857,
+          "open_set_accuracy": 0.2625
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 0.9841666666666666,
+            "aupr_out": 0.9657968489668707,
+            "aupr_in": 0.994369651209502,
+            "fpr95": 0.08333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.38333333333333336,
+            "true_positive_rate": 0.9
+          },
+          "known_coverage": 0.38333333333333336,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8913043478260869,
+          "open_set_accuracy": 0.48125
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 0.9841666666666666,
+            "aupr_out": 0.9657968489668707,
+            "aupr_in": 0.994369651209502,
+            "fpr95": 0.08333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9083333333333333,
+            "true_positive_rate": 0.95
+          },
+          "known_coverage": 0.9083333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6880733944954128,
+          "open_set_accuracy": 0.70625
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9841666666666666,
+            "aupr_out": 0.9657968489668707,
+            "aupr_in": 0.994369651209502,
+            "fpr95": 0.08333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.925,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.925,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6936936936936937,
+          "open_set_accuracy": 0.7125
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9375468023830508,
+            "aupr_in": 0.9881787090779336,
+            "fpr95": 0.125
+          },
+          "operating_point": {
+            "threshold": 3.4110959984369162,
+            "false_positive_rate": 0.9583333333333334,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.041666666666666664,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6,
+          "open_set_accuracy": 0.26875
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9375468023830508,
+            "aupr_in": 0.9881787090779336,
+            "fpr95": 0.125
+          },
+          "operating_point": {
+            "known_coverage": 0.45,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.45,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.8333333333333334,
+          "open_set_accuracy": 0.5125
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9375468023830508,
+            "aupr_in": 0.9881787090779336,
+            "fpr95": 0.125
+          },
+          "operating_point": {
+            "known_coverage": 0.925,
+            "true_positive_rate": 0.825
+          },
+          "known_coverage": 0.925,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6936936936936937,
+          "open_set_accuracy": 0.6875
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9689583333333334,
+            "aupr_out": 0.9375468023830508,
+            "aupr_in": 0.9881787090779336,
+            "fpr95": 0.125
+          },
+          "operating_point": {
+            "known_coverage": 0.9166666666666666,
+            "true_positive_rate": 0.9
+          },
+          "known_coverage": 0.9166666666666666,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6909090909090909,
+          "open_set_accuracy": 0.7
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.98,
+            "aupr_out": 0.9645304248132477,
+            "aupr_in": 0.9921593430827264,
+            "fpr95": 0.13333333333333333
+          },
+          "operating_point": {
+            "threshold": 0.8788128640646424,
+            "false_positive_rate": 0.8666666666666667,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.13333333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.625,
+          "open_set_accuracy": 0.3125
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 0.98,
+            "aupr_out": 0.9645304248132477,
+            "aupr_in": 0.9921593430827264,
+            "fpr95": 0.13333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.5083333333333333,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.5083333333333333,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.819672131147541,
+          "open_set_accuracy": 0.54375
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 0.98,
+            "aupr_out": 0.9645304248132477,
+            "aupr_in": 0.9921593430827264,
+            "fpr95": 0.13333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9416666666666667,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.9416666666666667,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.6991150442477876,
+          "open_set_accuracy": 0.725
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.98,
+            "aupr_out": 0.9645304248132477,
+            "aupr_in": 0.9921593430827264,
+            "fpr95": 0.13333333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9583333333333334,
+            "true_positive_rate": 0.925
+          },
+          "known_coverage": 0.9583333333333334,
+          "known_accuracy": 0.7166666666666667,
+          "accepted_known_accuracy": 0.7043478260869566,
+          "open_set_accuracy": 0.7375
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 44,
+        "known_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_classes": [
+          5
+        ],
+        "final_unknown_classes": [
+          8
+        ],
+        "geometry_classes": [
+          0,
+          1,
+          2
+        ],
+        "geometry_variant": "additive",
+        "readout_classes": [
+          0,
+          1,
+          2
+        ],
+        "proxy_unknown_used_for_selection": true,
+        "final_unknown_used_for_selection": false,
+        "final_test_used_for_selection": false,
+        "readout_calibration_count": 15,
+        "known_carve_count": 12,
+        "id_validation_count": 33,
+        "proxy_unknown_validation_count": 20,
+        "id_test_count": 120,
+        "final_unknown_test_count": 40
+      },
+      "selection": {
+        "score": "minimum_sdf",
+        "threshold": 0.6819779926907457,
+        "production_binding_supported": true
+      },
+      "carve_audit": {
+        "candidate_count": 0,
+        "accepted_count": 0
+      },
+      "validation": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 0.9590909090909092,
+            "aupr_out": 0.9458924675527061,
+            "aupr_in": 0.975158813875363,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_threshold": 0.6819779926907457
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 0.9590909090909092,
+            "aupr_out": 0.9458924675527061,
+            "aupr_in": 0.975158813875363,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_thresholds": {
+            "0": 0.6819779926907457,
+            "1": 3.4871005796055803,
+            "2": 2.01364492589222
+          },
+          "fallback_classes": []
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.9590909090909092,
+            "aupr_out": 0.9458924675527061,
+            "aupr_in": 0.975158813875363,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_threshold": 2.3646459307531726
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9590909090909092,
+            "aupr_out": 0.9458924675527061,
+            "aupr_in": 0.975158813875363,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_thresholds": {
+            "0": 3.466329271118179,
+            "1": 2.1986390401304687,
+            "2": 1.4617006568316835
+          },
+          "fallback_classes": []
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.9575757575757576,
+            "aupr_out": 0.9392740419597383,
+            "aupr_in": 0.9750447154310298,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_threshold": 0.19362598678499476
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 0.9575757575757576,
+            "aupr_out": 0.9392740419597383,
+            "aupr_in": 0.9750447154310298,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_thresholds": {
+            "0": 0.19362598678499476,
+            "1": 0.8400866687638096,
+            "2": 0.7377076221835892
+          },
+          "fallback_classes": []
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.9575757575757576,
+            "aupr_out": 0.9392740419597383,
+            "aupr_in": 0.9750447154310298,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_threshold": 0.7280559220510493
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9575757575757576,
+            "aupr_out": 0.9392740419597383,
+            "aupr_in": 0.9750447154310298,
+            "fpr95": 0.15151515151515152
+          },
+          "selected_thresholds": {
+            "0": 1.227409950259742,
+            "1": 0.7280559220510493,
+            "2": 0.36920773186562583
+          },
+          "fallback_classes": []
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.9560606060606062,
+            "aupr_out": 0.9411841342193727,
+            "aupr_in": 0.9735087801019172,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 0.5920502720801801
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 0.9560606060606062,
+            "aupr_out": 0.9411841342193727,
+            "aupr_in": 0.9735087801019172,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 0.5920502720801801,
+            "1": 3.3432432506807985,
+            "2": 1.6241406181248237
+          },
+          "fallback_classes": []
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 0.9560606060606062,
+            "aupr_out": 0.9411841342193727,
+            "aupr_in": 0.9735087801019172,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 2.194935995811043
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9560606060606062,
+            "aupr_out": 0.9411841342193727,
+            "aupr_in": 0.9735087801019172,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 3.3381090749280986,
+            "1": 2.194935995811043,
+            "2": 1.0851181803138954
+          },
+          "fallback_classes": []
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.4696969696969697,
+            "aupr_out": 0.373163490278202,
+            "aupr_in": 0.6109543961111812,
+            "fpr95": 1.0
+          },
+          "selected_threshold": 0.00010633628118572602
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.4696969696969697,
+            "aupr_out": 0.373163490278202,
+            "aupr_in": 0.6109543961111812,
+            "fpr95": 1.0
+          },
+          "selected_thresholds": {
+            "0": 0.00010633628118572602,
+            "1": 0.1688500344156797,
+            "2": 0.5510779485121745
+          },
+          "fallback_classes": []
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.4696969696969697,
+            "aupr_out": 0.373163490278202,
+            "aupr_in": 0.6109543961111812,
+            "fpr95": 1.0
+          },
+          "selected_threshold": 0.49681497848906847
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.4696969696969697,
+            "aupr_out": 0.373163490278202,
+            "aupr_in": 0.6109543961111812,
+            "fpr95": 1.0
+          },
+          "selected_thresholds": {
+            "0": 0.6304192189861214,
+            "1": 0.01455188681511699,
+            "2": 0.49681497848906847
+          },
+          "fallback_classes": []
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.896969696969697,
+            "aupr_out": 0.8695258419376068,
+            "aupr_in": 0.9370776925980129,
+            "fpr95": 0.3333333333333333
+          },
+          "selected_threshold": 1.792183962614366
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 0.896969696969697,
+            "aupr_out": 0.8695258419376068,
+            "aupr_in": 0.9370776925980129,
+            "fpr95": 0.3333333333333333
+          },
+          "selected_thresholds": {
+            "0": 2.049600890484183,
+            "1": 2.3809079582709094,
+            "2": 1.792183962614366
+          },
+          "fallback_classes": []
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 0.896969696969697,
+            "aupr_out": 0.8695258419376068,
+            "aupr_in": 0.9370776925980129,
+            "fpr95": 0.3333333333333333
+          },
+          "selected_threshold": 2.960855160745341
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.896969696969697,
+            "aupr_out": 0.8695258419376068,
+            "aupr_in": 0.9370776925980129,
+            "fpr95": 0.3333333333333333
+          },
+          "selected_thresholds": {
+            "0": 3.215696998101271,
+            "1": 3.0498064027508285,
+            "2": 2.031065482159364
+          },
+          "fallback_classes": []
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.9333333333333333,
+            "aupr_out": 0.8970967873874609,
+            "aupr_in": 0.9631481362853911,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 5.793012740338086
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 0.9333333333333333,
+            "aupr_out": 0.8970967873874609,
+            "aupr_in": 0.9631481362853911,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 5.793012740338086,
+            "1": 10.595039211695054,
+            "2": 7.101787962964471
+          },
+          "fallback_classes": []
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 0.9333333333333333,
+            "aupr_out": 0.8970967873874609,
+            "aupr_in": 0.9631481362853911,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 8.067622190154317
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9333333333333333,
+            "aupr_out": 0.8970967873874609,
+            "aupr_in": 0.9631481362853911,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 9.871403305858651,
+            "1": 9.02993482383313,
+            "2": 5.681488639686281
+          },
+          "fallback_classes": []
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.9424242424242424,
+            "aupr_out": 0.9187649187197244,
+            "aupr_in": 0.9661466614219542,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 1.212763993901222
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 0.9424242424242424,
+            "aupr_out": 0.9187649187197244,
+            "aupr_in": 0.9661466614219542,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 1.212763993901222,
+            "1": 1.7177502024997273,
+            "2": 1.5077768136186571
+          },
+          "fallback_classes": []
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 0.9424242424242424,
+            "aupr_out": 0.9187649187197244,
+            "aupr_in": 0.9661466614219542,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_threshold": 1.6887152755722674
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.9424242424242424,
+            "aupr_out": 0.9187649187197244,
+            "aupr_in": 0.9661466614219542,
+            "fpr95": 0.18181818181818182
+          },
+          "selected_thresholds": {
+            "0": 2.090172804356176,
+            "1": 1.6228424381562783,
+            "2": 1.255027816249949
+          },
+          "fallback_classes": []
+        }
+      },
+      "final_test": {
+        "minimum_sdf": {
+          "detection": {
+            "auroc": 0.691875,
+            "aupr_out": 0.487403683023541,
+            "aupr_in": 0.8421507297683483,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "threshold": 0.6819779926907457,
+            "false_positive_rate": 0.4166666666666667,
+            "true_positive_rate": 0.625
+          },
+          "known_coverage": 0.5833333333333334,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5,
+          "open_set_accuracy": 0.375
+        },
+        "minimum_sdf_per_class": {
+          "detection": {
+            "auroc": 0.691875,
+            "aupr_out": 0.487403683023541,
+            "aupr_in": 0.8421507297683483,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.825,
+            "true_positive_rate": 0.5
+          },
+          "known_coverage": 0.825,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5959595959595959,
+          "open_set_accuracy": 0.49375
+        },
+        "minimum_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.691875,
+            "aupr_out": 0.487403683023541,
+            "aupr_in": 0.8421507297683483,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.325
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5238095238095238,
+          "open_set_accuracy": 0.425
+        },
+        "minimum_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.691875,
+            "aupr_out": 0.487403683023541,
+            "aupr_in": 0.8421507297683483,
+            "fpr95": 0.8916666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.225
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5142857142857142,
+          "open_set_accuracy": 0.39375
+        },
+        "minimum_metric_sdf": {
+          "detection": {
+            "auroc": 0.701875,
+            "aupr_out": 0.5459715379724411,
+            "aupr_in": 0.8419472695865016,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "threshold": 0.19362598678499476,
+            "false_positive_rate": 0.44166666666666665,
+            "true_positive_rate": 0.7
+          },
+          "known_coverage": 0.5583333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5074626865671642,
+          "open_set_accuracy": 0.3875
+        },
+        "minimum_metric_sdf_per_class": {
+          "detection": {
+            "auroc": 0.701875,
+            "aupr_out": 0.5459715379724411,
+            "aupr_in": 0.8419472695865016,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8,
+            "true_positive_rate": 0.5
+          },
+          "known_coverage": 0.8,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.59375,
+          "open_set_accuracy": 0.48125
+        },
+        "minimum_metric_sdf_coverage90": {
+          "detection": {
+            "auroc": 0.701875,
+            "aupr_out": 0.5459715379724411,
+            "aupr_in": 0.8419472695865016,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8833333333333333,
+            "true_positive_rate": 0.35
+          },
+          "known_coverage": 0.8833333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5188679245283019,
+          "open_set_accuracy": 0.43125
+        },
+        "minimum_metric_sdf_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.701875,
+            "aupr_out": 0.5459715379724411,
+            "aupr_in": 0.8419472695865016,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8583333333333333,
+            "true_positive_rate": 0.2
+          },
+          "known_coverage": 0.8583333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5048543689320388,
+          "open_set_accuracy": 0.375
+        },
+        "sdf_energy": {
+          "detection": {
+            "auroc": 0.6666666666666667,
+            "aupr_out": 0.4602122779716111,
+            "aupr_in": 0.8306511699805779,
+            "fpr95": 0.9166666666666666
+          },
+          "operating_point": {
+            "threshold": 0.5920502720801801,
+            "false_positive_rate": 0.4,
+            "true_positive_rate": 0.625
+          },
+          "known_coverage": 0.6,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.4861111111111111,
+          "open_set_accuracy": 0.375
+        },
+        "sdf_energy_per_class": {
+          "detection": {
+            "auroc": 0.6666666666666667,
+            "aupr_out": 0.4602122779716111,
+            "aupr_in": 0.8306511699805779,
+            "fpr95": 0.9166666666666666
+          },
+          "operating_point": {
+            "known_coverage": 0.85,
+            "true_positive_rate": 0.5
+          },
+          "known_coverage": 0.85,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5882352941176471,
+          "open_set_accuracy": 0.5
+        },
+        "sdf_energy_coverage90": {
+          "detection": {
+            "auroc": 0.6666666666666667,
+            "aupr_out": 0.4602122779716111,
+            "aupr_in": 0.8306511699805779,
+            "fpr95": 0.9166666666666666
+          },
+          "operating_point": {
+            "known_coverage": 0.8833333333333333,
+            "true_positive_rate": 0.325
+          },
+          "known_coverage": 0.8833333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5188679245283019,
+          "open_set_accuracy": 0.425
+        },
+        "sdf_energy_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6666666666666667,
+            "aupr_out": 0.4602122779716111,
+            "aupr_in": 0.8306511699805779,
+            "fpr95": 0.9166666666666666
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.2
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5238095238095238,
+          "open_set_accuracy": 0.39375
+        },
+        "maximum_probability": {
+          "detection": {
+            "auroc": 0.7335416666666668,
+            "aupr_out": 0.41391570604583505,
+            "aupr_in": 0.9039728046145971,
+            "fpr95": 0.6083333333333333
+          },
+          "operating_point": {
+            "threshold": 0.00010633628118572602,
+            "false_positive_rate": 0.9916666666666667,
+            "true_positive_rate": 1.0
+          },
+          "known_coverage": 0.008333333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 1.0,
+          "open_set_accuracy": 0.25625
+        },
+        "maximum_probability_per_class": {
+          "detection": {
+            "auroc": 0.7335416666666668,
+            "aupr_out": 0.41391570604583505,
+            "aupr_in": 0.9039728046145971,
+            "fpr95": 0.6083333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.775,
+            "true_positive_rate": 0.55
+          },
+          "known_coverage": 0.775,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.6451612903225806,
+          "open_set_accuracy": 0.5125
+        },
+        "maximum_probability_coverage90": {
+          "detection": {
+            "auroc": 0.7335416666666668,
+            "aupr_out": 0.41391570604583505,
+            "aupr_in": 0.9039728046145971,
+            "fpr95": 0.6083333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.975,
+            "true_positive_rate": 0.0
+          },
+          "known_coverage": 0.975,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5641025641025641,
+          "open_set_accuracy": 0.4125
+        },
+        "maximum_probability_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.7335416666666668,
+            "aupr_out": 0.41391570604583505,
+            "aupr_in": 0.9039728046145971,
+            "fpr95": 0.6083333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.9083333333333333,
+            "true_positive_rate": 0.075
+          },
+          "known_coverage": 0.9083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5412844036697247,
+          "open_set_accuracy": 0.3875
+        },
+        "mahalanobis": {
+          "detection": {
+            "auroc": 0.5920833333333334,
+            "aupr_out": 0.46835616211267683,
+            "aupr_in": 0.7656350768920124,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "threshold": 1.792183962614366,
+            "false_positive_rate": 0.5916666666666667,
+            "true_positive_rate": 0.65
+          },
+          "known_coverage": 0.4083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.4489795918367347,
+          "open_set_accuracy": 0.3
+        },
+        "mahalanobis_per_class": {
+          "detection": {
+            "auroc": 0.5920833333333334,
+            "aupr_out": 0.46835616211267683,
+            "aupr_in": 0.7656350768920124,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.575,
+            "true_positive_rate": 0.6
+          },
+          "known_coverage": 0.575,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5797101449275363,
+          "open_set_accuracy": 0.4
+        },
+        "mahalanobis_coverage90": {
+          "detection": {
+            "auroc": 0.5920833333333334,
+            "aupr_out": 0.46835616211267683,
+            "aupr_in": 0.7656350768920124,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.9,
+            "true_positive_rate": 0.275
+          },
+          "known_coverage": 0.9,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5370370370370371,
+          "open_set_accuracy": 0.43125
+        },
+        "mahalanobis_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.5920833333333334,
+            "aupr_out": 0.46835616211267683,
+            "aupr_in": 0.7656350768920124,
+            "fpr95": 0.9666666666666667
+          },
+          "operating_point": {
+            "known_coverage": 0.8583333333333333,
+            "true_positive_rate": 0.3
+          },
+          "known_coverage": 0.8583333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5631067961165048,
+          "open_set_accuracy": 0.4375
+        },
+        "gmm_nll": {
+          "detection": {
+            "auroc": 0.630625,
+            "aupr_out": 0.38015604486792187,
+            "aupr_in": 0.8167291802362568,
+            "fpr95": 0.8583333333333333
+          },
+          "operating_point": {
+            "threshold": 5.793012740338086,
+            "false_positive_rate": 0.39166666666666666,
+            "true_positive_rate": 0.65
+          },
+          "known_coverage": 0.6083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.4657534246575342,
+          "open_set_accuracy": 0.375
+        },
+        "gmm_nll_per_class": {
+          "detection": {
+            "auroc": 0.630625,
+            "aupr_out": 0.38015604486792187,
+            "aupr_in": 0.8167291802362568,
+            "fpr95": 0.8583333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8083333333333333,
+            "true_positive_rate": 0.475
+          },
+          "known_coverage": 0.8083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5567010309278351,
+          "open_set_accuracy": 0.45625
+        },
+        "gmm_nll_coverage90": {
+          "detection": {
+            "auroc": 0.630625,
+            "aupr_out": 0.38015604486792187,
+            "aupr_in": 0.8167291802362568,
+            "fpr95": 0.8583333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8083333333333333,
+            "true_positive_rate": 0.325
+          },
+          "known_coverage": 0.8083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.4845360824742268,
+          "open_set_accuracy": 0.375
+        },
+        "gmm_nll_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.630625,
+            "aupr_out": 0.38015604486792187,
+            "aupr_in": 0.8167291802362568,
+            "fpr95": 0.8583333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8083333333333333,
+            "true_positive_rate": 0.325
+          },
+          "known_coverage": 0.8083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5154639175257731,
+          "open_set_accuracy": 0.39375
+        },
+        "knn_distance": {
+          "detection": {
+            "auroc": 0.6479166666666667,
+            "aupr_out": 0.46006293239016843,
+            "aupr_in": 0.825720120823165,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "threshold": 1.212763993901222,
+            "false_positive_rate": 0.475,
+            "true_positive_rate": 0.65
+          },
+          "known_coverage": 0.525,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5238095238095238,
+          "open_set_accuracy": 0.36875
+        },
+        "knn_distance_per_class": {
+          "detection": {
+            "auroc": 0.6479166666666667,
+            "aupr_out": 0.46006293239016843,
+            "aupr_in": 0.825720120823165,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.7666666666666667,
+            "true_positive_rate": 0.475
+          },
+          "known_coverage": 0.7666666666666667,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5652173913043478,
+          "open_set_accuracy": 0.44375
+        },
+        "knn_distance_coverage90": {
+          "detection": {
+            "auroc": 0.6479166666666667,
+            "aupr_out": 0.46006293239016843,
+            "aupr_in": 0.825720120823165,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.875,
+            "true_positive_rate": 0.35
+          },
+          "known_coverage": 0.875,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5333333333333333,
+          "open_set_accuracy": 0.4375
+        },
+        "knn_distance_coverage90_per_class": {
+          "detection": {
+            "auroc": 0.6479166666666667,
+            "aupr_out": 0.46006293239016843,
+            "aupr_in": 0.825720120823165,
+            "fpr95": 0.8833333333333333
+          },
+          "operating_point": {
+            "known_coverage": 0.8083333333333333,
+            "true_positive_rate": 0.3
+          },
+          "known_coverage": 0.8083333333333333,
+          "known_accuracy": 0.5583333333333333,
+          "accepted_known_accuracy": 0.5360824742268041,
+          "open_set_accuracy": 0.4
+        }
+      }
+    }
+  ],
+  "summary": {
+    "minimum_sdf": {
+      "known_coverage_mean": 0.5499999999999999,
+      "known_coverage_minimum": 0.06666666666666667,
+      "unknown_recall_mean": 0.5416666666666666,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.3916666666666666,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_sdf_per_class": {
+      "known_coverage_mean": 0.763888888888889,
+      "known_coverage_minimum": 0.4666666666666667,
+      "unknown_recall_mean": 0.4916666666666667,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.5145833333333333,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_sdf_coverage90": {
+      "known_coverage_mean": 0.8916666666666666,
+      "known_coverage_minimum": 0.875,
+      "unknown_recall_mean": 0.525,
+      "unknown_recall_minimum": 0.325,
+      "open_set_accuracy_mean": 0.55,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_sdf_coverage90_per_class": {
+      "known_coverage_mean": 0.875,
+      "known_coverage_minimum": 0.8666666666666667,
+      "unknown_recall_mean": 0.5083333333333334,
+      "unknown_recall_minimum": 0.225,
+      "open_set_accuracy_mean": 0.53125,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_metric_sdf": {
+      "known_coverage_mean": 0.5499999999999999,
+      "known_coverage_minimum": 0.09166666666666666,
+      "unknown_recall_mean": 0.5666666666666667,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.40208333333333335,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_metric_sdf_per_class": {
+      "known_coverage_mean": 0.7694444444444445,
+      "known_coverage_minimum": 0.5083333333333333,
+      "unknown_recall_mean": 0.5,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.5229166666666666,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_metric_sdf_coverage90": {
+      "known_coverage_mean": 0.9194444444444444,
+      "known_coverage_minimum": 0.8833333333333333,
+      "unknown_recall_mean": 0.5333333333333333,
+      "unknown_recall_minimum": 0.275,
+      "open_set_accuracy_mean": 0.56875,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "minimum_metric_sdf_coverage90_per_class": {
+      "known_coverage_mean": 0.8638888888888889,
+      "known_coverage_minimum": 0.85,
+      "unknown_recall_mean": 0.5083333333333333,
+      "unknown_recall_minimum": 0.2,
+      "open_set_accuracy_mean": 0.5229166666666667,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "sdf_energy": {
+      "known_coverage_mean": 0.561111111111111,
+      "known_coverage_minimum": 0.08333333333333333,
+      "unknown_recall_mean": 0.5416666666666666,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.39375,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "sdf_energy_per_class": {
+      "known_coverage_mean": 0.7722222222222223,
+      "known_coverage_minimum": 0.4666666666666667,
+      "unknown_recall_mean": 0.4916666666666667,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.5145833333333333,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "sdf_energy_coverage90": {
+      "known_coverage_mean": 0.8972222222222221,
+      "known_coverage_minimum": 0.8833333333333333,
+      "unknown_recall_mean": 0.5083333333333334,
+      "unknown_recall_minimum": 0.275,
+      "open_set_accuracy_mean": 0.5479166666666667,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "sdf_energy_coverage90_per_class": {
+      "known_coverage_mean": 0.8722222222222222,
+      "known_coverage_minimum": 0.8666666666666667,
+      "unknown_recall_mean": 0.5,
+      "unknown_recall_minimum": 0.2,
+      "open_set_accuracy_mean": 0.5312500000000001,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "maximum_probability": {
+      "known_coverage_mean": 0.11388888888888891,
+      "known_coverage_minimum": 0.008333333333333333,
+      "unknown_recall_mean": 0.9333333333333332,
+      "unknown_recall_minimum": 0.8,
+      "open_set_accuracy_mean": 0.31875,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "maximum_probability_per_class": {
+      "known_coverage_mean": 0.43888888888888894,
+      "known_coverage_minimum": 0.125,
+      "unknown_recall_mean": 0.7166666666666668,
+      "unknown_recall_minimum": 0.55,
+      "open_set_accuracy_mean": 0.425,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "maximum_probability_coverage90": {
+      "known_coverage_mean": 0.9166666666666666,
+      "known_coverage_minimum": 0.8333333333333334,
+      "unknown_recall_mean": 0.17500000000000002,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.5062500000000001,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "maximum_probability_coverage90_per_class": {
+      "known_coverage_mean": 0.8888888888888888,
+      "known_coverage_minimum": 0.8583333333333333,
+      "unknown_recall_mean": 0.24166666666666667,
+      "unknown_recall_minimum": 0.075,
+      "open_set_accuracy_mean": 0.5,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "mahalanobis": {
+      "known_coverage_mean": 0.48888888888888893,
+      "known_coverage_minimum": 0.058333333333333334,
+      "unknown_recall_mean": 0.5499999999999999,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.35833333333333334,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "mahalanobis_per_class": {
+      "known_coverage_mean": 0.6527777777777778,
+      "known_coverage_minimum": 0.38333333333333336,
+      "unknown_recall_mean": 0.5,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.4645833333333333,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "mahalanobis_coverage90": {
+      "known_coverage_mean": 0.8805555555555555,
+      "known_coverage_minimum": 0.8333333333333334,
+      "unknown_recall_mean": 0.4583333333333333,
+      "unknown_recall_minimum": 0.15,
+      "open_set_accuracy_mean": 0.5270833333333332,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "mahalanobis_coverage90_per_class": {
+      "known_coverage_mean": 0.8416666666666667,
+      "known_coverage_minimum": 0.7416666666666667,
+      "unknown_recall_mean": 0.47500000000000003,
+      "unknown_recall_minimum": 0.2,
+      "open_set_accuracy_mean": 0.5125000000000001,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "gmm_nll": {
+      "known_coverage_mean": 0.5499999999999999,
+      "known_coverage_minimum": 0.041666666666666664,
+      "unknown_recall_mean": 0.5499999999999999,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.3854166666666667,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "gmm_nll_per_class": {
+      "known_coverage_mean": 0.7527777777777778,
+      "known_coverage_minimum": 0.45,
+      "unknown_recall_mean": 0.4666666666666666,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.49374999999999997,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "gmm_nll_coverage90": {
+      "known_coverage_mean": 0.8833333333333334,
+      "known_coverage_minimum": 0.8083333333333333,
+      "unknown_recall_mean": 0.49999999999999994,
+      "unknown_recall_minimum": 0.325,
+      "open_set_accuracy_mean": 0.5375,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "gmm_nll_coverage90_per_class": {
+      "known_coverage_mean": 0.875,
+      "known_coverage_minimum": 0.8083333333333333,
+      "unknown_recall_mean": 0.5,
+      "unknown_recall_minimum": 0.275,
+      "open_set_accuracy_mean": 0.5375,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "knn_distance": {
+      "known_coverage_mean": 0.5527777777777777,
+      "known_coverage_minimum": 0.13333333333333333,
+      "unknown_recall_mean": 0.5499999999999999,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.3979166666666667,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "knn_distance_per_class": {
+      "known_coverage_mean": 0.7583333333333333,
+      "known_coverage_minimum": 0.5083333333333333,
+      "unknown_recall_mean": 0.4666666666666666,
+      "unknown_recall_minimum": 0.0,
+      "open_set_accuracy_mean": 0.5,
+      "episodes_passing_gate": 0,
+      "all_episodes_pass_gate": false
+    },
+    "knn_distance_coverage90": {
+      "known_coverage_mean": 0.9083333333333333,
+      "known_coverage_minimum": 0.875,
+      "unknown_recall_mean": 0.5,
+      "unknown_recall_minimum": 0.225,
+      "open_set_accuracy_mean": 0.55625,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    },
+    "knn_distance_coverage90_per_class": {
+      "known_coverage_mean": 0.8805555555555555,
+      "known_coverage_minimum": 0.8083333333333333,
+      "unknown_recall_mean": 0.4916666666666667,
+      "unknown_recall_minimum": 0.25,
+      "open_set_accuracy_mean": 0.5416666666666666,
+      "episodes_passing_gate": 1,
+      "all_episodes_pass_gate": false
+    }
+  },
+  "scores_passing_all_episodes": []
+}

@@ -1,0 +1,69 @@
+{
+  "milestone": "M160",
+  "title": "SMOKE: M160 schedule-sensitivity plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M160 / section 6 build entry (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (4000 train / 2000 test rows, 2 epochs per schedule, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 4000,
+  "_smoke_test_rows": 2000,
+  "_smoke_epochs": 2,
+  "question": "Does the M160 pipeline (r1 refit, three-schedule r3 loop, anchor checks) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "level": {
+    "n_train": 138000
+  },
+  "sparse": {
+    "spm_atoms": 1923,
+    "power": 0.5,
+    "grid": 27,
+    "dictionary_seed": 11,
+    "contrast_epsilon": 10.0,
+    "patch": 6,
+    "stride": 1,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "candidate_pool_size": 8192
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "schedule": {
+    "batch": 64,
+    "validation_fraction": 0.05
+  },
+  "schedules": [
+    { "name": "S0", "epochs": 8, "learning_rate": 3e-4, "weight_decay": 1e-4, "patience": 2, "note": "the sealed schedule (smoke trains 2 epochs)" },
+    { "name": "S1", "epochs": 16, "learning_rate": 3e-4, "weight_decay": 1e-4, "patience": 4, "note": "the more-epochs axis" },
+    { "name": "S2", "epochs": 8, "learning_rate": 3e-5, "weight_decay": 1e-4, "patience": 2, "note": "the different-LR axis" }
+  ],
+  "anchors": {
+    "r1_reference": 0.2273623188405797,
+    "r1_tolerance": 1e-06,
+    "r3_sealed": 0.10602898550724638,
+    "r3_tolerance": 0.005
+  },
+  "gate": {
+    "registered": "measuring stick: if any schedule's r3 clears r1, the price-of-freezing verdict is schedule-bound and M146's shipping selection reopens; if none does, the frozen verdict hardens."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m160_schedule_sensitivity_smoke"
+}

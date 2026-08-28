@@ -1,0 +1,50 @@
+{
+  "milestone": "M142",
+  "title": "Construction factorial screen - cell C1: power-normalisation on the sealed f6144 codes (free fit)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 Phase A / section 9 M142",
+  "registered_before_any_accuracy": true,
+  "question": "Does the classic signed-square-root + per-row L2 normalisation lift the sealed f6144 codes at matched cost?",
+  "registration_notes": {
+    "N99.1": "C1 is a FREE fit on the sealed M117 memmaps (never re-encoded). The transform is the Fisher-vector post-processing: y = sign(x)|x|^p then per-row L2 normalise.",
+    "N99.2": "Registered anchor: p=1.0 is the identity up to a positive per-row scale, and argmax is invariant to positive row scaling, so the p=1.0 ridge read MUST reproduce the sealed Q(6144, 138000) = 0.22487 within 0.002. This pins the transform arithmetic.",
+    "N99.3": "Reads per cell: ridge read (penalty ladder), trained-head read (SGD linear head, the co-adaptation control), and the closed-form joint grid (p x penalty).",
+    "N99.4": "Gate: the best (p, penalty) ridge read at the 138k level must beat 0.22487 + 0.005, else C1 is a scoped negative. The 207k level (sealed ext600 memmap, 69,000 rows reused) is reported alongside.",
+    "N99.5": "The full-data frontier gate (Q(6144, 409832) = 0.261362) is DEFERRED to the escalation cell: the full-data codes were never cached by M141 and need a fresh ~2h encode; only winners of this free screen are escalated.",
+    "N99.6": "Encode cells C2 (spatial-pyramid 1x1+2x2+4x4, 21 bins), C3 (multi-scale patches 3/5/7 with per-scale whiteners) and C4 (SPM + power-norm) are registered in this config's deferred_cells and NOT dispatched tonight.",
+    "N99.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576,
+    "ext600_relpath": "v16/m140",
+    "ext600_file": "f6144_ext600.npy"
+  },
+  "cell_c1": {
+    "p_ladder": [1.0, 0.5],
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "trained_epochs": 8,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "gate_registered": "fired if the best (p, penalty) ridge read at 138k < 0.22487 + 0.005, or the p=1.0 anchor misses by more than 0.002.",
+    "consequence_fired": "power-normalisation does not lift the sealed codes at matched cost; C1 is a scoped negative and C4 (SPM + power-norm) is re-prioritised behind the raw SPM cell.",
+    "consequence_passed": "power-normalisation lifts the sealed codes at matched cost; C1 is promoted and C4 (SPM + power-norm) moves up in the factorial."
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 16
+  },
+  "output_dir": "logs/results/v16/m142_factorial"
+}

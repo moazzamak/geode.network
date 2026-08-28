@@ -1,0 +1,19 @@
+{
+  "artifact_path": "logs/results/tier5_feature_outlier_confirmation.json",
+  "seeds": [11, 23, 37, 53, 71],
+  "dimensions": 6,
+  "class_count": 4,
+  "geometry_per_class": 100,
+  "calibration_per_class": 40,
+  "test_per_class": 200,
+  "center_radius": 2.5,
+  "mode_offset": 0.8,
+  "noise_scale": 0.9,
+  "max_iterations": 30,
+  "scenarios": [
+    {"name": "clean", "kind": "clean"},
+    {"name": "feature_outliers_d3", "kind": "feature_outliers", "rate": 0.10, "distance": 3.0},
+    {"name": "feature_outliers_d6", "kind": "feature_outliers", "rate": 0.10, "distance": 6.0},
+    {"name": "feature_outliers_d10", "kind": "feature_outliers", "rate": 0.10, "distance": 10.0}
+  ]
+}

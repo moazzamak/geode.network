@@ -1,0 +1,34 @@
+{
+  "milestone": "M149",
+  "title": "Group splitting (split-and-rebuild): transactional split of a task group into two closed-form specialists + fused readout, vs the incumbent and a random-split control",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 7 splitting / section 9 M149",
+  "registered_before_any_accuracy": true,
+  "question": "When a registered task group contains two subpopulations, can the registry split it into two closed-form specialists plus a fused readout without losing accuracy - and is the win real structure rather than an artefact of the proposal step?",
+  "registration_notes": {
+    "N98.1": "Input: the M143 cached score matrices (v16/m143/scores.npz), never recomputed. A group = the test rows of one domain (the incumbent specialist's group). The whole experiment runs on held-out rows, exactly like M143's stacking protocol.",
+    "N98.2": "Per group: rows split 50/50 (fit/eval, seeded per domain). Fit half: incumbent ridge on all fit rows; proposal = seeded 2-means over the standardised 2415-dim score vectors -> children X, Y; child ridges on their cluster rows; fusion = stacking over [X_scores, Y_scores] with the penalty ladder selected on a validation slice of the fit half.",
+    "N98.3": "Controls: a seeded RANDOM split runs the identical recipe; the split signal must beat it. Row floor: groups with fewer than 2 x floor fit rows or a degenerate cluster are SKIPPED, not failed (data starvation, E10).",
+    "N98.4": "Gate (kill switch): a domain PASSES iff fused(2-means) >= incumbent + margin AND fused(2-means) >= fused(random) on its eval half. M149 fires iff ZERO domains pass (the split operation has no measured room on these groups - a scoped negative); otherwise PASS with the per-domain table.",
+    "N98.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory.",
+    "N98.6": "Dated snapshot; all seeds, the ladder, the floor and the margin registered for byte-repeat."
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143"
+  },
+  "phase2": {
+    "split_seed": 33,
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "kmeans_seed": 77,
+    "random_seed": 88,
+    "penalty_ladder": [1, 10, 100, 1000]
+  },
+  "gate": {
+    "margin": 0.005,
+    "row_floor": 200,
+    "registered": "domain passes iff fused(2-means) >= incumbent + 0.005 AND fused(2-means) >= fused(random) on its eval half; fired iff ZERO domains pass.",
+    "consequence_fired": "the split operation has no measured room on these groups; M149 closes as a scoped negative and splitting stays registered but unproven on this corpus.",
+    "consequence_passed": "split-and-rebuild beats the incumbent on at least one domain and beats the random-split control: the registry split is a measured operation, promotable with its transactional gates."
+  },
+  "output_dir": "logs/results/v16/m149_group_split"
+}

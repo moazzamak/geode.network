@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "milestone": "M85",
+  "purpose": "Two sealed feature artifacts for M85's transfer arm: CIFAR-100 superclasses, the registered transfer corpus, and the resolution control N85.2 requires. Both are extracted through the same frozen DINOv2-small INT8 graph as the v13 corpus, at batch size one, on the CPU provider.",
+  "registration_notes": [
+    "N85.2 - the resolution control is not optional. The registered transfer corpus is 32x32 and the v13 corpus was filtered at 256px, and degrading corpus images to 32x32 costs 41 percent of nearest-class-mean accuracy while displacing a row 1.166 times the distance to its own class mean. A CIFAR-100 number alone would confound corpus with resolution. The degraded artifact holds the corpus's own held-out evaluation rows, the identical images, put through the identical graph at CIFAR-100's resolution, so the two effects separate.",
+    "N85.2a - only the evaluation rows are degraded, not the fit rows. The question is whether a dictionary fitted on native images survives low-resolution input, which is the same question CIFAR-100 asks. Degrading the fit set too would answer a different question and would silently repair the confound instead of measuring it.",
+    "N85.3 - the reproduction control is gating. Before the degraded features are written, a sample of the same evaluation rows is re-extracted natively and compared against the sealed corpus. It must agree to exactly zero. If it does not, this builder is not the instrument that built the corpus and nothing it produces is comparable to v13.",
+    "N85.7 - the 256px minimum short edge is waived for both artifacts, explicitly and for a stated reason, rather than being quietly absent. Every CIFAR-100 image is 32x32 and would fail the corpus filter; so, by construction, would every degraded row. The filter exists to keep the corpus's resolution uniform, and these artifacts exist precisely to vary it. The waiver applies to nothing else in v13."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's split, recomputed here so the degraded rows are exactly the rows M83, M84 and M85a read."
+  },
+  "degradation": {
+    "size": 32,
+    "resample": "bilinear",
+    "rationale": "CIFAR-100's native resolution, reached by the same PIL bilinear path the confound was measured with. The image is converted to RGB before resizing so that palette and greyscale sources degrade identically."
+  },
+  "cifar100": {
+    "source_path": "data/tier5/cifar100_superclass.npz",
+    "images_key": "images",
+    "labels_key": "coarse_labels",
+    "class_count": 20,
+    "samples_per_class": 500,
+    "sample_seed": 85200,
+    "rationale": "20 coarse superclasses at 500 images each. The superclass labels are used rather than the 100 fine labels because a 20-way task at 500 per class supports the 10-samples-per-fitted-dimension contract at every rank v13 uses, where a 100-way task at 100 per class would not."
+  },
+  "parquet_root": "D:/geode-ml/data/cache/domainnet/repository/data",
+  "minimum_native_short_edge": null,
+  "minimum_native_short_edge_waiver": "N85.7. Waived for these two artifacts only, because varying resolution is what they measure.",
+  "extraction_batch_size": 1,
+  "extraction_batch_size_rationale": "The frozen DINOv2-small INT8 graph derives activation scales from the whole input tensor, so above batch size one an image's features depend on its batch neighbours. Batch size one makes each artifact a function of (image, backbone) and lets extraction shard freely across processes.",
+  "execution_provider": "CPUExecutionProvider",
+  "worker_count": 14,
+  "dispatch_chunk_size": 512,
+  "backbone": {
+    "id": "dinov2-small",
+    "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+    "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+    "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+    "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "token_pooling_policy": "cls_token",
+    "output_dimension": 384
+  },
+  "reproduction_control": {
+    "description": "N85.3. Re-extract a sample of the corpus's own evaluation rows natively through this builder and compare against the sealed corpus features.",
+    "sample_rows": 256,
+    "sample_seed": 85300,
+    "maximum_absolute_difference": 0.0
+  },
+  "shard_invariance_control": {
+    "description": "Extract a probe set under two worker counts and require bitwise identity. Passes only if features are genuinely per-image, and is repeated here because these artifacts are extracted by different code from the corpus.",
+    "probe_images": 96,
+    "worker_counts": [3, 11],
+    "maximum_absolute_difference": 0.0
+  },
+  "output_dir": "logs/results/v13/m85_transfer",
+  "final_labels_opened": false
+}

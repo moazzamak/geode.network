@@ -1,0 +1,40 @@
+{
+  "_note": "engineering measurement of the instrument, NOT evidence; no corpus, no accuracy, no operand",
+  "onnxruntime": "1.24.4",
+  "providers": [
+    "DmlExecutionProvider",
+    "CPUExecutionProvider"
+  ],
+  "rows": [
+    {
+      "model": "small",
+      "resolution": 224,
+      "batch": 32,
+      "cpu_img_per_s": 33.919,
+      "dml_img_per_s": 336.469,
+      "speedup": 9.92,
+      "max_abs_difference": 0.00017642974853515625,
+      "max_relative_difference": 5.9571762108894475e-06
+    },
+    {
+      "model": "base",
+      "resolution": 224,
+      "batch": 32,
+      "cpu_img_per_s": 11.338,
+      "dml_img_per_s": 127.162,
+      "speedup": 11.215,
+      "max_abs_difference": 0.0026187896728515625,
+      "max_relative_difference": 0.00010068226349567646
+    },
+    {
+      "model": "large",
+      "resolution": 224,
+      "batch": 16,
+      "cpu_img_per_s": 3.052,
+      "dml_img_per_s": 40.711,
+      "speedup": 13.338,
+      "max_abs_difference": 0.016051769256591797,
+      "max_relative_difference": 0.001004534804864571
+    }
+  ]
+}

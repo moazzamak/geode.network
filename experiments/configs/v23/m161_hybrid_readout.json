@@ -1,0 +1,59 @@
+{
+  "milestone": "M161",
+  "title": "The hybrid readout: frozen ridge + one trained linear residual head on the C4 138k codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M161 / section 6 build entry (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the unmeasured middle — closed-form ridge + a small trained residual head on the same codes — beat either pure readout?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "level": {
+    "n_train": 138000,
+    "note": "the C4 138k context (the M146 level): the first 138,000 rows of the cached full-train codes"
+  },
+  "sparse": {
+    "spm_atoms": 1923,
+    "power": 0.5,
+    "note": "the M146 r2 construction for the residual head: HeadOnly (no hidden layer), frozen codes with power_norm"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "schedule": {
+    "batch": 64,
+    "epochs": 4,
+    "learning_rate": 3e-4,
+    "weight_decay": 1e-4,
+    "patience": 2,
+    "validation_fraction": 0.05,
+    "note": "the M109 shared schedule (AdamW, cosine), identical for the pure head and the hybrid"
+  },
+  "anchors": {
+    "ridge_reference": 0.2273623188405797,
+    "ridge_tolerance": 1e-06,
+    "note": "the frozen ridge read (p=0.5, penalty 1.0) is the anchor; the pure trained head is reported against the sealed r2 0.042608695652173914"
+  },
+  "gate": {
+    "registered": "hybrid >= ridge + 0.005 on the test rows, else archived as a scoped negative (the hybrid must also beat the pure trained head's read to be the best readout).",
+    "margin": 0.005,
+    "consequence_passed": "the hybrid beats both parents: the ridge's frozen knowledge and the trained residual are complementary.",
+    "consequence_fired": "the hybrid does not clear the margin: M161 closes as a scoped negative and the pure ridge stays the readout."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m161_hybrid_readout"
+}

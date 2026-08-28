@@ -1,0 +1,377 @@
+{
+  "advancement_gate": {
+    "accuracy_improved": false,
+    "accuracy_tolerance": 0.0025,
+    "accuracy_within_tolerance": true,
+    "negative_log_likelihood_improved": false,
+    "negative_log_likelihood_within_tolerance": true,
+    "nll_tolerance": 0.01,
+    "passed": false,
+    "scope": "stop M15.2 if false; otherwise advance to mixture weights"
+  },
+  "all_optimizers_converged": true,
+  "all_readouts_converged": true,
+  "calibration_nll_improvement": {
+    "mean": 0.0,
+    "per_seed": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "duplicate_retries": 0,
+  "grouped_test_results": {
+    "feature_control": {
+      "accuracy_mean": 0.8397500000000001,
+      "accuracy_std": 0.005295930041078726,
+      "brier_score_mean": 0.23072924789122728,
+      "brier_score_std": 0.0019720795292121466,
+      "expected_calibration_error_mean": 0.02078634183224602,
+      "expected_calibration_error_std": 0.008011178566241268,
+      "negative_log_likelihood_mean": 0.4653777532801688,
+      "negative_log_likelihood_std": 0.0071229286749692365,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "geometric": {
+      "accuracy_mean": 0.8393750000000001,
+      "accuracy_std": 0.004074501503251649,
+      "brier_score_mean": 0.23132717809383596,
+      "brier_score_std": 0.0017515425465756832,
+      "expected_calibration_error_mean": 0.019539651200262596,
+      "expected_calibration_error_std": 0.006352215102013398,
+      "negative_log_likelihood_mean": 0.46989827456066424,
+      "negative_log_likelihood_std": 0.005686005015936486,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid": {
+      "accuracy_mean": 0.837875,
+      "accuracy_std": 0.002404423007708939,
+      "brier_score_mean": 0.23139337026725215,
+      "brier_score_std": 0.0016497086599893023,
+      "expected_calibration_error_mean": 0.01871043972615181,
+      "expected_calibration_error_std": 0.0020094286535249075,
+      "negative_log_likelihood_mean": 0.4676281536034068,
+      "negative_log_likelihood_std": 0.005783552406450305,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid_global_temperature": {
+      "accuracy_mean": 0.8379999999999999,
+      "accuracy_std": 0.002977782312392911,
+      "brier_score_mean": 0.23143240878790783,
+      "brier_score_std": 0.0017846792781992988,
+      "expected_calibration_error_mean": 0.020284396566357343,
+      "expected_calibration_error_std": 0.0038950364034857957,
+      "negative_log_likelihood_mean": 0.4675356635702596,
+      "negative_log_likelihood_std": 0.005899511091059659,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid_per_class_temperature": {
+      "accuracy_mean": 0.8379999999999999,
+      "accuracy_std": 0.002977782312392911,
+      "brier_score_mean": 0.23143240878790783,
+      "brier_score_std": 0.0017846792781992988,
+      "expected_calibration_error_mean": 0.020284396566357343,
+      "expected_calibration_error_std": 0.0038950364034857957,
+      "negative_log_likelihood_mean": 0.4675356635702596,
+      "negative_log_likelihood_std": 0.005899511091059659,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic": {
+      "accuracy_mean": 0.8401249999999999,
+      "accuracy_std": 0.004537172853220397,
+      "brier_score_mean": 0.23200216280187885,
+      "brier_score_std": 0.0012003134964843854,
+      "expected_calibration_error_mean": 0.023893446547855555,
+      "expected_calibration_error_std": 0.008498119910323962,
+      "negative_log_likelihood_mean": 0.47061453827246247,
+      "negative_log_likelihood_std": 0.005039714234132567,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic_global_temperature": {
+      "accuracy_mean": 0.8391250000000001,
+      "accuracy_std": 0.0014388580541526367,
+      "brier_score_mean": 0.2311309386399057,
+      "brier_score_std": 0.0015405001303832092,
+      "expected_calibration_error_mean": 0.023147146384424288,
+      "expected_calibration_error_std": 0.006092946967821034,
+      "negative_log_likelihood_mean": 0.46798613352172475,
+      "negative_log_likelihood_std": 0.005565766655695822,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic_per_class_temperature": {
+      "accuracy_mean": 0.8391250000000001,
+      "accuracy_std": 0.0014388580541526367,
+      "brier_score_mean": 0.2311309386399057,
+      "brier_score_std": 0.0015405001303832092,
+      "expected_calibration_error_mean": 0.023147146384424288,
+      "expected_calibration_error_std": 0.006092946967821034,
+      "negative_log_likelihood_mean": 0.46798613352172475,
+      "negative_log_likelihood_std": 0.005565766655695822,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    }
+  },
+  "matched_frozen_models": true,
+  "paired_differences": {
+    "hybrid_per_class_temperature": {
+      "baseline": "hybrid_global_temperature",
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ],
+      "tuned_minus_accuracy": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_brier_score": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_expected_calibration_error": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_negative_log_likelihood": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "probabilistic_per_class_temperature": {
+      "baseline": "probabilistic_global_temperature",
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ],
+      "tuned_minus_accuracy": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_brier_score": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_expected_calibration_error": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "tuned_minus_negative_log_likelihood": {
+        "mean": 0.0,
+        "per_seed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "per_class_temperatures": [
+    {
+      "maximum": 2.633317184273339,
+      "mean": 2.6333171842733387,
+      "minimum": 2.633317184273339,
+      "seed": 11,
+      "values": [
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339,
+        2.633317184273339
+      ]
+    },
+    {
+      "maximum": 2.359172491576359,
+      "mean": 2.359172491576359,
+      "minimum": 2.359172491576359,
+      "seed": 23,
+      "values": [
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359,
+        2.359172491576359
+      ]
+    },
+    {
+      "maximum": 2.2901774709013027,
+      "mean": 2.2901774709013027,
+      "minimum": 2.2901774709013027,
+      "seed": 37,
+      "values": [
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027,
+        2.2901774709013027
+      ]
+    },
+    {
+      "maximum": 2.437461550660651,
+      "mean": 2.437461550660651,
+      "minimum": 2.437461550660651,
+      "seed": 53,
+      "values": [
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651,
+        2.437461550660651
+      ]
+    },
+    {
+      "maximum": 2.4151477308697666,
+      "mean": 2.4151477308697666,
+      "minimum": 2.4151477308697666,
+      "seed": 71,
+      "values": [
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666,
+        2.4151477308697666
+      ]
+    }
+  ],
+  "protocol": "tier4_per_class_covariance_temperature_dplus2",
+  "schema_version": 1,
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_winners": {
+    "geometric": 1,
+    "hybrid": 2,
+    "probabilistic_global_temperature": 2
+  },
+  "source_artifact": "logs/results/tier4_per_class_covariance_temperature_dplus2_runs.jsonl",
+  "source_rows": 5,
+  "sphere_seed_rule": "d_plus_2",
+  "test_used_for_selection": false,
+  "unique_experiments": 5
+}

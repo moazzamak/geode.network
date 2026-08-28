@@ -1,0 +1,44 @@
+{
+  "schema_version": 3,
+  "artifact": "V13-DOMAINNET-LARGE",
+  "purpose": "Enlarged native DomainNet feature corpus that makes the M78 sample-adequacy floor reachable.",
+  "class_count": 128,
+  "samples_per_class": 576,
+  "samples_per_class_rationale": "The v13 plan targeted 640 per class. A full extraction pass measured the actual availability of classes 0-127 in the DomainNet training shards after the 256-pixel short-edge filter, and three classes fall short of 640: class 65 yields 579, class 53 yields 603, class 96 yields 627. The uniform ceiling is therefore 579, and the target is set to 576. This still leaves 536 samples per class for geometry, which clears the registered floor of ten samples per fitted dimension at every rank up to 53.",
+  "minimum_native_short_edge": 256,
+  "extraction_batch_size": 1,
+  "dispatch_chunk_size": 512,
+  "execution_provider": "CPUExecutionProvider",
+  "extraction_rationale": {
+    "per_image_batching": "The frozen DINOv2-small INT8 graph contains 49 DynamicQuantizeLinear operators, which derive activation scales from the whole input tensor at run time. At any batch size above one a feature vector is therefore a function of which other images shared its batch, not of its own image alone. Extraction runs at batch size one so that the corpus is a well-defined function of (image, backbone), reproducible independently of how the work is partitioned.",
+    "cpu_only": "The DirectML provider disagrees with the CPU provider by 11.7 percent relative at batch size one, so the divergence lies in the quantized kernels themselves rather than in batch composition. The GPU cannot reproduce this backbone's features and is only 1.4x faster at batch size one, so extraction is CPU-only."
+  },
+  "domainnet_download_record": {
+    "path": "logs/results/e7_domainnet_download.json",
+    "sha256": "d2e8326e437e0e82eb524e29f70edb76773df017206758f406667a0319fcbf0b"
+  },
+  "backbone": {
+    "id": "dinov2-small",
+    "onnx_path": "data/v5/backbones/dinov2-small/onnx/model_int8.onnx",
+    "onnx_sha256": "e48d69984ee26d089e5c690cb39a727e38b95e2a525d7269f5ac366b02a6c22a",
+    "preprocessor_path": "data/v5/backbones/dinov2-small/preprocessor_config.json",
+    "preprocessor_sha256": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "token_pooling_policy": "cls_token",
+    "output_dimension": 384
+  },
+  "shard_invariance_control": {
+    "description": "Positive control for the extraction operand. The same probe images are extracted under different worker counts and different dispatch groupings. Per-image extraction is shard-invariant only if the batching dependence has actually been removed, so a non-zero difference here means the corpus is still a function of how it was chunked.",
+    "probe_images": 96,
+    "worker_counts": [1, 4],
+    "maximum_absolute_difference": 0.0
+  },
+  "m70_divergence_report": {
+    "description": "Reported, not gated. The sealed M70 corpus was extracted at batch size 32 and is therefore perturbed by batch composition. It cannot be reproduced by any enlarged corpus. This records the magnitude of that perturbation over the shared per-class prefix.",
+    "m70_index": {
+      "path": "logs/results/v12/m70_native_domainnet/artifact_index.json",
+      "sha256": "20c2dea882b41ecce8066f5b0d5468a8c9cff692686144e94f2d115ddf78b22a"
+    },
+    "samples_per_class": 100
+  },
+  "final_labels_opened": false
+}

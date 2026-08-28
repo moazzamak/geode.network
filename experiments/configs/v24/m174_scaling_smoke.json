@@ -1,0 +1,29 @@
+{
+  "milestone": "M174",
+  "title": "Q(n) scaling — SMOKE (inadmissible as evidence)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase D (M174)",
+  "registered_before_any_training": true,
+  "_smoke_note": "inadmissible: short encoder training and a truncated ladder, crash check only",
+  "_smoke_max": 1000,
+  "question": "Smoke: does the M174 runner run end-to-end without crashing?",
+  "interpretation_registered_before_running": {
+    "smoke": "inadmissible as evidence; only checks the pipeline runs"
+  },
+  "cell": {
+    "family": "delayed-coupling AR(5)",
+    "temporal_structure": "delayed",
+    "n_ladder": [200, 1000, 5000, 25000],
+    "train_frac": 0.6,
+    "window": 10,
+    "seed": 23
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 10,
+    "lr": 0.001,
+    "note": "10 steps only (smoke)"
+  },
+  "output_dir": "logs/results/v24/m174_scaling_smoke"
+}

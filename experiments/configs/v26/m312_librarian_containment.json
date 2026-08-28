@@ -1,0 +1,17 @@
+{
+  "milestone": "M312",
+  "title": "Librarian containment: force-inclusion queue, executable replacement, liveness statistics (A14)",
+  "question": "Do the registered repairs bound the librarian's censorship power: withholding invalidates the chain, replacement is executable, and a stopped librarian is publicly visible?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M312 (26 Aug 2026, before the build)",
+  "registered_notes": {
+    "force_inclusion": "R-A14a: any party posts directly to the settlement contract; incorporation within 1 epoch or the chain is invalid",
+    "replacement": "R-A14b: recorded reason + >= 0.5 of registered validators endorsing; deputy takes over next epoch",
+    "liveness": "R-A14c: anchor cadence and inclusion latency are measured public statistics"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "withholding an entry does not invalidate the chain, or a within-window incorporation is treated as invalid; VOID",
+    "c2_fails": "replacement fires without a reason or below threshold, or never fires at threshold; VOID",
+    "c3_fails": "a stopped librarian is not flagged or a healthy one reads unbounded; VOID",
+    "all_hold": "M312 PASS: librarian containment closes A14 at the registered cells"
+  }
+}

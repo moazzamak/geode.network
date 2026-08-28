@@ -1,0 +1,14 @@
+{
+  "milestone": "M186",
+  "cell": "pricing-oracle study",
+  "title": "Posted price vs second-price auction vs epsilon-greedy bandit on synthetic demand traces",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "rounds": 500,
+  "demand": {"n": 500, "arrival": 0.3, "seed": 9001},
+  "posted": {"price": 1.0, "seed": 9002},
+  "auction": {"seed": 9003},
+  "bandit": {"price_grid": [0.2, 0.5, 1.0, 2.0, 5.0], "epsilon": 0.1, "seed": 9004},
+  "scope_note": "synthetic-scenario study, not a claim about real demand",
+  "output_dir": "logs/results/v25/m186_pricing"
+}

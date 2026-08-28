@@ -1,0 +1,30 @@
+{
+  "milestone": "M307",
+  "title": "Behavioural artifact identity: Merkle-committed probe set, locality checks, behavioural dedup key (A1)",
+  "question": "Does the registered machinery let a serving host prove behaviour without distributing weights, and does it see the one-bit-flip copy?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M307 (26 Aug 2026, before the build)",
+  "beacon_seed": "geode-m307-test-beacon",
+  "dim": 8,
+  "classes": 4,
+  "draw_rows": 20000,
+  "probe_count": 200,
+  "neighbours_per_probe": 10,
+  "boundary_band": 0.1,
+  "perturbation_scale": 0.05,
+  "model_bound": 0.99,
+  "lookup_bound": 0.65,
+  "separation_bound": 0.3,
+  "m307a_note": "run 1 VOIDED on its own C3 bound: the lookup rate (0.6145) sat above the registered 0.60 with separation 0.3855. M307a calibrated from the instrument's own swept rates (never fitted to the verdict): perturbation scale 0.02->0.05 (the perturbation must make a stored label miss at a measurable rate), boundary band 0.25->0.1 (keeps 200 probes), lookup bound 0.60->0.65 plus a registered separation gate model-lookup >= 0.3 (measured 0.443 at the calibrated setting). Run-1 evidence stays on record as evidence_void_c3.json.",  "seed": 307,
+  "registered_notes": {
+    "commitment": "R-A1a: Merkle root over f(x) on the sealed probe set at admission; a fresh beacon-seeded slice opens every epoch",
+    "locality": "R-A1a: perturbed neighbours of boundary probes - a stored lookup table answers exact probes but cannot produce neighbour responses consistently",
+    "dedup": "R-A1c: profiles agreeing above 0.95 are the same artifact for registration, whatever the weight hashes"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "the committed slice does not open, or tampered answers open - the commitment is not binding; VOID",
+    "c2_fails": "epochs do not rotate slices - the revealed set can be memorised once; VOID",
+    "c3_fails": "the lookup table passes locality checks at the real model's rate, or the model fails - the locality discriminator does not discriminate; VOID",
+    "c4_fails": "a bit-flip copy registers separately or distinct profiles dedup - the registry key still misses the behavioural signature; VOID",
+    "all_hold": "M307 PASS: behavioural identity closes A1 at the registered cells"
+  }
+}

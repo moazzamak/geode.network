@@ -1,0 +1,32 @@
+{
+  "protocol": {
+    "evaluation_count": 2401,
+    "target_class": 0,
+    "untouched_classes": [
+      1,
+      2
+    ],
+    "evaluation_used_for_fitting": false
+  },
+  "prediction_changes": {
+    "insertion": 329,
+    "deletion_relative_to_inserted": 329,
+    "nudge": 186
+  },
+  "latency_seconds": {
+    "point_fitted_insertion": 7.510000432375818e-05,
+    "deletion": 1.5999976312741637e-06,
+    "rollback": 5.6599994422867894e-05,
+    "local_nudge": 0.00042100000428035855
+  },
+  "checks": {
+    "insertion_changed_predictions": true,
+    "insertion_untouched_class_sdf_bitwise_stable": true,
+    "deletion_restored_predictions": true,
+    "deletion_untouched_class_sdf_bitwise_stable": true,
+    "rollback_exact_snapshot": true,
+    "rollback_restored_predictions": true,
+    "nudge_untouched_class_sdf_bitwise_stable": true
+  },
+  "audit_record_count": 5
+}

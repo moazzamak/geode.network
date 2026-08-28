@@ -1,0 +1,34 @@
+{
+  "milestone": "M164",
+  "title": "Buildout-blocker literature search (M164 instrument, first dispatch)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M164 / section 6 dispatch entry (17 Aug 2026)",
+  "registered_before_any_search": true,
+  "question": "Which of the registered buildout blockers (v24 section 9 L1-L7, plus the v24/v25 open items) already have published solutions?",
+  "role": "displacement only: an unauthenticated public search cannot support novelty claims. Hits can displace or inform registered claims; absence proves nothing.",
+  "endpoint": "https://export.arxiv.org/api/query",
+  "max_results_per_query": 10,
+  "retries": 3,
+  "backoff_seconds_base": 2.0,
+  "gate": {
+    "anchor_rule": "every anchor query must return at least one hit in stage 1 (AND of quoted abs: phrases). If any anchor misses, stage 2 re-runs ALL queries uniformly with OR of the same phrases (never only the empty ones). If any anchor still misses after stage 2, the whole search is VOID for claims.",
+    "rate_limit_rule": "HTTP 429 responses are retried with exponential backoff and recorded separately from genuinely empty results."
+  },
+  "queries": [
+    {"id": "a1", "kind": "anchor", "blocker": "task fingerprinting", "phrases": ["task embedding", "transfer learning"], "note": "the task-embedding literature (Task2Vec/Taskonomy territory)"},
+    {"id": "a2", "kind": "anchor", "blocker": "behavioral transfer labels", "phrases": ["transferability", "representation"], "note": "transferability measures (LEEP/LogME territory)"},
+    {"id": "a3", "kind": "anchor", "blocker": "better codes", "phrases": ["fisher vector", "classification"], "note": "Fisher vectors for image classification"},
+    {"id": "a4", "kind": "anchor", "blocker": "L4 fit wall", "phrases": ["kernel ridge regression", "large"], "note": "large-scale closed-form kernel ridge (Falkon territory)"},
+    {"id": "a5", "kind": "anchor", "blocker": "Track P provability", "phrases": ["zero knowledge", "neural network"], "note": "zk proofs for neural inference (zkCNN territory)"},
+    {"id": "a6", "kind": "anchor", "blocker": "v25 attribution", "phrases": ["data valuation", "machine learning"], "note": "data valuation (Data Shapley territory)"},
+    {"id": "b1", "kind": "blocker", "blocker": "L1 better codes", "phrases": ["spatial pyramid", "convolutional"], "note": "is deep-patch SPM (M176c candidate 1) already published?"},
+    {"id": "b2", "kind": "blocker", "blocker": "L1 better codes", "phrases": ["dictionary learning", "image classification"], "note": "learned patch dictionaries for classification (M113 context)"},
+    {"id": "b3", "kind": "blocker", "blocker": "L4 fit wall", "phrases": ["ridge regression", "iterative solver"], "note": "iterative solvers for large ridge systems (LSQR territory)"},
+    {"id": "b4", "kind": "blocker", "blocker": "routing", "phrases": ["mixture of experts", "task"], "note": "task-specialist MoE routing"},
+    {"id": "b5", "kind": "blocker", "blocker": "behavioral transfer labels", "phrases": ["transferability metric"], "note": "cheap transferability metrics for the label protocol (M167)"},
+    {"id": "b6", "kind": "blocker", "blocker": "ontology bootstrap", "phrases": ["large language model", "task taxonomy"], "note": "LLM-generated task taxonomies (v24 section 3.2)"},
+    {"id": "b7", "kind": "blocker", "blocker": "Track P MPC fit", "phrases": ["secret sharing", "regression"], "note": "MPC/secret-shared linear fits (M192 territory)"},
+    {"id": "b8", "kind": "blocker", "blocker": "L1 ceiling probe", "phrases": ["linear probe", "frozen"], "note": "probes on frozen features (M176a context)"},
+    {"id": "b9", "kind": "blocker", "blocker": "M162 context", "phrases": ["pruning", "retraining"], "note": "prune-then-retrain literature (M162 verdict context)"},
+    {"id": "b10", "kind": "blocker", "blocker": "v25 attribution", "phrases": ["shapley", "machine learning"], "note": "Shapley attribution for ML (M180 territory)"}
+  ]
+}

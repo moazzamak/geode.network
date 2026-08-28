@@ -1,0 +1,25 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+anchor V_ms 0.242144927536232 delta +0.000e+00
+g2 field Gram bit-exact vs quantized plaintext: True
+g1 all 2-of-3 pairs reconstruct row bit-exact: True
+g3 quantization fidelity rel 7.010e-09
+g4 share corr -0.0139 mean-frac 0.0013 std-frac 0.0031
+{
+ "anchor_ok": true,
+ "gates": {
+  "g1_pair_reconstruction": true,
+  "g2_field_gram_exact": true,
+  "g3_fidelity": {
+   "rel": 7.009990745322312e-09,
+   "ok": true
+  },
+  "g4_uniformity": {
+   "corr": 0.013943811918419199,
+   "mean_frac": 0.0012953198677828626,
+   "std_frac": 0.003057909697758543,
+   "ok": true
+  }
+ },
+ "gates_ok": true
+}
+M192b complete -> logs\results\v25\m192b_all_random_gram\evidence.json

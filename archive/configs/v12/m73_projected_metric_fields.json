@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "milestone": "M73",
+  "seed": 11,
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "geometry_fraction": 0.8,
+  "projection_dimension": 64,
+  "rank": 32,
+  "miscoverage": 0.08,
+  "training": {
+    "epochs": 24,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "classification_temperature": 2.0,
+    "target_score": 1.0,
+    "separation_margin": 1.0,
+    "probe_margin_multiplier": 2.0,
+    "loss_weights": {
+      "classification": 1.0,
+      "eikonal": 0.01,
+      "probe": 1.0,
+      "distribution": 0.1,
+      "separation": 0.1
+    },
+    "collapse_weight": 10.0,
+    "ablation_collapse_weight": 0.0,
+    "trained_probe_families": [
+      "axis_tangent",
+      "normal",
+      "masking",
+      "random_direction"
+    ],
+    "held_out_probe_families": ["corner_tangent", "mixed"]
+  },
+  "gate": {
+    "maximum_median_threshold_ratio": 2.0,
+    "minimum_accuracy_improvement_over_m72": 0.005,
+    "minimum_held_out_four_x_reduction_over_m72": 0.10,
+    "maximum_relative_distance_drift_fraction_vs_ablation": 0.80,
+    "maximum_row_orthogonality_error_fraction_vs_ablation": 0.80,
+    "require_full_projection_rank": true,
+    "material_improvement_operator": "accuracy_or_held_out_probe"
+  },
+  "source_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m72_index": {
+    "path": "logs/results/v12/m72_metric_field_stage0/artifact_index.json",
+    "sha256": "c4a4701cba5fdf899fb7c75d7416279b8b5998d105774a5fe5adc1bf3b64bce6"
+  },
+  "final_labels_opened": false
+}

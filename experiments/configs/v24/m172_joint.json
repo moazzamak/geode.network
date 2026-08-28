@@ -1,0 +1,37 @@
+{
+  "milestone": "M172",
+  "title": "Multi-task differentiation cell: A/B/A+B/B+A (fingerprint-level routing)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase C (M172) / section 6 capability 8",
+  "registered_before_any_training": true,
+  "question": "Do the two pure tasks get distinct fingerprints, and do the two joint descriptors route distinguishably to the dominant side's arm (not to an unrelated arm)?",
+  "interpretation_registered_before_running": {
+    "premise_fail": "VOID — the M171 evidence is inadmissible or the rebuilt encoder drifted",
+    "G5a_fail": "the fingerprint cannot separate the two pure tasks under ontology v0 — scoped negative, ontology axis gap",
+    "G5b_fail": "the two joint descriptors collapse in fingerprint space",
+    "G5c_fail": "joint tasks route identically — not distinguishable",
+    "G5d_fail": "a joint task routes to the wrong dominant side",
+    "G5e_fail": "a joint task routes to an unrelated arm",
+    "note": "no mixture arm exists in the MVP by registration; routing is task-level (fingerprint), not row-level"
+  },
+  "cell": {
+    "A": "mackey_glass",
+    "B": "dyck",
+    "C": "tabular",
+    "A+B": "mackey_glass axes + coupling=mixture",
+    "B+A": "dyck axes + coupling=mixture"
+  },
+  "thresholds": {
+    "g5a_cos": 0.9,
+    "g5b_cos": 0.99,
+    "fingerprint_equivalence_min_cos": 1.0
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 300,
+    "lr": 0.001,
+    "note": "the sealed M169 encoder, rebuilt deterministically (equivalence-gated against M171 evidence)"
+  },
+  "output_dir": "logs/results/v24/m172_joint"
+}

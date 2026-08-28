@@ -1,0 +1,94 @@
+{
+  "milestone": "m87_prior_art_audit",
+  "program": "v13 post-hoc targeted prior-art audit",
+  "registration_notes": {
+    "N87.1": "This audit may only narrow or withdraw a v13 claim, never promote one. v13 evidence is sealed and its ledger is closed.",
+    "N87.2": "There is no 'novel' verdict. Outcomes are displaced, narrowed, unresolved. Absence of a located source is unresolved, not new.",
+    "N87.3": "The claim list is closed at the registration commit. No claim may be added, removed, reworded or split after the first query runs.",
+    "N87.4": "Query families are phrased to find work that would displace each claim, not work that agrees with it.",
+    "N87.5": "Searching stops when the registered families are exhausted, not when a satisfying answer appears. Empty queries still record their counts.",
+    "N87.6": "Title and abstract mark a source live. Only primary text with a located passage may displace or narrow.",
+    "N87.7": "The audit measures nothing. Every v13 figure it quotes is transcribed from sealed evidence and hash-cited.",
+    "N87.8": "This evidence is a dated snapshot and is NOT replayable. Unlike every other v13 artifact, re-running it later will return different records because the indexes change and the network is not a sealed corpus. The run records its date and the exact query strings so a reader can repeat the search, not so the bytes can be reproduced. No downstream check may treat this file as byte-reproducible.",
+    "N87.9": "Three instrument defects were found and repaired before the audited run: arXiv exact-phrase syntax returned zero for every query including the anchors; term conjunction alone was too strict, so a fixed two-stage AND-then-OR rule now applies uniformly to every query; and Semantic Scholar rate-limiting was being recorded as emptiness, so retries were added and residual failures are recorded in failed_queries rather than counted as empty. The repaired instrument re-runs every registered query, not only the ones that returned nothing."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "outlier exposure out-of-distribution detection",
+    "generalized category discovery",
+    "sparse autoencoder interpretability features"
+  ],
+  "claims": {
+    "C1": {
+      "statement": "Outlier exposure degrades rather than improves rejection for a union of per-class density models.",
+      "queries": [
+        "outlier exposure degrades out-of-distribution detection",
+        "outlier exposure harmful negative result OOD",
+        "outlier exposure Mahalanobis class conditional Gaussian",
+        "class conditional density model outlier exposure training",
+        "one-class classifier per class outlier exposure failure",
+        "union of acceptance regions open set rejection",
+        "per-class ellipsoid novelty rejection multiclass",
+        "outlier exposure fails distance based OOD detector"
+      ]
+    },
+    "C2": {
+      "statement": "Domain-pooled OOD AUROC conceals within-domain performance; the pooled score separates domain rather than novelty.",
+      "queries": [
+        "Simpson's paradox AUROC evaluation",
+        "pooled versus stratified AUROC subgroup evaluation",
+        "out-of-distribution detection evaluation domain confound AUROC",
+        "group conditional AUROC out-of-distribution detection",
+        "subpopulation reversal AUROC aggregation artifact",
+        "AUROC pooling across datasets misleading OOD benchmark"
+      ]
+    },
+    "C3": {
+      "statement": "Cross-corpus representation transfer loss is attributable to input resolution rather than corpus identity, isolated by a degraded-resolution control arm.",
+      "queries": [
+        "image resolution confound frozen features transfer learning",
+        "input resolution domain shift representation quality vision transformer",
+        "low resolution CIFAR upsampling ViT feature degradation",
+        "dictionary learning transfer across datasets resolution control",
+        "resolution matched control transfer evaluation confound",
+        "sparse coding dictionary generalization unseen dataset"
+      ]
+    },
+    "C4": {
+      "statement": "Exemplar-mediated concept naming channels are not independent, so their agreement cannot evidence naming correctness.",
+      "queries": [
+        "concept naming top activating exemplars confound",
+        "automated concept interpretation independence validation",
+        "network dissection critique interpretability labels unreliable",
+        "concept bottleneck naming validation without joint text space",
+        "automated neuron labeling evaluation agreement misleading",
+        "sparse autoencoder feature naming reliability critique"
+      ]
+    },
+    "C5": {
+      "statement": "Simulatability metrics require a null explanation matched in structure, citation budget and split.",
+      "queries": [
+        "simulatability forward simulation evaluation control baseline",
+        "randomized explanation baseline interpretability evaluation",
+        "sanity checks saliency maps randomization",
+        "null model explanation evaluation control interpretability",
+        "forward simulation human study explanation baseline",
+        "shuffled explanation control interpretability metric"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v13/m87_prior_art_audit"
+}

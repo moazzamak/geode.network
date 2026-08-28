@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\diag_m182_rung138k.py", line 51, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\diag_m182_rung138k.py", line 46, in main
+    f"{[round(v, 6) for v in r['per_domain_correct']['1.0'].tolist()]}",
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'tolist'

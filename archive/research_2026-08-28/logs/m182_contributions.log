@@ -1,0 +1,11 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+schedule rows: 409832; test 34500
+Q(n) ladder
+  n=34500: 0.0905797101
+  n=69000: 0.1524927536
+  n=138000: 0.2246086957
+    anchor n=138000: delta -2.609e-04 ok=False
+  n=276000: 0.2248695652
+  n=409832: 0.2613623188
+    anchor n=409832: delta +0.000e+00 ok=True

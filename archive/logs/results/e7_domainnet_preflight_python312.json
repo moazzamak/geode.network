@@ -1,0 +1,82 @@
+{
+  "blockers": [
+    "ray_cluster_has_insufficient_nodes"
+  ],
+  "environment": {
+    "data_cache_root": "D:\\geode-ml\\data\\cache",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10"
+  },
+  "full_run": {
+    "attempted": false,
+    "complete_histories": false,
+    "reason": "preflight blockers must be resolved first"
+  },
+  "gate_passed": false,
+  "manifest": {
+    "class_count": 345,
+    "domains": [
+      "clipart",
+      "infograph",
+      "painting",
+      "quickdraw",
+      "real",
+      "sketch"
+    ],
+    "source_repository": "wltjr1007/DomainNet",
+    "source_revision": "ee20570ae7a29c51571e55a9a17983f7625295d6",
+    "split_samples": {
+      "test": 176743,
+      "train": 409832
+    },
+    "total_declared_samples": 586575,
+    "total_verified_bytes": 18521436207,
+    "verified_files": [
+      "data/test-00000-of-00001.parquet",
+      "data/train-00000-of-00003.parquet",
+      "data/train-00001-of-00003.parquet",
+      "data/train-00002-of-00003.parquet"
+    ],
+    "version": "huggingface-parquet-v1"
+  },
+  "milestone": "E7",
+  "model_selection": {
+    "final_domains": [
+      "sketch"
+    ],
+    "primary_metric": "balanced_accuracy",
+    "selection_rule": "maximize source-held-out mean balanced accuracy on clipart only",
+    "validation_domains": [
+      "clipart"
+    ]
+  },
+  "proxy_results_used_as_flagship": false,
+  "qualification_status": "blocked",
+  "ray": {
+    "available": true,
+    "resource_report": {
+      "address": "127.0.0.1:60971",
+      "available_resources": {
+        "CPU": 16.0,
+        "memory": 23599315354.0,
+        "node:127.0.0.1": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 10113992294.0
+      },
+      "cluster_resources": {
+        "CPU": 16.0,
+        "memory": 23599315354.0,
+        "node:127.0.0.1": 1.0,
+        "node:__internal_head__": 1.0,
+        "object_store_memory": 10113992294.0
+      },
+      "nodes": 1
+    },
+    "worker_loss_recovery": {
+      "attempted": false,
+      "passed": false,
+      "reason": "not attempted until minimum Ray node count is satisfied"
+    }
+  },
+  "schema_version": 1
+}

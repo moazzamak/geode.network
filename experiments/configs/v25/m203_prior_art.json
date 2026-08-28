@@ -1,0 +1,67 @@
+{
+  "endpoint": "http://export.arxiv.org/api/query",
+  "max_results_per_query": 20,
+  "retries": 3,
+  "backoff_seconds_base": 2.0,
+  "sleep_between_queries_seconds": 3.2,
+  "question": "Prior art for the GEODE hardening stack (C5): private/verifiable inference, DNN copy protection, PQ crypto, and anonymous anti-abuse mechanisms. Role: DISPLACEMENT ONLY.",
+  "role": "Displacement only — an unauthenticated public search cannot support novelty claims (M88). It can only find displacing work.",
+  "gate": "Anchor gate: every anchor query must return at least one hit after both stages (AND of quoted abs: phrases, then a uniform OR re-run of ALL queries). An anchor that misses voids the search for all claims. A 429 recorded separately from a genuine empty result.",
+  "queries": [
+    {
+      "id": "anchor_iron",
+      "kind": "anchor",
+      "phrases": ["private inference", "transformers", "secret sharing"]
+    },
+    {
+      "id": "anchor_bolt",
+      "kind": "anchor",
+      "phrases": ["private inference", "GPU", "throughput"]
+    },
+    {
+      "id": "anchor_fss_regression",
+      "kind": "anchor",
+      "phrases": ["function secret sharing", "logistic regression", "training"]
+    },
+    {
+      "id": "anchor_mpc_ml_framework",
+      "kind": "anchor",
+      "phrases": ["secure multi-party computation", "machine learning", "framework"]
+    },
+    {
+      "id": "anchor_pq_signatures",
+      "kind": "anchor",
+      "phrases": ["post-quantum", "signatures", "lattice"]
+    },
+    {
+      "id": "anchor_fhe_inference",
+      "kind": "anchor",
+      "phrases": ["fully homomorphic encryption", "neural network", "inference"]
+    },
+    {
+      "id": "disc_model_extraction",
+      "kind": "discovery",
+      "phrases": ["model extraction", "query", "attack"]
+    },
+    {
+      "id": "disc_watermarking",
+      "kind": "discovery",
+      "phrases": ["deep learning model", "watermarking", "protection"]
+    },
+    {
+      "id": "disc_anti_sybil_anonymous",
+      "kind": "discovery",
+      "phrases": ["sybil", "blockchain", "incentive", "anonymous"]
+    },
+    {
+      "id": "disc_wash_trading",
+      "kind": "discovery",
+      "phrases": ["wash trading", "decentralized", "detection"]
+    },
+    {
+      "id": "disc_verifiable_inference",
+      "kind": "discovery",
+      "phrases": ["verifiable", "machine learning", "zero-knowledge"]
+    }
+  ]
+}

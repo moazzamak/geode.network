@@ -1,0 +1,85 @@
+{
+  "milestone": "M108-smoke",
+  "title": "M108 instrument smoke test — INADMISSIBLE AS EVIDENCE",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v16.md section 5.1",
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Eight rows per class, two atom budgets and a 64-atom candidate pool, so the whole instrument runs end to end in minutes. Every accuracy it produces is below anything meaningful and every sample floor it reports is violated. Its only job is to prove the code paths execute, the parity check runs, the digests are stable, the gate evaluates and the artifacts are well formed. The runner REFUSES to let this config write to the sealed directory.",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 8,
+    "test_rows_per_class": 2,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 16,
+    "expected_subsample_sha256": null
+  },
+  "domains": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 20000,
+    "zca_fit_seed": 11
+  },
+  "sparse": {
+    "budgets": [8, 16],
+    "dictionary_seed": 11,
+    "candidate_pool_size": 64
+  },
+  "selection": {
+    "arm": "c_discriminative",
+    "selection_rows": 400,
+    "selection_seed": 11,
+    "parity_subset_rows": 200,
+    "parity_budget": 16
+  },
+  "ridge_leverage": {
+    "arm": "e_ridge_leverage",
+    "penalty": 1.0,
+    "seed": 11,
+    "top_budget": 16
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [1.0, 100.0],
+    "selection_validation_fraction": 0.1,
+    "selection_arm": "a_random_8",
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_floor_note": "SMOKE ONLY. At eight rows per class almost every arm here is below the floor and will be voided, which is itself the point: the smoke proves the floor VOIDS arms rather than merely reporting them."
+  },
+  "arm_a_reproduction": {
+    "source": "logs/results/v15/m107_dense/evidence.json",
+    "tolerance_accuracy": 0.002,
+    "_smoke_only_note": "The smoke corpus differs from M107's, so the reproduction gate is expected to FAIL here (it compares against M107's 138,000-row subsample figures). The smoke's job is to prove the gate EXECUTES and voids the run correctly, not to pass it."
+  },
+  "kill_switch_3_dense_source": {
+    "path": "logs/results/v15/m107_dense/evidence.json"
+  },
+  "gate": {
+    "registered_prediction": "SMOKE ONLY — no prediction is read from a smoke run.",
+    "kill_switch_1": "SMOKE ONLY.",
+    "kill_switch_2": "SMOKE ONLY.",
+    "kill_switch_3": "SMOKE ONLY."
+  },
+  "device": {
+    "encode": "cuda",
+    "selection": "cuda",
+    "leverage": "cpu",
+    "whiten": "cpu",
+    "ridge": "cpu"
+  },
+  "gap_closing": {
+    "dense_reference_arm": "d1_small_224",
+    "dense_reference_accuracy": 0.5375,
+    "_smoke_only_note": "SMOKE ONLY. The gap-closing fraction is computed but is inadmissible, like every smoke figure; the smoke's job is to prove the computation executes and serialises."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16
+  },
+  "_amendments": []
+}

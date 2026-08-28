@@ -1,0 +1,18 @@
+{
+  "artifact_path": "logs/results/tier5_editability_scaling_smoke.json",
+  "seed": 101,
+  "repeat_count": 1,
+  "evaluation_count": 32,
+  "update_point_count": 12,
+  "enforce_exit_gate": true,
+  "baseline": {
+    "class_count": 8,
+    "dimensions": 8,
+    "primitives_per_class": 8
+  },
+  "sweeps": {
+    "class_count": [2, 8, 32, 128],
+    "dimensions": [2, 8, 32, 128],
+    "primitives_per_class": [1, 8, 32, 128]
+  }
+}

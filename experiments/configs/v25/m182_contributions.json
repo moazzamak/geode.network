@@ -1,0 +1,38 @@
+{
+  "milestone": "M182",
+  "title": "Data-contribution measurement: Q(n) marginal ladder + group leave-one-domain-out on the sealed f6144 codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026 design; dispatched after M180)",
+  "registered_before_any_accuracy": true,
+  "question": "How steep is the Q(n) marginal ladder at full scale, and what does each domain's data contribute at the margin?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy"
+  },
+  "ladder": {
+    "rungs": [34500, 69000, 138000, 276000, 409832],
+    "schedule_note": "prefixes of the M141 cell-2 row schedule: m117 138k subsample, m140 ext600 69k, m141 all-rest 202,832",
+    "anchors": {
+      "138000": {
+        "value": 0.2248695652173913,
+        "source": "M117 exact Q(6144, 138000)"
+      },
+      "409832": {
+        "value": 0.2613623188405797,
+        "source": "M155/M142 t2 exact Q(6144, 409832)"
+      }
+    }
+  },
+  "output_dir": "logs/results/v25/m182_contributions"
+}

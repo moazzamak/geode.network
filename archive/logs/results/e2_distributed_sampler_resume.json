@@ -1,0 +1,84 @@
+{
+  "epochs": 4,
+  "full_disjoint_coverage": true,
+  "performance_claim": false,
+  "ranks": [
+    {
+      "final_global_step": 8,
+      "history_exact": true,
+      "model_exact": true,
+      "optimizer_exact": true,
+      "rank": 0,
+      "rank_mismatch_rejected": true,
+      "resumed_from_epoch": 2,
+      "scheduler_exact": true,
+      "shards": [
+        [
+          7,
+          5,
+          1,
+          2
+        ],
+        [
+          0,
+          5,
+          7,
+          1
+        ],
+        [
+          2,
+          4,
+          6,
+          0
+        ],
+        [
+          0,
+          3,
+          5,
+          1
+        ]
+      ]
+    },
+    {
+      "final_global_step": 8,
+      "history_exact": true,
+      "model_exact": true,
+      "optimizer_exact": true,
+      "rank": 1,
+      "rank_mismatch_rejected": true,
+      "resumed_from_epoch": 2,
+      "scheduler_exact": true,
+      "shards": [
+        [
+          4,
+          0,
+          6,
+          3
+        ],
+        [
+          6,
+          4,
+          3,
+          2
+        ],
+        [
+          3,
+          5,
+          1,
+          7
+        ],
+        [
+          6,
+          4,
+          2,
+          7
+        ]
+      ]
+    }
+  ],
+  "run_id": "e2-distributed-sampler-smoke",
+  "sampler": "torch.utils.data.DistributedSampler",
+  "schema_version": 1,
+  "torch_version": "2.13.0+cpu",
+  "world_size": 2
+}

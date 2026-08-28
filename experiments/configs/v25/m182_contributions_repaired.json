@@ -1,0 +1,48 @@
+{
+  "milestone": "M182",
+  "title": "Data-contribution measurement (REPAIRED RUN): Q(n) marginal ladder + group leave-one-domain-out on the sealed f6144 codes with the registered tail repair",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026 design; repair registered 19 Aug before this re-run)",
+  "registered_before_any_accuracy": true,
+  "question": "How steep is the Q(n) marginal ladder at full scale, and what does each domain's data contribute at the margin?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy"
+  },
+  "ladder": {
+    "rungs": [34500, 69000, 138000, 276000, 409832],
+    "schedule_note": "prefixes of the M141 cell-2 row schedule: m117 138k subsample, m140 ext600 69k, m141 all-rest 202,832",
+    "anchors": {
+      "138000": {
+        "value": 0.2248695652173913,
+        "source": "M117 exact Q(6144, 138000)"
+      },
+      "409832": {
+        "value": 0.2613623188405797,
+        "source": "M155/M142 t2 exact Q(6144, 409832)"
+      }
+    }
+  },
+  "repair": {
+    "note": "REGISTERED REPAIR (plan execution log, 19 Aug): the first run's rung-138000 anchor missed by -2.609e-4. Localised cause: v16/m117/f6144_train.npy rows 137749:137999 corrupt (row 137749 partially written, 137750:137999 all-zero) - the signature of an interrupted write. Bit-exact M117-pipeline re-encode verified rows 0:256, 34400:34656, 68800:69056, 103200:103456 at delta 0.0. Repair = in-memory overlay substituting rows 137749:138000 of part 1 from a fresh M117-pipeline encode patch (25 MB; no full-file copy: F: out of space). The rung-138000 anchor is judged on this repaired view; failure to reproduce voids rung 138000 by anchor (forensic milestone), and the original corrupt cache is preserved as evidence.",
+    "patch_relpath": "v16/m117/f6144_train_patch.npy",
+    "patch_start": 137749,
+    "rows": 251,
+    "original_sha256": "d7a0597da2f3130fb43a7ccb795a19b347dcb5e8ac691b6345a375f5885cf057",
+    "test_sha256": "1ef8499c7918289e749564ee59ddd9e59f770d66fb0d2ca3d99d6c48b9411b70",
+    "patch_sha256": "616880017ea8a2d0792d5c7126d66efa6c250c5183944d3e831a1796c87f28f8",
+    "patch_sha256_note": "digest of the .npy FILE (numpy header included); the first registration mistakenly recorded the raw-array-bytes digest and the gate refused the run - corrected before any measurement"
+  },
+  "output_dir": "logs/results/v25/m182_contributions"
+}

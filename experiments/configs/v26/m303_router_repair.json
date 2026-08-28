@@ -1,0 +1,24 @@
+{
+  "milestone": "M303",
+  "title": "Router repair: price floor, anchor-seeded tie-break, top-k weighted lottery, expected-charge ranking (H26-7 sweep)",
+  "question": "Does the repaired router remove the degenerate equilibrium on the registered synthetic sweep?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M303 (26 Aug 2026, before the build)",
+  "price_floor": 1.0,
+  "top_k": 5,
+  "n_anchors": 2000,
+  "c1_price_sweep": [2.0, 1.5, 1.2, 1.0, 0.8],
+  "c3_units_sweep": [1, 2, 5, 10],
+  "registered_checks": {
+    "c1": "below-floor registration rejected; the challenger's share rises monotonically as its price falls; the floor share sits in [0.60, 0.75] (the registered score ratio 0.60/(0.60+0.30) for a 2:1 price cut); no above-floor price yields share >= 0.90 (capture is the degenerate outcome)",
+    "c1b": "an equal-priced equal-quality pair at the floor splits ~50/50 (|share - 0.5| <= 0.05)",
+    "c2": "the quality leader's share is below 100% and below 60%, and both followers win sometimes",
+    "c3": "the bloated arm's share shrinks monotonically with expected units and falls below 12% at ubar=10",
+    "c4": "same anchor -> same winner and seed; distinct anchors -> distinct seeds on a tie",
+    "c5": "a price one tick below the floor is rejected at registration"
+  },
+  "m303a_note": "run 1 VOIDED on its own C1 check: the pre-registered '<55% at the floor' bound conflated capture (epsilon-pricing) with legitimate price competition (the registered s/(p*u) score awards a 2:1 price cut a 2/3 share by design). M303a restates the C1 claims against the registered semantics before re-running; the run-1 evidence stays on record as evidence_void_c1_check.json.",
+  "interpretation_registered_before_running": {
+    "all_checks_pass": "H26-7 PASS for the three defects M303 owns (price race, capture, bloat)",
+    "any_check_fails": "the repaired router does not close that defect on the registered sweep - reported as VOID and diagnosed"
+  }
+}

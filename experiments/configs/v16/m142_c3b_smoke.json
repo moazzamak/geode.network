@@ -1,0 +1,60 @@
+{
+  "milestone": "M142",
+  "cell": "C3b",
+  "title": "SMOKE: C3b power-norm plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (M142 C3b)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (20000 train / 1000 test rows, gates skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "_smoke_test_rows": 1000,
+  "question": "Does the C3b power-norm grid (raw anchor + p x penalty cells + trained head) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy"
+  },
+  "sparse": {
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms_by_scale": { "3": 1950, "5": 850, "7": 511 },
+    "note": "same construction as the full config; only the cells shrink"
+  },
+  "anchors": {
+    "t1_reference": 0.242144927536232,
+    "t1_tolerance": 0.002
+  },
+  "cell_c3b": {
+    "p_ladder": [1.0, 0.5],
+    "penalty_ladder": [1.0],
+    "n_138k": 20000,
+    "trained_epochs": 1,
+    "trained_lr": 0.001,
+    "trained_seed": 201,
+    "prior_note": "n/a (smoke)",
+    "gate_registered": "skipped in smoke",
+    "consequence_fired": "n/a (smoke)",
+    "consequence_passed": "n/a (smoke)"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 1024,
+    "encode_throttle_seconds": 0.05
+  },
+  "output_dir": "logs/results/v16/m142_c3b_smoke"
+}

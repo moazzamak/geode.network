@@ -1,0 +1,20 @@
+{
+  "milestone": "M317",
+  "title": "Standard-library sandboxing: settlement key unreachable from any primitive (A24)",
+  "question": "Does the capability model demonstrate the pre-repair key path, its absence under uniform sandboxing, and enforcement of identical terms?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M317 (26 Aug 2026, before the build)",
+  "stdlib_primitive": "cas_engine",
+  "key_process": "settlement_key",
+  "primitives": ["cas_engine", "pure_fn_engine", "torch_like"],
+  "registered_notes": {
+    "defect": "A24: the standard library runs directly in the signing process while only third-party code is sandboxed; the settlement key lives in a host process",
+    "pinning": "trusted-by-hash guarantees you run the intended code, including its intended bugs, on attacker-chosen input",
+    "repair": "R-A24: sandbox the standard library on the same terms as third-party primitives"
+  },
+  "interpretation_registered_before_running": {
+    "c1_fails": "the pre-repair model shows no key path - the registered defect would not be demonstrated; VOID",
+    "c2_fails": "a path to the key remains after sandboxing - the repair does not close A24; VOID",
+    "c3_fails": "elevated or missing terms pass the guard - the uniform-terms policy is not enforced; VOID",
+    "all_hold": "M317 PASS: the sandbox policy closes A24 at the registered cells"
+  }
+}

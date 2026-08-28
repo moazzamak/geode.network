@@ -1,0 +1,22 @@
+device cuda; transformers 4.57.1
+  nli: refit weights hash MATCH (53ea3bfd21d13f43...)
+  nli/validation_matched: linear repro 0.537443 (sealed 0.537443, OK)
+  nli/validation_mismatched: linear repro 0.545769 (sealed 0.545769, OK)
+  nli/validation_matched: rff 0.501885 (linear 0.537443, delta -0.035558)
+  nli/validation_mismatched: rff 0.515053 (linear 0.545769, delta -0.030716)
+  sst2: refit weights hash MATCH (71439ef6a2027083...)
+  sst2/validation: linear repro 0.856651 (sealed 0.856651, OK)
+  sst2/validation: rff 0.806193 (linear 0.856651, delta -0.050459)
+  imdb: refit weights hash MATCH (219f9ce30773e4ca...)
+  imdb/test: linear repro 0.828200 (sealed 0.828200, OK)
+  imdb/test: rff 0.666240 (linear 0.828200, delta -0.161960)
+{
+ "gates_ok": true,
+ "deltas": {
+  "nli/validation_matched": -0.03555781966377991,
+  "nli/validation_mismatched": -0.030716029292107372,
+  "sst2/validation": -0.050458715596330306,
+  "imdb/test": -0.16196
+ },
+ "reading": "a uniform null: no task lifts by >= 0.01 - the text features are already linear-sufficient at this scale and the breadth claim rests on the recipe, not the map"
+}

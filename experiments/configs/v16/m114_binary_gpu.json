@@ -1,0 +1,72 @@
+{
+  "milestone": "M114",
+  "title": "Binary soft-code encode: can Hamming (XOR/popcount) preserve the frozen random-3072 accuracy at a fraction of the float cdist encode cost?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v17.md (M114, 6 August 2026)",
+  "registered_before_any_accuracy": true,
+  "_gpu_backend_note": "IMPLEMENTATION BACKEND ONLY, 7 August 2026: this config is the sealed m114_binary.json with device.encode='gpu'. The Hamming distances are computed by the sign-GEMM identity Hamming = (B - <p,a>)/2 on the GPU (torch matmul) instead of the CPU hardware-POPCNT path; because B <= 108 and every inner product is an exact fp32 integer, the distances - and therefore the accuracy verdict - are BIT-IDENTICAL to the CPU path (verified in the smoke: identical to 4 decimals). Disclosed cost: the GPU realizes the same Hamming at n*B*A MACs (no GPU popcount exists in this ROCm torch build); the registered algorithmic cost (2*P*A*words ops, hardware POPCNT) is what the CPU path realizes. The first sealed CPU attempt ran ~17.6 CPU-hr without finishing the ITQ-108 arm (the CPU popcount path at 3072 atoms is the 2-3 day scenario in miniature); this GPU run produces the same sealed verdict in ~15-25 min. Registered in v18 section 5.3.",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107/M108/M109/A2/A5/M113's exact shared subsample, unchanged."
+  },
+  "device": {
+    "whiten": "cpu",
+    "hash": "cpu",
+    "encode": "gpu",
+    "ridge": "cpu",
+    "_note": "whitening and the sign-code projection stay on CPU numpy (float64, bit-identical to the CPU path); only the Hamming GEMM runs on the GPU. HIP_VISIBLE_DEVICES=1, gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms": 3072,
+    "bits": [64, 108],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "random_dictionary": "M108/M113 arm (a) exact: prefix of the seeded permutation of the shared 8192-whitened-patch pool - IDENTICAL to the dictionary M113 measured at 0.2153",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "hash_fit_seed": 33,
+    "hash_fit_images": 200,
+    "hash_pool_size": 100000,
+    "hash_iters": 50,
+    "hash_learned": "ITQ (Gong et al., CVPR 2011): PCA top-B on the whitened-patch pool, random orthogonal rotation, 50 alternation iterations; code = sign((x - center) @ P - bias). B is capped at 108 = PATCH_DIM: a linear projection of the 108-dim whitened patch has at most 108 informative bits",
+    "hash_control": "seeded Gaussian projection (unit-norm columns), same pool and bias convention - isolates whether hash LEARNING matters",
+    "hamming": "packed uint64 XOR + POPCNT (numpy bitwise_count, hardware POPCNT instruction); triangle kernel on Hamming distances, soft assignment over ALL atoms (never truncated - M113 arm (c) showed truncation destroys the soft code)"
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalties": [1.0],
+    "_note": "M108's chosen head constant, applied unchanged."
+  },
+  "gate": {
+    "float_reference": "QUOTED from M113 sealed random-3072 = 0.2153 @ 254.6M MACs (M113 re-measured M108's at delta +0.00000 on 6 Aug; this run rebuilds the IDENTICAL deterministic dictionary)",
+    "kill_switch_1_hash_learning": "if binary ITQ-108 does not beat binary RANDOM-108 by >= +0.01, hash learning adds nothing over random bits",
+    "kill_switch_2_mac_axis_breakthrough": "if binary ITQ-108 < float(0.2153) - 0.01 OR its total ops > float total MACs / 3, no MAC-axis win is licensed; if BOTH pass, the sparse family wins the MAC axis at preserved accuracy - the first measured time",
+    "registered_prediction": "the Hamming triangle preserves the soft assignment's coarse geometry (unlike top-k truncation), so a modest accuracy drop is expected, but within 0.01 of float is the open question; the cost win (~8x at B=108, algorithmic) is structural"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "milestone": "M151",
+  "title": "SPM x MS interaction: the column-concatenated code (the separability test)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M151",
+  "registered_before_any_accuracy": true,
+  "question": "Does the column-concatenated SPM+MS code (optionally + signed sqrt + L2) beat the best single construction at matched cost? (v22 registered the separability assumption as tested-not-trusted; this is the test.)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "m142_cache_relpath": "v16/m142_c2",
+    "m142_c3_cache_relpath": "v16/m142_c3",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "ms_train_file": "ms357_fulltrain.npy",
+    "ms_test_file": "ms357_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz",
+    "note": "both train matrices are the M141 cell-2 schedule (409,832 rows); row identity is PREMISE-CHECKED row by row (row count + labels digest + spot hash)."
+  },
+  "sparse": {
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms_by_scale": { "3": 1950, "5": 850, "7": 511 },
+    "pool_atoms": 2062,
+    "note": "the C3 recipe (per-scale whiteners + dictionaries, the M117/M126 recipe); the MS test encode must reproduce it bitwise for the anchor."
+  },
+  "anchors": {
+    "spm_full_data": 0.2604927536231884,
+    "ms_full_data": 0.24214492753623187,
+    "tolerance": 1e-09,
+    "note": "fitting each half ALONE must reproduce its sealed full-data read at penalty 1.0 before the concatenation is trusted."
+  },
+  "cell": {
+    "penalty_ladder": [0.1, 1.0, 10.0],
+    "power_ladder": [null, 0.5],
+    "n_138k": 138000,
+    "concat_width": 53627,
+    "note": "the concatenation is SPM columns first, MS columns second, per row; row identity verified before any fit."
+  },
+  "gate": {
+    "registered": "best concat cell (ridge read) >= best single construction + 0.005 at the disclosed feature-width cost (53627 cols); the trained-head read is the co-adaptation control (at 138k, the M146 r2 protocol); a cell failing both reads closes as a scoped negative (the v22 dual-read closure rule).",
+    "margin": 0.005
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m151_interaction"
+}

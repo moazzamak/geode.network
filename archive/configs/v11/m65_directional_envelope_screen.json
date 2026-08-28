@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "milestone": "M65",
+  "seed": 11,
+  "known_classes": [0, 1, 2, 3, 4, 5, 6, 7],
+  "proxy_unknown_classes": [8, 9],
+  "ranks": [8, 16, 32],
+  "patch_counts": [1, 2, 4],
+  "extent_policies": ["quantile", "negative_guided", "negative_guided_iqr"],
+  "extent_quantile": 0.95,
+  "penalty_weight": 16,
+  "miscoverage": 0.08,
+  "contrast_margin_grid": [0, 0.05, 0.1, 0.2],
+  "calibration_extent_fraction": 0.5,
+  "minimum_conformal_class_count": 12,
+  "parent_locks": {
+    "m64_index": {
+      "path": "logs/results/v11/m64_synthetic_masking/artifact_index.json",
+      "sha256": "f092efaac864a3d5fd7af5bc5f057b7585874b5254839a51c4cda073c2ffebeb"
+    },
+    "m63_index": {
+      "path": "logs/results/v11/m63_protocol_lock/artifact_index.json",
+      "sha256": "8fe9ec24237062bc45d589a74c9144995eb7168457641c8f86ce63bf4045fbf1"
+    },
+    "m63_evidence": {
+      "path": "logs/results/v11/m63_protocol_lock/evidence.json",
+      "sha256": "148e347a5525776376f687751f0a48f241b51fd767c9976ffc03f07a13830bee"
+    },
+    "v9_m53_config": {
+      "path": "experiments/configs/v9/m53_bounded_tube_s1.json",
+      "sha256": "e1e497bc60982ef2678edce24fcb1a5a4c4290ffe625a288bc48f284ae6cac60"
+    },
+    "v9_m53_evidence": {
+      "path": "logs/results/v9/m53_bounded_tube_s1/evidence.json",
+      "sha256": "5bfac23e08c2665b8bf94c0b9c61a41aa4c8b1f613f24bc65bfd930bdc41f696"
+    }
+  },
+  "gate": {
+    "minimum_unknown_recall_gain": 0.02,
+    "maximum_composite_accuracy_loss": 0.01,
+    "maximum_accepted_known_accuracy_loss": 0.01,
+    "maximum_8x_tangent_acceptance": 0,
+    "maximum_4x_tangent_acceptance": 0.01,
+    "maximum_4x_masking_acceptance": 0.01,
+    "maximum_other_probe_acceptance": 0.05,
+    "minimum_accepted_class_count": 6,
+    "maximum_parameter_ratio": 2,
+    "maximum_fit_work_ratio": 2
+  },
+  "final_labels_opened": false
+}

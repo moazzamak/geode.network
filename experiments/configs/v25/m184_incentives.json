@@ -1,0 +1,34 @@
+{
+  "milestone": "M184",
+  "cell": "agent-based simulation harness (synthetic gates)",
+  "title": "H1 shared-beats-solo, H3 wash-loses, H8 availability honesty — registered synthetic scenarios",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "h1": {
+    "rounds": 20,
+    "demand": 100.0,
+    "lag_sweep": [0, 2, 5, 10],
+    "seed": 1,
+    "agents": [
+      {"name": "coop_a", "kind": "cooperative", "cost": 1.0, "contribution": 3.0, "solo_progress": 1.2},
+      {"name": "coop_b", "kind": "cooperative", "cost": 1.0, "contribution": 2.5, "solo_progress": 1.0},
+      {"name": "defector_1", "kind": "defector", "cost": 0.5, "solo_progress": 1.5},
+      {"name": "defector_2", "kind": "defector", "cost": 0.5, "solo_progress": 1.4}
+    ]
+  },
+  "h3": {
+    "rounds": 50,
+    "demand": 100.0,
+    "lag": 5,
+    "seed": 2
+  },
+  "h8": {
+    "seed": 3,
+    "agents": [
+      {"name": "down_gamer", "kind": "gamer", "actually_healthy": false, "self_reported_healthy": true},
+      {"name": "well", "kind": "cooperative", "actually_healthy": true}
+    ]
+  },
+  "scope_note": "synthetic-scenario instruments, not deployment claims",
+  "output_dir": "logs/results/v25/m184_incentives"
+}

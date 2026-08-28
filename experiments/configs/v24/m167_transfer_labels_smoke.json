@@ -1,0 +1,50 @@
+{
+  "milestone": "M167",
+  "title": "SMOKE: M167 transfer-label harness plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase A (M167)",
+  "registered_before_any_label": true,
+  "_smoke_note": "Tiny cells (first 2000 selected train rows per side, first 2000 domain-b test rows, gate skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gate": true,
+  "_smoke_train_rows": 2000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M167 harness run end-to-end on tiny cells?",
+  "gate": {
+    "registered": "two-tier (the M167a repair): validity = own-domain - permuted >= 0.05; transfer = cross-domain - permuted >= 0.0",
+    "validity_margin": 0.05,
+    "transfer_margin": 0.0,
+    "similar": "fit the SPM codes on domain-0 train rows, score on domain-1 test rows",
+    "dissimilar": "the SAME fit on label-permuted domain-0 rows",
+    "own_domain": "fit domain-0 train rows, score domain-0 test rows"
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c2",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "sparse": {
+    "power": 0.5,
+    "penalty": 1.0
+  },
+  "pairs": {
+    "domain_a": 0,
+    "domain_b": 1,
+    "permutation_seed": 7
+  },
+  "numerics": {
+    "block": 4096,
+    "torch_threads": 16
+  },
+  "output_dir": "logs/results/v24/m167_transfer_labels_smoke"
+}

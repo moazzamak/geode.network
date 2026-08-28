@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "maximum_calibration_nll_increase": 0.02,
+  "passing_calibration_nll_before": 0.20,
+  "passing_calibration_nll_after": 0.21,
+  "rejected_calibration_nll_after": 0.25,
+  "confirmation_timestamp": "2026-07-26T02:00:00Z"
+}

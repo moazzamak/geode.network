@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "milestone": "M45",
+  "program": "v8_adaptation_utility",
+  "parent_locks": [
+    {
+      "id": "v6_1_final_index",
+      "path": "logs/results/v6_1/final_artifact_replay/artifact_index.json",
+      "sha256": "314ac59e1d19fbb906f1d91a33eafcb38a4e41efaa27944f4c2e810056d9a16d"
+    },
+    {
+      "id": "v7_final_index",
+      "path": "logs/results/v7/final_stagewise_replay/artifact_index.json",
+      "sha256": "e9168a5599bc0087958fe45966527c24d55198598fa6856273cd8aff18d7d4cf"
+    }
+  ],
+  "registration_source_hashes": {
+    "claim_ledger_v8": "957371e78d981d43b5530186a9e172657f3556554c1968707143007544c8a3a0",
+    "implementation_plan_v8": "45096cce983ef3228baf97894bf7cdda73e03167f9e1a6224693357bdfe93ca8"
+  },
+  "endpoint": {
+    "review_budget": 50,
+    "known_regression_ceiling": 0.01,
+    "unknown_recall_drop_ceiling": 0.02,
+    "minimum_mean_gain_over_baseline": 0.05,
+    "bootstrap_confidence": 0.95,
+    "minimum_positive_cells": 7,
+    "total_cells": 9,
+    "primary_metric": "post_integration_balanced_accuracy"
+  },
+  "statistical_policy": {
+    "resamples": 10000,
+    "interval": "paired_percentile_bootstrap",
+    "seed": 8017,
+    "lower_bound_must_exceed": 0.0
+  },
+  "episodes": [
+    {
+      "id": "synthetic_arrival_delta",
+      "seed": 11,
+      "arrival_class": "delta"
+    },
+    {
+      "id": "synthetic_arrival_epsilon",
+      "seed": 23,
+      "arrival_class": "epsilon"
+    },
+    {
+      "id": "synthetic_arrival_zeta",
+      "seed": 37,
+      "arrival_class": "zeta"
+    }
+  ],
+  "initial_class_order": [
+    "alpha",
+    "beta",
+    "gamma"
+  ],
+  "interfaces": {
+    "rejector_to_buffer": [
+      "embedding",
+      "sample_id",
+      "novelty_score",
+      "decision_margin",
+      "nearest_candidates",
+      "class_order_version",
+      "threshold_lineage_hash",
+      "acceptance_policy_hash"
+    ],
+    "buffer_to_clusterer": [
+      "embedding",
+      "sample_id",
+      "window_id",
+      "source_model_signature",
+      "support_profile_version"
+    ],
+    "clusterer_to_review": [
+      "candidate_id",
+      "member_ids",
+      "core_member_ids",
+      "boundary_member_ids",
+      "representativeness",
+      "persistence"
+    ],
+    "review_to_adapter": [
+      "review_id",
+      "confirmation_id",
+      "confirmed_label",
+      "selected_sample_ids",
+      "review_budget_used"
+    ],
+    "adapter_to_router": [
+      "child_bundle_hash",
+      "child_class_order",
+      "threshold_lineage_hash",
+      "routing_profile_hash",
+      "rollback_parent_hash"
+    ]
+  },
+  "failure_policy": {
+    "partition_leakage": "abort",
+    "stale_class_order": "abort",
+    "threshold_lineage_mismatch": "abort",
+    "review_budget_overflow": "abort",
+    "missing_confirmation": "abort",
+    "rollback_parent_drift": "abort"
+  },
+  "sealed_data": {
+    "training_data_loaded": false,
+    "final_labels_opened": false,
+    "final_test_sealed": true
+  }
+}

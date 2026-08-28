@@ -1,0 +1,67 @@
+{
+  "milestone": "M281b",
+  "cell": "discriminating learned-router instrument",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (23 Aug 2026, the M281 instrument amendment)",
+  "registered_before_any_accuracy": true,
+  "question": "Does a learned router beat the deterministic incumbent on a properly held-out mix that the incumbent does NOT saturate?",
+  "candidate": {
+    "description": "M281's closed-form ridge over frozen mean-pooled BERT features, fit UNCHANGED",
+    "train": {
+      "arithmetic_n": 300,
+      "logic_n": 300,
+      "sentiment_rows": [3000, 3300],
+      "arithmetic_seed": 20260824,
+      "logic_seed": 20260825,
+      "note": "the M281 training set exactly (cell-4 templates/generators)"
+    }
+  },
+  "incumbent": {
+    "description": "cosine nearest-centroid embedding router, the sealed cell-4 rule",
+    "centroid_samples": "the registered _SAMPLES (5 per family, unchanged)"
+  },
+  "mix": {
+    "arithmetic_paraphrase": {
+      "n": 150,
+      "seed": 20260826,
+      "note": "NEW templates only — disjoint from the cell-4 template set the candidate trains on",
+      "new_arithmetic_templates": [
+        "A quick one: {a} {op_word} {b} equals what?",
+        "What comes out of {a} {op_word} {b}?",
+        "{a} {op_word} {b} — what number is that?",
+        "Give me the number for {a} {op_word} {b}."
+      ]
+    },
+    "logic_paraphrase": {
+      "n": 150,
+      "seed": 20260827,
+      "note": "NEW question forms — disjoint from the cell-4 form"
+    },
+    "confounder": {
+      "n": 100,
+      "seed": 20260828,
+      "note": "cross-cue: task = logic, surface = arithmetic (half true, half false)"
+    },
+    "digit_arithmetic": {
+      "n": 100,
+      "seed": 20260829,
+      "note": "digit-form arithmetic — a surface neither the centroids nor the candidate trained on"
+    },
+    "sentiment": {
+      "hf_id": "stanfordnlp/imdb",
+      "split": "test",
+      "rows": [3300, 3600],
+      "smoke_rows": 5,
+      "note": "disjoint from the candidate's training rows [3000, 3300) and from the sealed cell-4 rows [2500, 2800)"
+    }
+  },
+  "gates": {
+    "g1_premise": "incumbent misroutes > 0 on this mix, measured FIRST (a void run reads no candidate number)",
+    "g2_heldout": "test templates/forms disjoint from the candidate's training set; sentiment rows disjoint",
+    "g3_admission": "strictly fewer misroutes than the incumbent, or equal misroutes with strictly higher routed accuracy measured under the candidate's own routes; a tie is not admission"
+  },
+  "smoke": {
+    "counts": {"ar_paraphrase": 6, "lg_paraphrase": 6, "confounder": 4, "digit_arithmetic": 4, "sentiment_rows": 5}
+  },
+  "output_dir": "logs/results/v25/m281b_discriminating_router",
+  "evidence_filename": "evidence.json"
+}

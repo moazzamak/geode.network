@@ -1,0 +1,45 @@
+{
+  "milestone": "M271c",
+  "title": "Arm-quality ladder cell (c), rung 1: frozen whisper-medium.en, greedy WER on LibriSpeech test-clean",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md (M271 registered 21 Aug; M271c rung 1 dispatched 22 Aug, local-first, F: caches)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the next Whisper rung (medium.en) reproduce the official model card anchor, and what WER does it read on LibriSpeech test-clean with the sealed M266a pipeline?",
+  "anchor": {
+    "model": "openai/whisper-medium.en",
+    "published_wer_test_clean": 3.0154,
+    "source": "official HF model card evaluation snippet (openai/whisper-medium.en, 'Evaluation' section)",
+    "protocol": "per-sample greedy generate; tokenizer._normalize on reference and prediction; word-level WER (evaluate.load('wer') class metric)",
+    "context_published": [
+      {"value": 2.6, "source": "OpenAI paper test-clean, Radford et al. 2022 (arXiv:2212.04356)", "role": "published context, not a gate"},
+      {"value": 4.121, "source": "model-index self-reported 'Test WER on LibriSpeech (clean)' on the HF card", "role": "card metadata, not a gate"},
+      {"value": 7.432, "source": "model-index self-reported 'Test WER on LibriSpeech (other)' on the HF card", "role": "card metadata, not a gate"}
+    ],
+    "honesty": "the anchor is the publisher's number, reproduced; our reading is ours, never the authors'"
+  },
+  "encoder": {
+    "checkpoint": "openai/whisper-medium.en",
+    "license_recorded": "apache-2.0 per the HF card; MIT per the project LICENSE (openai/whisper) — both recorded, audit verifies",
+    "frozen": true,
+    "decoding": "greedy (num_beams=1), fp32, GPU with the registered batch throttle",
+    "params_million": 769,
+    "prior_rung": {"checkpoint": "openai/whisper-small.en", "sealed_wer": 0.02957, "evidence": "logs/results/v25/m266_audio_arm/evidence.json"}
+  },
+  "dataset": {
+    "hf_id": "librispeech_asr",
+    "config": "clean",
+    "split": "test",
+    "license_recorded": "CC-BY-4.0",
+    "expected_utterances": 2620
+  },
+  "guard": {
+    "note": "per-sample duration and RMS-energy recorded; inputs outside the registered ranges are flagged in evidence (all LibriSpeech test-clean samples are expected in-distribution)",
+    "duration_range_seconds": [0.5, 30.0],
+    "energy_floor": 1e-4
+  },
+  "smoke": {
+    "max_samples": 10
+  },
+  "output_dir": "logs/results/v25/m271_quality_ladder",
+  "evidence_filename": "evidence_whisper_medium.json",
+  "feature_cache_relpath": "v25/m271_quality_ladder"
+}

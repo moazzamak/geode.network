@@ -1,0 +1,67 @@
+{
+  "milestone": "M143b",
+  "title": "Integration layer fitted on TRAIN scores (the registered rescue after M143's sealed negative)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md execution log (M143 rescue, 14 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Fitted on the arms' own train scores (400 rows/class) instead of held-out rows (40 rows/class), does the integration layer recover the specialist gains that hard routing lost?",
+  "registration_notes": {
+    "N100.1": "Registered AFTER M143's sealed negative (fused 0.1463 vs global 0.2251) and its diagnostic (global-only stacking 0.159 vs global 0.2251 on the same fitter = a rows-per-class effect, not a broken fit). This cell does NOT re-adjudicate M143; it re-tests on the train-score axis (epistemic rule 2).",
+    "N100.2": "Phase 1 scores the full TRAIN split (138k rows) with the six 512-atom specialists (exact M143/M139b construction, bit-exact M119 anchors) and the global head (dual accumulate on the sealed f6144 memmaps); cached to v16/m143b/train_scores.npz (~2.5h GPU).",
+    "N100.3": "Phase 2 fits the stacking head and the competence router (correct-arm target, lowest-index tie-break) on the train rows; penalty ladder {1,10,100,1000,10000} selected on a seeded 80/20 train-valid slice; evaluated on the sealed TEST scores from v16/m143/scores.npz (never recomputed).",
+    "N100.4": "Gate (same shape as M143): fired if fused < global - 0.005 on test rows, OR competence < identity, OR identity < random.",
+    "N100.5": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory."
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "specialist_construction": "A5-exact (M119/M124/M139b): global M108 whitener; per-domain candidate pool (n_cap 20000, seed [11, domain]); dictionary = candidates in the [11,100] seeded-permutation order, first 512 atoms; triangle encode on GPU with the registered throttle; closed-form ridge lambda=1.0."
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576
+  },
+  "score_cache": {
+    "cache_relpath": "v16/m143b"
+  },
+  "test_cache": {
+    "cache_relpath": "v16/m143"
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05,
+    "block": 4096
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "random_seed": 44
+  },
+  "gate": {
+    "registered": "fired if fused < global - 0.005 on test rows, OR competence < identity, OR identity < random.",
+    "consequence_fired": "even fitted on train scores, the integration layer does not recover the specialist gains; the interface is the finding and M143's negative extends to the train-score axis.",
+    "consequence_passed": "fitted on train scores, the integration layer recovers the specialist gains; the M143 negative is scoped to the held-out-fit protocol and the fusion is promoted."
+  },
+  "output_dir": "logs/results/v16/m143b_train_fusion"
+}

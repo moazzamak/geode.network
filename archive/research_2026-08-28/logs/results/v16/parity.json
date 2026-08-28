@@ -1,0 +1,48 @@
+{
+  "_note": "engineering measurement of the instrument, NOT evidence; no corpus, no accuracy, no operand",
+  "pairs": [
+    {
+      "model": "small",
+      "against": "onnx_dml",
+      "max_abs_difference": 2.6285648345947266e-05,
+      "max_relative_difference": 1.4478662561879375e-06,
+      "mean_cosine_similarity": 1.0
+    },
+    {
+      "model": "small",
+      "against": "torch_cuda",
+      "max_abs_difference": 2.759695053100586e-05,
+      "max_relative_difference": 1.520095411825431e-06,
+      "mean_cosine_similarity": 1.0
+    },
+    {
+      "model": "base",
+      "against": "onnx_dml",
+      "max_abs_difference": 3.063678741455078e-05,
+      "max_relative_difference": 2.9737010966176545e-06,
+      "mean_cosine_similarity": 1.0
+    },
+    {
+      "model": "base",
+      "against": "torch_cuda",
+      "max_abs_difference": 2.5480985641479492e-05,
+      "max_relative_difference": 2.473263071603205e-06,
+      "mean_cosine_similarity": 1.0
+    },
+    {
+      "model": "large",
+      "against": "onnx_dml",
+      "max_abs_difference": 7.140636444091797e-05,
+      "max_relative_difference": 9.525755416258655e-06,
+      "mean_cosine_similarity": 1.0
+    },
+    {
+      "model": "large",
+      "against": "torch_cuda",
+      "max_abs_difference": 9.465217590332031e-05,
+      "max_relative_difference": 1.2626794324723492e-05,
+      "mean_cosine_similarity": 1.0
+    }
+  ],
+  "worst_relative_difference": 1.2626794324723492e-05
+}

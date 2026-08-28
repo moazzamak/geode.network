@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "seed": 11,
+  "parent_bundle_id": "18ab33416dd20c4c37d0",
+  "parent_registry": "logs/results/e4_model_registry",
+  "source_dataset": "cifar100_coarse",
+  "target_dataset": "cifar10",
+  "target_accuracy_floor": 0.35,
+  "source_forgetting_budget": 0.0,
+  "partition_fractions": {
+    "readout_calibration": 0.15,
+    "risk_control": 0.10,
+    "validation": 0.15
+  },
+  "model": {
+    "pca_components": 128,
+    "alpha": 2.0,
+    "max_iterations": 10,
+    "nudge_iterations": 0,
+    "consensus_threshold": 0.10,
+    "capture_threshold": 0.08
+  },
+  "pretraining_lanes": {
+    "controlled": {
+      "status": "qualified",
+      "checkpoint": "MobileNetV2 IMAGENET1K_V1",
+      "source_datasets": ["ImageNet-1K"],
+      "target_training": "CIFAR-10 geometry split only"
+    },
+    "external": {
+      "status": "not_run",
+      "reason": "No second externally pretrained checkpoint is present"
+    }
+  }
+}

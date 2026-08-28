@@ -1,0 +1,91 @@
+{
+  "milestone": "M107-smoke",
+  "title": "M107 instrument smoke test — INADMISSIBLE AS EVIDENCE",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v15.md section 7.14",
+  "_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Two rows per class, two atom budgets and the two dense arms that need no original-resolution pixels, so the whole instrument runs end to end in minutes on a machine that is busy with M104. Every accuracy it produces is below anything meaningful and every sample floor it reports is violated. Its only job is to prove the code paths execute, the digests are stable, the gate evaluates and the artifacts are well formed.",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 8,
+    "test_rows_per_class": 2,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 16,
+    "expected_subsample_sha256": null
+  },
+  "domains": [
+    "clipart",
+    "infograph",
+    "painting",
+    "quickdraw",
+    "real",
+    "sketch"
+  ],
+  "representation": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 20000,
+    "zca_fit_seed": 11
+  },
+  "sparse": {
+    "budgets": [
+      8,
+      16
+    ],
+    "mixture_budgets": [
+      8
+    ],
+    "dictionary_seed": 11,
+    "candidate_pool_size": 64
+  },
+  "dense": {
+    "source": "onnx-community DINOv2 ONNX exports, used unmodified",
+    "batch": 16,
+    "feature": "CLS token concatenated with the mean of the patch tokens",
+    "_note": "Only upsampled_from_32 arms, so the smoke never touches the parquet materialisation. That path is exercised separately.",
+    "arms": [
+      {
+        "name": "d5s_small_28_from_32",
+        "model": "small",
+        "resolution": 28,
+        "pixels": "upsampled_from_32",
+        "disclosure": "SMOKE ONLY."
+      },
+      {
+        "name": "d5_small_224_from_32",
+        "model": "small",
+        "resolution": 224,
+        "pixels": "upsampled_from_32",
+        "disclosure": "SMOKE ONLY."
+      }
+    ]
+  },
+  "head": {
+    "family": "multi_output_ridge",
+    "regularisation_grid": [
+      100.0,
+      10000.0
+    ],
+    "selection_validation_fraction": 0.1,
+    "selection_arm": "s_generalist_8",
+    "fit_samples_per_fitted_dimension_floor": 10,
+    "_floor_note": "SMOKE ONLY. At eight rows per class almost every arm here is below the floor and will be voided, which is itself the point: the smoke proves the floor VOIDS arms rather than merely reporting them."
+  },
+  "compute_ledger": {
+    "operand": "test accuracy against analytic inference MACs per image"
+  },
+  "gate": {
+    "registered_prediction": "SMOKE ONLY. Nothing here is a prediction."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 4,
+    "onnx_threads": 4
+  },
+  "_smoke_note": "NOT A MILESTONE RUN AND NOT ADMISSIBLE AS EVIDENCE. Section 2.4 and section 11.2 item 23: no figure produced by this configuration may be read as an operand, quoted in the plan, or entered in the claim ledger. It exists to prove the M107 runner executes every branch -- the section 5.3 voiding path, the head-constant selection, both dense pixel sources, the oracle mixture, the gate and its admissibility flag -- before the sealed configuration is started. The tiny per-class draw and the [8, 16] budgets are chosen so that arms FALL BELOW the floor and the voiding path is actually taken, which the sealed configuration must never do. Its executions earned their keep three times over: they showed an empty ladder overlap reporting a kill switch as 'not fired' when it was void, the section 5.3 floor being reported without being enforced, and the console printing a bare 'not fired' for switches the payload already knew were undecidable. Because this file names itself inadmissible, the runner REFUSES to let it write to the sealed output directory."
+}

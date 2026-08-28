@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "milestone": "M78",
+  "program": "v13",
+  "registered_hypothesis": "H78",
+  "registration_amendments": ["R1", "R2"],
+  "description": "Sample-adequacy and basis-identifiability forensics over the M70 native DomainNet array.",
+  "subspace_stability": {
+    "method": "shared_projection_disjoint_halves",
+    "random_trials": 64,
+    "random_seed": 7801
+  },
+  "m74_config": {
+    "path": "experiments/configs/v12/m74_confirmation_transfer.json",
+    "sha256": "90e99037504fe6dc312ac92ec71a320bd5246a4859eb0932296097ff38059ff1"
+  },
+  "m70_native_index": {
+    "path": "logs/results/v12/m70_native_domainnet/artifact_index.json",
+    "sha256": "20c2dea882b41ecce8066f5b0d5468a8c9cff692686144e94f2d115ddf78b22a"
+  },
+  "seeds": [11, 23, 37],
+  "projection_dimension": 64,
+  "miscoverage": 0.08,
+  "known_coverage_target": 0.92,
+  "knn_neighbors": 5,
+  "domainnet_transfer": {
+    "known_class_count": 32,
+    "calibration_per_class": 20,
+    "evaluation_per_class": 20,
+    "unknown_class_start": 32,
+    "unknown_class_stop": 128,
+    "unknown_evaluation_per_class": 20
+  },
+  "axis_a_rank_sensitivity": {
+    "geometry_per_class": 60,
+    "ranks": [2, 4, 8, 16, 32]
+  },
+  "axis_b_sample_sensitivity": {
+    "geometry_per_class": [20, 40, 60],
+    "ranks": [8, 32]
+  },
+  "training": {
+    "epochs": 24,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "classification_temperature": 2.0,
+    "target_score": 1.0,
+    "separation_margin": 1.0,
+    "probe_margin_multiplier": 2.0,
+    "loss_weights": {
+      "classification": 1.0,
+      "eikonal": 0.01,
+      "probe": 1.0,
+      "distribution": 0.1,
+      "separation": 0.1
+    },
+    "collapse_weight": 10.0,
+    "trained_probe_families": [
+      "axis_tangent",
+      "normal",
+      "masking",
+      "random_direction"
+    ]
+  },
+  "gate": {
+    "low_rank_improvement_points": 5.0,
+    "minimum_samples_per_fitted_dimension": 10.0,
+    "minimum_identifiability": 0.5,
+    "logistic_parity_tolerance_points": 3.0
+  },
+  "final_labels_opened": false
+}

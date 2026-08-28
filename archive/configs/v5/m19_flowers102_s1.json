@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "milestone": "M19",
+  "stage": "S1-Flowers",
+  "dataset": "oxford_flowers102_bounded_s1",
+  "dataset_root": "data/v5/datasets/flowers102",
+  "backbone_config": "experiments/configs/v5/m19_frozen_space_s1.json",
+  "seed": 11,
+  "samples_per_class": {
+    "train": 5,
+    "dev": 2,
+    "test": 3
+  },
+  "n_classes": 102,
+  "official_split_mapping": {
+    "train": "train",
+    "dev": "val",
+    "test": "test"
+  },
+  "limits": {
+    "bounded_feasibility_only": true,
+    "identity_interfaces_only": true
+  }
+}

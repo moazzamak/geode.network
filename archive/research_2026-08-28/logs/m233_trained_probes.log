@@ -1,0 +1,122 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+g1: 0.24214492753623187 ok=True
+dino probe clipart: 0.7700
+dino probe infograph: 0.4204
+dino probe painting: 0.7079
+dino probe quickdraw: 0.6040
+dino probe real: 0.8380
+dino probe sketch: 0.6708
+hybrid probe clipart: 0.3586
+hybrid probe infograph: 0.0924
+hybrid probe painting: 0.4030
+hybrid probe quickdraw: 0.2183
+hybrid probe real: 0.4130
+hybrid probe sketch: 0.2756
+g3 reproducibility: True
+{
+ "gates_ok": true,
+ "tables": {
+  "dino": {
+   "clipart": 0.77,
+   "infograph": 0.4203735144312394,
+   "painting": 0.70790878214459,
+   "quickdraw": 0.6039820901209869,
+   "real": 0.8380281690140845,
+   "sketch": 0.6707566462167689
+  },
+  "hybrid": {
+   "clipart": 0.3585714285714286,
+   "infograph": 0.09235993208828523,
+   "painting": 0.4029597282872392,
+   "quickdraw": 0.2182528341430885,
+   "real": 0.413047730829421,
+   "sketch": 0.27556237218813906
+  }
+ },
+ "verdicts": {
+  "dino": {
+   "clipart": {
+    "best": 0.77,
+    "bar": 0.8,
+    "met": false
+   },
+   "infograph": {
+    "best": 0.4204,
+    "bar": [
+     0.3,
+     0.4
+    ],
+    "met": true
+   },
+   "painting": {
+    "best": 0.7079,
+    "bar": [
+     0.5,
+     0.6
+    ],
+    "met": true
+   },
+   "quickdraw": {
+    "best": 0.604,
+    "bar": 0.8,
+    "met": false
+   },
+   "real": {
+    "best": 0.838,
+    "bar": 0.8,
+    "met": true
+   },
+   "sketch": {
+    "best": 0.6708,
+    "bar": [
+     0.5,
+     0.6
+    ],
+    "met": true
+   }
+  },
+  "hybrid": {
+   "clipart": {
+    "best": 0.3586,
+    "bar": 0.8,
+    "met": false
+   },
+   "infograph": {
+    "best": 0.0924,
+    "bar": [
+     0.3,
+     0.4
+    ],
+    "met": false
+   },
+   "painting": {
+    "best": 0.403,
+    "bar": [
+     0.5,
+     0.6
+    ],
+    "met": false
+   },
+   "quickdraw": {
+    "best": 0.2183,
+    "bar": 0.8,
+    "met": false
+   },
+   "real": {
+    "best": 0.413,
+    "bar": 0.8,
+    "met": false
+   },
+   "sketch": {
+    "best": 0.2756,
+    "bar": [
+     0.5,
+     0.6
+    ],
+    "met": false
+   }
+  }
+ }
+}
+M233 complete -> logs\results\v25\m233_trained_probes\evidence.json

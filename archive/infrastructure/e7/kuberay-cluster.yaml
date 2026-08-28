@@ -1,0 +1,59 @@
+apiVersion: ray.io/v1
+kind: RayCluster
+metadata:
+  name: geode-e7
+spec:
+  rayVersion: "2.56.1"
+  headGroupSpec:
+    rayStartParams:
+      dashboard-host: "0.0.0.0"
+    template:
+      spec:
+        containers:
+          - name: ray-head
+            image: geode-e7:latest
+            env:
+              - name: GEODE_CACHE_DIR
+                value: /geode-cache
+            volumeMounts:
+              - name: geode-cache
+                mountPath: /geode-cache
+        volumes:
+          - name: geode-cache
+            persistentVolumeClaim:
+              claimName: geode-cache-rwx
+  workerGroupSpecs:
+    - groupName: domainnet-workers
+      replicas: 2
+      minReplicas: 2
+      maxReplicas: 8
+      rayStartParams: {}
+      template:
+        spec:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  ray.io/group: domainnet-workers
+          containers:
+            - name: ray-worker
+              image: geode-e7:latest
+              env:
+                - name: GEODE_CACHE_DIR
+                  value: /geode-cache
+              resources:
+                requests:
+                  cpu: "4"
+                  memory: 8Gi
+                limits:
+                  cpu: "4"
+                  memory: 8Gi
+              volumeMounts:
+                - name: geode-cache
+                  mountPath: /geode-cache
+          volumes:
+            - name: geode-cache
+              persistentVolumeClaim:
+                claimName: geode-cache-rwx

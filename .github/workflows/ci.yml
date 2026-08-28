@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    name: pytest + coverage (unit, integration)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      - name: Test with coverage
+        run: |
+          python -m pytest -m "not system" \
+            --cov=geode --cov-report=term-missing --cov-report=xml \
+            --cov-fail-under=95
+      - name: Architecture rules
+        run: python -m pytest tests/unit/test_architecture_layering.py -q
+
+  evm:
+    name: EVM harness (Hardhat)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infrastructure/evm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Hardhat dependencies
+        run: npm ci
+      - name: Run the harness suite
+        run: npx hardhat test
+      - name: Solidity coverage gate
+        run: npx hardhat coverage

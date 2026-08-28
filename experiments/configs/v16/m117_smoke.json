@@ -1,0 +1,57 @@
+{
+  "_smoke_note": "NOT A RESULT AND NEVER QUOTABLE AS ONE. Tiny atom ladder (128/256/512) and tiny n ladder (2000/4000/8000), gates bypassed. Its only job is to prove the code paths execute: whitener+dictionary at multiple atom counts, per-atom train/test code memmaps, ridge fit + full-test score at every (atoms, n) cell for the joint surface, the super-additivity computation, evidence write. Every accuracy it produces is meaningless.",
+  "_smoke_skip_gates": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu"
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms_ladder": [128, 256, 512],
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108",
+    "dictionary_rule": "prefix of the seeded permutation of the shared pool",
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "head": "closed_form_ridge_1.0"
+  },
+  "scaling": {
+    "n_ladder": [2000, 4000, 8000],
+    "subsample_rule": "first n rows of the shuffled train order",
+    "test_set": "full 34500-row shared test set"
+  },
+  "gate": {
+    "t1_tolerance": 0.002,
+    "kill_switch_superadditive": "joint > axes + 0.005 at cell (1536, 34500) equivalent (bypassed in smoke)"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

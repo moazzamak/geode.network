@@ -1,0 +1,16 @@
+{
+  "artifacts": [
+    "logs/results/tier4_real_feature_finch_clustering.json",
+    "logs/results/tier4_real_feature_streaming_memory.json",
+    "logs/results/tier4_real_feature_group_count_estimation.json",
+    "logs/results/tier4_joint_unlabeled_representation.json",
+    "logs/results/tier4_pairwise_feedback_refinement.json",
+    "logs/results/tier4_pairwise_partition_refinement.json",
+    "logs/results/tier4_pairwise_query_budget.json",
+    "logs/results/tier4_pairwise_feedback_robustness.json",
+    "logs/results/tier4_pairwise_feedback_confirmation.json",
+    "logs/results/tier4_pairwise_feedback_confirmation_repeated.json",
+    "logs/results/tier4_event_review_representation_control.json"
+  ],
+  "retained_automatic_artifact": "logs/results/tier4_real_feature_finch_clustering.json"
+}

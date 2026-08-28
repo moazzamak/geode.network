@@ -1,0 +1,684 @@
+{
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "run_count": 5,
+  "absolute_results": [
+    {
+      "method": "geode",
+      "geometry_variant": "A0",
+      "readout": "diagonal",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.83625,
+        "balanced_accuracy": 0.8382140045102453,
+        "brier_score": 0.23678394739243477,
+        "expected_calibration_error": 0.027415538513395787,
+        "negative_log_likelihood": 0.4936742773935531,
+        "top_5_accuracy": 0.993625
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 9741177.65806793,
+        "inference_seconds": 0.00016431999683845787,
+        "readout_fit_seconds_all_modes": 0.0459947800001828
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44035.2,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5504.4,
+        "subtractive_ellipsoids": 0.0
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A0",
+      "readout": "multinomial",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836,
+        "balanced_accuracy": 0.8374674020702132,
+        "brier_score": 0.23778576159052306,
+        "expected_calibration_error": 0.046385705759921396,
+        "negative_log_likelihood": 0.49512222295667785,
+        "top_5_accuracy": 0.9932500000000001
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 4542159.663273592,
+        "inference_seconds": 0.0003694600018206984,
+        "readout_fit_seconds_all_modes": 0.0459947800001828
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44035.2,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5504.4,
+        "subtractive_ellipsoids": 0.0
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A0",
+      "readout": "raw",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836625,
+        "balanced_accuracy": 0.8378795388434476,
+        "brier_score": 0.66167041634558,
+        "expected_calibration_error": 0.594111262839533,
+        "negative_log_likelihood": 1.5091096686202408,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10484127.917181272,
+        "inference_seconds": 0.00015276000485755503,
+        "readout_fit_seconds_all_modes": 0.0459947800001828
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44035.2,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5504.4,
+        "subtractive_ellipsoids": 0.0
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A0",
+      "readout": "temperature",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836625,
+        "balanced_accuracy": 0.8378795388434476,
+        "brier_score": 0.23663500300772608,
+        "expected_calibration_error": 0.027640847553436942,
+        "negative_log_likelihood": 0.4897055021401887,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10632628.964552145,
+        "inference_seconds": 0.0001505600055679679,
+        "readout_fit_seconds_all_modes": 0.0459947800001828
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44035.2,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5504.4,
+        "subtractive_ellipsoids": 0.0
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A1",
+      "readout": "diagonal",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836375,
+        "balanced_accuracy": 0.838343132761243,
+        "brier_score": 0.2366852888271139,
+        "expected_calibration_error": 0.027271829101217004,
+        "negative_log_likelihood": 0.4934458750356952,
+        "top_5_accuracy": 0.993625
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 8674115.859298328,
+        "inference_seconds": 0.00019398000149521976,
+        "readout_fit_seconds_all_modes": 0.04485704000107944
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A1",
+      "readout": "multinomial",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836125,
+        "balanced_accuracy": 0.8375794526596781,
+        "brier_score": 0.23780984612472417,
+        "expected_calibration_error": 0.04615778863101698,
+        "negative_log_likelihood": 0.4951531870654883,
+        "top_5_accuracy": 0.9932500000000001
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 4966726.798566698,
+        "inference_seconds": 0.00032246000191662463,
+        "readout_fit_seconds_all_modes": 0.04485704000107944
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A1",
+      "readout": "raw",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8365,
+        "balanced_accuracy": 0.8377673880246779,
+        "brier_score": 0.6617198315648918,
+        "expected_calibration_error": 0.5940272560762718,
+        "negative_log_likelihood": 1.5092658145923168,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10781277.185947513,
+        "inference_seconds": 0.00014844000397715718,
+        "readout_fit_seconds_all_modes": 0.04485704000107944
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A1",
+      "readout": "temperature",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8365,
+        "balanced_accuracy": 0.8377673880246779,
+        "brier_score": 0.23650817261088952,
+        "expected_calibration_error": 0.026497520326555425,
+        "negative_log_likelihood": 0.4893469508890632,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10449632.22461859,
+        "inference_seconds": 0.0001534600043669343,
+        "readout_fit_seconds_all_modes": 0.04485704000107944
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A2",
+      "readout": "diagonal",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836375,
+        "balanced_accuracy": 0.838343132761243,
+        "brier_score": 0.2366852888271139,
+        "expected_calibration_error": 0.027271829101217004,
+        "negative_log_likelihood": 0.4934458750356952,
+        "top_5_accuracy": 0.993625
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 9389306.256857347,
+        "inference_seconds": 0.0001712200028123334,
+        "readout_fit_seconds_all_modes": 0.04774102000228595
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A2",
+      "readout": "multinomial",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.836125,
+        "balanced_accuracy": 0.8375794526596781,
+        "brier_score": 0.23780984612472417,
+        "expected_calibration_error": 0.04615778863101698,
+        "negative_log_likelihood": 0.4951531870654883,
+        "top_5_accuracy": 0.9932500000000001
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 4748269.076005615,
+        "inference_seconds": 0.0003404599992791191,
+        "readout_fit_seconds_all_modes": 0.04774102000228595
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A2",
+      "readout": "raw",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8365,
+        "balanced_accuracy": 0.8377673880246779,
+        "brier_score": 0.6617198315648918,
+        "expected_calibration_error": 0.5940272560762718,
+        "negative_log_likelihood": 1.5092658145923168,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10345586.972191218,
+        "inference_seconds": 0.00015533999830950052,
+        "readout_fit_seconds_all_modes": 0.04774102000228595
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "geode",
+      "geometry_variant": "A2",
+      "readout": "temperature",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8365,
+        "balanced_accuracy": 0.8377673880246779,
+        "brier_score": 0.23650817261088952,
+        "expected_calibration_error": 0.026497520326555425,
+        "negative_log_likelihood": 0.4893469508890632,
+        "top_5_accuracy": 0.993
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 10742526.078286605,
+        "inference_seconds": 0.00014931999903637915,
+        "readout_fit_seconds_all_modes": 0.04774102000228595
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44352.0,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5544.0,
+        "subtractive_ellipsoids": 0.4
+      }
+    },
+    {
+      "method": "histogram_gradient_boosting",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8233750000000001,
+        "balanced_accuracy": 0.825115188326855,
+        "brier_score": 0.29402559054806565,
+        "expected_calibration_error": 0.12779453676742109,
+        "negative_log_likelihood": 0.8964462598402836,
+        "top_5_accuracy": 0.990375
+      },
+      "performance_mean": {
+        "fit_seconds": 1.094283859996358,
+        "inference_samples_per_second": 58188.04766293764,
+        "inference_seconds": 0.027538899998762644
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "knn",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8154999999999999,
+        "balanced_accuracy": 0.8171789521015442,
+        "brier_score": 0.27227000000000007,
+        "expected_calibration_error": 0.0402,
+        "negative_log_likelihood": 2.207630550334833,
+        "top_5_accuracy": 0.9463750000000001
+      },
+      "performance_mean": {
+        "fit_seconds": 0.004287820003810339,
+        "inference_samples_per_second": 50464.02400698847,
+        "inference_seconds": 0.0317231399967568
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "linear_svm",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8341249999999999,
+        "balanced_accuracy": 0.8359304937213101,
+        "brier_score": 0.25134580594429917,
+        "expected_calibration_error": 0.07915933462069458,
+        "negative_log_likelihood": 0.541948790401152,
+        "top_5_accuracy": 0.989625
+      },
+      "performance_mean": {
+        "fit_seconds": 0.0680227000004379,
+        "inference_samples_per_second": 575855.4970835935,
+        "inference_seconds": 0.0028617800009669734
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "logistic_regression",
+      "geometry_variant": "A0",
+      "readout": "feature_logistic",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8402499999999999,
+        "balanced_accuracy": 0.8417439080597638,
+        "brier_score": 0.2306831694117752,
+        "expected_calibration_error": 0.021045789894860993,
+        "negative_log_likelihood": 0.4653002866884172,
+        "top_5_accuracy": 0.993375
+      },
+      "performance_mean": {
+        "geometry_fit_seconds": 2.1832375400001185,
+        "inference_samples_per_second": 4695750.322391517,
+        "inference_seconds": 0.0003465800022240728,
+        "readout_fit_seconds_all_modes": 0.0459947800001828
+      },
+      "model_stats_mean": {
+        "additive_ellipsoids": 55.6,
+        "approximate_model_bytes": 44035.2,
+        "candidate_evaluations": 0.0,
+        "classes": 10.0,
+        "empty_classes": 0.0,
+        "experts": 39.2,
+        "fitted_parameters": 5504.4,
+        "subtractive_ellipsoids": 0.0
+      }
+    },
+    {
+      "method": "logistic_regression",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8396250000000001,
+        "balanced_accuracy": 0.8412670569086755,
+        "brier_score": 0.22716273095622022,
+        "expected_calibration_error": 0.01908658903348946,
+        "negative_log_likelihood": 0.45615361423751316,
+        "top_5_accuracy": 0.9945
+      },
+      "performance_mean": {
+        "fit_seconds": 0.01640342000173405,
+        "inference_samples_per_second": 4605514.481747274,
+        "inference_seconds": 0.00034797999542206525
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "matched_gmm",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8007500000000001,
+        "balanced_accuracy": 0.8025662384792088,
+        "brier_score": 0.29512813142330846,
+        "expected_calibration_error": 0.08309327850648705,
+        "negative_log_likelihood": 0.7052300157003614,
+        "top_5_accuracy": 0.9877500000000001
+      },
+      "performance_mean": {
+        "fit_seconds": 1.6134674000029918,
+        "inference_samples_per_second": 271073.14373463707,
+        "inference_seconds": 0.005924300002516247
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "nearest_centroid",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.829875,
+        "balanced_accuracy": 0.83138815217749,
+        "brier_score": 0.271631893610275,
+        "expected_calibration_error": 0.13086468658210731,
+        "negative_log_likelihood": 0.6071761776496049,
+        "top_5_accuracy": 0.990375
+      },
+      "performance_mean": {
+        "fit_seconds": 0.0020811599941225724,
+        "inference_samples_per_second": 1895258.9313138812,
+        "inference_seconds": 0.0008454399998299777
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "rbf_svm",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.842125,
+        "balanced_accuracy": 0.8437941056681508,
+        "brier_score": 0.2827037137119011,
+        "expected_calibration_error": 0.05823817131971729,
+        "negative_log_likelihood": 0.6971170992255736,
+        "top_5_accuracy": 0.9946249999999999
+      },
+      "performance_mean": {
+        "fit_seconds": 0.4374511799978791,
+        "inference_samples_per_second": 12838.015203603756,
+        "inference_seconds": 0.12570408000028693
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    },
+    {
+      "method": "shrinkage_gaussian",
+      "geometry_variant": "none",
+      "readout": "native_probability",
+      "seed_count": 5,
+      "metrics_mean": {
+        "accuracy": 0.8310000000000001,
+        "balanced_accuracy": 0.8325708623343161,
+        "brier_score": 0.2478305176184675,
+        "expected_calibration_error": 0.04771675462807242,
+        "negative_log_likelihood": 0.5464660033205362,
+        "top_5_accuracy": 0.9904999999999999
+      },
+      "performance_mean": {
+        "fit_seconds": 0.003760320000583306,
+        "inference_samples_per_second": 603708.758011913,
+        "inference_seconds": 0.002654779999284074
+      },
+      "model_stats_mean": {
+        "training_samples": 4160.2
+      }
+    }
+  ],
+  "readout_deltas": {
+    "raw": {
+      "A1-A0": {
+        "mean_seed_difference": -0.00012500000000001955,
+        "seed_standard_deviation": 0.0010000000000000174,
+        "pooled_paired_bootstrap": {
+          "difference": -0.00012499999999993072,
+          "lower": -0.0006250000000000977,
+          "upper": 0.0003750000000000142,
+          "confidence": 0.95
+        }
+      },
+      "A2-A1": {
+        "mean_seed_difference": 0.0,
+        "seed_standard_deviation": 0.0,
+        "pooled_paired_bootstrap": {
+          "difference": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "confidence": 0.95
+        }
+      }
+    },
+    "temperature": {
+      "A1-A0": {
+        "mean_seed_difference": -0.00012500000000001955,
+        "seed_standard_deviation": 0.0010000000000000174,
+        "pooled_paired_bootstrap": {
+          "difference": -0.00012499999999993072,
+          "lower": -0.0006250000000000977,
+          "upper": 0.0003750000000000142,
+          "confidence": 0.95
+        }
+      },
+      "A2-A1": {
+        "mean_seed_difference": 0.0,
+        "seed_standard_deviation": 0.0,
+        "pooled_paired_bootstrap": {
+          "difference": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "confidence": 0.95
+        }
+      }
+    },
+    "diagonal": {
+      "A1-A0": {
+        "mean_seed_difference": 0.00012500000000001955,
+        "seed_standard_deviation": 0.0006123724356958222,
+        "pooled_paired_bootstrap": {
+          "difference": 0.00012499999999993072,
+          "lower": -0.0003750000000000142,
+          "upper": 0.0006250000000000977,
+          "confidence": 0.95
+        }
+      },
+      "A2-A1": {
+        "mean_seed_difference": 0.0,
+        "seed_standard_deviation": 0.0,
+        "pooled_paired_bootstrap": {
+          "difference": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "confidence": 0.95
+        }
+      }
+    },
+    "multinomial": {
+      "A1-A0": {
+        "mean_seed_difference": 0.00012499999999997512,
+        "seed_standard_deviation": 0.0010000000000000091,
+        "pooled_paired_bootstrap": {
+          "difference": 0.00012500000000004174,
+          "lower": -0.0007500000000000284,
+          "upper": 0.0010000000000000009,
+          "confidence": 0.95
+        }
+      },
+      "A2-A1": {
+        "mean_seed_difference": 0.0,
+        "seed_standard_deviation": 0.0,
+        "pooled_paired_bootstrap": {
+          "difference": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "confidence": 0.95
+        }
+      }
+    }
+  },
+  "carve_audits": {
+    "A1": {
+      "decisions": 31,
+      "accepted": 2,
+      "rejected": 29,
+      "recovered_false_positives": 34,
+      "damaged_true_positives": 2
+    },
+    "A2": {
+      "decisions": 0,
+      "accepted": 0,
+      "rejected": 0,
+      "recovered_false_positives": 0,
+      "damaged_true_positives": 0
+    }
+  }
+}

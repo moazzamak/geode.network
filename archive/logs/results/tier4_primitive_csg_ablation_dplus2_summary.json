@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "protocol": "tier4_primitive_csg_ablation_dplus2",
+  "comparative_result": true,
+  "sphere_seed_rule": "d_plus_2",
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "run_count": 15,
+  "families": {
+    "full_covariance": {
+      "A0": {
+        "accuracy_mean": 0.8175000000000001,
+        "negative_log_likelihood_mean": 0.5458595393230382,
+        "additive_primitives_mean": 92.0,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1": {
+        "accuracy_mean": 0.8175000000000001,
+        "negative_log_likelihood_mean": 0.5458319511370797,
+        "additive_primitives_mean": 92.0,
+        "subtractive_primitives_mean": 1.8
+      },
+      "A2": {
+        "accuracy_mean": 0.8175000000000001,
+        "negative_log_likelihood_mean": 0.5458319511370797,
+        "additive_primitives_mean": 92.0,
+        "subtractive_primitives_mean": 1.8
+      },
+      "A1_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          -0.06249999999999867,
+          0.06249999999999867,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          -0.0548743145678165,
+          0.0548743145678165
+        ],
+        "changed_predictions": 17,
+        "accepted_carvings": 9
+      },
+      "A2_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          -0.06249999999999867,
+          0.06249999999999867,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          -0.0548743145678165,
+          0.0548743145678165
+        ],
+        "changed_predictions": 17,
+        "accepted_carvings": 9
+      }
+    },
+    "diagonal_covariance": {
+      "A0": {
+        "accuracy_mean": 0.835,
+        "negative_log_likelihood_mean": 0.4903688037556472,
+        "additive_primitives_mean": 59.2,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1": {
+        "accuracy_mean": 0.835,
+        "negative_log_likelihood_mean": 0.4903688037556472,
+        "additive_primitives_mean": 59.2,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A2": {
+        "accuracy_mean": 0.835,
+        "negative_log_likelihood_mean": 0.4903688037556472,
+        "additive_primitives_mean": 59.2,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          0.0,
+          0.0
+        ],
+        "changed_predictions": 0,
+        "accepted_carvings": 0
+      },
+      "A2_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          0.0,
+          0.0
+        ],
+        "changed_predictions": 0,
+        "accepted_carvings": 0
+      }
+    },
+    "spherical_covariance": {
+      "A0": {
+        "accuracy_mean": 0.8393750000000001,
+        "negative_log_likelihood_mean": 0.46989827456066424,
+        "additive_primitives_mean": 72.0,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1": {
+        "accuracy_mean": 0.8393750000000001,
+        "negative_log_likelihood_mean": 0.46989827456066424,
+        "additive_primitives_mean": 72.0,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A2": {
+        "accuracy_mean": 0.8393750000000001,
+        "negative_log_likelihood_mean": 0.46989827456066424,
+        "additive_primitives_mean": 72.0,
+        "subtractive_primitives_mean": 0.0
+      },
+      "A1_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          0.0,
+          0.0
+        ],
+        "changed_predictions": 0,
+        "accepted_carvings": 0
+      },
+      "A2_minus_A0": {
+        "mean_pp": 0.0,
+        "per_seed_pp": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "t95_ci_pp": [
+          0.0,
+          0.0
+        ],
+        "changed_predictions": 0,
+        "accepted_carvings": 0
+      }
+    }
+  },
+  "paired_A0_accuracy_differences": {
+    "sphere_minus_diagonal_covariance": {
+      "mean_pp": 0.4375000000000018,
+      "per_seed_pp": [
+        0.7499999999999951,
+        0.7500000000000062,
+        -0.31249999999999334,
+        0.374999999999992,
+        0.6250000000000089
+      ],
+      "t95_ci_pp": [
+        -0.11670341096690517,
+        0.9917034109669087
+      ]
+    },
+    "sphere_minus_full_covariance": {
+      "mean_pp": 2.1875,
+      "per_seed_pp": [
+        3.749999999999998,
+        1.8750000000000044,
+        1.8750000000000044,
+        0.9999999999999898,
+        2.4375000000000036
+      ],
+      "t95_ci_pp": [
+        0.9289746128800613,
+        3.4460253871199384
+      ]
+    }
+  },
+  "test_used_for_selection": false
+}

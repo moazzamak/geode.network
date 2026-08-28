@@ -1,0 +1,63 @@
+==============================================================================
+ANCHORS (must be found or the search is broken)
+==============================================================================
+
+[Bordelon spectrum learning curves] MISS (err=ERROR after retries: HTTP Error 429: Too Many Requests)
+
+[Canatar kernel regression stats mech] MISS (err=None)
+
+[Kaplan scaling laws] MISS (err=ERROR after retries: HTTP Error 429: Unknown Error)
+
+[Hoffmann chinchilla] MISS (err=ERROR after retries: HTTP Error 429: Unknown Error)
+
+[Mei-Montanari random features] MISS (err=ERROR after retries: HTTP Error 429: Unknown Error)
+
+[Gong ITQ] MISS (err=ERROR after retries: The read operation timed out)
+
+[Fedus switch transformers] MISS (err=ERROR after retries: HTTP Error 429: Unknown Error)
+
+[Clark unified scaling routed] MISS (err=ERROR after retries: HTTP Error 429: Too Many Requests)
+
+==============================================================================
+TOPIC QUERIES (recall test: which known work do these find?)
+==============================================================================
+
+[kernel-ridge learning curves] RESIDUAL-ERROR: ERROR after retries: The read operation timed out  (record as non-empty!)
+
+[kernel regression eigenspectrum] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[random features ridge] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[random features scaling] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[neural scaling laws] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[data scaling] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[linear probing scaling laws] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[linear evaluation transfer] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[frozen features scaling] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[mixture of experts scaling] RESIDUAL-ERROR: ERROR after retries: The read operation timed out  (record as non-empty!)
+
+[domain experts MoE] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Too Many Requests  (record as non-empty!)
+
+[binary hashing image] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[dictionary learning scaling] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[sparse coding sample complexity] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[feature eigenspectrum transfer] RESIDUAL-ERROR: ERROR after retries: HTTP Error 429: Unknown Error  (record as non-empty!)
+
+[NTK transfer learning] RESIDUAL-ERROR: ERROR after retries: The read operation timed out  (record as non-empty!)
+
+[kernel ridge scaling law] RESIDUAL-ERROR: ERROR after retries: The read operation timed out  (record as non-empty!)
+
+==============================================================================
+SUMMARY
+==============================================================================
+anchor failures: ['Bordelon spectrum learning curves', 'Canatar kernel regression stats mech', 'Kaplan scaling laws', 'Hoffmann chinchilla', 'Mei-Montanari random features', 'Gong ITQ', 'Fedus switch transformers', 'Clark unified scaling routed']
+empty-or-error topics: [('kernel-ridge learning curves', 'ERROR after retries: The read operation timed out'), ('kernel regression eigenspectrum', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('random features ridge', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('random features scaling', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('neural scaling laws', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('data scaling', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('linear probing scaling laws', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('linear evaluation transfer', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('frozen features scaling', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('mixture of experts scaling', 'ERROR after retries: The read operation timed out'), ('domain experts MoE', 'ERROR after retries: HTTP Error 429: Too Many Requests'), ('binary hashing image', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('dictionary learning scaling', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('sparse coding sample complexity', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('feature eigenspectrum transfer', 'ERROR after retries: HTTP Error 429: Unknown Error'), ('NTK transfer learning', 'ERROR after retries: The read operation timed out'), ('kernel ridge scaling law', 'ERROR after retries: The read operation timed out')]

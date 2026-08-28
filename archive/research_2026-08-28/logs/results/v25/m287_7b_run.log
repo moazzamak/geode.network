@@ -1,0 +1,35 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
+Loading checkpoint shards:  25%|##5       | 1/4 [00:03<00:09,  3.31s/it]
+Loading checkpoint shards:  50%|#####     | 2/4 [00:06<00:06,  3.46s/it]
+Loading checkpoint shards:  75%|#######5  | 3/4 [00:09<00:03,  3.06s/it]
+Loading checkpoint shards: 100%|##########| 4/4 [00:09<00:00,  2.01s/it]
+Loading checkpoint shards: 100%|##########| 4/4 [00:09<00:00,  2.47s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+  coder 20/164
+  coder 40/164
+  coder 60/164
+  coder 80/164
+  coder 100/164
+  coder 120/164
+  coder 140/164
+  coder 160/164
+  generalist 20/164
+  generalist 40/164
+  generalist 60/164
+  generalist 80/164
+  generalist 100/164
+  generalist 120/164
+  generalist 140/164
+  generalist 160/164
+{
+ "results": {
+  "n_problems": 164,
+  "coder_pass_at_1": 0.8598,
+  "generalist_pass_at_1": 0.5061,
+  "coder_wins_by": 0.3537
+ }
+}
+M268 cell 3 complete -> logs\results\v25\m287_coder_7b\evidence_code_7b.json

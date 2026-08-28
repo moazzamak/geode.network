@@ -1,0 +1,31 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier6_variable_order_locked_single.json",
+  "calibration_fraction": 0.2,
+  "capture_threshold": 0.08,
+  "consensus_threshold": 0.1,
+  "dataset": "synthetic_variable_order",
+  "refinement_batch_size": 128,
+  "refinement_lr": 0.005,
+  "refinement_max_batches_per_epoch": 4,
+  "max_chars": 6000,
+  "max_iterations": 10,
+  "max_test_samples": 300,
+  "max_train_samples": 1000,
+  "n_refinement_epochs": 0,
+  "n_refinement_iters": 0,
+  "n_folds": 2,
+  "nudge_iterations": 0,
+  "nudge_lr": 0.02,
+  "pca_components": 8,
+  "representations": [
+    "temporal_state"
+  ],
+  "seed": 13,
+  "temporal_recurrence": 0.95,
+  "temporal_state_dim": 24,
+  "temporal_warmup": 32,
+  "use_gpu": false,
+  "use_subtractive": false,
+  "window": 2
+}

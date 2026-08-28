@@ -1,0 +1,159 @@
+loading DomainNet
+  reusing decoded corpus D:\geode-ml\data\cache\domainnet_decoded\size32.npz
+  train 409832  test 100000  classes 345
+    clipart    train   33525  test    8263  share 0.0818
+    infograph  train   36023  test    8816  share 0.0879
+    painting   train   50416  test   12363  share 0.1230
+    quickdraw  train  120750  test   29280  share 0.2946
+    real       train  120906  test   29444  share 0.2950
+    sketch     train   48212  test   11834  share 0.1176
+fitting the shared whitener on TRAIN patches only
+  seed 11  rank clipart    rows  2000  RankMe    76.711
+  seed 11  rank infograph  rows  2000  RankMe    71.841
+  seed 11  rank painting   rows  2000  RankMe    78.733
+  seed 11  rank quickdraw  rows  2000  RankMe    11.116
+  seed 11  rank real       rows  2000  RankMe    78.269
+  seed 11  rank sketch     rows  2000  RankMe    36.147
+  seed 11    512  a_uniform                    clipart    atoms   512  rows/dim   16.37
+  seed 11    512  a_uniform                    infograph  atoms   512  rows/dim   17.59
+  seed 11    512  a_uniform                    painting   atoms   512  rows/dim   24.62
+  seed 11    512  a_uniform                    quickdraw  atoms   512  rows/dim   58.96
+  seed 11    512  a_uniform                    real       atoms   512  rows/dim   59.04
+  seed 11    512  a_uniform                    sketch     atoms   512  rows/dim   23.54
+  seed 11    512  b_rank_sized                 clipart    atoms   743  rows/dim   11.28
+  seed 11    512  b_rank_sized                 infograph  atoms   695  rows/dim   12.96
+  seed 11    512  b_rank_sized                 painting   atoms   762  rows/dim   16.54
+  seed 11    512  b_rank_sized                 quickdraw  atoms   108  rows/dim  279.51
+  seed 11    512  b_rank_sized                 real       atoms   758  rows/dim   39.88
+  seed 11    512  b_rank_sized                 sketch     atoms   350  rows/dim   34.44
+  seed 11    512  c1_generalist_mac_matched    all        atoms   512  rows/dim  200.11
+  seed 11    512  c2_generalist_atom_matched   all        atoms  3072  rows/dim   33.35
+  seed 11    512  d_random_sized               clipart    atoms   620  rows/dim   13.52
+  seed 11    512  d_random_sized               infograph  atoms   900  rows/dim   10.01
+  seed 11    512  d_random_sized               painting   atoms   469  rows/dim   26.87
+  seed 11    512  d_random_sized               quickdraw  atoms   329  rows/dim   91.76
+  seed 11    512  d_random_sized               real       atoms   290  rows/dim  104.23
+  seed 11    512  d_random_sized               sketch     atoms  1205  rows/dim   10.00
+  seed 11    512  e_traffic_inverse            clipart    atoms   838  rows/dim   10.00
+  seed 11    512  e_traffic_inverse            infograph  atoms   900  rows/dim   10.01
+  seed 11    512  e_traffic_inverse            painting   atoms   740  rows/dim   17.03
+  seed 11    512  e_traffic_inverse            quickdraw  atoms   309  rows/dim   97.69
+  seed 11    512  e_traffic_inverse            real       atoms   309  rows/dim   97.82
+  seed 11    512  e_traffic_inverse            sketch     atoms   774  rows/dim   15.57
+  seed 11    512  a_uniform                    pooled 0.2429  MACs/img 4.952e+07
+  seed 11    512  b_rank_sized                 pooled 0.2271  MACs/img 4.961e+07
+  seed 11    512  c1_generalist_mac_matched    pooled 0.1821  MACs/img 4.952e+07
+  seed 11    512  c2_generalist_atom_matched   pooled 0.2445  MACs/img 2.546e+08
+  seed 11    512  d_random_sized               pooled 0.2360  MACs/img 4.959e+07
+  seed 11    512  e_traffic_inverse            pooled 0.2364  MACs/img 4.961e+07
+  seed 23  rank clipart    rows  2000  RankMe    75.588
+  seed 23  rank infograph  rows  2000  RankMe    70.146
+  seed 23  rank painting   rows  2000  RankMe    78.319
+  seed 23  rank quickdraw  rows  2000  RankMe    10.376
+  seed 23  rank real       rows  2000  RankMe    77.271
+  seed 23  rank sketch     rows  2000  RankMe    35.202
+  seed 23    512  a_uniform                    clipart    atoms   512  rows/dim   16.37
+  seed 23    512  a_uniform                    infograph  atoms   512  rows/dim   17.59
+  seed 23    512  a_uniform                    painting   atoms   512  rows/dim   24.62
+  seed 23    512  a_uniform                    quickdraw  atoms   512  rows/dim   58.96
+  seed 23    512  a_uniform                    real       atoms   512  rows/dim   59.04
+  seed 23    512  a_uniform                    sketch     atoms   512  rows/dim   23.54
+  seed 23    512  b_rank_sized                 clipart    atoms   745  rows/dim   11.25
+  seed 23    512  b_rank_sized                 infograph  atoms   691  rows/dim   13.03
+  seed 23    512  b_rank_sized                 painting   atoms   771  rows/dim   16.35
+  seed 23    512  b_rank_sized                 quickdraw  atoms   102  rows/dim  295.96
+  seed 23    512  b_rank_sized                 real       atoms   761  rows/dim   39.72
+  seed 23    512  b_rank_sized                 sketch     atoms   347  rows/dim   34.73
+  seed 23    512  c1_generalist_mac_matched    all        atoms   512  rows/dim  200.11
+  seed 23    512  c2_generalist_atom_matched   all        atoms  3072  rows/dim   33.35
+  seed 23    512  d_random_sized               clipart    atoms   110  rows/dim   76.19
+  seed 23    512  d_random_sized               infograph  atoms   278  rows/dim   32.39
+  seed 23    512  d_random_sized               painting   atoms   725  rows/dim   17.38
+  seed 23    512  d_random_sized               quickdraw  atoms   763  rows/dim   39.56
+  seed 23    512  d_random_sized               real       atoms   512  rows/dim   59.04
+  seed 23    512  d_random_sized               sketch     atoms   117  rows/dim  103.02
+  seed 23    512  e_traffic_inverse            clipart    atoms   838  rows/dim   10.00
+  seed 23    512  e_traffic_inverse            infograph  atoms   900  rows/dim   10.01
+  seed 23    512  e_traffic_inverse            painting   atoms   740  rows/dim   17.03
+  seed 23    512  e_traffic_inverse            quickdraw  atoms   309  rows/dim   97.69
+  seed 23    512  e_traffic_inverse            real       atoms   309  rows/dim   97.82
+  seed 23    512  e_traffic_inverse            sketch     atoms   774  rows/dim   15.57
+  seed 23    512  a_uniform                    pooled 0.2413  MACs/img 4.952e+07
+  seed 23    512  b_rank_sized                 pooled 0.2230  MACs/img 4.958e+07
+  seed 23    512  c1_generalist_mac_matched    pooled 0.1800  MACs/img 4.952e+07
+  seed 23    512  c2_generalist_atom_matched   pooled 0.2452  MACs/img 2.546e+08
+  seed 23    512  d_random_sized               pooled 0.2319  MACs/img 4.946e+07
+  seed 23    512  e_traffic_inverse            pooled 0.2336  MACs/img 4.961e+07
+  seed 37  rank clipart    rows  2000  RankMe    77.764
+  seed 37  rank infograph  rows  2000  RankMe    72.345
+  seed 37  rank painting   rows  2000  RankMe    80.265
+  seed 37  rank quickdraw  rows  2000  RankMe    10.568
+  seed 37  rank real       rows  2000  RankMe    79.825
+  seed 37  rank sketch     rows  2000  RankMe    36.416
+  seed 37    512  a_uniform                    clipart    atoms   512  rows/dim   16.37
+  seed 37    512  a_uniform                    infograph  atoms   512  rows/dim   17.59
+  seed 37    512  a_uniform                    painting   atoms   512  rows/dim   24.62
+  seed 37    512  a_uniform                    quickdraw  atoms   512  rows/dim   58.96
+  seed 37    512  a_uniform                    real       atoms   512  rows/dim   59.04
+  seed 37    512  a_uniform                    sketch     atoms   512  rows/dim   23.54
+  seed 37    512  b_rank_sized                 clipart    atoms   744  rows/dim   11.27
+  seed 37    512  b_rank_sized                 infograph  atoms   692  rows/dim   13.01
+  seed 37    512  b_rank_sized                 painting   atoms   768  rows/dim   16.41
+  seed 37    512  b_rank_sized                 quickdraw  atoms   101  rows/dim  298.89
+  seed 37    512  b_rank_sized                 real       atoms   763  rows/dim   39.62
+  seed 37    512  b_rank_sized                 sketch     atoms   348  rows/dim   34.64
+  seed 37    512  c1_generalist_mac_matched    all        atoms   512  rows/dim  200.11
+  seed 37    512  c2_generalist_atom_matched   all        atoms  3072  rows/dim   33.35
+  seed 37    512  d_random_sized               clipart    atoms   320  rows/dim   26.19
+  seed 37    512  d_random_sized               infograph  atoms   447  rows/dim   20.15
+  seed 37    512  d_random_sized               painting   atoms   227  rows/dim   55.52
+  seed 37    512  d_random_sized               quickdraw  atoms   786  rows/dim   38.41
+  seed 37    512  d_random_sized               real       atoms   558  rows/dim   54.17
+  seed 37    512  d_random_sized               sketch     atoms   190  rows/dim   63.44
+  seed 37    512  e_traffic_inverse            clipart    atoms   838  rows/dim   10.00
+  seed 37    512  e_traffic_inverse            infograph  atoms   900  rows/dim   10.01
+  seed 37    512  e_traffic_inverse            painting   atoms   740  rows/dim   17.03
+  seed 37    512  e_traffic_inverse            quickdraw  atoms   309  rows/dim   97.69
+  seed 37    512  e_traffic_inverse            real       atoms   309  rows/dim   97.82
+  seed 37    512  e_traffic_inverse            sketch     atoms   774  rows/dim   15.57
+  seed 37    512  a_uniform                    pooled 0.2425  MACs/img 4.952e+07
+  seed 37    512  b_rank_sized                 pooled 0.2238  MACs/img 4.959e+07
+  seed 37    512  c1_generalist_mac_matched    pooled 0.1813  MACs/img 4.952e+07
+  seed 37    512  c2_generalist_atom_matched   pooled 0.2457  MACs/img 2.546e+08
+  seed 37    512  d_random_sized               pooled 0.2384  MACs/img 4.943e+07
+  seed 37    512  e_traffic_inverse            pooled 0.2357  MACs/img 4.961e+07
+
+=== M104 gate (ORACLE routing) ===
+{
+  "_reading": "Oracle routing. Section 7.10 design item 3 and restriction 4: these are upper bounds and not system results, and every sentence quoting one carries the word 'oracle'. Section 7.10 restriction 1 and prohibition 24 forbid comparing any figure here to any M103 or section 2.9.3 CIFAR-10 figure in either direction.",
+  "budgets": {
+    "512": {
+      "generalist_atom_matched_pooled_mean": 0.24513,
+      "generalist_mac_matched_pooled_mean": 0.18116333333333334,
+      "high_rank_domain_mean_margin": 0.011029369064138036,
+      "kill_switch_1_fired": true,
+      "kill_switch_1_text": "If arm (b) does not beat arm (a) by more than arm (a)'s own seed spread, at three seeds, then rank-sizing buys nothing at matched compute and the direction is refuted. Section 11.1 requires that as the headline, not a footnote.",
+      "kill_switch_2_fired": true,
+      "kill_switch_3_atom_matched_fired": true,
+      "kill_switch_3_mac_matched_fired": false,
+      "kill_switch_4_fired": true,
+      "low_rank_domain_mean_margin": -0.04844527538354648,
+      "margin_b_minus_a": -0.01756333333333332,
+      "per_domain_margin_b_minus_a": {
+        "clipart": 0.014482230021380493,
+        "infograph": 0.004310344827586202,
+        "painting": 0.007630294696540751,
+        "quickdraw": -0.07925774134790531,
+        "real": 0.017694606711044697,
+        "sketch": -0.017632809419187656
+      },
+      "random_sized_pooled_mean": 0.23540333333333333,
+      "rank_sized_pooled_mean": 0.22466,
+      "registered_mechanism_verdict": "unsupported: no margin on the low-rank domains",
+      "traffic_inverse_pooled_mean": 0.23526333333333335,
+      "uniform_pooled_mean": 0.24222333333333332,
+      "uniform_pooled_spread": 0.0016499999999999848,
+      "void_arms": []
+    }
+  }
+}

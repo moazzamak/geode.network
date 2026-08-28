@@ -1,0 +1,172 @@
+{
+  "child_bundle_id": "aaa5a73c0b813240876d",
+  "config_hash": "ffe61e280760b223fa0e842b6878ad5c085d5fa0595ab7be5ed187e5205fee71",
+  "core_gates_passed": true,
+  "final_test_used_for_selection": false,
+  "milestone": "E6",
+  "parent_bundle_id": "18ab33416dd20c4c37d0",
+  "partition_audit": {
+    "class_counts": {
+      "final_test": {
+        "0": 125,
+        "1": 122,
+        "2": 143,
+        "3": 134,
+        "4": 131,
+        "5": 160,
+        "6": 137,
+        "7": 126,
+        "8": 121,
+        "9": 144
+      },
+      "geometry": {
+        "0": 410,
+        "1": 396,
+        "2": 399,
+        "3": 393,
+        "4": 411,
+        "5": 408,
+        "6": 397,
+        "7": 378,
+        "8": 389,
+        "9": 411
+      },
+      "readout_calibration": {
+        "0": 103,
+        "1": 99,
+        "2": 100,
+        "3": 98,
+        "4": 103,
+        "5": 102,
+        "6": 99,
+        "7": 95,
+        "8": 98,
+        "9": 103
+      },
+      "risk_control": {
+        "0": 68,
+        "1": 66,
+        "2": 66,
+        "3": 66,
+        "4": 68,
+        "5": 68,
+        "6": 66,
+        "7": 63,
+        "8": 65,
+        "9": 69
+      },
+      "validation": {
+        "0": 103,
+        "1": 99,
+        "2": 100,
+        "3": 98,
+        "4": 103,
+        "5": 102,
+        "6": 99,
+        "7": 95,
+        "8": 98,
+        "9": 103
+      }
+    },
+    "complete_coverage": true,
+    "dataset_size": 8000,
+    "pairwise_disjoint": true,
+    "partition_counts": {
+      "final_test": 1343,
+      "geometry": 3992,
+      "readout_calibration": 1000,
+      "risk_control": 665,
+      "validation": 1000
+    },
+    "partition_hashes": {
+      "final_test": "e76da24a229f9a1cf77a00b572da225fd040cb39fe1f736af3a3cc0097066ace",
+      "geometry": "ec84471aea3727a652372a26f2d86704db1ee99bda0f9e20ea44bb716e579b69",
+      "readout_calibration": "f478ea606ef3a7c3329770851c540c3047a71ac6c989b119e9bd40aa64181c66",
+      "risk_control": "88139f5762fbea6ba2d2e018fe23068974d0bb89fe4c050c294e660b89032ffe",
+      "validation": "2593d25bb994a1194b89db249087ab5d5a2c5bce763104be6b608b90f0731ce9"
+    },
+    "seed": 11
+  },
+  "pretraining_lanes": {
+    "controlled": {
+      "checkpoint": "MobileNetV2 IMAGENET1K_V1",
+      "source_datasets": [
+        "ImageNet-1K"
+      ],
+      "status": "qualified",
+      "target_training": "CIFAR-10 geometry split only"
+    },
+    "external": {
+      "reason": "No second externally pretrained checkpoint is present",
+      "status": "not_run"
+    }
+  },
+  "replay_identity": {
+    "geometry": true,
+    "passed": true,
+    "prediction_hash": true,
+    "readout": true,
+    "transform": true
+  },
+  "schema_version": 1,
+  "source_replay": {
+    "accuracy_after": 0.6517996870109546,
+    "accuracy_before": 0.6517996870109546,
+    "budget": 0.0,
+    "forgetting": 0.0,
+    "passed": true,
+    "prediction_hash_after": "ee6db9523c40937f5116c14b11731e922e25b9f2d0d9e83c7a4867c5e09aae75",
+    "prediction_hash_before": "ee6db9523c40937f5116c14b11731e922e25b9f2d0d9e83c7a4867c5e09aae75"
+  },
+  "target_gate": {
+    "chance_balanced_accuracy": 0.1,
+    "geode_improvement": 0.7195696255426517,
+    "passed": true,
+    "required_improvement": 0.35
+  },
+  "variants": {
+    "frozen_source": {
+      "source_accuracy": 0.6517996870109546,
+      "target_metrics": null,
+      "target_role": "unavailable_without_target_head"
+    },
+    "geode_head": {
+      "model_hashes": {
+        "geometry": "078f471a088ccb6b1dc7b9fe98f718c371877438786b99d207470b56c8a74754",
+        "readout": "ed30209561ea675f80c863e65455892689f5f59430c9f5b6e0a074472fcf77b0",
+        "transform": "032a26a5710949f76bbd7183c73531f0704f9752abe590838303d4e7b2da9bc5"
+      },
+      "prediction_hash": "13696cbdf4d1ae9188e504334cf31a981b6413bf8761292fe5b8dd723f88b4d3",
+      "target_metrics": {
+        "accuracy": 0.8175725986597171,
+        "balanced_accuracy": 0.8195696255426517,
+        "brier_score": 0.26768553383313604,
+        "expected_calibration_error": 0.05688647473867164,
+        "negative_log_likelihood": 0.5686055768640375,
+        "top_5_accuracy": 0.9873417721518988
+      }
+    },
+    "linear_probe": {
+      "prediction_hash": "4ddde94d9420c7af4bb90900a530f03a1d0355f66fe33a7bc7285848c81325d8",
+      "target_metrics": {
+        "accuracy": 0.8242740134028295,
+        "balanced_accuracy": 0.8270762742339492,
+        "brier_score": 0.27236605974060024,
+        "expected_calibration_error": 0.0946720431943178,
+        "negative_log_likelihood": 0.6695232597327588,
+        "top_5_accuracy": 0.9910647803425168
+      }
+    },
+    "supervised_adapter": {
+      "prediction_hash": "2d2dbf8ef2ffdb6ba113405e24af93be023c89cc04b89d7b1e69ef12b8642f62",
+      "target_metrics": {
+        "accuracy": 0.8265078183172003,
+        "balanced_accuracy": 0.829737072209267,
+        "brier_score": 0.24691518181099292,
+        "expected_calibration_error": 0.03116356877271042,
+        "negative_log_likelihood": 0.5105083570694675,
+        "top_5_accuracy": 0.9918093819806404
+      }
+    }
+  }
+}

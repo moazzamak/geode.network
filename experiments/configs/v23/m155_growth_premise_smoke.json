@@ -1,0 +1,45 @@
+{
+  "milestone": "M155",
+  "title": "SMOKE: M155 premise plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M155",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (20000 train / 2000 test rows, anchors skipped). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_anchors": true,
+  "_smoke_train_rows": 20000,
+  "_smoke_test_rows": 2000,
+  "question": "Does the M155 pipeline (two head refits, anchor checks, train error-row counts, floor ladders) run end-to-end on tiny cells?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "m142_cache_relpath": "v16/m142_c2",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz"
+  },
+  "anchors": {
+    "f6144_full_data": 0.2613623188405797,
+    "spm_sqrt_full_data": 0.27855072463768116,
+    "tolerance": 1e-09
+  },
+  "premise": {
+    "fit_floor": 10.0,
+    "pool_bins": 4
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "block": 4096
+  },
+  "output_dir": "logs/results/v23/m155_growth_premise_smoke"
+}

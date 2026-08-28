@@ -1,0 +1,17 @@
+{
+  "assembly_hashes_match": true,
+  "failure_stage": "class-10",
+  "feature_loads": {
+    "recovered_before_resume": 1,
+    "recovered_during_resume": 0,
+    "uninterrupted": 1
+  },
+  "final_test_observed": false,
+  "milestone": "E4",
+  "partial_stage_visible": true,
+  "passed": true,
+  "recovered_complete": true,
+  "run_id": "b12ae75f6eee2c30",
+  "schema_version": 1,
+  "validation_metrics_match": true
+}

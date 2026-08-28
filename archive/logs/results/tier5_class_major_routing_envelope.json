@@ -1,0 +1,1961 @@
+{
+  "milestone": "M12.3",
+  "protocol": {
+    "design": "one_factor_at_a_time",
+    "schedule": "class_major_at_most_one_exact_call_per_class",
+    "exhaustive_authoritative": true,
+    "approximate_index_used": false
+  },
+  "summary": {
+    "minimum_agreement": 1.0,
+    "maximum_winning_score_error": 1.7763568394002505e-15,
+    "slopes": {
+      "class_count": {
+        "candidate_count": 0.9241646995092938,
+        "routed_latency": 0.9087216668516553,
+        "exhaustive_latency": 1.0069560621983604
+      },
+      "dimensions": {
+        "candidate_count": 0.6353278961851524,
+        "routed_latency": 0.3032844935594781,
+        "exhaustive_latency": 0.37449493349555785
+      },
+      "primitives_per_class": {
+        "candidate_count": 0.4534243083166131,
+        "routed_latency": 0.657153226352679,
+        "exhaustive_latency": 0.9833111002534961
+      },
+      "batch_size": {
+        "candidate_count": 0.06837446555110503,
+        "routed_latency": 0.20909472520280845,
+        "exhaustive_latency": 0.1167461521455784
+      }
+    },
+    "break_even_conditions": [],
+    "maximum_speedup": 0.8700228170870544
+  },
+  "condition_summaries": [
+    {
+      "condition": {
+        "name": "baseline",
+        "axis": "baseline",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.002604166666668,
+      "candidate_fraction": 0.9063313802083334,
+      "mean_primitives_per_sample": 116.01041666666667,
+      "exhaustive_latency_p50_seconds": 0.0016302000027887213,
+      "routed_latency_p50_seconds": 0.0036601166696830965,
+      "speedup_over_exhaustive": 0.4453956389673963
+    },
+    {
+      "condition": {
+        "name": "class_count=4",
+        "axis": "class_count",
+        "class_count": 4,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 3.9635416666666665,
+      "candidate_fraction": 0.9908854166666666,
+      "mean_primitives_per_sample": 15.854166666666666,
+      "exhaustive_latency_p50_seconds": 0.00020344999938970432,
+      "routed_latency_p50_seconds": 0.0005182833338039927,
+      "speedup_over_exhaustive": 0.3925459032156457
+    },
+    {
+      "condition": {
+        "name": "class_count=8",
+        "axis": "class_count",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.776041666666667,
+      "candidate_fraction": 0.9720052083333334,
+      "mean_primitives_per_sample": 31.104166666666668,
+      "exhaustive_latency_p50_seconds": 0.0004012166682514362,
+      "routed_latency_p50_seconds": 0.0009852833342544425,
+      "speedup_over_exhaustive": 0.407209433370792
+    },
+    {
+      "condition": {
+        "name": "class_count=16",
+        "axis": "class_count",
+        "class_count": 16,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 15.221354166666666,
+      "candidate_fraction": 0.9513346354166666,
+      "mean_primitives_per_sample": 60.885416666666664,
+      "exhaustive_latency_p50_seconds": 0.0008116166645777412,
+      "routed_latency_p50_seconds": 0.00190916666421496,
+      "speedup_over_exhaustive": 0.42511566946486257
+    },
+    {
+      "condition": {
+        "name": "class_count=64",
+        "axis": "class_count",
+        "class_count": 64,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 54.348958333333336,
+      "candidate_fraction": 0.8492024739583334,
+      "mean_primitives_per_sample": 217.39583333333334,
+      "exhaustive_latency_p50_seconds": 0.0032816500024637207,
+      "routed_latency_p50_seconds": 0.006682483333861455,
+      "speedup_over_exhaustive": 0.49108240731929037
+    },
+    {
+      "condition": {
+        "name": "class_count=128",
+        "axis": "class_count",
+        "class_count": 128,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 102.2578125,
+      "candidate_fraction": 0.79888916015625,
+      "mean_primitives_per_sample": 409.03125,
+      "exhaustive_latency_p50_seconds": 0.006630183333375801,
+      "routed_latency_p50_seconds": 0.012578349999481967,
+      "speedup_over_exhaustive": 0.5271107365949319
+    },
+    {
+      "condition": {
+        "name": "class_count=256",
+        "axis": "class_count",
+        "class_count": 256,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 183.83333333333334,
+      "candidate_fraction": 0.7180989583333334,
+      "mean_primitives_per_sample": 735.3333333333334,
+      "exhaustive_latency_p50_seconds": 0.013282200001413003,
+      "routed_latency_p50_seconds": 0.022334900000714697,
+      "speedup_over_exhaustive": 0.5946836565638522
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 2,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 6.658854166666667,
+      "candidate_fraction": 0.20808919270833334,
+      "mean_primitives_per_sample": 26.635416666666668,
+      "exhaustive_latency_p50_seconds": 0.0014269999980266828,
+      "routed_latency_p50_seconds": 0.002961033341610649,
+      "speedup_over_exhaustive": 0.4819263525247806
+    },
+    {
+      "condition": {
+        "name": "dimensions=4",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 4,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 9.0390625,
+      "candidate_fraction": 0.282470703125,
+      "mean_primitives_per_sample": 36.15625,
+      "exhaustive_latency_p50_seconds": 0.0018039666683762334,
+      "routed_latency_p50_seconds": 0.003868583332708416,
+      "speedup_over_exhaustive": 0.4663119579521289
+    },
+    {
+      "condition": {
+        "name": "dimensions=16",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 16,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_p50_seconds": 0.003017783337175691,
+      "routed_latency_p50_seconds": 0.0062410166671422,
+      "speedup_over_exhaustive": 0.48354034256369843
+    },
+    {
+      "condition": {
+        "name": "dimensions=32",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 32,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_p50_seconds": 0.004039849998662248,
+      "routed_latency_p50_seconds": 0.006669300002007124,
+      "speedup_over_exhaustive": 0.6057382330149276
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 1,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.0546875,
+      "candidate_fraction": 0.220458984375,
+      "mean_primitives_per_sample": 7.0546875,
+      "exhaustive_latency_p50_seconds": 0.0005284333310555667,
+      "routed_latency_p50_seconds": 0.0022821500000039427,
+      "speedup_over_exhaustive": 0.2315506566416115
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=2",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 2,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 25.1015625,
+      "candidate_fraction": 0.784423828125,
+      "mean_primitives_per_sample": 50.203125,
+      "exhaustive_latency_p50_seconds": 0.0015143833346276854,
+      "routed_latency_p50_seconds": 0.004213249997216432,
+      "speedup_over_exhaustive": 0.35943353364461944
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=8",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 8,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.294270833333332,
+      "candidate_fraction": 0.9466959635416666,
+      "mean_primitives_per_sample": 242.35416666666666,
+      "exhaustive_latency_p50_seconds": 0.00474551667139167,
+      "routed_latency_p50_seconds": 0.008823999999246249,
+      "speedup_over_exhaustive": 0.5377965403215134
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=16",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 16,
+        "batch_size": 128
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 1.7763568394002505e-15,
+      "mean_candidates_per_sample": 30.911458333333332,
+      "candidate_fraction": 0.9659830729166666,
+      "mean_primitives_per_sample": 494.5833333333333,
+      "exhaustive_latency_p50_seconds": 0.009015649998521743,
+      "routed_latency_p50_seconds": 0.015379216665072212,
+      "speedup_over_exhaustive": 0.5862229653736015
+    },
+    {
+      "condition": {
+        "name": "batch_size=1",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 1
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 18.666666666666668,
+      "candidate_fraction": 0.5833333333333334,
+      "mean_primitives_per_sample": 74.66666666666667,
+      "exhaustive_latency_p50_seconds": 0.0016078166663646698,
+      "routed_latency_p50_seconds": 0.0018480166666752969,
+      "speedup_over_exhaustive": 0.8700228170870544
+    },
+    {
+      "condition": {
+        "name": "batch_size=16",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 16
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.625,
+      "candidate_fraction": 0.92578125,
+      "mean_primitives_per_sample": 118.5,
+      "exhaustive_latency_p50_seconds": 0.0018262333372452606,
+      "routed_latency_p50_seconds": 0.003501683330493203,
+      "speedup_over_exhaustive": 0.5215301227675663
+    },
+    {
+      "condition": {
+        "name": "batch_size=64",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 64
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.338541666666668,
+      "candidate_fraction": 0.9168294270833334,
+      "mean_primitives_per_sample": 117.35416666666667,
+      "exhaustive_latency_p50_seconds": 0.002284466667333618,
+      "routed_latency_p50_seconds": 0.004999799998283076,
+      "speedup_over_exhaustive": 0.45691161008802356
+    },
+    {
+      "condition": {
+        "name": "batch_size=256",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 256
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.334635416666668,
+      "candidate_fraction": 0.9167073567708334,
+      "mean_primitives_per_sample": 117.33854166666667,
+      "exhaustive_latency_p50_seconds": 0.003471066663526775,
+      "routed_latency_p50_seconds": 0.007457049997659245,
+      "speedup_over_exhaustive": 0.4654745059529354
+    },
+    {
+      "condition": {
+        "name": "batch_size=512",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 512
+      },
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.314453125,
+      "candidate_fraction": 0.91607666015625,
+      "mean_primitives_per_sample": 117.2578125,
+      "exhaustive_latency_p50_seconds": 0.003504183334977521,
+      "routed_latency_p50_seconds": 0.006707316667113143,
+      "speedup_over_exhaustive": 0.5224419106613817
+    }
+  ],
+  "cells": [
+    {
+      "condition": {
+        "name": "baseline",
+        "axis": "baseline",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.0703125,
+      "candidate_fraction": 0.908447265625,
+      "mean_primitives_per_sample": 116.28125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0016228500026045367,
+        "p95": 0.0017828799987910312,
+        "p99": 0.0018525760056218132
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0036769500075024553,
+        "p95": 0.004015290003735572,
+        "p99": 0.00405409800587222
+      }
+    },
+    {
+      "condition": {
+        "name": "baseline",
+        "axis": "baseline",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.5390625,
+      "candidate_fraction": 0.923095703125,
+      "mean_primitives_per_sample": 118.15625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0016245500009972602,
+        "p95": 0.001651319993106881,
+        "p99": 0.0016521839944471138
+      },
+      "routed_latency_seconds": {
+        "p50": 0.003587400002288632,
+        "p95": 0.003713884998433059,
+        "p99": 0.0037688570031605196
+      }
+    },
+    {
+      "condition": {
+        "name": "baseline",
+        "axis": "baseline",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 28.3984375,
+      "candidate_fraction": 0.887451171875,
+      "mean_primitives_per_sample": 113.59375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001643200004764367,
+        "p95": 0.0017138900067948269,
+        "p99": 0.0017390180043003057
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0037159999992582016,
+        "p95": 0.0038455450063338502,
+        "p99": 0.00387070900935214
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=4",
+        "axis": "class_count",
+        "class_count": 4,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 3.9296875,
+      "candidate_fraction": 0.982421875,
+      "mean_primitives_per_sample": 15.71875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00020444999972824007,
+        "p95": 0.0002166450023651123,
+        "p99": 0.0002194890030659735
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0005197999998927116,
+        "p95": 0.0005629099985526409,
+        "p99": 0.0005788219992246014
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=4",
+        "axis": "class_count",
+        "class_count": 4,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 3.96875,
+      "candidate_fraction": 0.9921875,
+      "mean_primitives_per_sample": 15.875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0002045500004896894,
+        "p95": 0.00021231499995337798,
+        "p99": 0.00021422300400445238
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0005203000036999583,
+        "p95": 0.0005978099979984108,
+        "p99": 0.0006043620007403661
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=4",
+        "axis": "class_count",
+        "class_count": 4,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 3.9921875,
+      "candidate_fraction": 0.998046875,
+      "mean_primitives_per_sample": 15.96875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00020134999795118347,
+        "p95": 0.0002077750024909619,
+        "p99": 0.00020867500410531647
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0005147499978193082,
+        "p95": 0.0005437799991341308,
+        "p99": 0.0005529960064450279
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=8",
+        "axis": "class_count",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.765625,
+      "candidate_fraction": 0.970703125,
+      "mean_primitives_per_sample": 31.0625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00039230000402312726,
+        "p95": 0.0004405249979754444,
+        "p99": 0.00044250499733607286
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0009653500019339845,
+        "p95": 0.0010362450004322455,
+        "p99": 0.0010527690005255864
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=8",
+        "axis": "class_count",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.8671875,
+      "candidate_fraction": 0.9833984375,
+      "mean_primitives_per_sample": 31.46875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0004030499985674396,
+        "p95": 0.00043941500262008044,
+        "p99": 0.00045716300679487175
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0010017000022344291,
+        "p95": 0.0010515150002902373,
+        "p99": 0.001054142999346368
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=8",
+        "axis": "class_count",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.6953125,
+      "candidate_fraction": 0.9619140625,
+      "mean_primitives_per_sample": 30.78125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00040830000216374174,
+        "p95": 0.00043600000790320335,
+        "p99": 0.0004446400108281523
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0009887999985949136,
+        "p95": 0.001063429995701881,
+        "p99": 0.00108092599795782
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=16",
+        "axis": "class_count",
+        "class_count": 16,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 15.265625,
+      "candidate_fraction": 0.9541015625,
+      "mean_primitives_per_sample": 61.0625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.000803099996119272,
+        "p95": 0.0008972099989478009,
+        "p99": 0.0009390419979172294
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0019384999977773987,
+        "p95": 0.0023308299998461733,
+        "p99": 0.002360566001007101
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=16",
+        "axis": "class_count",
+        "class_count": 16,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 15.4375,
+      "candidate_fraction": 0.96484375,
+      "mean_primitives_per_sample": 61.75,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0008066500013228506,
+        "p95": 0.0009387200057972221,
+        "p99": 0.0009914240089710803
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0018674999955692329,
+        "p95": 0.0021679300050891468,
+        "p99": 0.002202706002717605
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=16",
+        "axis": "class_count",
+        "class_count": 16,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 14.9609375,
+      "candidate_fraction": 0.93505859375,
+      "mean_primitives_per_sample": 59.84375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.000825099996291101,
+        "p95": 0.0010719199985032898,
+        "p99": 0.0011822240002220498
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0019214999992982484,
+        "p95": 0.002441905005980516,
+        "p99": 0.002481181006442057
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=64",
+        "axis": "class_count",
+        "class_count": 64,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 54.4375,
+      "candidate_fraction": 0.8505859375,
+      "mean_primitives_per_sample": 217.75,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0033425500078010373,
+        "p95": 0.00386473499238491,
+        "p99": 0.004068386992439628
+      },
+      "routed_latency_seconds": {
+        "p50": 0.00664610000239918,
+        "p95": 0.006941375003225403,
+        "p99": 0.0070164350037521216
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=64",
+        "axis": "class_count",
+        "class_count": 64,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 56.7578125,
+      "candidate_fraction": 0.8868408203125,
+      "mean_primitives_per_sample": 227.03125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0032196999964071438,
+        "p95": 0.0033821949989942366,
+        "p99": 0.0034005189970775975
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006516749999718741,
+        "p95": 0.006942489998618839,
+        "p99": 0.007071297999791568
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=64",
+        "axis": "class_count",
+        "class_count": 64,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 51.8515625,
+      "candidate_fraction": 0.8101806640625,
+      "mean_primitives_per_sample": 207.40625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003282700003182981,
+        "p95": 0.0036819449938775505,
+        "p99": 0.003703508995677112
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006884599999466445,
+        "p95": 0.00876790500115021,
+        "p99": 0.009446540998033015
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=128",
+        "axis": "class_count",
+        "class_count": 128,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 102.4921875,
+      "candidate_fraction": 0.80072021484375,
+      "mean_primitives_per_sample": 409.96875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.006572899997991044,
+        "p95": 0.007033064999995986,
+        "p99": 0.007097253001556965
+      },
+      "routed_latency_seconds": {
+        "p50": 0.012010149999696296,
+        "p95": 0.01301404500263743,
+        "p99": 0.013325049002887682
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=128",
+        "axis": "class_count",
+        "class_count": 128,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 105.7421875,
+      "candidate_fraction": 0.82611083984375,
+      "mean_primitives_per_sample": 422.96875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0065638000014587305,
+        "p95": 0.007159264994697877,
+        "p99": 0.007407052990311059
+      },
+      "routed_latency_seconds": {
+        "p50": 0.012477849995775614,
+        "p95": 0.01577468500036048,
+        "p99": 0.0158476570007042
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=128",
+        "axis": "class_count",
+        "class_count": 128,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 98.5390625,
+      "candidate_fraction": 0.76983642578125,
+      "mean_primitives_per_sample": 394.15625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00675385000067763,
+        "p95": 0.007879234998836181,
+        "p99": 0.008195927000488155
+      },
+      "routed_latency_seconds": {
+        "p50": 0.013247050002973992,
+        "p95": 0.014631155002280138,
+        "p99": 0.015109991002245806
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=256",
+        "axis": "class_count",
+        "class_count": 256,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 178.546875,
+      "candidate_fraction": 0.69744873046875,
+      "mean_primitives_per_sample": 714.1875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.013600700003735255,
+        "p95": 0.014015150000341236,
+        "p99": 0.014092550002969802
+      },
+      "routed_latency_seconds": {
+        "p50": 0.022502799998619594,
+        "p95": 0.025331884999468455,
+        "p99": 0.026354537001752762
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=256",
+        "axis": "class_count",
+        "class_count": 256,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 191.71875,
+      "candidate_fraction": 0.7489013671875,
+      "mean_primitives_per_sample": 766.875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.012966700000106357,
+        "p95": 0.013492254999437136,
+        "p99": 0.013526850995694985
+      },
+      "routed_latency_seconds": {
+        "p50": 0.02214195000124164,
+        "p95": 0.022751714999321847,
+        "p99": 0.02289186299778521
+      }
+    },
+    {
+      "condition": {
+        "name": "class_count=256",
+        "axis": "class_count",
+        "class_count": 256,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 181.234375,
+      "candidate_fraction": 0.70794677734375,
+      "mean_primitives_per_sample": 724.9375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.013279200000397395,
+        "p95": 0.014421044999471633,
+        "p99": 0.014482928993966198
+      },
+      "routed_latency_seconds": {
+        "p50": 0.022359950002282858,
+        "p95": 0.023322195002401715,
+        "p99": 0.023411799003661145
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 2,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.0703125,
+      "candidate_fraction": 0.220947265625,
+      "mean_primitives_per_sample": 28.28125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001446999995096121,
+        "p95": 0.0015534349971858318,
+        "p99": 0.0015742069929547142
+      },
+      "routed_latency_seconds": {
+        "p50": 0.002864800007955637,
+        "p95": 0.0031278499984182416,
+        "p99": 0.003221810001414269
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 2,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 6.8984375,
+      "candidate_fraction": 0.215576171875,
+      "mean_primitives_per_sample": 27.59375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001418099993315991,
+        "p95": 0.0016170699964277444,
+        "p99": 0.001704693993087858
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0029875000109313987,
+        "p95": 0.0033038050038157957,
+        "p99": 0.00342084100440843
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 2,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 6.0078125,
+      "candidate_fraction": 0.187744140625,
+      "mean_primitives_per_sample": 24.03125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001415900005667936,
+        "p95": 0.0017044250060280317,
+        "p99": 0.0018007250111259055
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0030308000059449114,
+        "p95": 0.0034134049965359736,
+        "p99": 0.0034382809921226
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=4",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 4,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 9.7109375,
+      "candidate_fraction": 0.303466796875,
+      "mean_primitives_per_sample": 38.84375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001513600000180304,
+        "p95": 0.0020881900018139277,
+        "p99": 0.0021442780045617836
+      },
+      "routed_latency_seconds": {
+        "p50": 0.003206499997759238,
+        "p95": 0.0036524199982522986,
+        "p99": 0.003671284005686175
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=4",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 4,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 9.6171875,
+      "candidate_fraction": 0.300537109375,
+      "mean_primitives_per_sample": 38.46875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0014878000001772307,
+        "p95": 0.0019270899945695416,
+        "p99": 0.002026377990987385
+      },
+      "routed_latency_seconds": {
+        "p50": 0.00319619999936549,
+        "p95": 0.0037288649968104434,
+        "p99": 0.003775772997760214
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=4",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 4,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.7890625,
+      "candidate_fraction": 0.243408203125,
+      "mean_primitives_per_sample": 31.15625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0024105000047711655,
+        "p95": 0.0025285350035119335,
+        "p99": 0.002534187009878224
+      },
+      "routed_latency_seconds": {
+        "p50": 0.00520305000100052,
+        "p95": 0.005332264998287428,
+        "p99": 0.005350372999964747
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=16",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 16,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003028450002602767,
+        "p95": 0.00318614500502008,
+        "p99": 0.003259549003414577
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006173049994686153,
+        "p95": 0.006275729996559676,
+        "p99": 0.0062910659980843775
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=16",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 16,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003009550004207995,
+        "p95": 0.0030548049995559267,
+        "p99": 0.0030624010050087237
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0064182999994955026,
+        "p95": 0.006504170003609033,
+        "p99": 0.006513314005132997
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=16",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 16,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0030153500047163107,
+        "p95": 0.003224034990853397,
+        "p99": 0.0032944869877246674
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006131700007244945,
+        "p95": 0.006322514989005867,
+        "p99": 0.006323702987574506
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=32",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 32,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0040243999974336475,
+        "p95": 0.004121155002212618,
+        "p99": 0.004126231009431649
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006811050006945152,
+        "p95": 0.006884080003510462,
+        "p99": 0.0068904160046076865
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=32",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 32,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.004100099999050144,
+        "p95": 0.004141434993653092,
+        "p99": 0.004148526995268184
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0065781000012066215,
+        "p95": 0.006764225001097657,
+        "p99": 0.006769805001677014
+      }
+    },
+    {
+      "condition": {
+        "name": "dimensions=32",
+        "axis": "dimensions",
+        "class_count": 32,
+        "dimensions": 32,
+        "primitives_per_class": 4,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 32.0,
+      "candidate_fraction": 1.0,
+      "mean_primitives_per_sample": 128.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003995049999502953,
+        "p95": 0.004050134996941779,
+        "p99": 0.004057226998556871
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0066187499978696,
+        "p95": 0.006906500001787208,
+        "p99": 0.007000100002042018
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 1,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 6.9765625,
+      "candidate_fraction": 0.218017578125,
+      "mean_primitives_per_sample": 6.9765625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00047500000073341653,
+        "p95": 0.0005717250009183772,
+        "p99": 0.0005729850000352599
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0020403500020620413,
+        "p95": 0.002383324997936142,
+        "p99": 0.0025041050008439924
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 1,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 7.2578125,
+      "candidate_fraction": 0.226806640625,
+      "mean_primitives_per_sample": 7.2578125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0005709499964723364,
+        "p95": 0.0005909700004849583,
+        "p99": 0.0005936339998152108
+      },
+      "routed_latency_seconds": {
+        "p50": 0.002366649998293724,
+        "p95": 0.002468219998263521,
+        "p99": 0.0024698039946088103
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 1,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 6.9296875,
+      "candidate_fraction": 0.216552734375,
+      "mean_primitives_per_sample": 6.9296875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0005393499959609471,
+        "p95": 0.0006094749973271973,
+        "p99": 0.0006110949991852976
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0024394499996560626,
+        "p95": 0.0027035650055040605,
+        "p99": 0.0027763930047512986
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=2",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 2,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 24.8828125,
+      "candidate_fraction": 0.777587890625,
+      "mean_primitives_per_sample": 49.765625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0016418500017607585,
+        "p95": 0.0017900100006954744,
+        "p99": 0.0018116819980787114
+      },
+      "routed_latency_seconds": {
+        "p50": 0.004361399995104875,
+        "p95": 0.00459721000152058,
+        "p99": 0.004610962006699993
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=2",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 2,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 25.3515625,
+      "candidate_fraction": 0.792236328125,
+      "mean_primitives_per_sample": 50.703125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0013667500024894252,
+        "p95": 0.0016580199982854536,
+        "p99": 0.0016812039967044256
+      },
+      "routed_latency_seconds": {
+        "p50": 0.003991500001575332,
+        "p95": 0.004447930008609546,
+        "p99": 0.004453186011960497
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=2",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 2,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 25.0703125,
+      "candidate_fraction": 0.783447265625,
+      "mean_primitives_per_sample": 50.140625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0015345499996328726,
+        "p95": 0.0017262100016523618,
+        "p99": 0.0017630020041542595
+      },
+      "routed_latency_seconds": {
+        "p50": 0.004286849994969089,
+        "p95": 0.0046591199949034484,
+        "p99": 0.004703903990157414
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=8",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 8,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.265625,
+      "candidate_fraction": 0.94580078125,
+      "mean_primitives_per_sample": 242.125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.004962450002494734,
+        "p95": 0.005180015000951244,
+        "p99": 0.005192722998181125
+      },
+      "routed_latency_seconds": {
+        "p50": 0.009237649996066466,
+        "p95": 0.009830424994288479,
+        "p99": 0.009848244993772824
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=8",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 8,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.5546875,
+      "candidate_fraction": 0.954833984375,
+      "mean_primitives_per_sample": 244.4375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.004610350006259978,
+        "p95": 0.005211840006086277,
+        "p99": 0.00521572800949798
+      },
+      "routed_latency_seconds": {
+        "p50": 0.00869415000488516,
+        "p95": 0.0099967550006113,
+        "p99": 0.010132150994322728
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=8",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 8,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.0625,
+      "candidate_fraction": 0.939453125,
+      "mean_primitives_per_sample": 240.5,
+      "exhaustive_latency_seconds": {
+        "p50": 0.004663750005420297,
+        "p95": 0.004990379993250827,
+        "p99": 0.005007515992765547
+      },
+      "routed_latency_seconds": {
+        "p50": 0.008540199996787123,
+        "p95": 0.009583119997842005,
+        "p99": 0.009694863994809566
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=16",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 16,
+        "batch_size": 128
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 31.0234375,
+      "candidate_fraction": 0.969482421875,
+      "mean_primitives_per_sample": 496.375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.009149550001893658,
+        "p95": 0.00945370499684941,
+        "p99": 0.009508100991952232
+      },
+      "routed_latency_seconds": {
+        "p50": 0.015097849995072465,
+        "p95": 0.016170075004629324,
+        "p99": 0.016292655005527193
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=16",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 16,
+        "batch_size": 128
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 1.7763568394002505e-15,
+      "mean_candidates_per_sample": 31.1875,
+      "candidate_fraction": 0.974609375,
+      "mean_primitives_per_sample": 499.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00915079999685986,
+        "p95": 0.009452420007437467,
+        "p99": 0.009529604008421302
+      },
+      "routed_latency_seconds": {
+        "p50": 0.01579230000061216,
+        "p95": 0.016305805000592956,
+        "p99": 0.016323481009458192
+      }
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=16",
+        "axis": "primitives_per_class",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 16,
+        "batch_size": 128
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.5234375,
+      "candidate_fraction": 0.953857421875,
+      "mean_primitives_per_sample": 488.375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00874659999681171,
+        "p95": 0.009226819999457802,
+        "p99": 0.00922840400104178
+      },
+      "routed_latency_seconds": {
+        "p50": 0.01524749999953201,
+        "p95": 0.016241815003741066,
+        "p99": 0.01627612300304463
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=1",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 1
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 15.0,
+      "candidate_fraction": 0.46875,
+      "mean_primitives_per_sample": 60.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0015942500031087548,
+        "p95": 0.001911619999009417,
+        "p99": 0.002047844004264334
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0016196500000660308,
+        "p95": 0.001743550008541206,
+        "p99": 0.0017611900118936318
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=1",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 1
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 11.0,
+      "candidate_fraction": 0.34375,
+      "mean_primitives_per_sample": 44.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0015859999984968454,
+        "p95": 0.0017510250043414998,
+        "p99": 0.001758045010647038
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0013893499999539927,
+        "p95": 0.0014867200043227058,
+        "p99": 0.0015163840049353893
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=1",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 1
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.0,
+      "candidate_fraction": 0.9375,
+      "mean_primitives_per_sample": 120.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0016431999974884093,
+        "p95": 0.0016695800048182718,
+        "p99": 0.0016744760106666946
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0025350500000058673,
+        "p95": 0.002603240001189988,
+        "p99": 0.002617927997780498
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=16",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 16
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.0,
+      "candidate_fraction": 0.90625,
+      "mean_primitives_per_sample": 116.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0018103000038536265,
+        "p95": 0.0019025499990675597,
+        "p99": 0.0019115500047337264
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0034143999946536496,
+        "p95": 0.0036480649992881808,
+        "p99": 0.0036683330016967376
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=16",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 16
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.75,
+      "candidate_fraction": 0.9296875,
+      "mean_primitives_per_sample": 119.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.001832900001318194,
+        "p95": 0.0018553400041128043,
+        "p99": 0.001855628001067089
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0034379499993519858,
+        "p95": 0.003509939994546585,
+        "p99": 0.003510227996739559
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=16",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 16
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 30.125,
+      "candidate_fraction": 0.94140625,
+      "mean_primitives_per_sample": 120.5,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0018355000065639615,
+        "p95": 0.0019108050015347543,
+        "p99": 0.0019558410039462615
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0036526999974739738,
+        "p95": 0.003733954996278044,
+        "p99": 0.0037347109915572218
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=64",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 64
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.9375,
+      "candidate_fraction": 0.935546875,
+      "mean_primitives_per_sample": 119.75,
+      "exhaustive_latency_seconds": {
+        "p50": 0.002317649996257387,
+        "p95": 0.002482065002550371,
+        "p99": 0.002531132998992689
+      },
+      "routed_latency_seconds": {
+        "p50": 0.004853749996982515,
+        "p95": 0.005152294999425067,
+        "p99": 0.00517349899848341
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=64",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 64
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.59375,
+      "candidate_fraction": 0.9248046875,
+      "mean_primitives_per_sample": 118.375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0022518499972647987,
+        "p95": 0.0023389750014757736,
+        "p99": 0.002363635000656359
+      },
+      "routed_latency_seconds": {
+        "p50": 0.004960699996445328,
+        "p95": 0.005529039996326901,
+        "p99": 0.00558980799803976
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=64",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 64
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 28.484375,
+      "candidate_fraction": 0.89013671875,
+      "mean_primitives_per_sample": 113.9375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0022839000084786676,
+        "p95": 0.002463859999261331,
+        "p99": 0.0024959720027982256
+      },
+      "routed_latency_seconds": {
+        "p50": 0.0051849500014213845,
+        "p95": 0.005545179999171523,
+        "p99": 0.005588235996983712
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=256",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 256
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.359375,
+      "candidate_fraction": 0.91748046875,
+      "mean_primitives_per_sample": 117.4375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0035505999985616654,
+        "p95": 0.0038668549968861043,
+        "p99": 0.003875531000085175
+      },
+      "routed_latency_seconds": {
+        "p50": 0.007290549998288043,
+        "p95": 0.00832013500330504,
+        "p99": 0.008435947005054914
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=256",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 256
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.75,
+      "candidate_fraction": 0.9296875,
+      "mean_primitives_per_sample": 119.0,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0035861499927705154,
+        "p95": 0.003843349999078782,
+        "p99": 0.0038933899976836984
+      },
+      "routed_latency_seconds": {
+        "p50": 0.007437050000589807,
+        "p95": 0.008131274990591918,
+        "p99": 0.00817177498989622
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=256",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 256
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 28.89453125,
+      "candidate_fraction": 0.9029541015625,
+      "mean_primitives_per_sample": 115.578125,
+      "exhaustive_latency_seconds": {
+        "p50": 0.0032764499992481433,
+        "p95": 0.003919299998960923,
+        "p99": 0.004040979993005749
+      },
+      "routed_latency_seconds": {
+        "p50": 0.007643549994099885,
+        "p95": 0.00793825999571709,
+        "p99": 0.008048851989151444
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=512",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 512
+      },
+      "seed": 1201,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.38671875,
+      "candidate_fraction": 0.9183349609375,
+      "mean_primitives_per_sample": 117.546875,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003486550005618483,
+        "p95": 0.004015874998731305,
+        "p99": 0.0041384549943904855
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006744450001860969,
+        "p95": 0.008379184992372756,
+        "p99": 0.008593276993342442
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=512",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 512
+      },
+      "seed": 1202,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.22265625,
+      "candidate_fraction": 0.9132080078125,
+      "mean_primitives_per_sample": 116.890625,
+      "exhaustive_latency_seconds": {
+        "p50": 0.003546799998730421,
+        "p95": 0.004630939994240179,
+        "p99": 0.004859467995120213
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006718650001857895,
+        "p95": 0.008074359998136058,
+        "p99": 0.0087299919979705
+      }
+    },
+    {
+      "condition": {
+        "name": "batch_size=512",
+        "axis": "batch_size",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 4,
+        "batch_size": 512
+      },
+      "seed": 1203,
+      "agreement": 1.0,
+      "maximum_winning_score_error": 0.0,
+      "mean_candidates_per_sample": 29.333984375,
+      "candidate_fraction": 0.91668701171875,
+      "mean_primitives_per_sample": 117.3359375,
+      "exhaustive_latency_seconds": {
+        "p50": 0.00347920000058366,
+        "p95": 0.004004394996445626,
+        "p99": 0.004067358993925154
+      },
+      "routed_latency_seconds": {
+        "p50": 0.006658849997620564,
+        "p95": 0.007087175005290191,
+        "p99": 0.007143515004718211
+      }
+    }
+  ]
+}

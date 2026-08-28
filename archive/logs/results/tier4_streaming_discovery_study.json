@@ -1,0 +1,700 @@
+{
+  "protocol": {
+    "seeds": [
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "parameters_selected_before_multiseed_observation": true,
+    "oracle_used_for_discovery": false,
+    "automatic_class_creation_enabled": false
+  },
+  "summary": {
+    "dbscan": {
+      "discovery_precision_mean": 0.5073170731707317,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.7666666666666667,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 4,
+      "runs_with_proposals": 5
+    },
+    "incremental_centroid": {
+      "discovery_precision_mean": 0.6857142857142857,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.29166666666666663,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 2,
+      "runs_with_proposals": 5
+    },
+    "no_clustering": {
+      "discovery_precision_mean": 0.0,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.0,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 0,
+      "runs_with_proposals": 0
+    }
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 41,
+        "rejection_threshold": 1.0,
+        "oracle_used_for_discovery": false,
+        "automatic_class_creation_enabled": false,
+        "semantic_proposals_enabled": false
+      },
+      "stream": {
+        "sample_count": 96,
+        "rejected_count": 74,
+        "window_count": 3
+      },
+      "strategies": {
+        "dbscan": {
+          "proposal_count": 2,
+          "proposed_sample_count": 47,
+          "discovery_precision": 0.5106382978723404,
+          "discovery_recall": 1.0,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-1e12c89c8434",
+              "sample_ids": [
+                2,
+                10,
+                19,
+                21,
+                26,
+                27,
+                29,
+                31,
+                46,
+                50,
+                51,
+                52,
+                55,
+                56,
+                60,
+                62,
+                67,
+                77,
+                78,
+                87,
+                89,
+                91,
+                94
+              ],
+              "support": 23,
+              "windows": 3,
+              "rms_radius": 0.8008062018098494,
+              "nearest_known_distance": 1.5605346748920461,
+              "oracle_event_counts": {
+                "new_known_mode": 23
+              }
+            },
+            {
+              "temporary_unknown_id": "unknown-ff3444fbfbc6",
+              "sample_ids": [
+                7,
+                9,
+                13,
+                16,
+                17,
+                20,
+                22,
+                28,
+                33,
+                38,
+                43,
+                47,
+                48,
+                53,
+                57,
+                58,
+                64,
+                65,
+                73,
+                79,
+                85,
+                86,
+                90,
+                95
+              ],
+              "support": 24,
+              "windows": 3,
+              "rms_radius": 0.747341040182924,
+              "nearest_known_distance": 3.6162753928290363,
+              "oracle_event_counts": {
+                "unseen_class": 24
+              }
+            }
+          ]
+        },
+        "incremental_centroid": {
+          "proposal_count": 1,
+          "proposed_sample_count": 9,
+          "discovery_precision": 1.0,
+          "discovery_recall": 0.375,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": 2,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-dd6b8edce472",
+              "sample_ids": [
+                9,
+                17,
+                38,
+                48,
+                64,
+                79,
+                85,
+                86,
+                90
+              ],
+              "support": 9,
+              "windows": 3,
+              "rms_radius": 0.434076911332157,
+              "nearest_known_distance": 3.9260362893311926,
+              "oracle_event_counts": {
+                "unseen_class": 9
+              }
+            }
+          ]
+        },
+        "no_clustering": {
+          "proposal_count": 0,
+          "proposed_sample_count": 0,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 0.0,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": null,
+          "proposals": []
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 42,
+        "rejection_threshold": 1.0,
+        "oracle_used_for_discovery": false,
+        "automatic_class_creation_enabled": false,
+        "semantic_proposals_enabled": false
+      },
+      "stream": {
+        "sample_count": 96,
+        "rejected_count": 70,
+        "window_count": 3
+      },
+      "strategies": {
+        "dbscan": {
+          "proposal_count": 1,
+          "proposed_sample_count": 24,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-1342d6cfdcb0",
+              "sample_ids": [
+                3,
+                7,
+                9,
+                11,
+                12,
+                17,
+                25,
+                31,
+                32,
+                40,
+                43,
+                49,
+                52,
+                57,
+                59,
+                62,
+                68,
+                73,
+                74,
+                76,
+                80,
+                82,
+                84,
+                86
+              ],
+              "support": 24,
+              "windows": 3,
+              "rms_radius": 0.7590137764990559,
+              "nearest_known_distance": 1.5856861109994929,
+              "oracle_event_counts": {
+                "new_known_mode": 24
+              }
+            }
+          ]
+        },
+        "incremental_centroid": {
+          "proposal_count": 1,
+          "proposed_sample_count": 17,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-34fc84bee103",
+              "sample_ids": [
+                3,
+                7,
+                9,
+                11,
+                12,
+                17,
+                31,
+                43,
+                49,
+                52,
+                57,
+                59,
+                68,
+                74,
+                76,
+                82,
+                86
+              ],
+              "support": 17,
+              "windows": 3,
+              "rms_radius": 0.5718634973553841,
+              "nearest_known_distance": 1.5340729071891375,
+              "oracle_event_counts": {
+                "new_known_mode": 17
+              }
+            }
+          ]
+        },
+        "no_clustering": {
+          "proposal_count": 0,
+          "proposed_sample_count": 0,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 0.0,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": null,
+          "proposals": []
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 43,
+        "rejection_threshold": 1.0,
+        "oracle_used_for_discovery": false,
+        "automatic_class_creation_enabled": false,
+        "semantic_proposals_enabled": false
+      },
+      "stream": {
+        "sample_count": 96,
+        "rejected_count": 78,
+        "window_count": 3
+      },
+      "strategies": {
+        "dbscan": {
+          "proposal_count": 1,
+          "proposed_sample_count": 47,
+          "discovery_precision": 0.48936170212765956,
+          "discovery_recall": 0.9583333333333334,
+          "cluster_purity": 0.5106382978723404,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-0f01d65ba726",
+              "sample_ids": [
+                0,
+                3,
+                4,
+                6,
+                7,
+                9,
+                10,
+                11,
+                13,
+                14,
+                16,
+                17,
+                18,
+                19,
+                21,
+                25,
+                32,
+                33,
+                34,
+                35,
+                36,
+                39,
+                40,
+                41,
+                44,
+                46,
+                47,
+                51,
+                52,
+                53,
+                58,
+                63,
+                65,
+                67,
+                69,
+                71,
+                73,
+                74,
+                77,
+                78,
+                79,
+                83,
+                85,
+                86,
+                91,
+                93,
+                95
+              ],
+              "support": 47,
+              "windows": 3,
+              "rms_radius": 1.0286590191550269,
+              "nearest_known_distance": 2.2052160252000412,
+              "oracle_event_counts": {
+                "new_known_mode": 24,
+                "unseen_class": 23
+              }
+            }
+          ]
+        },
+        "incremental_centroid": {
+          "proposal_count": 1,
+          "proposed_sample_count": 8,
+          "discovery_precision": 1.0,
+          "discovery_recall": 0.3333333333333333,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": 2,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-345c13ed9ce3",
+              "sample_ids": [
+                7,
+                19,
+                34,
+                39,
+                44,
+                47,
+                79,
+                93
+              ],
+              "support": 8,
+              "windows": 3,
+              "rms_radius": 0.47694792019107435,
+              "nearest_known_distance": 3.0767084040876846,
+              "oracle_event_counts": {
+                "unseen_class": 8
+              }
+            }
+          ]
+        },
+        "no_clustering": {
+          "proposal_count": 0,
+          "proposed_sample_count": 0,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 0.0,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": null,
+          "proposals": []
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 44,
+        "rejection_threshold": 1.0,
+        "oracle_used_for_discovery": false,
+        "automatic_class_creation_enabled": false,
+        "semantic_proposals_enabled": false
+      },
+      "stream": {
+        "sample_count": 96,
+        "rejected_count": 79,
+        "window_count": 3
+      },
+      "strategies": {
+        "dbscan": {
+          "proposal_count": 1,
+          "proposed_sample_count": 23,
+          "discovery_precision": 1.0,
+          "discovery_recall": 0.9583333333333334,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-94751c06a699",
+              "sample_ids": [
+                1,
+                2,
+                3,
+                10,
+                25,
+                28,
+                29,
+                30,
+                45,
+                46,
+                47,
+                50,
+                52,
+                54,
+                56,
+                67,
+                68,
+                79,
+                86,
+                87,
+                90,
+                91,
+                93
+              ],
+              "support": 23,
+              "windows": 3,
+              "rms_radius": 0.8052867329062433,
+              "nearest_known_distance": 3.994732452211782,
+              "oracle_event_counts": {
+                "unseen_class": 23
+              }
+            }
+          ]
+        },
+        "incremental_centroid": {
+          "proposal_count": 1,
+          "proposed_sample_count": 9,
+          "discovery_precision": 1.0,
+          "discovery_recall": 0.375,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": 2,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-e8b0109f7671",
+              "sample_ids": [
+                10,
+                25,
+                28,
+                50,
+                54,
+                79,
+                87,
+                90,
+                91
+              ],
+              "support": 9,
+              "windows": 3,
+              "rms_radius": 0.5368147509868817,
+              "nearest_known_distance": 3.9654226655862046,
+              "oracle_event_counts": {
+                "unseen_class": 9
+              }
+            }
+          ]
+        },
+        "no_clustering": {
+          "proposal_count": 0,
+          "proposed_sample_count": 0,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 0.0,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": null,
+          "proposals": []
+        }
+      }
+    },
+    {
+      "protocol": {
+        "seed": 45,
+        "rejection_threshold": 1.0,
+        "oracle_used_for_discovery": false,
+        "automatic_class_creation_enabled": false,
+        "semantic_proposals_enabled": false
+      },
+      "stream": {
+        "sample_count": 96,
+        "rejected_count": 77,
+        "window_count": 3
+      },
+      "strategies": {
+        "dbscan": {
+          "proposal_count": 2,
+          "proposed_sample_count": 41,
+          "discovery_precision": 0.5365853658536586,
+          "discovery_recall": 0.9166666666666666,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 1,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-9703d19adabe",
+              "sample_ids": [
+                4,
+                12,
+                20,
+                27,
+                28,
+                29,
+                30,
+                33,
+                46,
+                50,
+                51,
+                56,
+                61,
+                63,
+                66,
+                68,
+                72,
+                77,
+                81,
+                91,
+                92,
+                95
+              ],
+              "support": 22,
+              "windows": 3,
+              "rms_radius": 0.8519995508397086,
+              "nearest_known_distance": 6.103640190104684,
+              "oracle_event_counts": {
+                "unseen_class": 22
+              }
+            },
+            {
+              "temporary_unknown_id": "unknown-e76f60cd7132",
+              "sample_ids": [
+                7,
+                13,
+                16,
+                31,
+                32,
+                39,
+                41,
+                42,
+                44,
+                45,
+                54,
+                65,
+                67,
+                74,
+                80,
+                83,
+                84,
+                89,
+                93
+              ],
+              "support": 19,
+              "windows": 3,
+              "rms_radius": 0.7488611492436091,
+              "nearest_known_distance": 1.5396194259293194,
+              "oracle_event_counts": {
+                "new_known_mode": 19
+              }
+            }
+          ]
+        },
+        "incremental_centroid": {
+          "proposal_count": 2,
+          "proposed_sample_count": 21,
+          "discovery_precision": 0.42857142857142855,
+          "discovery_recall": 0.375,
+          "cluster_purity": 1.0,
+          "adjusted_rand_index": 1.0,
+          "false_proposal_count": 1,
+          "time_to_first_proposal_window": 2,
+          "proposals": [
+            {
+              "temporary_unknown_id": "unknown-ac4482612b4b",
+              "sample_ids": [
+                7,
+                13,
+                16,
+                31,
+                39,
+                44,
+                54,
+                65,
+                67,
+                80,
+                83,
+                93
+              ],
+              "support": 12,
+              "windows": 3,
+              "rms_radius": 0.5651913980436744,
+              "nearest_known_distance": 1.6690210295751284,
+              "oracle_event_counts": {
+                "new_known_mode": 12
+              }
+            },
+            {
+              "temporary_unknown_id": "unknown-49f57da0f07a",
+              "sample_ids": [
+                20,
+                33,
+                50,
+                51,
+                61,
+                63,
+                66,
+                77,
+                81
+              ],
+              "support": 9,
+              "windows": 3,
+              "rms_radius": 0.6042277432045213,
+              "nearest_known_distance": 6.553889447900904,
+              "oracle_event_counts": {
+                "unseen_class": 9
+              }
+            }
+          ]
+        },
+        "no_clustering": {
+          "proposal_count": 0,
+          "proposed_sample_count": 0,
+          "discovery_precision": 0.0,
+          "discovery_recall": 0.0,
+          "cluster_purity": 0.0,
+          "adjusted_rand_index": 0.0,
+          "false_proposal_count": 0,
+          "time_to_first_proposal_window": null,
+          "proposals": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "artifact_path": "logs/results/tier6_temporal_tuning_wikitext_100k.json",
+  "candidates": [
+    {"name": "window_2", "representation": "window", "window": 2},
+    {"name": "window_3", "representation": "window", "window": 3},
+    {"name": "window_4", "representation": "window", "window": 4},
+    {"name": "window_5", "representation": "window", "window": 5},
+    {"name": "single_d16_r80", "representation": "temporal_state", "state_dim": 16, "recurrence": 0.8, "warmup": 64},
+    {"name": "single_d16_r95", "representation": "temporal_state", "state_dim": 16, "recurrence": 0.95, "warmup": 64},
+    {"name": "single_d24_r80", "representation": "temporal_state", "state_dim": 24, "recurrence": 0.8, "warmup": 64},
+    {"name": "single_d24_r95", "representation": "temporal_state", "state_dim": 24, "recurrence": 0.95, "warmup": 64},
+    {"name": "timescale_d24", "representation": "multi_timescale", "state_dim": 24, "recurrences": [0.3, 0.7, 0.95], "warmup": 64},
+    {"name": "hybrid_w3_d16_r80", "representation": "hybrid", "window": 3, "state_dim": 16, "recurrence": 0.8, "warmup": 64}
+  ],
+  "dataset": "wikitext103",
+  "linear_max_iter": 100,
+  "max_chars": 100000,
+  "max_tuning_chars": 12000,
+  "n_folds": 3,
+  "seed": 13
+}

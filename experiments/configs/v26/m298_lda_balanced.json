@@ -1,0 +1,45 @@
+{
+  "milestone": "M298",
+  "title": "Head repair III: LDA/Mahalanobis readout + class-balanced ridge at the sealed M297 lambda*",
+  "question": "Do the LDA/Mahalanobis readout and the class-balanced ridge beat the sealed anchor 0.24214492753623187 with no feature change, at the train-side lambda M297 chose?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M298 (26 Aug 2026, before the build)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters (the m109 _load_corpus digest gate)"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz",
+    "labels_note": "the M142 cell-2 schedule labels - the ms codes are aligned to THIS order (the M228 discipline)"
+  },
+  "anchor_penalty": 1.0,
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09,
+             "source": "the sealed ms full-train penalty-1.0 aggregate (M228)"},
+  "fallback_lambda": 1.0,
+  "lda_lambda_grid": [1e-6, 1e-4, 1e-2, 1.0, 30.0, 100.0],
+  "agreement_rows": 2000,
+  "agreement_tolerance": 1e-6,
+  "agreement_applies_when_dropped_zero": true,
+  "m298b_note": "M298a VOIDED on g4: the eigen-vs-direct agreement at lambda=100 measured 6.96e-8 relative - exactly the fp64 floor for the comparison (eps * cond * sqrt(d) ~ 2.2e-16 * 2.9e7 * 115 ~ 7e-8); the registered 1e-8 was below the direct solve's conditioning resolution. M298b: agreement_tolerance 1e-8 -> 1e-6, registered before the re-run. The M298a grid finding stands on the record: all six LDA cells collapse to 1/345 regardless of lambda (the collapse is intrinsic to the mu_c-based readout at this feature scale, not the lambda transfer), so no readout is expected to improve the anchor.",
+  "m298a_note": "run-1 (at lambda* = 30.0) sealed with gates PASS and H26-1 false: the LDA readout collapsed to a constant class (0.0029 = 1/345). Diagnosis measured BEFORE the amendment: a direct-space LDA collapses identically - the implementation matches its closed form; the registered transfer rule imported a scale mismatch (lambda* is a SOLVE regularization; at 30 it attenuates the readout's data term ~1/30 while the prior term is constant, so priors dominate). M298a: the LDA readout evaluates over its own registered grid; every cell validated by a direct-form agreement gate where the direct solve is meaningful (dropped == 0 and the direct solve's own residual <= 1e-8 - the 100.0 cell is the registered agreement anchor); H26-1 reads strictly on any cell. Run-1 evidence stays sealed (a valid negative cell, not a VOID).",  "registered_transfer_rule": "lambda* is the M297 LOOCV choice, train-side only; it transfers to the LDA and balanced-ridge readouts as a registered constant. If M297 is not sealed, the cell is VOID (the fallback lambda is recorded but never feeds a solve when the dependency gate fails).",
+  "registered_readout_definitions": {
+    "lda": "scores x^T A^-1 m_c - 1/2 m_c^T A^-1 m_c + log(n_c/n), A = symmetric standardised Gram + lambda* I, m_c the class means",
+    "balanced_ridge": "weighted least squares, per-row weight 1/n_{y_i} (each class contributes total weight 1), symmetric Gram + lambda* I, no prior term"
+  },
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - row counts are a premise",
+    "g2_fail": "VOID - the LU path must reproduce the sealed anchor or the instrument is not the sealed one",
+    "g3_fail": "VOID - M298 cannot run before M297 seals lambda* and the eigendecomposition cache",
+    "g4_fail": "VOID - a solve failed its backward instrument",
+    "any_readout_improves": "H26-1 PASS: strict improvement over the anchor with no feature change",
+    "no_readout_improves": "no readout beats the sealed anchor; H26-1 rests on the M297 ridge-at-star reading and on M299"
+  }
+}

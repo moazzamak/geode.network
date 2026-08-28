@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "all_publication_gates_passed": true,
+    "child_activated": true,
+    "child_parent_lineage": true,
+    "confirmation_after_rejections": true,
+    "delayed_feedback_linked": true,
+    "dry_run_not_published": true,
+    "dry_run_pointer_unchanged": true,
+    "exact_parent_rollback": true,
+    "final_novel_labels_hidden": true,
+    "persistent_review_id": true,
+    "rejected_calibration_gate": true,
+    "rejection_pointer_unchanged": true,
+    "rollback_recorded": true
+  },
+  "gate_passed": true,
+  "milestone": "E9",
+  "qualification_status": "passed",
+  "registry": {
+    "child_bundle_id": "a151b8f3c1cfa763f677",
+    "current_bundle_id": "b5e3f04cf40c9d321a82",
+    "parent_bundle_id": "b5e3f04cf40c9d321a82"
+  },
+  "review": {
+    "confirmation_id": "confirmation-117f7ae34560",
+    "confirmation_kind": "existing_class",
+    "confirmed_label": "class-0",
+    "review_id": "review-ce1ed001f618"
+  },
+  "schema_version": 1,
+  "transactions": {
+    "dry_run": {
+      "child_bundle_id": null,
+      "confirmation_id": "confirmation-117f7ae34560",
+      "failed_gates": [],
+      "mutation_published": false,
+      "parent_bundle_id": "b5e3f04cf40c9d321a82",
+      "review_id": "review-ce1ed001f618",
+      "rollback_bundle_id": null,
+      "status": "validated_dry_run",
+      "transaction_id": "adaptation-4f080f58714a"
+    },
+    "published": {
+      "child_bundle_id": "a151b8f3c1cfa763f677",
+      "confirmation_id": "confirmation-117f7ae34560",
+      "failed_gates": [],
+      "mutation_published": true,
+      "parent_bundle_id": "b5e3f04cf40c9d321a82",
+      "review_id": "review-ce1ed001f618",
+      "rollback_bundle_id": null,
+      "status": "published",
+      "transaction_id": "adaptation-4f080f58714a"
+    },
+    "rejected": {
+      "child_bundle_id": null,
+      "confirmation_id": "confirmation-117f7ae34560",
+      "failed_gates": [
+        "calibration_gate_failed"
+      ],
+      "mutation_published": false,
+      "parent_bundle_id": "b5e3f04cf40c9d321a82",
+      "review_id": "review-ce1ed001f618",
+      "rollback_bundle_id": null,
+      "status": "rejected",
+      "transaction_id": "adaptation-4f080f58714a"
+    },
+    "rolled_back": {
+      "child_bundle_id": "a151b8f3c1cfa763f677",
+      "confirmation_id": "confirmation-117f7ae34560",
+      "failed_gates": [],
+      "mutation_published": false,
+      "parent_bundle_id": "b5e3f04cf40c9d321a82",
+      "review_id": "review-ce1ed001f618",
+      "rollback_bundle_id": "b5e3f04cf40c9d321a82",
+      "status": "rolled_back",
+      "transaction_id": "adaptation-4f080f58714a"
+    }
+  }
+}

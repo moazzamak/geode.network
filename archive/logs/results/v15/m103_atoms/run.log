@@ -1,0 +1,197 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  seed 11: candidate pool 4096, selection order of 2048 atoms in 133s
+  seed 23: candidate pool 4096, selection order of 2048 atoms in 135s
+  seed 37: candidate pool 4096, selection order of 2048 atoms in 133s
+  seed 11     64 atoms        a_random_patches  acc 0.5735  
+  seed 11     64 atoms                b_kmeans  acc 0.5754  
+  seed 11     64 atoms        c_discriminative  acc 0.6076  
+  seed 11     64 atoms    d_random_projections  acc 0.5404  
+  seed 23     64 atoms        a_random_patches  acc 0.5679  
+  seed 23     64 atoms                b_kmeans  acc 0.5775  
+  seed 23     64 atoms        c_discriminative  acc 0.6043  
+  seed 23     64 atoms    d_random_projections  acc 0.5322  
+  seed 37     64 atoms        a_random_patches  acc 0.5776  
+  seed 37     64 atoms                b_kmeans  acc 0.5709  
+  seed 37     64 atoms        c_discriminative  acc 0.6075  
+  seed 37     64 atoms    d_random_projections  acc 0.5322  
+  seed 11    128 atoms        a_random_patches  acc 0.6206  
+  seed 11    128 atoms                b_kmeans  acc 0.6121  
+  seed 11    128 atoms        c_discriminative  acc 0.6408  
+  seed 11    128 atoms    d_random_projections  acc 0.5809  
+  seed 23    128 atoms        a_random_patches  acc 0.6148  
+  seed 23    128 atoms                b_kmeans  acc 0.6159  
+  seed 23    128 atoms        c_discriminative  acc 0.6400  
+  seed 23    128 atoms    d_random_projections  acc 0.5713  
+  seed 37    128 atoms        a_random_patches  acc 0.6279  
+  seed 37    128 atoms                b_kmeans  acc 0.6148  
+  seed 37    128 atoms        c_discriminative  acc 0.6435  
+  seed 37    128 atoms    d_random_projections  acc 0.5774  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 11    256 atoms        a_random_patches  acc 0.6501  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 11    256 atoms                b_kmeans  acc 0.6513  
+  seed 11    256 atoms        c_discriminative  acc 0.6728  
+  seed 11    256 atoms    d_random_projections  acc 0.6183  
+  seed 23    256 atoms        a_random_patches  acc 0.6554  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 23    256 atoms                b_kmeans  acc 0.6463  
+  seed 23    256 atoms        c_discriminative  acc 0.6760  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 23    256 atoms    d_random_projections  acc 0.6124  
+  seed 37    256 atoms        a_random_patches  acc 0.6504  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 37    256 atoms                b_kmeans  acc 0.6454  
+  seed 37    256 atoms        c_discriminative  acc 0.6749  
+  seed 37    256 atoms    d_random_projections  acc 0.6194  
+  seed 11    512 atoms        a_random_patches  acc 0.6727  
+  seed 11    512 atoms                b_kmeans  acc 0.6738  
+  seed 11    512 atoms        c_discriminative  acc 0.6862  
+  seed 11    512 atoms    d_random_projections  acc 0.6470  
+  seed 23    512 atoms        a_random_patches  acc 0.6753  
+  seed 23    512 atoms                b_kmeans  acc 0.6664  
+  seed 23    512 atoms        c_discriminative  acc 0.6950  
+  seed 23    512 atoms    d_random_projections  acc 0.6431  
+  seed 37    512 atoms        a_random_patches  acc 0.6680  
+  seed 37    512 atoms                b_kmeans  acc 0.6714  
+  seed 37    512 atoms        c_discriminative  acc 0.6913  
+  seed 37    512 atoms    d_random_projections  acc 0.6528  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 11   1024 atoms        a_random_patches  acc 0.6818  
+  seed 11   1024 atoms                b_kmeans  acc 0.6856  
+  seed 11   1024 atoms        c_discriminative  acc 0.6951  
+  seed 11   1024 atoms    d_random_projections  acc 0.6760  
+  seed 23   1024 atoms        a_random_patches  acc 0.6919  
+  seed 23   1024 atoms                b_kmeans  acc 0.6844  
+  seed 23   1024 atoms        c_discriminative  acc 0.7039  
+  seed 23   1024 atoms    d_random_projections  acc 0.6694  
+  seed 37   1024 atoms        a_random_patches  acc 0.6900  
+  seed 37   1024 atoms                b_kmeans  acc 0.6818  
+  seed 37   1024 atoms        c_discriminative  acc 0.6959  
+  seed 37   1024 atoms    d_random_projections  acc 0.6597  
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 11   2048 atoms        a_random_patches  acc 0.7033  [VOID: below sample floor]
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 11   2048 atoms                b_kmeans  acc 0.6997  [VOID: below sample floor]
+  seed 11   2048 atoms        c_discriminative  acc 0.7077  [VOID: below sample floor]
+  seed 11   2048 atoms    d_random_projections  acc 0.6850  [VOID: below sample floor]
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 23   2048 atoms        a_random_patches  acc 0.7085  [VOID: below sample floor]
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 23   2048 atoms                b_kmeans  acc 0.7062  [VOID: below sample floor]
+  seed 23   2048 atoms        c_discriminative  acc 0.7111  [VOID: below sample floor]
+  seed 23   2048 atoms    d_random_projections  acc 0.6855  [VOID: below sample floor]
+  seed 37   2048 atoms        a_random_patches  acc 0.7081  [VOID: below sample floor]
+C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 1000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=1000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+  seed 37   2048 atoms                b_kmeans  acc 0.7052  [VOID: below sample floor]
+  seed 37   2048 atoms        c_discriminative  acc 0.7079  [VOID: below sample floor]
+  seed 37   2048 atoms    d_random_projections  acc 0.6778  [VOID: below sample floor]
+
+M103 — efficiency at matched accuracy
+  instrument: ok (monotone True, floor 0.6839333333333334 > 0.6223 = True, deterministic True)
+  anchor (gates nothing): Coates 0.796 at 4000 features
+  reference: arm (a) at 1024 atoms = 0.6879
+        a_random_patches  reaches it at 1024 atoms (interpolated 1024.0)
+                b_kmeans  reaches it at None atoms (interpolated None)
+        c_discriminative  reaches it at 512 atoms (interpolated 465.83606557377027)
+    d_random_projections  reaches it at None atoms (interpolated None)
+  kill switch 1 (c beats a at every seed): True
+  kill switch 2 (d matches a): False
+  verdict: confirmed
+  void budgets (below the sample floor): [2048]

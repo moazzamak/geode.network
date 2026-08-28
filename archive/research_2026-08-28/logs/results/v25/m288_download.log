@@ -1,0 +1,7 @@
+
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 5 files:  20%|##        | 1/5 [00:00<00:00,  6.25it/s]
+Fetching 5 files:  60%|######    | 3/5 [00:00<00:00, 10.12it/s]
+Fetching 5 files: 100%|##########| 5/5 [00:04<00:00,  1.00it/s]
+Fetching 5 files: 100%|##########| 5/5 [00:04<00:00,  1.00it/s]
+wavlm cached at F:\geode-ml\data\cache\huggingface\wavlm-base-plus-sv

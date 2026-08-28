@@ -1,0 +1,27 @@
+{
+  "artifact_path": "logs/results/tier5_corruption_robustness_smoke.json",
+  "seeds": [11],
+  "dimensions": 6,
+  "class_count": 4,
+  "geometry_per_class": 100,
+  "calibration_per_class": 40,
+  "test_per_class": 200,
+  "center_radius": 2.5,
+  "mode_offset": 0.8,
+  "noise_scale": 0.9,
+  "max_iterations": 15,
+  "scenarios": [
+    {"name": "clean", "kind": "clean"},
+    {"name": "symmetric_label_05", "kind": "symmetric_label_noise", "rate": 0.05},
+    {"name": "symmetric_label_10", "kind": "symmetric_label_noise", "rate": 0.10},
+    {"name": "symmetric_label_20", "kind": "symmetric_label_noise", "rate": 0.20},
+    {"name": "class_conditional_20", "kind": "class_conditional_label_noise", "source_class": 0, "target_class": 1, "rate": 0.20},
+    {"name": "feature_outliers_d3", "kind": "feature_outliers", "rate": 0.10, "distance": 3.0},
+    {"name": "feature_outliers_d6", "kind": "feature_outliers", "rate": 0.10, "distance": 6.0},
+    {"name": "feature_outliers_d10", "kind": "feature_outliers", "rate": 0.10, "distance": 10.0},
+    {"name": "missing_dimensions_20", "kind": "missing_dimensions", "fraction": 0.20},
+    {"name": "missing_dimensions_50", "kind": "missing_dimensions", "fraction": 0.50},
+    {"name": "covariance_shift_03", "kind": "covariance_shift", "strength": 0.30},
+    {"name": "covariance_shift_07", "kind": "covariance_shift", "strength": 0.70}
+  ]
+}

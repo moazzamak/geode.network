@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A1-B",
+  "stage": "S1",
+  "seed": 11,
+  "m30_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m30_evidence": {
+    "path": "logs/results/v6/m30_directional_s2/evidence.json",
+    "sha256": "bb64692fac27c78c9345a7c07a702804c117b36a95415d3b4b36720da8711331"
+  },
+  "m31_config": {
+    "path": "experiments/configs/v6/m31_factorial_s2.json",
+    "sha256": "aa7f528d9603d9a2f94f347ebaffffbad9d84e469b36b342e5bd3a344ed43731"
+  },
+  "a1_weighted_evidence": {
+    "path": "logs/results/v6_1/a1_weighted_s1/evidence.json",
+    "sha256": "e00a01b1f7c8d56640bf0e992a94e8d8be72be705b4b7bffd6985b6d90be8218",
+    "required_advancement_status": true
+  },
+  "family": {
+    "primitive": "subspace_r32",
+    "rank": 32,
+    "objective": "direct",
+    "score": "normalized_radial",
+    "readout": "hard_class_minimum"
+  },
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "anchor_fraction": 0.2,
+    "variance_floor_fraction": 0.001,
+    "residual_floor_fraction": 0.05
+  },
+  "selection": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "initial_components_per_class": 1,
+    "minimum_improvement": 1e-08,
+    "exact_component_counts": [10, 20, 30, 46, 60, 80, 100, 120]
+  },
+  "temperature": {
+    "policy": "one_global",
+    "minimum": 0.05,
+    "maximum": 20.0
+  },
+  "classification": {
+    "minimum_high_budget_slope_per_ten": 0.001,
+    "material_accuracy_reversal": 0.005,
+    "material_nll_reversal_fraction": 0.05
+  },
+  "diagnostic_only": true,
+  "a2_component_count_immutable": 46,
+  "test_labels_opened": false
+}

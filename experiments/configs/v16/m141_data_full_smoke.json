@@ -1,0 +1,53 @@
+{
+  "milestone": "M141",
+  "title": "SMOKE: data-escalation plumbing on tiny cells",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v21.md section 5 (M141)",
+  "registered_before_any_accuracy": true,
+  "_smoke_note": "Reduced cells (uniform cap 410, skip gates, encoder check 64 rows). Results are INADMISSIBLE as evidence.",
+  "_smoke_skip_gates": true,
+  "_smoke_cap": 410,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192,
+    "atoms": 6144
+  },
+  "extension": {
+    "uniform_cap": 410,
+    "all_available_note": "per class, ALL raw-train rows (raw array order) NOT in the sealed 400-row subsample. NON-UNIFORM schedule, disclosed.",
+    "encoder_check_rows": 64,
+    "encoder_check_tolerance": 1e-05
+  },
+  "sealed_codes": {
+    "cache_relpath": "v16/m117",
+    "train_file": "f6144_train.npy",
+    "test_file": "f6144_test.npy",
+    "width": 24576
+  },
+  "anchors": { "t1_tolerance": 0.002 },
+  "gate": { "dense_r42_reference": 0.1972 },
+  "numerics": {
+    "torch_threads": 16,
+    "seed": 109,
+    "block": 512,
+    "batch": 64,
+    "encode_throttle_seconds": 0.05
+  }
+}

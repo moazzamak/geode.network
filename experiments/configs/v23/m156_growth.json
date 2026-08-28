@@ -1,0 +1,105 @@
+{
+  "milestone": "M156",
+  "title": "Residual growth on the GLOBAL head at full-data scale: growth-dictionary prefixes vs blind-greedy selection, appended to the base SPM+sqrt head and re-fused, at the M155-registered budgets {256, 2048}",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v23.md section 4 M156 / section 6 execution log (16 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "Does residual-targeted growth on the global head's error rows pay at the M155-permitted budgets {256, 2048}, beyond what blind-greedy selection of the same pool explains?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "m142_cache_relpath": "v16/m142_c2",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy",
+    "spm_train_file": "spm1923_fulltrain.npy",
+    "spm_test_file": "spm1923_fulltest.npy",
+    "labels_file": "m142_c2_fulltrain_labels.npz",
+    "f6144_full_parts": [
+      { "relpath": "v16/m117", "file": "f6144_train.npy", "rows": 138000, "labels": "corpus train_labels (the subsample, positional)" },
+      { "relpath": "v16/m140", "file": "f6144_ext600.npy", "rows": 69000, "labels": "raw train_labels[ext600_indices] (the M141 _extension_indices rule, cap 600)" },
+      { "relpath": "v16/m141", "file": "f6144_all_rest.npy", "rows": 202832, "labels": "raw train_labels[rest_indices] (the M141 _rest_extension_indices rule, per_class_take 200)" }
+    ],
+    "note": "all under the M141 cell-2 row schedule (409,832 train rows), the same order as spm1923_fulltrain"
+  },
+  "base": {
+    "note": "the promoted SPM+sqrt full-data head (C4 p=0.5, penalty 0.1); its test read is the a1 anchor AND the static arm of the gate",
+    "p": 0.5,
+    "penalty": 0.1
+  },
+  "sparse": {
+    "pool_size": 8192,
+    "pool_seed": 11,
+    "permutation_seed": [11, 100],
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "note": "used only to rebuild the whitener for the a2/a4 anchors (M145 protocol); the arms themselves read the cached f6144 codes"
+  },
+  "growth": {
+    "pool_atoms": 6144,
+    "pool_width": 24576,
+    "budgets": [256, 2048],
+    "head_penalty": 1.0,
+    "budgets_note": "the M155-registered rungs {256, 2048}; 2048 is the largest clearing power of two (ceil(76670/(4*2048)) = 10 >= floor 10)",
+    "dictionary_note": "first g atoms of the cached f6144 pool = the [11,100]-permuted shared pool's first 6144 atoms; atom a owns columns {a, 6144+a, 12288+a, 18432+a} (the M103 interleaved bin-major layout). No new encode: the arm codes are column-extracted from the cached memmaps.",
+    "head_fit_note": "growth and control heads are fitted on the SAME rows (the base head's train error rows) with the same ridge penalty 1.0; the arms differ ONLY in how the dictionary is chosen."
+  },
+  "control": {
+    "mechanism": "M108 arm (c) blind greedy (group-OMP vs centred one-hot, select_discriminative) over the error-row features, pool 6144 atoms, budget 2048, GPU port (_select_discriminative_gpu) with the M145 order-parity check; on parity failure the control arm is VOID (section 6 amendment) and only growth-vs-static is adjudicated",
+    "parity_subset_rows": 512,
+    "parity_budget": 32,
+    "budget": 2048
+  },
+  "anchors": {
+    "base_full_data": 0.27855072463768116,
+    "d0_own_domain": 0.19357142857142856,
+    "a1_tolerance": 1e-09,
+    "a2_tolerance": 0.002,
+    "a4_tolerance": 1e-05,
+    "a1_note": "the promoted head's full-data test read (the M155 anchor), tol 1e-9",
+    "a2_note": "the M145 specialist-path anchor: d0 512-atom own-domain accuracy from the rebuilt whitener + d0 candidates, [11,100] prefix, ridge 1.0",
+    "a4_note": "cached-code reproduction: a fresh GPU encode of the first 64 train rows with the rebuilt 6144-atom dictionary reproduces the cached f6144 codes"
+  },
+  "premise": {
+    "fit_floor": 10.0,
+    "expected_n_error_rows": 76670,
+    "note": "n_error > 0 hard-fails; the full run requires n_error == 76670 exactly (the M155 sealed population) else VOID; per-budget floor ceil(n_error/(4g)) >= 10 else the budget is void, not negative"
+  },
+  "phase2": {
+    "valid_frac": 0.8,
+    "valid_seed": 55,
+    "penalty_ladder": [1, 10, 100, 1000, 10000],
+    "note": "the M143b train protocol: fit 80% / select penalty on 20% of the train rows, refit on all train rows, evaluate on the test rows"
+  },
+  "gate": {
+    "registered": "per budget g: growth_fused >= static + 0.005 AND growth_fused > control_fused, where static = the base head's test read; control >= growth at any budget means the gain is not residual targeting's and that budget's growth claim fails; a void control arm leaves growth-vs-control non-adjudicable and the budget cannot pass",
+    "margin": 0.005,
+    "consequence_passed": "residual-targeted growth lifts the global-head system beyond the base read, and blind greedy selection cannot reproduce the lift: the growth mechanism is the targeting, not the dictionary draw.",
+    "consequence_fired": "growth does not clear the registered margin over the base read, or the blind-greedy control reaches it: M156 closes as a scoped negative on this corpus and the base head stands."
+  },
+  "ops_ledger": {
+    "note": "both arms report the g-atom encode-equivalent MACs over train+test rows (disclosed, not matched away); the control additionally its error-row pool encode + OMP selection MACs; growth-vs-control is the matched-cost comparison."
+  },
+  "numerics": {
+    "torch_threads": 16,
+    "batch": 64,
+    "block": 4096,
+    "encode_throttle_seconds": 0.05,
+    "grid": 27,
+    "dimension": 108
+  },
+  "output_dir": "logs/results/v23/m156_growth"
+}

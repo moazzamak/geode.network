@@ -1,0 +1,120 @@
+{
+  "milestone": "m129_programmatic_primitives_litsearch",
+  "program": "pre-registration literature survey for the programmatic-primitives + hybrid router idea (12 Aug 2026)",
+  "registration_notes": {
+    "N88.1": "This is a SURVEY for a new, unsealed engineering idea - not a claim audit. Nothing here can promote or withdraw a sealed claim.",
+    "N88.2": "Question registered before search: could a GEODE-style system treat well-defined computations (math, shape checks, known transforms) as PROGRAMMATIC primitives with the same fingerprint interface as learned primitives, and route through them with a planner/controller - keeping a learned model only for fingerprinting, open-goal routing, and tasks with no programmatic primitive - to win on footprint and energy at modest accuracy cost?",
+    "N88.3": "Anchors are recall probes: each MUST be retrieved by a topic query that does NOT contain its title, else the search is insensitive and every 'not found' is worthless.",
+    "N88.4": "Query families are phrased to find displacing work (work that already builds programmatic+learned hybrids, tool-augmented models, learned routers with fallback, or solves the interface-contract problem), not work that merely agrees in spirit.",
+    "N88.5": "Empty queries are recorded, not dropped. Rate-limited queries are retried and residual failures recorded separately from genuinely empty results.",
+    "N88.6": "Absence from these indexes is UNRESOLVED, never 'new' or 'first'. Unauthenticated public search cannot support a novelty claim.",
+    "N88.7": "Title/abstract mark a source live; only primary text with a located passage may count as displacement.",
+    "N88.8": "This evidence is a dated snapshot and is NOT replayable: the indexes change and the network is not a sealed corpus. The run records its date and the exact query strings so a reader can repeat the search, not so the bytes can be reproduced.",
+    "N88.9": "Instrument reused from M127 (audit_v13_prior_art): arXiv two-stage AND-then-OR, Semantic Scholar with retry; S2 rate-limiting recorded as failures, not empty."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "language model learning to use tools",
+    "large language model connected to APIs",
+    "grounded language robot task planning",
+    "learning to defer classification",
+    "program aided language model arithmetic",
+    "language model code interpreter"
+  ],
+  "claims": {
+    "D1": {
+      "statement": "Programmatic computation is already served to a learned model as an external tool (calculator / code interpreter / function call), with the model deciding when to invoke it.",
+      "queries": [
+        "large language model external tool use",
+        "LLM function calling calculator code",
+        "language model tool augmentation arithmetic accuracy",
+        "LLM code interpreter solve arithmetic",
+        "toolformer teach language model use tools"
+      ]
+    },
+    "D2": {
+      "statement": "Hybrid neuro-symbolic systems already compose learned models with programmatic/symbolic modules in one pipeline.",
+      "queries": [
+        "neuro symbolic architecture programmatic module",
+        "hybrid neural symbolic reasoning pipeline",
+        "neural network symbolic computation integration",
+        "differentiable program module neural controller",
+        "symbolic program neural network hybrid system"
+      ]
+    },
+    "D3": {
+      "statement": "The interface-contract problem (typed input/output schema between a learned module and a programmatic tool) is already addressed in the literature.",
+      "queries": [
+        "function calling schema generation large language model",
+        "typed interface tool specification language model",
+        "structured input output contract neural module",
+        "tool schema validation LLM argument",
+        "API specification model invocation contract"
+      ]
+    },
+    "D4": {
+      "statement": "A planner/controller (LLM or symbolic) already selects among a library of modules/tools toward an open goal, including for non-LLM downstream modules.",
+      "queries": [
+        "language model planner select module task",
+        "LLM controller orchestrate multiple tools goal",
+        "goal directed module selection agent planning",
+        "LLM tool selection planning open goal",
+        "agent skill composition task planning controller"
+      ]
+    },
+    "D5": {
+      "statement": "Fallback/abstention/cascade techniques already handle the case where the selected module is wrong or out of contract.",
+      "queries": [
+        "learning to defer abstention classifier",
+        "model cascade fallback confidence threshold",
+        "selective prediction reject option classification",
+        "LLM cascade fallback cheaper model",
+        "uncertainty aware routing fallback expert"
+      ]
+    },
+    "D6": {
+      "statement": "Energy/footprint-aware routing or sparse dispatch already exists as a measured design goal for learned systems.",
+      "queries": [
+        "energy efficient mixture of experts routing",
+        "edge deployment sparse routing tiny model",
+        "energy aware model selection inference",
+        "low power on device machine learning routing",
+        "cost accuracy tradeoff model routing"
+      ]
+    },
+    "D7": {
+      "statement": "Skill/primitive libraries with a task planner already exist (robotics/agents) as a reusable pattern for programmatic + learned composition.",
+      "queries": [
+        "skill library task planning robot",
+        "learned skill primitives hierarchical planning",
+        "compositional skills robot manipulation planning",
+        "primitive library reuse task planner",
+        "saycan grounded language skills robot"
+      ]
+    },
+    "D8": {
+      "statement": "Program synthesis / DSL / code-as-primitive is already used to turn spec into executable programmatic modules for a learned system.",
+      "queries": [
+        "program synthesis domain specific language",
+        "neural program synthesis specification executable",
+        "code generation module learned system",
+        "programmatic policy learning executable code",
+        "DSL generation model executable module"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v16/m129_programmatic_primitives_litsearch"
+}

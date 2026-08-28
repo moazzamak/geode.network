@@ -1,0 +1,75 @@
+{
+  "milestone": "M212",
+  "cell": "settlement wire e2e: orchestrator route records -> CreditLedger attribution batches, posted cross-language to the local EVM",
+  "arms": {
+    "ms_ridge": {
+      "kind": "sealed_head",
+      "family": "ms",
+      "width": 1428,
+      "accuracy": 0.24214492753623187,
+      "sealed_source": "logs/results/v25/m210b_ms_per_domain/evidence.json",
+      "per_task": {
+        "d0": 0.25429,
+        "d1": 0.07742,
+        "d2": 0.14362,
+        "d3": 0.33638,
+        "d4": 0.26780,
+        "d5": 0.14136
+      },
+      "note": "sealed M210b per-domain table (registered in the plan); aggregate = sealed anchor"
+    },
+    "syn_fast": {
+      "kind": "sealed_head",
+      "family": "synthetic",
+      "width": 32,
+      "accuracy": 0.3,
+      "sealed_source": "synthetic (stated in the M212 registration)",
+      "per_task": {
+        "d0": 0.3,
+        "d1": 0.3,
+        "d2": 0.3,
+        "d3": 0.3,
+        "d4": 0.3,
+        "d5": 0.3
+      },
+      "note": "synthetic competitor arm; the wire, not the accuracy, is the M212 claim"
+    },
+    "syn_small": {
+      "kind": "sealed_head",
+      "family": "synthetic",
+      "width": 8,
+      "accuracy": 0.2,
+      "sealed_source": "synthetic (stated in the M212 registration)",
+      "per_task": {
+        "d0": 0.2,
+        "d1": 0.2,
+        "d2": 0.2,
+        "d3": 0.2,
+        "d4": 0.2,
+        "d5": 0.2
+      },
+      "note": "synthetic filler arm, never routed (lowest per-task accuracy)"
+    }
+  },
+  "queries": [
+    { "query_id": "q_d0", "task_id": "d0" },
+    { "query_id": "q_d1", "task_id": "d1" },
+    { "query_id": "q_d2", "task_id": "d2" },
+    { "query_id": "q_d3", "task_id": "d3" },
+    { "query_id": "q_d4", "task_id": "d4" },
+    { "query_id": "q_d5", "task_id": "d5" }
+  ],
+  "price_per_query": 100,
+  "payer_prefix": "payer:",
+  "registration_fee": 1000,
+  "self_payment": {
+    "query": "q_d2",
+    "note": "C1: the contract skips an entry whose payer IS the credited payout address; the builder must mirror that exclusion"
+  },
+  "hardhat": {
+    "cwd": "infrastructure/evm",
+    "cmd": ["npx", "hardhat", "run", "scripts/post_batch.js"],
+    "timeout_seconds": 600,
+    "note": "the batch JSON path is passed via the POST_BATCH_PATH env var (Hardhat does not forward script args)"
+  }
+}

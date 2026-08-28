@@ -1,0 +1,15 @@
+{
+  "milestone": "M178",
+  "cell": "capability map v0 + monitoring rule catalog",
+  "title": "Capability map v0 from the fingerprint/task graph; register the monitoring rules for dangerous clusters",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (18 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "scope": "sealed evidence only; no new data; deterministic",
+  "rules_registered": [
+    "R-cap-cluster: fingerprint cosine >= 0.9 across modalities flags a capability cluster",
+    "R-transfer-spike: cross-family transfer gap factor < 1.1 flags a verification demand",
+    "R-new-axis: a novel output_contract kind requires a map extension",
+    "R-regression: a sealed node re-measured outside its registered tolerance flags"
+  ],
+  "output_dir": "logs/results/v25/m178_capability"
+}

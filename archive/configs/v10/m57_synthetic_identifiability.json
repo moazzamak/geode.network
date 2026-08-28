@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "milestone": "M57",
+  "ambient_dimension": 64,
+  "seeds": [11, 23, 37],
+  "rank_grid": [8, 16, 32],
+  "straight_true_ranks": [8, 16, 32],
+  "geometry_count": 320,
+  "calibration_count": 160,
+  "evaluation_count": 320,
+  "explained_variance_target": 0.95,
+  "extent_quantile": 0.95,
+  "outer_scale_policy": "interquantile_range",
+  "penalty_grid": [1, 4, 16, 64, 256, 1024],
+  "coverage_floor": 0.90,
+  "eight_x_rejection_floor": 0.99,
+  "normal_separation_ratio_floor": 10.0,
+  "full_dimension_residual_fraction_floor": 0.25,
+  "atlas_residual_ratio_ceiling": 0.50,
+  "true_label_accuracy_floor": 0.95,
+  "random_label_accuracy_ceiling": 0.65,
+  "random_orientation_residual_ratio_floor": 10.0,
+  "parent_lock": {
+    "path": "logs/results/v10/m56_protocol_lock/artifact_index.json",
+    "sha256": "d3210f8d78f231af65b8cd8ffbfd82c773808814ad5bb6fbce16fac8a49317fb"
+  },
+  "final_labels_opened": false
+}

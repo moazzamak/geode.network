@@ -1,0 +1,111 @@
+{
+  "classification": [
+    {
+      "mean_balanced_accuracy": 0.652630910379654,
+      "method": "geode_multinomial",
+      "per_seed": [
+        0.6534014850009038,
+        0.6582072987530729,
+        0.6518579139184099,
+        0.6546381612618394,
+        0.6450496929640442
+      ],
+      "stdev_balanced_accuracy": 0.00484229619276823
+    },
+    {
+      "mean_balanced_accuracy": 0.673288197093284,
+      "method": "logistic_regression",
+      "per_seed": [
+        0.6734131063506104,
+        0.6730244292831152,
+        0.674161739721557,
+        0.6799797717553663,
+        0.6658619383557715
+      ],
+      "stdev_balanced_accuracy": 0.005019331200428006
+    },
+    {
+      "mean_balanced_accuracy": 0.6812894170244698,
+      "method": "rbf_svm",
+      "per_seed": [
+        0.676502442040139,
+        0.688212624459174,
+        0.6843517220371296,
+        0.6837340190940439,
+        0.6736462774918623
+      ],
+      "stdev_balanced_accuracy": 0.006012846744026201
+    }
+  ],
+  "cost": {
+    "e4_mean_experts": 46.6,
+    "e4_mean_primitives": 54.2,
+    "e4_mean_seconds_per_seed": 19.10414040000178,
+    "e4_total_seconds": 95.5207020000089
+  },
+  "cross_modal": {
+    "point_geode_mean_abs_sdf": 0.27674515610693157,
+    "point_sphere_mean_abs_sdf": 0.2872639920976405,
+    "text_linear_top_1_accuracy": 0.3392094017094017,
+    "text_top_1_accuracy": 0.24465811965811965
+  },
+  "gates": {
+    "e10": true,
+    "e4": true,
+    "e5": true,
+    "e6": true,
+    "e7_expected_blocked": true,
+    "e8": true,
+    "e9": true
+  },
+  "negative_results": [
+    {
+      "milestone": "E4",
+      "result": "GEODE passed non-inferiority but trailed logistic and RBF controls."
+    },
+    {
+      "milestone": "E5",
+      "result": "No router promoted (0 eligible of 16)."
+    },
+    {
+      "milestone": "E7",
+      "result": "Blocked: ray_cluster_has_insufficient_nodes."
+    },
+    {
+      "milestone": "E8",
+      "result": "Text GEODE trailed matched linear and n-gram controls."
+    }
+  ],
+  "ood": {
+    "far": {
+      "mean_auroc": 0.8052607981220656,
+      "mean_fpr95": 0.6082159624413146
+    },
+    "near": {
+      "mean_auroc": 0.6415444016793739,
+      "mean_fpr95": 0.8081377151799687
+    },
+    "selected_score": "maximum_probability"
+  },
+  "principal_seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "recovery": {
+    "bad_canary_seconds": 0.005916299996897578,
+    "coordinator_loss_seconds": 0.002796799992211163,
+    "rpo_requests": 0,
+    "rto_seconds": 1.0
+  },
+  "schema_version": 1,
+  "study": "E11 final public study",
+  "transfer": {
+    "geode_balanced_accuracy": 0.8195696255426517,
+    "linear_probe_balanced_accuracy": 0.8270762742339492,
+    "source_forgetting": 0.0,
+    "supervised_adapter_balanced_accuracy": 0.829737072209267
+  }
+}

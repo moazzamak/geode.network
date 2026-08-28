@@ -1,0 +1,21 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier4_csg_ablation_runs.jsonl",
+  "bootstrap_resamples": 500,
+  "baseline_rbf_sample_limit": 10000,
+  "calibration_fraction": 0.2,
+  "capture_threshold": 0.08,
+  "carve_fraction": 0.15,
+  "consensus_threshold": 0.12,
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "feature_extractor": "cnn",
+  "max_iterations": 10,
+  "max_samples": 8000,
+  "mdl_penalty_weight": 0.01,
+  "min_penalized_gain": 0.0,
+  "nudge_iterations": 20,
+  "nudge_learning_rate": 0.02,
+  "pca_components": 128,
+  "seed": 42,
+  "use_gpu": true
+}

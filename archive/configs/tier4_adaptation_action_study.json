@@ -1,0 +1,7 @@
+{
+  "artifact_path": "logs/results/tier4_adaptation_action_study.json",
+  "seeds": [61, 62, 63, 64, 65],
+  "rejection_threshold": 1.0,
+  "dbscan_epsilon": 0.9,
+  "minimum_known_separation": 1.5
+}

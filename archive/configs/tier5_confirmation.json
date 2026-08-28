@@ -1,0 +1,15 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier5_confirmation_runs.jsonl",
+  "capture_threshold": 0.08,
+  "consensus_threshold": 0.1,
+  "dataset_path": "data/tier5/cifar100_superclass.npz",
+  "max_iterations": null,
+  "max_samples": 60000,
+  "n_splits": 5,
+  "nudge_iterations": 20,
+  "nudge_learning_rate": 0.02,
+  "pca_components": 128,
+  "seed": 42,
+  "use_gpu": true
+}

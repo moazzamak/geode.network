@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "milestone": "M62",
+  "indexes": [
+    {
+      "path": "logs/results/v10/m56_protocol_lock/artifact_index.json",
+      "sha256": "d3210f8d78f231af65b8cd8ffbfd82c773808814ad5bb6fbce16fac8a49317fb"
+    },
+    {
+      "path": "logs/results/v10/m57_identifiability/artifact_index.json",
+      "sha256": "018a4bd7e27af13c3e790b0314d3e7b1aa61aaf36e322a9d52a70685c53ace9b"
+    },
+    {
+      "path": "logs/results/v10/m58_affine_screen/artifact_index.json",
+      "sha256": "0866bf57a0996659c5c74f75ace4fe738a2f32dfe739ff8b7addfdd3caaf4411"
+    }
+  ],
+  "evidence": {
+    "m56": {
+      "path": "logs/results/v10/m56_protocol_lock/evidence.json",
+      "sha256": "884b2619a20b16253d57a16b6e5b4a7518846516f110150c999b1231be7a2fba"
+    },
+    "m57": {
+      "path": "logs/results/v10/m57_identifiability/evidence.json",
+      "sha256": "df7fc12a728c7a83863e009401abefabc7c7531472f4325dcf516ae72a8aea91"
+    },
+    "m58": {
+      "path": "logs/results/v10/m58_affine_screen/evidence.json",
+      "sha256": "c444577624b04ada0490bf27b200dc6273449456ddaf3973cb9e7fcdeb57df72"
+    }
+  },
+  "expected_outcome": "D",
+  "final_labels_opened": false
+}

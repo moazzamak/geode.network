@@ -1,0 +1,358 @@
+{
+  "protocol": {
+    "seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "candidate_model_family": "nearest_mode_surrogate",
+    "automatic_mutation_enabled": false
+  },
+  "summary": {
+    "proposal_count": 7,
+    "action_decision_accuracy": 1.0,
+    "actions": {
+      "quarantine": 0,
+      "update_existing": 2,
+      "create_new": 5
+    },
+    "confirmation_burden": 7,
+    "constant_action_controls": {
+      "quarantine": 0.0,
+      "update_existing": 0.2857142857142857,
+      "create_new": 0.7142857142857143
+    },
+    "failed_gate_counts": {
+      "confirmation_required": 0,
+      "insufficient_proposal_gain": 0,
+      "replay_regression": 0,
+      "ood_regression": 0,
+      "transaction_validation_failed": 0
+    }
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 61,
+        "oracle_used_only_for_confirmation_and_evaluation": true,
+        "candidate_models_isolated": true,
+        "candidate_model_family": "nearest_mode_surrogate",
+        "automatic_mutation_enabled": false
+      },
+      "proposal_count": 1,
+      "action_decision_accuracy": 1.0,
+      "actions": {
+        "quarantine": 0,
+        "update_existing": 0,
+        "create_new": 1
+      },
+      "proposals": [
+        {
+          "temporary_unknown_id": "unknown-d2394292110d",
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.625,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.625,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "oracle_used_only_for_confirmation_and_evaluation": true,
+        "candidate_models_isolated": true,
+        "candidate_model_family": "nearest_mode_surrogate",
+        "automatic_mutation_enabled": false
+      },
+      "proposal_count": 1,
+      "action_decision_accuracy": 1.0,
+      "actions": {
+        "quarantine": 0,
+        "update_existing": 0,
+        "create_new": 1
+      },
+      "proposals": [
+        {
+          "temporary_unknown_id": "unknown-2b8432506da4",
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.875,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.875,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "oracle_used_only_for_confirmation_and_evaluation": true,
+        "candidate_models_isolated": true,
+        "candidate_model_family": "nearest_mode_surrogate",
+        "automatic_mutation_enabled": false
+      },
+      "proposal_count": 2,
+      "action_decision_accuracy": 1.0,
+      "actions": {
+        "quarantine": 0,
+        "update_existing": 1,
+        "create_new": 1
+      },
+      "proposals": [
+        {
+          "temporary_unknown_id": "unknown-51081e331ee2",
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.782608695652174,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.782608695652174,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "temporary_unknown_id": "unknown-b39ebab4915e",
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8947368421052632,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8947368421052632,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "oracle_used_only_for_confirmation_and_evaluation": true,
+        "candidate_models_isolated": true,
+        "candidate_model_family": "nearest_mode_surrogate",
+        "automatic_mutation_enabled": false
+      },
+      "proposal_count": 2,
+      "action_decision_accuracy": 1.0,
+      "actions": {
+        "quarantine": 0,
+        "update_existing": 1,
+        "create_new": 1
+      },
+      "proposals": [
+        {
+          "temporary_unknown_id": "unknown-873d357db109",
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "temporary_unknown_id": "unknown-6d063c457e35",
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "oracle_used_only_for_confirmation_and_evaluation": true,
+        "candidate_models_isolated": true,
+        "candidate_model_family": "nearest_mode_surrogate",
+        "automatic_mutation_enabled": false
+      },
+      "proposal_count": 1,
+      "action_decision_accuracy": 1.0,
+      "actions": {
+        "quarantine": 0,
+        "update_existing": 0,
+        "create_new": 1
+      },
+      "proposals": [
+        {
+          "temporary_unknown_id": "unknown-6a14c3a9d48f",
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.875,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.875,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    }
+  ]
+}

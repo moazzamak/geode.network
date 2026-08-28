@@ -1,0 +1,31 @@
+{
+  "milestone": "M174",
+  "title": "Q(n) scaling of the toolbox route on a new synthetic family",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase D (M174)",
+  "registered_before_any_training": true,
+  "question": "On an out-of-registry delayed-coupling family, does the toolbox's fit-and-report (frozen lag-window provider + closed-form intercept ridge) keep improving on held-out rows as train n grows, or plateau?",
+  "interpretation_registered_before_running": {
+    "S1_fail": "route is nondeterministic — void the route fields",
+    "S2_fail": "the fit-and-report ladder is non-monotone — the scaling story is not simple; report per-cell",
+    "S3_pass": "R2(25000) - R2(200) >= 0.10 — the frozen path keeps scaling on this family",
+    "S3_fail": "the frozen path plateaus on this family — L1 evidence (growth must change codes, not heads)",
+    "plateau": "the first n at which the ladder is within 0.01 of the top cell is reported, not hidden"
+  },
+  "cell": {
+    "family": "delayed-coupling AR(5): x[t+1] = 0.35x[t] + 0.30x[t-4] + 0.15x[t]x[t-2] + 0.10 sin(2.5x[t-1]) + 0.05 eps",
+    "temporal_structure": "delayed",
+    "n_ladder": [200, 1000, 5000, 25000],
+    "train_frac": 0.6,
+    "window": 10,
+    "seed": 23
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 300,
+    "lr": 0.001,
+    "note": "one self-consistent in-process encoder (the M172b pattern)"
+  },
+  "output_dir": "logs/results/v24/m174_scaling"
+}

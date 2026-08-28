@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "FINAL",
+  "artifact_indexes": [
+    {"path": "logs/results/v6_1/a0_parent_lock/artifact_index.json", "sha256": "5713097888e35bb5fed0a131c367b40ddbca9714948bc7f4d0115e6b15d12dab"},
+    {"path": "logs/results/v6_1/a1_tangent_s1/artifact_index.json", "sha256": "b263d3a9552e9ec65d12d7c3b5c235996c6f55ce9a6bd0eac23e7f2290d1a714"},
+    {"path": "logs/results/v6_1/a1_weighted_s1/artifact_index.json", "sha256": "2b6c121daf729f8bd6774db5f364693376862f9d2e7a3e53edccd42e15bc888e"},
+    {"path": "logs/results/v6_1/a1_budget_curve_s1/artifact_index.json", "sha256": "ec979a90e386498f07ac42c0a35aba230ec42b20c0e69def6543ce7b25829a78"},
+    {"path": "logs/results/v6_1/a2_weighted_s2/artifact_index.json", "sha256": "17da7667614011f5ec9a70a502941369261f69e6ac4bbffec3a43378ffe8513d"},
+    {"path": "logs/results/v6_1/a3_lifecycle_frontier/artifact_index.json", "sha256": "4f66228820574e886849b351a87340fa16c4bf4f508a3efea10ed49fdd4a32d2"},
+    {"path": "logs/results/v6_1/a4_flowers_support/artifact_index.json", "sha256": "4c725730f984dd5cab38fbef6fce2fb884f94d5e85f921e69003c832e658fdfa"}
+  ],
+  "evidence": {
+    "a1_tangent": {"path": "logs/results/v6_1/a1_tangent_s1/evidence.json", "sha256": "717637ecd2f3f4b38f379010daeeab433deb595200dbe2b747f29abb3eb1f7b2"},
+    "a1_weighted": {"path": "logs/results/v6_1/a1_weighted_s1/evidence.json", "sha256": "e00a01b1f7c8d56640bf0e992a94e8d8be72be705b4b7bffd6985b6d90be8218"},
+    "a1_budget": {"path": "logs/results/v6_1/a1_budget_curve_s1/evidence.json", "sha256": "ae6ba25a924b1fc9e7efec9379089771951ab1cfe0b03fd07f60c4120deb5cc7"},
+    "a2": {"path": "logs/results/v6_1/a2_weighted_s2/evidence.json", "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65"},
+    "a3": {"path": "logs/results/v6_1/a3_lifecycle_frontier/evidence.json", "sha256": "c15eefa56f5d12cb7226ac0028cd8df64bbe7b5ca767500c5607efc52399ac7c"},
+    "a4": {"path": "logs/results/v6_1/a4_flowers_support/evidence.json", "sha256": "dc3b316366b9582da6d0b246a22b7ea9bc3befb061519f4db654450c40ca99ef"}
+  },
+  "operands": [
+    {"evidence": "a1_tangent", "path": "advancement_passed", "expected": false},
+    {"evidence": "a1_weighted", "path": "advancement_passed", "expected": true},
+    {"evidence": "a1_budget", "path": "classification.classification", "expected": "unstable"},
+    {"evidence": "a2", "path": "final_outcome", "expected": "Outcome D"},
+    {"evidence": "a2", "path": "mean_metrics.weighted_balanced_accuracy", "expected": 0.9173333333333332},
+    {"evidence": "a2", "path": "same_space_gap", "expected": 0.05033333333333345},
+    {"evidence": "a3", "path": "claim_status", "expected": "rollback_qualification_only"},
+    {"evidence": "a3", "path": "outcome_c_gate.locality_contract_passed", "expected": false},
+    {"evidence": "a4", "path": "a4_f5.status.status", "expected": "feasible"},
+    {"evidence": "a4", "path": "a4_f34.status.status", "expected": "blocked"},
+    {"evidence": "a4", "path": "test_labels_opened", "expected": false}
+  ],
+  "branches": [
+    {"branch": "A1-T tangent caps", "status": "stopped", "reason": "Failed seed-11 predictive advancement."},
+    {"branch": "A1-W weighted affine", "status": "stopped_after_A2", "reason": "Improved M31 but failed the 2.0-point A2 parity operand."},
+    {"branch": "A1-B component scaling", "status": "diagnostic_unstable", "reason": "Material 100-to-120 component reversal."},
+    {"branch": "tangent plus weighted readout", "status": "infeasible_closed", "reason": "Combination required both A1 mechanisms to pass; A1-T failed."},
+    {"branch": "M32 topology", "status": "closed", "reason": "Predictive rescue prohibited after final Outcome D."},
+    {"branch": "M33 OOD", "status": "closed", "reason": "Predictive rescue prohibited after final Outcome D."},
+    {"branch": "predictive M35 confirmation", "status": "closed", "reason": "A2 parity failed; final-test confirmation was not opened."},
+    {"branch": "M36 migration", "status": "closed", "reason": "Predictive rescue prohibited after final Outcome D."},
+    {"branch": "M37 amortization", "status": "closed", "reason": "Predictive rescue prohibited after final Outcome D."},
+    {"branch": "A3 lifecycle frontier", "status": "rollback_qualification_only", "reason": "Exact rollback passed; 99.9% locality and comparative advantage did not."},
+    {"branch": "A4-F5 Flowers rank 3", "status": "feasible_not_competitive", "reason": "Fit and replay feasibility only."},
+    {"branch": "A4-F34 Flowers rank 32", "status": "blocked", "reason": "5 training examples per class versus 34 required."},
+    {"branch": "physical E7 qualification", "status": "open_independent", "reason": "Requires distinct physical hosts and cannot alter Outcome D."}
+  ],
+  "test_labels_opened": false,
+  "training_data_allowed": false
+}

@@ -1,0 +1,30 @@
+{
+  "milestone": "M171",
+  "title": "Router + registry integration, R1 gate (v0: nearest-arm chain + primitives bottom tier)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 7 Phase C (M171) / section 5 router contract",
+  "registered_before_any_training": true,
+  "question": "Does deterministic nearest-arm routing across the measured series tasks route each task to an arm that matches or beats the best single applicable arm on held-out rows (R1), and does an unregistered task fall back to the strongest general arm (capability 9)?",
+  "interpretation_registered_before_running": {
+    "R1_pass": "nearest-arm routing + failover chain reaches the best single arm per task on the measured axes",
+    "R1_fail": "scoped negative on nearest-arm routing FOR THIS fingerprint — the router and registry still ship as the MVP mechanism; the gates are the measurement",
+    "cold_start": "capability 9 is gated on deterministic fallback happening, NOT on the fallback beating specialists",
+    "mg_lorenz": "their descriptors are identical under ontology v0, so their fingerprints coincide — the tie resolves by the registered selection score; recorded, not a failure"
+  },
+  "cell": {
+    "n_rows": 1000,
+    "train_frac": 0.6,
+    "window": 10,
+    "penalties": [1e-6, 1e-4, 0.01, 1.0],
+    "tasks": ["mackey_glass", "lorenz", "dyck", "tabular"],
+    "cold_start_demos": ["audio", "cifar10"]
+  },
+  "model": {
+    "f_dim": 16,
+    "mlp_hidden": 32,
+    "seed": 11,
+    "steps": 300,
+    "lr": 0.001,
+    "note": "the sealed M169 encoder, rebuilt deterministically from the M169 config (G1 determinism)"
+  },
+  "output_dir": "logs/results/v24/m171_router"
+}

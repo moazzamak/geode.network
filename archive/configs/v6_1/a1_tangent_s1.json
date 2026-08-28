@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A1-T",
+  "stage": "S1",
+  "seed": 11,
+  "a0_parent_index": {
+    "path": "logs/results/v6_1/a0_parent_lock/artifact_index.json",
+    "sha256": "aebefd2a0ab9648564d6fc7acdb8a9edf693492a619e88a9e22623a2f35f5efc"
+  },
+  "m30_config": {
+    "path": "experiments/configs/v6/m30_directional_s2.json",
+    "sha256": "d7adf394a1873a5fe065a5665457c6170e60fa31f45c3bd6c76dd6524390ad34"
+  },
+  "m30_evidence": {
+    "path": "logs/results/v6/m30_directional_s2/evidence.json",
+    "sha256": "bb64692fac27c78c9345a7c07a702804c117b36a95415d3b4b36720da8711331"
+  },
+  "m31_evidence": {
+    "path": "logs/results/v6/m31_factorial_s2/evidence.json",
+    "sha256": "bd1d52ec1ae76043b5dd4d53be25068a2b7abfdff29b4ab67e2caf4bab4a9511"
+  },
+  "primitive": {
+    "family": "tangent_cap",
+    "rank": 32,
+    "score": "normalized_tangent_radial",
+    "normalization": "explicit_l2",
+    "minimum_support": 34,
+    "variance_floor_fraction": 0.001,
+    "residual_floor_fraction": 0.05
+  },
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "anchor_fraction": 0.2
+  },
+  "selection": {
+    "objective": "direct",
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "component_count": 46,
+    "initial_components_per_class": 1,
+    "minimum_improvement": 1e-08,
+    "maximum_candidate_evaluations": 5000
+  },
+  "temperature": {
+    "policy": "one_global",
+    "minimum": 0.05,
+    "maximum": 20.0
+  },
+  "budget": {
+    "component_count": 46,
+    "parameter_limit": 584476
+  },
+  "advancement_gate": {
+    "minimum_accuracy_improvement": 0.005,
+    "minimum_nll_reduction_fraction": 0.05,
+    "maximum_accuracy_loss_for_nll": 0.0025,
+    "minimum_unaffected_prediction_preservation": 0.999,
+    "require_exact_replay": true,
+    "require_exact_rollback": true
+  },
+  "controls": [
+    "m30_cosine_cap",
+    "m31_direct_rank32_affine"
+  ],
+  "test_labels_opened": false
+}

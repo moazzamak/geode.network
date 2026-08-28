@@ -1,0 +1,9 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+device: {'torch_version': '2.11.0+rocm7.13.0a20260416', 'hip_version': '7.2.0', 'device_name': 'AMD Radeon RX 9070 XT', 'gcnArchName': 'gfx1201', 'device_count': 1, '_note': "torch's device string 'cuda' is the ROCm/HIP backend in this interpreter; the device is an AMD RX 9070 XT, not NVIDIA."}
+building whitener + candidate pool (M108 exact)
+sealed train rows: 138000
+rows 0:256  max|delta| = 0.000e+00 MATCH
+rows 34400:34656  max|delta| = 0.000e+00 MATCH
+rows 68800:69056  max|delta| = 0.000e+00 MATCH
+rows 103200:103456  max|delta| = 0.000e+00 MATCH
+rows 137744:138000  max|delta| = 2.827e+02 MISMATCH

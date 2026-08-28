@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "milestone": "M28",
+  "stage": "S1",
+  "seed": 11,
+  "representation_hash": "bc5bdba8e59751e1b045bd8db626b303eaea566e6ad38f0710a61ff0b18f24a0",
+  "feature_dir": "data/v5/features/m19_native_dinov2_sphere_support_pilot",
+  "m27_prediction_baseline": "logs/results/v6/m27_baseline_predictions/baseline_predictions.json",
+  "teacher_manifest": "logs/results/v6/m27_baseline_predictions/rbf_teacher.json",
+  "candidate_generation": {
+    "candidates_per_class": 12,
+    "seed_size": 386,
+    "anchor_fraction": 0.2
+  },
+  "objective": {
+    "cohort_fraction": 0.2,
+    "cohort_minimum_count": 1000,
+    "teacher_weight": 1.0,
+    "ground_truth_weight": 0.0,
+    "complexity_penalty": 0.0,
+    "minimum_improvement": 1e-08
+  },
+  "budget": {
+    "mode": "component_matched",
+    "component_limit": 70
+  },
+  "s1_gate": {
+    "maximum_teacher_gap": 0.03,
+    "minimum_baseline_improvement": 0.05
+  },
+  "test_used_for_selection": false
+}

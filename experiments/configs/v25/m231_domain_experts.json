@@ -1,0 +1,34 @@
+{
+  "milestone": "M231",
+  "title": "Per-domain expert ridge heads on the native-resolution features",
+  "question": "Do per-domain expert ridges (the M229 ladder's actual object) reach the bars: easy >= 80, middle 50-60, infograph 30-40?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M231 REGISTERED (20 Aug)",
+  "features_source": "logs/results/v25/m230_native_res_dinov2/features",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters for the _load_corpus digest gate and the schedule permutation"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "penalties": [0.1, 1.0, 10.0],
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09},
+  "domain_names": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "ladder": {"easy": ["quickdraw", "real", "clipart"], "easy_bar": 0.8,
+             "middle": ["sketch", "painting"], "middle_bar": [0.5, 0.6],
+             "hard": ["infograph"], "hard_first_bar": [0.3, 0.4]},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - the ms global anchor must reproduce at 1e-9",
+    "g2_fail": "VOID - the schedule permutation must reconstruct the labels byte-exactly",
+    "expert_reading": "an easy-domain expert >= 0.8 meets the ladder's easy bar; every number is per-domain-expert-scored-on-its-own-domain"
+  }
+}

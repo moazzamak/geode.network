@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "amendment": "v6.1",
+  "milestone": "A3",
+  "stage": "S2",
+  "seeds": [11, 23, 37],
+  "a2_evidence": {
+    "path": "logs/results/v6_1/a2_weighted_s2/evidence.json",
+    "sha256": "c27cfc5b49f1525944f132073fe3f0e174ab68d1e509a8ca518443368aba7b65",
+    "required_final_outcome": "Outcome D"
+  },
+  "m31_evidence": {
+    "path": "logs/results/v6/m31_factorial_s2/evidence.json",
+    "sha256": "bd1d52ec1ae76043b5dd4d53be25068a2b7abfdff29b4ab67e2caf4bab4a9511"
+  },
+  "m30_evidence": {
+    "path": "logs/results/v6/m30_directional_s2/evidence.json",
+    "sha256": "bb64692fac27c78c9345a7c07a702804c117b36a95415d3b4b36720da8711331"
+  },
+  "e9_evidence": {
+    "path": "logs/results/e9_transactional_adaptation.json",
+    "sha256": "c58cf77ee7ba9de935941cd490bafc697fde280a1c04a094888a0e418475002a"
+  },
+  "weighted_students": {
+    "11": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_11/weighted_student.json",
+      "sha256": "fc4c42e236192a50e2b729e603a3bb3583a15170fed6bff9a51ffc185085c39c"
+    },
+    "23": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_23/weighted_student.json",
+      "sha256": "d70da0a5239e8ac71f2f6a863fef51da234f8a7e41dfa0c97a51bba2d6fff1ad"
+    },
+    "37": {
+      "path": "logs/results/v6_1/a2_weighted_s2/seed_37/weighted_student.json",
+      "sha256": "b1534f55109050334b519074719df55d923cbb634b18802f54eeb2693170e31d"
+    }
+  },
+  "m31_students": {
+    "11": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_11/selected_student.json",
+      "sha256": "cae62407d0d7ab0609bf5285a58da682205a9fea0797ba61b50087bf3db36978"
+    },
+    "23": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_23/selected_student.json",
+      "sha256": "e31e19f180a0393a929c06647d1f329324a54deebca3ac06a57c6110f80be86a"
+    },
+    "37": {
+      "path": "logs/results/v6/m31_factorial_s2/seed_37/selected_student.json",
+      "sha256": "baddf80e036b7d9589010c4e93b27fa403e95753370ff903ee50becd41dc8d2b"
+    }
+  },
+  "models": [
+    "weighted_affine_rank32",
+    "m31_affine_rank32",
+    "current_spherical_geode",
+    "rbf_svm",
+    "weighted_knn",
+    "prototype"
+  ],
+  "tasks": [
+    "local_false_positive_correction",
+    "known_class_mode_addition",
+    "corrupted_cluster_suppression",
+    "bounded_shift_recalibration",
+    "exact_rollback"
+  ],
+  "explicit_edit_contract": {
+    "local_false_positive_correction_scale": 0.5,
+    "known_class_mode_addition_scale": 1.5,
+    "corrupted_cluster_suppression_scale": 0.01,
+    "bounded_shift_temperature_scale": 1.01,
+    "minimum_unaffected_prediction_preservation": 0.999
+  },
+  "latency": {
+    "warmup_runs": 1,
+    "measured_runs": 5
+  },
+  "outcome_c_gate": {
+    "require_non_dominated": true,
+    "require_advantage_over_every_accuracy_superior_control": true,
+    "require_exact_rollback_every_seed_and_task": true,
+    "require_predictive_deficit_report": true
+  },
+  "test_labels_opened": false
+}

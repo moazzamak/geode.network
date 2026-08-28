@@ -1,0 +1,32 @@
+{
+  "alpha": 2.0,
+  "artifact_path": "logs/results/tier6_representation_toy.json",
+  "calibration_fraction": 0.2,
+  "capture_threshold": 0.08,
+  "consensus_threshold": 0.1,
+  "dataset": "synthetic_periodic",
+  "refinement_batch_size": 128,
+  "refinement_lr": 0.005,
+  "refinement_max_batches_per_epoch": 4,
+  "max_chars": 4000,
+  "max_iterations": 10,
+  "max_test_samples": 180,
+  "max_train_samples": 600,
+  "n_refinement_epochs": 0,
+  "n_refinement_iters": 0,
+  "n_folds": 1,
+  "nudge_iterations": 0,
+  "nudge_lr": 0.02,
+  "pca_components": 3,
+  "representations": [
+    "window",
+    "temporal_state",
+    "hybrid"
+  ],
+  "seed": 7,
+  "temporal_state_dim": 8,
+  "temporal_warmup": 16,
+  "use_gpu": false,
+  "use_subtractive": false,
+  "window": 2
+}

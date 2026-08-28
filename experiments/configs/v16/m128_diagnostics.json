@@ -1,0 +1,24 @@
+{
+  "milestone": "M128",
+  "title": "v19 ride-along diagnostics: spectral tail and effective rank vs atoms, and margin statistics on the extended-atoms codes",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v19.md section 5.6 (M128, ride along)",
+  "registered_before_any_accuracy": true,
+  "source": {
+    "features": "M126 sealed code memmaps on F: (GEODE_CACHE_DIR=F:\\geode-ml\\data\\cache): v16/m126/f{6144,8192,12288,16384}_{train,test}.npy; gram files gram12288/gram16384 (trace-verified) reused where valid",
+    "m121_reference": "M121 sealed: sparse (12288-dim, 3072 atoms) eff-rank 7.9, tail -2.26, captured 11.8%"
+  },
+  "diagnostics": {
+    "eff_rank_vs_atoms": "participation ratio trace^2 / ||G_std||_F^2 (exact, from the standardized Gram) at atoms 6144/8192/12288/16384: does eff. rank track atoms?",
+    "tail_vs_atoms": "spectral tail index over the top half of positive eigenvalues: FULL eigh at 6144/8192 (M121 exact); DISCLOSED truncation at 12288/16384 (full eigh infeasible at width >= 49152 on this 66 GB machine) - top-1 eigenvalue/share via power iteration only, tail reported as not computed there",
+    "captured_power_vs_atoms": "one-hot label power captured by the top modes: exact at 6144/8192 (M121 w2 machinery); top-1 eigenvector projection only at 12288/16384 (disclosed truncation)",
+    "margin_statistics": "the argmax object: test-set score margins (f_true - max_other) for the 6144/8192 cells (standard closed-form ridge re-fit): mean/median/quantiles/P(margin>0). 12288/16384 margin stats NOT recomputed (their solves are expensive; accuracy already sealed in M126)",
+    "disclosure": "diagnostics are explanatory, never gates; truncated quantities are explicitly marked truncated"
+  },
+  "numerics": {
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109,
+    "topk_power_iterations": 60,
+    "frob_row_block": 4096
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "artifact_path": "logs/results/tier5_primitive_stability.json",
+  "data_seed": 101,
+  "construction_seeds": [11, 23, 37, 53, 71],
+  "dimensions": 6,
+  "class_count": 4,
+  "geometry_per_class": 100,
+  "calibration_per_class": 40,
+  "test_per_class": 200,
+  "center_radius": 2.5,
+  "mode_offset": 0.8,
+  "noise_scale": 0.9,
+  "max_iterations": 30
+}

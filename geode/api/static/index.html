@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GEODE console</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 60rem; }
+    section { border: 1px solid #ccc; border-radius: 8px; padding: 1rem;
+              margin-bottom: 1rem; }
+    h2 { margin-top: 0; }
+    label { display: inline-block; min-width: 10rem; margin-top: .4rem; }
+    input, select { min-width: 16rem; }
+    button { margin-top: .6rem; margin-right: .6rem; }
+    pre { background: #f5f5f5; padding: .6rem; border-radius: 6px;
+          overflow-x: auto; white-space: pre-wrap; font-size: .85rem; }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 24rem; }
+  </style>
+</head>
+<body>
+  <h1>GEODE console</h1>
+  <p>End-to-end: register arms → route queries → inspect the chain →
+     build settlement batches. Local-only.</p>
+
+  <div class="row">
+    <section>
+      <h2>1 · Register an arm</h2>
+      <label>arm_id <input id="arm_id" value="demo_head"></label><br>
+      <label>family <input id="family" value="spm"></label><br>
+      <label>width <input id="width" type="number" value="1428"></label><br>
+      <label>accuracy <input id="accuracy" type="number" step="0.001"
+             value="0.24"></label><br>
+      <label>per_task JSON <input id="per_task"
+             value='{"d0": 0.25, "d1": 0.08}'></label><br>
+      <button onclick="register()">register</button>
+    </section>
+
+    <section>
+      <h2>2 · Route a query</h2>
+      <label>query_id <input id="query_id" value="q1"></label><br>
+      <label>task_id <input id="task_id" value="d0"></label><br>
+      <label>k <input id="k" type="number" value="1"></label><br>
+      <button onclick="route()">route</button>
+    </section>
+  </div>
+
+  <section>
+    <h2>3 · Chain & settlement</h2>
+    <button onclick="ledger()">view ledger</button>
+    <button onclick="settlement()">build settlement batches</button>
+    <button onclick="snapshot()">save snapshot</button>
+    <button onclick="demoSeed()">seed demo arms</button>
+    <button onclick="health()">health</button>
+  </section>
+
+  <section>
+    <h2>Output</h2>
+    <pre id="out">—</pre>
+  </section>
+
+  <script>
+    async function post(url, body) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      return res.json();
+    }
+    function show(label, data) {
+      document.getElementById("out").textContent =
+        label + "\n" + JSON.stringify(data, null, 2);
+    }
+    async function register() {
+      let perTask = {};
+      try { perTask = JSON.parse(document.getElementById("per_task").value); }
+      catch (e) { show("bad per_task JSON", String(e)); return; }
+      show("POST /arms", await post("/arms", {
+        arm_id: document.getElementById("arm_id").value,
+        family: document.getElementById("family").value,
+        width: Number(document.getElementById("width").value),
+        accuracy: Number(document.getElementById("accuracy").value),
+        per_task: perTask,
+      }));
+    }
+    async function route() {
+      show("POST /route", await post("/route", {
+        query_id: document.getElementById("query_id").value,
+        task_id: document.getElementById("task_id").value || null,
+        k: Number(document.getElementById("k").value),
+      }));
+    }
+    async function ledger() {
+      const res = await fetch("/ledger");
+      show("GET /ledger", await res.json());
+    }
+    async function snapshot() {
+      show("POST /snapshot", await post("/snapshot", {}));
+    }
+    async function demoSeed() {
+      show("POST /demo/seed", await post("/demo/seed", {}));
+    }
+    async function settlement() {
+      show("POST /settlement/batches",
+           await post("/settlement/batches", { price_per_query: 100 }));
+    }
+    async function health() {
+      const res = await fetch("/health");
+      show("GET /health", await res.json());
+    }
+  </script>
+</body>
+</html>

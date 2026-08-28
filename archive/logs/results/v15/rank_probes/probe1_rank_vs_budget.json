@@ -1,0 +1,78 @@
+{
+  "probe": "rankme_effective_rank_vs_atom_budget",
+  "instrument": "RankMe, arXiv:2210.02885, used unmodified",
+  "arm": "(a) random patches \u2014 M103's null",
+  "rows_used": 10000,
+  "seed": 11,
+  "note": "scoping evidence, not sealed, not a milestone",
+  "curve": [
+    {
+      "atoms": 64,
+      "ambient_dimension": 256,
+      "rankme": 37.19395065307617,
+      "fraction_of_ambient": 0.1452888697385788
+    },
+    {
+      "atoms": 128,
+      "ambient_dimension": 512,
+      "rankme": 49.055442810058594,
+      "fraction_of_ambient": 0.09581141173839569
+    },
+    {
+      "atoms": 256,
+      "ambient_dimension": 1024,
+      "rankme": 72.34417724609375,
+      "fraction_of_ambient": 0.07064861059188843
+    },
+    {
+      "atoms": 512,
+      "ambient_dimension": 2048,
+      "rankme": 97.9066390991211,
+      "fraction_of_ambient": 0.04780597612261772
+    },
+    {
+      "atoms": 1024,
+      "ambient_dimension": 4096,
+      "rankme": 129.82879638671875,
+      "fraction_of_ambient": 0.03169648349285126
+    },
+    {
+      "atoms": 2048,
+      "ambient_dimension": 8192,
+      "rankme": 177.821533203125,
+      "fraction_of_ambient": 0.021706730127334595
+    }
+  ],
+  "growth": [
+    {
+      "from_atoms": 64,
+      "to_atoms": 128,
+      "atom_ratio": 2.0,
+      "rankme_ratio": 1.3189091760544507
+    },
+    {
+      "from_atoms": 128,
+      "to_atoms": 256,
+      "atom_ratio": 2.0,
+      "rankme_ratio": 1.4747431294465843
+    },
+    {
+      "from_atoms": 256,
+      "to_atoms": 512,
+      "atom_ratio": 2.0,
+      "rankme_ratio": 1.353345118102198
+    },
+    {
+      "from_atoms": 512,
+      "to_atoms": 1024,
+      "atom_ratio": 2.0,
+      "rankme_ratio": 1.3260469114385545
+    },
+    {
+      "from_atoms": 1024,
+      "to_atoms": 2048,
+      "atom_ratio": 2.0,
+      "rankme_ratio": 1.3696617249184928
+    }
+  ]
+}

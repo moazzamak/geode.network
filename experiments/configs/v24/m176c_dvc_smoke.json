@@ -1,0 +1,45 @@
+{
+  "milestone": "M176c-dvc",
+  "title": "Device verification — SMOKE (inadmissible as evidence)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026)",
+  "registered_before_any_training": true,
+  "_smoke_note": "inadmissible: only 8 check rows, crash check",
+  "_smoke_rows": 8,
+  "question": "Smoke: does the dvc runner run end-to-end on the rental?",
+  "interpretation_registered_before_running": {
+    "smoke": "inadmissible as evidence; only checks the pipeline runs"
+  },
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "sparse": {
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "dictionary_seed": 11,
+    "candidate_pool_size": 8192
+  },
+  "anchors": {
+    "t1_encoder_check_rows": 256,
+    "t1_encoder_check_tolerance": 1e-05,
+    "dvc_numerical_tolerance": 1e-06,
+    "reference_relpath": "v16/m142_c2/_check_pool6144.npy"
+  },
+  "numerics": {
+    "torch_threads": 4,
+    "seed": 11,
+    "encode_throttle_seconds": 0.0
+  },
+  "output_dir": "logs/results/v24/m176c_dvc_smoke"
+}

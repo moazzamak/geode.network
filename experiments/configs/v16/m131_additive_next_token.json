@@ -1,0 +1,42 @@
+{
+  "milestone": "M131",
+  "program": "v20 B4b - registered engineering measurement: additive next-token model on a constrained DSL (12 Aug 2026)",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B4b",
+  "registration_notes": {
+    "N90.1": "Engineering MEASUREMENT milestone, not a claim audit. It measures the B4a programmatic memory as an additive next-token model on a generated constrained DSL; no novelty claim is made or licensed (M129 verdict: this is classic n-gram/PPM/cache-LM territory).",
+    "N90.2": "Hypothesis registered before measurement: (a) the additive interpolated next-token model's test perplexity decreases as the window (the 'how far back' dial) grows; (b) footprint grows with window; (c) per-token operations grow slowly with window (integer lookups/adds, not multiply-accumulates).",
+    "N90.3": "Corpus is DETERMINISTICALLY GENERATED, not downloaded: a small statement/expression DSL produced by a seeded generator, split by SEED (train/valid/test programs never share a seed), so the corpus is byte-reproducible with zero network dependency. No external text.",
+    "N90.4": "Model is ADDITIVE in its construction: p(next|context) is a uniform mixture over orders k=1..K of add-alpha-smoothed exact-order counts (Jelinek-Mercer with uniform lambda) - each order is an independent count term summed in. Built from ProgrammaticMemory.exact_continuations.",
+    "N90.5": "Sanity gate (kill switch): window=8 test perplexity must not exceed window=1 test perplexity by more than 10% (more memory must not hurt with proper smoothing); a fired switch is reported as a negative on the additive construction, not silently dropped.",
+    "N90.6": "The small-transformer comparison is DISCLOSED as not run: training any transformer on this environment's compute GPU (display GPU, TDR risk) is out of scope. The additive model is reported against a uniform baseline and its own window sweep only; the transformer arm is recorded as not performed, not claimed.",
+    "N90.7": "Cost accounting: footprint in stored-table bytes (ProgrammaticMemory.footprint_bytes); per-token operations counted as integer lookups + adds (the model is add-only, no multiply-accumulates); wall-clock is never a comparison currency.",
+    "N90.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir.",
+    "N90.9": "This evidence is a dated snapshot; it records the exact generator seeds, grammar, and window ladder so a reader can repeat the measurement byte-for-byte."
+  },
+  "corpus": {
+    "kind": "generated_dsl",
+    "programs": {"train": 5000, "valid": 500, "test": 500},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "model": {
+    "window_ladder": [1, 2, 3, 4, 8],
+    "alpha": 1.0,
+    "interpolation": "uniform over orders 1..K",
+    "max_window": 8
+  },
+  "gate": {
+    "t1_tolerance": 0.0,
+    "kill_switch_more_memory_hurts": "fired if test_ppl(window=8) > test_ppl(window=1) * 1.10"
+  },
+  "output_dir": "logs/results/v16/m131_additive_next_token"
+}

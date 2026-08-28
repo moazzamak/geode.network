@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "run_id": "e2-refinement-smoke",
+  "checkpoint_epoch": 2,
+  "checkpoint_global_step": 4,
+  "final_epoch": 4,
+  "final_global_step": 8,
+  "uninterrupted_global_step": 8,
+  "epoch_history_count": 4,
+  "epoch_history_exact": true,
+  "optimizer_state_exact": true,
+  "array_state_exact": true,
+  "array_count": 10,
+  "array_sha256": {
+    "ellipsoid-000000-center": "8edd5b238180a65c5a05fadd85afa91b89bf4a4050e75e4c5f2a26657ccdebfe",
+    "ellipsoid-000000-center-velocity": "203c2e88efa338d81586bce63ff3f7a9879139098870cf0ac19eabcd81a8d17e",
+    "ellipsoid-000000-orientation": "ab4375614c2afa49b8bc9e7420dca28da4752c57478519d20025a5bdf36b1d9e",
+    "ellipsoid-000000-precision-velocity": "26759625673f14f32f81b21e13279ad0428238ba6b9c7b94e64414e3bad5f104",
+    "ellipsoid-000000-radii": "f6bb222be728b7d6001322eed6a307e851b60d100d8275196c5ad9064b610028",
+    "ellipsoid-000001-center": "d6680708b0ed8d07a1943bc1c62e8ffcb3e54c6274a8f1122b747f3dc54c5ba6",
+    "ellipsoid-000001-center-velocity": "a0509d8c2350ab5b75199449beb9979733132c8cbe6b4b47fafefd85e6ae0ee1",
+    "ellipsoid-000001-orientation": "ab4375614c2afa49b8bc9e7420dca28da4752c57478519d20025a5bdf36b1d9e",
+    "ellipsoid-000001-precision-velocity": "815bfa16ff36d94a5ef1b3a0d5d114b52041c884dea1d3a74b461b4c9f518b2c",
+    "ellipsoid-000001-radii": "c6d8b808fb7e2134c4e90dbd25d98174d09ed63bf1bb16fc7bd5a0b93b5c0dfa"
+  },
+  "topology_mismatch_rejected": true,
+  "rng_mismatch_rejected": true,
+  "regression_test_count": 156,
+  "regression_test_seconds": 9.796,
+  "performance_claim": false
+}

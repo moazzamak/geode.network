@@ -1,0 +1,2415 @@
+{
+  "protocol": {
+    "holdout_seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "stream_families": [
+      "heavy_tailed",
+      "anisotropic",
+      "abrupt_drift",
+      "intermittent_unseen"
+    ],
+    "frozen_separation": 2.5,
+    "parameters_selected_before_family_observation": true,
+    "oracle_used_for_discovery": false,
+    "automatic_class_creation_enabled": false
+  },
+  "families": {
+    "heavy_tailed": {
+      "discovery_precision_mean": 0.8,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.7666666666666667,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 0,
+      "runs_with_proposals": 4,
+      "reviews_total": 11,
+      "reviewed_samples_total": 206,
+      "unseen_recall_with_review_mean": 0.95,
+      "unseen_recall_with_review_minimum": 0.9166666666666666
+    },
+    "anisotropic": {
+      "discovery_precision_mean": 0.8,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.7916666666666667,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 0,
+      "runs_with_proposals": 4,
+      "reviews_total": 11,
+      "reviewed_samples_total": 201,
+      "unseen_recall_with_review_mean": 0.975,
+      "unseen_recall_with_review_minimum": 0.9166666666666666
+    },
+    "abrupt_drift": {
+      "discovery_precision_mean": 0.8,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.7833333333333334,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 0,
+      "runs_with_proposals": 4,
+      "reviews_total": 11,
+      "reviewed_samples_total": 209,
+      "unseen_recall_with_review_mean": 0.975,
+      "unseen_recall_with_review_minimum": 0.9583333333333334
+    },
+    "intermittent_unseen": {
+      "discovery_precision_mean": 0.8,
+      "discovery_precision_minimum": 0.0,
+      "discovery_recall_mean": 0.7375,
+      "discovery_recall_minimum": 0.0,
+      "false_proposals_total": 0,
+      "runs_with_proposals": 4,
+      "reviews_total": 9,
+      "reviewed_samples_total": 166,
+      "unseen_recall_with_review_mean": 0.925,
+      "unseen_recall_with_review_minimum": 0.8125
+    }
+  },
+  "runs": {
+    "heavy_tailed": [
+      {
+        "seed": 61,
+        "proposal_count": 1,
+        "proposed_sample_count": 23,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9583333333333334,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 38,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-a1842458e021",
+            "sample_ids": [
+              1,
+              5,
+              8,
+              12,
+              16,
+              22,
+              23,
+              25,
+              36,
+              37,
+              41,
+              43,
+              51,
+              53,
+              57,
+              65,
+              67,
+              69,
+              70,
+              77,
+              87,
+              90,
+              94
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.6321425784278674,
+            "nearest_known_distance": 4.4847323147977125,
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-4566852681b3",
+            "sample_ids": [
+              2,
+              10,
+              13,
+              20,
+              21,
+              26,
+              39,
+              40,
+              45,
+              50,
+              52,
+              59,
+              62,
+              64,
+              68,
+              73,
+              91,
+              95
+            ],
+            "support": 18,
+            "windows": 3,
+            "rms_radius": 0.6119950519984027,
+            "nearest_known_distance": 1.5996161909737223,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 18
+            }
+          },
+          {
+            "review_id": "review-cde4327d1119",
+            "sample_ids": [
+              3,
+              7,
+              9,
+              15,
+              17,
+              18,
+              28,
+              29,
+              32,
+              33,
+              34,
+              42,
+              56,
+              61,
+              63,
+              72,
+              78,
+              81,
+              88,
+              92
+            ],
+            "support": 20,
+            "windows": 3,
+            "rms_radius": 0.9630508412449893,
+            "nearest_known_distance": 1.3569616992500724,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 2,
+              "shifted_known": 18
+            }
+          }
+        ]
+      },
+      {
+        "seed": 62,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 36,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-06ce7d780463",
+            "sample_ids": [
+              0,
+              6,
+              16,
+              17,
+              18,
+              20,
+              23,
+              30,
+              34,
+              37,
+              41,
+              44,
+              47,
+              51,
+              55,
+              57,
+              64,
+              66,
+              69,
+              72,
+              73,
+              75,
+              83,
+              89
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.5976223407431471,
+            "nearest_known_distance": 3.099333431603856,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-ac71df56935a",
+            "sample_ids": [
+              2,
+              3,
+              7,
+              14,
+              22,
+              25,
+              27,
+              31,
+              32,
+              35,
+              46,
+              49,
+              59,
+              62,
+              63,
+              68,
+              78,
+              80,
+              84,
+              85,
+              88,
+              93,
+              95
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.6170208301745634,
+            "nearest_known_distance": 1.5261864256856579,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          },
+          {
+            "review_id": "review-99c5df3850cd",
+            "sample_ids": [
+              13,
+              21,
+              28,
+              29,
+              42,
+              43,
+              48,
+              52,
+              54,
+              56,
+              76,
+              90,
+              94
+            ],
+            "support": 13,
+            "windows": 3,
+            "rms_radius": 0.8557701320873164,
+            "nearest_known_distance": 1.4751109706863508,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "shifted_known": 13
+            }
+          }
+        ]
+      },
+      {
+        "seed": 63,
+        "proposal_count": 0,
+        "proposed_sample_count": 0,
+        "discovery_precision": 0.0,
+        "discovery_recall": 0.0,
+        "cluster_purity": 0.0,
+        "adjusted_rand_index": 0.0,
+        "false_proposal_count": 0,
+        "review_count": 3,
+        "reviewed_sample_count": 60,
+        "reviewed_unseen_sample_count": 22,
+        "unseen_recall_with_review": 0.9166666666666666,
+        "time_to_first_proposal_window": null,
+        "proposals": [],
+        "reviews": [
+          {
+            "review_id": "review-5027b4e15005",
+            "sample_ids": [
+              0,
+              9,
+              15,
+              26,
+              37,
+              51,
+              52,
+              63,
+              67,
+              73,
+              77,
+              79,
+              84,
+              85,
+              89
+            ],
+            "support": 15,
+            "windows": 3,
+            "rms_radius": 0.9744905159415796,
+            "nearest_known_distance": 1.3708572485463943,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 2,
+              "shifted_known": 13
+            }
+          },
+          {
+            "review_id": "review-e2358250afbf",
+            "sample_ids": [
+              1,
+              5,
+              6,
+              7,
+              17,
+              19,
+              20,
+              21,
+              34,
+              35,
+              41,
+              42,
+              46,
+              48,
+              53,
+              55,
+              70,
+              78,
+              80,
+              82,
+              86,
+              90,
+              95
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.7355704235968233,
+            "nearest_known_distance": 1.4884380954847964,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          },
+          {
+            "review_id": "review-7259fc08a5d7",
+            "sample_ids": [
+              3,
+              4,
+              12,
+              13,
+              16,
+              23,
+              28,
+              30,
+              43,
+              44,
+              47,
+              54,
+              60,
+              61,
+              64,
+              71,
+              72,
+              74,
+              76,
+              81,
+              87,
+              92
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.6666413337100326,
+            "nearest_known_distance": 2.2770889845356854,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "unseen_class": 22
+            }
+          }
+        ]
+      },
+      {
+        "seed": 64,
+        "proposal_count": 1,
+        "proposed_sample_count": 22,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9166666666666666,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 40,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9166666666666666,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-1cbffde617e2",
+            "sample_ids": [
+              0,
+              1,
+              2,
+              6,
+              9,
+              10,
+              13,
+              19,
+              34,
+              39,
+              43,
+              49,
+              50,
+              53,
+              60,
+              65,
+              66,
+              76,
+              77,
+              78,
+              84,
+              86
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.6479506988429447,
+            "nearest_known_distance": 6.707120553777974,
+            "oracle_event_counts": {
+              "unseen_class": 22
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-2dbf24da37e8",
+            "sample_ids": [
+              4,
+              5,
+              12,
+              16,
+              24,
+              25,
+              29,
+              32,
+              35,
+              44,
+              46,
+              64,
+              69,
+              71,
+              73,
+              79,
+              82
+            ],
+            "support": 17,
+            "windows": 3,
+            "rms_radius": 0.8649014173706382,
+            "nearest_known_distance": 1.5974401325655603,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "shifted_known": 17
+            }
+          },
+          {
+            "review_id": "review-ca851e4ab90d",
+            "sample_ids": [
+              7,
+              8,
+              11,
+              26,
+              27,
+              28,
+              30,
+              31,
+              36,
+              56,
+              57,
+              58,
+              59,
+              62,
+              63,
+              67,
+              75,
+              80,
+              83,
+              85,
+              89,
+              90,
+              93
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.7157576050997309,
+            "nearest_known_distance": 1.5224251216544775,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          }
+        ]
+      },
+      {
+        "seed": 65,
+        "proposal_count": 1,
+        "proposed_sample_count": 23,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9583333333333334,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 32,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-9026b1a3f586",
+            "sample_ids": [
+              1,
+              4,
+              11,
+              13,
+              25,
+              27,
+              29,
+              39,
+              40,
+              42,
+              49,
+              51,
+              55,
+              57,
+              59,
+              65,
+              66,
+              69,
+              76,
+              77,
+              82,
+              88,
+              91
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.7224075834986589,
+            "nearest_known_distance": 4.528591620334563,
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-af5f72a0ee82",
+            "sample_ids": [
+              6,
+              12,
+              14,
+              15,
+              19,
+              21,
+              24,
+              28,
+              32,
+              33,
+              35,
+              36,
+              44,
+              47,
+              52,
+              67,
+              68,
+              70,
+              85,
+              86,
+              90,
+              95
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.7644341153718057,
+            "nearest_known_distance": 1.5412391124940652,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 22
+            }
+          },
+          {
+            "review_id": "review-55f2cd9f0eba",
+            "sample_ids": [
+              22,
+              23,
+              30,
+              34,
+              43,
+              53,
+              61,
+              63,
+              78,
+              83
+            ],
+            "support": 10,
+            "windows": 3,
+            "rms_radius": 0.9414809219840846,
+            "nearest_known_distance": 1.4385132145618544,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 3,
+              "shifted_known": 7
+            }
+          }
+        ]
+      }
+    ],
+    "anisotropic": [
+      {
+        "seed": 61,
+        "proposal_count": 1,
+        "proposed_sample_count": 23,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9583333333333334,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 39,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-d1cb92593a67",
+            "sample_ids": [
+              8,
+              10,
+              13,
+              14,
+              18,
+              22,
+              25,
+              29,
+              35,
+              41,
+              44,
+              45,
+              51,
+              54,
+              59,
+              61,
+              67,
+              68,
+              70,
+              80,
+              88,
+              89,
+              90
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.8600049287270226,
+            "nearest_known_distance": 4.61310225001098,
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-602c544545f1",
+            "sample_ids": [
+              2,
+              7,
+              15,
+              20,
+              26,
+              27,
+              28,
+              31,
+              32,
+              37,
+              46,
+              53,
+              55,
+              60,
+              62,
+              69,
+              72,
+              73,
+              75,
+              82,
+              83,
+              84,
+              93
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.7217023558502337,
+            "nearest_known_distance": 1.4882461810270295,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          },
+          {
+            "review_id": "review-3b47403b551a",
+            "sample_ids": [
+              16,
+              17,
+              19,
+              39,
+              43,
+              50,
+              56,
+              58,
+              64,
+              76,
+              77,
+              79,
+              87,
+              92,
+              94,
+              95
+            ],
+            "support": 16,
+            "windows": 3,
+            "rms_radius": 0.8210226306087222,
+            "nearest_known_distance": 1.4192952313157121,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 3,
+              "shifted_known": 13
+            }
+          }
+        ]
+      },
+      {
+        "seed": 62,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 35,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-0901c520abb4",
+            "sample_ids": [
+              8,
+              15,
+              16,
+              21,
+              24,
+              25,
+              26,
+              27,
+              33,
+              40,
+              42,
+              44,
+              47,
+              57,
+              58,
+              62,
+              67,
+              71,
+              75,
+              80,
+              82,
+              85,
+              87,
+              88
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.7563189517750096,
+            "nearest_known_distance": 2.9812221034384594,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-e3e9848c423e",
+            "sample_ids": [
+              0,
+              11,
+              12,
+              18,
+              19,
+              20,
+              28,
+              31,
+              32,
+              34,
+              46,
+              49,
+              55,
+              60,
+              61,
+              63,
+              64,
+              66,
+              68,
+              73,
+              74,
+              76,
+              90,
+              92
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.6677460940209846,
+            "nearest_known_distance": 1.4645648902758517,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 24
+            }
+          },
+          {
+            "review_id": "review-4696a231ec3e",
+            "sample_ids": [
+              17,
+              39,
+              50,
+              51,
+              52,
+              53,
+              54,
+              59,
+              77,
+              78,
+              89
+            ],
+            "support": 11,
+            "windows": 3,
+            "rms_radius": 0.5513847754370974,
+            "nearest_known_distance": 1.189114955059853,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 2,
+              "shifted_known": 9
+            }
+          }
+        ]
+      },
+      {
+        "seed": 63,
+        "proposal_count": 0,
+        "proposed_sample_count": 0,
+        "discovery_precision": 0.0,
+        "discovery_recall": 0.0,
+        "cluster_purity": 0.0,
+        "adjusted_rand_index": 0.0,
+        "false_proposal_count": 0,
+        "review_count": 3,
+        "reviewed_sample_count": 53,
+        "reviewed_unseen_sample_count": 22,
+        "unseen_recall_with_review": 0.9166666666666666,
+        "time_to_first_proposal_window": null,
+        "proposals": [],
+        "reviews": [
+          {
+            "review_id": "review-30a9ff4af12d",
+            "sample_ids": [
+              2,
+              10,
+              11,
+              15,
+              17,
+              19,
+              26,
+              31,
+              39,
+              40,
+              41,
+              49,
+              51,
+              58,
+              61,
+              66,
+              67,
+              72,
+              76,
+              87,
+              91,
+              92
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.832954684089764,
+            "nearest_known_distance": 2.440284764538799,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "unseen_class": 22
+            }
+          },
+          {
+            "review_id": "review-41459915a2d3",
+            "sample_ids": [
+              3,
+              4,
+              5,
+              16,
+              20,
+              22,
+              24,
+              32,
+              35,
+              37,
+              48,
+              53,
+              59,
+              60,
+              64,
+              77,
+              81,
+              83,
+              85,
+              86,
+              93,
+              95
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.8131876935940281,
+            "nearest_known_distance": 1.5057187001900336,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 22
+            }
+          },
+          {
+            "review_id": "review-e21fcd305c7d",
+            "sample_ids": [
+              12,
+              18,
+              38,
+              46,
+              50,
+              52,
+              62,
+              65,
+              78
+            ],
+            "support": 9,
+            "windows": 3,
+            "rms_radius": 0.7339981647878265,
+            "nearest_known_distance": 1.5527650436210383,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "shifted_known": 9
+            }
+          }
+        ]
+      },
+      {
+        "seed": 64,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 43,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-bc0072d51d47",
+            "sample_ids": [
+              3,
+              4,
+              9,
+              13,
+              14,
+              19,
+              22,
+              26,
+              34,
+              35,
+              37,
+              44,
+              45,
+              49,
+              50,
+              55,
+              64,
+              72,
+              74,
+              78,
+              82,
+              86,
+              87,
+              92
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.696350979376784,
+            "nearest_known_distance": 6.565258128578594,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-e47b7f602422",
+            "sample_ids": [
+              0,
+              5,
+              7,
+              15,
+              16,
+              20,
+              23,
+              27,
+              33,
+              36,
+              59,
+              60,
+              61,
+              67,
+              70,
+              73,
+              76,
+              79,
+              80,
+              95
+            ],
+            "support": 20,
+            "windows": 3,
+            "rms_radius": 0.9501895937973502,
+            "nearest_known_distance": 1.569815000849583,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "shifted_known": 20
+            }
+          },
+          {
+            "review_id": "review-239bd3f6d337",
+            "sample_ids": [
+              6,
+              10,
+              12,
+              17,
+              18,
+              21,
+              25,
+              30,
+              32,
+              42,
+              43,
+              46,
+              51,
+              52,
+              54,
+              62,
+              69,
+              71,
+              77,
+              83,
+              85,
+              89,
+              90
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.8170253378885526,
+            "nearest_known_distance": 1.5970478219154025,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          }
+        ]
+      },
+      {
+        "seed": 65,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 31,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-ec743a47b5a7",
+            "sample_ids": [
+              3,
+              5,
+              7,
+              12,
+              15,
+              16,
+              23,
+              24,
+              32,
+              34,
+              35,
+              51,
+              55,
+              57,
+              59,
+              60,
+              64,
+              69,
+              77,
+              82,
+              85,
+              91,
+              92,
+              95
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.7651121233015485,
+            "nearest_known_distance": 4.454096794055337,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-ae1ffab43465",
+            "sample_ids": [
+              4,
+              9,
+              11,
+              18,
+              20,
+              22,
+              28,
+              31,
+              39,
+              42,
+              45,
+              46,
+              53,
+              58,
+              62,
+              67,
+              72,
+              75,
+              76,
+              79,
+              80,
+              94
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.8294022995552962,
+            "nearest_known_distance": 1.469556414921976,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 22
+            }
+          },
+          {
+            "review_id": "review-1cbb60e8a6c0",
+            "sample_ids": [
+              0,
+              27,
+              30,
+              40,
+              52,
+              56,
+              61,
+              84,
+              87
+            ],
+            "support": 9,
+            "windows": 3,
+            "rms_radius": 0.7463480808382551,
+            "nearest_known_distance": 1.2627952816878958,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 2,
+              "shifted_known": 7
+            }
+          }
+        ]
+      }
+    ],
+    "abrupt_drift": [
+      {
+        "seed": 61,
+        "proposal_count": 1,
+        "proposed_sample_count": 23,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9583333333333334,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 36,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-368bb6eea372",
+            "sample_ids": [
+              8,
+              10,
+              13,
+              14,
+              18,
+              22,
+              25,
+              29,
+              35,
+              41,
+              44,
+              45,
+              51,
+              54,
+              59,
+              61,
+              67,
+              68,
+              70,
+              74,
+              80,
+              88,
+              89
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.9200064813770542,
+            "nearest_known_distance": 4.583152768559368,
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-1b7a7b590fd6",
+            "sample_ids": [
+              2,
+              7,
+              15,
+              26,
+              28,
+              31,
+              32,
+              37,
+              46,
+              53,
+              55,
+              60,
+              62,
+              69,
+              73,
+              75,
+              82,
+              83,
+              84
+            ],
+            "support": 19,
+            "windows": 3,
+            "rms_radius": 0.7310558415790303,
+            "nearest_known_distance": 1.333479206307265,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 19
+            }
+          },
+          {
+            "review_id": "review-77aae142b983",
+            "sample_ids": [
+              16,
+              17,
+              19,
+              23,
+              43,
+              50,
+              56,
+              57,
+              58,
+              64,
+              76,
+              77,
+              79,
+              85,
+              87,
+              92,
+              94
+            ],
+            "support": 17,
+            "windows": 3,
+            "rms_radius": 0.9986836817205258,
+            "nearest_known_distance": 1.5271861608013528,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 4,
+              "shifted_known": 13
+            }
+          }
+        ]
+      },
+      {
+        "seed": 62,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 42,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-58bc43036118",
+            "sample_ids": [
+              8,
+              15,
+              16,
+              21,
+              24,
+              25,
+              26,
+              27,
+              33,
+              40,
+              42,
+              44,
+              47,
+              57,
+              58,
+              62,
+              67,
+              71,
+              75,
+              80,
+              82,
+              85,
+              87,
+              88
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.8056095718256484,
+            "nearest_known_distance": 2.8555523683322264,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-f02309ab2e18",
+            "sample_ids": [
+              0,
+              11,
+              12,
+              18,
+              19,
+              20,
+              28,
+              31,
+              32,
+              34,
+              49,
+              55,
+              60,
+              61,
+              63,
+              64,
+              66,
+              68,
+              73,
+              74,
+              76,
+              90,
+              92
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.7232873403871256,
+            "nearest_known_distance": 1.2855901729750598,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          },
+          {
+            "review_id": "review-62e3b9b2fc70",
+            "sample_ids": [
+              2,
+              4,
+              23,
+              30,
+              36,
+              37,
+              39,
+              51,
+              52,
+              53,
+              54,
+              59,
+              77,
+              78,
+              79,
+              83,
+              86,
+              89,
+              91
+            ],
+            "support": 19,
+            "windows": 3,
+            "rms_radius": 0.829967209035651,
+            "nearest_known_distance": 1.2800153319501186,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 7,
+              "shifted_known": 12
+            }
+          }
+        ]
+      },
+      {
+        "seed": 63,
+        "proposal_count": 0,
+        "proposed_sample_count": 0,
+        "discovery_precision": 0.0,
+        "discovery_recall": 0.0,
+        "cluster_purity": 0.0,
+        "adjusted_rand_index": 0.0,
+        "false_proposal_count": 0,
+        "review_count": 3,
+        "reviewed_sample_count": 55,
+        "reviewed_unseen_sample_count": 23,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": null,
+        "proposals": [],
+        "reviews": [
+          {
+            "review_id": "review-b067667fdbdc",
+            "sample_ids": [
+              2,
+              10,
+              11,
+              15,
+              17,
+              19,
+              26,
+              31,
+              39,
+              40,
+              41,
+              47,
+              49,
+              51,
+              58,
+              61,
+              66,
+              67,
+              72,
+              76,
+              87,
+              91,
+              92
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.8684624446833925,
+            "nearest_known_distance": 2.361301353342252,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          },
+          {
+            "review_id": "review-cdaf1566c3cc",
+            "sample_ids": [
+              4,
+              5,
+              16,
+              20,
+              22,
+              24,
+              32,
+              37,
+              48,
+              53,
+              60,
+              64,
+              77,
+              81,
+              83,
+              85,
+              95
+            ],
+            "support": 17,
+            "windows": 3,
+            "rms_radius": 0.8108339428662148,
+            "nearest_known_distance": 1.4739087718638053,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 17
+            }
+          },
+          {
+            "review_id": "review-eb177a14bcd1",
+            "sample_ids": [
+              12,
+              18,
+              27,
+              30,
+              38,
+              43,
+              46,
+              50,
+              62,
+              63,
+              65,
+              70,
+              75,
+              78,
+              82
+            ],
+            "support": 15,
+            "windows": 3,
+            "rms_radius": 0.9683087460671747,
+            "nearest_known_distance": 1.408515568721832,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 5,
+              "shifted_known": 10
+            }
+          }
+        ]
+      },
+      {
+        "seed": 64,
+        "proposal_count": 1,
+        "proposed_sample_count": 23,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9583333333333334,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 44,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9583333333333334,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-74c9f54c9538",
+            "sample_ids": [
+              3,
+              4,
+              13,
+              14,
+              19,
+              22,
+              26,
+              34,
+              35,
+              37,
+              44,
+              45,
+              49,
+              50,
+              55,
+              64,
+              72,
+              74,
+              78,
+              82,
+              86,
+              87,
+              92
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.6818135566375959,
+            "nearest_known_distance": 6.454100761556847,
+            "oracle_event_counts": {
+              "unseen_class": 23
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-717b032588a9",
+            "sample_ids": [
+              0,
+              5,
+              7,
+              15,
+              16,
+              20,
+              33,
+              36,
+              38,
+              47,
+              59,
+              60,
+              61,
+              67,
+              70,
+              73,
+              75,
+              76,
+              80,
+              81,
+              91,
+              93,
+              95
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.960807713296146,
+            "nearest_known_distance": 1.5693455187485017,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 5,
+              "shifted_known": 18
+            }
+          },
+          {
+            "review_id": "review-20aa8532be3a",
+            "sample_ids": [
+              6,
+              10,
+              12,
+              17,
+              18,
+              21,
+              25,
+              30,
+              32,
+              43,
+              46,
+              51,
+              52,
+              62,
+              69,
+              71,
+              77,
+              83,
+              85,
+              89,
+              90
+            ],
+            "support": 21,
+            "windows": 3,
+            "rms_radius": 0.7730537353646635,
+            "nearest_known_distance": 1.4690508852016384,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 21
+            }
+          }
+        ]
+      },
+      {
+        "seed": 65,
+        "proposal_count": 1,
+        "proposed_sample_count": 24,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 32,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 1,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-5c48fda5ec95",
+            "sample_ids": [
+              3,
+              5,
+              7,
+              12,
+              15,
+              16,
+              23,
+              24,
+              32,
+              34,
+              35,
+              51,
+              55,
+              57,
+              59,
+              60,
+              64,
+              69,
+              77,
+              82,
+              85,
+              91,
+              92,
+              95
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.7950926706588202,
+            "nearest_known_distance": 4.465193615361149,
+            "oracle_event_counts": {
+              "unseen_class": 24
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-20f88dcd66fa",
+            "sample_ids": [
+              4,
+              9,
+              11,
+              18,
+              20,
+              22,
+              28,
+              31,
+              39,
+              45,
+              53,
+              58,
+              62,
+              67,
+              68,
+              72,
+              75,
+              76,
+              79,
+              80,
+              94
+            ],
+            "support": 21,
+            "windows": 3,
+            "rms_radius": 0.889075952764466,
+            "nearest_known_distance": 1.3435189801073268,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 21
+            }
+          },
+          {
+            "review_id": "review-c1c6df19426c",
+            "sample_ids": [
+              10,
+              27,
+              30,
+              40,
+              44,
+              48,
+              56,
+              61,
+              65,
+              84,
+              87
+            ],
+            "support": 11,
+            "windows": 3,
+            "rms_radius": 0.7207800225431723,
+            "nearest_known_distance": 1.3202336174363274,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 4,
+              "shifted_known": 7
+            }
+          }
+        ]
+      }
+    ],
+    "intermittent_unseen": [
+      {
+        "seed": 61,
+        "proposal_count": 1,
+        "proposed_sample_count": 15,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9375,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 1,
+        "reviewed_sample_count": 22,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9375,
+        "time_to_first_proposal_window": 2,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-6c16779b1d55",
+            "sample_ids": [
+              8,
+              10,
+              13,
+              14,
+              18,
+              22,
+              25,
+              29,
+              56,
+              61,
+              65,
+              77,
+              78,
+              83,
+              85
+            ],
+            "support": 15,
+            "windows": 2,
+            "rms_radius": 0.7111743683032437,
+            "nearest_known_distance": 4.5836817463386925,
+            "oracle_event_counts": {
+              "unseen_class": 15
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-0cd0d79df5ac",
+            "sample_ids": [
+              2,
+              7,
+              15,
+              26,
+              27,
+              28,
+              31,
+              33,
+              35,
+              40,
+              44,
+              51,
+              52,
+              54,
+              60,
+              66,
+              67,
+              71,
+              73,
+              82,
+              84,
+              87
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.6795903772331329,
+            "nearest_known_distance": 1.5485684885371798,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 22
+            }
+          }
+        ]
+      },
+      {
+        "seed": 62,
+        "proposal_count": 1,
+        "proposed_sample_count": 16,
+        "discovery_precision": 1.0,
+        "discovery_recall": 1.0,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 34,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 1.0,
+        "time_to_first_proposal_window": 2,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-f5210e317e4b",
+            "sample_ids": [
+              8,
+              15,
+              16,
+              21,
+              24,
+              25,
+              26,
+              27,
+              56,
+              59,
+              63,
+              66,
+              75,
+              78,
+              79,
+              81
+            ],
+            "support": 16,
+            "windows": 2,
+            "rms_radius": 0.6973043888358583,
+            "nearest_known_distance": 3.2425333086892563,
+            "oracle_event_counts": {
+              "unseen_class": 16
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-3bdefc76054a",
+            "sample_ids": [
+              0,
+              11,
+              12,
+              18,
+              19,
+              20,
+              28,
+              31,
+              33,
+              37,
+              38,
+              45,
+              46,
+              47,
+              49,
+              52,
+              58,
+              60,
+              68,
+              69,
+              72,
+              82,
+              84,
+              85
+            ],
+            "support": 24,
+            "windows": 3,
+            "rms_radius": 0.6857371301735037,
+            "nearest_known_distance": 1.519515647199052,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 24
+            }
+          },
+          {
+            "review_id": "review-d43d0076e0b8",
+            "sample_ids": [
+              2,
+              4,
+              34,
+              41,
+              42,
+              53,
+              70,
+              77,
+              80,
+              87
+            ],
+            "support": 10,
+            "windows": 3,
+            "rms_radius": 0.7410157298000694,
+            "nearest_known_distance": 1.3483590151609315,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 3,
+              "shifted_known": 7
+            }
+          }
+        ]
+      },
+      {
+        "seed": 63,
+        "proposal_count": 0,
+        "proposed_sample_count": 0,
+        "discovery_precision": 0.0,
+        "discovery_recall": 0.0,
+        "cluster_purity": 0.0,
+        "adjusted_rand_index": 0.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 35,
+        "reviewed_unseen_sample_count": 15,
+        "unseen_recall_with_review": 0.9375,
+        "time_to_first_proposal_window": null,
+        "proposals": [],
+        "reviews": [
+          {
+            "review_id": "review-6bd6161c0709",
+            "sample_ids": [
+              2,
+              10,
+              11,
+              15,
+              17,
+              19,
+              26,
+              31,
+              57,
+              61,
+              63,
+              68,
+              82,
+              83,
+              85
+            ],
+            "support": 15,
+            "windows": 2,
+            "rms_radius": 0.778843926517969,
+            "nearest_known_distance": 2.3707789838315882,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "unseen_class": 15
+            }
+          },
+          {
+            "review_id": "review-2fb66b5448fc",
+            "sample_ids": [
+              4,
+              5,
+              16,
+              20,
+              22,
+              24,
+              38,
+              41,
+              45,
+              50,
+              51,
+              54,
+              56,
+              58,
+              62,
+              64,
+              69,
+              73,
+              76,
+              84
+            ],
+            "support": 20,
+            "windows": 3,
+            "rms_radius": 0.7755862718367099,
+            "nearest_known_distance": 1.4911347389476046,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 20
+            }
+          }
+        ]
+      },
+      {
+        "seed": 64,
+        "proposal_count": 1,
+        "proposed_sample_count": 15,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.9375,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 40,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.9375,
+        "time_to_first_proposal_window": 2,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-ec231dfc7e9c",
+            "sample_ids": [
+              3,
+              4,
+              13,
+              14,
+              19,
+              22,
+              26,
+              57,
+              58,
+              62,
+              65,
+              68,
+              71,
+              81,
+              84
+            ],
+            "support": 15,
+            "windows": 2,
+            "rms_radius": 0.6891269249690182,
+            "nearest_known_distance": 6.652359265308283,
+            "oracle_event_counts": {
+              "unseen_class": 15
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-e6e3b7e2022e",
+            "sample_ids": [
+              0,
+              5,
+              7,
+              15,
+              16,
+              23,
+              27,
+              33,
+              34,
+              42,
+              47,
+              50,
+              63,
+              69,
+              70,
+              72,
+              86
+            ],
+            "support": 17,
+            "windows": 3,
+            "rms_radius": 0.973604761382544,
+            "nearest_known_distance": 1.5169612836737563,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 1,
+              "shifted_known": 16
+            }
+          },
+          {
+            "review_id": "review-2039e80057f5",
+            "sample_ids": [
+              6,
+              10,
+              12,
+              17,
+              18,
+              21,
+              25,
+              30,
+              32,
+              38,
+              40,
+              43,
+              45,
+              52,
+              54,
+              56,
+              59,
+              60,
+              66,
+              67,
+              76,
+              78,
+              79
+            ],
+            "support": 23,
+            "windows": 3,
+            "rms_radius": 0.6563156677766447,
+            "nearest_known_distance": 1.6793615550502128,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 23
+            }
+          }
+        ]
+      },
+      {
+        "seed": 65,
+        "proposal_count": 1,
+        "proposed_sample_count": 13,
+        "discovery_precision": 1.0,
+        "discovery_recall": 0.8125,
+        "cluster_purity": 1.0,
+        "adjusted_rand_index": 1.0,
+        "false_proposal_count": 0,
+        "review_count": 2,
+        "reviewed_sample_count": 35,
+        "reviewed_unseen_sample_count": 0,
+        "unseen_recall_with_review": 0.8125,
+        "time_to_first_proposal_window": 2,
+        "proposals": [
+          {
+            "temporary_unknown_id": "unknown-5add206e45c9",
+            "sample_ids": [
+              3,
+              5,
+              7,
+              12,
+              15,
+              16,
+              23,
+              24,
+              62,
+              67,
+              78,
+              81,
+              82
+            ],
+            "support": 13,
+            "windows": 2,
+            "rms_radius": 0.773880391539385,
+            "nearest_known_distance": 4.526408302375362,
+            "oracle_event_counts": {
+              "unseen_class": 13
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "review_id": "review-1bb45769bb06",
+            "sample_ids": [
+              4,
+              9,
+              11,
+              18,
+              20,
+              22,
+              28,
+              31,
+              37,
+              42,
+              44,
+              46,
+              51,
+              52,
+              56,
+              59,
+              66,
+              68,
+              71,
+              73,
+              76,
+              83
+            ],
+            "support": 22,
+            "windows": 3,
+            "rms_radius": 0.7840870517175895,
+            "nearest_known_distance": 1.569249132159345,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "new_known_mode": 22
+            }
+          },
+          {
+            "review_id": "review-6e37ba694519",
+            "sample_ids": [
+              10,
+              27,
+              30,
+              33,
+              34,
+              45,
+              69,
+              70,
+              72,
+              75,
+              77,
+              85,
+              87
+            ],
+            "support": 13,
+            "windows": 3,
+            "rms_radius": 0.8858625988021598,
+            "nearest_known_distance": 1.2839387979549628,
+            "failed_criteria": [
+              "insufficient_separation"
+            ],
+            "oracle_event_counts": {
+              "known": 1,
+              "shifted_known": 12
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

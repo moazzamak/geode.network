@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "milestone": "M90.2",
+  "registered_question": "Plan v14 section 6.4: is domain linearly encoded in the frozen features, does erasing it remove domain dominance, and does removing domain dominance improve rejection?",
+  "registration_notes": [
+    "N90.2.0 - registered before any arm was run. H94 says domain is linearly encoded and erasing it linearly removes domain dominance, judged on the geometry. H95 says removing domain dominance improves rejection, judged on M90's three bars. The two are permitted to dissociate, and the dissociation is registered in advance as the interesting outcome: H94 true with H95 false means domain dominance is real, removable, and not the cause of v13's rejection failure.",
+    "N90.2.1 - only scale-invariant quantities are compared across arms. Erasure and whitening change the overall scale of the space, so a raw gap of 32.295 in one arm against 4.1 in another is a unit change, not a comparison. Across arms this milestone reads the domain dominance ratio, the spread-over-separation ratios, the sign of sibling_exceeds_foreign and the probe accuracy. Raw gaps are recorded per arm and never compared between arms.",
+    "N90.2.2 - the H94 bar. Domain dominance is removed only if the dominance ratio falls below dominance_ratio_bar and the held-out probe balanced accuracy falls below probe_chance_bar, with the arm beating its matched null on both.",
+    "N90.2.3 - H95 is judged on M90's three bars unchanged, against the same sealed v13 values on identical rows. No bar moves because a new arm arrived.",
+    "N90.2.4 - a failed erasure voids only H94 for that arm. If the probe does not fall to chance under leace_domain, LEACE was misapplied and the arm is a defect to fix rather than evidence about domain overlap.",
+    "N90.2.5 - the domain probe is fitted on fit rows and scored on held-out report rows. Fitting and scoring on the same rows would measure memorisation, not linear encoding.",
+    "N90.2.6 - R5. Every erasure arm carries a null that removes the same number of directions by the same machinery with no domain information. leace_null erases a random six-way partition with matched group sizes; abtt_null removes five seeded random orthonormal directions. An erasure without its null is not evidence, because removing any five directions from a 384-dimensional space changes every figure a little.",
+    "N90.2.7 - the erased rank is 5 for every erasure arm, because a centred one-hot over six domains has rank 5. ABTT's k is set to 5 to match, so the arms remove the same number of directions and differ only in which.",
+    "N90.2.8 - prior art was consulted before the arms were chosen and is listed in plan v14 section 6.4: LEACE (arXiv:2306.03819), INLP (arXiv:2004.07667), All-but-the-Top (arXiv:1702.01417), RobustNet (arXiv:2103.15597), Deep CORAL (arXiv:1607.01719), Mahalanobis OOD (arXiv:1807.03888) and DomainBed (arXiv:2007.01434). The list exists to borrow from, not to establish priority. Under the M88 finding, unauthenticated public search cannot support a novelty claim and its silence means nothing.",
+    "N90.2.9 - DomainBed found that plain ERM matches every domain generalisation algorithm tested under fair model selection. Registered before execution: a null result here is what that literature predicts and is not evidence that the arms were implemented wrongly, provided the probe confirms the erasure actually happened.",
+    "N90.2.10 - no figure here may revisit a v13 verdict, and M91's gate is unchanged. M90.1 opened it. A null here does not close M91 and a success here does not cancel it.",
+    "N90.2.11 - the negative control is M90.1's repaired stratified split, not M85's class-block split. The class-block figure is still reported per arm so the defect stays on the record.",
+    "N90.2.12 - amendment made after seeing arm figures, disclosed rather than silent. The first execution crashed on a code defect before sealing any evidence, but it printed probe accuracies first, and those were baseline 0.8912, leace_domain 0.4879, leace_null 0.8817, abtt 0.7518, abtt_null 0.8896, whiten 0.8943. Every one hit the registered 200 iteration limit without converging. Three things change. The probe now standardises features on fit-row statistics, because lbfgs does not converge on raw features of median L2 norm 46.8 within any tolerable budget. The iteration budget rises to 2000 and convergence on every arm becomes part of probe validity. Chance is derived from the domains actually present in the report rows rather than asserted. The direction of the first two changes is one-sided and against the hypothesis: an unconverged probe understates domain predictability, so a converged probe can only raise every arm's accuracy, making H94's probe bar harder to clear rather than easier. The pre-amendment figures are recorded here so the amendment cannot be mistaken for the result.",
+    "N90.2.13 - the registered chance balanced accuracy of 0.1667 was wrong. The evaluation quota gives sketch zero rows, so five domains are present in the report rows and chance is 0.2. The probe bar stays at 0.25 as registered but is now a narrower margin over chance than intended, so an arm landing between 0.2 and 0.25 is to be reported as near chance rather than comfortably below it.",
+    "N90.2.14 - LEACE equalises class-conditional means, which is a first-moment guarantee. It does not equalise class-conditional covariances. A multinomial linear probe can exploit a covariance difference even when means coincide, because the argmax of several linear scores has polyhedral decision regions and the widest-variance domain wins in the tails. Residual probe accuracy above chance after a verified erasure is therefore expected behaviour, not evidence that the erasure failed, and it is the reason RobustNet at arXiv:2103.15597 and Deep CORAL at arXiv:1607.01719 target second-order statistics. The cross-covariance check in the test suite, not the probe, is what certifies the erasure was applied.",
+    "N90.2.15 - every arm records an erasure certificate: the largest pairwise gap between domain means and the largest absolute cross-covariance with the one-hot domain, before and after the transform, plus the per-domain total variance that survives it. This is a diagnostic and not a bar. It changes no hypothesis outcome. It exists because a refuted H94 is otherwise ambiguous between two opposite findings, that domain is not linearly encoded and that the eraser was misapplied, and the milestone should not leave a reader to guess which one it observed. Added after the first complete run, disclosed here, and reported for all six arms including those that erase nothing.",
+    "N90.2.16 - the certificate immediately caught a defect in this milestone's own code, which is the reason it earns its place. The corpus is float32. Fitting LEACE's closed form in float32, which requires the inverse square root of a 384-square covariance, left a residual largest pairwise domain-mean gap of 1.76e-01 against an original 3.52e+01: the exact guarantee degraded to a 200-fold reduction instead of a complete one. The same computation in float64 leaves 1.06e-07 on the corpus. All four transforms are therefore fitted and applied in float64 and the result cast back to the corpus dtype, so downstream geometry still sees float32 exactly as the untransformed baseline does. The certificate's verdict is relative rather than absolute for the same reason: a float64 map applied to float32 data and cast back cannot leave a residual smaller than the rounding of the corpus, so an absolute bar would be measuring the dtype rather than the erasure.",
+    "N90.2.17 - the erased rank is capped at group_count minus one rather than read off a singular value tolerance. A centred one-hot over g groups has rank exactly g-1, so the budget is known in advance. This was found when the float64 run removed five directions for the domain arm and six for its random-group null, which breaks R5's requirement that a null share the arm's budget. The cause is that the null's cross-covariance is entirely noise, so a relative tolerance has no signal to be relative to and cannot separate a real direction from a numerical one. A tolerance is the wrong instrument for a quantity that is known analytically.",
+    "N90.2.14a - N90.2.14 is withdrawn as speculation that turned out to be explaining an artefact. It was written to account for a probe reading 0.7289 after a verified erasure, and reasoned that a multinomial linear probe can exploit second-moment structure that LEACE does not touch. That reading was a float32 defect, per N90.2.16. With the erasure computed correctly the probe reads exactly 0.2000, which is chance for the five domains present, so the linear probe finds nothing at all and no second-moment explanation is needed or supported. The general point that LEACE guarantees only the first moment remains true and is still the reason RobustNet and Deep CORAL exist; what is withdrawn is the claim that this corpus exhibited it. Nothing here tests a nonlinear probe, so no claim is made about what a nonlinear probe would find."
+  ],
+  "corpus": {
+    "path": "logs/results/v13/domainnet_large/artifact_index.json",
+    "sha256": "a6485f9000654eebb6a9d06edd711f757ecc9f9c5764bc5b34bf91ec841bbf85",
+    "manifest_path": "logs/results/v13/domainnet_large/selection_manifest.json",
+    "class_count": 128,
+    "domain_count": 6
+  },
+  "openset": {
+    "path": "logs/results/v13/openset/artifact_index.json",
+    "feature_hash": "1d1585afa2de6bf227350704f1c1e7e1a2179c407c86cf97c4b8354c37799fe9",
+    "stratified_only": true,
+    "evaluation_first_label": 248,
+    "evaluation_rationale": "The same 5760 rows M84 read, M85 ranked, M89 described and M90 re-read."
+  },
+  "partition": {
+    "fit_per_class": 512,
+    "evaluation_domain_quota": [9, 7, 6, 39, 3, 0],
+    "evaluation_per_class": 64,
+    "rationale": "N83.7's domain-quota split, unchanged since M83 and identical to M90 so the operands stay comparable."
+  },
+  "coverage": {
+    "known_coverage": 0.9,
+    "rationale": "N83.3 and N90.7, unchanged."
+  },
+  "arms": [
+    {
+      "name": "baseline",
+      "transform": "identity",
+      "rationale": "v13 exactly. Anchors both the geometry and the operands, and reproduces M90's sealed figures."
+    },
+    {
+      "name": "leace_domain",
+      "transform": "leace_domain",
+      "rationale": "H94. Closed-form least-squares erasure of the six-way domain concept (arXiv:2306.03819), provably removing all linear predictability of domain while changing the embedding as little as possible. Needs no domain label at evaluation time, which is the objection N90.6 raised against domain centring."
+    },
+    {
+      "name": "leace_null",
+      "transform": "leace_random",
+      "rationale": "N90.2.6. Identical machinery and identical erased rank, erasing a random six-way partition with matched group sizes instead of the domain."
+    },
+    {
+      "name": "abtt",
+      "transform": "abtt",
+      "rationale": "H94, label-free. Removes the common mean and the top five principal directions (arXiv:1702.01417), which is the cheapest available attack on M89's finding that a nuisance factor is the dominant axis of variation."
+    },
+    {
+      "name": "abtt_null",
+      "transform": "abtt_random",
+      "rationale": "N90.2.6. Removes five seeded random orthonormal directions, so the arm and its null differ only in whether the removed directions are the dominant ones."
+    },
+    {
+      "name": "whiten",
+      "transform": "zca_whiten",
+      "rationale": "RobustNet's caution (arXiv:2103.15597) read as a bound. Whitening the pooled fit covariance removes all second-order structure including the part that carries class content, so this arm measures what indiscriminate removal costs."
+    }
+  ],
+  "components": "class",
+  "rank": 51,
+  "erasure": {
+    "erased_rank": 5,
+    "abtt_directions": 5,
+    "eigenvalue_floor": 1e-10,
+    "singular_value_tolerance": 1e-10,
+    "rationale": "N90.2.7. A centred one-hot over six domains has rank 5, so every erasure arm removes five directions and the arms differ only in which five. The singular value tolerance is relative to the leading value because the null direction sits around 5e-15 of it, which straddles numpy's absolute default and would erase an arbitrary sixth direction, breaking LEACE's minimal-edit guarantee."
+  },
+  "probe": {
+    "max_iterations": 2000,
+    "regularisation_C": 1.0,
+    "seed": 90201,
+    "probe_chance_bar": 0.25,
+    "probe_positive_floor": 0.5,
+    "chance_balanced_accuracy": 0.2,
+    "rationale": "N90.2.5 and N90.2.2. Multinomial logistic fitted on fit rows, scored on held-out report rows, balanced over domains so quickdraw's 44800 rows cannot carry the figure. Chance is 1/6; the bar is 0.25, which is well above chance and still far below the baseline's expected value. The probe is itself an instrument, so it carries a positive control registered in advance: the identity arm must exceed probe_positive_floor, three times chance, or the probe is broken and no erasure figure may be read from it."
+  },
+  "gate": {
+    "v13_acceptance_multiplicity_mean": 78.74169921875,
+    "v13_rejection_recall": 0.11875,
+    "v13_geometry_auroc": 0.585085105895996,
+    "multiplicity_bar": 40.0,
+    "auroc_margin": 0.02,
+    "dominance_ratio_bar": 1.0,
+    "rationale": "N90.2.2 and N90.2.3. The three rejection bars are M90's, unchanged. The dominance ratio bar is 1.0 because a ratio below 1 is exactly the statement that foreign-class cells are further apart than a class's own domain cells, which is the negation of M89's finding."
+  },
+  "controls": {
+    "far_field_multiplier": 5.0,
+    "far_field_count": 2048,
+    "far_field_seed": 90001,
+    "far_field_floor": 0.99,
+    "known_split_tolerance": 0.02,
+    "known_split_seed": 90101,
+    "rationale": "N90.2.11. Identical to M90.1, including the repaired stratified split seed, so instrument validity is decided the same way."
+  },
+  "separation": {
+    "minimum_cell_support": 100,
+    "floor_samples_per_dimension": 10,
+    "rationale": "M89's settings, so the per-arm separation report is directly comparable to the sealed M89 figures for the identity arm."
+  },
+  "replication": {
+    "reference_evidence": "logs/results/v14/m90_1_control_repair/evidence.json",
+    "reference_hash": "ce88fb2a737083765c544e1ba9cd22b4889ba5052c6f6dc1f6ecef941a026940",
+    "reference_arm": "baseline",
+    "operand_tolerance": 1e-12,
+    "rationale": "The identity arm must reproduce M90.1's baseline exactly. If it does not, the pipeline changed and no other arm can be read."
+  },
+  "seeds": {
+    "random_group": 90002,
+    "leace_null": 90202,
+    "abtt_null": 90203,
+    "rationale": "Fixed before execution. The nulls are drawn once, not searched over. random_group is carried from M90 so the matched group sizes are the same objects."
+  },
+  "output_dir": "logs/results/v14/m90_2_domain_erasure"
+}

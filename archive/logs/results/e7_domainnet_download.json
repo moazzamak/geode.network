@@ -1,0 +1,29 @@
+{
+  "cache_root": "D:\\geode-ml\\data\\cache",
+  "class_count": 345,
+  "dataset_root": "D:\\geode-ml\\data\\cache\\domainnet",
+  "domains": [
+    "clipart",
+    "infograph",
+    "painting",
+    "quickdraw",
+    "real",
+    "sketch"
+  ],
+  "manifest_path": "D:\\geode-ml\\data\\cache\\domainnet\\manifest.json",
+  "source_repository": "wltjr1007/DomainNet",
+  "source_revision": "ee20570ae7a29c51571e55a9a17983f7625295d6",
+  "split_samples": {
+    "test": 176743,
+    "train": 409832
+  },
+  "total_declared_samples": 586575,
+  "total_verified_bytes": 18521436207,
+  "verified_files": [
+    "data/test-00000-of-00001.parquet",
+    "data/train-00000-of-00003.parquet",
+    "data/train-00001-of-00003.parquet",
+    "data/train-00002-of-00003.parquet"
+  ],
+  "version": "huggingface-parquet-v1"
+}

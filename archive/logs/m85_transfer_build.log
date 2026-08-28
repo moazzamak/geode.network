@@ -1,0 +1,47 @@
+corpus evaluation rows 8192 (4096 calibration, 4096 report)
+reading source rows from the shards ...
+N85.3 reproduction control ...
+  max |diff| 0.000e+00 -> reproduced
+  shard invariance max |diff| 0.000e+00
+extracting 8192 evaluation rows at 32x32 ...
+    degraded 512/8192 at 62.2 img/s
+    degraded 1024/8192 at 74.8 img/s
+    degraded 1536/8192 at 82.7 img/s
+    degraded 2048/8192 at 85.2 img/s
+    degraded 2560/8192 at 87.3 img/s
+    degraded 3072/8192 at 88.6 img/s
+    degraded 3584/8192 at 90.3 img/s
+    degraded 4096/8192 at 90.6 img/s
+    degraded 4608/8192 at 91.7 img/s
+    degraded 5120/8192 at 92.1 img/s
+    degraded 5632/8192 at 92.6 img/s
+    degraded 6144/8192 at 93.2 img/s
+    degraded 6656/8192 at 93.3 img/s
+    degraded 7168/8192 at 93.7 img/s
+    degraded 7680/8192 at 94.0 img/s
+    degraded 8192/8192 at 94.5 img/s
+extracting 10000 CIFAR-100 images ...
+    cifar100 512/10000 at 64.0 img/s
+    cifar100 1024/10000 at 75.2 img/s
+    cifar100 1536/10000 at 83.8 img/s
+    cifar100 2048/10000 at 86.4 img/s
+    cifar100 2560/10000 at 89.0 img/s
+    cifar100 3072/10000 at 90.4 img/s
+    cifar100 3584/10000 at 91.6 img/s
+    cifar100 4096/10000 at 92.7 img/s
+    cifar100 4608/10000 at 93.0 img/s
+    cifar100 5120/10000 at 94.1 img/s
+    cifar100 5632/10000 at 94.5 img/s
+    cifar100 6144/10000 at 95.0 img/s
+    cifar100 6656/10000 at 95.4 img/s
+    cifar100 7168/10000 at 95.6 img/s
+    cifar100 7680/10000 at 96.2 img/s
+    cifar100 8192/10000 at 96.2 img/s
+    cifar100 8704/10000 at 96.8 img/s
+    cifar100 9216/10000 at 96.7 img/s
+    cifar100 9728/10000 at 96.9 img/s
+
+degraded rows   8192
+cifar100 rows   10000
+feature_hash    34d89ad8836d7bf2b1ff432f928fa9e51661f6e9a1b06b12874e781306365752
+runtime         3.6 min

@@ -1,0 +1,137 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+streaming 224px decode + backbone encode
+  atoms 256: train 512/138000
+  atoms 256: train 4608/138000
+  atoms 256: train 8704/138000
+  atoms 256: train 12800/138000
+  atoms 256: train 16896/138000
+  atoms 256: train 20992/138000
+  atoms 256: train 25088/138000
+  atoms 256: train 29184/138000
+  atoms 256: train 33280/138000
+  atoms 256: train 37376/138000
+  atoms 256: train 41472/138000
+  atoms 256: train 45568/138000
+  atoms 256: train 49664/138000
+  atoms 256: train 53760/138000
+  atoms 256: train 57856/138000
+  atoms 256: train 61952/138000
+  atoms 256: train 66048/138000
+  atoms 256: train 70144/138000
+  atoms 256: train 74240/138000
+  atoms 256: train 78336/138000
+  atoms 256: train 82432/138000
+  atoms 256: train 86528/138000
+  atoms 256: train 90624/138000
+  atoms 256: train 94720/138000
+  atoms 256: train 98816/138000
+  atoms 256: train 102912/138000
+  atoms 256: train 107008/138000
+  atoms 256: train 111104/138000
+  atoms 256: train 115200/138000
+  atoms 256: train 119296/138000
+  atoms 256: train 123392/138000
+  atoms 256: train 127488/138000
+  atoms 256: train 131584/138000
+  atoms 256: train 135680/138000
+  atoms 1024: train 512/138000
+  atoms 1024: train 4608/138000
+  atoms 1024: train 8704/138000
+  atoms 1024: train 12800/138000
+  atoms 1024: train 16896/138000
+  atoms 1024: train 20992/138000
+  atoms 1024: train 25088/138000
+  atoms 1024: train 29184/138000
+  atoms 1024: train 33280/138000
+  atoms 1024: train 37376/138000
+  atoms 1024: train 41472/138000
+  atoms 1024: train 45568/138000
+  atoms 1024: train 49664/138000
+  atoms 1024: train 53760/138000
+  atoms 1024: train 57856/138000
+  atoms 1024: train 61952/138000
+  atoms 1024: train 66048/138000
+  atoms 1024: train 70144/138000
+  atoms 1024: train 74240/138000
+  atoms 1024: train 78336/138000
+  atoms 1024: train 82432/138000
+  atoms 1024: train 86528/138000
+  atoms 1024: train 90624/138000
+  atoms 1024: train 94720/138000
+  atoms 1024: train 98816/138000
+  atoms 1024: train 102912/138000
+  atoms 1024: train 107008/138000
+  atoms 1024: train 111104/138000
+  atoms 1024: train 115200/138000
+  atoms 1024: train 119296/138000
+  atoms 1024: train 123392/138000
+  atoms 1024: train 127488/138000
+  atoms 1024: train 131584/138000
+  atoms 1024: train 135680/138000
+  atoms 2048: train 512/138000
+  atoms 2048: train 4608/138000
+  atoms 2048: train 8704/138000
+  atoms 2048: train 12800/138000
+  atoms 2048: train 16896/138000
+  atoms 2048: train 20992/138000
+  atoms 2048: train 25088/138000
+  atoms 2048: train 29184/138000
+  atoms 2048: train 33280/138000
+  atoms 2048: train 37376/138000
+  atoms 2048: train 41472/138000
+  atoms 2048: train 45568/138000
+  atoms 2048: train 49664/138000
+  atoms 2048: train 53760/138000
+  atoms 2048: train 57856/138000
+  atoms 2048: train 61952/138000
+  atoms 2048: train 66048/138000
+  atoms 2048: train 70144/138000
+  atoms 2048: train 74240/138000
+  atoms 2048: train 78336/138000
+  atoms 2048: train 82432/138000
+  atoms 2048: train 86528/138000
+  atoms 2048: train 90624/138000
+  atoms 2048: train 94720/138000
+  atoms 2048: train 98816/138000
+  atoms 2048: train 102912/138000
+  atoms 2048: train 107008/138000
+  atoms 2048: train 111104/138000
+  atoms 2048: train 115200/138000
+  atoms 2048: train 119296/138000
+  atoms 2048: train 123392/138000
+  atoms 2048: train 127488/138000
+  atoms 2048: train 131584/138000
+  atoms 2048: train 135680/138000
+{
+ "256": {
+  "accuracy_by_penalty": {
+   "0.1": 0.48695652173913045,
+   "1.0": 0.48692753623188406,
+   "10.0": 0.4871304347826087
+  },
+  "width": 5376,
+  "readout_macs": 1854720,
+  "encode_seconds": 1064.1
+ },
+ "1024": {
+  "accuracy_by_penalty": {
+   "0.1": 0.5626086956521739,
+   "1.0": 0.5626666666666666,
+   "10.0": 0.5628405797101449
+  },
+  "width": 21504,
+  "readout_macs": 7418880,
+  "encode_seconds": 1972.7
+ },
+ "2048": {
+  "accuracy_by_penalty": {
+   "0.1": 0.5869275362318841,
+   "1.0": 0.5871884057971014,
+   "10.0": 0.5898550724637681
+  },
+  "width": 43008,
+  "readout_macs": 14837760,
+  "encode_seconds": 5645.3
+ }
+}
+M176c-c1 complete -> logs\results\v24\m176c_c1\evidence.json

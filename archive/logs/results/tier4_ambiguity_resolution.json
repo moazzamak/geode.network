@@ -1,0 +1,1705 @@
+{
+  "protocol": {
+    "seeds": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "stream_families": [
+      "heavy_tailed",
+      "anisotropic",
+      "abrupt_drift",
+      "intermittent_unseen"
+    ],
+    "oracle_used_only_after_review": true,
+    "automatic_mutation_enabled": false
+  },
+  "summary": {
+    "review_count": 42,
+    "confirmation_counts": {
+      "existing_class": 38,
+      "new_class": 4
+    },
+    "decision_counts": {
+      "quarantine": 1,
+      "update_existing": 37,
+      "create_new": 4
+    },
+    "confirmation_action_match": 0.9761904761904762,
+    "published_mutations": 0
+  },
+  "runs": [
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "heavy_tailed",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-4566852681b3",
+          "nearest_known_distance": 1.5996161909737223,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-cde4327d1119",
+          "nearest_known_distance": 1.3569616992500724,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.6,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.6,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "heavy_tailed",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-ac71df56935a",
+          "nearest_known_distance": 1.5261864256856579,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-99c5df3850cd",
+          "nearest_known_distance": 1.4751109706863508,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7692307692307693,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7692307692307693,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "heavy_tailed",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 3,
+      "resolutions": [
+        {
+          "review_id": "review-5027b4e15005",
+          "nearest_known_distance": 1.3708572485463943,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.5333333333333333,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.5333333333333333,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.875,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-e2358250afbf",
+          "nearest_known_distance": 1.4884380954847964,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8695652173913043,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8695652173913043,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-7259fc08a5d7",
+          "nearest_known_distance": 2.2770889845356854,
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9090909090909091,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9090909090909091,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "heavy_tailed",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-2dbf24da37e8",
+          "nearest_known_distance": 1.5974401325655603,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7058823529411765,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7058823529411765,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-ca851e4ab90d",
+          "nearest_known_distance": 1.5224251216544775,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9130434782608695,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9130434782608695,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "heavy_tailed",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-af5f72a0ee82",
+          "nearest_known_distance": 1.5412391124940652,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7727272727272727,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7727272727272727,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-55f2cd9f0eba",
+          "nearest_known_distance": 1.4385132145618544,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "anisotropic",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-602c544545f1",
+          "nearest_known_distance": 1.4882461810270295,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8695652173913043,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8695652173913043,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-3b47403b551a",
+          "nearest_known_distance": 1.4192952313157121,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8125,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8125,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "anisotropic",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-e3e9848c423e",
+          "nearest_known_distance": 1.4645648902758517,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9583333333333334,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9583333333333334,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-4696a231ec3e",
+          "nearest_known_distance": 1.189114955059853,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 1.0,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "anisotropic",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 3,
+      "resolutions": [
+        {
+          "review_id": "review-30a9ff4af12d",
+          "nearest_known_distance": 2.440284764538799,
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-41459915a2d3",
+          "nearest_known_distance": 1.5057187001900336,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7272727272727273,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7272727272727273,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-e21fcd305c7d",
+          "nearest_known_distance": 1.5527650436210383,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8888888888888888,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8888888888888888,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "anisotropic",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-e47b7f602422",
+          "nearest_known_distance": 1.569815000849583,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.5,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.5,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-239bd3f6d337",
+          "nearest_known_distance": 1.5970478219154025,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7391304347826086,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7391304347826086,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "anisotropic",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-ae1ffab43465",
+          "nearest_known_distance": 1.469556414921976,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7272727272727273,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7272727272727273,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-1cbb60e8a6c0",
+          "nearest_known_distance": 1.2627952816878958,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8888888888888888,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8888888888888888,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "abrupt_drift",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-1b7a7b590fd6",
+          "nearest_known_distance": 1.333479206307265,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8421052631578947,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8421052631578947,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-77aae142b983",
+          "nearest_known_distance": 1.5271861608013528,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.6470588235294118,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.6470588235294118,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "abrupt_drift",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-f02309ab2e18",
+          "nearest_known_distance": 1.2855901729750598,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9565217391304348,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9565217391304348,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-62e3b9b2fc70",
+          "nearest_known_distance": 1.2800153319501186,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7368421052631579,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7368421052631579,
+              "replay_accuracy_before": 0.9583333333333334,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "abrupt_drift",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 3,
+      "resolutions": [
+        {
+          "review_id": "review-b067667fdbdc",
+          "nearest_known_distance": 2.361301353342252,
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.782608695652174,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.782608695652174,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-cdaf1566c3cc",
+          "nearest_known_distance": 1.4739087718638053,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8823529411764706,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8823529411764706,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-eb177a14bcd1",
+          "nearest_known_distance": 1.408515568721832,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "quarantine",
+            "target_class_id": null,
+            "failed_gates": [
+              "insufficient_proposal_gain"
+            ]
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.4666666666666667,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.4666666666666667,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "abrupt_drift",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-717b032588a9",
+          "nearest_known_distance": 1.5693455187485017,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.6956521739130435,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.6956521739130435,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-20aa8532be3a",
+          "nearest_known_distance": 1.4690508852016384,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8571428571428571,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8571428571428571,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "abrupt_drift",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-20f88dcd66fa",
+          "nearest_known_distance": 1.3435189801073268,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7619047619047619,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7619047619047619,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-c1c6df19426c",
+          "nearest_known_distance": 1.3202336174363274,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9090909090909091,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9090909090909091,
+              "replay_accuracy_before": 0.8125,
+              "replay_accuracy_after": 0.8125,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 61,
+        "stream_family": "intermittent_unseen",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 1,
+      "resolutions": [
+        {
+          "review_id": "review-0cd0d79df5ac",
+          "nearest_known_distance": 1.5485684885371798,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 62,
+        "stream_family": "intermittent_unseen",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-3bdefc76054a",
+          "nearest_known_distance": 1.519515647199052,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9583333333333334,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9583333333333334,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-d43d0076e0b8",
+          "nearest_known_distance": 1.3483590151609315,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9583333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9,
+              "replay_accuracy_before": 0.9375,
+              "replay_accuracy_after": 0.9375,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 63,
+        "stream_family": "intermittent_unseen",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-6bd6161c0709",
+          "nearest_known_distance": 2.3707789838315882,
+          "oracle_confirmation": "new_class",
+          "expected_action": "create_new",
+          "decision": {
+            "action": "create_new",
+            "target_class_id": null,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8666666666666667,
+              "replay_accuracy_before": 0.8333333333333334,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8666666666666667,
+              "replay_accuracy_before": 0.8333333333333334,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-2fb66b5448fc",
+          "nearest_known_distance": 1.4911347389476046,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.85,
+              "replay_accuracy_before": 0.8333333333333334,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.85,
+              "replay_accuracy_before": 0.8333333333333334,
+              "replay_accuracy_after": 0.8333333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 64,
+        "stream_family": "intermittent_unseen",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-e6e3b7e2022e",
+          "nearest_known_distance": 1.5169612836737563,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.5294117647058824,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.5294117647058824,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-2039e80057f5",
+          "nearest_known_distance": 1.6793615550502128,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.9130434782608695,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.9130434782608695,
+              "replay_accuracy_before": 0.9166666666666666,
+              "replay_accuracy_after": 0.9166666666666666,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    },
+    {
+      "protocol": {
+        "seed": 65,
+        "stream_family": "intermittent_unseen",
+        "frozen_separation": 2.5,
+        "oracle_used_only_after_review": true,
+        "automatic_mutation_enabled": false
+      },
+      "review_count": 2,
+      "resolutions": [
+        {
+          "review_id": "review-1bb45769bb06",
+          "nearest_known_distance": 1.569249132159345,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 1,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 1
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.8636363636363636,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        },
+        {
+          "review_id": "review-6e37ba694519",
+          "nearest_known_distance": 1.2839387979549628,
+          "oracle_confirmation": "existing_class",
+          "expected_action": "update_existing",
+          "decision": {
+            "action": "update_existing",
+            "target_class_id": 0,
+            "failed_gates": []
+          },
+          "candidates": [
+            {
+              "action": "update_existing",
+              "proposal_gain": 0.7692307692307693,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": 0
+            },
+            {
+              "action": "create_new",
+              "proposal_gain": 0.7692307692307693,
+              "replay_accuracy_before": 0.8958333333333334,
+              "replay_accuracy_after": 0.8958333333333334,
+              "ood_unknown_recall_before": 1.0,
+              "ood_unknown_recall_after": 1.0,
+              "transaction_validated": true,
+              "target_class_id": null
+            }
+          ],
+          "mutation_published": false
+        }
+      ]
+    }
+  ]
+}

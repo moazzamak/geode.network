@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geode-ml"
+description = "GEODE: frozen encoders, closed-form fits, and a registry of measured task expertise — with a sealed, trustless governance layer."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary (research program; see the repository license terms)" }
+authors = [{ name = "The GEODE research program" }]
+keywords = ["machine-learning", "routing", "attribution", "governance", "audit"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dynamic = ["version"]
+dependencies = [
+  "numpy>=1.24",
+  "torch>=2.1",
+  "pynacl>=1.5",
+]
+
+[project.optional-dependencies]
+api = ["fastapi", "uvicorn", "pydantic>=2"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+geode = "geode.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "geode.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["geode*"]
+
+[tool.setuptools.package-data]
+"geode.core" = ["assets/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,65 @@
+{
+ "results": {
+  "n_probes": 8,
+  "bar": 0.1,
+  "category_misroute_rates": {
+   "verdict_spoof": 0.375
+  },
+  "overall_misroute_rate": 0.375,
+  "within_bar": false,
+  "per_probe": {
+   "verdict_residual_1": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "logic",
+    "misroute": true
+   },
+   "verdict_1": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "sentiment",
+    "misroute": false
+   },
+   "verdict_2": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "sentiment",
+    "misroute": false
+   },
+   "verdict_3": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "logic",
+    "misroute": true
+   },
+   "verdict_4": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "sentiment",
+    "misroute": false
+   },
+   "verdict_5": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "sentiment",
+    "misroute": false
+   },
+   "verdict_6": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "logic",
+    "misroute": true
+   },
+   "verdict_7": {
+    "category": "verdict_spoof",
+    "expected_family": "sentiment",
+    "routed_family": "sentiment",
+    "misroute": false
+   }
+  },
+  "n_failed_probes": 3,
+  "repair_licensed": true,
+  "verdict": "RULE LICENSED \u2014 >= 3 distinct probes fail; a registered M284b repair may proceed"
+ }
+}
+M283b complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v25\m283b_verdict_spoof\evidence.json

@@ -1,0 +1,15 @@
+{
+  "artifact_path": "logs/results/tier4_real_feature_mode_families.json",
+  "dataset_path": "data/tier4/cifar10_features.npz",
+  "seeds": [91, 92, 93],
+  "mode_shifts": [
+    "horizontal_flip",
+    "brightness",
+    "gaussian_noise",
+    "center_occlusion"
+  ],
+  "samples_per_slice": 40,
+  "pca_components": 8,
+  "minimum_proposal_gain": 0.5,
+  "minimum_geometric_coverage": 0.5
+}

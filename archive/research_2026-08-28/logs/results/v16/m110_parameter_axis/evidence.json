@@ -1,0 +1,170 @@
+{
+ "geometry": {
+  "classes": 345,
+  "patch_dim": 108,
+  "pool": 2,
+  "patches": 729,
+  "whiten_params": 11772,
+  "dense_feature": 768,
+  "_note": "parameter counts are computed from geometry here, never from a model card (plan section 5.3 restriction 2)"
+ },
+ "dense_trunk_params": {
+  "analytic_from_geometry": 21618816,
+  "sealed_runtime": 22056576,
+  "delta": -437760,
+  "_note": "the analytic geometry count omits DINOv2's extra tokens/registers and pre/post norms; the sealed runtime count (from the real torch graph, recorded in M109 evidence) is the operand."
+ },
+ "sparse_params_3072": {
+  "representation": 343548,
+  "head": 4239705,
+  "total": 4583253,
+  "head_fraction": 0.925043
+ },
+ "per_rung": [
+  {
+   "rung": "t1",
+   "resolution": 28,
+   "sparse_acc": 0.2147536231884058,
+   "dense_acc": 0.15904347826086956,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 4.685615722902615e-08,
+   "dense_acc_per_param": 7.125003410817823e-09
+  },
+  {
+   "rung": "t1",
+   "resolution": 42,
+   "sparse_acc": 0.2147536231884058,
+   "dense_acc": 0.19710144927536233,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 4.685615722902615e-08,
+   "dense_acc_per_param": 8.82996595472229e-09
+  },
+  {
+   "rung": "t1",
+   "resolution": 224,
+   "sparse_acc": 0.2147536231884058,
+   "dense_acc": 0.5367536231884058,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 4.685615722902615e-08,
+   "dense_acc_per_param": 2.4046074933756964e-08
+  },
+  {
+   "rung": "t2",
+   "resolution": 28,
+   "sparse_acc": 0.05542028985507246,
+   "dense_acc": 0.17176811594202898,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 1.2091911542974491e-08,
+   "dense_acc_per_param": 7.695055624659453e-09
+  },
+  {
+   "rung": "t2",
+   "resolution": 42,
+   "sparse_acc": 0.05542028985507246,
+   "dense_acc": 0.22121739130434784,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 1.2091911542974491e-08,
+   "dense_acc_per_param": 9.910338259770664e-09
+  },
+  {
+   "rung": "t2",
+   "resolution": 224,
+   "sparse_acc": 0.05542028985507246,
+   "dense_acc": 0.6440579710144928,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 1.2091911542974491e-08,
+   "dense_acc_per_param": 2.8853212281460186e-08
+  },
+  {
+   "rung": "t3",
+   "resolution": 28,
+   "sparse_acc": 0.15878260869565217,
+   "dense_acc": 0.23095652173913042,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 3.464408547720411e-08,
+   "dense_acc_per_param": 1.0346642459886351e-08
+  },
+  {
+   "rung": "t3",
+   "resolution": 42,
+   "sparse_acc": 0.15878260869565217,
+   "dense_acc": 0.2846376811594203,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 3.464408547720411e-08,
+   "dense_acc_per_param": 1.275150965814307e-08
+  },
+  {
+   "rung": "t3",
+   "resolution": 224,
+   "sparse_acc": 0.15878260869565217,
+   "dense_acc": 0.601768115942029,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 3.464408547720411e-08,
+   "dense_acc_per_param": 2.695866517441021e-08
+  },
+  {
+   "rung": "t4",
+   "resolution": 28,
+   "sparse_acc": 0.13020289855072464,
+   "dense_acc": 0.1321449275362319,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 2.8408403060168103e-08,
+   "dense_acc_per_param": 5.9199727628792524e-09
+  },
+  {
+   "rung": "t4",
+   "resolution": 42,
+   "sparse_acc": 0.13020289855072464,
+   "dense_acc": 0.16950724637681158,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 2.8408403060168103e-08,
+   "dense_acc_per_param": 7.593770721061168e-09
+  },
+  {
+   "rung": "t4",
+   "resolution": 224,
+   "sparse_acc": 0.13020289855072464,
+   "dense_acc": 0.19066666666666668,
+   "sparse_params": 4583253,
+   "dense_params": 22321881,
+   "sparse_acc_per_param": 2.8408403060168103e-08,
+   "dense_acc_per_param": 8.541693536788708e-09
+  }
+ ],
+ "t4_from_scratch_dense": {
+  "accuracy": 0.1132463768115942,
+  "params": 22321881,
+  "accuracy_per_param": 5.0733348507499974e-09
+ },
+ "t4_sparse": {
+  "accuracy": 0.13020289855072464,
+  "params": 4583253,
+  "accuracy_per_param": 2.8408403060168103e-08
+ },
+ "kill_switch_1": {
+  "mac_axis_winner": "dense",
+  "parameter_axis_winner": "sparse",
+  "fired": true,
+  "consequence": "if the axes disagree about whether a crossing exists, neither axis may be reported alone"
+ },
+ "kill_switch_2": {
+  "head_fraction": 0.925043,
+  "threshold": 0.9,
+  "fired": true,
+  "consequence": "if ~93% of the sparse parameter count is the head, the axis must be reported split into representation and head"
+ },
+ "registered_prediction": "sparse advantage is larger on the parameter axis than on the MAC axis at every budget where both are readable",
+ "admissible_as_evidence": true,
+ "milestone": "M110"
+}

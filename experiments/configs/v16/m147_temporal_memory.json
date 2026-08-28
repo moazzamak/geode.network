@@ -1,0 +1,81 @@
+{
+  "milestone": "M147",
+  "program": "v22 temporal-memory screen (14 Aug 2026): on one-step-ahead Mackey-Glass prediction, does a fixed random reservoir earn its recurrence over the no-memory ridge baseline, the additive tap-delay line, and hand-written programmatic primitives?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v22.md section 6 Phase T / section 9 M147",
+  "registration_notes": {
+    "N96.1": "Question registered before measurement: the reservoir family lost on the DSL next-token task (M134 r128 ppl 29.72 / r512 27.54 vs count w4 3.32 / transformer 2.80) - that loss is a REGISTERED PRIOR on the DSL axis only. This screen re-tests on the chaotic-series axis where the prior does not bind (epistemic rule 2), and reproduces the M134 r128 reservoir on the DSL as a t1 anchor for the reused machinery.",
+    "N96.2": "Arms: no_memory (ridge on x(t)), tap_delay k in {2,4,8} (ridge on concatenated past), programmatic (extrapolator x_hat=2x(t)-x(t-1), EWMA alpha=0.3, and ridge on hand-written primitive features [x, delta, mean4, std4]; best of three), reservoir (tanh, W_rec scaled to rho < 1, warmup 200 discarded, ridge readout; seeds {21,22,23} x units {64,256,1024} x rho {0.5,0.9,0.99}), mlp (tiny Adam-trained MLP, the trained measuring stick).",
+    "N96.3": "Echo-state property: the measured spectral radius of the scaled W_rec is recorded per run and must be < 1 before any reservoir readout is trusted.",
+    "N96.4": "Metric: NRMSFE = RMSE / std(test target). Reported per arm; the gate uses the best reservoir per seed across (units, rho).",
+    "N96.5": "Kill switch (registered): the reservoir's best NRMSFE must beat the best NON-recurrent arm (no_memory / tap_delay / programmatic) by >= 5% relative on >= 2 of 3 seeds, AND the t1 anchor must reproduce M134 r128 ppl within 0.01. Otherwise M147 closes as a scoped negative on this axis.",
+    "N96.6": "Mackey-Glass parameters fixed: tau=17, beta=0.2, gamma=0.1, n=10, RK4 dt=0.1, sample every 10 steps (1.0 time-unit resolution, the canonical ESN benchmark), x0=1.2 + seeded jitter, discard 10000 RK4 steps, train 5000, test 1000, seed 7.",
+    "N96.7": "Smoke runs declare _smoke_note and MUST refuse the sealed output directory; smoke skips the mlp arm and all gates.",
+    "N96.8": "Dated snapshot: all seeds, radii, ladders recorded for byte-repeat."
+  },
+  "mackey_glass": {
+    "tau": 17.0,
+    "beta": 0.2,
+    "gamma": 0.1,
+    "n": 10.0,
+    "dt": 0.1,
+    "x0": 1.2,
+    "seed": 7,
+    "discard": 10000,
+    "sample_every": 10,
+    "train_points": 5000,
+    "test_points": 1000
+  },
+  "tap_delay": {
+    "k_ladder": [2, 4, 8]
+  },
+  "programmatic": {
+    "ewma_alpha": 0.3,
+    "window": 4
+  },
+  "reservoir": {
+    "seeds": [21, 22, 23],
+    "units_ladder": [64, 256, 1024],
+    "rho_ladder": [0.5, 0.9, 0.99],
+    "warmup_steps": 200,
+    "ridge_penalty": 1.0
+  },
+  "mlp": {
+    "seed": 31,
+    "hidden": 32,
+    "epochs": 200,
+    "lr": 0.01
+  },
+  "t1_anchor": {
+    "units": 128,
+    "seed": 300,
+    "spectral_radius": 0.9,
+    "warmup_steps": 128,
+    "ridge_penalty": 1.0,
+    "sealed_ppl": 29.7193,
+    "tolerance": 0.01
+  },
+  "dsl_corpus": {
+    "kind": "generated_dsl",
+    "reuse": "M131 generator (same seeds 900/901/902, same grammar)",
+    "programs": {"train": 5000, "valid": 500, "test": 500},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "gate": {
+    "relative_margin": 0.05,
+    "min_seeds": 2,
+    "registered": "reservoir best NRMSFE <= (1 - 0.05) x best non-recurrent arm on >= 2 of 3 seeds, and t1 anchor within 0.01 ppl; else the recurrence does not earn its keep on this axis (scoped negative).",
+    "consequence_fired": "the reservoir's recurrence does not earn its keep on the chaotic-series axis; M147 closes as a scoped negative and the temporal path falls back to additive / programmatic memory (the M134 DSL prior and this axis now agree).",
+    "consequence_passed": "the reservoir beats all non-recurrent arms by the registered margin on the chaotic-series axis; feedback earns its keep and the reservoir stays a first-class arm of the temporal branch."
+  },
+  "output_dir": "logs/results/v16/m147_temporal_memory"
+}

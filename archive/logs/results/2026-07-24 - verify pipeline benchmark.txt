@@ -1,0 +1,87 @@
+============================================================
+         GEODE Verification Pipeline
+============================================================
+
+[Tier 1] Geometry Regression ... Legacy dataset detected for 'sphere'. Regenerate with experiments/tier1/data_gen.py for persisted train/test files.
+Legacy dataset detected for 'ellipsoid'. Regenerate with experiments/tier1/data_gen.py for persisted train/test files.
+done (1.7s).
+[Tier 2] Point-Cloud Reconstruction ... done (137.3s).
+[Tier 3] MNIST Manifold Fitting ... done (16.3s).
+[Tier 4] Complex Image Classification ... Extracting CNN features (MobileNetV2 / ImageNet)...
+  CNN features loaded from cache (C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\.feat_cache\cnn_8fdd7f474cc39a89_7500.npz)
+CNN features: 1280 dims
+Sample check  : 7500 samples, 10 classes, d=9 (LDA)
+  min_seed=54  |  minimum=1350  recommended=6750  [OK]
+  max d (minimum tier)=23  max d (recommended)=9
+  (Transform fitted per fold — no data leakage.)
+done (27.4s).
+[Tier 5] CIFAR-100 Superclass Classification ... Extracting CNN features (MobileNetV2 / ImageNet)...
+  CNN features loaded from cache (C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\.feat_cache\cnn_31a78a3c0c67ecf6_15000.npz)
+CNN features: 1280 dims
+Sample check  : 15000 samples, 20 classes, d=19 (LDA)
+  min_seed=209  |  minimum=10450  recommended=52250  [LOW — RANSAC may underfit]
+  ~600 training samples/class in final fit
+done (892.0s).
+[Tier 6] Temporal Text Prediction (next-char) ... done (5407.3s).
+
+============================================================
+                  RESULTS SUMMARY
+============================================================
+
+[PASS]  [Tier 1] Sphere
+     CV MAE(|SDF|) : 0.023708 +/- 0.001938
+     Test MAE(|SDF|): 0.020598
+     Center RMSE    : 0.003845
+     Radii RMSE     : 0.020962
+     Experts fitted : 1
+     R²             : 0.9994
+     Time           : 1.7s
+
+[PASS]  [Tier 1] Ellipsoid
+     CV MAE(|SDF|) : 0.025629 +/- 0.001604
+     Test MAE(|SDF|): 0.028546
+     Center RMSE    : 0.004152
+     Radii RMSE     : 0.314850
+     Experts fitted : 1
+     R²             : 0.9992
+     Time           : 1.7s
+
+[PASS]  [Tier 2] ModelNet Point-Cloud
+     CV MAE(|SDF|) : 0.130035 +/- 0.019134
+     Test MAE(|SDF|): 0.128639
+     Experts fitted : 11
+     R²             : 1.0000
+     Time           : 137.3s
+
+[PASS]  [Tier 3] MNIST digit=0
+     CV MAE(|SDF|) : 0.316726 +/- 0.035933
+     Test MAE(|SDF|): 0.316638
+     Experts fitted : 9
+     R²             : 0.9928
+     Time           : 16.3s
+
+[PASS]  [Tier 4] CIFAR-10 Classification
+     Experts fitted : 42
+     CV Accuracy    : 83.88% +/- 1.16%
+     Test Accuracy  : 84.07%
+     Classes modeled: 10
+     Time           : 27.4s
+
+[PASS]  [Tier 5] CIFAR-100 Superclass (20-class)
+     Experts fitted : 74
+     CV Accuracy    : 64.87% +/- 0.88%
+     Test Accuracy  : 65.83%
+     Classes modeled: 20
+     Time           : 892.0s
+
+[PASS]  [Tier 6] Temporal Text Prediction (char-level)
+     CV Accuracy    : 0.68% +/- 0.06%
+     Test Accuracy  : 0.55%
+     After EM       : 0.55% (+0.00pp)
+     Perplexity     : inf
+     Classes modeled: 97
+     Time           : 5407.3s
+
+------------------------------------------------------------
+  Total: 7  |  Passed: 7  |  Failed: 0  |  Skipped: 0
+  Wall-clock total: 6481.9s

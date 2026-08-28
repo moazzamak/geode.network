@@ -1,0 +1,61 @@
+{
+  "milestone": "M134",
+  "program": "v20 follow-up - SMOKE (inadmissible): fixed-construction sequence families, tiny slice",
+  "registered_in": "analysis/ENGINEERING_PLAN_v20.md section B4b follow-up (M134)",
+  "_smoke_note": "SMOKE RUN - inadmissible as evidence; refuses the sealed output dir.",
+  "_smoke_rows": 40,
+  "_smoke_skip_gates": true,
+  "registration_notes": {
+    "N93.1": "Engineering MEASUREMENT milestone; no novelty claim.",
+    "N93.2": "Question: how much of the transformer's advantage over the count model is recoverable by a fixed-construction sequence model at matched footprint?",
+    "N93.3": "Count + transformer points reused from sealed M131/M133; reservoir/fixed-attention newly computed.",
+    "N93.4": "Both new families: fixed nonlinear construction + closed-form ridge readout, no backprop.",
+    "N93.5": "Reservoir: spectral radius 0.9, warmup 128; fixed-attention: context 8, fixed random projections.",
+    "N93.6": "No pre-registered winner gate.",
+    "N93.7": "Footprint = stored fp32 params.",
+    "N93.8": "Smoke runs use _smoke_note + _smoke_skip_gates and MUST refuse the sealed output dir.",
+    "N93.9": "Dated snapshot; seeds and ladders recorded."
+  },
+  "corpus": {
+    "kind": "generated_dsl",
+    "reuse": "M131 generator (same seeds 900/901/902, same grammar)",
+    "programs": {"train": 40, "valid": 20, "test": 20},
+    "seeds": {"train": 900, "valid": 901, "test": 902},
+    "statements_per_program": [4, 12],
+    "max_expr_depth": 3,
+    "grammar": {
+      "keywords": ["let", "if", "else", "return", "func", "call"],
+      "identifiers": 10,
+      "functions": 6,
+      "numbers": 10,
+      "operators": ["=", "+", "-", "*", "/", "==", "<", ">"],
+      "punct": ["(", ")", "{", "}", ";", ",", " "]
+    }
+  },
+  "reused_evidence": {
+    "count": "logs/results/v16/m131_additive_next_token/evidence.json",
+    "transformer": "logs/results/v16/m133_matched_footprint/evidence.json",
+    "windows": ["1", "2", "3", "4", "8"]
+  },
+  "reservoir": {
+    "seed": 300,
+    "spectral_radius": 0.9,
+    "warmup_steps": 16,
+    "ridge_penalty": 1.0,
+    "ladder": [
+      {"name": "r128", "units": 128},
+      {"name": "r512", "units": 512}
+    ]
+  },
+  "fixed_attention": {
+    "seed": 301,
+    "context": 8,
+    "heads": 4,
+    "ridge_penalty": 1.0,
+    "ladder": [
+      {"name": "fa64", "d_model": 64},
+      {"name": "fa128", "d_model": 128}
+    ]
+  },
+  "output_dir": "logs/results/v16/m134_fixed_sequence_smoke"
+}

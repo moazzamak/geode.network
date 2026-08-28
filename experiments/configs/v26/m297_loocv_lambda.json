@@ -1,0 +1,36 @@
+{
+  "milestone": "M297",
+  "title": "Head repair II: exact-LOOCV lambda over the registered grid (cached ms features)",
+  "question": "What lambda does exact leave-one-out cross-validation choose on the sealed 409,832-row train set, and does the sealed test at that lambda improve over the fixed-penalty anchor 0.24214492753623187?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v26.md M297 (26 Aug 2026, before the build)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "note": "the sealed subsample parameters (the m109 _load_corpus digest gate)"
+  },
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz",
+    "labels_note": "the M142 cell-2 schedule labels - the ms codes are aligned to THIS order (the M228 discipline)"
+  },
+  "lambda_grid": [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0],
+  "anchor_penalty": 1.0,
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09,
+             "source": "the sealed ms full-train penalty-1.0 aggregate (M228)"},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - row counts are a premise",
+    "g2_fail": "VOID - the LU path must reproduce the sealed anchor or the instrument is not the sealed one",
+    "g3_fail": "VOID - the LOOCV machinery must be finite and the hat-margin validity rule applied as registered",
+    "g4_fail": "VOID - the eigendecomposition must reproduce the sealed M296 conditioning",
+    "no_valid_grid_point": "reported, no test evaluation; lambda selection has no registered basis on an indefinite system this thin",
+    "star_improves": "I4's lambda-selection claim is supported at this scale (H26-1 partial; M298 adds the readout)",
+    "star_does_not_improve": "the fixed penalty was not the binding constraint; publishable, H26-1 rests on M298"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "milestone": "M206",
+  "title": "DNN-component probe: train a small MLP head on cached f6144 codes, admit it through the M205 contract, measure on the sealed test",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md section 6 (M206 scope registered before the build)",
+  "registered_before_any_accuracy": true,
+  "question": "Does the registered DNN-component integration path work end to end: train -> admission contract -> replay hash -> sealed-test measurement?",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "artifacts": {
+    "f6144_cache_relpath": "v16/m117",
+    "f6144_train_file": "f6144_train.npy",
+    "f6144_test_file": "f6144_test.npy"
+  },
+  "training": {
+    "train_rows": 50000,
+    "hidden": 512,
+    "epochs": 10,
+    "lr": 0.001,
+    "batch": 512,
+    "seed": 20260819,
+    "optimizer": "adam",
+    "input_standardisation": "per-column z-score fitted on the train slice only"
+  },
+  "output_dir": "logs/results/v25/m206_dnn_probe"
+}

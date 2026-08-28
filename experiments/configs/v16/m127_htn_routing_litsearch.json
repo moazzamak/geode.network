@@ -1,0 +1,99 @@
+{
+  "milestone": "m127_htn_routing_litsearch",
+  "program": "pre-registration literature survey for the HTN-style hierarchical routing idea (12 Aug 2026)",
+  "registration_notes": {
+    "N87.1": "This is a SURVEY for a new, unsealed idea - not a claim audit. Nothing here can promote or withdraw a sealed claim.",
+    "N87.2": "Question registered before search: could a lightweight LLM plus an HTN-style task vocabulary and methods (tasks that decompose into subtasks, chained into a plan) drive hierarchical expert routing in the GEODE/CG-MoE router, where the LLM decomposes the inference goal into a chain of subtasks each served by a specialist?",
+    "N87.3": "Anchors are recall probes: each MUST be retrieved by a topic query that does NOT contain its title, else the search is insensitive and every 'not found' is worthless.",
+    "N87.4": "Query families are phrased to find displacing work (work that already does HTN x routing / LLM hierarchical routing / plan-based expert selection), not work that merely agrees in spirit.",
+    "N87.5": "Empty queries are recorded, not dropped. Rate-limited queries are retried and residual failures recorded separately from genuinely empty results.",
+    "N87.6": "Absence from these indexes is UNRESOLVED, never 'new' or 'first'. Unauthenticated public search cannot support a novelty claim.",
+    "N87.7": "Title/abstract mark a source live; only primary text with a located passage may count as displacement.",
+    "N87.8": "This evidence is a dated snapshot and is NOT replayable: the indexes change and the network is not a sealed corpus. The run records its date and the exact query strings so a reader can repeat the search, not so the bytes can be reproduced.",
+    "N87.9": "Instrument defects found and repaired before the audited run: arXiv exact-phrase syntax returned zero for every query including the anchors; term conjunction alone was too strict, so a fixed two-stage AND-then-OR rule applies uniformly; Semantic Scholar rate-limiting is recorded in failed_queries rather than counted as empty."
+  },
+  "sources": {
+    "arxiv": {
+      "endpoint": "http://export.arxiv.org/api/query",
+      "max_results": 20,
+      "delay_seconds": 3.5
+    },
+    "semantic_scholar": {
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "max_results": 20,
+      "delay_seconds": 3.5,
+      "attempts": 4,
+      "fields": "title,abstract,year,venue,citationCount,externalIds"
+    }
+  },
+  "anchors": [
+    "hierarchical task network planning",
+    "SHOP2 domain independent HTN",
+    "large language model routing",
+    "ReAct reasoning and acting",
+    "hierarchical mixture of experts"
+  ],
+  "claims": {
+    "D1": {
+      "statement": "HTN-style hierarchical task decomposition (a task vocabulary with methods that decompose tasks into subtasks, chained into a plan) is already used as the routing/selection mechanism in a neural or expert system.",
+      "queries": [
+        "hierarchical task network neural network controller",
+        "HTN planning learned policy",
+        "task decomposition method network planning",
+        "hierarchical task decomposition expert selection",
+        "task network planning machine learning system"
+      ]
+    },
+    "D2": {
+      "statement": "A large language model already performs hierarchical/plan-based routing between expert or specialist models at inference.",
+      "queries": [
+        "large language model hierarchical expert routing",
+        "LLM plan based model selection inference",
+        "language model task decomposition specialist routing",
+        "LLM router decompose subtask expert",
+        "hierarchical planning language model mixture of experts"
+      ]
+    },
+    "D3": {
+      "statement": "LLM-generated or LLM-guided HTN methods/domains are an established technique (LLM learns or emits the task vocabulary and methods).",
+      "queries": [
+        "large language model hierarchical task network generation",
+        "LLM generated HTN methods planning",
+        "language model task decomposition methods learning",
+        "learning HTN methods from natural language",
+        "LLM grounded hierarchical task planning domain"
+      ]
+    },
+    "D4": {
+      "statement": "Plan/task-chain architectures (agent-style multi-step controllers) are already used to route inputs across a multi-model or multi-expert system.",
+      "queries": [
+        "language model agent multi-step controller models",
+        "task chain plan routing multi model system",
+        "LLM orchestration specialist submodel pipeline",
+        "hierarchical agent planning tool use controller",
+        "LLM decomposes task into subtask submodel"
+      ]
+    },
+    "D5": {
+      "statement": "Hierarchical gating/routing is established in mixture-of-experts (two-level or tree-structured gates, with or without language grounding).",
+      "queries": [
+        "hierarchical mixture of experts two level gating",
+        "tree structured router mixture of experts",
+        "multi level gating expert network",
+        "hierarchical routing sparse mixture of experts",
+        "language guided gating mixture of experts"
+      ]
+    },
+    "D6": {
+      "statement": "A lightweight LLM is used as the semantic planner that decides which perceptual/expert subsystem handles a given input (the closest analogue to the GEODE semantic router).",
+      "queries": [
+        "lightweight language model routing perception",
+        "small LLM planner vision pipeline selection",
+        "language model semantic routing class model",
+        "LLM expert dispatch perceptual task",
+        "tiny language model tool orchestration routing"
+      ]
+    }
+  },
+  "output_dir": "logs/results/v16/m127_htn_routing_litsearch"
+}

@@ -1,0 +1,62 @@
+{
+  "milestone": "M119",
+  "title": "Per-domain specialists x data scaling (A5 x M116): do routed specialists' per-domain Q_d(n) curves rise at least as steeply as the global arm's?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v18.md section 5.5 (M119)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "ridge": "cpu",
+    "_note": "HIP_VISIBLE_DEVICES=1, gfx1201; whitening and ridge on numpy CPU; frozen per-domain encode on GPU."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "sparse": {
+    "atoms_per_domain": 512,
+    "patch": 6,
+    "stride": 1,
+    "pool_grid": 2,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "zca_fit_patches": 400000,
+    "zca_fit_seed": 11,
+    "whitener": "global M108 (identical construction, same seeds)",
+    "specialist_construction": "A5 exact: per-domain random whitened-patch candidates (seed [11, domain], n_cap 20000), atoms picked by the seeded permutation",
+    "domain_candidate_seed": 11,
+    "head": "closed_form_ridge_1.0",
+    "_note": "fixed 512 atoms per domain (disclosed): the question is the SHAPE of per-domain Q_d(n), not A5's per-domain budget allocation"
+  },
+  "scaling": {
+    "n_ladder_fractions": [0.1, 0.2, 0.4, 0.7, 1.0],
+    "subsample_rule": "first n rows of each domain's train rows (corpus order, nested)",
+    "test_set": "each domain's FULL test rows, identical for every ladder point",
+    "global_baseline": "M116 sealed sparse per-domain accuracy (global 3072 arm) over its global ladder - the baseline steepness per domain",
+    "_note": "a specialist sees n rows of ITS domain; the global arm at global n sees ~n/6 rows of that domain. The gate compares GAINS over each arm's own ladder (steepness of per-domain accuracy vs per-domain data), which is the scale-fair quantity."
+  },
+  "gate": {
+    "kill_switch_specialist_steepness": "fired if any domain's specialist per-domain gain Q_d(n_full) - Q_d(n_first) is < 0.5 x the global arm's per-domain gain over M116's ladder for that domain",
+    "reported": "per-domain specialist curves, per-domain global curves (M116), gains, ratios, and the head-to-head at full data (A5's per-domain cost win, re-checked at full data)"
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

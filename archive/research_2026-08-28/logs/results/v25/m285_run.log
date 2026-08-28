@@ -1,0 +1,16 @@
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+{
+ "results": {
+  "n_planted": 1000,
+  "flag_rate": 0.0,
+  "score_quantiles_min_p50_p90_p99_max": [
+   1.0360899209934906,
+   1.0667704683058166,
+   1.1246954925427124,
+   1.1246954925427124,
+   1.1246954925427124
+  ],
+  "verdict": "the guard is WEAK/DEAD on planted-OOD \u2014 recorded, a threshold/profile repair is registered as the finding"
+ }
+}
+M285 complete -> C:\Users\mak\Documents\projects\Research Work\CG-MoE\logs\results\v25\m285_ood_calibration\evidence.json

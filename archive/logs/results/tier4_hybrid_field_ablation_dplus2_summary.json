@@ -1,0 +1,206 @@
+{
+  "advancement_gate": {
+    "accuracy_improves_both": false,
+    "accuracy_tolerance": 0.0025,
+    "accuracy_within_tolerance": true,
+    "nll_improves_both": true,
+    "nll_tolerance": 0.01,
+    "nll_within_tolerance": true,
+    "passed": true,
+    "scope": "advance to frozen-geometry likelihood optimization only"
+  },
+  "all_readouts_converged": true,
+  "duplicate_retries": 0,
+  "grouped_test_results": {
+    "feature_control": {
+      "accuracy_mean": 0.8397500000000001,
+      "accuracy_std": 0.005295930041078726,
+      "brier_score_mean": 0.23072924789122728,
+      "brier_score_std": 0.0019720795292121466,
+      "expected_calibration_error_mean": 0.02078634183224602,
+      "expected_calibration_error_std": 0.008011178566241268,
+      "negative_log_likelihood_mean": 0.4653777532801688,
+      "negative_log_likelihood_std": 0.0071229286749692365,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "geometric": {
+      "accuracy_mean": 0.8393750000000001,
+      "accuracy_std": 0.004074501503251649,
+      "brier_score_mean": 0.23132717809383596,
+      "brier_score_std": 0.0017515425465756832,
+      "expected_calibration_error_mean": 0.019539651200262596,
+      "expected_calibration_error_std": 0.006352215102013398,
+      "negative_log_likelihood_mean": 0.46989827456066424,
+      "negative_log_likelihood_std": 0.005686005015936486,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "hybrid": {
+      "accuracy_mean": 0.837875,
+      "accuracy_std": 0.002404423007708939,
+      "brier_score_mean": 0.23139337026725215,
+      "brier_score_std": 0.0016497086599893023,
+      "expected_calibration_error_mean": 0.01871043972615181,
+      "expected_calibration_error_std": 0.0020094286535249075,
+      "negative_log_likelihood_mean": 0.4676281536034068,
+      "negative_log_likelihood_std": 0.005783552406450305,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic": {
+      "accuracy_mean": 0.8401249999999999,
+      "accuracy_std": 0.004537172853220397,
+      "brier_score_mean": 0.23200216280187885,
+      "brier_score_std": 0.0012003134964843854,
+      "expected_calibration_error_mean": 0.023893446547855555,
+      "expected_calibration_error_std": 0.008498119910323962,
+      "negative_log_likelihood_mean": 0.47061453827246247,
+      "negative_log_likelihood_std": 0.005039714234132567,
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    }
+  },
+  "matched_frozen_models": true,
+  "model_fits_per_seed": 1,
+  "paired_differences": {
+    "geometric": {
+      "hybrid_minus_accuracy": {
+        "mean": -0.0014999999999999903,
+        "per_seed": [
+          -0.004374999999999907,
+          0.00187499999999996,
+          -0.0012499999999999734,
+          0.0025000000000000577,
+          -0.006250000000000089
+        ]
+      },
+      "hybrid_minus_brier_score": {
+        "mean": 6.619217341620187e-05,
+        "per_seed": [
+          0.0022628309024448068,
+          -0.0008721928261141987,
+          -0.0005481107404053387,
+          -0.0006373644925093958,
+          0.0001257980236651357
+        ]
+      },
+      "hybrid_minus_expected_calibration_error": {
+        "mean": -0.0008292114741107835,
+        "per_seed": [
+          -0.0044338773589025875,
+          -0.0025441487378582324,
+          -0.005934059866214713,
+          0.009897836539396932,
+          -0.0011318079469753162
+        ]
+      },
+      "hybrid_minus_negative_log_likelihood": {
+        "mean": -0.002270120957257438,
+        "per_seed": [
+          0.0007916845854765708,
+          -0.004316382439705224,
+          -0.003260321660607801,
+          -0.002477428998906628,
+          -0.002088156272544106
+        ]
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    },
+    "probabilistic": {
+      "hybrid_minus_accuracy": {
+        "mean": -0.0022499999999999742,
+        "per_seed": [
+          -0.004999999999999893,
+          0.0031250000000000444,
+          0.0006250000000000977,
+          -0.003750000000000031,
+          -0.006250000000000089
+        ]
+      },
+      "hybrid_minus_brier_score": {
+        "mean": -0.0006087925346266954,
+        "per_seed": [
+          -0.000779796050888848,
+          -0.002819109396707542,
+          -3.7831403372129424e-05,
+          0.0006827224139002164,
+          -8.994823606517377e-05
+        ]
+      },
+      "hybrid_minus_expected_calibration_error": {
+        "mean": -0.005183006821703741,
+        "per_seed": [
+          -0.019057656696991877,
+          -0.0071136954006065616,
+          0.0009377731158056735,
+          0.004230309307943585,
+          -0.004911764434669525
+        ]
+      },
+      "hybrid_minus_negative_log_likelihood": {
+        "mean": -0.0029863846690556194,
+        "per_seed": [
+          -0.0010856280403993002,
+          -0.007957268926979677,
+          -0.006229639654932118,
+          0.001547361012022297,
+          -0.0012067477349892997
+        ]
+      },
+      "seeds": [
+        11,
+        23,
+        37,
+        53,
+        71
+      ]
+    }
+  },
+  "protocol": "tier4_hybrid_field_ablation_dplus2",
+  "readout_fits_per_seed": 4,
+  "schema_version": 1,
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "selection_winners": {
+    "geometric": 1,
+    "hybrid": 2,
+    "probabilistic": 2
+  },
+  "source_artifact": "logs/results/tier4_hybrid_field_ablation_dplus2_runs.jsonl",
+  "source_rows": 5,
+  "sphere_seed_rule": "d_plus_2",
+  "test_used_for_selection": false,
+  "unique_experiments": 5
+}

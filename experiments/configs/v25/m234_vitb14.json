@@ -1,0 +1,38 @@
+{
+  "milestone": "M234",
+  "title": "dinov2_vitb14 native-resolution extraction + per-domain probes/ridges",
+  "question": "Does the 768-d ViT-B backbone close the remaining easy bars (clipart >= 0.8, quickdraw >= 0.8)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M234 REGISTERED (20 Aug)",
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d"
+  },
+  "extraction": {"resize": 224, "batch": 256, "threads": 6},
+  "model": {"repo": "facebookresearch/dinov2", "name": "dinov2_vitb14",
+            "feature_dim": 768, "input_size": 224},
+  "artifacts": {
+    "cache_relpath": "v16/m142_c3",
+    "train_file": "ms357_fulltrain.npy",
+    "test_cache_relpath": "v16/m151",
+    "test_file": "ms357_fulltest.npy",
+    "labels_file": "v16/m142_c2/m142_c2_fulltrain_labels.npz"
+  },
+  "training": {"epochs": 30, "lr": 0.001, "weight_decay": 0.0001,
+               "batch": 1024, "seed": 11},
+  "penalties": [0.1, 1.0, 10.0],
+  "anchor": {"value": 0.24214492753623187, "tolerance": 1e-09},
+  "domain_names": ["clipart", "infograph", "painting", "quickdraw", "real", "sketch"],
+  "ladder": {"easy": ["quickdraw", "real", "clipart"], "easy_bar": 0.8,
+             "middle": ["sketch", "painting"], "middle_bar": [0.5, 0.6],
+             "hard": ["infograph"], "hard_first_bar": [0.3, 0.4]},
+  "interpretation_registered_before_running": {
+    "g1_fail": "VOID - the ms anchor must reproduce at 1e-9",
+    "g2_fail": "VOID - the schedule permutation must reconstruct the labels byte-exactly",
+    "g3_fail": "VOID - a trained probe must be reproducible under the same seed",
+    "reading": "clipart >= 0.8 and/or quickdraw >= 0.8 meets the remaining easy bars"
+  }
+}

@@ -1,0 +1,2228 @@
+{
+  "protocol": {
+    "design": "one_factor_at_a_time",
+    "seed": 101,
+    "repeat_count": 1,
+    "evaluation_count": 32,
+    "update_point_count": 12,
+    "evaluation_used_for_fitting": false,
+    "memory_measure": "canonical_serialized_model_bytes",
+    "comparators": [
+      "target_class_reconstruction",
+      "full_model_reconstruction"
+    ],
+    "comparator_scope_note": "Synthetic deterministic reconstruction, not optimizer retraining."
+  },
+  "conditions": [
+    {
+      "condition": {
+        "name": "baseline",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 64,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 40832,
+            "after_insertion": 41493,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 1,
+            "nudge": 1
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0006346000009216368,
+            "inserted_inference": 0.000556800005142577,
+            "point_fitted_insertion": 7.199999527074397e-05,
+            "deletion": 2.6999914553016424e-06,
+            "rollback": 0.000913399999262765,
+            "local_nudge": 0.0019285000016679987,
+            "target_class_reconstruction": 0.00011310000263620168,
+            "full_model_reconstruction": 0.0004585999995470047,
+            "cache_invalidation_total": 2.4000037228688598e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2048,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2080,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0006346000009216368,
+          "minimum": 0.0006346000009216368,
+          "maximum": 0.0006346000009216368
+        },
+        "inserted_inference": {
+          "median": 0.000556800005142577,
+          "minimum": 0.000556800005142577,
+          "maximum": 0.000556800005142577
+        },
+        "point_fitted_insertion": {
+          "median": 7.199999527074397e-05,
+          "minimum": 7.199999527074397e-05,
+          "maximum": 7.199999527074397e-05
+        },
+        "deletion": {
+          "median": 2.6999914553016424e-06,
+          "minimum": 2.6999914553016424e-06,
+          "maximum": 2.6999914553016424e-06
+        },
+        "rollback": {
+          "median": 0.000913399999262765,
+          "minimum": 0.000913399999262765,
+          "maximum": 0.000913399999262765
+        },
+        "local_nudge": {
+          "median": 0.0019285000016679987,
+          "minimum": 0.0019285000016679987,
+          "maximum": 0.0019285000016679987
+        },
+        "target_class_reconstruction": {
+          "median": 0.00011310000263620168,
+          "minimum": 0.00011310000263620168,
+          "maximum": 0.00011310000263620168
+        },
+        "full_model_reconstruction": {
+          "median": 0.0004585999995470047,
+          "minimum": 0.0004585999995470047,
+          "maximum": 0.0004585999995470047
+        },
+        "cache_invalidation_total": {
+          "median": 2.4000037228688598e-06,
+          "minimum": 2.4000037228688598e-06,
+          "maximum": 2.4000037228688598e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 40832.0,
+          "minimum": 40832.0,
+          "maximum": 40832.0
+        },
+        "after_insertion": {
+          "median": 41493.0,
+          "minimum": 41493.0,
+          "maximum": 41493.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        },
+        "nudge": {
+          "median": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2048.0,
+            "minimum": 2048.0,
+            "maximum": 2048.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2080.0,
+            "minimum": 2080.0,
+            "maximum": 2080.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "class_count=2",
+        "class_count": 2,
+        "dimensions": 8,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 16,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 10219,
+            "after_insertion": 10880,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 3,
+            "nudge": 4
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0001601999974809587,
+            "inserted_inference": 0.00015940000594127923,
+            "point_fitted_insertion": 3.890000516548753e-05,
+            "deletion": 1.8999999156221747e-06,
+            "rollback": 0.00023580000561196357,
+            "local_nudge": 0.0010715999960666522,
+            "target_class_reconstruction": 0.00010540000221226364,
+            "full_model_reconstruction": 0.0001421999913873151,
+            "cache_invalidation_total": 1.3999961083754897e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 64,
+              "shortlisted_candidate_pairs": 64,
+              "exact_class_sdf_pairs": 64,
+              "primitive_sdf_pairs": 512,
+              "score_values_materialized": 64
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 64,
+              "shortlisted_candidate_pairs": 64,
+              "exact_class_sdf_pairs": 64,
+              "primitive_sdf_pairs": 544,
+              "score_values_materialized": 64
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0001601999974809587,
+          "minimum": 0.0001601999974809587,
+          "maximum": 0.0001601999974809587
+        },
+        "inserted_inference": {
+          "median": 0.00015940000594127923,
+          "minimum": 0.00015940000594127923,
+          "maximum": 0.00015940000594127923
+        },
+        "point_fitted_insertion": {
+          "median": 3.890000516548753e-05,
+          "minimum": 3.890000516548753e-05,
+          "maximum": 3.890000516548753e-05
+        },
+        "deletion": {
+          "median": 1.8999999156221747e-06,
+          "minimum": 1.8999999156221747e-06,
+          "maximum": 1.8999999156221747e-06
+        },
+        "rollback": {
+          "median": 0.00023580000561196357,
+          "minimum": 0.00023580000561196357,
+          "maximum": 0.00023580000561196357
+        },
+        "local_nudge": {
+          "median": 0.0010715999960666522,
+          "minimum": 0.0010715999960666522,
+          "maximum": 0.0010715999960666522
+        },
+        "target_class_reconstruction": {
+          "median": 0.00010540000221226364,
+          "minimum": 0.00010540000221226364,
+          "maximum": 0.00010540000221226364
+        },
+        "full_model_reconstruction": {
+          "median": 0.0001421999913873151,
+          "minimum": 0.0001421999913873151,
+          "maximum": 0.0001421999913873151
+        },
+        "cache_invalidation_total": {
+          "median": 1.3999961083754897e-06,
+          "minimum": 1.3999961083754897e-06,
+          "maximum": 1.3999961083754897e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 10219.0,
+          "minimum": 10219.0,
+          "maximum": 10219.0
+        },
+        "after_insertion": {
+          "median": 10880.0,
+          "minimum": 10880.0,
+          "maximum": 10880.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 3.0,
+          "minimum": 3.0,
+          "maximum": 3.0
+        },
+        "nudge": {
+          "median": 4.0,
+          "minimum": 4.0,
+          "maximum": 4.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 512.0,
+            "minimum": 512.0,
+            "maximum": 512.0
+          },
+          "score_values_materialized": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 544.0,
+            "minimum": 544.0,
+            "maximum": 544.0
+          },
+          "score_values_materialized": {
+            "median": 64.0,
+            "minimum": 64.0,
+            "maximum": 64.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "class_count=32",
+        "class_count": 32,
+        "dimensions": 8,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 256,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 163211,
+            "after_insertion": 163872,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0021711000008508563,
+            "inserted_inference": 0.002078400008031167,
+            "point_fitted_insertion": 7.179999374784529e-05,
+            "deletion": 1.3999961083754897e-06,
+            "rollback": 0.0035063999966951087,
+            "local_nudge": 0.004099500001757406,
+            "target_class_reconstruction": 0.00010630000906530768,
+            "full_model_reconstruction": 0.001673899998422712,
+            "cache_invalidation_total": 1.799970050342381e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 1024,
+              "shortlisted_candidate_pairs": 1024,
+              "exact_class_sdf_pairs": 1024,
+              "primitive_sdf_pairs": 8192,
+              "score_values_materialized": 1024
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 1024,
+              "shortlisted_candidate_pairs": 1024,
+              "exact_class_sdf_pairs": 1024,
+              "primitive_sdf_pairs": 8224,
+              "score_values_materialized": 1024
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0021711000008508563,
+          "minimum": 0.0021711000008508563,
+          "maximum": 0.0021711000008508563
+        },
+        "inserted_inference": {
+          "median": 0.002078400008031167,
+          "minimum": 0.002078400008031167,
+          "maximum": 0.002078400008031167
+        },
+        "point_fitted_insertion": {
+          "median": 7.179999374784529e-05,
+          "minimum": 7.179999374784529e-05,
+          "maximum": 7.179999374784529e-05
+        },
+        "deletion": {
+          "median": 1.3999961083754897e-06,
+          "minimum": 1.3999961083754897e-06,
+          "maximum": 1.3999961083754897e-06
+        },
+        "rollback": {
+          "median": 0.0035063999966951087,
+          "minimum": 0.0035063999966951087,
+          "maximum": 0.0035063999966951087
+        },
+        "local_nudge": {
+          "median": 0.004099500001757406,
+          "minimum": 0.004099500001757406,
+          "maximum": 0.004099500001757406
+        },
+        "target_class_reconstruction": {
+          "median": 0.00010630000906530768,
+          "minimum": 0.00010630000906530768,
+          "maximum": 0.00010630000906530768
+        },
+        "full_model_reconstruction": {
+          "median": 0.001673899998422712,
+          "minimum": 0.001673899998422712,
+          "maximum": 0.001673899998422712
+        },
+        "cache_invalidation_total": {
+          "median": 1.799970050342381e-06,
+          "minimum": 1.799970050342381e-06,
+          "maximum": 1.799970050342381e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 163211.0,
+          "minimum": 163211.0,
+          "maximum": 163211.0
+        },
+        "after_insertion": {
+          "median": 163872.0,
+          "minimum": 163872.0,
+          "maximum": 163872.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 8192.0,
+            "minimum": 8192.0,
+            "maximum": 8192.0
+          },
+          "score_values_materialized": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 8224.0,
+            "minimum": 8224.0,
+            "maximum": 8224.0
+          },
+          "score_values_materialized": {
+            "median": 1024.0,
+            "minimum": 1024.0,
+            "maximum": 1024.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "class_count=128",
+        "class_count": 128,
+        "dimensions": 8,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 1024,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 652556,
+            "after_insertion": 653217,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.008205000005546026,
+            "inserted_inference": 0.00815330000477843,
+            "point_fitted_insertion": 0.0001542999962111935,
+            "deletion": 1.5999976312741637e-06,
+            "rollback": 0.014539199997670949,
+            "local_nudge": 0.013977099995827302,
+            "target_class_reconstruction": 0.00011419999646022916,
+            "full_model_reconstruction": 0.006540699992910959,
+            "cache_invalidation_total": 2.3000029614195228e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 4096,
+              "shortlisted_candidate_pairs": 4096,
+              "exact_class_sdf_pairs": 4096,
+              "primitive_sdf_pairs": 32768,
+              "score_values_materialized": 4096
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 4096,
+              "shortlisted_candidate_pairs": 4096,
+              "exact_class_sdf_pairs": 4096,
+              "primitive_sdf_pairs": 32800,
+              "score_values_materialized": 4096
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.008205000005546026,
+          "minimum": 0.008205000005546026,
+          "maximum": 0.008205000005546026
+        },
+        "inserted_inference": {
+          "median": 0.00815330000477843,
+          "minimum": 0.00815330000477843,
+          "maximum": 0.00815330000477843
+        },
+        "point_fitted_insertion": {
+          "median": 0.0001542999962111935,
+          "minimum": 0.0001542999962111935,
+          "maximum": 0.0001542999962111935
+        },
+        "deletion": {
+          "median": 1.5999976312741637e-06,
+          "minimum": 1.5999976312741637e-06,
+          "maximum": 1.5999976312741637e-06
+        },
+        "rollback": {
+          "median": 0.014539199997670949,
+          "minimum": 0.014539199997670949,
+          "maximum": 0.014539199997670949
+        },
+        "local_nudge": {
+          "median": 0.013977099995827302,
+          "minimum": 0.013977099995827302,
+          "maximum": 0.013977099995827302
+        },
+        "target_class_reconstruction": {
+          "median": 0.00011419999646022916,
+          "minimum": 0.00011419999646022916,
+          "maximum": 0.00011419999646022916
+        },
+        "full_model_reconstruction": {
+          "median": 0.006540699992910959,
+          "minimum": 0.006540699992910959,
+          "maximum": 0.006540699992910959
+        },
+        "cache_invalidation_total": {
+          "median": 2.3000029614195228e-06,
+          "minimum": 2.3000029614195228e-06,
+          "maximum": 2.3000029614195228e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 652556.0,
+          "minimum": 652556.0,
+          "maximum": 652556.0
+        },
+        "after_insertion": {
+          "median": 653217.0,
+          "minimum": 653217.0,
+          "maximum": 653217.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 32768.0,
+            "minimum": 32768.0,
+            "maximum": 32768.0
+          },
+          "score_values_materialized": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 32800.0,
+            "minimum": 32800.0,
+            "maximum": 32800.0
+          },
+          "score_values_materialized": {
+            "median": 4096.0,
+            "minimum": 4096.0,
+            "maximum": 4096.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "dimensions=2",
+        "class_count": 8,
+        "dimensions": 2,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 64,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 9938,
+            "after_insertion": 10117,
+            "insertion_growth": 179
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0005120999994687736,
+            "inserted_inference": 0.0005185000045457855,
+            "point_fitted_insertion": 4.270000499673188e-05,
+            "deletion": 1.2999953469261527e-06,
+            "rollback": 0.00030220000189729035,
+            "local_nudge": 0.000866300004418008,
+            "target_class_reconstruction": 9.709999721962959e-05,
+            "full_model_reconstruction": 0.0004138999938732013,
+            "cache_invalidation_total": 1.2999953469261527e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2048,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2080,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0005120999994687736,
+          "minimum": 0.0005120999994687736,
+          "maximum": 0.0005120999994687736
+        },
+        "inserted_inference": {
+          "median": 0.0005185000045457855,
+          "minimum": 0.0005185000045457855,
+          "maximum": 0.0005185000045457855
+        },
+        "point_fitted_insertion": {
+          "median": 4.270000499673188e-05,
+          "minimum": 4.270000499673188e-05,
+          "maximum": 4.270000499673188e-05
+        },
+        "deletion": {
+          "median": 1.2999953469261527e-06,
+          "minimum": 1.2999953469261527e-06,
+          "maximum": 1.2999953469261527e-06
+        },
+        "rollback": {
+          "median": 0.00030220000189729035,
+          "minimum": 0.00030220000189729035,
+          "maximum": 0.00030220000189729035
+        },
+        "local_nudge": {
+          "median": 0.000866300004418008,
+          "minimum": 0.000866300004418008,
+          "maximum": 0.000866300004418008
+        },
+        "target_class_reconstruction": {
+          "median": 9.709999721962959e-05,
+          "minimum": 9.709999721962959e-05,
+          "maximum": 9.709999721962959e-05
+        },
+        "full_model_reconstruction": {
+          "median": 0.0004138999938732013,
+          "minimum": 0.0004138999938732013,
+          "maximum": 0.0004138999938732013
+        },
+        "cache_invalidation_total": {
+          "median": 1.2999953469261527e-06,
+          "minimum": 1.2999953469261527e-06,
+          "maximum": 1.2999953469261527e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 9938.0,
+          "minimum": 9938.0,
+          "maximum": 9938.0
+        },
+        "after_insertion": {
+          "median": 10117.0,
+          "minimum": 10117.0,
+          "maximum": 10117.0
+        },
+        "insertion_growth": {
+          "median": 179.0,
+          "minimum": 179.0,
+          "maximum": 179.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2048.0,
+            "minimum": 2048.0,
+            "maximum": 2048.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2080.0,
+            "minimum": 2080.0,
+            "maximum": 2080.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "dimensions=32",
+        "class_count": 8,
+        "dimensions": 32,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 64,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 348972,
+            "after_insertion": 354370,
+            "insertion_growth": 5398
+          },
+          "prediction_changes": {
+            "insertion": 3,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0007467000104952604,
+            "inserted_inference": 0.0007551000016974285,
+            "point_fitted_insertion": 5.5800002883188426e-05,
+            "deletion": 1.500011421740055e-06,
+            "rollback": 0.006613699995796196,
+            "local_nudge": 0.007587900006910786,
+            "target_class_reconstruction": 0.00012669998977798969,
+            "full_model_reconstruction": 0.0004928999987896532,
+            "cache_invalidation_total": 1.600012183189392e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2048,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2080,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0007467000104952604,
+          "minimum": 0.0007467000104952604,
+          "maximum": 0.0007467000104952604
+        },
+        "inserted_inference": {
+          "median": 0.0007551000016974285,
+          "minimum": 0.0007551000016974285,
+          "maximum": 0.0007551000016974285
+        },
+        "point_fitted_insertion": {
+          "median": 5.5800002883188426e-05,
+          "minimum": 5.5800002883188426e-05,
+          "maximum": 5.5800002883188426e-05
+        },
+        "deletion": {
+          "median": 1.500011421740055e-06,
+          "minimum": 1.500011421740055e-06,
+          "maximum": 1.500011421740055e-06
+        },
+        "rollback": {
+          "median": 0.006613699995796196,
+          "minimum": 0.006613699995796196,
+          "maximum": 0.006613699995796196
+        },
+        "local_nudge": {
+          "median": 0.007587900006910786,
+          "minimum": 0.007587900006910786,
+          "maximum": 0.007587900006910786
+        },
+        "target_class_reconstruction": {
+          "median": 0.00012669998977798969,
+          "minimum": 0.00012669998977798969,
+          "maximum": 0.00012669998977798969
+        },
+        "full_model_reconstruction": {
+          "median": 0.0004928999987896532,
+          "minimum": 0.0004928999987896532,
+          "maximum": 0.0004928999987896532
+        },
+        "cache_invalidation_total": {
+          "median": 1.600012183189392e-06,
+          "minimum": 1.600012183189392e-06,
+          "maximum": 1.600012183189392e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 348972.0,
+          "minimum": 348972.0,
+          "maximum": 348972.0
+        },
+        "after_insertion": {
+          "median": 354370.0,
+          "minimum": 354370.0,
+          "maximum": 354370.0
+        },
+        "insertion_growth": {
+          "median": 5398.0,
+          "minimum": 5398.0,
+          "maximum": 5398.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 3.0,
+          "minimum": 3.0,
+          "maximum": 3.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2048.0,
+            "minimum": 2048.0,
+            "maximum": 2048.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2080.0,
+            "minimum": 2080.0,
+            "maximum": 2080.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "dimensions=128",
+        "class_count": 8,
+        "dimensions": 128,
+        "primitives_per_class": 8
+      },
+      "total_primitives": 64,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 4532498,
+            "after_insertion": 4602943,
+            "insertion_growth": 70445
+          },
+          "prediction_changes": {
+            "insertion": 5,
+            "nudge": 1
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.002538999993703328,
+            "inserted_inference": 0.002981900004670024,
+            "point_fitted_insertion": 0.0001260999997612089,
+            "deletion": 3.2999960239976645e-06,
+            "rollback": 0.09546889999182895,
+            "local_nudge": 0.10244680001051165,
+            "target_class_reconstruction": 0.00044180000259075314,
+            "full_model_reconstruction": 0.0026772999990498647,
+            "cache_invalidation_total": 3.9000005926936865e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2048,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 2080,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.002538999993703328,
+          "minimum": 0.002538999993703328,
+          "maximum": 0.002538999993703328
+        },
+        "inserted_inference": {
+          "median": 0.002981900004670024,
+          "minimum": 0.002981900004670024,
+          "maximum": 0.002981900004670024
+        },
+        "point_fitted_insertion": {
+          "median": 0.0001260999997612089,
+          "minimum": 0.0001260999997612089,
+          "maximum": 0.0001260999997612089
+        },
+        "deletion": {
+          "median": 3.2999960239976645e-06,
+          "minimum": 3.2999960239976645e-06,
+          "maximum": 3.2999960239976645e-06
+        },
+        "rollback": {
+          "median": 0.09546889999182895,
+          "minimum": 0.09546889999182895,
+          "maximum": 0.09546889999182895
+        },
+        "local_nudge": {
+          "median": 0.10244680001051165,
+          "minimum": 0.10244680001051165,
+          "maximum": 0.10244680001051165
+        },
+        "target_class_reconstruction": {
+          "median": 0.00044180000259075314,
+          "minimum": 0.00044180000259075314,
+          "maximum": 0.00044180000259075314
+        },
+        "full_model_reconstruction": {
+          "median": 0.0026772999990498647,
+          "minimum": 0.0026772999990498647,
+          "maximum": 0.0026772999990498647
+        },
+        "cache_invalidation_total": {
+          "median": 3.9000005926936865e-06,
+          "minimum": 3.9000005926936865e-06,
+          "maximum": 3.9000005926936865e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 4532498.0,
+          "minimum": 4532498.0,
+          "maximum": 4532498.0
+        },
+        "after_insertion": {
+          "median": 4602943.0,
+          "minimum": 4602943.0,
+          "maximum": 4602943.0
+        },
+        "insertion_growth": {
+          "median": 70445.0,
+          "minimum": 70445.0,
+          "maximum": 70445.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 5.0,
+          "minimum": 5.0,
+          "maximum": 5.0
+        },
+        "nudge": {
+          "median": 1.0,
+          "minimum": 1.0,
+          "maximum": 1.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2048.0,
+            "minimum": 2048.0,
+            "maximum": 2048.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 2080.0,
+            "minimum": 2080.0,
+            "maximum": 2080.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=1",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 1
+      },
+      "total_primitives": 8,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 5516,
+            "after_insertion": 6177,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 9.520001185592264e-05,
+            "inserted_inference": 9.180000051856041e-05,
+            "point_fitted_insertion": 4.539999645203352e-05,
+            "deletion": 1.3999961083754897e-06,
+            "rollback": 0.0001610999897820875,
+            "local_nudge": 0.00037510000402107835,
+            "target_class_reconstruction": 7.439999899361283e-05,
+            "full_model_reconstruction": 0.00022319999698083848,
+            "cache_invalidation_total": 1.3999961083754897e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 256,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 288,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 9.520001185592264e-05,
+          "minimum": 9.520001185592264e-05,
+          "maximum": 9.520001185592264e-05
+        },
+        "inserted_inference": {
+          "median": 9.180000051856041e-05,
+          "minimum": 9.180000051856041e-05,
+          "maximum": 9.180000051856041e-05
+        },
+        "point_fitted_insertion": {
+          "median": 4.539999645203352e-05,
+          "minimum": 4.539999645203352e-05,
+          "maximum": 4.539999645203352e-05
+        },
+        "deletion": {
+          "median": 1.3999961083754897e-06,
+          "minimum": 1.3999961083754897e-06,
+          "maximum": 1.3999961083754897e-06
+        },
+        "rollback": {
+          "median": 0.0001610999897820875,
+          "minimum": 0.0001610999897820875,
+          "maximum": 0.0001610999897820875
+        },
+        "local_nudge": {
+          "median": 0.00037510000402107835,
+          "minimum": 0.00037510000402107835,
+          "maximum": 0.00037510000402107835
+        },
+        "target_class_reconstruction": {
+          "median": 7.439999899361283e-05,
+          "minimum": 7.439999899361283e-05,
+          "maximum": 7.439999899361283e-05
+        },
+        "full_model_reconstruction": {
+          "median": 0.00022319999698083848,
+          "minimum": 0.00022319999698083848,
+          "maximum": 0.00022319999698083848
+        },
+        "cache_invalidation_total": {
+          "median": 1.3999961083754897e-06,
+          "minimum": 1.3999961083754897e-06,
+          "maximum": 1.3999961083754897e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 5516.0,
+          "minimum": 5516.0,
+          "maximum": 5516.0
+        },
+        "after_insertion": {
+          "median": 6177.0,
+          "minimum": 6177.0,
+          "maximum": 6177.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 288.0,
+            "minimum": 288.0,
+            "maximum": 288.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=32",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 32
+      },
+      "total_primitives": 256,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 161955,
+            "after_insertion": 162616,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.0022849000088172033,
+            "inserted_inference": 0.0019364000036148354,
+            "point_fitted_insertion": 6.979999307077378e-05,
+            "deletion": 1.600012183189392e-06,
+            "rollback": 0.003493800002615899,
+            "local_nudge": 0.0054856999922776595,
+            "target_class_reconstruction": 0.00021720000950153917,
+            "full_model_reconstruction": 0.0013344999897526577,
+            "cache_invalidation_total": 1.4999968698248267e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 8192,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 8224,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.0022849000088172033,
+          "minimum": 0.0022849000088172033,
+          "maximum": 0.0022849000088172033
+        },
+        "inserted_inference": {
+          "median": 0.0019364000036148354,
+          "minimum": 0.0019364000036148354,
+          "maximum": 0.0019364000036148354
+        },
+        "point_fitted_insertion": {
+          "median": 6.979999307077378e-05,
+          "minimum": 6.979999307077378e-05,
+          "maximum": 6.979999307077378e-05
+        },
+        "deletion": {
+          "median": 1.600012183189392e-06,
+          "minimum": 1.600012183189392e-06,
+          "maximum": 1.600012183189392e-06
+        },
+        "rollback": {
+          "median": 0.003493800002615899,
+          "minimum": 0.003493800002615899,
+          "maximum": 0.003493800002615899
+        },
+        "local_nudge": {
+          "median": 0.0054856999922776595,
+          "minimum": 0.0054856999922776595,
+          "maximum": 0.0054856999922776595
+        },
+        "target_class_reconstruction": {
+          "median": 0.00021720000950153917,
+          "minimum": 0.00021720000950153917,
+          "maximum": 0.00021720000950153917
+        },
+        "full_model_reconstruction": {
+          "median": 0.0013344999897526577,
+          "minimum": 0.0013344999897526577,
+          "maximum": 0.0013344999897526577
+        },
+        "cache_invalidation_total": {
+          "median": 1.4999968698248267e-06,
+          "minimum": 1.4999968698248267e-06,
+          "maximum": 1.4999968698248267e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 161955.0,
+          "minimum": 161955.0,
+          "maximum": 161955.0
+        },
+        "after_insertion": {
+          "median": 162616.0,
+          "minimum": 162616.0,
+          "maximum": 162616.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 8192.0,
+            "minimum": 8192.0,
+            "maximum": 8192.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 8224.0,
+            "minimum": 8224.0,
+            "maximum": 8224.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    },
+    {
+      "condition": {
+        "name": "primitives_per_class=128",
+        "class_count": 8,
+        "dimensions": 8,
+        "primitives_per_class": 128
+      },
+      "total_primitives": 1024,
+      "records": [
+        {
+          "repeat": 0,
+          "seed": 101,
+          "serialized_bytes": {
+            "baseline": 646332,
+            "after_insertion": 646993,
+            "insertion_growth": 661
+          },
+          "prediction_changes": {
+            "insertion": 0,
+            "nudge": 0
+          },
+          "latency_seconds": {
+            "baseline_inference": 0.007941899995785207,
+            "inserted_inference": 0.008344199988641776,
+            "point_fitted_insertion": 0.00022529999841935933,
+            "deletion": 2.4000037228688598e-06,
+            "rollback": 0.014829099993221462,
+            "local_nudge": 0.017443400007323362,
+            "target_class_reconstruction": 0.0007041999924695119,
+            "full_model_reconstruction": 0.004730300002847798,
+            "cache_invalidation_total": 2.00001522898674e-06
+          },
+          "routing_counts": {
+            "baseline": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 32768,
+              "score_values_materialized": 256
+            },
+            "after_insertion": {
+              "sample_count": 32,
+              "nodes_executed": 1,
+              "compatible_candidate_pairs": 256,
+              "shortlisted_candidate_pairs": 256,
+              "exact_class_sdf_pairs": 256,
+              "primitive_sdf_pairs": 32800,
+              "score_values_materialized": 256
+            }
+          },
+          "cache_invalidations": 5,
+          "checks": {
+            "insertion_untouched_sdf_bitwise_stable": true,
+            "deletion_exact_snapshot": true,
+            "deletion_restored_predictions": true,
+            "rollback_exact_snapshot": true,
+            "nudge_untouched_sdf_bitwise_stable": true
+          }
+        }
+      ],
+      "latency_seconds": {
+        "baseline_inference": {
+          "median": 0.007941899995785207,
+          "minimum": 0.007941899995785207,
+          "maximum": 0.007941899995785207
+        },
+        "inserted_inference": {
+          "median": 0.008344199988641776,
+          "minimum": 0.008344199988641776,
+          "maximum": 0.008344199988641776
+        },
+        "point_fitted_insertion": {
+          "median": 0.00022529999841935933,
+          "minimum": 0.00022529999841935933,
+          "maximum": 0.00022529999841935933
+        },
+        "deletion": {
+          "median": 2.4000037228688598e-06,
+          "minimum": 2.4000037228688598e-06,
+          "maximum": 2.4000037228688598e-06
+        },
+        "rollback": {
+          "median": 0.014829099993221462,
+          "minimum": 0.014829099993221462,
+          "maximum": 0.014829099993221462
+        },
+        "local_nudge": {
+          "median": 0.017443400007323362,
+          "minimum": 0.017443400007323362,
+          "maximum": 0.017443400007323362
+        },
+        "target_class_reconstruction": {
+          "median": 0.0007041999924695119,
+          "minimum": 0.0007041999924695119,
+          "maximum": 0.0007041999924695119
+        },
+        "full_model_reconstruction": {
+          "median": 0.004730300002847798,
+          "minimum": 0.004730300002847798,
+          "maximum": 0.004730300002847798
+        },
+        "cache_invalidation_total": {
+          "median": 2.00001522898674e-06,
+          "minimum": 2.00001522898674e-06,
+          "maximum": 2.00001522898674e-06
+        }
+      },
+      "serialized_bytes": {
+        "baseline": {
+          "median": 646332.0,
+          "minimum": 646332.0,
+          "maximum": 646332.0
+        },
+        "after_insertion": {
+          "median": 646993.0,
+          "minimum": 646993.0,
+          "maximum": 646993.0
+        },
+        "insertion_growth": {
+          "median": 661.0,
+          "minimum": 661.0,
+          "maximum": 661.0
+        }
+      },
+      "prediction_changes": {
+        "insertion": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "nudge": {
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "routing_counts": {
+        "baseline": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 32768.0,
+            "minimum": 32768.0,
+            "maximum": 32768.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        },
+        "after_insertion": {
+          "sample_count": {
+            "median": 32.0,
+            "minimum": 32.0,
+            "maximum": 32.0
+          },
+          "nodes_executed": {
+            "median": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0
+          },
+          "compatible_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "shortlisted_candidate_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "exact_class_sdf_pairs": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          },
+          "primitive_sdf_pairs": {
+            "median": 32800.0,
+            "minimum": 32800.0,
+            "maximum": 32800.0
+          },
+          "score_values_materialized": {
+            "median": 256.0,
+            "minimum": 256.0,
+            "maximum": 256.0
+          }
+        }
+      },
+      "cache_invalidations": {
+        "median": 5.0,
+        "minimum": 5.0,
+        "maximum": 5.0
+      },
+      "all_exit_gates_passed": true
+    }
+  ]
+}

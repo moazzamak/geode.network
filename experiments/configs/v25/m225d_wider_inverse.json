@@ -1,0 +1,26 @@
+{
+  "milestone": "M225d",
+  "title": "Wider authored inverse set: more inverse pairs in training, two excluded pairs as the true-held-out G6",
+  "question": "Does the shared inverse direction, trained on five pairs (reference + fft/ifft + exponent/logarithm + multiply/divide + translate/inverse-translate), generalise to the TWO excluded pairs (convolution/deconvolution and sort/unsort)?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v25.md M225d REGISTERED (20 Aug, before the build, NOT dispatched; dispatched this session)",
+  "model": {"f_dim": 32, "mlp_hidden": 32, "seed": 11},
+  "training": {
+    "steps": 3000,
+    "lr": 0.001,
+    "rel_ordered_triple_tau": 0.5,
+    "rel_polar_rho": 0.3,
+    "margin_dissimilar": 0.1,
+    "inverse_analogy_tau": 0.5,
+    "frozen_swap_tau": 0.5,
+    "note": "same joint objective as M225c; the inverse-pair hinge covers the reference + fft/ifft + exponent/logarithm + multiply/divide + translate/inverse-translate (the two registered excluded pairs are held out)"
+  },
+  "train_exclude": [["convolution", "deconvolution"], ["sort", "unsort"]],
+  "relations_file": "analysis/fingerprint_relations_v0.json",
+  "transform_relations_file": "analysis/fingerprint_relations_v2_transform.json",
+  "interpretation_registered_before_running": {
+    "G1_fail": "VOID - determinism is the instrument contract",
+    "G6_heldout_pass": "the inverse relation generalises to UNSEEN pairs at >= 0.5 - the wider authored set reconciles the held-out requirement; the M226 trigger is restored",
+    "G6_heldout_fail": "the inverse relation does not generalise beyond trained pairs even with five training pairs - scoped negative for the authored inverse set; M226 stays gated",
+    "ship": "prototype only; M226 remains gated unless G1-G3+G6 pass"
+  }
+}

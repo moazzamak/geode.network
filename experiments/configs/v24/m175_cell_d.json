@@ -1,0 +1,39 @@
+{
+  "milestone": "M175",
+  "cell": "D",
+  "title": "License-clean Wikipedia fit-and-report (uniform-w2 fitted ON the dump, licensing posture recorded)",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v24.md section 12 (18 Aug 2026); analysis/v24_m175_transfer_cells.md (17 Aug 2026)",
+  "registered_before_any_accuracy": true,
+  "question": "What does the license-clean Wikipedia text arm read on its own held-out slice, and does fitting on the dump beat the transferred wikitext encoder's read of it?",
+  "corpus": {
+    "sub_cache_file": "data/tier6/wikitext103_100000.npz",
+    "full_cache_file": "data/tier6/wikitext103_full.npz"
+  },
+  "slices": {
+    "fit_start": 100000,
+    "fit_rows": 300000,
+    "test_start": 400000,
+    "test_rows": 100000,
+    "note": "disjoint from every slice A/B/A0 measured"
+  },
+  "model": {
+    "variant": "uniform",
+    "window": 2,
+    "alpha": 1.0,
+    "selected_in": "cell A (valid-pinned, sealed)"
+  },
+  "anchors": {
+    "g0": "the 100k train ids equal the full train stream's first 80000 ids (prefix pin)",
+    "g1": "D's encoder on A's exact out-domain slice reproduces A's sealed 11.0933 with delta 0.0",
+    "a_evidence": "logs/results/v24/m175_cell_a/evidence.json",
+    "a_wiki_start": 100000,
+    "a_wiki_rows": 100000
+  },
+  "license_posture": {
+    "derivation": "wikitext-103 derives from Wikipedia articles",
+    "licenses": ["CC BY-SA 3.0", "GFDL"],
+    "traceability": "the cached token ids carry a vocab fingerprint, so the lineage is traceable end-to-end",
+    "status": "recorded, not a legal audit; the license-clean text arm's input, in contrast to scraped corpora"
+  },
+  "output_dir": "logs/results/v24/m175_cell_d"
+}

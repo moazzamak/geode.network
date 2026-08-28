@@ -1,0 +1,80 @@
+{
+  "milestone": "A5-p1",
+  "title": "Routed per-domain patch-dictionary specialists (Arm P) vs a global dense model — does routing lift the sparse ceiling?",
+  "registered_in": "analysis/RESEARCH_IMPLEMENTATION_PLAN_v17.md section 3 (A5, phase 1)",
+  "registered_before_any_accuracy": true,
+  "corpus": {
+    "dataset": "DomainNet, six domains, 345 classes",
+    "source": "GEODE_CACHE_DIR/domainnet/repository/data (parquet)",
+    "image_size": 32,
+    "train_rows_per_class": 400,
+    "test_rows_per_class": 100,
+    "subsample_seed": 107,
+    "shuffle_seed": 11,
+    "pixel_identity_rows": 64,
+    "expected_subsample_sha256": "63f590097008f749f3f1828b29d6f154de7b21a6828a7b017ac141c0615fa09d",
+    "_note": "M107/M108/M109/A2's exact shared subsample, unchanged."
+  },
+  "device": {
+    "encode": "cuda",
+    "whiten": "cpu",
+    "training": "cuda",
+    "ridge": "cpu",
+    "_note": "Sparse whitening stays on numpy CPU (M107's arithmetic); encode + distance on the GPU ('cuda' = ROCm/HIP). HIP_VISIBLE_DEVICES=1, device_count 1, gcnArchName gfx1201."
+  },
+  "parity_guard": {
+    "bound_relative": 1e-04,
+    "models": ["small"],
+    "resolution": 28,
+    "batch": 4,
+    "feature": "CLS token concatenated with the mean of the patch tokens"
+  },
+  "dense": {
+    "model": "dinov2-small",
+    "resolutions": [28, 42],
+    "pixels": "original",
+    "feature": "CLS token concatenated with the mean of the patch tokens",
+    "_note": "Arm D is RE-MEASURED global DINOv2-small ridge (never quoted from M107), at resolutions whose MACs sit at-or-above the routed specialists' per-image cost; the t1 gate requires it to reproduce M107/M109 t1."
+  },
+  "sparse": {
+    "arm": "a_random",
+    "atoms_per_domain": [249, 257, 361, 945, 907, 350],
+    "pool_grid": 2,
+    "patch": 6,
+    "stride": 1,
+    "contrast_epsilon": 10.0,
+    "zca_epsilon": 0.1,
+    "image_size": 32,
+    "whitener": "global M108 (fitted on the full subsample)",
+    "dictionary_per_domain": "random whitened-patch sample restricted to that domain's train rows (M108 arm (a) construction, domain-specific)",
+    "_atoms_note": "floor-capped: atoms_d = floor(D_d / 44.92) where D_d is the domain's train rows and 44.92 = 4 * 11.23 (the section 3.5 floor), so each specialist keeps >= 11.23 rows per fitted dimension. Computed at registration.",
+    "_floor_repair": "REGISTERED REPAIR, 6 August 2026, before any re-run. First sealed run (a5_routed.json as registered) SELF-VOIDED on the per-domain floor gate: d1 was registered at 258 atoms but floor(11587/44.92) = 257.947, cap 257, so 258 exceeded the floor by 1. Corrected 258 -> 257. All other domains verified: {249, 361, 945, 907, 350} are each <= floor(D_d/44.92). The runner also now fits every head on ALL train rows (no vestigial 5% validation split - A5 has no SGD and selects no hyperparameter), matching M107's dense arm and per-domain mixture arm, so the recorded rows-per-fitted-dimension agrees with the floor gate. Registration: analysis/RESEARCH_IMPLEMENTATION_PLAN_v17.md, A5 section."
+  },
+  "head": {
+    "family": "closed_form_ridge",
+    "penalty": 1.0,
+    "_note": "per A2 (sealed): the closed-form ridge head, never a trained linear head, on sparse codes."
+  },
+  "router": {
+    "oracle": true,
+    "fingerprint": {
+      "descriptor": "per-image mean and std of raw pixels",
+      "distance": "normalised L2 to per-domain centroids",
+      "_note": "the oracle router (true test domain labels) is the primary control and carries the family verdicts; the fingerprint router's routing accuracy is reported as a gate beside every routed figure."
+    }
+  },
+  "gate": {
+    "t1_reproduction_tolerance": 0.002,
+    "floor_rows_per_fitted_dimension": 11.23,
+    "registered_prediction": "routing lifts the frozen sparse ceiling modestly on non-natural domains (quickdraw, sketch, clipart) but does not reach the dense model's accuracy.",
+    "kill_switch_1_ceiling_lift": "if oracle-routed per-domain Arm P does not beat the global frozen dictionary (0.2148) overall by at least 0.01, routing does not lift the sparse ceiling and the routed idea adds nothing beyond M109; the program consolidates.",
+    "kill_switch_2_vs_dense": "if oracle-routed Arm P beats Arm D at-or-above its cost on any domain, routed sparse specialists beat a trained transformer per-domain at matched cost (the only measured regime where the program's sparse family wins on accuracy).",
+    "_comparison_rule": "a routed per-domain Arm P prediction costs router + one specialist per input; Arm D is compared at the resolution whose per-image MACs are at-or-above that total (never below, so the sparse side cannot win by being cheaper)."
+  },
+  "numerics": {
+    "encode_dtype": "float32",
+    "gram_dtype": "float64",
+    "torch_threads": 16,
+    "seed": 109
+  }
+}

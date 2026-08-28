@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\eval_v25_m210b_ms_per_domain.py", line 143, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\eval_v25_m210b_ms_per_domain.py", line 139, in main
+    run_m210b(args.config, args.output)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\experiments\tier4\eval_v25_m210b_ms_per_domain.py", line 64, in run_m210b
+    mem_test = np.load(ms_cache / config["artifacts"]["test_file"],
+                       mmap_mode="r")
+  File "C:\Users\mak\Documents\projects\Research Work\CG-MoE\.venv-rocm\Lib\site-packages\numpy\lib\_npyio_impl.py", line 454, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'F:\\geode-ml\\data\\cache\\v16\\m142_c3\\ms357_fulltest.npy'

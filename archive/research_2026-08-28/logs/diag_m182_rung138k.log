@@ -1,0 +1,5 @@
+  reusing decoded corpus F:\geode-ml\data\cache\domainnet_decoded\size32.npz
+train rows 138000, test rows 34500
+M117 path on current cache: 0.224608695652174
+sealed M117 value:          0.224869565217391
+delta: -2.609e-04

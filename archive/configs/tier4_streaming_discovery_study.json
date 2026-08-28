@@ -1,0 +1,8 @@
+{
+  "artifact_path": "logs/results/tier4_streaming_discovery_study.json",
+  "seeds": [41, 42, 43, 44, 45],
+  "rejection_threshold": 1.0,
+  "dbscan_epsilon": 0.9,
+  "dbscan_minimum_samples": 4,
+  "incremental_assignment_radius": 0.9
+}

@@ -2040,7 +2040,7 @@ the effect: even a forged order can only freeze.
 A network with no suppliers is a whitepaper, not a product. GEODE
 therefore launches with a minimum viable product operated by the
 developer. It is a small set of bootstrap arms covering a few key
-tasks, served on rented hardware and paid like any other host. Two
+tasks, served on rented hardware and paid like any other host. Six
 rules apply.
 
 \begin{enumerate}
@@ -2309,12 +2309,12 @@ A few readings from this table, stated plainly. The vision trunk
 ladder is monotonic but far below the 0.8 deployment bar. A trunk
 ladder is a family of models of increasing size. The arm serves
 only a scoped subset and refuses the rest rather than guess. The
-TTS loop roughly halved its word-error rate when conditioned on a
+TTS loop reads 0.052 WER when conditioned on a
 real speaker. The router and the code arm are the strongest
 measured results. They are still single-corpus.
 
-The last two rows are the architecture's own measurements, and
-they belong together. On a clean two-encoder cell, concatenation
+The fusion and nonlinearity rows are the architecture's own
+measurements, and they belong together. On a clean two-encoder cell, concatenation
 more than doubles the single encoder ($0.548$ vs $0.242$), and
 CCA alignment loses to raw concatenation ($0.511$): fusion works,
 bridges are optional. The frozen-concatenation recipe appears

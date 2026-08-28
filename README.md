@@ -2,8 +2,8 @@
 
 **GEODE** is a network where anyone can contribute a capability and
 anyone can buy answers, priced in Ethereum at market rate. A
-capability is a *frozen* neural network — weights that no longer
-change — or a small deterministic program called a *primitive*.
+capability is a _frozen_ neural network — weights that no longer
+change — or a small deterministic program called a _primitive_.
 Capabilities are **composable** and **routable**: a contribution can
 be reused and built upon by anyone, every use pays the work beneath
 it, and payment follows the measured work that actually served the
@@ -28,8 +28,8 @@ measured results, and the honesty boundaries:
 
 The name says it: **generalized encoders**. A registry of frozen
 encoders — each mapping one kind of input (image, audio, text, number
-series) into a code space — is the spine. A head declares a *code
-manifest*: an ordered list of the blocks it reads, concatenated into
+series) into a code space — is the spine. A head declares a _code
+manifest_: an ordered list of the blocks it reads, concatenated into
 one design. Nothing beneath it is rebuilt: a closed-form fit on the
 composed codes is measured, priced, and routed on its own.
 
@@ -60,17 +60,17 @@ Single-corpus and single-party — a working demonstration, not a
 competitive claim. The whitepaper reports the failures as loudly as
 the wins.
 
-| Axis | Measurement | Result |
-| ---- | ----------- | ------ |
-| Routing | DomainNet: the router picks the right specialist / the answer the user receives | 0.91 / 0.76 |
-| Code | Qwen2.5-Coder 7B, HumanEval pass@1 / pass@3 | 0.860 / 0.884 |
-| Speech | Whisper ladder, LibriSpeech test-clean WER | 0.0296 |
-| Vision (scoped serving) | Open Images: 129 served classes, 472 refused | 0.901 on the served subset |
-| Fusion | clean cell: two frozen encoders concatenated vs one | 0.548 vs 0.242 |
-| Nonlinearity | quickdraw wall (four frozen backbones) vs + hash-seeded random features | 0.63 → 0.675 |
-| Text recipe | frozen BERT-base + closed-form ridge: SST-2 / IMDb | 0.857 / 0.828 |
-| Audio recipe | frozen wav2vec2-base + ridge, Speech Commands v2 | 0.879 |
-| Number series | in-house temporal arms, Mackey-Glass one-step NRMSFE | 0.0032 |
+| Axis                    | Measurement                                                                     | Result                     |
+| ----------------------- | ------------------------------------------------------------------------------- | -------------------------- |
+| Routing                 | DomainNet: the router picks the right specialist / the answer the user receives | 0.91 / 0.76                |
+| Code                    | Qwen2.5-Coder 7B, HumanEval pass@1 / pass@3                                     | 0.860 / 0.884              |
+| Speech                  | Whisper ladder, LibriSpeech test-clean WER                                      | 0.0296                     |
+| Vision (scoped serving) | Open Images: 129 served classes, 472 refused                                    | 0.901 on the served subset |
+| Fusion                  | clean cell: two frozen encoders concatenated vs one                             | 0.548 vs 0.242             |
+| Nonlinearity            | quickdraw wall (four frozen backbones) vs + hash-seeded random features         | 0.63 → 0.675               |
+| Text recipe             | frozen BERT-base + closed-form ridge: SST-2 / IMDb                              | 0.857 / 0.828              |
+| Audio recipe            | frozen wav2vec2-base + ridge, Speech Commands v2                                | 0.879                      |
+| Number series           | in-house temporal arms, Mackey-Glass one-step NRMSFE                            | 0.0032                     |
 
 One honesty statement organizes the whole project: the protocol
 machinery is built and measured, and the generalized-encoder thesis

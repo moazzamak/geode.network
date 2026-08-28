@@ -187,6 +187,3 @@ threat reviews, sealed experiment logs, tools, docs, legacy tiers,
 and the legacy README — is preserved under `archive/` (the
 post-17-Aug research material in `archive/research_2026-08-28/`, the
 earlier material in the rest of `archive/`; see `archive/README.md`).
-The git history is squashed to the single public-release commit; the
-pre-release history is kept on the remote until the release and
-locally on `backup/pre-public-master`.

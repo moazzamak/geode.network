@@ -32,10 +32,9 @@ whitepaper can now verify.
   Gramian series-to-image bridge fails at 4.144 NRMSFE against
   0.00317). The wrapper-axis problem is bounded, not solved.
 - **Prior-art position after today's sweep:** fixed routing was
-  already established (Hash Layers, NeurIPS 2021; COMET, ICLR
-  2025) and the frozen-concatenation recipe was independently
+  already established (Hash Layers, NeurIPS 2021; COMET, ICLR 2025) and the frozen-concatenation recipe was
   published with a tabular-foundation-model head (CoMET, arXiv
-  2605.20674, May 2026). The whitepaper now attributes both. What
+  2605.20674, May 2026, before the M341 clean cell). The whitepaper now attributes both. What
   remains unclaimed by any located neighbor: the registry of
   independent frozen artifacts with versioned code-bus manifests
   and payment by measured downstream use. Verdict: the claim is
@@ -77,16 +76,16 @@ the wager as a wager.
 
 ## 2. Learning/composition feasibility in detail
 
-| Question | Evidence | Status |
-| --- | --- | --- |
-| Does concatenating frozen codes beat single encoders? | M341: 0.5479 vs 0.2421 | MEASURED YES (one clean cell) |
-| Do alignment bridges beat concatenation? | M341: CCA 0.5106 < 0.5479 | MEASURED NO — bridges optional |
-| Is the linearity ceiling repairable? | M300b: 0.6335 → 0.6753 | MEASURED YES on vision only |
-| Does the repair generalize? | M344 text null, M345 −0.039, M346 bridge 4.144 | MEASURED NO — bounded |
-| Does the recipe cover modalities? | text 0.857/0.828, audio 0.879, vision scoped 0.901, series 0.0032 | MEASURED, with negatives |
-| Is the frozen-concat recipe novel? | CoMET arXiv 2605.20674 (TFM head) | NO — attributed |
-| Is fixed routing novel? | Hash Layers; COMET ICLR 2025 | NO — attributed |
-| Is the registry+bus+payment combination claimed elsewhere? | two registered sweeps; none found | ABSENCE RECORDED AS ABSENCE |
+| Question                                                   | Evidence                                                          | Status                         |
+| ---------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------ |
+| Does concatenating frozen codes beat single encoders?      | M341: 0.5479 vs 0.2421                                            | MEASURED YES (one clean cell)  |
+| Do alignment bridges beat concatenation?                   | M341: CCA 0.5106 < 0.5479                                         | MEASURED NO — bridges optional |
+| Is the linearity ceiling repairable?                       | M300b: 0.6335 → 0.6753                                            | MEASURED YES on vision only    |
+| Does the repair generalize?                                | M344 text null, M345 −0.039, M346 bridge 4.144                    | MEASURED NO — bounded          |
+| Does the recipe cover modalities?                          | text 0.857/0.828, audio 0.879, vision scoped 0.901, series 0.0032 | MEASURED, with negatives       |
+| Is the frozen-concat recipe novel?                         | CoMET arXiv 2605.20674 (TFM head)                                 | NO — attributed                |
+| Is fixed routing novel?                                    | Hash Layers; COMET ICLR 2025                                      | NO — attributed                |
+| Is the registry+bus+payment combination claimed elsewhere? | two registered sweeps; none found                                 | ABSENCE RECORDED AS ABSENCE    |
 
 **Feasibility conclusion for the learning/composing approach:**
 the composition mechanism works at single-corpus scale and the
@@ -121,30 +120,30 @@ launch-safe on this axis.
 
 ## 4. Threat vector register (fresh pass)
 
-| Vector | Defense (shipped) | Residual (stated in paper) |
-| --- | --- | --- |
-| Copycat / re-registration | dedup by artifact hash + behavioural signature (0.95) | fresh-address copy is an identity-bound limit |
-| Copycat pricing race | per-axis price floor, timelock, M334 sweep (−865) | predatory cycles slowed, not eliminated |
-| Wash trading | 2.5% dock twice per loop, held-out scoring | none claimed beyond cost |
-| Sybil validators | activation window, activity floor, tenure, M335 0.4 recovery | economic barrier, not a proof |
-| Probing the sealed corpus | aggregate-only verdicts, 4-digit precision, fees, rotation | cost barrier, not a proof |
-| Head extraction | bucketed confidence, budgets, lottery router (M332 55.2×) | payer indifferent to cost can still extract |
-| Substituted serving (crude) | shadow probe, commit-before-reveal, 1/(ρδ) horizon | near-copy case is the real residual |
-| Substituted serving (near-copy) | sequential mismatch test (M305a 0.958 / 0.004) | measured, not perfect |
-| Executor–host collusion | sampled judges, commit-before-compare, both slashed | corrupt fraction of the pool raised to k_e |
-| Validator collusion / wrong labels | audits, wrong-label exclusion, pre-reveal collusion proof | corrupt majority outside mechanism reach |
-| Librarian rewrite | anchored-prefix immutability, fork rule, replacement | cadence is the rewrite window |
-| Librarian withholding | force-inclusion queue (on-chain inbox) | liveness statistics make silence visible |
-| Governance capture | earned-weight-only votes, 20% cap, no premine, d distinct identities | genesis is concentrated; path out is automatic |
-| Coercion / censorship demands | no selection surface, artifact-scoped fixed-effect freezes | frontend operators remain compellable |
-| Forged authority orders | multi-channel pinning, nexus gate | forgery not impossible; effect capped at freeze |
-| Input/code inversion | no-retention contract covers codes; FHE tier | contract breach and inversion risk named |
-| Malicious sealed trunk | sameness certified, artifact itself not audited | largest blast radius; stated, not hidden |
-| Privacy-vs-capability moat gap | separate claims; dependency chain registered | moat and capability disjoint today |
-| Front-running price changes | timelock, epoch-boundary effect, session lock | re-lock path bounded |
-| Budget exhaustion / spamming | per-payer per-axis per-epoch query budgets | used-over-cap rate is the visible surface |
-| Griefing by silence | quorum over responders, resample, demerits | victim pays no second fee by design |
-| False disputes | bounded deposit, loser pays replay, burn | false claim has no upside |
+| Vector                             | Defense (shipped)                                                    | Residual (stated in paper)                      |
+| ---------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| Copycat / re-registration          | dedup by artifact hash + behavioural signature (0.95)                | fresh-address copy is an identity-bound limit   |
+| Copycat pricing race               | per-axis price floor, timelock, M334 sweep (−865)                    | predatory cycles slowed, not eliminated         |
+| Wash trading                       | 2.5% dock twice per loop, held-out scoring                           | none claimed beyond cost                        |
+| Sybil validators                   | activation window, activity floor, tenure, M335 0.4 recovery         | economic barrier, not a proof                   |
+| Probing the sealed corpus          | aggregate-only verdicts, 4-digit precision, fees, rotation           | cost barrier, not a proof                       |
+| Head extraction                    | bucketed confidence, budgets, lottery router (M332 55.2×)            | payer indifferent to cost can still extract     |
+| Substituted serving (crude)        | shadow probe, commit-before-reveal, 1/(ρδ) horizon                   | near-copy case is the real residual             |
+| Substituted serving (near-copy)    | sequential mismatch test (M305a 0.958 / 0.004)                       | measured, not perfect                           |
+| Executor–host collusion            | sampled judges, commit-before-compare, both slashed                  | corrupt fraction of the pool raised to k_e      |
+| Validator collusion / wrong labels | audits, wrong-label exclusion, pre-reveal collusion proof            | corrupt majority outside mechanism reach        |
+| Librarian rewrite                  | anchored-prefix immutability, fork rule, replacement                 | cadence is the rewrite window                   |
+| Librarian withholding              | force-inclusion queue (on-chain inbox)                               | liveness statistics make silence visible        |
+| Governance capture                 | earned-weight-only votes, 20% cap, no premine, d distinct identities | genesis is concentrated; path out is automatic  |
+| Coercion / censorship demands      | no selection surface, artifact-scoped fixed-effect freezes           | frontend operators remain compellable           |
+| Forged authority orders            | multi-channel pinning, nexus gate                                    | forgery not impossible; effect capped at freeze |
+| Input/code inversion               | no-retention contract covers codes; FHE tier                         | contract breach and inversion risk named        |
+| Malicious sealed trunk             | sameness certified, artifact itself not audited                      | largest blast radius; stated, not hidden        |
+| Privacy-vs-capability moat gap     | separate claims; dependency chain registered                         | moat and capability disjoint today              |
+| Front-running price changes        | timelock, epoch-boundary effect, session lock                        | re-lock path bounded                            |
+| Budget exhaustion / spamming       | per-payer per-axis per-epoch query budgets                           | used-over-cap rate is the visible surface       |
+| Griefing by silence                | quorum over responders, resample, demerits                           | victim pays no second fee by design             |
+| False disputes                     | bounded deposit, loser pays replay, burn                             | false claim has no upside                       |
 
 **Threat conclusion:** every vector has a shipped defense and a
 named residual; the largest residual is the malicious-sealed-trunk
@@ -191,18 +190,18 @@ was found in this pass.
 
 ## 6. Whitepaper claim audit (what a hostile reader will check)
 
-| Claim in the paper | Backing | Risk |
-| --- | --- | --- |
-| "No new learning algorithm; parts old and named" | true and now fully attributed | low |
-| "Claim: the composed-codes architecture" | M341 + bus design + two sweeps | medium — absence claim, hedged |
-| "Payment follows measured work" | settlement code + tests | low (code), high (live economics) |
-| "Frozen, replayable, deterministic" | sealed tests, replay oracle | low |
-| "Fusion works, bridges optional" | M341 0.5479/0.5106 | low |
-| "Repair is not universal" | M344–M346 negatives published | low |
-| "Extraction costs 55× lifetime revenue" | M332 registered simulation | medium — model-dependent |
-| "Probe convicts 99.5% substitute at 0.958" | M305a sealed | low |
-| "No system combines the three" | two sweeps | medium — absence claim, hedged |
-| "The mechanism is a conjecture under test" | stated repeatedly | low |
+| Claim in the paper                               | Backing                        | Risk                              |
+| ------------------------------------------------ | ------------------------------ | --------------------------------- |
+| "No new learning algorithm; parts old and named" | true and now fully attributed  | low                               |
+| "Claim: the composed-codes architecture"         | M341 + bus design + two sweeps | medium — absence claim, hedged    |
+| "Payment follows measured work"                  | settlement code + tests        | low (code), high (live economics) |
+| "Frozen, replayable, deterministic"              | sealed tests, replay oracle    | low                               |
+| "Fusion works, bridges optional"                 | M341 0.5479/0.5106             | low                               |
+| "Repair is not universal"                        | M344–M346 negatives published  | low                               |
+| "Extraction costs 55× lifetime revenue"          | M332 registered simulation     | medium — model-dependent          |
+| "Probe convicts 99.5% substitute at 0.958"       | M305a sealed                   | low                               |
+| "No system combines the three"                   | two sweeps                     | medium — absence claim, hedged    |
+| "The mechanism is a conjecture under test"       | stated repeatedly              | low                               |
 
 ---
 

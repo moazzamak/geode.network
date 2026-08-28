@@ -550,6 +550,25 @@ Gate: the product cell publishes accuracy × coverage ≥ the
 full-coverage arm's raw accuracy on the same head (the H26-9
 inversion, now as a product claim).
 
+**Cell M348 (task-relation arithmetic, code-space v2).**
+Registered 28 Aug 2026, unsequenced — later milestone. The
+question: do the frozen code spaces support task-level analogy
+arithmetic, `code(finger → hand) ≈ code(foot → leg)`, i.e. is task
+relation recoverable as a linear offset over codes? The product
+form is a code-space v2 in which the task fingerprint carries a
+code-space embedding and relation queries (nearest task, task
+inversion, analogy) are served as measured, priced operations.
+Registered constraints: (a) the analogy probe battery is
+pre-registered before any measurement; (b) prior art is attributed
+at measurement time — analogy arithmetic over embeddings (Mikolov
+et al., 2013), task embedding via probe networks (task2vec,
+Achille et al., 2019); (c) a negative result — offsets do not hold
+in publisher code spaces — is a publishable honest negative, not a
+blocker; (d) nothing in routing or payment may depend on
+task-embedding similarity until M348 passes. Today the design has
+declared structural fingerprints only, and the paper claims no
+task-relation property.
+
 ---
 
 ## 3. Dependency graph and sequencing

@@ -633,8 +633,14 @@ Only capabilities that passed the axis's admission verdict are
 considered. A capability that pads its output pays for it here:
 bloat inflates the expected charge and lowers the ranking by
 exactly that factor. The discipline descends from
-mixture-of-experts routing~\cite{shazeer2017,fedus2022}. The
-learned gate is replaced by a public, replayable rule.
+mixture-of-experts routing~\cite{shazeer2017,fedus2022}.
+Replacing the learned gate with a fixed rule is itself
+established prior art: hash-based routing~\cite{roller2021} and
+COMET's fixed random projection with a winner-take-all
+cap~\cite{shaier2025} route without a trainable gate. What
+GEODE adds is that the fixed rule is public and replayable, and
+ranks independently registered frozen artifacts by measured
+quality per expected charge.
 \item The route is a weighted lottery over the top five, with
 weights equal to the ranking. It is not winner-take-all: every
 qualified capability in the top five keeps a share of traffic
@@ -2388,6 +2394,13 @@ They are not claims against published baselines.
 \item \textbf{Mixture of experts} --- many small specialist models
 plus a gate that picks which to use --- for specialist routing:
 Shazeer et al.~\cite{shazeer2017}, Fedus et al.~\cite{fedus2022}.
+\item \textbf{Fixed routing} --- routing without a trainable gate:
+Hash Layers, Roller et al.~\cite{roller2021}; COMET ---
+conditionally-overlapping experts induced by a fixed random
+projection and a winner-take-all cap --- Shaier et
+al.~\cite{shaier2025}. Both are training-time architectures inside
+a single network. Neither registers independent frozen artifacts,
+fits closed-form heads, or pays by measured use.
 \item \textbf{Classical image codes} --- fixed recipes that turn an
 image into a compact numeric descriptor: spatial pyramid matching,
 Lazebnik et al.~\cite{lazebnik2006}; Fisher vectors, Perronnin and
@@ -3019,6 +3032,18 @@ W.~Fedus, B.~Zoph, and N.~Shazeer.
 Switch transformers: scaling to trillion parameter models with
 simple and efficient sparsity.
 \emph{JMLR}, 2022.
+
+\bibitem{roller2021}
+S.~Roller, S.~Sukhbaatar, A.~Szlam, and J.~Weston.
+Hash layers for large sparse models.
+\emph{NeurIPS}, 2021.
+
+\bibitem{shaier2025}
+S.~Shaier, F.~Pereira, K.~von der Wense, L.~Hunter, and
+M.~Jones.
+More experts than galaxies: conditionally-overlapping experts
+with biologically-inspired fixed routing.
+\emph{ICLR}, 2025.
 
 \bibitem{lazebnik2006}
 S.~Lazebnik, C.~Schmid, and J.~Ponce.

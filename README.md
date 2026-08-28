@@ -14,11 +14,7 @@ GEODE claims no new learning algorithm — its parts are old and
 named. What it claims is the architecture: frozen representation
 artifacts composed by declaration on a versioned code bus, upgraded
 without invalidation, and paid by measured downstream use — the
-composed-codes architecture — plus the discipline: an economic
-mechanism whose incentive rules are registered before they are
-tested. Two registered prior-art sweeps found no system combining
-the three architectural elements; absence from a search is recorded
-as absence from that search, never as a first. The wager: collaboration
+composed-codes architecture. The wager: collaboration
 is the fastest path to advanced AI. Tasks break into smaller
 composable pieces that are cheaper to train and cheaper to run;
 competitors build on each other's work and share the rewards by

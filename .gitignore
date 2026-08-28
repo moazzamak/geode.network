@@ -94,3 +94,4 @@ archive/**/*.npz
 archive/**/*.onnx
 archive/**/*.onnx.data
 logs/results/**/features/*.npy
+logs/

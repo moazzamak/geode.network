@@ -174,7 +174,11 @@ was found in this pass.
 - **N4 (process, LOW, REGISTERED):** several neighbor citations
   (CoMET 2026, HadAgent, Token Inflation, opML, SVIP, Golden
   Grain, Dropbear) are absent from the litsearch cache — they were
-  verified directly today via arXiv. The two registered sweeps'
+  verified directly today via arXiv. CoMET was published 20 May
+  2026 — before the M341 clean cell (28 Aug 2026) — and was
+  located only during this publication audit; the paper no longer
+  describes the frozen-concatenation recipe as independently
+  discovered. The two registered sweeps'
   conclusions are unaffected (their claims concern the
   combination, which none of these papers has), but the cache gap
   is recorded so future sweeps re-run through the instrument.

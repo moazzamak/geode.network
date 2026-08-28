@@ -2,8 +2,8 @@
 (24 Aug 2026). Single source of truth for the Python side; the EVM
 contracts mirror these values (``infrastructure/evm/contracts/``).
 
-Registered rules (``analysis/WHITEPAPER_GEODE.tex``,
-``analysis/GEODE_ECONOMIC_DESIGN_v1.md``):
+Registered rules (``docs/WHITEPAPER_GEODE.tex``,
+``archive/research_2026-08-28/analysis/GEODE_ECONOMIC_DESIGN_v1.md``):
 
 - one registration form for arms and primitives: operator key +
   payout address (may differ) + price per unit of work + sealed

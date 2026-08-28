@@ -24,9 +24,9 @@ protection.
 
 **For further information**, read the whitepaper — the design, the
 measured results, and the honesty boundaries:
-[`analysis/WHITEPAPER_GEODE.pdf`](analysis/WHITEPAPER_GEODE.pdf)
+[`docs/WHITEPAPER_GEODE.pdf`](docs/WHITEPAPER_GEODE.pdf)
 (LaTeX source:
-[`analysis/WHITEPAPER_GEODE.tex`](analysis/WHITEPAPER_GEODE.tex)).
+[`docs/WHITEPAPER_GEODE.tex`](docs/WHITEPAPER_GEODE.tex)).
 
 ## The architecture in one idea
 
@@ -93,12 +93,12 @@ Then `python examples/hello_geode.py` (the five-minute tour) and the
 `archive/research_2026-08-28/docs/QUICKSTART.md`. The API is
 local-only by design.
 
-- **Whitepaper:** [`analysis/WHITEPAPER_GEODE.pdf`](analysis/WHITEPAPER_GEODE.pdf) — the
+- **Whitepaper:** [`docs/WHITEPAPER_GEODE.pdf`](docs/WHITEPAPER_GEODE.pdf) — the
   canonical whitepaper: the shipped system, the design decisions and
   why, the held-out measurements and metrics, the safety and
   economics, and the prior art — with every technical term explained
   at its first use. The LaTeX source ships beside it
-  ([`analysis/WHITEPAPER_GEODE.tex`](analysis/WHITEPAPER_GEODE.tex)).
+  ([`docs/WHITEPAPER_GEODE.tex`](docs/WHITEPAPER_GEODE.tex)).
   A plain-language markdown copy existed through 24 Aug 2026; it was
   deleted from the public release rather than maintained stale, and
   the .tex/.pdf pair is the single source of truth.
@@ -120,8 +120,8 @@ local-only by design.
 ## Repository map
 
 ```
-analysis/                 # the whitepaper (.tex + built PDF) and the
-                          #   sealed v25 execution log
+docs/                     # the canonical whitepaper (.tex + built PDF)
+analysis/                 # the sealed v25 execution log
 archive/                  # research-phase material superseded by the
   research_2026-08-28/    #   public release (plans, threat reviews,
                           #   sealed logs, tools, docs)

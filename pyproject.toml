@@ -7,7 +7,7 @@ name = "geode-ml"
 description = "GEODE: frozen encoders, closed-form fits, and a registry of measured task expertise — with a sealed, trustless governance layer."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Proprietary (research program; see the repository license terms)" }
+license = "AGPL-3.0-or-later"
 authors = [{ name = "The GEODE research program" }]
 keywords = ["machine-learning", "routing", "attribution", "governance", "audit"]
 classifiers = [

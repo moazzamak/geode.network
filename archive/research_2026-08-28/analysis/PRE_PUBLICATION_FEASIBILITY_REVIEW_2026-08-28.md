@@ -185,6 +185,16 @@ was found in this pass.
   code-space v2) registered as an unsequenced later milestone with
   pre-registered constraints; the whitepaper claims no
   task-relation property and should not until M348 measures one.
+- **N6 (licensing, DECIDED 28 Aug):** the public release ships
+  AGPL-3.0-or-later for the code (copy and deploy allowed; public
+  deployments of modified versions must release their
+  modifications) and CC-BY-4.0 for the whitepaper and docs. This
+  supersedes the archived per-file MIT/Apache note in the
+  publication plan and the previous "Proprietary" marker in
+  pyproject.toml. Publisher checkpoints are never redistributed.
+  Rationale: the copycat fork is exactly the deployment AGPL's
+  network clause covers, funneling modifications back to the
+  shared codebase instead of a closed fork.
 
 ---
 

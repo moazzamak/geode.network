@@ -178,6 +178,20 @@ on 17 Aug 2026).
 
 ---
 
+## License
+
+- **Code** (`geode/`, `src/`, `experiments/`, `infrastructure/`,
+  `tests/`): GNU Affero General Public License v3.0 or later
+  (`LICENSE`). Copying and deploying are permitted; anyone running
+  a modified version as a public service must publish their
+  modifications under the same license.
+- **Whitepaper and documentation**: Creative Commons Attribution
+  4.0 International (`LICENSE-DOCS`).
+- **Publisher checkpoints** are never redistributed; they are
+  pulled from their publishers under the publishers' own terms.
+
+---
+
 ## Where the research phase went
 
 The repository transitioned from research to development on 17 Aug

@@ -1793,8 +1793,8 @@ The
 contributor's revenue window sits inside the vesting
 promise wherever the table says yes. Colluding with a
 judge is
-no cheaper. Every sampled executor must be corrupted. A
-host--executor ring needs a corrupt fraction of the pool raised
+no cheaper. Every sampled executor must be corrupted. A host and
+its executor together need a corrupt fraction of the pool raised
 to the executor count, not a single fresh key.
 \paragraph{The cost.} The shadow probe is the contributor's
 ongoing honesty certificate. Admission sets the precedent: admission costs
@@ -3447,8 +3447,9 @@ These are the structural residuals, in order of severity:
           more private than the plaintext tier's, and adjudication is the
           same table: an unopened commitment or a mismatched evaluation is
           a deviation. The
-          remaining residual is executor--host collusion. It requires corrupting every sampled
-          executor of the same session. That is a corrupt fraction of the
+          remaining residual is collusion between an executor and a
+          host. It requires corrupting every sampled executor of the
+          same session. That is a corrupt fraction of the
           executor pool raised to the executor count. The executors' own
           slashable promises bound it further.
     \item \textbf{The reference executor sees the probed input in plaintext,}

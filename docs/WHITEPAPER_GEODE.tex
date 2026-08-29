@@ -219,9 +219,9 @@ of them.
           weights-private artifact there is no serving-time identity check
           beyond behavioural identity on a fixed probe set, and the
           residual is priced by the bond.
-    \item[Librarian.] The role that records credits, the one act
-          that still needs a named party. The settlement around it is not
-          privilege: anyone may incorporate an entry, post a root,
+    \item[Librarian.] This is the role that records credits, the one
+          act that still needs a named party. The settlement around it is
+          not a privilege: anyone may incorporate an entry, post a root,
           deliver a branch, claim, or resolve a challenged filing, and the
           reward follows the work. The librarian is an operator
           key, named at bootstrap by the developer's key and at maturity
@@ -306,8 +306,9 @@ throughout.
 The system's behavior follows from a small set of rules.
 
 \begin{description}
-    \item[Frozen.] Publisher checkpoints, fixed dictionaries, and
-          closed-form heads. No component changes at serve time.
+    \item[Frozen.] The system uses publisher checkpoints, fixed
+          dictionaries, and closed-form heads. No component changes at
+          serve time.
     \item[Exact where possible.] The task head is a closed-form ridge
           fit. Exactness removes the lottery of random-seed training runs.
     \item[Deterministic.] Routing is a deterministic function of the
@@ -551,7 +552,7 @@ user's consent.
 
 \subsection{The pipeline}
 
-Inside, one input walks one path. First, an input guard rejects
+Inside the network, one input walks one path. First, an input guard rejects
 inputs outside the known input space. Then the contract check
 runs. A frozen encoder turns the input into a code vector. A code
 vector is a compact numeric summary of the input. The closed-form
@@ -2744,7 +2745,7 @@ rules apply.
           epoch, governance votes run through a multi-party council of
           validators, recruited operators, and the registered bootstrap arm
           operator, never the developer alone. The council's weight is
-          not stake, and it cannot route fund money to itself. It sunsets
+          not staked, and it cannot route fund money to itself. It sunsets
           by timelock into the earned-weight quorum.
     \item \textbf{No pre-mine.} Voting weight accrues only from
           verified work, from epoch zero. The developer, the council, and

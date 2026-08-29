@@ -2197,34 +2197,44 @@ $0.975\,g$ to attribution.
           public-good research. It is the wash-trade tax: trading with
           yourself to fake activity returns less than it costs.
     \item \textbf{97.5\% to attribution.} The remainder is credited
-          to the contributors whose measured work served the session. For a
-          single-artifact session the credit is whole. For a chain, a
-          session served by a registered multi-stage artifact, the
-          attribution pool divides by the Shapley value of each stage:
-          the coalition value of a subset of stages is the chain's measured
-          end-to-end score with the stages outside the subset replaced by
-          the identity (pass-through) stage, and a stage that hurts the
-          chain earns zero, never a subsidy. The split always sums to one
-          over the paid stages. It is released gradually.
+          to the contributors whose measured work served the session. A
+          session that used a single artifact credits that artifact
+          wholly. A chain session must divide the pool among its stages,
+          and the protocol uses one rule for every such division: the
+          Shapley value~\cite{shapley1953}, the standard fair way to
+          split a reward among the members who jointly produced it. The
+          rule works on subsets. A subset of stages has a
+          \emph{coalition value}: the chain's measured end-to-end score
+          with every stage outside the subset replaced by the identity
+          (pass-through) stage, so the value is what the subset alone
+          achieves. A stage's share is its average marginal
+          contribution, the average gain in coalition value from adding
+          that stage across all subsets. A stage that never improves a
+          subset's value earns zero, never a subsidy. The shares of the
+          paid stages always sum to the whole pool. The credit then
+          releases gradually.
 \end{itemize}
 
 \textbf{Shapley is the protocol's single attribution rule.} It
-binds here, and it binds for representation artifacts
-(Section~\ref{sec:library}). The distinction matters in money, not only in
-notation: on the measured two-stage chain of
-Section~\ref{sec:measured}, Shapley and leave-one-out divide the
-\emph{same} four coalition values into shares that differ by a
-factor of $1.66$ for the routing stage. Naming two rules would
-mean owing two amounts.
+applies to chains here and to representation artifacts
+(Section~\ref{sec:library}). The choice is not cosmetic: on the
+measured two-stage chain of Section~\ref{sec:measured}, Shapley
+and the simpler leave-one-out rule look at the \emph{same} four
+coalition values but weight them differently, and the two rules
+give the routing stage shares that differ by a factor of $1.66$.
+A protocol that named two rules would owe a session two different
+amounts.
 
-Shapley's cost is what caps chain length. A chain of $m$ stages
-needs $2^m$ end-to-end coalition evaluations, so the values are
-not computed per session. They are computed once per registered
-chain against its sealed reference workload, published with the
-chain, and reused by every session that chain serves until it
-re-registers. Chain length is capped at four stages, which is
-sixteen evaluations, an amount that a validator can replay. A chain
-longer than four is not admissible.
+\textbf{Shapley's cost is what caps chain length.} A chain of $m$
+stages has $2^m$ subsets, and every subset needs its own end-to-end
+score, so the number of scores doubles with each added stage. The
+protocol therefore does not compute these scores per session. It
+computes them once when a chain is registered, against the chain's
+sealed reference workload, publishes them with the chain, and
+reuses them for every session the chain serves until the chain
+re-registers. Chain length is capped at four stages, which means
+sixteen scores, a number a validator can replay. A chain longer
+than four stages is not admissible.
 
 The credited amounts release under fixed mechanics:
 

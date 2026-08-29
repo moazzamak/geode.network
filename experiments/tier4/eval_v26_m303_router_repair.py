@@ -54,6 +54,10 @@ DEFAULT_CONFIG = (REPO_ROOT / "experiments" / "configs" / "v26"
 DEFAULT_OUTPUT = REPO_ROOT / "logs" / "results" / "v26" / "m303_router_repair"
 
 FP = [1.0, 0.0]
+# M388: the draw is seeded from the randomness beacon (which closes
+# after declaration) ordered by the epoch anchor. The anchor is
+# per-epoch; traffic-spreading runs vary the beacon round.
+EPOCH_ANCHOR = "epoch-0x8f3a"
 
 
 def _arm(arm_id: str, acc: float, price: float,
@@ -68,7 +72,8 @@ def _arm(arm_id: str, acc: float, price: float,
 def _share(router: RepairedRouter, n: int) -> dict[str, float]:
     counts: dict[str, int] = {}
     for i in range(n):
-        out = router.route(FP, anchor=f"anchor-{i}")
+        out = router.route(FP, beacon=f"round-{i}",
+                           anchor=EPOCH_ANCHOR)
         if not out:
             continue
         winner = out[0]["arm_id"]
@@ -162,9 +167,9 @@ def run_m303(config_path: Path, output_dir: Path) -> dict[str, Any]:
     router = RepairedRouter(price_floor=floor)
     router.add_arm(_arm("a", 0.60, 1.0))
     router.add_arm(_arm("b", 0.60, 1.0))
-    first = router.route(FP, anchor="anchor-1")
-    second = router.route(FP, anchor="anchor-1")
-    other = router.route(FP, anchor="anchor-2")
+    first = router.route(FP, beacon="round-1", anchor="anchor-1")
+    second = router.route(FP, beacon="round-1", anchor="anchor-1")
+    other = router.route(FP, beacon="round-1", anchor="anchor-2")
     c4 = {"same_anchor_same_winner": first[0]["arm_id"] == second[0]["arm_id"],
           "same_anchor_same_seed": first[0]["draw_seed"]
           == second[0]["draw_seed"],

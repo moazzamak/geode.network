@@ -17,6 +17,12 @@ from geode.core.router_repair import (
     rank_score,
 )
 
+# M388: the draw is seeded from the randomness beacon (closed after
+# declaration) ordered by the epoch anchor. A fixed epoch anchor is
+# the protocol's cadence; spread-traffic tests vary the beacon round.
+BEACON = "beacon-round-0x3f"
+EPOCH_ANCHOR = "epoch-0x8f3a"
+
 
 def _arm(arm_id: str, acc: float, price: float, ubar: float | None = None,
          healthy: bool = True) -> dict:
@@ -57,7 +63,7 @@ class TestPriceFloor(unittest.TestCase):
         # an arm admitted elsewhere (or pre-repair) below the floor is
         # excluded at route time, never selected
         router._arms["stale"] = _arm("stale", 0.999, 0.001)
-        out = router.route([1.0, 0.0], anchor="a1")
+        out = router.route([1.0, 0.0], beacon=BEACON, anchor="a1")
         self.assertEqual([r["arm_id"] for r in out], ["floor_ok"])
 
     def test_zero_price_impossible_downstream(self):
@@ -72,17 +78,31 @@ class TestLottery(unittest.TestCase):
         router = RepairedRouter(price_floor=1.0)
         router.add_arm(_arm("a", 0.60, 1.0))
         router.add_arm(_arm("b", 0.60, 1.0))
-        first = router.route([1.0, 0.0], anchor="epoch-7")
-        second = router.route([1.0, 0.0], anchor="epoch-7")
+        first = router.route([1.0, 0.0], beacon=BEACON, anchor="epoch-7")
+        second = router.route([1.0, 0.0], beacon=BEACON, anchor="epoch-7")
         self.assertEqual([r["arm_id"] for r in first],
                          [r["arm_id"] for r in second])
         self.assertEqual(first[0]["draw_seed"], second[0]["draw_seed"])
+
+    def test_beacon_dependence(self):
+        # M388: the same anchor and session under different beacon
+        # rounds take different draws — the closure that makes the
+        # seed unknowable at declaration time.
+        router = RepairedRouter(price_floor=1.0)
+        router.add_arm(_arm("a", 0.60, 1.0))
+        router.add_arm(_arm("b", 0.60, 1.0))
+        winners = {router.route([1.0, 0.0], beacon=f"round-{i}",
+                                anchor=EPOCH_ANCHOR)[0]["arm_id"]
+                   for i in range(40)}
+        self.assertEqual(winners, {"a", "b"},
+                         "the beacon round must move the draw")
 
     def test_anchor_dependence_on_ties(self):
         router = RepairedRouter(price_floor=1.0)
         router.add_arm(_arm("a", 0.60, 1.0))
         router.add_arm(_arm("b", 0.60, 1.0))
-        winners = {router.route([1.0, 0.0], anchor=f"epoch-{i}")[0]["arm_id"]
+        winners = {router.route([1.0, 0.0], beacon=BEACON,
+                                anchor=f"epoch-{i}")[0]["arm_id"]
                    for i in range(40)}
         self.assertEqual(winners, {"a", "b"},
                          "a tie must produce anchor-dependent winners")
@@ -94,7 +114,8 @@ class TestLottery(unittest.TestCase):
         shares: dict[str, int] = {"top": 0, "mid": 0}
         n = 2000
         for i in range(n):
-            winner = router.route([1.0, 0.0], anchor=f"epoch-{i}")[0]
+            winner = router.route([1.0, 0.0], beacon=f"round-{i}",
+                                  anchor=EPOCH_ANCHOR)[0]
             shares[winner["arm_id"]] += 1
         self.assertLess(shares["top"], n, "winner-take-all must be gone")
         self.assertGreater(shares["mid"], 0, "the pool must win sometimes")
@@ -110,7 +131,8 @@ class TestLottery(unittest.TestCase):
         shares = {"lean": 0, "bloated": 0}
         n = 2000
         for i in range(n):
-            winner = router.route([1.0, 0.0], anchor=f"epoch-{i}")[0]
+            winner = router.route([1.0, 0.0], beacon=f"round-{i}",
+                                  anchor=EPOCH_ANCHOR)[0]
             shares[winner["arm_id"]] += 1
         # scores: lean .60, bloated .12 -> bloated share ~1/6 of lean's;
         # the registered test threshold is a 2x margin, far below the
@@ -124,7 +146,8 @@ class TestLottery(unittest.TestCase):
         shares = {"better": 0, "worse": 0}
         n = 2000
         for i in range(n):
-            winner = router.route([1.0, 0.0], anchor=f"epoch-{i}")[0]
+            winner = router.route([1.0, 0.0], beacon=f"round-{i}",
+                                  anchor=EPOCH_ANCHOR)[0]
             shares[winner["arm_id"]] += 1
         self.assertGreater(shares["better"], shares["worse"])
 
@@ -136,9 +159,11 @@ class TestTieBreak(unittest.TestCase):
         router.add_arm(_arm("a", 0.60, 1.0))
         router.add_arm(_arm("b", 0.60, 1.0))
         first_ids = [r["arm_id"] for r in
-                     router.route([1.0, 0.0], anchor="epoch-1")]
+                     router.route([1.0, 0.0], beacon=BEACON,
+                                  anchor="epoch-1")]
         second_ids = [r["arm_id"] for r in
-                      router.route([1.0, 0.0], anchor="epoch-2")]
+                      router.route([1.0, 0.0], beacon=BEACON,
+                                   anchor="epoch-2")]
         # the pool order (excluding the winner flag) is the tie-break
         # order; anchors may or may not flip it - the claim under test
         # is only that it is deterministic and anchor-derived

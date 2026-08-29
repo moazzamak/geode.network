@@ -3218,7 +3218,7 @@ All three leftovers are closed, each through its own gate.
    none is supplied). The review's "replacement() fires and names
    nobody" is closed.
 3. **The governance path is timelocked.** `REPLACEMENT_DELAY =
-   7 days` (matching `GovernanceFloors.MIN_DELAY`) on every
+7 days` (matching `GovernanceFloors.MIN_DELAY`) on every
    replacement and succession; execution before the delay reverts.
 
 Gates, all green: 10 new EVM tests (`librarian_governance.test.js`),
@@ -3237,7 +3237,7 @@ timelocked path (a captured proposer cannot swap with no notice) is
 right. Chosen: timelocked, 7 days. The instant path is the worse
 failure — a replacement is the most powerful action the network can
 take, and a slow-but-visible one lets the network see and respond
-during the window. A captured *librarian* does not lose by this: the
+during the window. A captured _librarian_ does not lose by this: the
 librarian cannot use the governance path at all (it is not the
 governance executor), and its replacement runs on the recorded-reason
 vote as before.

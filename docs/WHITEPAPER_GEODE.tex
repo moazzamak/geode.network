@@ -217,9 +217,10 @@ weights-private artifact there is no serving-time identity check
 beyond behavioural identity on a fixed probe set, and the
 residual is priced by the bond.
 \item[Librarian.] The single role that appends ledger entries and
-executes deterministic registry updates. It is an operator key
-during bootstrap. At maturity it is a governance contract with no
-human key.
+executes deterministic registry updates. It is an operator key,
+named at bootstrap by the developer's key and at maturity by the
+governance executor --- a keyless contract with no human key that
+holds that one power and no other.
 \item[Developer.] The operator of the bootstrap. It holds the
 librarian key initially. It ships the bootstrap arms at 80--90\%
 of capability and earns hosting fees only. Then it retires per
@@ -853,8 +854,9 @@ contents and the seal of the link before it. Change the content
 and the hash changes. No record can be altered without breaking
 the chain.
 \item \textbf{The librarian.} One role appends entries. It is an
-operator key during bootstrap. At maturity it is a governance
-contract with no human key. The role does not rotate on a
+operator key, named at bootstrap by the developer's key and at
+maturity by the governance executor --- a keyless contract with
+no human key. The role does not rotate on a
 schedule and posts no stake --- replacement is its whole
 discipline, which is why the next two rules carry the weight they
 do.
@@ -910,7 +912,8 @@ earn --- it watches its income move to whoever covered for it, one
 entry at a time, with no vote and no penalty ruling in the path.
 The fee rises with the square of a sender's posts in one epoch past
 a small free allowance: posting a thousand entries costs about
-three hundred thousand times what a flat fee would charge, which is
+three hundred and thirty thousand times what a flat fee would
+charge, which is
 what stops a queue nobody can clear from being bought with gas
 alone. A poster that clears its own entry before the deadline does
 not get the fee back, or posting would be free again and that price
@@ -1010,8 +1013,8 @@ times. Granting a hypothetical implementation ten times faster
 than the one measured moves that to twenty thousand, which changes
 nothing about the placement. The $O(\log n)$ size claim holds and
 is a size claim only: proofs stay between 1.1 and 1.7 KB across a
-four-hundred-fold range in $n$. No cost claim appears anywhere in
-this paper that is not in this table.
+four-hundred-fold range in $n$. No claim about the cost of these
+proofs appears anywhere in this paper that is not in this table.
 
 Two placements follow.
 \begin{itemize}
@@ -1092,7 +1095,8 @@ word-error rate.
 \item \textbf{Privacy tier}: \texttt{plaintext},
 \texttt{device\_encoder}, or \texttt{private}. The tier is part of
 the axis identity, not a preference: arms compete only within a
-tier and a cross-tier route is refused. See §Serving verification.
+tier and a cross-tier route is refused. See
+Section~\ref{sec:serving}.
 \item \textbf{Declared label set} (classification only): the
 classes the buyer cares about. The axis metric is computed
 restricted to this set, and an arm that does not cover it is not
@@ -1485,7 +1489,7 @@ invalid outright. Diverging copies are ignored. A divergence is a
 recorded reason to replace the librarian.
 \end{itemize}
 
-\subsection{Serving verification}
+\subsection{Serving verification}\label{sec:serving}
 
 \textbf{Private serving.} The privacy-critical serving
 path is fully homomorphic evaluation of the closed-form head.
@@ -1520,8 +1524,8 @@ only an encrypted (label, bucket) pair leaves the host --- was
 measured and is not within reach of the registered scheme. The
 comparison circuit is many levels deeper than the depth-one head,
 and the measured private-query cost, extrapolated to the vision
-axis's class count, is about five hundred seconds against a
-hundred-second bound --- five times the head-only figure, not
+axis's class count, is about five hundred seconds against the
+hundred-second bound (five times the head-only figure) --- not
 within the registered five-times tolerance. The private tier
 therefore returns the full score vector to the device, and that
 vector is a strictly stronger oracle than the raw margin: $d\cdot
@@ -1861,10 +1865,11 @@ Each leaf states a running total rather than an increment, so
 presenting the same branch twice pays once.
 
 A librarian that publishes nothing still halts that epoch's
-income, so any party may publish the commitment under a bond,
-with a challenge decided by the same replay quorum that decides
-guilt elsewhere. A stalled librarian cannot freeze the epoch's
-payments entirely.
+income. The halt is the librarian's own recorded divergence: an
+absent root is visible on chain and in the liveness statistics,
+and the recorded-reason replacement discipline is the remedy ---
+a librarian that stops posting roots is not merely failing, it
+is recording the reason it gets replaced.
 
 \section{Programmable primitives}
 
@@ -3657,10 +3662,11 @@ a measurement, not a warranty.
 \begin{enumerate}
 \item The serving host commits $H(\text{answer})$ before it
 learns whether the session is probed.
-\item The gateway reveals the probe flag, drawn from the epoch
-anchor. It samples $k_e=2$ reference executors from the
-artifact's eligible pool. The sample is a hash of the anchor, the
-session, and the host's own commit.
+\item The gateway reveals the probe flag, drawn from the
+randomness beacon, ordered by the epoch anchor. It samples
+$k_e=2$ reference executors from the
+artifact's eligible pool. The sample is a hash of the
+randomness-beacon round, the session, and the host's own commit.
 \item Each executor re-runs the sealed artifact on the session's
 input. Each commits its reference answer, covering the input's
 hash. The answers are compared.
@@ -3707,8 +3713,8 @@ session.
 Three attempts, all closed by ordering rather than secrecy.
 \begin{itemize}
 \item \emph{Compute the probed set in advance} from the public
-anchor. Closed: the probe flag is revealed only after the host's
-answer is committed.
+randomness. Closed: the probe flag is revealed only after the
+host's answer is committed.
 \item \emph{Fingerprint the reference path} and cheat
 selectively. Closed: even a fingerprint arrives too late. The
 committed answer is already bound. The reference compares against

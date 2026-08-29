@@ -37,6 +37,9 @@ from geode.hashing import payload_hash
 FP = [1.0, 0.0]
 N_SESSIONS = 4000
 EPOCH_ANCHOR = "epoch-0x8f3a"       # one anchor for the whole epoch
+# M388: the draw is seeded from the randomness beacon, which closes
+# after the session is declared, ordered by the epoch anchor.
+EPOCH_BEACON = "beacon-round-0x3f"
 PRICE_FLOOR = 1.0
 
 
@@ -49,13 +52,15 @@ def _arm(arm_id: str, acc: float, price: float,
     return spec
 
 
-def repaired_seed(anchor: str, task_id: str, state_root: str,
-                  fp: list[float], session_id: str) -> str:
-    """G16's proposed repair: the session identifier joins the seed.
-    Assigned at declaration and recorded in the ledger, so the route
-    still replays exactly."""
-    return payload_hash({"anchor": anchor, "task": task_id,
-                         "state_root": state_root,
+def repaired_seed(beacon: str, anchor: str, task_id: str,
+                  state_root: str, fp: list[float],
+                  session_id: str) -> str:
+    """The final seed: H(beacon, anchor, task, registry state root,
+    fp, session id). The session identifier joins the seed (G16); the
+    beacon closes after declaration so the draw is not grindable
+    against the public anchor (M388)."""
+    return payload_hash({"beacon": beacon, "anchor": anchor,
+                         "task": task_id, "state_root": state_root,
                          "fingerprint": [float(v) for v in fp],
                          "session": str(session_id)})
 
@@ -63,7 +68,8 @@ def repaired_seed(anchor: str, task_id: str, state_root: str,
 def _draw(router: RepairedRouter, seed: str) -> str:
     """One draw from the top-k pool under an externally supplied
     seed, using the router's own ranking."""
-    pool = router.route(FP, anchor=EPOCH_ANCHOR)
+    pool = router.route(FP, beacon=EPOCH_BEACON,
+                        anchor=EPOCH_ANCHOR)
     ranked = sorted(pool, key=lambda r: r["share_rank"])
     weights = [r["rank_score"] for r in ranked]
     pick = random.Random(seed).choices(range(len(ranked)),
@@ -81,12 +87,15 @@ def _shares(router: RepairedRouter, mode: str,
     state = router.state_root()
     for i in range(n):
         if mode == "published":
-            winner = router.route(FP, anchor=f"anchor-{i}")[0]["arm_id"]
+            winner = router.route(FP, beacon=EPOCH_BEACON,
+                                  anchor=f"anchor-{i}")[0]["arm_id"]
         elif mode == "protocol":
-            winner = router.route(FP, anchor=EPOCH_ANCHOR)[0]["arm_id"]
+            winner = router.route(FP, beacon=EPOCH_BEACON,
+                                  anchor=EPOCH_ANCHOR)[0]["arm_id"]
         elif mode == "repaired":
             winner = _draw(router, repaired_seed(
-                EPOCH_ANCHOR, "default", state, FP, f"session-{i}"))
+                EPOCH_BEACON, EPOCH_ANCHOR, "default", state, FP,
+                f"session-{i}"))
         else:
             raise ValueError(mode)
         counts[winner] = counts.get(winner, 0) + 1
@@ -178,11 +187,12 @@ def main() -> int:
     # registered fields, which move the ranking rather than the draw.
     router = _three_arm()
     state = router.state_root()
-    host_lever = draw_seed(EPOCH_ANCHOR, "default", state, FP)
+    host_lever = draw_seed(EPOCH_BEACON, EPOCH_ANCHOR, "default",
+                           state, FP)
     router2 = _three_arm()
     router2.add_arm(_arm("newcomer", 0.10, 9.0))
-    host_lever_after = draw_seed(EPOCH_ANCHOR, "default",
-                                 router2.state_root(), FP)
+    host_lever_after = draw_seed(EPOCH_BEACON, EPOCH_ANCHOR,
+                                 "default", router2.state_root(), FP)
 
     # A payer does own its session ids, and within an epoch the
     # anchor is known, so it can resubmit until a preferred arm
@@ -191,7 +201,7 @@ def main() -> int:
     for trial in range(200):
         n = 1
         while _draw(router, repaired_seed(
-                EPOCH_ANCHOR, "default", state, FP,
+                EPOCH_BEACON, EPOCH_ANCHOR, "default", state, FP,
                 f"grind-{trial}-{n}")) != "follower2":
             n += 1
             if n > 500:
@@ -214,15 +224,19 @@ def main() -> int:
             "least_favoured_arm_share":
                 round(results["three_arm_leader"]["repaired"]
                       ["follower2"], 4),
-            "reading": "a payer DOES own its session ids and the "
-                       "epoch anchor is public, so it can resubmit "
-                       "until a preferred arm wins. Each attempt "
-                       "costs a declaration fee, and the payer can "
-                       "already express arm preference through "
-                       "best-quality mode, so this buys little -- "
-                       "but it is a real residual, not a closed "
-                       "hole, and the beacon (not the anchor) "
-                       "should seed the draw to close it.",
+            "reading": "this loop measures the KNOWN-SEED "
+                       "counterfactual: with the seed value fixed and "
+                       "public, a payer that owns its session ids can "
+                       "resubmit until a preferred arm wins. M388 "
+                       "closes that in the protocol by seeding the "
+                       "draw from the randomness beacon, whose output "
+                       "for a round closes AFTER the session is "
+                       "declared — a payer cannot know the seed when "
+                       "choosing a session id, so each forcing "
+                       "attempt crosses a round and cannot be "
+                       "steered. The paper reports the 3.1 figure as "
+                       "the measured anchor-seeded counterfactual and "
+                       "the beacon as the deployed closure.",
         },
     }
 

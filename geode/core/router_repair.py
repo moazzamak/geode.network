@@ -25,9 +25,10 @@ Registered selection semantics (written before any measurement):
 - **Top-k lottery (R-A3c).** The qualified arms are ranked by score;
   the route is drawn from the top ``k`` (registered default 5) with
   weights equal to the score. The draw is seeded from
-  ``H(anchor, task, registry state root, fingerprint, session id)`` -
-  deterministic and replayable per session, unknowable in advance, and
-  no host owns the axis. The winner is returned first; the remaining
+  ``H(beacon, anchor, task, registry state root, fingerprint,
+  session id)`` - deterministic and replayable per session,
+  unknowable in advance, and no host owns the axis. The winner is
+  returned first; the remaining
   pool is the warm failover chain in rank order.
 
   The session identifier was added by M354 (28 Aug 2026). Without it
@@ -35,6 +36,17 @@ Registered selection semantics (written before any measurement):
   the lottery measured as winner-take-all: 1.000 to a single arm in
   all three registered scenarios. See
   ``analysis/m354_route_lottery_entropy.json``.
+
+  The beacon was added by M388 (29 Aug 2026, the M382/R3 closure of
+  the route-grinding residual). The anchor is public within an
+  epoch, so a payer who controls its own session id could grind
+  against a known seed (measured at 3.1 declarations in M354). The
+  beacon output for the round closes AFTER the session is declared,
+  so no payer can predict the draw when choosing a session id; the
+  anchor is retained for ordering rounds within the epoch. The paper
+  (router, ledger sampling list, Known Limits) requires every sample
+  including the routing draw to derive from the beacon - this is
+  that requirement made code.
 - **Anchor-seeded tie-break (R-A3b).** Rank ties resolve by
   ``H(artifact_id, anchor)``, never by the artifact hash alone.
 """
@@ -65,15 +77,23 @@ def tie_key(artifact_id: str, anchor: str) -> str:
                          "anchor": str(anchor)})
 
 
-def draw_seed(anchor: str, task_id: str, state_root: str,
+def draw_seed(beacon: str, anchor: str, task_id: str, state_root: str,
               fp: Sequence[float], session_id: str = "") -> str:
-    """The lottery seed: H(anchor, task, registry state root, fp,
-    session id). The anchor producer does not control the beacon
-    (M311), so nobody can grind the draw. The session id supplies the
-    per-session entropy the other four fields cannot: they are all
-    constant within an epoch for a given task (M354).
+    """The lottery seed: H(beacon, anchor, task, registry state root,
+    fp, session id).
+
+    M388 (M382/R3): the beacon is the primary source - the same
+    composed source every other sample in the protocol derives from
+    (M371). Its output for a round closes AFTER the session is
+    declared, so no payer can predict the draw when choosing a
+    session id (the anchor is public within an epoch, which is what
+    made the pre-beacon seed grindable at 3.1 declarations, M354).
+    The anchor is retained for ordering rounds within the epoch. The
+    session id supplies the per-session entropy the other fields
+    cannot (M354).
     """
-    return payload_hash({"anchor": str(anchor), "task": str(task_id),
+    return payload_hash({"beacon": str(beacon), "anchor": str(anchor),
+                         "task": str(task_id),
                          "state_root": str(state_root),
                          "fingerprint": [float(v) for v in fp],
                          "session": str(session_id)})
@@ -123,7 +143,7 @@ class RepairedRouter:
                  for k, v in sorted(self._arms.items())}
         return payload_hash(state)
 
-    def route(self, fp: Sequence[float], anchor: str,
+    def route(self, fp: Sequence[float], beacon: str, anchor: str,
               task_id: str = "default",
               session_id: str = "") -> list[dict[str, Any]]:
         """One draw from the top-k lottery. Returns [winner, pool...]
@@ -132,6 +152,9 @@ class RepairedRouter:
         ``share_rank``, ``unmeasured_units``, and the draw's seed and
         winner flag.
 
+        ``beacon`` is the randomness-beacon output for the round that
+        closes after the session is declared (M388) — required, so
+        the seed is not grindable against the public anchor.
         ``session_id`` is assigned at declaration and recorded in the
         ledger, so the route still replays exactly.
         """
@@ -154,7 +177,7 @@ class RepairedRouter:
         # score desc; anchor-seeded tie-break asc on exact ties
         scored.sort(key=lambda t: (-t[0], t[1]))
         pool = scored[:self.top_k]
-        seed = draw_seed(anchor, task_id, self.state_root(), fp,
+        seed = draw_seed(beacon, anchor, task_id, self.state_root(), fp,
                          session_id)
         rng = random.Random(seed)
         weights = [entry[0] for entry in pool]

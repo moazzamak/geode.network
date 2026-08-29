@@ -14,6 +14,9 @@ from geode.core.router_repair import RepairedRouter, draw_seed
 
 FP = [1.0, 0.0]
 EPOCH_ANCHOR = "epoch-0x8f3a"
+# M388: the draw is seeded from the randomness beacon (which closes
+# after declaration) ordered by the epoch anchor.
+BEACON = "beacon-round-0x3f"
 
 
 def _router() -> RepairedRouter:
@@ -30,7 +33,8 @@ class TestWithoutSessionEntropy(unittest.TestCase):
 
     def test_fixed_epoch_anchor_is_winner_take_all(self) -> None:
         router = _router()
-        winners = {router.route(FP, anchor=EPOCH_ANCHOR)[0]["arm_id"]
+        winners = {router.route(FP, beacon=BEACON,
+                                anchor=EPOCH_ANCHOR)[0]["arm_id"]
                    for _ in range(200)}
         self.assertEqual(len(winners), 1)
 
@@ -42,7 +46,8 @@ class TestSessionEntropy(unittest.TestCase):
         counts: dict[str, int] = {}
         n = 3000
         for i in range(n):
-            winner = router.route(FP, anchor=EPOCH_ANCHOR,
+            winner = router.route(FP, beacon=BEACON,
+                                  anchor=EPOCH_ANCHOR,
                                   session_id=f"session-{i}")[0]["arm_id"]
             counts[winner] = counts.get(winner, 0) + 1
         self.assertEqual(len(counts), 3)
@@ -52,9 +57,9 @@ class TestSessionEntropy(unittest.TestCase):
 
     def test_the_same_session_replays_exactly(self) -> None:
         router = _router()
-        first = router.route(FP, anchor=EPOCH_ANCHOR,
+        first = router.route(FP, beacon=BEACON, anchor=EPOCH_ANCHOR,
                              session_id="session-7")
-        again = router.route(FP, anchor=EPOCH_ANCHOR,
+        again = router.route(FP, beacon=BEACON, anchor=EPOCH_ANCHOR,
                              session_id="session-7")
         self.assertEqual(first[0]["arm_id"], again[0]["arm_id"])
         self.assertEqual(first[0]["draw_seed"], again[0]["draw_seed"])
@@ -62,16 +67,29 @@ class TestSessionEntropy(unittest.TestCase):
     def test_distinct_sessions_take_distinct_seeds(self) -> None:
         state = _router().state_root()
         self.assertNotEqual(
-            draw_seed(EPOCH_ANCHOR, "t", state, FP, "session-1"),
-            draw_seed(EPOCH_ANCHOR, "t", state, FP, "session-2"))
+            draw_seed(BEACON, EPOCH_ANCHOR, "t", state, FP, "session-1"),
+            draw_seed(BEACON, EPOCH_ANCHOR, "t", state, FP, "session-2"))
+
+    def test_distinct_beacon_rounds_take_distinct_seeds(self) -> None:
+        # M388: the same session and anchor under different beacon
+        # rounds take different seeds — the closure that makes the
+        # draw unknowable at declaration time.
+        state = _router().state_root()
+        self.assertNotEqual(
+            draw_seed("round-1", EPOCH_ANCHOR, "t", state, FP,
+                      "session-1"),
+            draw_seed("round-2", EPOCH_ANCHOR, "t", state, FP,
+                      "session-1"))
 
     def test_seed_carries_no_arm_identifier(self) -> None:
         """A host must not be able to bias its own draw."""
         state = _router().state_root()
-        seed = draw_seed(EPOCH_ANCHOR, "t", state, FP, "session-1")
+        seed = draw_seed(BEACON, EPOCH_ANCHOR, "t", state, FP,
+                         "session-1")
         self.assertNotIn("leader", seed)
         self.assertEqual(
-            seed, draw_seed(EPOCH_ANCHOR, "t", state, FP, "session-1"))
+            seed, draw_seed(BEACON, EPOCH_ANCHOR, "t", state, FP,
+                            "session-1"))
 
 
 if __name__ == "__main__":

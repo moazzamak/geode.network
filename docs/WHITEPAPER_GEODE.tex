@@ -382,23 +382,27 @@ loses to raw concatenation ($0.511$). Concatenation on the code
 manifest is the load-bearing fusion form; alignment bridges are
 optional, measured per pair. Both outcomes are published.
 
-\item \textbf{Composition (b): chaining.} Models can be linked into
-chains, one stage's output feeding the next, serving more complex
-tasks without significant accuracy degradation. A chain
+\item \textbf{Composition (b): chaining.} The core concept is a
+pipeline: capabilities link so that one stage's output becomes the
+next stage's input, and the linked stages together serve a task
+none of them serves alone --- transcribe the recording, then read
+the intent out of the transcript. A chain
 $g \circ h$ is admissible exactly when the output contract of $h$
 satisfies the input contract of $g$, written
 $C_{\mathrm{out}}(h) \subseteq C_{\mathrm{in}}(g)$ --- the outputs
-of the first stage must be valid inputs for the second.
+of the first stage must be valid inputs for the second. Chaining
+is a different claim from fusion, with different failure modes:
+concatenating blocks into one head tests neither the contract
+check nor the error a first stage hands to a second.
 
-This is a different claim from (a), with different failure modes.
-Fusion evidence does not support it: concatenating blocks into one
-head tests neither the contract check nor the error a first stage
-hands to a second. One chain is measured end to end
-(Section~\ref{sec:measured}): a domain router feeding six
-per-domain specialists on the sealed DomainNet selection. The
-chain reaches $0.2741$ against $0.2450$ for the monolithic head
-that is the strongest single stage. The scope of that test is
-narrow: one chain, of length
+The form is tested end to end (Section~\ref{sec:measured}): a
+domain router feeding six per-domain specialists on the sealed
+DomainNet selection. The chain reaches $0.2741$ against $0.2450$
+for the monolithic head that is the strongest single stage, and
+$0.2995$ when the router is handed the true domain --- routing
+error costs part of what specialisation earns.
+
+The tested scope is narrow: one chain, of length
 two, where both stages read the same frozen features. Chains of
 length three and above, and chains that cross modalities, remain
 unmeasured. Where composition does not hold, an arm can be a large

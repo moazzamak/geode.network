@@ -220,10 +220,11 @@ residual is priced by the bond.
 replay quorum's verdicts, the two acts that still need a named
 party. The settlement around them is not a privilege: anyone may
 incorporate an entry, post a root, deliver a branch, or claim,
-and the reward follows the work. It is an operator key, named at
-bootstrap by the developer's key and at maturity by the
-governance executor, a keyless contract with no human key that
-holds that one power and no other.
+and the reward follows the work. The librarian is an operator
+key, named at bootstrap by the developer's key and at maturity
+by the governance executor. The governance executor is a
+separate keyless contract with no human key; it holds that one
+power, naming and replacing the librarian, and no other.
 \item[Developer.] The operator of the bootstrap. It holds the
 librarian key initially. It ships the bootstrap arms at 80--90\%
 of capability and earns hosting fees only. Then it retires per
@@ -878,10 +879,10 @@ root posting, branch delivery, and claims are all permissionless,
 and the reward follows the work. What is left to the role is
 writing the credits a session's evidence supports and filing the
 replay quorum's verdicts, which need an on-chain authenticator
-the network does not yet carry. It is an operator key, named at
-bootstrap by the developer's key and at maturity by the
-governance executor, a keyless contract with
-no human key. The role does not rotate on a
+the network does not yet carry. The librarian is an operator key,
+named at bootstrap by the developer's key and at maturity by the
+governance executor. The governance executor is a separate
+keyless contract with no human key. The role does not rotate on a
 schedule and posts no stake; replacement is its whole
 discipline, which is why the next two rules carry the weight they
 do.

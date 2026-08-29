@@ -497,43 +497,55 @@ describe("CreditLedger", function () {
   });
 
   describe("slashing (burn, graded, replay-gated)", function () {
+    const SLASH_BOND = ethers.parseEther("1");
+
     it("burns unvested promise at level 1", async function () {
       const f = await loadFixture(creditedFixture);
-      await expect(f.ledger.connect(f.rando).slash(
-        f.contributor.address, f.artifactId, 100n, 1, ethers.ZeroHash))
-        .to.be.revertedWithCustomError(f.ledger, "NotLibrarian");
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 100n, 0, ethers.ZeroHash))
+      // shape is rejected at filing time (the permissionless path)
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 100n, 0, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "InvalidLevel");
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 100n, 4, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 100n, 4, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "InvalidLevel");
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 0n, 1, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 0n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "ZeroAmount");
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 5000n, 1, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 5000n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "NothingToClaim");
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 100n, 1, ethers.ZeroHash))
+      // a valid level-1 filing executes after the window
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 100n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await advanceTime(SLASH_WINDOW);
+      await expect(f.ledger.connect(f.rando).executeSlash(0))
         .to.emit(f.ledger, "Burned")
         .withArgs(f.contributor.address, f.artifactId, 100n, 1,
                   ethers.ZeroHash);
       expect(await f.ledger.burnedTotal()).to.equal(100n);
       expect(await f.ledger.creditsOf(f.contributor.address))
         .to.equal(1900n);
-      // level 1 cannot burn what is already vested
+      // level 1 cannot burn what is already vested: rejected at filing
       await advanceTime(5 * EPOCH);
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 1900n, 1, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 1900n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "NothingToClaim");
     });
 
     it("level 2+ delists the artifact", async function () {
       const f = await loadFixture(creditedFixture);
       await f.ledger.connect(f.librarian).setAdmitted(f.artifactId, true);
-      await f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 500n, 2, ethers.ZeroHash);
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 500n, 2, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.rando).executeSlash(0);
       expect((await f.ledger.regs(f.artifactId)).admitted)
         .to.equal(false);
       expect(await f.ledger.burnedTotal()).to.equal(500n);
@@ -549,13 +561,19 @@ describe("CreditLedger", function () {
            amount: 1000n }]); // rolls to epoch 5; bucket 5
       // level 1 collapses the old bucket into the mature balance and
       // burns unvested parts only
-      await f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 500n, 1, ethers.ZeroHash);
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 500n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.rando).executeSlash(0);
       expect(await f.ledger.matureOf(f.contributor.address))
         .to.equal(2000n);
       // level 2 drains the live bucket, then the mature balance
-      await f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 2500n, 2, ethers.ZeroHash);
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 2500n, 2, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.rando).executeSlash(1);
       expect(await f.ledger.burnedTotal()).to.equal(3000n);
       expect(await f.ledger.creditsOf(f.contributor.address))
         .to.equal(0n);
@@ -571,8 +589,11 @@ describe("CreditLedger", function () {
         [f.payer.address],
         [{ artifactId: f.artifactId, who: f.contributor.address,
            amount: 1000n }]); // rolls to epoch 5; bucket 5
-      await f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 1500n, 2, ethers.ZeroHash);
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 1500n, 2, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.rando).executeSlash(0);
       expect(await f.ledger.burnedTotal()).to.equal(1500n);
       expect(await f.ledger.epochCredits(
         f.contributor.address, 5)).to.equal(0n);
@@ -584,16 +605,18 @@ describe("CreditLedger", function () {
        async function () {
       const f = await loadFixture(creditedFixture);
       const ghost = ethers.keccak256(ethers.toUtf8Bytes("ghost"));
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, ghost, 100n, 2, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, ghost, 100n, 2, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "NotRegistered");
     });
 
     it("reverts level 2 when the victim is not the payout address",
        async function () {
       const f = await loadFixture(creditedFixture);
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.rando.address, f.artifactId, 100n, 2, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.rando.address, f.artifactId, 100n, 2, ethers.ZeroHash,
+        { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(f.ledger, "WrongTarget");
       expect((await f.ledger.regs(f.artifactId)).admitted)
         .to.equal(true); // untouched
@@ -1095,23 +1118,24 @@ describe("CreditLedger", function () {
     });
   });
 
-  describe("librarian replacement survives retirement (M382, G53)",
+  describe("librarian replacement survives retirement (M382, G53, F1)",
            function () {
     it("reproduces the freeze: no governance, renounced owner, " +
        "librarian locked forever", async function () {
       // This is the defect G53 named. The registered endgame is that
-      // the developer renounces ownership; setLibrarian was
-      // onlyOwner; so the two-thirds earned-weight replacement vote
-      // decided something with no execution path.
+      // the developer renounces ownership; setLibrarian is
+      // owner-only (bootstrap); so the two-thirds earned-weight
+      // replacement vote runs through the keyless executor, and a
+      // network with no executor cannot replace the librarian.
       const { ledger, rando } = await loadFixture(deployFixture);
       await ledger.renounceOwnership();
       expect(await ledger.governance()).to.equal(ethers.ZeroAddress);
       await expect(ledger.setLibrarian(rando.address))
-        .to.be.revertedWithCustomError(ledger, "NotOwnerOrGovernance");
+        .to.be.reverted; // Ownable
     });
 
-    it("governance replaces the librarian after the owner is gone",
-       async function () {
+    it("governance alone cannot name the librarian: the quorum gate " +
+       "is required", async function () {
       const { ledger, owner, librarian, rando } =
         await loadFixture(deployFixture);
       await expect(ledger.setGovernance(rando.address))
@@ -1121,11 +1145,16 @@ describe("CreditLedger", function () {
 
       // the developer's path is closed
       await expect(ledger.connect(owner).setLibrarian(owner.address))
-        .to.be.revertedWithCustomError(ledger, "NotOwnerOrGovernance");
-      // the replacement path is open: the deputy takes the role
+        .to.be.reverted; // Ownable
+      // governance cannot name the librarian on its own word: the raw
+      // path is bootstrap-only
       await expect(ledger.connect(rando).setLibrarian(rando.address))
-        .to.emit(ledger, "LibrarianChanged").withArgs(rando.address);
-      expect(await ledger.librarian()).to.equal(rando.address);
+        .to.be.reverted; // Ownable
+      // even the quorum carry-out needs an endorsed proposal for the
+      // exact target
+      await expect(ledger.connect(rando).setLibrarianByQuorum(
+        0, rando.address))
+        .to.be.revertedWithCustomError(ledger, "NotEndorsed");
     });
 
     it("naming governance is a bootstrap act, owner-only",
@@ -1135,32 +1164,15 @@ describe("CreditLedger", function () {
         .to.be.reverted; // Ownable
     });
 
-    it("governance hands itself on, so the role survives succession",
-       async function () {
-      const { ledger, contributor, rando } =
-        await loadFixture(deployFixture);
-      await ledger.setGovernance(rando.address);
-      await ledger.renounceOwnership();
-      await expect(ledger.transferGovernance(contributor.address))
-        .to.be.revertedWithCustomError(ledger, "NotGovernance");
-      await ledger.connect(rando).transferGovernance(
-        contributor.address);
-      expect(await ledger.governance()).to.equal(contributor.address);
-      // the old executor is out, the new one is in
-      await expect(ledger.connect(rando).setLibrarian(rando.address))
-        .to.be.revertedWithCustomError(ledger, "NotOwnerOrGovernance");
-      await ledger.connect(contributor).setLibrarian(rando.address);
-      expect(await ledger.librarian()).to.equal(rando.address);
-    });
-
     it("governance holds this one power and no other admin path",
        async function () {
       const { ledger, rando } = await loadFixture(deployFixture);
       await ledger.setGovernance(rando.address);
       await ledger.renounceOwnership();
-      // it can replace the librarian ...
-      await ledger.connect(rando).setLibrarian(rando.address);
-      // ... and nothing else that the owner could do
+      // it cannot raw-set the librarian (quorum-gated), and nothing
+      // else that the owner could do
+      await expect(ledger.connect(rando).setLibrarian(rando.address))
+        .to.be.reverted; // Ownable
       await expect(ledger.connect(rando).pause()).to.be.reverted;
       await expect(ledger.connect(rando).scheduleDevFundChange(
         rando.address)).to.be.reverted;
@@ -1427,8 +1439,9 @@ describe("CreditLedger", function () {
         .to.be.reverted; // paused
       await expect(f.ledger.connect(f.contributor).claim())
         .to.be.reverted; // paused
-      await expect(f.ledger.connect(f.librarian).slash(
-        f.contributor.address, f.artifactId, 1n, 1, ethers.ZeroHash))
+      await expect(f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 1n, 1, ethers.ZeroHash,
+        { value: 1n }))
         .to.be.reverted; // paused
       await f.ledger.unpause();
       await expect(f.ledger.connect(f.rando).unpause())

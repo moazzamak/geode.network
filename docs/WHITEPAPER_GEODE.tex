@@ -130,6 +130,11 @@ and priced per pair, and nothing in the protocol requires one.
 The measurements in this paper are the small, real version of that
 idea.
 
+The claim of this paper is the mechanism, not the market: it
+specifies how a network of frozen, replayable capabilities can pay
+by measured use and keep its settlement and governance honest, and
+it makes no demand forecast.
+
 Three properties make that payoff structure possible. Everything
 else in this paper follows from them.
 
@@ -148,7 +153,11 @@ artifact replays for whoever holds it. The validators check the
 replayed results. Weights need not be open for the decision to be
 auditable. Every decision is written to a hash-chained ledger.
 Records cannot be changed after the fact without breaking the
-chain.
+chain. Replay verifies consistency against the ledger;
+correspondence to work outside the ledger is enforced by the
+stakeholders who can detect and dispute it — the payer whose
+deposit is spent, the contributor whose credit is wrong —
+bounded by the anchor cadence.
 \item \textbf{Paid by measured use.} Payments are made in Ethereum
 at market rate. They flow to the contributors whose work actually
 served the query. They are released gradually over time. A small
@@ -222,9 +231,11 @@ privilege: anyone may incorporate an entry, post a root,
 deliver a branch, claim, or resolve a challenged filing, and the
 reward follows the work. The librarian is an operator
 key, named at bootstrap by the developer's key and at maturity
-by the governance executor. The governance executor is a
+by a quorum-endorsed proposal the keyless governance executor
+carries out. The governance executor is a
 separate keyless contract with no human key; it holds that one
-power, naming and replacing the librarian, and no other.
+power, carrying out a quorum-endorsed librarian replacement, and
+no other.
 \item[Developer.] The operator of the bootstrap. It holds the
 librarian key initially. It ships the bootstrap arms at 80--90\%
 of capability and earns hosting fees only. Then it retires per
@@ -884,9 +895,12 @@ session's evidence supports. The replay quorum's verdicts no
 longer need a filing key: the network's own credit-holding
 identities attest them on chain, and anyone finalizes. The
 librarian is an operator key,
-named at bootstrap by the developer's key and at maturity by the
-governance executor. The governance executor is a separate
-keyless contract with no human key. The role does not rotate on a
+named at bootstrap by the developer's key and at maturity by a
+quorum-endorsed proposal the keyless governance executor carries
+out. The governance executor is a separate
+keyless contract with no human key; its only power is to file
+and press the button for that proposal, never to name the
+librarian on its own word. The role does not rotate on a
 schedule and posts no stake; replacement is its whole
 discipline, which is why the next two rules carry the weight they
 do.
@@ -965,7 +979,20 @@ replaced when a recorded divergence reason collects endorsements
 carrying two thirds of the earned voting weight, under the same
 pedigree gate, twenty percent cap, and diversity floor as every
 other governance vote; a deterministic deputy takes over at the
-next epoch. The trigger stays mechanical: a recorded divergence
+next epoch. The tally is ON CHAIN: each eligible identity
+(vested credits above zero) attests its endorsement during the
+one-epoch notice window, weight is the vested-credit snapshot
+capped per identity at twenty percent of the eligible total, and
+the endorsement side needs two-thirds of the capped participating
+weight, a participation floor of one-third of eligible weight, and
+at least three distinct identities. The keyless governance
+executor files the proposal under a bond and presses the button
+after the timelock; the ledger executes the change only if the
+quorum endorsed exactly that target. A proposal the quorum did not
+endorse fails at the timelock and its bond burns. No caller, the
+executor included, can name the librarian on its own word: the raw
+bootstrap path is closed when the developer renounces
+ownership. The trigger stays mechanical: a recorded divergence
 reason is a fact a validator can replay, and no amount of weight
 substitutes for it. Only the endorsement is weighted. Replacing the
 role that appends every ledger entry is the most powerful action
@@ -1065,7 +1092,9 @@ re-runs the sealed artifact on sealed data. The re-run is itself
 a verifiable measurement. The computation decides guilt. Note that
 the re-run, not the proof, is what settles a dispute; for a
 head, replay is four to five orders of magnitude cheaper than
-proof verification.
+proof verification. The whole apparatus rests on bit-exact replay
+of sealed artifacts; the sealing discipline is what makes it
+achievable, and the cost model assumes it, not proves it.
 \end{itemize}
 
 The honest boundary: the proofs cover the small, exact
@@ -1452,7 +1481,12 @@ from the challenge budget at the registry-set rate. Unpaid audit work
 would be shirked. A sampled auditor that declines earns a demerit.
 A validator whose expected outputs disagree with the audits on a
 registered fraction of the audited points burns the unvested
-promise and leaves the pool.
+promise and leaves the pool. The backstop is probabilistic: a
+validator is caught only where an audit re-labels a point the
+artifact, and therefore the validator's own expected output, got
+wrong, and the audit fraction is a registered per-axis parameter;
+payment for accepted challenges rewards volume, so strictness is
+enforced by detection, not assumed.
 
 \textbf{Availability.} Validators only push entries. There is no
 inbound endpoint. The quorum is taken over responders.
@@ -1921,6 +1955,8 @@ party in the call. A challenge escalates to the on-chain
 attestation quorum: the network's credit-holding identities
 attest the verdict by the deterministic replay, weighted by
 vested credits with a per-identity cap, and anyone finalizes it.
+The tally is linear in the eligible set and is computed only when
+a filing is disputed, once per dispute on the settlement rollup.
 The party whose root lands earns the registered root-posting
 bounty from the operations line, so the settlement
 work is paid like the incorporation work: whoever did it draws
@@ -2416,7 +2452,10 @@ on conviction and returned in full otherwise. Bonds are economic:
 they require no identity.
 \item \textbf{The challenge budget.} Each submission carries a
 budget that pays the sampled validators. Admission costs the
-contributor, never the network.
+contributor, never the network. The budget cannot buy less than
+the axis's registered minimum session depth: a session below the
+published floor fails closed, so a contributor cannot purchase a
+validation so thin it is meaningless.
 \item \textbf{No stake.} There is no stake and no principal
 lockup. Vested-but-unclaimed credits (the claimable balance)
 can be locked into a voluntary escrow, where they carry voting
@@ -3468,7 +3507,13 @@ that still needs a key is writing the credits a session's
 evidence supports. A stopped or captured key halts new credits;
 it cannot change a verdict, because the verdict is attested on
 chain, not filed. The failure is recorded and visible, and it
-feeds the keyless replacement discipline.
+feeds the keyless replacement discipline. One coupling is worth
+stating: the same key writes credits and, over the vesting
+window, shapes who holds the quorum's weight. A captured key can
+build allied weight within the per-identity cap; the registration
+gate, the pool bound, and the quorum-gated replacement slow that,
+and the cap is what keeps any single identity from carrying a
+verdict.
 \item \textbf{The settlement root is challenge-gated, not
 verification-gated.} The contract checks that a filed
 attribution root is not yet posted; it does not check that the
@@ -3481,7 +3526,11 @@ attribution pool holds. The defenses are economic: a void
 verdict burns the filer's bond, and the parties a wrong root
 would mis-pay have both the standing and the one-epoch window to
 challenge it into the attestation quorum, where their vested
-weight decides.
+weight decides. The quorum's protection scales with the harmed
+parties' weight share: a wrong root that would mis-pay less than
+one-third of the network's eligible vested weight cannot be voided
+by the harmed parties alone, and lands by default unless the
+unaffected majority participates within the window.
 \item \textbf{The authority-key registry trusts governments' own
 channels.} Multi-channel pinning raises the cost of a forged
 order; it does not make forgery impossible. The effect of even a

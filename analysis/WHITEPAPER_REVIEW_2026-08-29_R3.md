@@ -148,3 +148,21 @@ labels, 15 refs, 58 bibitems).
   `applyAttestationRewardChange` / `claimAttestationReward`). The
   paper's known-limits "single-key acts" item is reduced to credit
   recording alone; EVM 149 -> 167.
+
+- **The replacement vote is now on-chain quorum-gated (Finding-1
+  closure, same day).** `LibrarianGovernance.proposeReplacement` /
+  `proposeSuccession` open a ledger-side attestation
+  (`openGovernanceReplacement`, `attestGovernanceReplacement`), and
+  `execute` only carries out a proposal the ledger confirms was
+  endorsed (`governanceReplacementApproved`); an unendorsed
+  proposal fails at the timelock and its bond burns
+  (`GovernanceRejected`, `bondsBurned`). The ledger's raw
+  `setLibrarian` / `renounceLibrarian` are now bootstrap-only
+  (owner), and the raw `transferGovernance` was removed in favour of
+  the quorum-gated `transferGovernanceByQuorum`, so no caller — a
+  captured executor included — can name the librarian or move the
+  governance role on its own word. The privileged direct `slash`
+  (onlyLibrarian, unverified burn) was removed: slashing is now
+  proposal-based only, as the paper describes. The paper's
+  "Executable replacement" bullet now states the on-chain tally.
+  EVM 167 -> 168.

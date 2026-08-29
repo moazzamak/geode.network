@@ -91,6 +91,8 @@ contract CreditLedger is
     error InvalidKind(uint8 kind);
     error NotEligible();
     error AlreadyAttested();
+    error NoSuchProposal();
+    error NotEndorsed();
 
     uint256 public constant DEV_FUND_BPS = 25;      // 2.5% of 1000
     uint256 public constant EPOCH = 7 days;
@@ -104,6 +106,7 @@ contract CreditLedger is
     uint256 public constant QUORUM_WEIGHT_CAP_BPS = 2000; // 20% per-identity cap
     uint256 public constant QUORUM_FLOOR_BPS = 3333;      // 1/3 participation floor
     uint256 public constant QUORUM_MIN_DISTINCT = 3;      // distinct-identity floor
+    uint256 public constant GOVERNANCE_WINDOW = 7 days;   // replacement notice = the executor's timelock
 
     address public devFund;
     address public librarian;
@@ -303,6 +306,24 @@ contract CreditLedger is
     address[] public creditedIdentities;
     mapping(address => bool) public inIdentities;
 
+    /// @notice An on-chain governance replacement or succession
+    /// proposal (closure of the M388 residual). The keyless executor
+    /// files it; the network's credit-holding identities attest
+    /// endorsement with the same weighted-quorum rules as every other
+    /// governance vote; the ledger only carries a proposal the quorum
+    /// endorsed. A single key — or any party with a bond and a
+    /// timelock — can no longer name the librarian.
+    struct GovernanceReplacement {
+        uint8 kind;            // 0 replace librarian, 1 governance succession
+        address target;
+        uint256 attestStart;   // slice of the global attestations array
+        uint256 attestCount;   // attestations cast for this proposal
+        uint256 filedAt;
+    }
+
+    mapping(uint256 => GovernanceReplacement)
+        public governanceReplacements;
+
     /// @notice Registered per-verdict attestation reward, split
     /// pro-rata by capped weight among the attestors on the side a
     /// quorum VERDICT endorsed (never paid on the default path).
@@ -392,6 +413,8 @@ contract CreditLedger is
     event AttestationRewardSkipped(uint256 indexed filingId,
                                    uint256 shortfall);
     event AttestationRewardClaimed(address indexed to, uint256 amount);
+    event GovernanceReplacementOpened(uint256 indexed proposalId,
+                                      uint8 kind, address indexed target);
 
     event Deposited(address indexed from, uint256 amount, uint256 devCut);
     event Registered(bytes32 indexed artifactId, address indexed operatorKey,
@@ -741,38 +764,11 @@ contract CreditLedger is
         emit DevFundClaimed(amount);
     }
 
-    /// @notice Replay-gated burn (slash ladder). The librarian files
-    /// the verdict's evidence hash; the off-chain replay of sealed
-    /// data decides guilt. Level 1 burns the unvested promise only;
-    /// levels 2-3 additionally delist the artifact. Nobody gains a
-    /// slashed amount: it moves to burnedTotal, unreachable by any
-    /// claim path.
-    function slash(address who, bytes32 artifactId, uint256 amount,
-                   uint8 level, bytes32 evidenceHash) external
-        whenNotPaused {
-        if (msg.sender != librarian) revert NotLibrarian();
-        Registration storage r = regs[artifactId];
-        if (level == 0 || level > 3) revert InvalidLevel(level);
-        if (level >= 2) {
-            if (r.operatorKey == address(0)) revert NotRegistered();
-            if (r.payoutAddress != who) revert WrongTarget();
-        }
-        if (amount == 0) revert ZeroAmount();
-        uint256 unclaimed = creditsOf[who] - claimedOf[who];
-        if (amount > unclaimed) revert NothingToClaim();
-        if (level == 1) {
-            uint256 unvested = creditsOf[who] - _vestedOf(who);
-            if (amount > unvested) revert NothingToClaim();
-        }
-        creditsOf[who] -= amount;
-        _burnFromBuckets(who, amount, level);
-        burnedTotal += amount;
-        if (level >= 2) {
-            r.admitted = false;
-            emit Admitted(artifactId, false);
-        }
-        emit Burned(who, artifactId, amount, level, evidenceHash);
-    }
+    /// @notice Slashing is proposal-based only (see M386 below): the
+    /// privileged direct burn was removed so no key can burn credits
+    /// on its own word. A conviction is filed by any party under a
+    /// bond, and the burn applies only after the challenge window
+    /// (unchallenged) or an attestation-quorum verdict.
 
     // --- M386 (G54): propose-and-challenge slash -------------------
     //
@@ -1449,6 +1445,17 @@ contract CreditLedger is
         if (block.timestamp >= filedAt + SLASH_WINDOW + ATTEST_WINDOW) {
             revert WindowClosed();
         }
+        _pushAttestation(attestStart, attestCount, voidFiling,
+                         kind, filingId);
+    }
+
+    /// @dev Shared attestation core: records one weighted attestation
+    /// on a slice. Eligibility: vested credits > 0 — credits are only
+    /// earned through the gated record/claim paths, so vested standing
+    /// is the pedigree. One attestation per identity per slice.
+    function _pushAttestation(uint256 attestStart, uint256 attestCount,
+                              bool vote, uint8 kind, uint256 id)
+        internal {
         uint256 weight = _vestedOf(msg.sender);
         if (weight == 0) revert NotEligible();
         uint256 end = attestStart + attestCount;
@@ -1459,11 +1466,36 @@ contract CreditLedger is
         }
         attestations.push(Attestation({
             attester: msg.sender,
-            voidFiling: voidFiling,
+            voidFiling: vote,
             weight: weight,
             at: block.timestamp
         }));
-        emit Attested(kind, filingId, msg.sender, voidFiling, weight);
+        emit Attested(kind, id, msg.sender, vote, weight);
+    }
+
+    /// @dev Two-pass weighted tally over an attestation slice: the
+    /// uncapped participation total, the capped total, the capped
+    /// void/endorse side, and the voter counts. The per-identity cap
+    /// is QUORUM_WEIGHT_CAP_BPS of the eligible total.
+    function _tally(uint256 attestStart, uint256 attestCount,
+                    uint256 eligibleTotal)
+        internal view returns (uint256 total, uint256 cappedTotal,
+                               uint256 voidCapped, uint256 voidVoters,
+                               uint256 upholdVoters) {
+        uint256 end = attestStart + attestCount;
+        for (uint256 i = attestStart; i < end; ++i) {
+            Attestation storage a = attestations[i];
+            total += a.weight;
+            if (a.voidFiling) voidVoters += 1;
+            else upholdVoters += 1;
+        }
+        uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
+        for (uint256 i = attestStart; i < end; ++i) {
+            Attestation storage a = attestations[i];
+            uint256 w = a.weight < cap ? a.weight : cap;
+            cappedTotal += w;
+            if (a.voidFiling) voidCapped += w;
+        }
     }
 
     /// @dev The quorum verdict for a challenged filing's attestation
@@ -1472,43 +1504,23 @@ contract CreditLedger is
     /// with no bar — the challenge is unsubstantiated). Both decided
     /// verdicts need two-thirds of capped participating weight, a
     /// participation floor of QUORUM_FLOOR_BPS of eligible weight, and
-    /// QUORUM_MIN_DISTINCT distinct identities; the per-identity cap
-    /// is QUORUM_WEIGHT_CAP_BPS of the eligible total.
+    /// QUORUM_MIN_DISTINCT distinct identities.
     function _quorumResult(uint256 attestStart, uint256 attestCount,
                            uint256 filedAt, uint256 eligibleTotal)
         internal view returns (uint8) {
-        uint256 total;
-        uint256 voidVoters;
-        uint256 upholdVoters;
-        uint256 end = attestStart + attestCount;
-        for (uint256 i = attestStart; i < end; ++i) {
-            Attestation storage a = attestations[i];
-            total += a.weight;
-            if (a.voidFiling) voidVoters += 1;
-            else upholdVoters += 1;
-        }
+        (uint256 total, uint256 cappedTotal, uint256 voidCapped,
+         uint256 voidVoters, uint256 upholdVoters) =
+            _tally(attestStart, attestCount, eligibleTotal);
         if (total > 0
-            && total >= (eligibleTotal * QUORUM_FLOOR_BPS) / 10000) {
-            uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
-            uint256 cappedTotal;
-            uint256 voidCapped;
-            uint256 upholdCapped;
-            for (uint256 i = attestStart; i < end; ++i) {
-                Attestation storage a = attestations[i];
-                uint256 w = a.weight < cap ? a.weight : cap;
-                cappedTotal += w;
-                if (a.voidFiling) voidCapped += w;
-                else upholdCapped += w;
+            && total >= (eligibleTotal * QUORUM_FLOOR_BPS) / 10000
+            && cappedTotal > 0) {
+            if (voidCapped * 3 >= 2 * cappedTotal
+                && voidVoters >= QUORUM_MIN_DISTINCT) {
+                return 1;
             }
-            if (cappedTotal > 0) {
-                if (voidCapped * 3 >= 2 * cappedTotal
-                    && voidVoters >= QUORUM_MIN_DISTINCT) {
-                    return 1;
-                }
-                if (upholdCapped * 3 >= 2 * cappedTotal
-                    && upholdVoters >= QUORUM_MIN_DISTINCT) {
-                    return 2;
-                }
+            if ((cappedTotal - voidCapped) * 3 >= 2 * cappedTotal
+                && upholdVoters >= QUORUM_MIN_DISTINCT) {
+                return 2;
             }
         }
         if (block.timestamp >= filedAt + SLASH_WINDOW + ATTEST_WINDOW) {
@@ -1539,21 +1551,18 @@ contract CreditLedger is
         internal {
         uint256 pot = attestationRewardPot;
         if (pot == 0) return;
-        uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
-        uint256 winningCapped;
-        uint256 end = attestStart + attestCount;
-        for (uint256 i = attestStart; i < end; ++i) {
-            Attestation storage a = attestations[i];
-            if (a.voidFiling != voidWon) continue;
-            uint256 w = a.weight < cap ? a.weight : cap;
-            winningCapped += w;
-        }
+        ( , uint256 cappedTotal, uint256 voidCapped, , ) =
+            _tally(attestStart, attestCount, eligibleTotal);
+        uint256 winningCapped = voidWon ? voidCapped
+                                        : cappedTotal - voidCapped;
         if (winningCapped == 0) return;
         if (operationsPool < pot) {
             emit AttestationRewardSkipped(filingId, pot - operationsPool);
             return;
         }
         operationsPool -= pot;
+        uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
+        uint256 end = attestStart + attestCount;
         for (uint256 i = attestStart; i < end; ++i) {
             Attestation storage a = attestations[i];
             if (a.voidFiling != voidWon) continue;
@@ -1610,16 +1619,20 @@ contract CreditLedger is
     /// an operator key at bootstrap, a governance contract with no
     /// human key at maturity.
     ///
-    /// Callable by the owner (bootstrap) or by governance (the
-    /// replacement vote's executor). The second caller is what keeps
-    /// the role replaceable after the developer renounces ownership.
+    /// Naming the librarian is a BOOTSTRAP act (owner-only), and so
+    /// is renouncing it. At maturity no caller may set the librarian
+    /// on its own word: the only path is `setLibrarianByQuorum`, a
+    /// proposal the network's credit-holding identities endorsed by
+    /// the same weighted-quorum rules as every other governance vote.
+    /// The keyless executor files the proposal and presses the
+    /// button; the ledger decides whether the quorum endorsed it.
     function setLibrarian(address newLibrarian)
-        external onlyOwnerOrGovernance {
+        external onlyOwner {
         librarian = newLibrarian;
         emit LibrarianChanged(newLibrarian);
     }
 
-    function renounceLibrarian() external onlyOwnerOrGovernance {
+    function renounceLibrarian() external onlyOwner {
         librarian = address(0);
         emit LibrarianChanged(address(0));
     }
@@ -1631,13 +1644,111 @@ contract CreditLedger is
         emit GovernanceChanged(newGovernance);
     }
 
-    /// @notice Governance hands itself on, so the role survives its
-    /// own succession once no owner remains to re-appoint it.
-    function transferGovernance(address newGovernance) external {
-        if (msg.sender != governance || governance == address(0))
-            revert NotGovernance();
-        governance = newGovernance;
-        emit GovernanceChanged(newGovernance);
+    /// @notice Open a governance replacement or succession proposal
+    /// for attestation. Callable by the keyless executor only, when
+    /// a party files a proposal there. The window runs
+    /// GOVERNANCE_WINDOW from opening; endorsements are weighted by
+    /// vested credits under the standard quorum rules, and the ledger
+    /// will only carry a proposal the quorum endorsed.
+    function openGovernanceReplacement(uint256 proposalId, uint8 kind,
+                                       address target)
+        external onlyGovernance {
+        if (kind > 1) revert InvalidKind(kind);
+        if (target == address(0)) revert ZeroAddress();
+        if (governanceReplacements[proposalId].filedAt != 0) {
+            revert NoPendingChange();
+        }
+        governanceReplacements[proposalId] = GovernanceReplacement({
+            kind: kind,
+            target: target,
+            attestStart: attestations.length,
+            attestCount: 0,
+            filedAt: block.timestamp
+        });
+        emit GovernanceReplacementOpened(proposalId, kind, target);
+    }
+
+    /// @notice Cast an endorsement on a governance proposal. Same
+    /// eligibility and weight as every other attestation: vested
+    /// credits above zero, one vote per identity, the attestation
+    /// window running GOVERNANCE_WINDOW from opening.
+    function attestGovernanceReplacement(uint256 proposalId, bool endorse)
+        external whenNotPaused {
+        GovernanceReplacement storage p =
+            governanceReplacements[proposalId];
+        if (p.filedAt == 0) revert NoSuchProposal();
+        if (block.timestamp >= p.filedAt + GOVERNANCE_WINDOW) {
+            revert WindowClosed();
+        }
+        _pushAttestation(p.attestStart, p.attestCount, endorse,
+                         3, proposalId);
+        p.attestCount += 1;
+    }
+
+    /// @dev Whether the quorum endorsed a governance proposal: the
+    /// window is closed and the endorsement side carried two-thirds
+    /// of capped participating weight, a participation floor of
+    /// one-third of eligible weight, and at least QUORUM_MIN_DISTINCT
+    /// distinct identities.
+    function governanceReplacementApproved(uint256 proposalId)
+        public view returns (bool) {
+        GovernanceReplacement storage p =
+            governanceReplacements[proposalId];
+        if (p.filedAt == 0) return false;
+        if (block.timestamp < p.filedAt + GOVERNANCE_WINDOW) {
+            return false;
+        }
+        uint256 eligible = _eligibleVestedTotal();
+        (uint256 total, uint256 cappedTotal,
+         uint256 endorseCapped, uint256 endorseVoters, ) =
+            _tally(p.attestStart, p.attestCount, eligible);
+        return total > 0
+            && total >= (eligible * QUORUM_FLOOR_BPS) / 10000
+            && cappedTotal > 0
+            && endorseCapped * 3 >= 2 * cappedTotal
+            && endorseVoters >= QUORUM_MIN_DISTINCT;
+    }
+
+    /// @notice Carry out a quorum-endorsed governance action
+    /// (librarian replacement, kind 0, or governance succession,
+    /// kind 1). Only the keyless executor may call, and only for a
+    /// proposal the quorum endorsed for exactly this target. The raw
+    /// `setLibrarian` is bootstrap-only, so no caller — a captured
+    /// executor included — can name the librarian on its own word.
+    function setLibrarianByQuorum(uint256 proposalId,
+                                  address newLibrarian)
+        external onlyGovernance {
+        _carryOutGovernance(proposalId, 0, newLibrarian);
+    }
+
+    /// @notice Carry out a quorum-endorsed governance succession. The
+    /// executor may only hand its role on through the same quorum
+    /// rule, so a hijacked succession cannot capture the role.
+    function transferGovernanceByQuorum(uint256 proposalId,
+                                        address newGovernance)
+        external onlyGovernance {
+        _carryOutGovernance(proposalId, 1, newGovernance);
+    }
+
+    /// @dev Shared carry-out: checks the proposal's kind and target
+    /// and the quorum's endorsement, then applies the change.
+    function _carryOutGovernance(uint256 proposalId, uint8 kind,
+                                 address target) internal {
+        GovernanceReplacement storage p =
+            governanceReplacements[proposalId];
+        if (p.kind != kind || p.target != target) {
+            revert NotEndorsed();
+        }
+        if (!governanceReplacementApproved(proposalId)) {
+            revert NotEndorsed();
+        }
+        if (kind == 0) {
+            librarian = target;
+            emit LibrarianChanged(target);
+        } else {
+            governance = target;
+            emit GovernanceChanged(target);
+        }
     }
 
     function scheduleDevFundChange(address newFund) external onlyOwner {
@@ -1769,6 +1880,12 @@ contract CreditLedger is
 
     modifier onlyLibrarian() {
         if (msg.sender != librarian) revert NotLibrarian();
+        _;
+    }
+
+    modifier onlyGovernance() {
+        if (msg.sender != governance || governance == address(0))
+            revert NotGovernance();
         _;
     }
 

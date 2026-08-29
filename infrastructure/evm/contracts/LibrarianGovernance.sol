@@ -44,8 +44,14 @@ pragma solidity ^0.8.28;
 ///    receive cannot block the path (the InclusionInbox M383
 ///    lesson).
 interface ILedgerGoverned {
-    function setLibrarian(address newLibrarian) external;
-    function transferGovernance(address newGovernance) external;
+    function openGovernanceReplacement(uint256 proposalId, uint8 kind,
+                                       address target) external;
+    function setLibrarianByQuorum(uint256 proposalId,
+                                  address newLibrarian) external;
+    function transferGovernanceByQuorum(uint256 proposalId,
+                                        address newGovernance) external;
+    function governanceReplacementApproved(uint256 proposalId)
+        external view returns (bool);
     function librarian() external view returns (address);
 }
 
@@ -67,8 +73,11 @@ contract LibrarianGovernance {
                               bytes32 reasonHash);
     event SuccessionExecuted(address indexed nextGovernance,
                              bytes32 reasonHash);
+    event GovernanceRejected(uint256 indexed proposalId,
+                             bytes32 reasonHash);
     event PendingCancelled(address indexed proposer);
     event BondCredited(address indexed to, uint256 amount);
+    event BondBurned(uint256 amount);
     event BondClaimed(address indexed to, uint256 amount);
 
     /// @notice the ledger whose librarian this contract may replace.
@@ -84,6 +93,7 @@ contract LibrarianGovernance {
         bytes32 reasonHash;  // the recorded, replay-checkable trigger
         address proposer;
         uint256 readyAt;
+        uint256 proposalId;  // the ledger-side attestation slice
     }
 
     Pending public pending;
@@ -92,6 +102,13 @@ contract LibrarianGovernance {
     /// @notice Pullable bond refunds (payments are pull, not push).
     mapping(address => uint256) public bondClaimable;
     uint256 public claimableTotal;
+    /// @notice Sequential id handed to the ledger for each proposal's
+    /// attestation slice.
+    uint256 public proposalCounter;
+    /// @notice Bonds forfeited by proposals the quorum did not
+    /// endorse. Unreachable by any claim path — nobody gains from an
+    /// unratified filing.
+    uint256 public bondsBurned;
 
     constructor(address ledger_) {
         require(ledger_ != address(0), "zero ledger");
@@ -100,51 +117,66 @@ contract LibrarianGovernance {
 
     /// @notice File a librarian replacement. Permissionless with a
     /// PROPOSAL_BOND; the recorded divergence reason is required and
-    /// the action waits REPLACEMENT_DELAY. A new proposal supersedes
-    /// any live pending (crediting the prior proposer's bond to
-    /// their claimable balance), so a griefer holding the slot with
-    /// a bad filing cannot block a real one forever.
+    /// the action waits REPLACEMENT_DELAY. The proposal opens a
+    /// ledger-side attestation slice, and execution is gated on the
+    /// network's weighted-quorum endorsement. A new proposal
+    /// supersedes any live pending (crediting the prior proposer's
+    /// bond to their claimable balance), so a griefer holding the
+    /// slot with a bad filing cannot block a real one forever.
     function proposeReplacement(address newLibrarian, bytes32 reasonHash)
         external payable {
         if (newLibrarian == address(0)) revert ZeroAddress();
         if (reasonHash == bytes32(0)) revert ZeroReasonHash();
         if (msg.value != PROPOSAL_BOND)
             revert WrongBond(msg.value, PROPOSAL_BOND);
-        _replacePending(Kind.REPLACE_LIBRARIAN, newLibrarian, reasonHash);
+        uint256 proposalId = ++proposalCounter;
+        ledger.openGovernanceReplacement(proposalId, 0, newLibrarian);
+        _replacePending(Kind.REPLACE_LIBRARIAN, newLibrarian, reasonHash,
+                        proposalId);
         emit ReplacementProposed(newLibrarian, reasonHash, pending.readyAt);
     }
 
     /// @notice File a governance succession: this role hands itself
-    /// on to `nextGovernance`. Same bond, recorded reason, and
-    /// timelock as a replacement, so the role survives its own
-    /// succession without a human key.
+    /// on to `nextGovernance`. Same bond, recorded reason, quorum
+    /// gate, and timelock as a replacement, so the role survives its
+    /// own succession without a human key and without capture.
     function proposeSuccession(address nextGovernance, bytes32 reasonHash)
         external payable {
         if (nextGovernance == address(0)) revert ZeroAddress();
         if (reasonHash == bytes32(0)) revert ZeroReasonHash();
         if (msg.value != PROPOSAL_BOND)
             revert WrongBond(msg.value, PROPOSAL_BOND);
+        uint256 proposalId = ++proposalCounter;
+        ledger.openGovernanceReplacement(proposalId, 1, nextGovernance);
         _replacePending(Kind.GOVERNANCE_SUCCESSION, nextGovernance,
-                        reasonHash);
+                        reasonHash, proposalId);
         emit SuccessionProposed(nextGovernance, reasonHash,
                                 pending.readyAt);
     }
 
     /// @notice Execute a timelocked pending action. Permissionless —
     /// anyone may press the button once the delay has elapsed. The
-    /// proposer's bond becomes claimable (pull, never push).
+    /// ledger decides whether the quorum endorsed the proposal: an
+    /// endorsed proposal executes and the proposer's bond becomes
+    /// claimable (pull, never push); an unendorsed proposal fails
+    /// and its bond burns (nobody gains from an unratified filing).
     function execute() external {
         Pending memory p = pending;
         if (p.kind == Kind.NONE) revert NoPending();
         if (block.timestamp < p.readyAt)
             revert TimelockNotElapsed(p.readyAt, block.timestamp);
         delete pending;
+        if (!ledger.governanceReplacementApproved(p.proposalId)) {
+            _burnBond();
+            emit GovernanceRejected(p.proposalId, p.reasonHash);
+            return;
+        }
         _creditBond(p.proposer, PROPOSAL_BOND);
         if (p.kind == Kind.REPLACE_LIBRARIAN) {
-            ledger.setLibrarian(p.target);
+            ledger.setLibrarianByQuorum(p.proposalId, p.target);
             emit ReplacementExecuted(p.target, p.reasonHash);
         } else {
-            ledger.transferGovernance(p.target);
+            ledger.transferGovernanceByQuorum(p.proposalId, p.target);
             emit SuccessionExecuted(p.target, p.reasonHash);
         }
     }
@@ -173,14 +205,16 @@ contract LibrarianGovernance {
     }
 
     function _replacePending(Kind kind, address target,
-                             bytes32 reasonHash) internal {
+                             bytes32 reasonHash, uint256 proposalId)
+        internal {
         Pending memory p = pending;
         if (p.kind != Kind.NONE) {
             delete pending;
             _creditBond(p.proposer, PROPOSAL_BOND);
         }
         pending = Pending(kind, target, reasonHash, msg.sender,
-                          block.timestamp + REPLACEMENT_DELAY);
+                          block.timestamp + REPLACEMENT_DELAY,
+                          proposalId);
         pendingBond = PROPOSAL_BOND;
     }
 
@@ -189,5 +223,11 @@ contract LibrarianGovernance {
         claimableTotal += amount;
         pendingBond = 0;
         emit BondCredited(to, amount);
+    }
+
+    function _burnBond() internal {
+        bondsBurned += PROPOSAL_BOND;
+        pendingBond = 0;
+        emit BondBurned(PROPOSAL_BOND);
     }
 }

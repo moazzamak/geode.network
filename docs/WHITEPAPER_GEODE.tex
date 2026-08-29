@@ -688,7 +688,8 @@ admission (dashed).}
 
 \subsection{The registry and the router}\label{sec:router}
 
-Admission is by measurement.
+Admission is by measurement, and the registry changes only
+through deterministic rules. The admission rules are:
 \begin{itemize}
 \item A submitted registration, an arm or a primitive, passes
 quality gates on held-out data. The claim is sealed before
@@ -717,7 +718,7 @@ files the sealed measurement, the rule decides, and the key never
 admits or extends on its own discretion.
 \end{itemize}
 Routing is deterministic
-(Figure~\ref{fig:network}).
+(Figure~\ref{fig:network}), and it follows these rules:
 \begin{itemize}
 \item The router ranks qualified capabilities by quality per
 expected charge: the measured score divided by the posted unit
@@ -856,6 +857,9 @@ rules with a governance registration, never by a code path; all
 three are measured and reported in Section~\ref{sec:measured}.
 
 \subsection{The ledger and the anchor}
+
+The ledger is the network's hash-chained record, and the anchor
+notarizes its tip on a public chain. The rules follow:
 
 \begin{itemize}
 \item \textbf{The chain.} Every decision, be it a route, an answer, an
@@ -1105,7 +1109,7 @@ is stated with it.
 
 \subsection{The task descriptor}
 
-A task is a declaration of fixed fields.
+A task is a declaration of fixed fields:
 \begin{itemize}
 \item \textbf{Input type}: image, audio, text, or number series.
 The input type carries its input contract.
@@ -1213,6 +1217,10 @@ readout~\cite{belrose2023} in one exact solve.
 
 \subsection{Registration proofs}
 
+A registration is accompanied by evidence about what the artifact
+computes, and the boundary of that evidence is fixed in advance.
+The rules are:
+
 \begin{itemize}
 \item \textbf{Contributors.} At registration the contributor
 submits the artifact hash, the fingerprint, and a contract proof.
@@ -1270,7 +1278,9 @@ published floor.
 public, append-only entry.
 \end{enumerate}
 
-\textbf{What the measurement measures.}
+\textbf{What the measurement measures.} The measurement
+is fair by construction: the network holds the data, and the
+contributor never sees the split. The rules are:
 \begin{itemize}
 \item Contributors train on whatever data they like. The network
 does not audit their training data. It measures data the
@@ -1292,7 +1302,8 @@ rows for bit-exact replay. That is an internal discipline, not a
 requirement on contributors.
 \end{itemize}
 
-\textbf{Defenses against probing.}
+\textbf{Defenses against probing.} The evaluation data is
+guarded against probing. The defenses are:
 \begin{itemize}
 \item Verdicts are aggregate-only. They give one score per axis.
 They never give per-row outputs or per-class breakdowns.
@@ -1322,7 +1333,8 @@ probing costs money.
 proof.
 \end{itemize}
 
-\textbf{Custody.}
+\textbf{Custody.} The corpora are held under a custody
+regime. The rules are:
 \begin{itemize}
 \item The evaluation corpora live inside a sealed scoring
 environment. Validators submit queries and receive aggregate
@@ -1340,7 +1352,9 @@ infrastructure trust point, and a corrupt majority of validators
 is outside the mechanism's reach.
 \end{itemize}
 
-\textbf{The challenge layer (overview; specified below).}
+\textbf{The challenge layer (overview; specified below).} The
+challenge layer adds live measurement to admission. Its outline
+is:
 \begin{itemize}
 \item Validators commit hashes of challenge points. The input is
 posed with the expected output hidden. The frozen artifact
@@ -1445,6 +1459,9 @@ and docked 2.5\%. They settle in the epoch batch. Nobody is paid
 for silence.
 
 \subsection{Failure handling}
+
+Failures are handled by fixed rules, so nothing is left to
+discretion. The rules are:
 
 \begin{itemize}
 \item \textbf{No-shows.} A sampled validator that does not respond
@@ -1830,7 +1847,7 @@ delay a sample's clock but never choose the sample itself.
 
 \subsection{A session, end to end}
 
-A session is one declared task and the samples served under it.
+A session is one declared task and the samples served under it:
 \begin{enumerate}
 \item \textbf{Declare} the task.
 \item \textbf{Route}: best measured score per unit of posted
@@ -1922,7 +1939,7 @@ and runs on each contributor's own machine. It earns nothing for
 anyone. It is infrastructure, like the road a delivery service
 drives on. The development fund maintains it as a public good.
 
-The catalog grows continuously. It launches with, by category:
+The catalog grows continuously. It launches with these categories:
 
 \begin{itemize}
 \item \textbf{Memory.} A count-based variable-order memory over a
@@ -2070,6 +2087,7 @@ moves and why each rule exists.
 \subsection{Currency and pricing}
 
 Services are priced and paid in Ethereum (ETH), at market rate.
+The pricing rules are:
 \begin{itemize}
 \item \textbf{Who sets prices.} Each contributor sets the price
 of its own registration, in ETH, per the axis's unit of work. The
@@ -2343,8 +2361,8 @@ of the $d$-distinct-identity floor.
 
 \subsection{Registration}
 
-Registering a capability (an arm or a primitive) is one
-procedure.
+Registering a capability, whether an arm or a primitive, is
+one procedure with these rules:
 
 \begin{itemize}
 \item \textbf{The fee.} A flat registration fee, paid directly to
@@ -2739,6 +2757,8 @@ free.
 \end{itemize}
 
 \subsection{Who earns what}
+
+Every role earns through a single defined line:
 
 \begin{center}
 \begin{tabular}{@{}p{4.8cm}p{9.4cm}@{}}
@@ -3266,6 +3286,8 @@ Each group is ordered by severity, most severe first.
 
 \paragraph{Structural residuals}
 
+These are the structural residuals, in order of severity:
+
 \begin{enumerate}
 \item \textbf{The frozen encoder is trusted, not audited.} The
 encoder is a publisher checkpoint, and no one can audit its
@@ -3510,6 +3532,8 @@ re-runs with the live validator-cost trace.
 
 \paragraph{Open questions}
 
+These are the open questions:
+
 \begin{enumerate}
 \item Results are on one benchmark per axis. The corpora are
 small. The party is single. Multi-corpus, multi-party scale is
@@ -3657,6 +3681,8 @@ digits blunt the signal.
 
 \subsection{The challenge session, from a validator's seat}
 
+Here is the same session from a validator's seat:
+
 \begin{enumerate}
 \item A validator registers on an axis and pays the fee. It
 waits out the activation window of two epochs. Only then can it
@@ -3688,6 +3714,8 @@ collusion. It slashes both parties.
 
 \subsection{Buying an answer}
 
+Buying an answer follows these steps:
+
 \begin{enumerate}
 \item The user declares the task: input type, output type, axis
 metric, routing mode, optional max unit price, optional max
@@ -3710,6 +3738,8 @@ published. Payment is for the measured computation. Confidence is
 a measurement, not a warranty.
 
 \subsection{A probed session, honest path}
+
+The honest path of a probed session runs like this:
 
 \begin{enumerate}
 \item The serving host commits $H(\text{answer})$ before it
@@ -3762,7 +3792,8 @@ session.
 
 \subsection{Probe-dodging attempts}
 
-Three attempts, all closed by ordering rather than secrecy.
+Three attempts are all closed by ordering rather than
+secrecy:
 \begin{itemize}
 \item \emph{Compute the probed set in advance} from the public
 randomness. Closed: the probe flag is revealed only after the
@@ -3779,6 +3810,8 @@ only profitable behavior is serving the artifact every time.
 \end{itemize}
 
 \subsection{A disputed mismatch: contributor vindicated}
+
+A dispute in which the contributor is vindicated runs like this:
 
 \begin{enumerate}
 \item A mismatch is recorded against the committed answer. The
@@ -3811,6 +3844,8 @@ raised to the executor count.
 
 \subsection{Becoming a reference executor}
 
+Becoming a reference executor takes three steps:
+
 \begin{enumerate}
 \item A party holds the sealed artifact and registers into its
 executor pool.
@@ -3824,6 +3859,8 @@ commits the answer, and earns a share of the registered price.
 artifact serves. A silent executor stops being sampled.
 
 \subsection{A third-party primitive, end to end}
+
+A third-party primitive runs end to end like this:
 
 \begin{enumerate}
 \item An author registers a primitive. Its challenges are
@@ -3841,6 +3878,8 @@ mismatch is replay-visible. The host faces the same slash path as
 any deviation.
 
 \subsection{The quorum takedown}
+
+A quorum takedown runs through these steps:
 
 \begin{enumerate}
 \item Any party files a proposal: artifact hash, evidence

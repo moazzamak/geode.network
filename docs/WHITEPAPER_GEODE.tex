@@ -3448,6 +3448,18 @@ replacement discipline. Removing the filer entirely needs an
 on-chain quorum oracle (threshold attestation or an on-chain
 voter registry); that is a registered next milestone, not part of
 this MVP.
+\item \textbf{The settlement root is challenge-gated, not
+verification-gated.} The contract checks that a filed
+attribution root is not yet posted; it does not check that the
+root is the correct one for its epoch. An early, unchallenged
+wrong root can therefore land within one epoch and, because the
+root is write-once, it is then permanent. The damage is bounded:
+a claim against the wrong root still passes the artifact
+eligibility checks and can draw at most what the undrawn
+attribution pool holds. The defenses are economic: a guilty
+verdict burns the filer's bond, and the parties a wrong root
+would mis-pay have both the standing and the one-epoch window to
+challenge it into the replay quorum.
 \item \textbf{The authority-key registry trusts governments' own
 channels.} Multi-channel pinning raises the cost of a forged
 order; it does not make forgery impossible. The effect of even a

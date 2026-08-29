@@ -267,6 +267,41 @@ describe("any party may post the attribution root (R3-F1)", function () {
         .to.equal(0n);
     });
 
+    it("two concurrent filings with different roots: the first to " +
+       "execute lands, the second skips, one bounty, both bonds " +
+       "accounted", async function () {
+      const f = await loadFixture(inboxFixture);
+      await fundLine(f);
+      await registerBounty(f, BOUNTY);
+      await advanceTime(EPOCH);
+      // two parties file the same closed epoch with different roots
+      await f.ledger.connect(f.stranger).fileAttributionRoot(
+        0n, ROOT, { value: BOND });
+      await f.ledger.connect(f.rando).fileAttributionRoot(
+        0n, ROOT_WRONG, { value: BOND });
+      await advanceTime(SLASH_WINDOW);
+      // the first to execute lands and earns the bounty
+      await expect(f.ledger.connect(f.rando).executeAttributionRoot(0n))
+        .to.emit(f.ledger, "AttributionRootPosted").withArgs(0n, ROOT)
+        .to.emit(f.ledger, "RootBountyAwarded")
+        .withArgs(0n, f.stranger.address, BOUNTY);
+      expect(await f.ledger.attributionRoot(0n)).to.equal(ROOT);
+      // the second filing resolves as a skip: no root, no bounty
+      await expect(f.ledger.connect(f.rando).executeAttributionRoot(1n))
+        .to.emit(f.ledger, "RootSkipped")
+        .withArgs(1n, "root already posted");
+      expect(await f.ledger.rootBountyClaimable(f.stranger.address))
+        .to.equal(BOUNTY);
+      expect(await f.ledger.rootBountyClaimable(f.rando.address))
+        .to.equal(0n);
+      // the pool lost exactly one bounty, never more
+      expect(await f.ledger.operationsPool()).to.equal(0n);
+      // both bonds are accounted: each filer pulls its own back
+      await f.ledger.connect(f.stranger).claimRootBond(0n);
+      await f.ledger.connect(f.rando).claimRootBond(1n);
+      expect(await f.ledger.rootBondHeld()).to.equal(0n);
+    });
+
     it("a quorum-confirmed root also pays the filer " +
        "(challenge -> innocent)", async function () {
       const f = await loadFixture(inboxFixture);

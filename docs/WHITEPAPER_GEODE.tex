@@ -1278,13 +1278,16 @@ published floor.
 public, append-only entry.
 \end{enumerate}
 
-\textbf{What the measurement measures.} The measurement
-is fair by construction: the network holds the data, and the
-contributor never sees the split. The rules are:
+\textbf{What the measurement measures.} The measurement produces
+one number: the artifact's held-out score on the axis metric,
+computed on data the contributor never saw. That number is sealed
+before evaluation, replayed from the ledger, and compared against
+the axis's published floor. It is never a self-report, and it is
+never measured on the contributor's training data. The rules that
+keep the number honest are:
 \begin{itemize}
 \item Contributors train on whatever data they like. The network
-does not audit their training data. It measures data the
-contributor cannot see.
+does not audit their training data, and it never scores on it.
 \item The network holds its own evaluation corpora. They are
 collected, held sealed, and never released. Every submission is
 scored on splits the contributor never touches.

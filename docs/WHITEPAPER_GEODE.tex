@@ -2756,19 +2756,19 @@ revenue. At the reference workload --- ten thousand sessions per
 epoch on the vision axis --- the itemized cost is about
 \$1.23 per epoch (librarian on-chain gas measured on the current
 contracts, batch verification at the measured proof cost, one
-dispute replay, one tally, serving bookkeeping, and the
-root-posting bounty). A base posting fee of about \$0.19 per
-entry closes the line at a registered 1.25$\times$ margin; that
-fee is a registered floor, not a suggestion. The line is held on
-chain by the settlement contract as a pool of the posting fees,
-and each unit of permissionless settlement work --- posting a
-root, running a batch verification, replaying a dispute, tallying
-a vote --- is paid a registered bounty from it. The payout is a
-pull, so no recipient can block the work that pays it. An axis
-whose entry volume falls short of the workload does not subsidise
-the line: the accrual is on chain, so the shortfall is public,
-and an empty pool skips a bounty publicly rather than minting
-one.
+dispute replay, one tally, and serving bookkeeping; the
+root-posting bounty is a registered draw on the same line). A
+base posting fee of about \$0.19 per entry closes the line at a
+registered 1.25$\times$ margin; that fee is a registered floor,
+not a suggestion. The line is held on chain by the settlement
+contract as a pool of the posting fees, and each unit of
+permissionless settlement work --- posting a root, running a
+batch verification, replaying a dispute, tallying a vote --- is
+paid a registered bounty from it. The payout is a pull, so no
+recipient can block the work that pays it. An axis whose entry
+volume falls short of the workload does not subsidise the line:
+the accrual is on chain, so the shortfall is public, and an empty
+pool skips a bounty publicly rather than minting one.
 
 \begin{figure}[t]
 \centering
@@ -3392,6 +3392,20 @@ commitments, proofs, and opened sums stay public; a corrupt
 majority of the sampled committee could open individual ballots.
 That is the same corrupt-validator boundary the rest of the
 design carries.
+\item \textbf{Credit recording and verdict filing are single-key acts.}
+The settlement around them is permissionless --- incorporation,
+root posting, branch delivery, and claims run with no named
+party --- but the two acts that still need one, writing the
+credits a session's evidence supports and filing an off-chain
+quorum verdict onto the ledger, run on the librarian key. A
+stopped or captured key halts new credits and delays a verdict's
+execution; it cannot change either, because the verdict is
+decided off-chain by the replay and the key only files it. Both
+failures are recorded and visible, and both feed the keyless
+replacement discipline. Removing the filer entirely needs an
+on-chain quorum oracle (threshold attestation or an on-chain
+voter registry); that is a registered next milestone, not part of
+this MVP.
 \item \textbf{The authority-key registry trusts governments' own
 channels.} Multi-channel pinning raises the cost of a forged
 order; it does not make forgery impossible. The effect of even a

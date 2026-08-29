@@ -107,5 +107,28 @@ group; commit when green.
   zero-weight result (M358: `haircut: 0.025`).
 
 Gates: Python **1144 passed / 1 skipped** (was 1142; +2 beacon
-tests); EVM **134 passing** (unchanged); `check_whitepaper_tex.py`
-**PASS** (1048/1048 braces, 17 labels, 14 refs, 58 bibitems).
+tests); EVM **148 passing** (was 134; +14 root-filing and bounty
+gates); `check_whitepaper_tex.py` **PASS** (1049/1049 braces, 17
+labels, 14 refs, 58 bibitems).
+
+## 5. Registered follow-ups (not solved in this pass)
+
+- **Deploy-posture wiring.** The paper's settlement system includes
+the force-inclusion inbox whose posting fees fund the operations
+line, and the root-posting bounty. The contract supports both
+(`InclusionInbox` with the ledger as `operationsLine`;
+`pullOperations`; `scheduleRootPostingBounty`). The registered
+launch posture (`deploy_testnet.js`) does not yet deploy the inbox
+or register the bounty; the launch checklist's user-owned gates
+(§6b) do not list the inbox either. Wiring the inbox and registering
+the bounty into the launch posture is a launch-scope decision, not a
+paper-code divergence, and is left for the launch step — not
+silently added to the registered posture.
+- **The on-chain quorum oracle.** The settlement path is now
+permissionless except the quorum-VERDICT filing (`resolveSlash` /
+`resolveRegistryChange` / `resolveAttributionRoot` stay
+`onlyLibrarian`) and credit recording. The paper's known-limits
+section now discloses this as the "credit recording and verdict
+filing are single-key acts" residual. Closing it (threshold
+attestation or an on-chain voter registry) is the same registered
+next milestone the R2 pass parked.

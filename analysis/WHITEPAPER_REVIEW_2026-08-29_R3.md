@@ -24,6 +24,7 @@ design — never silently.
 | F6   | LOW      | "See §Serving verification" is an unnumbered section reference; and "five hundred seconds against a hundred-second bound --- five times the head-only figure" reads ambiguously (the 5× describes the bound, not the 500 s). | Use the numbered reference; reword the bound sentence. |
 | F7   | MEDIUM    | The Actors list says the librarian "at maturity is a governance contract with no human key"; the implemented keyless contract (M388 `LibrarianGovernance`) is the governance *executor* that replaces the librarian, not the librarian itself. The librarian is an operator key throughout the MVP. | Reword the bullet: the librarian is an operator key; a keyless governance executor names and replaces it. |
 | F8   | HIGH      | §Serving verification (device readout) says the private tier's score-vector oracle needs "$d\cdot C$ queries recover the head exactly" and prices the tier at "the score-vector-oracle figure --- $2.8\times$". Both are the RAW-MARGIN figures (M332/M357: d·C queries, 2.8×). The score vector returns all C scores per query for a code the device computed itself, so ~d queries recover W — a factor of ~C below the raw margin. The private tier's model confidentiality is not an economic boundary at 2.8×; it is recoverable in roughly d queries. Inherited from R2's G1/M349, which reused the M332 raw-margin number for the stronger oracle. | Rewrite the paragraph: the score vector recovers W in about d queries (derived, linear algebra); the tier's claim is input privacy, not model confidentiality; drop the false 2.8× pricing basis. |
+| F9   | MEDIUM    | Appendix "A wash ring tries and fails" says "Every round-trip pays the 2.5% dock twice, 2 × 0.025 = 0.05 of the looped amount" — 5%. The sealed M358 evidence measures the ring's haircut at 2.5% (`haircut: 0.025`; the gate's registered "loses 5%" was corrected DOWN during the measurement). The appendix uses the pre-correction estimate. | Correct the appendix to the measured 2.5% dev-fund dock, and state the post-repair zero-weight result (M358). |
 
 ## 2. Verified and closed (not findings)
 
@@ -80,6 +81,10 @@ group; commit when green.
   gains the same caveat. (This error survived R1/R2 and M349's
   option-2 consequence, which reused the M332 raw-margin number for
   the strictly stronger oracle.)
+- **F9 SEALED.** The wash-ring appendix no longer claims "2 × 0.025 =
+  0.05 of the looped amount" (the pre-correction ~5% estimate). It
+  now states the measured 2.5% dev-fund dock and the post-repair
+  zero-weight result (M358: `haircut: 0.025`).
 
 Gates: Python **1144 passed / 1 skipped** (was 1142; +2 beacon
 tests); EVM **134 passing** (unchanged); `check_whitepaper_tex.py`

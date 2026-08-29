@@ -3857,9 +3857,13 @@ covered.
 \subsection{A wash ring tries and fails}
 
 Two addresses trade fake sessions with each other, hoping to
-inflate activity. Every round-trip pays the 2.5\% dock twice,
-$2 \times 0.025 = 0.05$ of the looped amount. Probed sessions
-pay the reference-run price on top. The gains it
+inflate activity. Every payment pays the 2.5\% development-fund
+dock --- measured at 2.5\% of the ring's cycled credit --- and
+the cycled revenue buys no voting weight at all: credits earned
+from a payer inside the earner's own linkage closure carry none,
+so the ring spends the dock and gets neither weight nor
+reputation for it, while an honest supplier keeps both. Probed
+sessions pay the reference-run price on top. The gains it
 hoped for do not exist. Scores are measured on held-out data,
 never on usage. Reputation cannot be bought by volume. The ring
 loses money on every loop.

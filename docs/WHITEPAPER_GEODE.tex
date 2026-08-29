@@ -338,8 +338,8 @@ path. A coercer can point at artifacts, never at audiences. The
 only content powers are public-record votes and authenticated
 freezes, and their effects are fixed: suspend, never burn. The
 protocol does meter per payer, and a payer address is
-pseudonymous; the metering is enforced locally at the gateway a
-user connects to, and nothing per payer is ever written to the
+pseudonymous; the metering is enforced locally at the gateway that a user
+connects to, and nothing per payer is ever written to the
 public ledger.
 \item[Earned, capped votes.] A vote counts only with pedigree: the
 activation window, the activity floor, and verified work. It
@@ -385,8 +385,8 @@ optional, measured per pair. Both outcomes are published.
 \item \textbf{Composition (b): chaining.} The core concept is a
 pipeline: capabilities link so that one stage's output becomes the
 next stage's input, and the linked stages together serve a task
-none of them serves alone e.g., transcribe the recording, then read
-the intent out of the transcript. A chain
+none of them serves alone, e.g. transcribe the recording and then
+read the intent out of the transcript. A chain
 $g \circ h$ is admissible exactly when the output contract of $h$
 satisfies the input contract of $g$, written
 $C_{\mathrm{out}}(h) \subseteq C_{\mathrm{in}}(g)$, i.e. the outputs
@@ -402,11 +402,11 @@ for the monolithic head that is the strongest single stage, and
 $0.2995$ when the router is handed the true domain. Routing
 error costs part of what specialisation earns.
 
-The tested scope is narrow: one chain, of length
-two, where both stages read the same frozen features. Chains of
+The tested scope is narrow: one chain of length
+two, in which both stages read the same frozen features. Chains of
 length three and above, and chains that cross modalities, remain
 unmeasured. Where composition does not hold, an arm can be a large
-deep network of the current state of the art. The design does not
+deep network at the current state of the art. The design does not
 depend on either path winning everywhere.
 \end{enumerate}
 
@@ -467,15 +467,14 @@ b \in \mathbb{R}^C,
 \end{equation}
 with $W$ the class projection and $b$ the class intercept (the
 ridge fit's bias, folded into $W$ in any place that writes the
-head without it).
-the answer is the top-scoring class (the entry of $s$ with the
-largest value),
+head without it). The answer is the
+top-scoring class, the entry of $s$ with the largest value,
 \begin{equation}
 \hat y = \argmax_{j \in [C]} s_j,
 \end{equation}
-and confidence is returned as a coarse bucket, never the raw
+Confidence is returned as a coarse bucket, never the raw
 number: the winning class's softmax margin is compared against
-the artifact's registered bucket edges and the answer carries
+the artifact's registered bucket edges, and the answer carries
 only the predicted class and the bucket index,
 \begin{equation}
 \kappa(x) = \softmax(s)_{\hat y} - \max_{j \neq \hat y} \softmax(s)_j, \qquad
@@ -489,7 +488,7 @@ in $d \cdot C$ unknowns; the bucket leaves only coarse
 information, and the extraction-cost analysis in
 Section~\ref{sec:measured} prices what remains.
 The capability abstains whenever $\kappa(x) < \tau$, the axis's
-registered margin threshold, a floor each axis publishes.
+registered margin threshold, a floor that each axis publishes.
 Number and transcript outputs are
 read out of the same vector through the task's registered
 decoder; the four-step form is unchanged.
@@ -510,8 +509,8 @@ On a sampled fraction of settlement batches, whoever computes it
 attaches
 a Bulletproofs-style argument. The argument proves that the
 reported answer is exactly what the sealed head computes. It is
-not cheaper than recomputing; for a linear head nothing is.
-Section~\ref{sec:proofs} prices it per axis. What it buys is
+not cheaper than recomputing; for a linear head, nothing is
+cheaper. Section~\ref{sec:proofs} prices it per axis. What it buys is
 that the proof reveals nothing about the input, and that the
 verifier never needs the private head. This is
 verification without disclosure.
@@ -750,8 +749,8 @@ share (ratio $1.95$). Those figures require the per-session term in
 the seed: with the seed drawn from the beacon alone, the same
 sweep gives a single arm $1.000$ of traffic in all three cases.
 Rank ties resolve by a hash of the artifact and the
-anchor, never the bare artifact hash: unknowable at seal time,
-deterministic per anchor.
+anchor, never by the bare artifact hash. The hash is unknowable
+at seal time and deterministic per anchor.
 \item A per-axis price floor sits at the reference hosting
 cost. Registration below the floor is rejected, and
 below-floor prices are never routed. The floor stops a price
@@ -911,7 +910,7 @@ incorporate the entry at the head of the queue}. Nobody has to be
 asked. A poster who is being ignored clears its own entry, so
 withholding a rival's registration, a dispute filing, or a mismatch
 record does not delay it at all. The queue is an on-chain inbox
-contract, and the state of it is queryable on chain, never silent.
+contract, and the state of it is queryable on chain and is never silent.
 
 The reason incorporation needs no permission is that it decides
 nothing. Every step it takes is already fixed by what is on the chain:
@@ -1008,12 +1007,12 @@ costs far more than recomputing. What it buys is verification
 computation, because $W$ is private. That is the whole benefit,
 and it is enough where the head must stay secret.
 
-The measured cost, on the reference CPU, per registered axis.
-Serving is a float64 mat-vec of $n = dC$ multiply-adds. Prover and
+The table gives the measured cost per registered axis on the
+reference CPU. Serving is a float64 mat-vec of $n = dC$ multiply-adds. Prover and
 verifier costs are the analytic Bulletproofs operation counts
 priced at a measured ed25519 scalar multiplication of
 $152.3\,\mu$s, with multi-exponentiation costed by the bucket
-method, the model most favourable to the proof system.
+method, which is the model most favourable to the proof system.
 
 \begin{center}\small
 \begin{tabular}{lrrrrr}
@@ -1311,7 +1310,7 @@ rows exactly where scores are weakest. The exact value stays in
 the ledger.
 \item Of the axes measured in this paper only the Open Images
 vision axis clears that minimum ($245{,}723$ held-out rows). The
-standard GLUE and Speech Commands evaluation splits do not; SST-2 dev is $872$ rows, MNLI-matched
+standard GLUE and Speech Commands evaluation splits do not clear that minimum; SST-2 dev is $872$ rows, MNLI-matched
 dev $9{,}815$, and Speech Commands v2 test $11{,}005$. On those axes single-row
 influence is at or above the reported resolution and the
 probing defense rests on the registration fee alone. Reporting
@@ -1562,7 +1561,7 @@ except the contributor's own host; that, with the input-privacy
 guarantee, is all the paper claims for the tier.
 
 \textbf{The privacy tier is an axis, not a price point.} A private
-arm at twenty seconds a query cannot compete on ranking against a
+arm at twenty seconds per query cannot compete on ranking against a
 plaintext arm at a millisecond: the router ranks on
 $v_a = s_a/(p_a \bar u_a)$, so a private arm would sit four orders
 of magnitude down any shared leaderboard and never be routed to.
@@ -1576,8 +1575,8 @@ $\{\texttt{plaintext}, \texttt{device\_encoder},
 through the unit table so it is frozen with everything else. Arms
 compete only inside their own tier; $v_a$ is never compared across
 tiers. A route that would cross a tier boundary is a refusal, not
-a low ranking. Each tier carries its own price floor, for the
-private tier the measured FHE reference cost, and its own
+a low ranking. Each tier carries its own price floor, namely the
+measured FHE reference cost for the private tier, and its own
 published quality floor. Without the descriptor field a user
 could not ask for private serving at all.
 
@@ -1851,7 +1850,7 @@ is recorded and metered at the measured compute fraction actually
 consumed (for a single-pass head, the full unit price, because
 the whole forward pass runs before the abstention is known; a
 cascade that abstains before its expensive stage registers a
-genuinely lower fraction per axis), never free. The
+genuinely lower fraction per axis). An abstention is never free. The
 boundary-mapping queries that
 probe the margin threshold are exactly the queries most likely
 to abstain, and they pay for the compute they burn.
@@ -2164,7 +2163,7 @@ not computed per session. They are computed once per registered
 chain against its sealed reference workload, published with the
 chain, and reused by every session that chain serves until it
 re-registers. Chain length is capped at four stages, which is
-sixteen evaluations, an amount a validator can replay. A chain
+sixteen evaluations, an amount that a validator can replay. A chain
 longer than four is not admissible.
 
 \begin{itemize}
@@ -2268,9 +2267,9 @@ unaffected.
 is pedigree: an activation window of two epochs, an activity
 floor of responded rounds, and a verified-work-only record. How
 much it weighs is earnings: the credits the voter has earned and
-not yet claimed, counted per behavioural identity, the
-artifact's measured response signature, so split accounts do not
-multiply weight.
+not yet claimed, counted per behavioural identity,
+i.e. the artifact's measured response signature, so split accounts
+do not multiply weight.
 \item \textbf{Why earnings.} Influence follows who has the most
 earned, at-risk capital, not who has been around longest.
 Unclaimed credits can be burned on conviction; claimed ETH
@@ -2375,11 +2374,11 @@ any address including a wash ring, accrues zero.
 \item \textbf{The per-axis bond.} Alongside the fee, a
 contributor posts a per-axis bond sized to the compute saving the
 axis makes available over the open-exposure window, the
-quantity a substitute actually arbitrages. That saving is the
+quantity that a substitute actually arbitrages. That saving is the
 substitute's private information, so the registry estimates it
 from public quantities: the axis's posted price minus the
 developer's posted reference hosting cost, times a registered
-conservatism factor, an estimate that over-sizes the bond,
+conservatism factor, an estimate that over-sizes the bond and
 never under-sizes it. The bond is forfeited
 on conviction and returned in full otherwise. Bonds are economic:
 they require no identity.
@@ -2455,7 +2454,7 @@ the call. A refutation, posted against the same bond by
 anyone who re-ran the replay and found the accusation false,
 escalates the filing to the replay quorum, which decides by the
 same computation. The loser of the dispute loses its bond, so a
-false accusation is not merely wrong, it is expensive, and a
+false accusation is not merely wrong; it is expensive, and a
 conviction that survives a challenge still lands. The bond is
 never paid to the network: the loser's stake is burned, matching
 the rule that nobody gains from a penalty.
@@ -2553,7 +2552,7 @@ nothing if it is right.
 
 The quorum takedown handles reports from anyone. States issue
 orders too, and the network needs a defined way to receive them.
-Defined, because the alternative is a quiet back channel.
+It must be defined, because the alternative is a quiet back channel.
 
 \begin{itemize}
 \item \textbf{Recorded channels only.} A government publishes a
@@ -2685,9 +2684,9 @@ users, regions, or classes of traffic, because those fields do
 not exist in the protocol.
 \item \textbf{Multi-jurisdiction nexus quorum.} The compliance
 nexus set is a quorum of registered jurisdictions. Policy
-changes, which authority keys are admitted, thresholds, and
-notice formats, require cross-jurisdiction agreement under
-the standard timelock. No single state dictates policy
+changes, including which authority keys are admitted, what
+thresholds apply, and what notice formats are used, require
+cross-jurisdiction agreement under the standard timelock. No single state dictates policy
 unilaterally; competing states bargain inside public governance
 instead of arm-wrestling outside it.
 \item \textbf{The frontend is the platform.} The software a user
@@ -2702,8 +2701,8 @@ fingerprint of the file itself, with no developer-held
 pointer. Discovery is ledger-side. No single endpoint can be
 taken down to block the software, and frontends are
 endpoint-agnostic. Availability is a federation too:
-independent parties, validators, gateway operators, and the
-development fund through incentivized pinning contracts, pin
+independent parties, namely validators, gateway operators, and
+the development fund through incentivized pinning contracts, pin
 every released frontend, and a stronger permanence substrate is
 a registered governance choice, not a developer one.
 \item \textbf{No escalation path.} The developer has no
@@ -2927,7 +2926,7 @@ $\uparrow$ higher is better; $\downarrow$ lower is better. The
 ladder rows (Whisper speech, DINOv2 vision) are families of models
 of increasing size, reported in increasing-size order.
 
-A few readings from this table, stated plainly. The vision trunk
+A few readings from this table, stated plainly, follow. The vision trunk
 ladder, a family of models of increasing size, is monotonic
 but stays far below the 0.8 deployment bar, with the arm serving
 only a scoped subset and refusing the rest rather than guessing.
@@ -2977,7 +2976,7 @@ specialist is fitted on roughly a sixth of the rows. It trades
 parameters for training data and comes out ahead. The comparison
 is artifact-matched rather than parameter-matched: two stages
 are two priced artifacts whatever their size, which is the
-matching the fee rule divides over.
+matching that the fee rule divides over.
 
 The router is right about the domain $0.815$ of the time. Given
 the true domain instead, the same specialists reach $0.2995$. So
@@ -2988,7 +2987,7 @@ was registered before the run, because the two ways this cell
 could have failed call for opposite responses, and deciding which
 one applied after seeing the numbers would have been worthless.
 
-Two boundaries. This is one chain, of length two, whose stages
+Two boundaries apply. This is one chain of length two whose stages
 read the same frozen features; nothing here speaks to length
 three, to crossing modalities, or to stages that must serialise
 through a text interface. And the cell is a chain that
@@ -3046,8 +3045,8 @@ best-quality mode to the weaker arm.
 A buyer
 declares the task, sees the served set and the coverage before
 paying, and an abstention is metered at the measured compute
-fraction, the full unit price on a single-pass head per axis,
-never free. The registered upgrade path
+fraction, which on a single-pass head is the full unit price per
+axis. An abstention is never free. The registered upgrade path
 for the same axis is measured: stronger frozen features (the
 CLIP-class trunk closed most of the per-domain gap over the
 DINOv2 ladder) and the random-feature map above.
@@ -3060,8 +3059,8 @@ figure would overstate what a buyer experiences. Both are
 published, and the gap between them is measured rather than
 hidden.
 
-Equally measured, and equally honest: a planted
-out-of-distribution (OOD) probe. The probe uses artificial inputs
+A planted out-of-distribution (OOD) probe was measured with the
+same honesty. It uses artificial inputs
 unlike anything the models were trained on. It found no tested
 detector that separates them from real photos at pre-registered
 gates. The guard therefore stays a report, not a product.
@@ -3139,9 +3138,9 @@ rather than discarding a result.
 \item \textbf{Dispute by fraud proof}: Truebit's verification
 game~\cite{truebit2017} and the optimistic-rollup lineage
 descended from it. GEODE's dispute-by-replay is the same
-skeleton, assume honest, challenge on objection, and settle by
-re-execution, narrowed to a deterministic head fit, which is
-what makes the bisection unnecessary.
+skeleton, narrowed to a deterministic head fit: assume honest,
+challenge on objection, and settle by re-execution. The narrowing
+is what makes the bisection unnecessary.
 \item \textbf{Behavioural model identity}: fingerprinting a
 network by its decision boundary, IPGuard~\cite{ipguard2021};
 conferrable adversarial examples, Lukas et al.~\cite{lukas2021};
@@ -3701,7 +3700,7 @@ stops at the declared cap. The user pays the price locked at
 routing, for the units actually served.
 \item If the artifact abstains, the abstention is recorded and
 metered at the measured compute fraction actually consumed, the
-full unit price on a single-pass head per axis, never free.
+full unit price on a single-pass head per axis. It is never free.
 \end{enumerate}
 \textbf{Abuse closed here.} A payer cannot wash money through its
 own payout address. The self-payment exclusion stops that. A

@@ -2780,11 +2780,12 @@ Validator & per accepted challenge, epoch-vested \\
 Reference executor & share of the registered reference-run price
 on probed sessions, paid from the probed contributor's dock \\
 Operations line & the non-refundable posting fees of the
-force-inclusion queue, pulled by whoever did the work (the
-librarian for prompt incorporation, the clearer after the
-deadline, the party whose root lands, the keeper who runs a
-batch verification or a tally); held on chain as a pool that
-funds the settlement work and pays the root-posting bounty \\
+force-inclusion queue, held on chain as a pool that funds the
+settlement work. A fee lands in the pool when the librarian
+incorporates, or when a stranger clears the entry within the
+window; a stranger who clears a late entry earns the fee
+directly. The pool's registered draw is the root-posting
+bounty, paid to whoever's root lands, the librarian included \\
 Development fund & 2.5\% of all fees + registration fees \\
 \bottomrule
 \end{tabular}

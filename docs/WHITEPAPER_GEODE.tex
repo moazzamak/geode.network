@@ -3648,6 +3648,102 @@ walkthrough: who does what, in what order, and what the ledger
 decides. Abuse attempts appear in the same scenes. Each scene
 ends where the mechanism closes the abuse.
 
+\subsection{The pools and where the money goes}
+
+The body states each flow in place. This section collects them
+into one map, so a reader can see which pool receives which
+payment and where that pool's money leaves the system. Four
+holding places matter: the development fund, the attribution
+pool, the operations pool, and the challenge budgets. Bonds are
+held, not pooled. Figure~\ref{fig:pools} shows the routes.
+
+\begin{figure}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\small,
+  box/.style={draw, rounded corners=2pt, minimum height=8.5mm,
+              align=center, fill=blue!6},
+  pool/.style={draw, rounded corners=2pt, minimum height=8.5mm,
+              align=center, fill=green!8, thick},
+  arr/.style={-{Stealth}, thick}
+]
+\node[box] (payer) at (0,3.2) {payer\\session payment};
+\node[box] (reg) at (0,1.3) {capability\\registration};
+\node[box] (post) at (0,-0.6) {queue poster\\bond + posting fee};
+\node[box] (file) at (0,-2.5) {root or slash\\filer, bond};
+
+\node[pool] (dev) at (5.4,3.2) {development fund\\2.5\% + registration fees};
+\node[pool] (attr) at (5.4,1.3) {attribution pool\\97.5\% of session fees};
+\node[pool] (ops) at (5.4,-0.6) {operations pool\\posting fees};
+\node[pool] (chg) at (5.4,-2.5) {challenge budget\\per submission};
+\node[pool, dashed] (bonds) at (5.4,-4.4) {bond vaults\\held, not pooled};
+
+\node[box] (zakat) at (10.8,3.2) {audits, tooling, security,\\public-good research;\\zakat end-state};
+\node[box] (vest) at (10.8,1.3) {credits vest\\$N=4$ epochs,\\pull claim};
+\node[box] (bounty) at (10.8,-0.6) {root-posting bounty\\to whoever's root lands};
+\node[box] (valfee) at (10.8,-2.5) {validator fees\\per accepted\\challenge};
+\node[box] (refund) at (10.8,-4.4) {returned to the\\rightful party,\\else burned};
+
+\draw[arr] (payer) -- (dev);
+\draw[arr] (payer) -- (attr);
+\draw[arr] (reg) -- (dev);
+\draw[arr] (reg) -- (chg);
+\draw[arr] (reg) -- (bonds);
+\draw[arr] (post) -- (ops);
+\draw[arr] (post) -- (bonds);
+\draw[arr] (file) -- (bonds);
+\draw[arr] (dev) -- (zakat);
+\draw[arr] (attr) -- (vest);
+\draw[arr] (ops) -- (bounty);
+\draw[arr] (chg) -- (valfee);
+\draw[arr] (bonds) -- (refund);
+\end{tikzpicture}%
+}
+\caption{The pools and the fee routes. Each pool is a separate
+account with its own source and its own outflows; bonds are
+held, not pooled.}
+\label{fig:pools}
+\end{figure}
+
+The same map, in words, case by case:
+
+\begin{center}
+\begin{tabular}{@{}p{6.0cm}p{9.5cm}@{}}
+\toprule
+\textbf{When this happens} & \textbf{Where the money lands} \\
+\midrule
+A payer buys an answer & the session fee splits: 2.5\% to the
+development fund and 97.5\% to the attribution pool \\
+A capability registers & the flat registration fee to the
+development fund; a per-axis bond held; a challenge budget set
+aside for its sampled validators \\
+A poster uses the force-inclusion queue & the refundable bond
+held; the non-refundable posting fee to the operations pool, or
+directly to a stranger who clears the entry after its deadline \\
+A root or slash filing posts a bond & the bond held, returned to
+the party the verdict vindicates, otherwise burned. A root that
+lands pays the registered root-posting bounty, drawn from the
+operations pool \\
+A contributor's work is served & the 97.5\% credit vests over
+four epochs and is pull-claimed; a probed contributor is docked
+for the reference executor's share \\
+A validator earns an accepted challenge & the per-challenge fee
+from the contributor's challenge budget, epoch-vested and
+pull-claimed \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two boundaries hold everywhere. The pools never exchange value
+with each other: each is fed by its own source and pays its own
+outflows. Bonds are never income: a bond is held, returned to
+the party the rules vindicate, or burned, and it is never
+collected by the network. The development fund never pays
+bounties, and the operations pool's only registered draw is the
+root-posting bounty; the two are not the same pot, which is the
+confusion this section exists to prevent.
+
 \subsection{Registering a new arm}
 
 A contributor wants to offer a coder arm on the code axis.

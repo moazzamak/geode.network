@@ -353,8 +353,8 @@ and held-out. We state its limits alongside it.
 
 The design rests on the assumptions below. Each one is a stated
 belief, not a measured fact. Where this paper leans on established
-crypto practice, it says so in place. Two examples: paying for
-access instead of identity checks, and the limits of majority
+crypto practice, it says so in place. Two such places are paying
+for access instead of identity checks, and the limits of majority
 honesty.
 
 \begin{enumerate}
@@ -2166,7 +2166,7 @@ the coalition value of a subset of stages is the chain's measured
 end-to-end score with the stages outside the subset replaced by
 the identity (pass-through) stage, and a stage that hurts the
 chain earns zero, never a subsidy. The split always sums to one
-over the paid stages. It is released gradually, as follows.
+over the paid stages. It is released gradually.
 \end{itemize}
 
 \textbf{Shapley is the protocol's single attribution rule.} It
@@ -2186,6 +2186,8 @@ chain, and reused by every session that chain serves until it
 re-registers. Chain length is capped at four stages, which is
 sixteen evaluations, an amount that a validator can replay. A chain
 longer than four is not admissible.
+
+The credited amounts release under fixed mechanics:
 
 \begin{itemize}
 \item \textbf{Vesting.} A credited amount $c$ vests linearly over

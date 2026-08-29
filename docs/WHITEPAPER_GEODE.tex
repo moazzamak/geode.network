@@ -1790,7 +1790,7 @@ executor. Each tier therefore names one operative mechanism, and
 the empty-pool case carries its stated residual.
 
 \begin{center}\small
-\begin{tabular}{@{}p{3.1cm}cccl@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
 \toprule
 \textbf{Tier} & \textbf{Shadow probe} & \textbf{Behavioural identity} & \textbf{Head proof} & \textbf{Dispute replay} \\
 \midrule
@@ -2887,8 +2887,8 @@ register-before-measuring discipline. The scale is small,
 single-corpus, and single-party. Treat these as a working
 demonstration, not as a competitive claim.
 
-\begin{center}
-\begin{tabular}{@{}lll@{}}
+\begin{center}\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7.8cm}l@{}}
 \toprule
 \textbf{Axis} & \textbf{Measurement} & \textbf{Result} \\
 \midrule
@@ -2905,7 +2905,7 @@ Text & frozen BERT-base + ridge: SST-2 / IMDb / MNLI-m $\uparrow$ & 0.857 / 0.82
 Audio & frozen wav2vec2-base + ridge, Speech Commands v2 $\uparrow$ & 0.879 \\
 Number series & in-house temporal arms, Mackey-Glass one-step NRMSFE $\downarrow$ & 0.0032 / 0.00031 \\
 \midrule
-\multicolumn{3}{@{}l}{\textit{The architecture's own cells (reproduction checks above; these are not published-checkpoint numbers)}} \\
+\multicolumn{3}{@{}p{13.8cm}@{}}{\textit{The architecture's own cells (reproduction checks above; these are not published-checkpoint numbers)}} \\
 \midrule
 Fusion & clean cell: ms codes + native DINOv2, concatenated $\uparrow$ & 0.548 \\
 & same cell, single encoder (ms codes only) $\uparrow$ & 0.242 \\

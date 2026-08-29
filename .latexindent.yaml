@@ -1,0 +1,9 @@
+# latexindent settings for the GEODE whitepaper.
+# Run from the repository root:
+#   perl latexindent.pl -w -s docs/WHITEPAPER_GEODE.tex
+#
+# Conservative by design: latexindent indents environments and code
+# blocks but does NOT rewrap prose (modifyLineBreaks stays off), so
+# the carefully wrapped sentences and the hand-aligned TikZ figures
+# keep their line structure. Only leading indentation is normalised.
+defaultIndent: "    "

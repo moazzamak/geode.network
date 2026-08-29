@@ -11,6 +11,7 @@ const { loadFixture } = require("@nomicfoundation/hardhat-toolbox/network-helper
 const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 
 const EPOCH = 7 * 24 * 3600;
+const SLASH_WINDOW = 7 * 24 * 3600;
 const CHANGE_DELAY = 2 * 24 * 3600;
 const PRICE_DELAY = 7 * 24 * 3600;
 const FEE = 1000n;
@@ -21,7 +22,8 @@ async function advanceTime(seconds) {
 }
 
 async function deployFixture() {
-  const [owner, devFund, payer, contributor, operator, librarian, rando] =
+  const [owner, devFund, payer, contributor, operator, librarian, rando,
+        voterA, voterB] =
     await ethers.getSigners();
   const Ledger = await ethers.getContractFactory("CreditLedger");
   const ledger = await upgrades.deployProxy(Ledger, [
@@ -32,7 +34,7 @@ async function deployFixture() {
   await ledger.setLibrarian(librarian.address);
   const artifactId = ethers.keccak256(ethers.toUtf8Bytes("arm-a"));
   return { owner, devFund, payer, contributor, operator, librarian,
-           rando, ledger, artifactId, Ledger };
+           rando, voterA, voterB, ledger, artifactId, Ledger };
 }
 
 async function registeredFixture() {
@@ -610,6 +612,30 @@ describe("CreditLedger", function () {
       return f;
     }
 
+    // Attestation-quorum variant: two extra identities are credited
+    // early and vested (5 epochs) so a quorum can form; the accused is
+    // credited FRESH in the current epoch (unvested) so a level-1
+    // slash still has unvested credits to burn; a stranger files and
+    // the accused challenges.
+    async function attestedSlashFixture() {
+      const f = await loadFixture(registeredFixture);
+      await f.ledger.connect(f.librarian).recordCredits(
+        [f.payer.address, f.payer.address],
+        [{ artifactId: f.artifactId, who: f.voterA.address, amount: 100n },
+         { artifactId: f.artifactId, who: f.voterB.address, amount: 100n }]);
+      await advanceTime(5 * EPOCH);          // vest the voters; epoch 0 closed
+      await f.ledger.connect(f.librarian).recordCredits(
+        [f.payer.address],
+        [{ artifactId: f.artifactId, who: f.contributor.address,
+           amount: 2000n }]);                // fresh, unvested
+      await f.ledger.connect(f.rando).fileSlash(
+        f.contributor.address, f.artifactId, 500n, 1, ethers.ZeroHash,
+        { value: SLASH_BOND });
+      await f.ledger.connect(f.contributor).challengeSlash(
+        0, { value: SLASH_BOND });
+      return f;
+    }
+
     it("anyone files with a bond and nothing burns until resolution",
        async function () {
       const f = await loadFixture(creditedFixture);
@@ -655,22 +681,22 @@ describe("CreditLedger", function () {
 
     it("a false accusation loses the bond to the quorum's verdict",
        async function () {
-      const f = await loadFixture(filedFixture);
-      // the accused refutes by replay, inside the window
-      await f.ledger.connect(f.contributor).challengeSlash(
-        0, { value: SLASH_BOND });
-      await advanceTime(8 * 24 * 3600);
+      const f = await loadFixture(attestedSlashFixture);
+      // the attestation window opens when the challenge window closes
+      await advanceTime(SLASH_WINDOW);
+      // the accused and two honest voters attest VOID
+      await f.ledger.connect(f.contributor).attestSlash(0, true);
+      await f.ledger.connect(f.voterA).attestSlash(0, true);
+      await f.ledger.connect(f.voterB).attestSlash(0, true);
       // a challenged filing cannot be executed unilaterally
       await expect(f.ledger.connect(f.rando).executeSlash(0))
         .to.be.revertedWithCustomError(f.ledger, "ChallengePending");
-      // the quorum's verdict (filed by the librarian) is innocent
       const rec = ethers.keccak256(ethers.toUtf8Bytes("v1"));
-      await expect(f.ledger.connect(f.librarian).resolveSlash(0, false, rec))
+      await expect(f.ledger.connect(f.rando).finalizeSlash(0, rec))
         .to.emit(f.ledger, "SlashResolved").withArgs(0, false, rec);
       // nothing burned; the false accuser's bond is forfeited
       expect(await f.ledger.burnedTotal()).to.equal(0n);
       expect(await f.ledger.slashBondsBurned()).to.equal(SLASH_BOND);
-      expect(await f.ledger.slashBondHeld()).to.equal(SLASH_BOND);
       // the challenger pulls its own bond back
       await f.ledger.connect(f.contributor).claimSlashBond(0);
       expect(await f.ledger.slashBondHeld()).to.equal(0n);
@@ -681,12 +707,14 @@ describe("CreditLedger", function () {
 
     it("a true filing survives its own challenge: the challenger's " +
        "bond is burned and the slash still lands", async function () {
-      const f = await loadFixture(filedFixture);
-      // the guilty party challenges its own true filing
-      await f.ledger.connect(f.contributor).challengeSlash(
-        0, { value: SLASH_BOND });
+      const f = await loadFixture(attestedSlashFixture);
+      await advanceTime(SLASH_WINDOW);
+      // the quorum upholds the true accusation
+      await f.ledger.connect(f.contributor).attestSlash(0, false);
+      await f.ledger.connect(f.voterA).attestSlash(0, false);
+      await f.ledger.connect(f.voterB).attestSlash(0, false);
       const rec = ethers.keccak256(ethers.toUtf8Bytes("v2"));
-      await expect(f.ledger.connect(f.librarian).resolveSlash(0, true, rec))
+      await expect(f.ledger.connect(f.rando).finalizeSlash(0, rec))
         .to.emit(f.ledger, "Burned")
         .withArgs(f.contributor.address, f.artifactId, 500n, 1,
                   ethers.ZeroHash);
@@ -699,14 +727,22 @@ describe("CreditLedger", function () {
       expect(await f.ledger.slashBondHeld()).to.equal(0n);
     });
 
-    it("only the librarian resolves a challenged filing",
-       async function () {
-      const f = await loadFixture(filedFixture);
-      await f.ledger.connect(f.contributor).challengeSlash(
-        0, { value: SLASH_BOND });
-      await expect(f.ledger.connect(f.rando).resolveSlash(
-        0, false, ethers.ZeroHash))
-        .to.be.revertedWithCustomError(f.ledger, "NotLibrarian");
+    it("finalization is permissionless and the accuser cannot vote on " +
+       "its own accusation", async function () {
+      const f = await loadFixture(attestedSlashFixture);
+      await advanceTime(SLASH_WINDOW);
+      // the accuser has no earned credits: no vote
+      await expect(f.ledger.connect(f.rando).attestSlash(0, true))
+        .to.be.revertedWithCustomError(f.ledger, "NotEligible");
+      // the librarian has no earned credits either: no vote
+      await expect(f.ledger.connect(f.librarian).attestSlash(0, true))
+        .to.be.revertedWithCustomError(f.ledger, "NotEligible");
+      await f.ledger.connect(f.contributor).attestSlash(0, true);
+      await f.ledger.connect(f.voterA).attestSlash(0, true);
+      await f.ledger.connect(f.voterB).attestSlash(0, true);
+      // anyone finalizes; no key is needed anywhere
+      await f.ledger.connect(f.rando).finalizeSlash(0, ethers.ZeroHash);
+      expect(await f.ledger.burnedTotal()).to.equal(0n);
     });
 
     it("a wrong bond is refused at filing and at challenge time",
@@ -774,11 +810,12 @@ describe("CreditLedger", function () {
       await f.ledger.connect(f.rando).executeSlash(0);
       await expect(f.ledger.connect(f.rando).executeSlash(0))
         .to.be.revertedWithCustomError(f.ledger, "AlreadyResolved");
-      const g = await loadFixture(filedFixture);
-      await g.ledger.connect(g.contributor).challengeSlash(
-        0, { value: SLASH_BOND });
-      await g.ledger.connect(g.librarian).resolveSlash(0, false,
-                                                       ethers.ZeroHash);
+      const g = await loadFixture(attestedSlashFixture);
+      await advanceTime(SLASH_WINDOW);
+      await g.ledger.connect(g.contributor).attestSlash(0, true);
+      await g.ledger.connect(g.voterA).attestSlash(0, true);
+      await g.ledger.connect(g.voterB).attestSlash(0, true);
+      await g.ledger.connect(g.rando).finalizeSlash(0, ethers.ZeroHash);
       await expect(g.ledger.connect(g.rando).challengeSlash(
         0, { value: SLASH_BOND }))
         .to.be.revertedWithCustomError(g.ledger, "AlreadyResolved");
@@ -820,6 +857,21 @@ describe("CreditLedger", function () {
       await f.ledger.connect(f.operator).register(
         f.freshId, f.contributor.address, 10n, ethers.ZeroHash,
         { value: FEE });
+      return f;
+    }
+
+    // Attestation-quorum variant: three identities are credited early
+    // and vested (5 epochs) so a quorum can form; the operator is the
+    // natural challenger of a false filing against its own artifact.
+    async function attestedRegistryFixture() {
+      const f = await loadFixture(registeredFixture);
+      await f.ledger.connect(f.librarian).recordCredits(
+        [f.payer.address, f.payer.address, f.payer.address],
+        [{ artifactId: f.artifactId, who: f.contributor.address,
+           amount: 2000n },
+         { artifactId: f.artifactId, who: f.voterA.address, amount: 100n },
+         { artifactId: f.artifactId, who: f.voterB.address, amount: 100n }]);
+      await advanceTime(5 * EPOCH);   // vest all three; epoch 0 closed
       return f;
     }
 
@@ -866,21 +918,24 @@ describe("CreditLedger", function () {
 
     it("a false delist is refutable and the filer loses the bond",
        async function () {
-      const f = await loadFixture(registeredFixture);
+      const f = await loadFixture(attestedRegistryFixture);
       // stranger files a delist; the operator refutes inside the window
       await f.ledger.connect(f.rando).fileRegistryChange(
         1, f.artifactId, false, 0, ethers.ZeroHash,
         { value: SLASH_BOND });
       await f.ledger.connect(f.operator).challengeRegistryChange(
         0, { value: SLASH_BOND });
-      await advanceTime(8 * 24 * 3600);
+      await advanceTime(SLASH_WINDOW);
       // a challenged filing cannot be executed unilaterally
       await expect(f.ledger.connect(f.rando).executeRegistryChange(0))
         .to.be.revertedWithCustomError(f.ledger, "ChallengePending");
       // the quorum exonerates the artifact
+      await f.ledger.connect(f.contributor).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterA).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterB).attestRegistryChange(0, true);
       const rec = ethers.keccak256(ethers.toUtf8Bytes("v1"));
-      await expect(f.ledger.connect(f.librarian)
-        .resolveRegistryChange(0, false, rec))
+      await expect(f.ledger.connect(f.rando)
+        .finalizeRegistryChange(0, rec))
         .to.emit(f.ledger, "RegistryChangeResolved")
         .withArgs(0, false, rec);
       expect((await f.ledger.regs(f.artifactId)).delisted).to.equal(false);
@@ -910,15 +965,18 @@ describe("CreditLedger", function () {
 
     it("a false freeze is refutable: the quorum lifts it and the " +
        "filer loses the bond", async function () {
-      const f = await loadFixture(registeredFixture);
+      const f = await loadFixture(attestedRegistryFixture);
       await f.ledger.connect(f.rando).fileRegistryChange(
         2, f.artifactId, false, 5, ethers.ZeroHash,
         { value: SLASH_BOND });
       await f.ledger.connect(f.operator).challengeRegistryChange(
         0, { value: SLASH_BOND });
-      await advanceTime(8 * 24 * 3600);
-      await f.ledger.connect(f.librarian).resolveRegistryChange(
-        0, false, ethers.keccak256(ethers.toUtf8Bytes("v2")));
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.contributor).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterA).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterB).attestRegistryChange(0, true);
+      await f.ledger.connect(f.rando).finalizeRegistryChange(
+        0, ethers.keccak256(ethers.toUtf8Bytes("v2")));
       expect(await f.ledger.isFrozen(f.artifactId)).to.equal(false);
       expect(await f.ledger.registryBondsBurned()).to.equal(SLASH_BOND);
     });
@@ -971,17 +1029,24 @@ describe("CreditLedger", function () {
         .to.be.revertedWithCustomError(f.ledger, "WrongBond");
     });
 
-    it("only the librarian resolves a challenged registry filing",
+    it("finalization is permissionless: no librarian key in the path",
        async function () {
-      const f = await loadFixture(registeredFixture);
+      const f = await loadFixture(attestedRegistryFixture);
       await f.ledger.connect(f.rando).fileRegistryChange(
         1, f.artifactId, false, 0, ethers.ZeroHash,
         { value: SLASH_BOND });
       await f.ledger.connect(f.operator).challengeRegistryChange(
         0, { value: SLASH_BOND });
-      await expect(f.ledger.connect(f.rando).resolveRegistryChange(
-        0, false, ethers.ZeroHash))
-        .to.be.revertedWithCustomError(f.ledger, "NotLibrarian");
+      await advanceTime(SLASH_WINDOW);
+      // the librarian cannot vote without earned standing
+      await expect(f.ledger.connect(f.librarian).attestRegistryChange(0, true))
+        .to.be.revertedWithCustomError(f.ledger, "NotEligible");
+      await f.ledger.connect(f.contributor).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterA).attestRegistryChange(0, true);
+      await f.ledger.connect(f.voterB).attestRegistryChange(0, true);
+      await f.ledger.connect(f.rando).finalizeRegistryChange(
+        0, ethers.ZeroHash);
+      expect((await f.ledger.regs(f.artifactId)).delisted).to.equal(false);
     });
 
     it("an unchallenged filing cannot execute inside the window and " +

@@ -58,9 +58,11 @@ group; commit when green.
   bonded propose-and-challenge root filing: `fileAttributionRoot`
   (permissionless, SLASH_BOND, closed epoch + non-zero root + no
   existing root at filing), `challengeAttributionRoot` (same bond,
-  escalates to the replay quorum), `executeAttributionRoot`
-  (permissionless after the window, write-once), `resolveAttributionRoot`
-  (librarian-filed quorum verdict, loser's bond burned), and
+  escalates to the on-chain attestation quorum),
+  `executeAttributionRoot` (permissionless after the window,
+  write-once), `attestAttributionRoot` (quorum attestation),
+  `finalizeAttributionRoot` (permissionless quorum resolution,
+  loser's bond burned), and
   `claimRootBond` (pull). A stalled librarian can no longer freeze an
   epoch's payments — any party can post the root. The paper's
   settlement claim is restored verbatim and is now true. 14 new EVM
@@ -74,12 +76,12 @@ group; commit when green.
   (`claimRootBounty`, pull). An underfunded pool skips the bounty
   publicly — nothing is minted. The paper's "who earns what" and the
   operations-line sizing now describe the pool and the bounties, and
-  the librarian actor row states the remaining named-party acts
-  (recording credits, filing the quorum verdicts). The only residual
-  left on the settlement path is the quorum-verdict FILING
-  (`resolveSlash` / `resolveRegistryChange` / `resolveAttributionRoot`
-  stay `onlyLibrarian`), shared with M386/M387 — the registered
-  on-chain quorum-oracle milestone.
+  the librarian actor row states the remaining named-party act
+  (recording credits). The on-chain quorum oracle (the registered
+  follow-up below) is now closed: challenged slash, registry-change,
+  and attribution-root filings are decided by an on-chain attestation
+  quorum (`attest*` / `finalize*`, never `onlyLibrarian`), shared
+  across M386/M387/F1.
 
 - **F3 SEALED.** The appendix's "A probed session, honest path" and
   "Probe-dodging attempts" now use the randomness beacon (ordered by
@@ -108,9 +110,12 @@ group; commit when green.
   zero-weight result (M358: `haircut: 0.025`).
 
 Gates: Python **1144 passed / 1 skipped** (was 1142; +2 beacon
-tests); EVM **148 passing** (was 134; +14 root-filing and bounty
-gates); `check_whitepaper_tex.py` **PASS** (1049/1049 braces, 17
-labels, 14 refs, 58 bibitems).
+tests); EVM **167 passing** (was 134; +14 root-filing and bounty
+gates, then +18 for the on-chain attestation quorum and its reward;
+`resolveSlash` / `resolveRegistryChange` / `resolveAttributionRoot`
+replaced by `attest*` / `finalize*`); `check_whitepaper_tex.py`
+**PASS** (1105/1105 braces, 18
+labels, 15 refs, 58 bibitems).
 
 ## 5. Registered follow-ups (not solved in this pass)
 
@@ -125,11 +130,21 @@ labels, 14 refs, 58 bibitems).
   the bounty into the launch posture is a launch-scope decision, not a
   paper-code divergence, and is left for the launch step — not
   silently added to the registered posture.
-- **The on-chain quorum oracle.** The settlement path is now
-  permissionless except the quorum-VERDICT filing (`resolveSlash` /
-  `resolveRegistryChange` / `resolveAttributionRoot` stay
-  `onlyLibrarian`) and credit recording. The paper's known-limits
-  section now discloses this as the "credit recording and verdict
-  filing are single-key acts" residual. Closing it (threshold
-  attestation or an on-chain voter registry) is the same registered
-  next milestone the R2 pass parked.
+- **The on-chain quorum oracle — SOLVED (29 Aug).** The settlement
+  path is now permissionless except credit recording. Challenged
+  slash, registry-change, and attribution-root filings are decided
+  by an on-chain attestation quorum, never by a single key:
+  `attestSlash` / `attestRegistryChange` / `attestAttributionRoot`
+  record a weighted attestation (vested-credit snapshot, 20%
+  per-identity cap on the eligible total, one-third participation
+  floor, three-distinct-identity floor, two-thirds bar), and
+  `finalizeSlash` / `finalizeRegistryChange` /
+  `finalizeAttributionRoot` apply the verdict permissionlessly. A
+  challenge that reaches no verdict by the attestation window
+  proceeds as if unchallenged and the challenger's bond burns
+  (liveness; no stuck-forever state). The winning side of a quorum
+  verdict earns the registered, timelocked attestation reward from
+  the operations pool (`scheduleAttestationReward` /
+  `applyAttestationRewardChange` / `claimAttestationReward`). The
+  paper's known-limits "single-key acts" item is reduced to credit
+  recording alone; EVM 149 -> 167.

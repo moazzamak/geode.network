@@ -216,11 +216,11 @@ contributor chooses to distribute the sealed weights. For a
 weights-private artifact there is no serving-time identity check
 beyond behavioural identity on a fixed probe set, and the
 residual is priced by the bond.
-\item[Librarian.] The role that records credits and files the
-replay quorum's verdicts, the two acts that still need a named
-party. The settlement around them is not a privilege: anyone may
-incorporate an entry, post a root, deliver a branch, or claim,
-and the reward follows the work. The librarian is an operator
+\item[Librarian.] The role that records credits, the one act
+that still needs a named party. The settlement around it is not
+privilege: anyone may incorporate an entry, post a root,
+deliver a branch, claim, or resolve a challenged filing, and the
+reward follows the work. The librarian is an operator
 key, named at bootstrap by the developer's key and at maturity
 by the governance executor. The governance executor is a
 separate keyless contract with no human key; it holds that one
@@ -713,10 +713,12 @@ refusal, never a silent default. A new trunk is therefore a new
 bus entry, not a registry invalidation: old heads keep resolving
 their manifests, and new heads may read old and new blocks
 together.
-\item The registry updates are filed by any party under a bond.
-The librarian executes the replay quorum's verdict as a clerk: it
-files the sealed measurement, the rule decides, and the key never
-admits or extends on its own discretion.
+\item The registry updates are filed by any party under a bond,
+and a challenge escalates to the on-chain attestation quorum. No
+key admits or extends on its own discretion: the sealed
+measurement or the ratified verdict decides, and the verdict is
+attested by the network's credit-holding identities, never filed
+by a single key.
 \end{itemize}
 Routing is deterministic
 (Figure~\ref{fig:network}), and it follows these rules:
@@ -875,11 +877,13 @@ and the hash changes. No record can be altered without breaking
 the chain.
 \item \textbf{The librarian.} One role records credits. The
 settlement around that append is not a privilege: incorporation,
-root posting, branch delivery, and claims are all permissionless,
-and the reward follows the work. What is left to the role is
-writing the credits a session's evidence supports and filing the
-replay quorum's verdicts, which need an on-chain authenticator
-the network does not yet carry. The librarian is an operator key,
+root posting, branch delivery, claims, and the resolution of a
+challenged filing are all permissionless, and the reward follows
+the work. What is left to the role is writing the credits a
+session's evidence supports. The replay quorum's verdicts no
+longer need a filing key: the network's own credit-holding
+identities attest them on chain, and anyone finalizes. The
+librarian is an operator key,
 named at bootstrap by the developer's key and at maturity by the
 governance executor. The governance executor is a separate
 keyless contract with no human key. The role does not rotate on a
@@ -1911,10 +1915,14 @@ Each leaf states a running total rather than an increment, so
 presenting the same branch twice pays once.
 
 A librarian that publishes nothing still halts that epoch's
-income, so any party may publish the commitment under a bond,
-with a challenge decided by the same replay quorum that decides
-guilt elsewhere. The party whose root lands earns the registered
-root-posting bounty from the operations line, so the settlement
+income, so any party may publish the commitment under a bond.
+An unchallenged filing lands after one epoch with no privileged
+party in the call. A challenge escalates to the on-chain
+attestation quorum: the network's credit-holding identities
+attest the verdict by the deterministic replay, weighted by
+vested credits with a per-identity cap, and anyone finalizes it.
+The party whose root lands earns the registered root-posting
+bounty from the operations line, so the settlement
 work is paid like the incorporation work: whoever did it draws
 the fee. A stalled librarian cannot freeze the epoch's payments
 entirely.
@@ -2476,10 +2484,15 @@ carries a bond and sits in a challenge window of one epoch. If
 nobody refutes it, the slash executes with no privileged party in
 the call. A refutation, posted against the same bond by
 anyone who re-ran the replay and found the accusation false,
-escalates the filing to the replay quorum, which decides by the
-same computation. The loser of the dispute loses its bond, so a
-false accusation is not merely wrong; it is expensive, and a
-conviction that survives a challenge still lands. The bond is
+escalates the filing to the on-chain attestation quorum: the
+network's credit-holding identities attest the verdict by the
+same computation, weighted by vested credits with a per-identity
+cap, and anyone finalizes it. A challenge that no quorum
+substantiates within one further epoch proceeds as if
+unchallenged, and the challenger loses its bond. The loser of
+the dispute loses its bond, so a false accusation is not merely
+wrong; it is expensive, and a conviction that survives a
+challenge still lands. The bond is
 never paid to the network: the loser's stake is burned, matching
 the rule that nobody gains from a penalty.
 
@@ -2564,8 +2577,9 @@ way. Any party files the decision it believes was made and posts a
 bond. The decision names what happened: the evaluation rule
 passed, the quorum ratified, or the order authenticated. The filing sits in a
 challenge window of one epoch. Unchallenged, it executes with no
-privileged party in the call. Challenged, the replay quorum
-decides; the loser of the dispute loses its bond, and the bond is
+privileged party in the call. Challenged, the on-chain
+attestation quorum decides, exactly as for a slash; the loser of
+the dispute loses its bond, and the bond is
 burned, never paid to the network. A false filing is therefore
 refutable by the party it harms: the operator whose artifact a
 false delisting would remove, or the contributor whose artifact a
@@ -2784,8 +2798,10 @@ force-inclusion queue, held on chain as a pool that funds the
 settlement work. A fee lands in the pool when the librarian
 incorporates, or when a stranger clears the entry within the
 window; a stranger who clears a late entry earns the fee
-directly. The pool's registered draw is the root-posting
-bounty, paid to whoever's root lands, the librarian included \\
+directly. The pool's registered draws are the root-posting
+bounty, paid to whoever's root lands, and the attestation
+reward, split among the attestors on the side a quorum verdict
+endorsed, the librarian included \\
 Development fund & 2.5\% of all fees + registration fees \\
 \bottomrule
 \end{tabular}
@@ -2803,7 +2819,8 @@ registered 1.25$\times$ margin; that fee is a registered floor,
 not a suggestion. The line is held on chain by the settlement
 contract as a pool of the posting fees, and each unit of
 permissionless settlement work, e.g. posting a root, running a
-batch verification, replaying a dispute, or tallying a vote, is
+batch verification, replaying a dispute, attesting a verdict, or
+tallying a vote, is
 paid a registered bounty from it. The payout is a pull, so no
 recipient can block the work that pays it. An axis whose entry
 volume falls short of the workload does not subsidise the line:
@@ -3434,20 +3451,24 @@ commitments, proofs, and opened sums stay public; a corrupt
 majority of the sampled committee could open individual ballots.
 That is the same corrupt-validator boundary the rest of the
 design carries.
-\item \textbf{Credit recording and verdict filing are single-key acts.}
-The settlement around them is permissionless: incorporation,
-root posting, branch delivery, and claims run with no named
-party. But the two acts that still need one, writing the
-credits a session's evidence supports and filing an off-chain
-quorum verdict onto the ledger, run on the librarian key. A
-stopped or captured key halts new credits and delays a verdict's
-execution; it cannot change either, because the verdict is
-decided off-chain by the replay and the key only files it. Both
-failures are recorded and visible, and both feed the keyless
-replacement discipline. Removing the filer entirely needs an
-on-chain quorum oracle (threshold attestation or an on-chain
-voter registry); that is a registered next milestone, not part of
-this MVP.
+\item \textbf{Credit recording is a single-key act.} The
+settlement around it is permissionless: incorporation, root
+posting, branch delivery, claims, and the resolution of a
+challenged filing run with no named party. A challenged filing
+is decided by the on-chain attestation quorum: each eligible
+identity (vested credits above zero) attests whether the filing
+is wrong, weight is the vested-credit snapshot capped per
+identity at twenty percent of the eligible total, and a verdict
+needs two-thirds of the capped participating weight, a
+participation floor of one-third of eligible weight, and at
+least three distinct identities; anyone finalizes once the bar
+is met, and a challenge that reaches no verdict by the
+attestation window proceeds as if unchallenged. The one act
+that still needs a key is writing the credits a session's
+evidence supports. A stopped or captured key halts new credits;
+it cannot change a verdict, because the verdict is attested on
+chain, not filed. The failure is recorded and visible, and it
+feeds the keyless replacement discipline.
 \item \textbf{The settlement root is challenge-gated, not
 verification-gated.} The contract checks that a filed
 attribution root is not yet posted; it does not check that the
@@ -3456,10 +3477,11 @@ wrong root can therefore land within one epoch and, because the
 root is write-once, it is then permanent. The damage is bounded:
 a claim against the wrong root still passes the artifact
 eligibility checks and can draw at most what the undrawn
-attribution pool holds. The defenses are economic: a guilty
+attribution pool holds. The defenses are economic: a void
 verdict burns the filer's bond, and the parties a wrong root
 would mis-pay have both the standing and the one-epoch window to
-challenge it into the replay quorum.
+challenge it into the attestation quorum, where their vested
+weight decides.
 \item \textbf{The authority-key registry trusts governments' own
 channels.} Multi-channel pinning raises the cost of a forged
 order; it does not make forgery impossible. The effect of even a
@@ -3695,6 +3717,7 @@ held, not pooled. Figure~\ref{fig:pools} shows the routes.
 \node[box] (zakat) at (10.8,3.2) {audits, tooling, security,\\public-good research;\\zakat end-state};
 \node[box] (vest) at (10.8,1.3) {credits vest\\$N=4$ epochs,\\pull claim};
 \node[box] (bounty) at (10.8,-0.6) {root-posting bounty\\to whoever's root lands};
+\node[box] (attest) at (10.8,-1.5) {attestation reward\\to the side a quorum\\verdict endorsed};
 \node[box] (valfee) at (10.8,-2.5) {validator fees\\per accepted\\challenge};
 \node[box] (refund) at (10.8,-4.4) {returned to the\\rightful party,\\else burned};
 
@@ -3709,6 +3732,7 @@ held, not pooled. Figure~\ref{fig:pools} shows the routes.
 \draw[arr] (dev) -- (zakat);
 \draw[arr] (attr) -- (vest);
 \draw[arr] (ops) -- (bounty);
+\draw[arr] (ops) -- (attest);
 \draw[arr] (chg) -- (valfee);
 \draw[arr] (bonds) -- (refund);
 \end{tikzpicture}%
@@ -3736,8 +3760,9 @@ held; the non-refundable posting fee to the operations pool, or
 directly to a stranger who clears the entry after its deadline \\
 A root or slash filing posts a bond & the bond held, returned to
 the party the verdict vindicates, otherwise burned. A root that
-lands pays the registered root-posting bounty, drawn from the
-operations pool \\
+lands pays the registered root-posting bounty, and a quorum
+verdict pays the registered attestation reward to the attestors
+on the endorsed side, both drawn from the operations pool \\
 A contributor's work is served & the 97.5\% credit vests over
 four epochs and is pull-claimed; a probed contributor is docked
 for the reference executor's share \\
@@ -3753,8 +3778,9 @@ with each other: each is fed by its own source and pays its own
 outflows. Bonds are never income: a bond is held, returned to
 the party the rules vindicate, or burned, and it is never
 collected by the network. The development fund never pays
-bounties, and the operations pool's only registered draw is the
-root-posting bounty; the two are not the same pot, which is the
+bounties, and the operations pool's only registered draws are
+the root-posting bounty and the attestation reward; the two are
+not the same pot, which is the
 confusion this section exists to prevent.
 
 \subsection{Registering a new arm}

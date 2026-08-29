@@ -132,7 +132,26 @@ describe("any party may post the attribution root (R3-F1)", function () {
     });
   });
 
-  describe("a false root is refutable (challenge + quorum)", function () {
+  describe("a false root is refutable (challenge + attestation quorum)",
+           function () {
+    // The challengers are the parties the filed root would pay. For
+    // the attestation to have weight, the voters need VESTED credits:
+    // the contributor is credited 2000 at epoch 0, two more identities
+    // get 100 each, and five epochs are advanced so everything vests
+    // and epoch 0 closes. Eligible total 2200, cap 440 (the
+    // contributor's 2000 is capped to 440), floor 733.
+    async function vestedFixture() {
+      const f = await loadFixture(closedEpochFixture);
+      await f.ledger.connect(f.librarian).recordCredits(
+        [f.payer.address, f.payer.address],
+        [{ artifactId: f.artifactId, who: f.operator.address,
+           amount: 100n },
+         { artifactId: f.artifactId, who: f.rando.address,
+           amount: 100n }]);
+      await advanceTime(5 * EPOCH);
+      return f;
+    }
+
     it("a challenged filing cannot auto-execute", async function () {
       const f = await loadFixture(closedEpochFixture);
       await advanceTime(EPOCH);
@@ -146,18 +165,40 @@ describe("any party may post the attribution root (R3-F1)", function () {
         .to.be.revertedWithCustomError(f.ledger, "ChallengePending");
     });
 
-    it("quorum innocent: the root lands and the challenger's bond burns",
+    it("quorum void: the false root never lands and the filer's bond burns",
        async function () {
-      const f = await loadFixture(closedEpochFixture);
-      await advanceTime(EPOCH);
+      const f = await loadFixture(vestedFixture);
+      await f.ledger.connect(f.stranger).fileAttributionRoot(
+        0n, ROOT_WRONG, { value: BOND });
+      await f.ledger.connect(f.contributor).challengeAttributionRoot(
+        0n, { value: BOND });
+      await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.contributor).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.operator).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.rando).attestAttributionRoot(0n, true);
+      const quorum = ethers.keccak256(ethers.toUtf8Bytes("quorum-void"));
+      await f.ledger.connect(f.stranger).finalizeAttributionRoot(0n, quorum);
+      // nothing lands for the epoch
+      expect(await f.ledger.attributionRoot(0n)).to.equal(ethers.ZeroHash);
+      // the challenger pulls its bond; the filer's stake is burned
+      await f.ledger.connect(f.contributor).claimRootBond(0n);
+      await expect(f.ledger.connect(f.stranger).claimRootBond(0n))
+        .to.be.revertedWithCustomError(f.ledger, "NothingToClaim");
+    });
+
+    it("quorum uphold: the root lands and the challenger's bond burns",
+       async function () {
+      const f = await loadFixture(vestedFixture);
       await f.ledger.connect(f.stranger).fileAttributionRoot(
         0n, ROOT, { value: BOND });
       await f.ledger.connect(f.contributor).challengeAttributionRoot(
         0n, { value: BOND });
       await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.contributor).attestAttributionRoot(0n, false);
+      await f.ledger.connect(f.operator).attestAttributionRoot(0n, false);
+      await f.ledger.connect(f.rando).attestAttributionRoot(0n, false);
       const quorum = ethers.keccak256(ethers.toUtf8Bytes("quorum-ok"));
-      await f.ledger.connect(f.librarian).resolveAttributionRoot(
-        0n, false, quorum);
+      await f.ledger.connect(f.rando).finalizeAttributionRoot(0n, quorum);
       expect(await f.ledger.attributionRoot(0n)).to.equal(ROOT);
       // the filer is refunded; the challenger's stake is burned
       await f.ledger.connect(f.stranger).claimRootBond(0n);
@@ -165,38 +206,24 @@ describe("any party may post the attribution root (R3-F1)", function () {
         .to.be.revertedWithCustomError(f.ledger, "NothingToClaim");
     });
 
-    it("quorum guilty: the false root is void and the filer's bond burns",
-       async function () {
-      const f = await loadFixture(closedEpochFixture);
-      await advanceTime(EPOCH);
+    it("finalization is permissionless: no librarian key anywhere in " +
+       "the path", async function () {
+      const f = await loadFixture(vestedFixture);
       await f.ledger.connect(f.stranger).fileAttributionRoot(
         0n, ROOT_WRONG, { value: BOND });
       await f.ledger.connect(f.contributor).challengeAttributionRoot(
         0n, { value: BOND });
       await advanceTime(SLASH_WINDOW);
-      const quorum = ethers.keccak256(ethers.toUtf8Bytes("quorum-void"));
-      await f.ledger.connect(f.librarian).resolveAttributionRoot(
-        0n, true, quorum);
-      // nothing lands for the epoch
+      // the librarian cannot even attest: it has no earned credits
+      await expect(f.ledger.connect(f.librarian).attestAttributionRoot(
+        0n, true))
+        .to.be.revertedWithCustomError(f.ledger, "NotEligible");
+      await f.ledger.connect(f.contributor).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.operator).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.rando).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.stranger).finalizeAttributionRoot(
+        0n, ethers.ZeroHash);
       expect(await f.ledger.attributionRoot(0n)).to.equal(ethers.ZeroHash);
-      // the challenger is refunded; the filer's stake is burned
-      await f.ledger.connect(f.contributor).claimRootBond(0n);
-      await expect(f.ledger.connect(f.stranger).claimRootBond(0n))
-        .to.be.revertedWithCustomError(f.ledger, "NothingToClaim");
-    });
-
-    it("resolution is quorum-filed only (stranger -> NotLibrarian)",
-       async function () {
-      const f = await loadFixture(closedEpochFixture);
-      await advanceTime(EPOCH);
-      await f.ledger.connect(f.stranger).fileAttributionRoot(
-        0n, ROOT, { value: BOND });
-      await f.ledger.connect(f.contributor).challengeAttributionRoot(
-        0n, { value: BOND });
-      await advanceTime(SLASH_WINDOW);
-      await expect(f.ledger.connect(f.rando).resolveAttributionRoot(
-        0n, false, ethers.ZeroHash))
-        .to.be.revertedWithCustomError(f.ledger, "NotLibrarian");
     });
   });
 
@@ -302,38 +329,69 @@ describe("any party may post the attribution root (R3-F1)", function () {
       expect(await f.ledger.rootBondHeld()).to.equal(0n);
     });
 
+    // Attestation-quorum variant: the voters' credits must be VESTED
+    // before they can attest, so this fixture credits three identities
+    // and advances five epochs (vesting everything, closing epoch 0)
+    // before the inbox is deployed.
+    async function vestedInboxFixture() {
+      const f = await loadFixture(closedEpochFixture);
+      await f.ledger.connect(f.librarian).recordCredits(
+        [f.payer.address, f.payer.address],
+        [{ artifactId: f.artifactId, who: f.operator.address,
+           amount: 100n },
+         { artifactId: f.artifactId, who: f.rando.address,
+           amount: 100n }]);
+      await advanceTime(5 * EPOCH);
+      const Inbox = await ethers.getContractFactory("InclusionInbox");
+      const inbox = await Inbox.deploy(
+        await f.ledger.getAddress(),   // librarian source: the ledger
+        10,                            // window blocks
+        100n,                          // refundable inbox bond
+        await f.ledger.getAddress(),   // operations line: the ledger
+        5000,                          // epoch blocks (long)
+        10n,                           // base posting fee
+        4,                             // free posts per epoch
+        8                              // capped librarian obligation
+      );
+      await inbox.waitForDeployment();
+      return { ...f, inbox };
+    }
+
     it("a quorum-confirmed root also pays the filer " +
-       "(challenge -> innocent)", async function () {
-      const f = await loadFixture(inboxFixture);
+       "(challenge -> uphold)", async function () {
+      const f = await loadFixture(vestedInboxFixture);
       await fundLine(f);
       await registerBounty(f, BOUNTY);
-      await advanceTime(EPOCH);
       await f.ledger.connect(f.stranger).fileAttributionRoot(
         0n, ROOT, { value: BOND });
       await f.ledger.connect(f.contributor).challengeAttributionRoot(
         0n, { value: BOND });
       await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.contributor).attestAttributionRoot(0n, false);
+      await f.ledger.connect(f.operator).attestAttributionRoot(0n, false);
+      await f.ledger.connect(f.rando).attestAttributionRoot(0n, false);
       const quorum = ethers.keccak256(ethers.toUtf8Bytes("quorum-ok"));
-      await expect(f.ledger.connect(f.librarian).resolveAttributionRoot(
-        0n, false, quorum))
+      await expect(f.ledger.connect(f.rando).finalizeAttributionRoot(
+        0n, quorum))
         .to.emit(f.ledger, "RootBountyAwarded")
         .withArgs(0n, f.stranger.address, BOUNTY);
       expect(await f.ledger.operationsPool()).to.equal(0n);
     });
 
     it("a quorum-voided false root pays no bounty", async function () {
-      const f = await loadFixture(inboxFixture);
+      const f = await loadFixture(vestedInboxFixture);
       await fundLine(f);
       await registerBounty(f, BOUNTY);
-      await advanceTime(EPOCH);
       await f.ledger.connect(f.stranger).fileAttributionRoot(
         0n, ROOT_WRONG, { value: BOND });
       await f.ledger.connect(f.contributor).challengeAttributionRoot(
         0n, { value: BOND });
       await advanceTime(SLASH_WINDOW);
+      await f.ledger.connect(f.contributor).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.operator).attestAttributionRoot(0n, true);
+      await f.ledger.connect(f.rando).attestAttributionRoot(0n, true);
       const quorum = ethers.keccak256(ethers.toUtf8Bytes("quorum-void"));
-      await f.ledger.connect(f.librarian).resolveAttributionRoot(
-        0n, true, quorum);
+      await f.ledger.connect(f.rando).finalizeAttributionRoot(0n, quorum);
       expect(await f.ledger.operationsPool()).to.equal(BOUNTY);
       expect(await f.ledger.rootBountyClaimable(f.stranger.address))
         .to.equal(0n);

@@ -7,7 +7,7 @@ module.exports = {
   solidity: {
     version: "0.8.28",
     settings: {
-      optimizer: { enabled: true, runs: 200 },
+      optimizer: { enabled: true, runs: 10 },
       evmVersion: "cancun",
       viaIR: true, // M213: required by the LinearProofVerifier's
                    // arithmetic-heavy port (optimizer inlining otherwise
@@ -50,3 +50,6 @@ module.exports = {
   },
   mocha: { timeout: 120000 },
 };
+
+
+

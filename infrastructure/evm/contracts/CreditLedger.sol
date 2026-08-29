@@ -38,9 +38,11 @@ interface IOperationsPuller {
 ///   changes carry a one-epoch notice period.
 /// - Any party may post an epoch's attribution root under a bond:
 ///   propose-and-challenge (unchallenged filings execute after the
-///   window; a challenge escalates to the replay quorum, whose
-///   verdict is librarian-filed as elsewhere). The party whose root
-///   lands earns the registered root-posting bounty.
+///   window; a challenge escalates to the on-chain attestation
+///   quorum, decided by the network's own credit-holding identities,
+///   never by a single key). The party whose root lands earns the
+///   registered root-posting bounty; verdict work earns the
+///   registered attestation reward.
 /// - The operations line: the inbox names this ledger as its line;
 ///   the non-refundable force-inclusion posting fees are pulled into
 ///   a pool (pullOperations) that funds the settlement bounties. An
@@ -87,6 +89,8 @@ contract CreditLedger is
     error ChallengePending();
     error NotChallenged();
     error InvalidKind(uint8 kind);
+    error NotEligible();
+    error AlreadyAttested();
 
     uint256 public constant DEV_FUND_BPS = 25;      // 2.5% of 1000
     uint256 public constant EPOCH = 7 days;
@@ -96,6 +100,10 @@ contract CreditLedger is
     uint256 public constant PRICE_CHANGE_DELAY = 7 days; // 1-epoch notice
     uint256 public constant SLASH_BOND = 1 ether;   // M386 filing/challenge stake
     uint256 public constant SLASH_WINDOW = 7 days;  // M386 challenge window = 1 epoch
+    uint256 public constant ATTEST_WINDOW = 7 days; // on-chain quorum: attestation window = 1 epoch
+    uint256 public constant QUORUM_WEIGHT_CAP_BPS = 2000; // 20% per-identity cap
+    uint256 public constant QUORUM_FLOOR_BPS = 3333;      // 1/3 participation floor
+    uint256 public constant QUORUM_MIN_DISTINCT = 3;      // distinct-identity floor
 
     address public devFund;
     address public librarian;
@@ -183,7 +191,7 @@ contract CreditLedger is
 
     /// @notice M386 (G54): a pending slash accusation. Anyone files
     /// with SLASH_BOND; a challenge inside SLASH_WINDOW escalates the
-    /// filing to the replay quorum. `bondRefundee` names the party
+    /// filing to the attestation quorum. `bondRefundee` names the party
     /// that won the dispute and may pull SLASH_BOND; the loser's bond
     /// is burned (slashBondsBurned) and never paid to anyone.
     struct SlashFiling {
@@ -198,6 +206,8 @@ contract CreditLedger is
         uint256 resolvedAt;    // 0 while live
         address bondRefundee;  // winner, set at resolution
         bool guilty;           // quorum verdict, challenged resolutions
+        uint256 attestStart;   // slice of the global attestations array
+        uint256 attestCount;   // attestations cast for this filing
     }
 
     SlashFiling[] public slashFilings;   // id = index
@@ -230,6 +240,8 @@ contract CreditLedger is
         uint256 resolvedAt;    // 0 while live
         address bondRefundee;  // winner, set at resolution
         bool guilty;           // quorum verdict, challenged resolutions
+        uint256 attestStart;   // slice of the global attestations array
+        uint256 attestCount;   // attestations cast for this filing
     }
 
     RegistryFiling[] public registryFilings;   // id = index
@@ -244,9 +256,10 @@ contract CreditLedger is
     /// librarian from the COMMON path: any party files the epoch's
     /// root under a bond; an unchallenged filing executes after the
     /// window (write-once per epoch); a challenge escalates to the
-    /// replay quorum, whose verdict (librarian-filed, the M294
-    /// pattern) applies the root or voids it, burning the loser's
-    /// bond. A false root is refutable by the payees it would pay
+    /// on-chain attestation quorum, whose verdict (weighted by vested
+    /// credits, never by a single key) applies the root or voids it,
+    /// burning the loser's bond. A false root is refutable by the
+    /// payees it would pay
     /// wrongly — the party that loses from it.
     struct RootFiling {
         uint256 forEpoch;      // the closed epoch the root summarises
@@ -257,11 +270,51 @@ contract CreditLedger is
         uint256 resolvedAt;    // 0 while live
         address bondRefundee;  // winner, set at resolution
         bool guilty;           // quorum verdict: the root is wrong
+        uint256 attestStart;   // slice of the global attestations array
+        uint256 attestCount;   // attestations cast for this filing
     }
 
     RootFiling[] public rootFilings;   // id = index
     uint256 public rootBondHeld;
     uint256 public rootBondsBurned;
+
+    /// @notice The on-chain attestation quorum (the R3 shared residual
+    /// closure). A challenged filing is decided by the network's own
+    /// credit-holding identities, not by a single key: each eligible
+    /// identity (vested credits > 0) attests whether the filing is
+    /// wrong; weight is the vested-credit snapshot, capped per identity
+    /// at QUORUM_WEIGHT_CAP_BPS of the eligible total; a VERDICT needs
+    /// two-thirds of capped participating weight, a participation floor
+    /// of QUORUM_FLOOR_BPS of eligible weight, and at least
+    /// QUORUM_MIN_DISTINCT distinct identities. A challenge that reaches
+    /// no verdict by ATTEST_WINDOW is unsubstantiated: the filing
+    /// proceeds as if unchallenged and the challenger's bond burns.
+    struct Attestation {
+        address attester;
+        bool voidFiling;      // true = the filing is wrong (void it)
+        uint256 weight;       // vested-credit weight at attestation time
+        uint256 at;
+    }
+
+    Attestation[] public attestations;   // global; per-filing by slice
+    /// @notice Every address that was ever credited. The eligible
+    /// voting set is derived from it at finalization (vested > 0), so
+    /// no credit path needs to maintain a running weight total.
+    address[] public creditedIdentities;
+    mapping(address => bool) public inIdentities;
+
+    /// @notice Registered per-verdict attestation reward, split
+    /// pro-rata by capped weight among the attestors on the side a
+    /// quorum VERDICT endorsed (never paid on the default path).
+    /// Funded by the operations-line pool, like the root-posting
+    /// bounty; an underfunded pool skips it publicly. 0 until
+    /// registered; the change is timelocked like every money
+    /// parameter.
+    uint256 public attestationRewardPot;
+    uint256 public pendingAttestationRewardPot;
+    uint256 public attestationRewardChangeAt;
+    /// @notice Pull balances for attestation rewards.
+    mapping(address => uint256) public attestationClaimable;
 
     /// @notice The operations-line pool: the non-refundable
     /// force-inclusion posting fees, pulled from the inbox (which
@@ -329,6 +382,16 @@ contract CreditLedger is
     event RootPostingBountyChangeScheduled(uint256 newBounty,
                                            uint256 changeAt);
     event RootPostingBountyChanged(uint256 bounty);
+    event Attested(uint8 indexed kind, uint256 indexed filingId,
+                   address indexed attester, bool voidFiling,
+                   uint256 weight);
+    event AttestationRewardScheduled(uint256 amount, uint256 changeAt);
+    event AttestationRewardChanged(uint256 amount);
+    event AttestationRewardAwarded(uint256 indexed filingId,
+                                   address indexed attester, uint256 amount);
+    event AttestationRewardSkipped(uint256 indexed filingId,
+                                   uint256 shortfall);
+    event AttestationRewardClaimed(address indexed to, uint256 amount);
 
     event Deposited(address indexed from, uint256 amount, uint256 devCut);
     event Registered(bytes32 indexed artifactId, address indexed operatorKey,
@@ -553,6 +616,10 @@ contract CreditLedger is
             attributable -= e.amount;
             creditsOf[e.who] += e.amount;
             epochCredits[e.who][epochId] += e.amount;
+            if (!inIdentities[e.who]) {
+                inIdentities[e.who] = true;
+                creditedIdentities.push(e.who);
+            }
             emit Credited(e.artifactId, e.who, e.amount);
         }
     }
@@ -642,6 +709,10 @@ contract CreditLedger is
         // Vesting keys on the epoch the credit is DRAWN in, matching
         // the push path. A late claim vests late; it is not backdated.
         epochCredits[who][epochId] += amount;
+        if (!inIdentities[who]) {
+            inIdentities[who] = true;
+            creditedIdentities.push(who);
+        }
         emit Credited(artifactId, who, amount);
         emit AttributionClaimed(forEpoch, artifactId, who, amount);
     }
@@ -710,9 +781,10 @@ contract CreditLedger is
     // removes the librarian from the COMMON path. Anyone files with a
     // bond, the filing sits in a challenge window, and if nobody
     // refutes it the slash executes with no privileged party anywhere
-    // in the call. A refutation escalates to the replay quorum, whose
-    // verdict decides guilt by the same replay as ever; the loser of
-    // the dispute loses its bond.
+    // in the call. A refutation escalates to the on-chain attestation
+    // quorum, whose verdict (weighted by the network's vested credits,
+    // never by a single key) decides guilt; the loser of the dispute
+    // loses its bond.
 
     /// @notice File a slash accusation, permissionless, with a bond.
     /// The filing is validated for shape immediately, so a filing
@@ -736,7 +808,9 @@ contract CreditLedger is
             challenger: address(0),
             resolvedAt: 0,
             bondRefundee: address(0),
-            guilty: false
+            guilty: false,
+            attestStart: attestations.length,
+            attestCount: 0
         }));
         slashBondHeld += SLASH_BOND;
         emit SlashFiled(filingId, who, artifactId, amount, level,
@@ -746,7 +820,7 @@ contract CreditLedger is
     /// @notice Refute a filing by replay, within the window, posting
     /// the same bond. The challenger asserts the replay of the filed
     /// evidence does not establish this guilt. A challenged filing can
-    /// no longer auto-execute; the replay quorum decides it instead.
+    /// no longer auto-execute; the attestation quorum decides it instead.
     function challengeSlash(uint256 filingId)
         external payable whenNotPaused {
         if (msg.value != SLASH_BOND) revert WrongBond();
@@ -784,37 +858,66 @@ contract CreditLedger is
         emit SlashExecuted(filingId);
     }
 
-    /// @notice Resolve a CHALLENGED filing by the replay quorum's
-    /// verdict. The librarian is the quorum's filer (the M294
-    /// pattern: the deterministic vote count decides, the key files).
-    /// Guilty: the slash executes and the challenger's bond is burned
-    /// — it staked on a replay the quorum contradicted. Innocent: the
-    /// filing is void and the FILER's bond is burned — a false
-    /// accusation loses its bond. The winner in each case pulls its
-    /// own bond back; no bond is ever paid to the network.
-    function resolveSlash(uint256 filingId, bool guilty,
-                          bytes32 quorumRecordHash)
+    /// @notice Cast an attestation on a challenged slash filing. The
+    /// attestation window opens when the challenge window closes and
+    /// runs ATTEST_WINDOW. Eligible: any address with vested credits
+    /// (earned standing in the network). Weight is the vested-credit
+    /// snapshot; there is no bond, because the stake is the attester's
+    /// own earned standing and the vote is capped per identity.
+    function attestSlash(uint256 filingId, bool voidFiling)
         external whenNotPaused {
-        if (msg.sender != librarian) revert NotLibrarian();
+        if (filingId >= slashFilings.length) revert NoSuchFiling();
+        SlashFiling storage s = slashFilings[filingId];
+        _attest(s.filedAt, s.resolvedAt, s.challenger,
+                s.attestStart, s.attestCount, voidFiling, 0, filingId);
+        s.attestCount += 1;
+    }
+
+    /// @notice Finalize a CHALLENGED slash filing by the on-chain
+    /// attestation quorum. Permissionless: the librarian is nowhere in
+    /// this call. Two-thirds of capped participating weight (with the
+    /// participation floor and the distinct-identity floor) voids or
+    /// upholds the filing; a challenge that reaches no verdict by
+    /// ATTEST_WINDOW is unsubstantiated and the filing proceeds as if
+    /// unchallenged. A voided filing burns the FILER's bond (a false
+    /// accusation loses its bond); an upheld filing executes the slash
+    /// and burns the CHALLENGER's bond. The winner pulls its own bond
+    /// back; no bond is ever paid to the network.
+    function finalizeSlash(uint256 filingId, bytes32 quorumRecordHash)
+        external whenNotPaused {
         if (filingId >= slashFilings.length) revert NoSuchFiling();
         SlashFiling storage s = slashFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
+        uint256 eligible = _eligibleVestedTotal();
+        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
+                                eligible);
+        if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
-        s.guilty = guilty;
-        if (guilty) {
+        if (r == 1) {
+            // void: the accusation is not upheld
+            s.guilty = false;
+            s.bondRefundee = s.challenger;
+            slashBondHeld -= SLASH_BOND;
+            slashBondsBurned += SLASH_BOND;   // filer's stake
+        } else {
+            // upheld by bar (r == 2) or by default (r == 3)
+            s.guilty = true;
             if (!_applySlash(s)) {
                 emit SlashSkipped(filingId, "insufficient balance");
             }
             s.bondRefundee = s.filer;
             slashBondHeld -= SLASH_BOND;
             slashBondsBurned += SLASH_BOND;   // challenger's stake
-        } else {
-            s.bondRefundee = s.challenger;
-            slashBondHeld -= SLASH_BOND;
-            slashBondsBurned += SLASH_BOND;   // filer's stake
         }
-        emit SlashResolved(filingId, guilty, quorumRecordHash);
+        if (r == 1) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             true, eligible);
+        } else if (r == 2) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             false, eligible);
+        }
+        emit SlashResolved(filingId, s.guilty, quorumRecordHash);
     }
 
     /// @notice Pull the winner's bond after a resolved filing. One
@@ -891,9 +994,11 @@ contract CreditLedger is
     // is opened: anyone files the decision with the same bond and
     // window as a slash filing, and an unchallenged filing executes
     // with no privileged party in the call. A refutation escalates to
-    // the replay quorum; the loser of the dispute loses its bond.
-    // The librarian keeps its direct fast paths (it is the quorum's
-    // filer); they are convenience, no longer the only way.
+    // the on-chain attestation quorum, whose verdict (weighted by the
+    // network's vested credits, never by a single key) applies or
+    // voids the change; the loser of the dispute loses its bond.
+    // The librarian keeps its direct fast paths; they are
+    // convenience, no longer the only way.
     //
     // liftFreeze (early release) is deliberately NOT in this set. Its
     // challenge incentives invert: the party that benefits from a
@@ -924,7 +1029,9 @@ contract CreditLedger is
             challenger: address(0),
             resolvedAt: 0,
             bondRefundee: address(0),
-            guilty: false
+            guilty: false,
+            attestStart: attestations.length,
+            attestCount: 0
         }));
         registryBondHeld += SLASH_BOND;
         emit RegistryChangeFiled(filingId, kind, artifactId, admitValue,
@@ -934,7 +1041,7 @@ contract CreditLedger is
     /// @notice Refute a registry filing inside its window, posting
     /// the same bond. The challenger asserts the off-chain decision
     /// was not actually made (the rule fails, the quorum was short,
-    /// the order was not confirmed). Escalates to the replay quorum.
+    /// the order was not confirmed). Escalates to the attestation quorum.
     function challengeRegistryChange(uint256 filingId)
         external payable whenNotPaused {
         if (msg.value != SLASH_BOND) revert WrongBond();
@@ -969,32 +1076,56 @@ contract CreditLedger is
         emit RegistryChangeExecuted(filingId);
     }
 
-    /// @notice Resolve a CHALLENGED registry filing by the replay
-    /// quorum's verdict (librarian-filed, the M294 pattern). Guilty:
-    /// the change applies and the challenger's bond is burned.
-    /// Innocent: the filing is void and the FILER's bond is burned —
-    /// a false registry change loses its bond.
-    function resolveRegistryChange(uint256 filingId, bool guilty,
-                                   bytes32 quorumRecordHash)
+    /// @notice Cast an attestation on a challenged registry filing.
+    /// Same window, eligibility, and weight as the slash attestation.
+    function attestRegistryChange(uint256 filingId, bool voidFiling)
         external whenNotPaused {
-        if (msg.sender != librarian) revert NotLibrarian();
+        if (filingId >= registryFilings.length) revert NoSuchFiling();
+        RegistryFiling storage s = registryFilings[filingId];
+        _attest(s.filedAt, s.resolvedAt, s.challenger,
+                s.attestStart, s.attestCount, voidFiling, 1, filingId);
+        s.attestCount += 1;
+    }
+
+    /// @notice Finalize a CHALLENGED registry filing by the on-chain
+    /// attestation quorum. Permissionless. A voided filing is not
+    /// applied and the FILER's bond is burned; an upheld filing
+    /// applies and burns the CHALLENGER's bond. A challenge that
+    /// reaches no verdict by ATTEST_WINDOW proceeds as unchallenged.
+    function finalizeRegistryChange(uint256 filingId,
+                                    bytes32 quorumRecordHash)
+        external whenNotPaused {
         if (filingId >= registryFilings.length) revert NoSuchFiling();
         RegistryFiling storage s = registryFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
+        uint256 eligible = _eligibleVestedTotal();
+        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
+                                eligible);
+        if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
-        s.guilty = guilty;
-        if (guilty) {
+        if (r == 1) {
+            // void: the change is not applied
+            s.guilty = false;
+            s.bondRefundee = s.challenger;
+            registryBondHeld -= SLASH_BOND;
+            registryBondsBurned += SLASH_BOND;   // filer's stake
+        } else {
+            // upheld by bar (r == 2) or by default (r == 3)
+            s.guilty = true;
             _applyRegistryChange(s);
             s.bondRefundee = s.filer;
             registryBondHeld -= SLASH_BOND;
             registryBondsBurned += SLASH_BOND;   // challenger's stake
-        } else {
-            s.bondRefundee = s.challenger;
-            registryBondHeld -= SLASH_BOND;
-            registryBondsBurned += SLASH_BOND;   // filer's stake
         }
-        emit RegistryChangeResolved(filingId, guilty, quorumRecordHash);
+        if (r == 1) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             true, eligible);
+        } else if (r == 2) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             false, eligible);
+        }
+        emit RegistryChangeResolved(filingId, s.guilty, quorumRecordHash);
     }
 
     /// @notice Pull the winner's bond after a resolved registry
@@ -1020,9 +1151,9 @@ contract CreditLedger is
     // COMMON path: any party files the closed epoch's root under a
     // bond, the filing sits in a challenge window, and if nobody
     // refutes it the root lands with no privileged party in the call.
-    // A refutation escalates to the replay quorum, whose verdict (the
-    // M294 pattern: the deterministic replay decides, the key files)
-    // applies the root or voids it; the loser of the dispute loses
+    // A refutation escalates to the on-chain attestation quorum,
+    // whose verdict (weighted by the network's vested credits, never
+    // by a single key) applies the root or voids it; the loser of the dispute loses
     // its bond. A stalled librarian can no longer freeze an epoch's
     // payments — anyone can post the root for it.
 
@@ -1049,7 +1180,9 @@ contract CreditLedger is
             challenger: address(0),
             resolvedAt: 0,
             bondRefundee: address(0),
-            guilty: false
+            guilty: false,
+            attestStart: attestations.length,
+            attestCount: 0
         }));
         rootBondHeld += SLASH_BOND;
         emit RootFiled(filingId, forEpoch, root, msg.sender);
@@ -1058,7 +1191,7 @@ contract CreditLedger is
     /// @notice Refute a root filing inside its window, posting the
     /// same bond. The challenger asserts the root is wrong — it would
     /// pay credits the epoch's work does not support. Escalates to
-    /// the replay quorum. The natural challengers are the payees and
+    /// the attestation quorum. The natural challengers are the payees and
     /// contributors a wrong root would mis-pay: the party that loses
     /// from the false filing is the one with standing to refute it.
     function challengeAttributionRoot(uint256 filingId)
@@ -1100,31 +1233,48 @@ contract CreditLedger is
         emit RootExecuted(filingId);
     }
 
-    /// @notice Resolve a CHALLENGED root filing by the replay
-    /// quorum's verdict (librarian-filed, the M294 pattern — the
-    /// deterministic replay decides, the key files). Guilty: the
-    /// filed root is wrong, the filing is void, and the FILER's bond
-    /// is burned — a false root loses its bond. Innocent: the root is
-    /// right, it lands, and the CHALLENGER's bond is burned — a false
-    /// challenge loses its bond. The winner in each case pulls its
-    /// own bond back; no bond is ever paid to the network.
-    function resolveAttributionRoot(uint256 filingId, bool guilty,
-                                    bytes32 quorumRecordHash)
+    /// @notice Cast an attestation on a challenged root filing. Same
+    /// window, eligibility, and weight as the slash attestation. The
+    /// natural attestors are the parties the root would pay: they
+    /// hold the standing (vested credits) and the stake.
+    function attestAttributionRoot(uint256 filingId, bool voidFiling)
         external whenNotPaused {
-        if (msg.sender != librarian) revert NotLibrarian();
+        if (filingId >= rootFilings.length) revert NoSuchFiling();
+        RootFiling storage s = rootFilings[filingId];
+        _attest(s.filedAt, s.resolvedAt, s.challenger,
+                s.attestStart, s.attestCount, voidFiling, 2, filingId);
+        s.attestCount += 1;
+    }
+
+    /// @notice Finalize a CHALLENGED root filing by the on-chain
+    /// attestation quorum. Permissionless: the librarian is nowhere in
+    /// this call. A voided root (the filing is wrong) never lands and
+    /// the FILER's bond is burned — a false root loses its bond. An
+    /// upheld root lands write-once and the CHALLENGER's bond is
+    /// burned — a false challenge loses its bond. A challenge that
+    /// reaches no verdict by ATTEST_WINDOW is unsubstantiated: the
+    /// root lands as if unchallenged and the challenger's bond burns.
+    function finalizeAttributionRoot(uint256 filingId,
+                                     bytes32 quorumRecordHash)
+        external whenNotPaused {
         if (filingId >= rootFilings.length) revert NoSuchFiling();
         RootFiling storage s = rootFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
+        uint256 eligible = _eligibleVestedTotal();
+        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
+                                eligible);
+        if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
-        s.guilty = guilty;
-        if (guilty) {
-            // the root is wrong: the filing is void, nothing lands
+        if (r == 1) {
+            // void: the root is wrong, nothing lands
+            s.guilty = true;
             s.bondRefundee = s.challenger;
             rootBondHeld -= SLASH_BOND;
             rootBondsBurned += SLASH_BOND;   // filer's stake
         } else {
-            // the root is right: it lands (write-once)
+            // upheld by bar (r == 2) or by default (r == 3): lands
+            s.guilty = false;
             if (_applyRoot(s)) {
                 _rewardRootPoster(filingId, s.filer);
             } else {
@@ -1134,7 +1284,14 @@ contract CreditLedger is
             rootBondHeld -= SLASH_BOND;
             rootBondsBurned += SLASH_BOND;   // challenger's stake
         }
-        emit RootResolved(filingId, guilty, quorumRecordHash);
+        if (r == 1) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             true, eligible);
+        } else if (r == 2) {
+            _rewardAttestors(filingId, s.attestStart, s.attestCount,
+                             false, eligible);
+        }
+        emit RootResolved(filingId, s.guilty, quorumRecordHash);
     }
 
     /// @notice Pull the winner's bond after a resolved root filing.
@@ -1194,6 +1351,40 @@ contract CreditLedger is
         emit RootPostingBountyChanged(rootPostingBounty);
     }
 
+    /// @notice Register the per-verdict attestation reward pot.
+    /// Timelocked like every other money parameter. 0 means no
+    /// attestation reward is registered.
+    function scheduleAttestationReward(uint256 newPot)
+        external onlyOwner {
+        if (attestationRewardChangeAt != 0) revert NoPendingChange();
+        pendingAttestationRewardPot = newPot;
+        attestationRewardChangeAt = block.timestamp + CHANGE_DELAY;
+        emit AttestationRewardScheduled(newPot, attestationRewardChangeAt);
+    }
+
+    function applyAttestationRewardChange() external {
+        if (attestationRewardChangeAt == 0) revert NoPendingChange();
+        if (block.timestamp < attestationRewardChangeAt) {
+            revert ChangeTooSoon(attestationRewardChangeAt,
+                                 block.timestamp);
+        }
+        attestationRewardPot = pendingAttestationRewardPot;
+        pendingAttestationRewardPot = 0;
+        attestationRewardChangeAt = 0;
+        emit AttestationRewardChanged(attestationRewardPot);
+    }
+
+    /// @notice Pull accumulated attestation rewards.
+    function claimAttestationReward()
+        external nonReentrant whenNotPaused {
+        uint256 amount = attestationClaimable[msg.sender];
+        if (amount == 0) revert NothingToClaim();
+        attestationClaimable[msg.sender] = 0;
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        if (!ok) revert SendFailed();
+        emit AttestationRewardClaimed(msg.sender, amount);
+    }
+
     /// @notice Pull accumulated root-posting bounties. Fee follows
     /// the work: the party whose root landed did the settlement work
     /// and draws the registered reward, exactly like the clearer who
@@ -1239,6 +1430,139 @@ contract CreditLedger is
         attributionRoot[s.forEpoch] = s.root;
         emit AttributionRootPosted(s.forEpoch, s.root);
         return true;
+    }
+
+    /// @dev Shared attestation core. Records one weighted attestation
+    /// on a challenged filing's slice of the global array. Window:
+    /// [filedAt + SLASH_WINDOW, filedAt + SLASH_WINDOW + ATTEST_WINDOW).
+    /// Eligibility: vested credits > 0 — credits are only earned
+    /// through the gated record/claim paths, so vested standing is the
+    /// pedigree. One attestation per identity per filing.
+    function _attest(uint256 filedAt, uint256 resolvedAt,
+                     address challenger, uint256 attestStart,
+                     uint256 attestCount, bool voidFiling,
+                     uint8 kind, uint256 filingId)
+        internal {
+        if (resolvedAt != 0) revert AlreadyResolved();
+        if (challenger == address(0)) revert NotChallenged();
+        if (block.timestamp < filedAt + SLASH_WINDOW) revert WindowOpen();
+        if (block.timestamp >= filedAt + SLASH_WINDOW + ATTEST_WINDOW) {
+            revert WindowClosed();
+        }
+        uint256 weight = _vestedOf(msg.sender);
+        if (weight == 0) revert NotEligible();
+        uint256 end = attestStart + attestCount;
+        for (uint256 i = attestStart; i < end; ++i) {
+            if (attestations[i].attester == msg.sender) {
+                revert AlreadyAttested();
+            }
+        }
+        attestations.push(Attestation({
+            attester: msg.sender,
+            voidFiling: voidFiling,
+            weight: weight,
+            at: block.timestamp
+        }));
+        emit Attested(kind, filingId, msg.sender, voidFiling, weight);
+    }
+
+    /// @dev The quorum verdict for a challenged filing's attestation
+    /// slice. 0 = undecided (window open); 1 = void (the filing is
+    /// wrong); 2 = uphold by bar; 3 = default proceed (window closed
+    /// with no bar — the challenge is unsubstantiated). Both decided
+    /// verdicts need two-thirds of capped participating weight, a
+    /// participation floor of QUORUM_FLOOR_BPS of eligible weight, and
+    /// QUORUM_MIN_DISTINCT distinct identities; the per-identity cap
+    /// is QUORUM_WEIGHT_CAP_BPS of the eligible total.
+    function _quorumResult(uint256 attestStart, uint256 attestCount,
+                           uint256 filedAt, uint256 eligibleTotal)
+        internal view returns (uint8) {
+        uint256 total;
+        uint256 voidVoters;
+        uint256 upholdVoters;
+        uint256 end = attestStart + attestCount;
+        for (uint256 i = attestStart; i < end; ++i) {
+            Attestation storage a = attestations[i];
+            total += a.weight;
+            if (a.voidFiling) voidVoters += 1;
+            else upholdVoters += 1;
+        }
+        if (total > 0
+            && total >= (eligibleTotal * QUORUM_FLOOR_BPS) / 10000) {
+            uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
+            uint256 cappedTotal;
+            uint256 voidCapped;
+            uint256 upholdCapped;
+            for (uint256 i = attestStart; i < end; ++i) {
+                Attestation storage a = attestations[i];
+                uint256 w = a.weight < cap ? a.weight : cap;
+                cappedTotal += w;
+                if (a.voidFiling) voidCapped += w;
+                else upholdCapped += w;
+            }
+            if (cappedTotal > 0) {
+                if (voidCapped * 3 >= 2 * cappedTotal
+                    && voidVoters >= QUORUM_MIN_DISTINCT) {
+                    return 1;
+                }
+                if (upholdCapped * 3 >= 2 * cappedTotal
+                    && upholdVoters >= QUORUM_MIN_DISTINCT) {
+                    return 2;
+                }
+            }
+        }
+        if (block.timestamp >= filedAt + SLASH_WINDOW + ATTEST_WINDOW) {
+            return 3;
+        }
+        return 0;
+    }
+
+    /// @dev Sum of vested credits across every identity that was ever
+    /// credited. The denominator for the participation floor and the
+    /// per-identity cap. Computed at finalization (rare and
+    /// permissionless), never maintained as a running total, so no
+    /// credit path can drift it.
+    function _eligibleVestedTotal() internal view returns (uint256 total) {
+        uint256 n = creditedIdentities.length;
+        for (uint256 i = 0; i < n; ++i) {
+            total += vestedOf(creditedIdentities[i]);
+        }
+    }
+
+    /// @dev Pays the registered attestation reward to the attestors
+    /// on the side a quorum VERDICT endorsed, pro-rata by capped
+    /// weight. Never paid on the default path. Never mints: an
+    /// underfunded pool skips the reward publicly.
+    function _rewardAttestors(uint256 filingId, uint256 attestStart,
+                              uint256 attestCount, bool voidWon,
+                              uint256 eligibleTotal)
+        internal {
+        uint256 pot = attestationRewardPot;
+        if (pot == 0) return;
+        uint256 cap = (eligibleTotal * QUORUM_WEIGHT_CAP_BPS) / 10000;
+        uint256 winningCapped;
+        uint256 end = attestStart + attestCount;
+        for (uint256 i = attestStart; i < end; ++i) {
+            Attestation storage a = attestations[i];
+            if (a.voidFiling != voidWon) continue;
+            uint256 w = a.weight < cap ? a.weight : cap;
+            winningCapped += w;
+        }
+        if (winningCapped == 0) return;
+        if (operationsPool < pot) {
+            emit AttestationRewardSkipped(filingId, pot - operationsPool);
+            return;
+        }
+        operationsPool -= pot;
+        for (uint256 i = attestStart; i < end; ++i) {
+            Attestation storage a = attestations[i];
+            if (a.voidFiling != voidWon) continue;
+            uint256 w = a.weight < cap ? a.weight : cap;
+            uint256 share = (pot * w) / winningCapped;
+            if (share == 0) continue;
+            attestationClaimable[a.attester] += share;
+            emit AttestationRewardAwarded(filingId, a.attester, share);
+        }
     }
 
     /// @dev Shape checks for a registry filing, applied at filing

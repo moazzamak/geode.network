@@ -174,7 +174,7 @@ attempts and exactly where each one is closed.
 One honesty statement organizes the rest of this paper. The
 protocol machinery is built and measured: the registry, the
 router, the probes, the ledger, and the settlement. Its rules are
-shipped code with sealed tests, and its numbers are held-out
+shipped code with closed tests, and its numbers are held-out
 measurements. The generalized-encoder thesis is younger than the
 machinery: the fusion, nonlinearity, and breadth measurements in
 Section~\ref{sec:measured} support the federated form of the
@@ -198,7 +198,7 @@ of them.
           epoch-vested (an epoch is seven days). Both kinds share one
           registration form: an operator
           key, a payout address that may differ from it, a price per unit
-          of work, and a sealed claim. The kinds differ only in who
+          of work, and a committed claim. The kinds differ only in who
           executes them.
     \item[Host.] The address that executes a primitive. The host
           earns the host share of its fees. Arms have no separate host
@@ -209,13 +209,13 @@ of them.
           scores answers, and audits other validators. It earns per
           accepted challenge.
     \item[Reference executor.] A registered party that holds the
-          sealed artifact and re-runs it inside probed sessions. It is
+          frozen artifact and re-runs it inside probed sessions. It is
           sampled per session from the artifact's pool under the validator
           eligibility rules (activation window, activity floor, tenure). It
           is structurally excluded from any artifact that serves the
           session. It earns a share of the registered reference-run price.
           The reference executor exists only for artifacts whose
-          contributor chooses to distribute the sealed weights. For a
+          contributor chooses to distribute the frozen weights. For a
           weights-private artifact there is no serving-time identity check
           beyond behavioural identity on a fixed probe set, and the
           residual is priced by the bond.
@@ -241,7 +241,7 @@ of them.
 
 There is no adjudicator role. Any party may file a dispute with a
 deposit. The computation decides guilt. The computation is a
-replay of sealed data.
+replay of closed data.
 
 Two actors from outside the system matter as inputs. The
 \emph{publisher} provides the frozen checkpoints the arms are
@@ -254,7 +254,7 @@ power.
 
 \subsection{Terminology}\label{sec:terms}
 
-Every load-bearing term is defined here once and used consistently
+Every term that matters is defined here once and used consistently
 throughout.
 
 \begin{center}
@@ -264,7 +264,7 @@ throughout.
         \midrule
         Capability              & A contribution that can be served: a learned arm or a
         programmed primitive.                                                             \\
-        Artifact                & A capability once sealed: frozen code, sealed claim,
+        Artifact                & A capability once frozen: frozen code, committed claim,
         measured profile.                                                                 \\
         Arm                     & A learned contribution: encoder and head over a frozen
         checkpoint.                                                                       \\
@@ -329,7 +329,7 @@ The system's behavior follows from a small set of rules.
           routing, and sampling), never request content. That separation
           is a design invariant, not a policy choice.
     \item[Measured, not asserted.] Every capability claim is scored
-          on held-out data. It is sealed with a content hash. It replays
+          on held-out data. It is committed with a content hash. It replays
           from the ledger. The discipline is register-before-measuring: a
           claim is written down before the measurement that tests it.
     \item[Economic-only incentives.] Anti-abuse mechanisms use
@@ -378,7 +378,7 @@ honesty.
           be concatenated on one code manifest and read by a single head
           without the blocks fighting each other. Both composition forms are
           measured: fusion here, chaining in the next item. Two
-          full-scale multi-encoder fusion cells are sealed. The first cell, multi-scale codes plus DINOv2 features upscaled from
+          full-scale multi-encoder fusion cells are committed. The first cell, multi-scale codes plus DINOv2 features upscaled from
           $32\times32$, is a negative for both plain concatenation and CCA
           alignment, with the upscaling confound registered rather than
           hidden. The second, on a clean cell where both blocks carry signal
@@ -386,7 +386,7 @@ honesty.
           concatenation reading: the fused design more than doubles the
           single encoder ($0.548$ vs $0.242$), while CCA alignment still
           loses to raw concatenation ($0.511$). Concatenation on the code
-          manifest is the load-bearing fusion form; alignment bridges are
+          manifest is the fusion form that matters; alignment bridges are
           optional, measured per pair. Both outcomes are published.
 
     \item \textbf{Composition (b): chaining.} The core concept is a
@@ -403,7 +403,7 @@ honesty.
           check nor the error a first stage hands to a second.
 
           The form is tested end to end (Section~\ref{sec:measured}): a
-          domain router feeding six per-domain specialists on the sealed
+          domain router feeding six per-domain specialists on the closed
           DomainNet selection. The chain reaches $0.2741$ against $0.2450$
           for the monolithic head that is the strongest single stage, and
           $0.2995$ when the router is handed the true domain. Routing
@@ -466,7 +466,7 @@ input to a code vector
 \begin{equation}
     z = f(x) \in \mathbb{R}^d.
 \end{equation}
-The sealed head scores the $C$ classes of the declared task as a
+The frozen head scores the $C$ classes of the declared task as a
 fixed sum of products plus a bias,
 \begin{equation}
     s = W^\top z + b, \qquad W \in \mathbb{R}^{d \times C},\;
@@ -487,7 +487,7 @@ only the predicted class and the bucket index,
     \kappa(x) = \softmax(s)_{\hat y} - \max_{j \neq \hat y} \softmax(s)_j, \qquad
     b = \text{bucket}(\kappa(x)),
 \end{equation}
-The edges are part of the sealed artifact, so the bucketing
+The edges are part of the frozen artifact, so the bucketing
 replays exactly. The raw margin and the score vector never leave
 the serving host: with a public trunk, a margin-annotated answer
 stream would let a buyer solve for the head as a linear system
@@ -515,7 +515,7 @@ with the largest score, $\hat y = \argmax_j (W^\top z)_j$.
 On a sampled fraction of settlement batches, whoever computes it
 attaches
 a Bulletproofs-style argument. The argument proves that the
-reported answer is exactly what the sealed head computes. It is
+reported answer is exactly what the frozen head computes. It is
 not cheaper than recomputing; for a linear head, nothing is
 cheaper. Section~\ref{sec:proofs} prices it per axis. What it buys is
 that the proof reveals nothing about the input, and that the
@@ -530,7 +530,7 @@ boundary.
 
 The encoder is a frozen checkpoint. A substituted model is caught
 probabilistically. A fraction of sessions is answered twice: once by the serving
-capability and once by a reference execution of the sealed
+capability and once by a reference execution of the frozen
 artifact. This is the shadow probe. The probed contributor pays for
 the reference run. The
 answers must match exactly. The serving host commits its answer
@@ -542,7 +542,7 @@ commitment to the answer and the meter, never the answer
 itself. The commitment is the answer's hash with a fresh nonce. The commitment form closes
 the transcript-axis exposure: there the answer is the content of
 the sample, and a commitment to it publishes no content. The
-opening exists only inside the sealed replay environment, where a
+opening exists only inside the closed replay environment, where a
 dispute is settled. The data contract: inputs are not retained beyond the
 session. Codes are not retained either. A code is the encoder's
 compact numeric summary of an input, and it can be inverted back
@@ -699,10 +699,10 @@ Admission is by measurement, and the registry changes only
 through deterministic rules. The admission rules are:
 \begin{itemize}
     \item A submitted registration, an arm or a primitive, passes
-          quality gates on held-out data. The claim is sealed before
+          quality gates on held-out data. The claim is committed before
           evaluation. This is commit-reveal. A bad result cannot be
           re-described after the fact.
-    \item Quality is measured and sealed. The market prices only the
+    \item Quality is measured and committed. The market prices only the
           cost side. A low posted price cannot buy a better score. A high
           one cannot claim it.
     \item New tasks grow the registry the same way. A measured task
@@ -721,7 +721,7 @@ through deterministic rules. The admission rules are:
           together.
     \item The registry updates are filed by any party under a bond,
           and a challenge escalates to the on-chain attestation quorum. No
-          key admits or extends on its own discretion: the sealed
+          key admits or extends on its own discretion: the committed
           measurement or the ratified verdict decides, and the verdict is
           attested by the network's credit-holding identities, never filed
           by a single key.
@@ -760,7 +760,7 @@ Routing is deterministic
           sweep gives a single arm $1.000$ of traffic in all three cases.
           Rank ties resolve by a hash of the artifact and the
           anchor, never by the bare artifact hash. The hash is unknowable
-          at seal time and deterministic per anchor.
+          at commit time and deterministic per anchor.
     \item A per-axis price floor sits at the reference hosting
           cost. Registration below the floor is rejected, and
           below-floor prices are never routed. The floor stops a price
@@ -1020,10 +1020,10 @@ cost is stated here rather than implied.
 The task head is a closed-form ridge fit. It is a fixed sum of
 products. Whoever computes it can prove, with a Bulletproofs-style
 inner-product argument, that the reported answer is exactly what
-the sealed head computes~\cite{bunz2018}. An inner-product
+the frozen head computes~\cite{bunz2018}. An inner-product
 argument is a compact certificate that a sum of products was
 computed correctly. In symbols, the prover
-publishes commitments to the sealed head $W$ and the input's
+publishes commitments to the frozen head $W$ and the input's
 code $z$ and a compact proof $\pi$ of the inner-product
 statement
 \begin{equation}
@@ -1085,12 +1085,12 @@ Two placements follow.
           proof is a ledger-disputable L1 deviation. It is replay-gated. It
           burns the unvested promise of whoever submitted it.
     \item \textbf{Disputes.} A slash is replay-gated. A filed dispute
-          re-runs the sealed artifact on sealed data. The re-run is itself
+          re-runs the frozen artifact on closed data. The re-run is itself
           a verifiable measurement. The computation decides guilt. Note that
           the re-run, not the proof, is what settles a dispute; for a
           head, replay is four to five orders of magnitude cheaper than
           proof verification. The whole apparatus rests on bit-exact replay
-          of sealed artifacts; the sealing discipline is what makes it
+          of frozen artifacts; the freeze discipline is what makes it
           achievable, and the cost model assumes it, not proves it.
 \end{itemize}
 
@@ -1216,7 +1216,7 @@ what inputs it accepts, what outputs it produces, and which
 labels it can emit. Two capabilities with identical
 fingerprints are interchangeable on that task. That makes
 composition and failover mechanical. The fingerprint is computed
-from the sealed artifact. It is never computed from a
+from the frozen artifact. It is never computed from a
 self-description.
 
 \subsection{The head}
@@ -1242,7 +1242,7 @@ time a fresh code $z$ is scored by the sum of products
 $s = W^\top z$ and answered by the class with the largest
 score, $\hat y = \argmax_j s_j$. The
 solve has no iterations and no random seed. The solver,
-$\lambda$, and the training rows are part of the sealed
+$\lambda$, and the training rows are part of the frozen
 artifact. The head replays bit-exactly. It is a closed-form
 readout~\cite{belrose2023} in one exact solve.
 
@@ -1256,7 +1256,7 @@ The rules are:
     \item \textbf{Contributors.} At registration the contributor
           submits the artifact hash, the fingerprint, and a contract proof.
           The proof is a compact Bulletproofs-style
-          argument~\cite{bunz2018}. It proves that the sealed head
+          argument~\cite{bunz2018}. It proves that the frozen head
           satisfies the declared output contract on a sampled set of
           ledger-registered reference codes. A reference code is the frozen
           encoder's output on a reference input, and the encoder run that
@@ -1268,7 +1268,7 @@ The rules are:
           \end{equation}
           where $\mathrm{decode}$ is the registered readout of the output
           contract. In words: the proof vouches, code by code, that what
-          the sealed head produces on each sampled reference code is what
+          the frozen head produces on each sampled reference code is what
           the contract says it must produce. Proving the encoder run that
           made the code is out of scope, by design (next item). The network
           verifies the proof. The fingerprint is then a cryptographic
@@ -1300,7 +1300,7 @@ is identical.
 \begin{enumerate}
     \item The contributor submits the artifact hash, the fingerprint,
           the descriptor, the contract proof, and the claimed scores.
-    \item The claim is sealed (commit) before evaluation.
+    \item The claim is committed before evaluation.
     \item Validators score the artifact on the held-out split
           (reveal).
     \item The verdict compares the measured score against the axis's
@@ -1311,7 +1311,7 @@ is identical.
 
 \textbf{What the measurement measures.} The measurement produces
 one number: the artifact's held-out score on the axis metric,
-computed on data the contributor never saw. That number is sealed
+computed on data the contributor never saw. That number is committed
 before evaluation, replayed from the ledger, and compared against
 the axis's published floor. It is never a self-report, and it is
 never measured on the contributor's training data. The rules that
@@ -1320,18 +1320,18 @@ keep the number honest are:
     \item Contributors train on whatever data they like. The network
           does not audit their training data, and it never scores on it.
     \item The network holds its own evaluation corpora. They are
-          collected, held sealed, and never released. Every submission is
+          collected, held closed, and never released. Every submission is
           scored on splits the contributor never touches.
     \item Where a public benchmark is used, the network does not
           score on the benchmark's public test split. It holds its own
-          sealed partition.
+          closed partition.
     \item Splits rotate. A leaked row loses its value.
     \item Boundary one: contributor data may overlap the evaluation
           data. That is an unearned boost, impossible to rule out.
     \item Boundary two: the frozen encoder is a publisher checkpoint.
           No one can audit its pretraining history. Publisher numbers are
           reproduced as a sanity check only.
-    \item The developer's own bootstrap arms seal the head's training
+    \item The developer's own bootstrap arms freeze the head's training
           rows for bit-exact replay. That is an internal discipline, not a
           requirement on contributors.
 \end{itemize}
@@ -1370,7 +1370,7 @@ guarded against probing. The defenses are:
 \textbf{Custody.} The corpora are held under a custody
 regime. The rules are:
 \begin{itemize}
-    \item The evaluation corpora live inside a sealed scoring
+    \item The evaluation corpora live inside a closed scoring
           environment. Validators submit queries and receive aggregate
           scores back. No validator holds rows. Nothing leaves the
           environment except aggregate verdicts.
@@ -1381,7 +1381,7 @@ regime. The rules are:
           replaced.
     \item The rubric is public. It holds the floors and metrics. Only
           the data is secret.
-    \item Residual: the sealed environment itself is an
+    \item Residual: the closed environment itself is an
           infrastructure trust point, and a corrupt majority of validators
           is outside the mechanism's reach.
 \end{itemize}
@@ -1425,10 +1425,10 @@ sampled set
 is the first $k$ entries in that key order. Default $k=9$. No one
 chooses their judges. The seed postdates the commit and is
 produced by a beacon the librarian does not control. The
-submitter cannot grind it by re-rolling the seal.
+submitter cannot grind it by re-rolling the commit.
 
 \textbf{Rounds.} Challenges are drawn, not authored. They
-come from a registered sealed per-axis corpus under a published
+come from a registered closed per-axis corpus under a published
 stratified sampling rule: the beacon-seeded draw is stratified by
 class share (equal per class unless shares are registered), and
 the corpus is committed by Merkle root at axis creation. A Merkle
@@ -1545,7 +1545,7 @@ discretion. The rules are:
           deposit and an evidence reference. The deposit is the registered
           reference-run price. It is deliberately bounded, so the dispute
           right is affordable to any contributor. The computation re-runs
-          the sealed artifact on the challenged point inside a sealed
+          the frozen artifact on the challenged point inside a closed
           replay environment. The disputed input is reproduced only there.
           It never enters the public ledger. The outcome is deterministic.
           The losing party pays the full replay cost. An upheld dispute
@@ -1649,7 +1649,7 @@ is answered twice. The default is $\rho=0.05$, timelock-adjustable
 upward only: the floor of $0.05$ sits outside ordinary governance
 (see security floors).
 The serving capability answers once. A reference execution of the
-sealed artifact answers once more, on the same session's input.
+frozen artifact answers once more, on the same session's input.
 The two answers must be identical: any
 $\hat y_{\mathrm{serve}} \neq \hat y_{\mathrm{ref}}$ is a
 deviation. The comparison is live. It is
@@ -1664,7 +1664,7 @@ falls and Section~\ref{sec:limits} carries the consequence.
 
 \paragraph{Behavioural identity.} At admission the
 contributor commits to a Merkle root over $f(x)$ on a large
-sealed probe set. Each epoch a beacon-seeded fresh slice is
+closed probe set. Each epoch a beacon-seeded fresh slice is
 revealed and the serving host must answer it; the answers must
 open against the committed root. Locality checks pair each probe
 with perturbed neighbours: a stored lookup table answers exact
@@ -1673,7 +1673,7 @@ both. The mechanism lets a serving host prove behaviour without
 distributing weights.
 
 \paragraph{Identity, not accuracy.} The probe certifies that
-the served model \emph{is} the sealed artifact. That is the only
+the served model \emph{is} the frozen artifact. That is the only
 claim a serving-time check can measure. A live sample carries no
 label. Accuracy was settled at admission on held-out splits. It
 is re-settled whenever an artifact re-registers. Serving the
@@ -1690,7 +1690,7 @@ around ``the same artifact''. It never licenses the served model
 to differ by the artifact's own error rate. Replay rests on a
 registered numerics policy: float64 promotion in the head's
 solve, pinned kernels, fixed reduction order. Measured: the
-canonical CPU oracle reproduces the sealed heads bit-exactly on
+canonical CPU oracle reproduces the frozen heads bit-exactly on
 its registered configuration, while the same computation under a
 different thread configuration diverges in the last bits. The
 probe therefore compares margins, never raw bits.
@@ -1733,7 +1733,7 @@ mismatch after seeing the answer. It cannot rubber-stamp a
 substitution. Neither party can substitute a different input at
 dispute time. Executors that disagree with each other or with the
 committed answer are all bound by replay. The disputed input is
-reproduced only into the sealed replay environment. The sealed
+reproduced only into the closed replay environment. The frozen
 artifact decides. Whoever it contradicts pays the replay and
 burns. Both roles carry the same slashable promise. A dispute is
 filed with a deposit set at the registered reference-run price.
@@ -1747,7 +1747,7 @@ escrows until the replay settles.
 probability $\rho$, so the number of sessions until a substituted
 artifact is first probed is geometric with expectation
 $\mathbb{E}[T] = 1/(\rho\delta)$, where $\delta$ is how often the
-substitute disagrees with the sealed artifact. A crude knockoff
+substitute disagrees with the frozen artifact. A crude knockoff
 that differs on every input ($\delta = 1$) is probed within
 $1/\rho$ sessions, twenty on average at the default
 five-percent probe rate. A close copy that differs on only 0.5\%
@@ -1816,13 +1816,13 @@ $k_e$ times the cost of serving one session. Expected probe
 overhead is therefore at least $k_e\rho$ of serving cost, about
 ten percent at the defaults, not five. The confidence knob
 ($k_e$) and the cost knob are the same number, and the tension is
-stated rather than hidden. Anyone holding the sealed artifact can register into
+stated rather than hidden. Anyone holding the frozen artifact can register into
 its executor pool. It is a paid, measured role, not a permanent
 developer duty. The executor sees the probed input in plaintext,
 a further plaintext point alongside the gateway and the
 serving host. The ledger never carries the answer: the answer
 entry is a commitment whose opening exists only inside the
-sealed replay environment. The same
+closed replay environment. The same
 data contract binds every point: no retention
 beyond the session, no training. Probe coverage is itself a
 ledger-measured rate. A provider that falls silent is visible.
@@ -1833,7 +1833,7 @@ development fund carries no per-session monitoring line.
 
 \paragraph{The operative mechanism, per tier.} The probe above
 is the operative live-traffic mechanism for artifacts with a
-non-empty executor pool; anyone holding the sealed artifact may
+non-empty executor pool; anyone holding the frozen artifact may
 register into it, so the pool is empty only when the contributor
 keeps the weights private. For weights-private artifacts on the
 plaintext tier, the operative mechanism is behavioural identity:
@@ -1905,7 +1905,7 @@ A session is one declared task and the samples served under it:
     \item \textbf{Record}: the ledger entry.
 \end{enumerate}
 A registered fraction of queries is also answered by a reference
-execution of the sealed artifact within the same session. The
+execution of the frozen artifact within the same session. The
 answers must match. An abstention consumed the trunk compute: it
 is recorded and metered at the measured compute fraction actually
 consumed (for a single-pass head, the full unit price, because
@@ -1977,7 +1977,7 @@ usage. It is admitted the same way: one registration form, one
 validator challenge session, one contributor-set price per unit
 of work. A primitive's challenges are reference executions. The
 two kinds, learned arms and programmed primitives, are
-collectively \emph{capabilities}. Once sealed, either kind is
+collectively \emph{capabilities}. Once frozen, either kind is
 called an \emph{artifact}. Every rule about artifacts applies to
 both.
 
@@ -2033,7 +2033,7 @@ trains off-network and registers the artifact frozen, exactly like
 any arm. A representation artifact registers with an input
 contract (the code-bus blocks it consumes), an output contract
 (the block it produces), a measured utility (downstream head
-improvement on the sealed reference workload), a measured expected
+improvement on the closed reference workload), a measured expected
 unit count, a price per unit, and a content digest of its frozen
 weights. It earns attribution through the heads that consume it,
 by the Shapley rule of Section~\ref{sec:fees}, the same rule
@@ -2089,7 +2089,7 @@ serverless industry uses for untrusted customer code.
           image. A hung primitive fails deterministically into the fallback
           chain.
     \item \textbf{Host deviations.} A host that silently modifies a
-          third-party primitive serves an artifact other than the sealed
+          third-party primitive serves an artifact other than the frozen
           one. The mismatch is replay-visible. The host faces the same
           replay-gated slash path as any other deviation.
 \end{itemize}
@@ -2122,11 +2122,11 @@ serverless industry uses for untrusted customer code.
 
 A program that tries to cheat its own evaluation is the known
 adversary here. For example, it may memorize the test set. The
-defenses are registered: commit-reveal submission, sealed
-evaluation data, replay comparison against the sealed artifact,
+defenses are registered: commit-reveal submission, closed
+evaluation data, replay comparison against the frozen artifact,
 and rotation of held-out data. Only validators see the admission
 split. Fully public benchmarks have publicly known answers. There,
-sealing is impossible. The honest statement: memorization is
+hiding the answers is impossible. The honest statement: memorization is
 bounded and risky, not prevented.
 
 \section{The game theory}
@@ -2240,7 +2240,7 @@ stages has $2^m$ subsets, and every subset needs its own end-to-end
 score, so the number of scores doubles with each added stage. The
 protocol therefore does not compute these scores per session. It
 computes them once when a chain is registered, against the chain's
-sealed reference workload, publishes them with the chain, and
+closed reference workload, publishes them with the chain, and
 reuses them for every session the chain serves until the chain
 re-registers. Chain length is capped at four stages, which means
 sixteen scores, a number a validator can replay. A chain longer
@@ -2434,13 +2434,13 @@ one procedure with these rules:
           the development fund. The registry sets it, adjustable by
           timelock.
     \item \textbf{The form.} Both kinds share one form: operator key,
-          payout address, price per unit of work, and a sealed claim. The
+          payout address, price per unit of work, and a committed claim. The
           payout address may differ from the operator key. A hot signing
           key need not hold earnings.
     \item \textbf{Deduplication.} The artifact hash is the registry
           key. An identical hash is the same artifact and cannot register
           twice. The key also carries a behavioural signature: the
-          response profile on the sealed reference set. Two artifacts whose
+          response profile on the closed reference set. Two artifacts whose
           profiles agree above $0.95$ are the same artifact for
           registration, whatever their hashes; a one-bit-flip copy is
           behaviourally identical and cannot register as new. A copycat
@@ -2505,7 +2505,7 @@ accrued credits stay unclaimable until the probe resolves.
         \midrule
         0              & Underperformance or downtime: no slash. The market penalizes
         through reduced attribution.                                                   \\
-        1              & Provably fraudulent output or deviation from the sealed
+        1              & Provably fraudulent output or deviation from the frozen
         artifact: freeze claims on credits earned under open probe
         exposure, then burn the unvested promise remainder.                            \\
         2              & Provable adversarial attack: burn the full promise and delist
@@ -2527,7 +2527,7 @@ closes. A conviction then burns vested-but-unclaimed credits,
 a quantity that is always non-empty under the freeze.
 
 Convictions are \emph{replay-gated}. A slash requires a mechanical
-re-run of the sealed artifact on sealed data showing the
+re-run of the frozen artifact on closed data showing the
 deviation. Any party may file the dispute with a deposit. The
 computation decides guilt. A false conviction requires a false
 replay. The probability of that is effectively zero for an honest
@@ -2683,7 +2683,7 @@ It must be defined, because the alternative is a quiet back channel.
           replay-gated slash ladder, never a content decision.
           Confirmation is technical only: validators check the notice
           format, the ledger binding of the reported output, and replay
-          equality against the sealed artifact. They never judge
+          equality against the frozen artifact. They never judge
           legality; the authority's notice is the determination.
     \item \textbf{Two further triggers.} A community escalation: at
           least $N$ distinct behavioural identities file the same evidence
@@ -2702,7 +2702,7 @@ It must be defined, because the alternative is a quiet back channel.
           a report cites the session's committed answer hash, the input
           commitment, and the authority notice reference. For sensitive
           classes the report path is authority-only; evidence is
-          reproduced only inside the sealed replay environment and shown
+          reproduced only inside the closed replay environment and shown
           only to the authority, and the public record keeps hashes and
           the notice reference. The known privacy controversy of
           hash-matching systems is a registered residual, not hidden.
@@ -2723,7 +2723,7 @@ rules apply.
 
 \begin{enumerate}
     \item \textbf{Ship at 80--90\%.} Each bootstrap arm ships
-          sub-maximal. The headroom is real, measured, and sealed. For
+          sub-maximal. The headroom is real, measured, and committed. For
           example, the 1.5-billion-parameter coder ships where a
           7-billion-parameter one exists. Parameters are the adjustable
           numbers inside a model. The bar is published.
@@ -2983,7 +2983,7 @@ baseline. A controlled, common-protocol comparison remains future
 work.
 
 Everything below is measured on held-out data. It is scored on
-rows the fit never saw. It is sealed with content hashes under the
+rows the fit never saw. It is committed with content hashes under the
 register-before-measuring discipline. The scale is small,
 single-corpus, and single-party. Treat these as a working
 demonstration, not as a competitive claim.
@@ -3061,10 +3061,10 @@ stage, and the fusion rows measure concatenation, which is a
 different operation: neither tests the contract check, and neither
 tests what a first stage's errors do to a second. The cell
 runs the composition the architecture is actually built from, a
-router feeding specialists, on the sealed DomainNet selection
+router feeding specialists, on the closed DomainNet selection
 (138,000 train and 34,500 held-out rows, 345 classes over 6
 domains, DINOv2-small features at $56\times56$). The monolithic
-head reproduces the sealed read of $0.245014$ exactly, which is
+head reproduces the committed read of $0.245014$ exactly, which is
 what licenses reading anything else off the same features.
 
 The chain reaches $0.2741$ against the monolith's $0.2450$. It
@@ -3218,7 +3218,7 @@ They are not claims against published baselines.
           et al.~\cite{sun2022} maximize a broker's profit over federated
           training rounds rather than over registrations. Numerai's
           tournament~\cite{numerai} is the deployed system nearest the
-          principle: sealed held-out scoring, payment by measured
+          principle: closed held-out scoring, payment by measured
           out-of-sample contribution, and stake at risk. It has never
           published, which is why we cite it as a system rather than as
           literature.
@@ -3254,9 +3254,9 @@ They are not claims against published baselines.
           that \emph{an} inference ran as specified. None establishes that
           the artifact was \emph{useful}, which is the quantity GEODE
           pays on. The two are complementary, not competing.
-    \item \textbf{Sealed compute environments}: Ocean Protocol's
+    \item \textbf{Closed compute environments}: Ocean Protocol's
           compute-to-data~\cite{ocean2019} is the closest existing form of
-          the challenge session's sealed scoring, where the buyer's data never
+          the challenge session's closed scoring, where the buyer's data never
           leaves its enclosure and only a result escapes. Ocean settles a
           data-access payment; GEODE settles a measured-utility payment.
     \item \textbf{Tool use}: Toolformer and the tool-augmented-model
@@ -3371,10 +3371,10 @@ These are the structural residuals, in order of severity:
           encoder is a publisher checkpoint, and no one can audit its
           pretraining history. The deeper consequence: every verification
           instrument, the shadow probe, replay, dispute, and proof,
-          verifies that the served model matches the sealed artifact. A
-          trunk that is malicious as sealed, or backdoored by its
+          verifies that the served model matches the frozen artifact. A
+          trunk that is malicious as frozen, or backdoored by its
           publisher, passes all of them by construction. Sameness is
-          certified; the sealed artifact itself is trusted, not audited.
+          certified; the frozen artifact itself is trusted, not audited.
           That is the failure mode with the largest blast radius, and it is
           stated first, not hidden mid-list.
     \item \textbf{No mechanism survives a lying majority.} Every
@@ -3406,7 +3406,7 @@ These are the structural residuals, in order of severity:
           overhead, sixty percent of serving cost at a hundred sessions
           per epoch against ten percent on a busy axis, which is a
           bootstrap cost, not a free property. This is arithmetic over the
-          sealed test statistic; no tuning can change it.
+          committed test statistic; no tuning can change it.
     \item \textbf{Model extraction is slowed, not stopped.} The trunk is a
           public checkpoint, so a buyer computes codes locally and probes
           the head. The defenses, coarse confidence buckets, metered
@@ -3423,11 +3423,11 @@ These are the structural residuals, in order of severity:
           an economic boundary.
           The same is true of every deployed black-box model.
     \item \textbf{Weights-private artifacts are verified by behavioural
-              identity on a fixed sealed probe set}, not by fresh-input
+              identity on a fixed closed probe set}, not by fresh-input
           probing: an executor pool needs the artifact, and a contributor
           that keeps the weights private has an empty pool by
           construction. The near-copy-on-live-traffic case, a substitute
-          that differs from the sealed artifact on a small fraction of
+          that differs from the frozen artifact on a small fraction of
           fresh inputs, is exactly the case only fresh-input probing
           catches, and for weights-private artifacts it is bounded by the
           per-axis bond and the dispute path, not by detection. That
@@ -3451,13 +3451,13 @@ These are the structural residuals, in order of severity:
           merge them.
     \item \textbf{Serving substitution is detected probabilistically.} A
           fraction of queries is answered twice: by the serving capability
-          and by a reference execution of the sealed artifact. The answers
+          and by a reference execution of the frozen artifact. The answers
           must match. A swapped model is caught at the probe rate per
           query, with a per-epoch minimum on quiet axes. The serving host's
           answer is committed before the probe flag is revealed. Under the
           private tier the probe is ciphertext-native: the host commits the
           output ciphertext, deterministic within a committed seed given
-          the input ciphertext and the sealed head, and the executor
+          the input ciphertext and the frozen head, and the executor
           re-runs the homomorphic evaluation on the same ciphertext and
           compares. Determinism comes from committed-seed flooding: the
           host binds a flooding ciphertext to the seed it commits with its
@@ -3477,7 +3477,7 @@ These are the structural residuals, in order of severity:
           a further plaintext point alongside the gateway and the
           serving host. The ledger never carries the answer: the answer
           entry is a commitment whose opening exists only inside the
-          sealed replay environment. The same
+          closed replay environment. The same
           no-retention, no-training data contract binds every point.
           Cryptography does not. The private serving path removes the
           serving-host point entirely for users who
@@ -3495,7 +3495,7 @@ These are the structural residuals, in order of severity:
           same no-retention, no-training rules as the inputs they
           summarize. Inversion risk is a named residual: contract rules can
           be broken, and cryptography does not cover codes.
-    \item \textbf{A corrupt validator's damage is bounded by the sealed
+    \item \textbf{A corrupt validator's damage is bounded by the closed
               scoring environment:} validators receive aggregate scores, never
           rows. Inside the environment, sharding means no single key reads
           the whole corpus at once. A row that leaks identifies its shard.
@@ -3571,7 +3571,7 @@ These are the structural residuals, in order of severity:
           a payer can already express arm preference openly through
           best-quality mode, so grinding buys a preference it could have
           asked for.
-    \item \textbf{Sealed evaluation data invites probing.} Membership and
+    \item \textbf{Closed evaluation data invites probing.} Membership and
           influence attacks run through repeated submission. The defenses,
           aggregate-only verdicts, bounded reporting precision, fees per
           submission, and rotation, push the signal below the cost of
@@ -3672,7 +3672,7 @@ discipline, not any component, is the product.
     \item \textbf{Register before measuring.} A claim is written down,
           with its acceptance criteria, before the measurement that tests
           it. This closes the door on re-describing results after the fact.
-    \item \textbf{Commit-reveal admission.} Submissions are sealed
+    \item \textbf{Commit-reveal admission.} Submissions are committed
           before evaluation. An after-the-fact re-description of a bad
           result is impossible by construction.
     \item \textbf{Replay everything.} Every number re-runs from its
@@ -3857,7 +3857,7 @@ A contributor wants to offer a coder arm on the code axis.
           the claimed scores. It also submits an operator key, a payout
           address, a price per unit, and the challenge budget that pays the
           sampled validators.
-    \item \textbf{The seal.} The claim is committed before
+    \item \textbf{The commit.} The claim is committed before
           evaluation. From this moment the scores cannot be re-described.
     \item \textbf{The judges.} The commit is frozen on the ledger.
           The sampled set is the first $k=9$ eligible validators of the
@@ -3881,7 +3881,7 @@ routes by best measured score per unit of posted price. Fail:
 nothing is admitted. \textbf{Abuse closed here.} A flood of fresh
 validator accounts carries no sampling weight. The activation
 window, activity floor, and tenure cause that. The contributor
-cannot re-roll the seal for friendlier judges. Repeated
+cannot re-roll the commit for friendlier judges. Repeated
 submissions that probe the hidden evaluation split are priced by
 the registration fee. Aggregate-only verdicts at four significant
 digits blunt the signal.
@@ -3956,7 +3956,7 @@ The honest path of a probed session runs like this:
           $k_e=2$ reference executors from the
           artifact's eligible pool. The sample is a hash of the
           randomness-beacon round, the session, and the host's own commit.
-    \item Each executor re-runs the sealed artifact on the session's
+    \item Each executor re-runs the frozen artifact on the session's
           input. Each commits its reference answer, covering the input's
           hash. The answers are compared.
     \item All match. The session closes. The probed credit is docked
@@ -3974,7 +3974,7 @@ committed answer differs from the reference. The mismatch is
 ledger-disputable. The deviation burns the unvested promise (L1).
 A repeat offender is delisted (L2). The substitution survives
 about $1/(\rho\delta)$ sessions in expectation, where $\delta$ is
-how often the substitute disagrees with the sealed artifact. A
+how often the substitute disagrees with the frozen artifact. A
 knockoff that differs on every input ($\delta = 1$) is caught
 within $1/\rho$ sessions, inside the $N=4$-epoch vesting window.
 A close copy that differs on 0.5\% of inputs ($\delta = 0.005$)
@@ -4025,8 +4025,8 @@ A dispute in which the contributor is vindicated runs like this:
           contributor deposits the registered reference-run price. The
           deposit is bounded and affordable by design. The contributor
           demands a replay.
-    \item The disputed input is reproduced only into the sealed
-          replay environment. The sealed artifact re-runs on it.
+    \item The disputed input is reproduced only into the closed
+          replay environment. The frozen artifact re-runs on it.
     \item The replay matches the contributor's committed answer. The
           claim is contradicted. The executor pays the full replay cost and
           burns under its own promise. The escrowed credit is released.
@@ -4054,7 +4054,7 @@ raised to the executor count.
 Becoming a reference executor takes three steps:
 
 \begin{enumerate}
-    \item A party holds the sealed artifact and registers into its
+    \item A party holds the frozen artifact and registers into its
           executor pool.
     \item Eligibility accrues like a validator's: an activation
           window, an activity floor, and tenure weight in the sampling. A
@@ -4080,7 +4080,7 @@ A third-party primitive runs end to end like this:
           the host. Both are docked 2.5\%.
 \end{enumerate}
 \textbf{Abuse closed here.} A host that silently modifies a
-primitive serves an artifact other than the sealed one. The
+primitive serves an artifact other than the frozen one. The
 mismatch is replay-visible. The host faces the same slash path as
 any deviation.
 
@@ -4366,7 +4366,7 @@ window such an attack must fit inside.
 
     \bibitem{numerai}
     Numerai.
-    A crowdsourced hedge fund: sealed held-out scoring with staked
+    A crowdsourced hedge fund: closed held-out scoring with staked
     predictions.
     \emph{Deployed system; no canonical paper. Documentation at
         numer.ai}, accessed 2026.

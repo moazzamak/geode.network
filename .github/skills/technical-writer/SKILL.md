@@ -26,7 +26,7 @@ One document serves two readers at once:
 - **Experts** get the precise mechanism: exact rules, parameters,
   equations, honest boundaries, prior-art position.
 - **The sophisticated general public** gets the intuition without
-  dumbing anything down: every load-bearing term is glossed
+  dumbing anything down: every term that matters is glossed
   inline, in sentence form, the first time it matters (e.g.,
   "a benchmark is a standard, publicly shared test suite",
   "parameters are the adjustable numbers inside a model",
@@ -155,6 +155,14 @@ style passes (dropped function words, gloss-first, dash cleanup).
 - **What before how.** State what a mechanism does before how it
   does it. A reader can reject a mechanism at the "what" without
   paying for the "how".
+- **Plain words over jargon.** If a common word says the same thing,
+  use it. A word repeated to the point of numbness is a signal that
+  it is doing several jobs at once: pick the word that says what is
+  actually true in each place. "Sealed" is not one idea: evaluation
+  data kept hidden is "closed", an artifact that cannot change is
+  "frozen", a value fixed before reveal is "committed". Replace
+  "load-bearing" with "that matters". If you cannot explain a word
+  to a curious outsider in one plain sentence, replace it.
 
 ## Honesty discipline (non-negotiable)
 
@@ -187,7 +195,7 @@ style passes (dropped function words, gloss-first, dash cleanup).
 
 ## Review checklist (Execute as an explicit multi-pass audit)
 
-1. **Pass 1: The Two-Reader Audit**. Scan every paragraph. Is every load-bearing term glossed inline for the generalist? Is the exact mechanism intact for the expert?
+1. **Pass 1: The Two-Reader Audit**. Scan every paragraph. Is every term that matters glossed inline for the generalist? Is the exact mechanism intact for the expert?
 2. **Pass 2: The Honesty Audit**. Strip out ledger-speak (commit IDs, test counts). Verify that boundaries and limitations are stated as precisely as capabilities.
 3. **Pass 3: The Sentence Audit**. Break down run-ons. Delete echo words and filler words. Verify parallel structure.
 4. **Pass 4: The Structure Audit**. Every rule attaches to a role;
@@ -199,7 +207,7 @@ style passes (dropped function words, gloss-first, dash cleanup).
    person speaks). Scan for dropped function words: verbless
    fragments standing as sentences, missing articles before singular
    count nouns, and dropped locative subjects (see Voice rules).
-   Verify gloss-first ordering at first use of every load-bearing
-   term, no em-dashes, and that every list is framed by a sentence.
+   Verify gloss-first ordering at first use of every term that
+   matters, no em-dashes, and that every list is framed by a sentence.
    Do not "fix" deliberate dictionary-style appositions or colon-list
    fragments.

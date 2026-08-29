@@ -284,6 +284,13 @@ the beacon chain's RANDAO composed with a verifiable delay
 function, with drand as the fallback, seeded as
 $H(\text{drand} \parallel \text{RANDAO-VDF})$ (safe if either
 source is honest). \\
+Open probe exposure & The window during which a session's answer is
+still subject to verification: a probe may still be drawn on it and
+the mismatch stream may still accumulate. Its length in work units
+is the detection horizon --- the probed sessions the substitution
+test needs, divided by the probe rate. Accrued credits stay
+unclaimable for the exposure's duration, which is also the per-axis
+bond's sizing window and the Level-1 claim-freeze duration. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1693,8 +1700,11 @@ stream. Dividing 119 by the probed sessions an epoch supplies
 gives the horizon, and the horizon is also the honest supplier's
 payout latency: the Level-1 claim freeze lasts
 $\lceil$open exposure units / units per epoch$\rceil$ epochs and
-the open exposure \emph{is} the detection window. The security
-number and the payout-latency number are the same number.
+the open exposure \emph{is} the detection window --- the period
+during which a session's answer can still be probed and the
+mismatch stream can still accumulate (Section~\ref{sec:terms}).
+The security number and the payout-latency number are the same
+number.
 
 \begin{center}\small
 \begin{tabular}{rrrrrl}

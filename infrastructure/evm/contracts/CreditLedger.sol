@@ -36,6 +36,15 @@ interface IOperationsPuller {
 ///   reverts the batch.
 /// - Registration fee and dev-fund changes are timelocked; price
 ///   changes carry a one-epoch notice period.
+/// - Any party may post an epoch's attribution root under a bond:
+///   propose-and-challenge (unchallenged filings execute after the
+///   window; a challenge escalates to the replay quorum, whose
+///   verdict is librarian-filed as elsewhere). The party whose root
+///   lands earns the registered root-posting bounty.
+/// - The operations line: the inbox names this ledger as its line;
+///   the non-refundable force-inclusion posting fees are pulled into
+///   a pool (pullOperations) that funds the settlement bounties. An
+///   empty pool skips a bounty publicly, never mints one.
 ///
 /// Session-level rules (the unit-of-work table, max unit price, max
 /// spend, challenge sessions, shadow probes) are enforced by the

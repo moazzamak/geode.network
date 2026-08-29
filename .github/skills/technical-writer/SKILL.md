@@ -98,15 +98,63 @@ For ADRs, adapt the 12-section layout into this exact compact progression:
 - **Code vs. Pseudocode**: Do not inject raw repository source code into the paper. Translate active code into clean, human-readable pseudocode or mathematical notation to explain algorithmic mechanics.
 - **Precise terminology, glossed.** Technical terms are used
   exactly; each is introduced for a general reader exactly once.
-- **Short sentences; one idea each.** Break run-ons. An em-dash
-  list (`a --- b --- c`) is a sentence shape, not an excuse to
-  stack three ideas without punctuation discipline.
+- **Short sentences; one idea each.** Break run-ons. No em-dashes:
+  use a period, "and", or a restructure (see Voice rules).
 - **Parallelism and repetition.** Kill echo words ("built upon …
   builds on"), restore parallel prepositions, remove filler
   ("core principles" → "principles").
 - **Every claim attaches to a number or a mechanism.** "Validated
   by simulation, never by assumption." State which class of
   evidence supports which claim.
+
+## Voice rules (natural-language fluency)
+
+Rules that keep prose reading as natural human English rather than
+compressed note-taking. These are the generalizable rules behind the
+style passes (dropped function words, gloss-first, dash cleanup).
+
+- **Write like a person speaks.** The most understandable text reads
+  the way a fluent person talks: a natural flow, plain word order, and
+  spoken rhythm, minus the fillers ("um", "uh", "ahem") and
+  hesitations. Read each sentence aloud; if it sounds stilted or
+  staccato, rewrite it. This is the governing principle behind every
+  rule below, and it is what keeps the paper legible to the
+  sophisticated general reader without dumbing anything down.
+- **No dropped function words.** A clause must not omit the copula
+  (is/are), an article (a/the), or a locative subject where a natural
+  reading needs one. The signature violation is a verbless fragment
+  that stands as a sentence, especially the double appositive with a
+  relative clause but no main verb: "X, the Y that Z."
+  - Broken: "The role that records credits, the one act that still
+    needs a named party." Fixed: "This is the role that records
+    credits, the one act that still needs a named party."
+  - Broken: "is not privilege". Fixed: "is not a privilege" (missing
+    article before a singular count noun).
+  - Broken: "Inside, one input walks one path." Fixed: "Inside the
+    network, one input walks one path." (dropped locative subject).
+  - Broken: "The council's weight is not stake." Fixed: "is not
+    staked." (bare noun where the natural verb form reads better).
+  - **Deliberate exceptions, do not "fix" these**: definition-list
+    appositions ("User. Anyone who pays for answers.") are standard
+    dictionary style; colon-list fragments ("Examples: memory stores,
+    math engines, transforms.") are natural; verb-phrase ellipsis
+    ("A sampled fraction does carry a proof.") is standard English.
+    Only fix constructions that read as broken sentences.
+- **Gloss-first.** Lead with what a thing does in plain words, then
+  attach the label, never the reverse ("the account that receives
+  the 2.5% share and the registration fees" before naming the
+  development fund).
+- **No em-dashes.** Replace em-dashes (---) with a period, "and",
+  or a restructure. En-dashes are reserved for numeric ranges and
+  compound modifiers (80--90%). Scan for the em-dash character
+  before committing.
+- **Frame every list.** A list needs a framing sentence that says
+  what the list is and why it matters ("The pricing rules are:",
+  "The defenses are:", "The rules that keep the number honest are:").
+  No bare item dump.
+- **What before how.** State what a mechanism does before how it
+  does it. A reader can reject a mechanism at the "what" without
+  paying for the "how".
 
 ## Honesty discipline (non-negotiable)
 
@@ -146,3 +194,12 @@ For ADRs, adapt the 12-section layout into this exact compact progression:
    the flow goes black-box → detail → measurement → limits →
    methodology; the abstract follows the five beats in order.
 5. **Pass 5: The Formatting & Compiling Audit**. Ensure clean LaTeX compilation. Check that figures use exact `text width` to prevent overlap. Verify that hyphenation (`\-`) is applied to long technical compound words overrunning line breaks.
+6. **Pass 6: The Fluency Audit**. Read the text aloud; anything that
+   sounds stilted or staccato should be rewritten (write like a
+   person speaks). Scan for dropped function words: verbless
+   fragments standing as sentences, missing articles before singular
+   count nouns, and dropped locative subjects (see Voice rules).
+   Verify gloss-first ordering at first use of every load-bearing
+   term, no em-dashes, and that every list is framed by a sentence.
+   Do not "fix" deliberate dictionary-style appositions or colon-list
+   fragments.

@@ -1,0 +1,76 @@
+{
+  "milestone": "M358",
+  "finding": "G13",
+  "gate": "a 3-cycle acquires zero voting weight and loses 5% of cycled capital; honest weight unchanged",
+  "arms": {
+    "ring_2": {
+      "ring_size": 2,
+      "spend_per_hop": 100.0,
+      "linkage_depth": 3,
+      "ring_weight_post_repair": 0.0,
+      "ring_weight_pre_repair": 195.0,
+      "ring_claimable": 195.0,
+      "capital_lost": 5.0,
+      "haircut": 0.025,
+      "honest_weight": 195.0,
+      "honest_claimable": 195.0,
+      "passes": true,
+      "note": "pre-repair the ring buys weight equal to its cycled credit at the dev-fund haircut; post-repair it buys none, and the honest supplier is untouched"
+    },
+    "ring_3": {
+      "ring_size": 3,
+      "spend_per_hop": 100.0,
+      "linkage_depth": 3,
+      "ring_weight_post_repair": 0.0,
+      "ring_weight_pre_repair": 292.5,
+      "ring_claimable": 292.5,
+      "capital_lost": 7.5,
+      "haircut": 0.025,
+      "honest_weight": 292.5,
+      "honest_claimable": 292.5,
+      "passes": true,
+      "note": "pre-repair the ring buys weight equal to its cycled credit at the dev-fund haircut; post-repair it buys none, and the honest supplier is untouched"
+    },
+    "ring_4": {
+      "ring_size": 4,
+      "spend_per_hop": 100.0,
+      "linkage_depth": 3,
+      "ring_weight_post_repair": 0.0,
+      "ring_weight_pre_repair": 390.0,
+      "ring_claimable": 390.0,
+      "capital_lost": 10.0,
+      "haircut": 0.025,
+      "honest_weight": 390.0,
+      "honest_claimable": 390.0,
+      "passes": true,
+      "note": "pre-repair the ring buys weight equal to its cycled credit at the dev-fund haircut; post-repair it buys none, and the honest supplier is untouched"
+    },
+    "ring_5": {
+      "ring_size": 5,
+      "spend_per_hop": 100.0,
+      "linkage_depth": 3,
+      "ring_weight_post_repair": 487.5,
+      "ring_weight_pre_repair": 487.5,
+      "ring_claimable": 487.5,
+      "capital_lost": 12.5,
+      "haircut": 0.025,
+      "honest_weight": 487.5,
+      "honest_claimable": 487.5,
+      "passes": false,
+      "note": "pre-repair the ring buys weight equal to its cycled credit at the dev-fund haircut; post-repair it buys none, and the honest supplier is untouched"
+    }
+  },
+  "residual_mutual_trade": {
+    "linkage_depth": 3,
+    "claimable": 195.0,
+    "voting_weight": 97.5,
+    "weight_lost_to_mutual_trade": 97.5,
+    "note": "binary externality: mutual trade between two genuine businesses keeps the money and loses the weight; MeritRank-style graded decay is the registered follow-on"
+  },
+  "residual_deep_ring": {
+    "ring_size": 5,
+    "linkage_depth": 3,
+    "verified_weight": 97.5,
+    "note": "a ring longer than the registered depth keeps weight; each extra hop costs another dev-fund dock and another behaviourally distinct artifact"
+  }
+}

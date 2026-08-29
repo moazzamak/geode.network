@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 
+from geode.core.probe_adjudication import adjudicate_probed_session
 from geode.privacy.fhe_probe import (
     ExecutorReplay,
     FheProbeRecord,
@@ -69,13 +70,20 @@ def test_g1_mismatch_adjudicates_l1_like_plaintext():
     assert result["verdict"]["basis"] == "opened mismatch"
 
 
-def test_g1_withhold_adjudicates_l1_per_m319():
+def test_g1_withhold_adjudicates_like_plaintext_per_m364():
+    # M364: a withheld ciphertext is an ABORT. It is charged the unit
+    # price at once, and whether it is a deviation is settled by the
+    # epoch's selectivity test, not by this session. The point of g1
+    # is that the ciphertext form reaches the SAME verdict as the
+    # plaintext form, whatever that verdict is.
     result = run_fhe_probe_session(
         session_id="s1", input_ciphertext=b"in",
         score_ciphertext=b"out", host_withholds=True)
-    assert result["verdict"]["verdict"] == "deviation"
-    assert result["verdict"]["ladder_level"] == 1
-    assert "A18" in result["verdict"]["basis"]
+    assert result["verdict"]["verdict"] == "abort"
+    assert result["verdict"]["ladder_level"] is None
+    assert result["verdict"]["charge_unit_price"] is True
+    assert result["verdict"] == adjudicate_probed_session(
+        commit_opened=False, probed=True, answers_match=False)
 
 
 def test_g2_no_plaintext_field_in_transcript():
@@ -107,11 +115,12 @@ def test_adjudicate_fhe_probe_direct():
     record = FheProbeRecord(
         session_id="s", input_ciphertext_digest="d",
         committed_output_digest=ciphertext_commitment(ct))
-    # unopened + probed -> A18 deviation
+    # unopened + probed -> M364 abort, charged, level deferred
     verdict = adjudicate_fhe_probe(record, ExecutorReplay(
         session_id="s", replayed_output_digest="c",
         matches_committed=True))
-    assert verdict["ladder_level"] == 1
+    assert verdict["verdict"] == "abort"
+    assert verdict["charge_unit_price"] is True
     # opened + match -> clean
     opened = record.open(ct)
     verdict = adjudicate_fhe_probe(opened, ExecutorReplay(

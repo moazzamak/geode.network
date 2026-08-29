@@ -1,0 +1,4727 @@
+{
+  "instrument": "prior_art_search_4 (28 Aug 2026), two-index",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md section G43 / M378 (revised)",
+  "indexes": [
+    "arxiv",
+    "openalex"
+  ],
+  "claims_under_test": {
+    "sweep_1": "the assembly: composable registrations of frozen artifacts + deterministic replayable verification + payment by measured held-out use, settled in native ETH with epoch vesting and burn slashing",
+    "sweep_2": "the narrow-waist composition architecture: frozen artifacts composed by declaration, versioned blocks with upgrade-without-invalidation, an economy paying block owners by measured downstream use"
+  },
+  "anchor_contract": {
+    "liveness": "must hit on arxiv",
+    "sensitivity": "must surface known work without its title",
+    "coverage": "openalex must hit; arxiv MUST MISS -- the miss is the measurement of the blind spot",
+    "decoy": "must return zero on both indexes"
+  },
+  "queries": [
+    {
+      "label": "s1 decentralized AI marketplace",
+      "arxiv": {
+        "query": "all:\"decentralized AI\" AND all:\"marketplace\"",
+        "status": 200,
+        "n_hits": 5,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2512.11878v3",
+            "title": "A Technical Policy Blueprint for Trustworthy Decentralized AI",
+            "published": "2025-12-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2210.16651v1",
+            "title": "Libraries, Integrations and Hubs for Decentralized AI using IPFS",
+            "published": "2022-10-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2306.04274v1",
+            "title": "Decentralized Technologies for AI Hubs",
+            "published": "2023-06-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2405.20450v1",
+            "title": "Decentralized AI: Permissionless LLM Inference on POKT Network",
+            "published": "2024-05-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2505.07452v2",
+            "title": "SwarmSearch: Decentralized Search Engine with Self-Funding Economy",
+            "published": "2025-05-12"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "decentralized AI marketplace",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 11964,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4387831852",
+            "title": "An Evaluation of Storage Alternatives for Service Interfaces Supporting a Decentralized AI Marketplace",
+            "published": 2023,
+            "venue": "IEEE Access",
+            "cited_by": 4
+          },
+          {
+            "id": "https://openalex.org/W2892788052",
+            "title": "IDMoB: IoT Data Marketplace on Blockchain",
+            "published": 2018,
+            "venue": null,
+            "cited_by": 129
+          },
+          {
+            "id": "https://openalex.org/W4394825660",
+            "title": "Decentralized Energy Marketplace via NFTs and AI-based Agents",
+            "published": 2024,
+            "venue": null,
+            "cited_by": 8
+          },
+          {
+            "id": "https://openalex.org/W4226225860",
+            "title": "Fusing Blockchain and AI With Metaverse: A Survey",
+            "published": 2022,
+            "venue": "IEEE Open Journal of the Computer Society",
+            "cited_by": 556
+          },
+          {
+            "id": "https://openalex.org/W2767307339",
+            "title": "Converging blockchain and next-generation artificial intelligence technologies to decentralize and accelerate biomedical research and healthcare",
+            "published": 2017,
+            "venue": "Oncotarget",
+            "cited_by": 479
+          },
+          {
+            "id": "https://openalex.org/W3206531723",
+            "title": "FAST DATA: A Fair, Secure, and Trusted Decentralized IIoT Data Marketplace Enabled by Blockchain",
+            "published": 2021,
+            "venue": "IEEE Internet of Things Journal",
+            "cited_by": 51
+          },
+          {
+            "id": "https://openalex.org/W3118345665",
+            "title": "Sketching an AI Marketplace: Tech, Economic, and Regulatory Aspects",
+            "published": 2021,
+            "venue": "IEEE Access",
+            "cited_by": 32
+          },
+          {
+            "id": "https://openalex.org/W4390829176",
+            "title": "Balancing Privacy and Progress: A Review of Privacy Challenges, Systemic Oversight, and Patient Perceptions in AI-Driven Healthcare",
+            "published": 2024,
+            "venue": "Applied Sciences",
+            "cited_by": 539
+          },
+          {
+            "id": "https://openalex.org/W4411118298",
+            "title": "Constructing a Decentralized AI Data Marketplace Enabled by a Blockchain-Based Incentive Mechanism",
+            "published": 2025,
+            "venue": "Journal of Industrial Engineering and Applied Science",
+            "cited_by": 3
+          },
+          {
+            "id": "https://openalex.org/W4283738729",
+            "title": "Blockchain and the emergence of Decentralized Autonomous Organizations (DAOs): An integrative model and research agenda",
+            "published": 2022,
+            "venue": "Technological Forecasting and Social Change",
+            "cited_by": 236
+          },
+          {
+            "id": "https://openalex.org/W3011648816",
+            "title": "Contributions and Risks of Artificial Intelligence (AI) in Building Smarter Cities: Insights from a Systematic Review of the Literature",
+            "published": 2020,
+            "venue": "Energies",
+            "cited_by": 535
+          },
+          {
+            "id": "https://openalex.org/W4395074725",
+            "title": "FEDSTR: Money-In AI-Out | A Decentralized Marketplace for Federated Learning and LLM Training on the NOSTR Protocol",
+            "published": 2024,
+            "venue": "Preprints.org",
+            "cited_by": 2
+          },
+          {
+            "id": "https://openalex.org/W2948606700",
+            "title": "Blockchain-based platforms: Decentralized infrastructures and its boundary conditions",
+            "published": 2019,
+            "venue": "Technological Forecasting and Social Change",
+            "cited_by": 184
+          },
+          {
+            "id": "https://openalex.org/W2913109543",
+            "title": "DInEMMo: Decentralized Incentivization for Enterprise Marketplace Models",
+            "published": 2018,
+            "venue": null,
+            "cited_by": 15
+          },
+          {
+            "id": "https://openalex.org/W3190296160",
+            "title": "Blockchain and AI Meet in the Metaverse",
+            "published": 2021,
+            "venue": "IntechOpen eBooks",
+            "cited_by": 168
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 ml marketplace",
+      "arxiv": {
+        "query": "all:\"machine learning\" AND all:\"marketplace\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2407.19078v1",
+            "title": "Practical Marketplace Optimization at Uber Using Causally-Informed Machine Learning",
+            "published": "2024-07-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.30999v1",
+            "title": "Estimating Supply Incrementality in Two-sided Marketplaces: A Causal Machine Learning Approach",
+            "published": "2026-06-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2504.03618v1",
+            "title": "Trading off Relevance and Revenue in the Jobs Marketplace: Estimation, Optimization and Auction Design",
+            "published": "2025-04-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2508.20335v1",
+            "title": "Dynamic Synthetic Controls vs. Panel-Aware Double Machine Learning for Geo-Level Marketing Impact Estimation",
+            "published": "2025-08-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.00280v1",
+            "title": "Understanding Guest Preferences and Optimizing Two-sided Marketplaces: Airbnb as an Example",
+            "published": "2026-07-01"
+          },
+          {
+            "id": "http://arxiv.org/abs/1907.07673v1",
+            "title": "Network Based Pricing for 3D Printing Services in Two-Sided Manufacturing-as-a-Service Marketplace",
+            "published": "2019-07-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2205.15757v1",
+            "title": "Dropbear: Machine Learning Marketplaces made Trustworthy with Byzantine Model Agreement",
+            "published": "2022-05-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.05833v1",
+            "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+            "published": "2025-09-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2209.15418v1",
+            "title": "Equitable Marketplace Mechanism Design",
+            "published": "2022-09-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2108.07915v1",
+            "title": "Data Pricing in Machine Learning Pipelines",
+            "published": "2021-08-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2307.15168v1",
+            "title": "PredictChain: Empowering Collaboration and Data Accessibility for AI in a Decentralized Blockchain-based Marketplace",
+            "published": "2023-07-27"
+          },
+          {
+            "id": "http://arxiv.org/abs/2006.12756v1",
+            "title": "A Framework for Fairness in Two-Sided Marketplaces",
+            "published": "2020-06-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/1911.09052v1",
+            "title": "Collaborative Machine Learning Markets with Data-Replication-Robust Payments",
+            "published": "2019-11-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.08785v1",
+            "title": "DaDaDa: A Dataset for Data Pricing in Data Marketplaces",
+            "published": "2026-06-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2203.10975v2",
+            "title": "GCF: Generalized Causal Forest for Heterogeneous Treatment Effect Estimation in Online Marketplace",
+            "published": "2022-03-21"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "machine learning model marketplace",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 75211,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3153990350",
+            "title": "Machine learning and deep learning",
+            "published": 2021,
+            "venue": "Electronic Markets",
+            "cited_by": 2599
+          },
+          {
+            "id": "https://openalex.org/W2948176562",
+            "title": "Towards Model-based Pricing for Machine Learning in a Data Marketplace",
+            "published": 2019,
+            "venue": null,
+            "cited_by": 124
+          },
+          {
+            "id": "https://openalex.org/W2922234936",
+            "title": "Software Engineering for Machine Learning: A Case Study",
+            "published": 2019,
+            "venue": null,
+            "cited_by": 1107
+          },
+          {
+            "id": "https://openalex.org/W2562618250",
+            "title": "Python Machine Learning",
+            "published": 2015,
+            "venue": null,
+            "cited_by": 657
+          },
+          {
+            "id": "https://openalex.org/W2051267297",
+            "title": "Model Inversion Attacks that Exploit Confidence Information and Basic Countermeasures",
+            "published": 2015,
+            "venue": null,
+            "cited_by": 2876
+          },
+          {
+            "id": "https://openalex.org/W2809684781",
+            "title": "A comprehensive survey on machine learning for networking: evolution, applications and research opportunities",
+            "published": 2018,
+            "venue": "Journal of Internet Services and Applications",
+            "cited_by": 1016
+          },
+          {
+            "id": "https://openalex.org/W4211017739",
+            "title": "Machine behaviour",
+            "published": 2019,
+            "venue": "Nature",
+            "cited_by": 1255
+          },
+          {
+            "id": "https://openalex.org/W2738241474",
+            "title": "Business models and dynamic capabilities",
+            "published": 2017,
+            "venue": "Long Range Planning",
+            "cited_by": 3371
+          },
+          {
+            "id": "https://openalex.org/W3092541244",
+            "title": "Fairness in Machine Learning: A Survey",
+            "published": 2023,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 488
+          },
+          {
+            "id": "https://openalex.org/W2964210282",
+            "title": "A Marketplace for Data",
+            "published": 2019,
+            "venue": null,
+            "cited_by": 217
+          },
+          {
+            "id": "https://openalex.org/W3167963175",
+            "title": "Precision agriculture using IoT data analytics and machine learning",
+            "published": 2021,
+            "venue": "Journal of King Saud University - Computer and Information Sciences",
+            "cited_by": 552
+          },
+          {
+            "id": "https://openalex.org/W1851422430",
+            "title": "Survey of review spam detection using machine learning techniques",
+            "published": 2015,
+            "venue": "Journal Of Big Data",
+            "cited_by": 504
+          },
+          {
+            "id": "https://openalex.org/W4283313119",
+            "title": "The Role of Machine Learning in Cybersecurity",
+            "published": 2022,
+            "venue": "Digital Threats Research and Practice",
+            "cited_by": 267
+          },
+          {
+            "id": "https://openalex.org/W3039088822",
+            "title": "A Review of Android Malware Detection Approaches Based on Machine Learning",
+            "published": 2020,
+            "venue": "IEEE Access",
+            "cited_by": 368
+          },
+          {
+            "id": "https://openalex.org/W4309505042",
+            "title": "A Survey of Data Marketplaces and Their Business Models",
+            "published": 2022,
+            "venue": "ACM SIGMOD Record",
+            "cited_by": 93
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 verifiable inference",
+      "arxiv": {
+        "query": "all:\"verifiable inference\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2608.09055v1",
+            "title": "Repeated-Game Security for Restaking-Based Verifiable Inference",
+            "published": "2026-08-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2501.16007v2",
+            "title": "TOPLOC: A Locality Sensitive Hashing Scheme for Trustless Verifiable Inference",
+            "published": "2025-01-27"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.17223v1",
+            "title": "Privacy-Preserving Mechanisms Enable Cheap Verifiable Inference of LLMs",
+            "published": "2026-02-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.12630v1",
+            "title": "TensorCommitments: A Lightweight Verifiable Inference for Language Models",
+            "published": "2026-02-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.19902v1",
+            "title": "Zero-Knowledge Proof Based Verifiable Inference of Models",
+            "published": "2025-11-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.17452v1",
+            "title": "Jolt Atlas: Verifiable Inference via Lookup Arguments in Zero Knowledge",
+            "published": "2026-02-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2410.22307v3",
+            "title": "SVIP: Towards Verifiable Inference of Open-source Large Language Models",
+            "published": "2024-10-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.18046v2",
+            "title": "NanoZK: Privacy-Preserving Verifiable Inference for Large Language Models via Layerwise Zero-Knowledge Proofs",
+            "published": "2026-03-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/1806.03287v2",
+            "title": "Slalom: Fast, Verifiable and Private Execution of Neural Networks in Trusted Hardware",
+            "published": "2018-06-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2011.05530v4",
+            "title": "On Polynomial Approximations for Privacy-Preserving and Verifiable ReLU Networks",
+            "published": "2020-11-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2309.13796v1",
+            "title": "Using Z3 to Verify Inferences in Fragments of Linear Logic",
+            "published": "2023-09-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.10999v1",
+            "title": "SkillGen: Verified Inference-Time Agent Skill Synthesis",
+            "published": "2026-05-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.07470v1",
+            "title": "Verifiable and Confidential DNN Inference on Low-End Edge Devices",
+            "published": "2026-06-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.18535v2",
+            "title": "A Survey of Zero-Knowledge Proof Based Verifiable Machine Learning",
+            "published": "2025-02-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.20621v1",
+            "title": "DiFR: Inference Verification Despite Nondeterminism",
+            "published": "2025-11-25"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "verifiable inference",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 59747,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3111925745",
+            "title": "Secure and Verifiable Inference in Deep Neural Networks",
+            "published": 2020,
+            "venue": "Annual Computer Security Applications Conference",
+            "cited_by": 26
+          },
+          {
+            "id": "https://openalex.org/W2805074088",
+            "title": "Slalom: Fast, Verifiable and Private Execution of Neural Networks in Trusted Hardware",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 227
+          },
+          {
+            "id": "https://openalex.org/W4252028749",
+            "title": "Information Theory and Statistical Mechanics. II",
+            "published": 1957,
+            "venue": "Physical Review",
+            "cited_by": 3238
+          },
+          {
+            "id": "https://openalex.org/W2899579542",
+            "title": "A Right to Reasonable Inferences: Re-Thinking Data Protection Law in the Age of Big Data and AI",
+            "published": 2018,
+            "venue": null,
+            "cited_by": 455
+          },
+          {
+            "id": "https://openalex.org/W2101462556",
+            "title": "Reliable, verifiable and efficient monitoring of biodiversity via metabarcoding",
+            "published": 2013,
+            "venue": "Ecology Letters",
+            "cited_by": 687
+          },
+          {
+            "id": "https://openalex.org/W4205480542",
+            "title": "Privacy-preserving and verifiable deep learning inference based on secret sharing",
+            "published": 2022,
+            "venue": "Neurocomputing",
+            "cited_by": 24
+          },
+          {
+            "id": "https://openalex.org/W3202343456",
+            "title": "ZEN: An Optimizing Compiler for Verifiable, Zero-Knowledge Neural Network Inferences",
+            "published": 2021,
+            "venue": "IACR Cryptology ePrint Archive",
+            "cited_by": 19
+          },
+          {
+            "id": "https://openalex.org/W2140611647",
+            "title": "CCured",
+            "published": 2012,
+            "venue": "ACM SIGPLAN Notices",
+            "cited_by": 511
+          },
+          {
+            "id": "https://openalex.org/W4287552728",
+            "title": "Toward Trustworthy AI Development: Mechanisms for Supporting Verifiable Claims",
+            "published": 2020,
+            "venue": "TU/e Research Portal",
+            "cited_by": 219
+          },
+          {
+            "id": "https://openalex.org/W4285218634",
+            "title": "PVD-FL: A Privacy-Preserving and Verifiable Decentralized Federated Learning Framework",
+            "published": 2022,
+            "venue": "IEEE Transactions on Information Forensics and Security",
+            "cited_by": 113
+          },
+          {
+            "id": "https://openalex.org/W4409369531",
+            "title": "Portcullis: A Scalable and Verifiable Privacy Gateway for Third-Party LLM Inference",
+            "published": 2025,
+            "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+            "cited_by": 8
+          },
+          {
+            "id": "https://openalex.org/W2963750162",
+            "title": "Slalom: Fast, Verifiable and Private Execution of Neural Networks in Trusted Hardware",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 43
+          },
+          {
+            "id": "https://openalex.org/W2726092462",
+            "title": "SafetyNets: Verifiable Execution of Deep Neural Networks on an Untrusted Cloud",
+            "published": 2017,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 80
+          },
+          {
+            "id": "https://openalex.org/W4403561364",
+            "title": "Privacy-preserving and verifiable convolution neural network inference and training in cloud computing",
+            "published": 2024,
+            "venue": "Future Generation Computer Systems",
+            "cited_by": 5
+          },
+          {
+            "id": "https://openalex.org/W4234020632",
+            "title": "CCured",
+            "published": 2002,
+            "venue": null,
+            "cited_by": 373
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 incentive + model market",
+      "arxiv": {
+        "query": "all:\"incentive\" AND all:\"model market\"",
+        "status": 200,
+        "n_hits": 4,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/1010.0027v1",
+            "title": "How sensitive are equilibrium pricing models to real-world distortions?",
+            "published": "2010-09-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2504.05355v2",
+            "title": "Deep Learning for Double Auction",
+            "published": "2025-04-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2211.08870v2",
+            "title": "A multi-asset, agent-based approach applied to DeFi lending protocol modelling",
+            "published": "2022-11-16"
+          },
+          {
+            "id": "http://arxiv.org/abs/2111.05804v1",
+            "title": "Secure and Reliable Transfer Learning Framework for 6G-enabled Internet of Vehicles",
+            "published": "2021-11-10"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "incentive mechanism model market",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 727745,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2053174125",
+            "title": "Federalism as a Commitment to Preserving Market Incentives",
+            "published": 1997,
+            "venue": "The Journal of Economic Perspectives",
+            "cited_by": 1512
+          },
+          {
+            "id": "https://openalex.org/W1589928278",
+            "title": "The Theory of Incentives: The Principal-Agent Model",
+            "published": 2001,
+            "venue": "Toulouse 1 Capitole Publications (Universit\u00e9 Toulouse I Capitole)",
+            "cited_by": 2063
+          },
+          {
+            "id": "https://openalex.org/W2066310392",
+            "title": "The Theory of Bank Risk Taking and Competition Revisited",
+            "published": 2005,
+            "venue": "The Journal of Finance",
+            "cited_by": 2130
+          },
+          {
+            "id": "https://openalex.org/W2800663167",
+            "title": "Profiting from innovation in the digital economy: Enabling technologies, standards, and licensing models in the wireless world",
+            "published": 2018,
+            "venue": "Research Policy",
+            "cited_by": 1738
+          },
+          {
+            "id": "https://openalex.org/W2158281340",
+            "title": "Incentives and Stability in Large Two-Sided Matching Markets",
+            "published": 2009,
+            "venue": "American Economic Review",
+            "cited_by": 380
+          },
+          {
+            "id": "https://openalex.org/W1510023144",
+            "title": "The free-market innovation machine: analyzing the growth miracle of capitalism",
+            "published": 2002,
+            "venue": "Choice Reviews Online",
+            "cited_by": 1222
+          },
+          {
+            "id": "https://openalex.org/W2119298903",
+            "title": "Evaluating Online Labor Markets for Experimental Research: Amazon.com's Mechanical Turk",
+            "published": 2012,
+            "venue": "Political Analysis",
+            "cited_by": 4107
+          },
+          {
+            "id": "https://openalex.org/W2023224020",
+            "title": "Building trust in online auction markets through an economic incentive mechanism",
+            "published": 2003,
+            "venue": "Decision Support Systems",
+            "cited_by": 281
+          },
+          {
+            "id": "https://openalex.org/W2091683391",
+            "title": "The fit between product market strategy and business model: implications for firm performance",
+            "published": 2007,
+            "venue": "Strategic Management Journal",
+            "cited_by": 1718
+          },
+          {
+            "id": "https://openalex.org/W3147421935",
+            "title": "Innovation and Institutional Ownership",
+            "published": 2013,
+            "venue": "American Economic Review",
+            "cited_by": 1987
+          },
+          {
+            "id": "https://openalex.org/W2089402107",
+            "title": "Dynamic capabilities: what are they?",
+            "published": 2000,
+            "venue": "Strategic Management Journal",
+            "cited_by": 14665
+          },
+          {
+            "id": "https://openalex.org/W3125560880",
+            "title": "Pollution and Capital Markets in Developing Countries",
+            "published": 2001,
+            "venue": "Journal of Environmental Economics and Management",
+            "cited_by": 521
+          },
+          {
+            "id": "https://openalex.org/W2240968826",
+            "title": "Rare Disasters and Asset Markets in the Twentieth Century*",
+            "published": 2006,
+            "venue": "The Quarterly Journal of Economics",
+            "cited_by": 2420
+          },
+          {
+            "id": "https://openalex.org/W2130788273",
+            "title": "Identifying Technology Spillovers and Product Market Rivalry",
+            "published": 2013,
+            "venue": "Econometrica",
+            "cited_by": 1789
+          },
+          {
+            "id": "https://openalex.org/W2119780569",
+            "title": "The economics of small business finance: The roles of private equity and debt markets in the financial growth cycle",
+            "published": 1998,
+            "venue": "Journal of Banking & Finance",
+            "cited_by": 3739
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 model marketplace",
+      "arxiv": {
+        "query": "all:\"model marketplace\"",
+        "status": 200,
+        "n_hits": 9,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2011.06458v5",
+            "title": "Golden Grain: Building a Secure and Decentralized Model Marketplace for MLaaS",
+            "published": "2020-11-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.18104v1",
+            "title": "Data Valuation and Selection in a Federated Model Marketplace",
+            "published": "2025-09-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2311.12573v3",
+            "title": "Moderating Model Marketplaces: Platform Governance Puzzles for AI Intermediaries",
+            "published": "2023-11-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.19354v1",
+            "title": "Policy or Community?: Supporting Individual Model Creators' Open Model Development in Model Marketplaces",
+            "published": "2026-02-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2106.04384v4",
+            "title": "FL-Market: Trading Private Models in Federated Learning",
+            "published": "2021-06-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2205.15757v1",
+            "title": "Dropbear: Machine Learning Marketplaces made Trustworthy with Byzantine Model Agreement",
+            "published": "2022-05-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.08284v1",
+            "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection",
+            "published": "2025-02-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.05833v1",
+            "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+            "published": "2025-09-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/1004.2565v2",
+            "title": "Competitive Equilibria in Matching Markets with Budgets",
+            "published": "2010-04-15"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "model marketplace",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 353189,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2670298746",
+            "title": "Understanding platform business models: A mixed methods study of marketplaces",
+            "published": 2017,
+            "venue": "European Management Journal",
+            "cited_by": 593
+          },
+          {
+            "id": "https://openalex.org/W2166140580",
+            "title": "Building Effective Online Marketplaces with Institution-Based Trust",
+            "published": 2004,
+            "venue": "Information Systems Research",
+            "cited_by": 2497
+          },
+          {
+            "id": "https://openalex.org/W2132159329",
+            "title": "Reducing Buyer Search Costs: Implications for Electronic Marketplaces",
+            "published": 1997,
+            "venue": "Management Science",
+            "cited_by": 2284
+          },
+          {
+            "id": "https://openalex.org/W4283220764",
+            "title": "A Profit-Maximizing Model Marketplace with Differentially Private Federated Learning",
+            "published": 2022,
+            "venue": null,
+            "cited_by": 54
+          },
+          {
+            "id": "https://openalex.org/W2118936359",
+            "title": "A Strategic Analysis of Electronic Marketplaces",
+            "published": 1991,
+            "venue": "MIS Quarterly",
+            "cited_by": 1235
+          },
+          {
+            "id": "https://openalex.org/W2060567066",
+            "title": "The role of intermediaries in electronic marketplaces: developing a contingency model",
+            "published": 2002,
+            "venue": "Information Systems Journal",
+            "cited_by": 182
+          },
+          {
+            "id": "https://openalex.org/W2056501160",
+            "title": "Marketplace or Reseller?",
+            "published": 2014,
+            "venue": "Management Science",
+            "cited_by": 757
+          },
+          {
+            "id": "https://openalex.org/W1989058609",
+            "title": "A relationship\u2010building model for the Web retail marketplace",
+            "published": 2000,
+            "venue": "Internet Research",
+            "cited_by": 129
+          },
+          {
+            "id": "https://openalex.org/W4246467418",
+            "title": "A Means-End Chain Model Based on Consumer Categorization Processes",
+            "published": 1982,
+            "venue": "Journal of Marketing",
+            "cited_by": 1960
+          },
+          {
+            "id": "https://openalex.org/W1580880025",
+            "title": "Competing for the Future",
+            "published": 1994,
+            "venue": null,
+            "cited_by": 5333
+          },
+          {
+            "id": "https://openalex.org/W3167806982",
+            "title": "Golden Grain: Building a Secure and Decentralized Model Marketplace for MLaaS",
+            "published": 2021,
+            "venue": "IEEE Transactions on Dependable and Secure Computing",
+            "cited_by": 24
+          },
+          {
+            "id": "https://openalex.org/W4402390209",
+            "title": "Moderating model marketplaces: platform governance puzzles for AI intermediaries",
+            "published": 2024,
+            "venue": "Law Innovation and Technology",
+            "cited_by": 21
+          },
+          {
+            "id": "https://openalex.org/W4388789617",
+            "title": "Moderating Model Marketplaces: Platform Governance Puzzles for AI Intermediaries",
+            "published": 2023,
+            "venue": null,
+            "cited_by": 21
+          },
+          {
+            "id": "https://openalex.org/W2011896860",
+            "title": "The emerging role of electronic marketplaces on the Internet",
+            "published": 1998,
+            "venue": "Communications of the ACM",
+            "cited_by": 1388
+          },
+          {
+            "id": "https://openalex.org/W4309505042",
+            "title": "A Survey of Data Marketplaces and Their Business Models",
+            "published": 2022,
+            "venue": "ACM SIGMOD Record",
+            "cited_by": 93
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 decentralized inference network",
+      "arxiv": {
+        "query": "all:\"decentralized\" AND all:\"inference\" AND all:\"network\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/1403.7471v3",
+            "title": "Approximate Decentralized Bayesian Inference",
+            "published": "2014-03-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2501.05323v1",
+            "title": "Distributed Learning and Inference Systems: A Networking Perspective",
+            "published": "2025-01-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2208.06963v2",
+            "title": "Privacy-Preserving Decentralized Inference with Graph Neural Networks in Wireless Networks",
+            "published": "2022-08-15"
+          },
+          {
+            "id": "http://arxiv.org/abs/2401.12836v1",
+            "title": "Empirical Likelihood Inference over Decentralized Networks",
+            "published": "2024-01-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2405.20450v1",
+            "title": "Decentralized AI: Permissionless LLM Inference on POKT Network",
+            "published": "2024-05-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2510.06444v1",
+            "title": "Context-Aware Inference via Performance Forecasting in Decentralized Learning Networks",
+            "published": "2025-10-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2408.15907v1",
+            "title": "Decentralized LLM Inference over Edge Networks with Energy Harvesting",
+            "published": "2024-08-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2104.01555v1",
+            "title": "Decentralized Statistical Inference with Unrolled Graph Neural Networks",
+            "published": "2021-04-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/1811.10322v3",
+            "title": "On the Relationship Between Inference and Data Privacy in Decentralized IoT Networks",
+            "published": "2018-11-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.26182v1",
+            "title": "Parallax: Efficient LLM Inference Service over Decentralized Environment",
+            "published": "2025-09-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2104.09027v2",
+            "title": "Decentralized Inference with Graph Neural Networks in Wireless Communication Systems",
+            "published": "2021-04-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.11733v1",
+            "title": "Speculative Decoding in Decentralized LLM Inference: Turning Communication Latency into Computation Throughput",
+            "published": "2025-11-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2303.00524v2",
+            "title": "Semi-decentralized Inference in Heterogeneous Graph Neural Networks for Traffic Demand Forecasting: An Edge-Computing Approach",
+            "published": "2023-02-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2312.01288v1",
+            "title": "Task-Oriented Edge Networks: Decentralized Learning Over Wireless Fronthaul",
+            "published": "2023-12-03"
+          },
+          {
+            "id": "http://arxiv.org/abs/2501.14784v1",
+            "title": "DeServe: Towards Affordable Offline LLM Inference via Decentralization",
+            "published": "2025-01-04"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "decentralized inference network",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 77433,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2803109435",
+            "title": "Blockchain-Based Decentralized Trust Management in Vehicular Networks",
+            "published": 2018,
+            "venue": "IEEE Internet of Things Journal",
+            "cited_by": 935
+          },
+          {
+            "id": "https://openalex.org/W2964252706",
+            "title": "On the Relationship Between Inference and Data Privacy in Decentralized IoT Networks",
+            "published": 2019,
+            "venue": "IEEE Transactions on Information Forensics and Security",
+            "cited_by": 74
+          },
+          {
+            "id": "https://openalex.org/W2112737587",
+            "title": "The Cricket location-support system",
+            "published": 2000,
+            "venue": null,
+            "cited_by": 3732
+          },
+          {
+            "id": "https://openalex.org/W3213116167",
+            "title": "Decentralized Inference With Graph Neural Networks in Wireless Communication Systems",
+            "published": 2021,
+            "venue": "IEEE Transactions on Mobile Computing",
+            "cited_by": 48
+          },
+          {
+            "id": "https://openalex.org/W4378805148",
+            "title": "Privacy-Preserving Decentralized Inference With Graph Neural Networks in Wireless Networks",
+            "published": 2023,
+            "venue": "IEEE Transactions on Wireless Communications",
+            "cited_by": 19
+          },
+          {
+            "id": "https://openalex.org/W3212941463",
+            "title": "Edge Artificial Intelligence for 6G: Vision, Enabling Technologies, and Applications",
+            "published": 2021,
+            "venue": "IEEE Journal on Selected Areas in Communications",
+            "cited_by": 802
+          },
+          {
+            "id": "https://openalex.org/W2930926105",
+            "title": "Comprehensive Privacy Analysis of Deep Learning: Passive and Active White-box Inference Attacks against Centralized and Federated Learning",
+            "published": 2019,
+            "venue": null,
+            "cited_by": 1620
+          },
+          {
+            "id": "https://openalex.org/W4391020684",
+            "title": "Semi-Decentralized Inference in Heterogeneous Graph Neural Networks for Traffic Demand Forecasting: An Edge-Computing Approach",
+            "published": 2024,
+            "venue": "IEEE Transactions on Vehicular Technology",
+            "cited_by": 22
+          },
+          {
+            "id": "https://openalex.org/W2154988370",
+            "title": "Decentralized sigma-point information filters for target tracking in collaborative sensor networks",
+            "published": 2005,
+            "venue": "IEEE Transactions on Signal Processing",
+            "cited_by": 158
+          },
+          {
+            "id": "https://openalex.org/W2154564703",
+            "title": "Protecting privacy using the decentralized label model",
+            "published": 2000,
+            "venue": "ACM Transactions on Software Engineering and Methodology",
+            "cited_by": 554
+          },
+          {
+            "id": "https://openalex.org/W2003159467",
+            "title": "Decentralized topology inference of electrical distribution networks",
+            "published": 2012,
+            "venue": null,
+            "cited_by": 9
+          },
+          {
+            "id": "https://openalex.org/W4408324844",
+            "title": "Decentralized LLM Inference over Edge Networks with Energy Harvesting",
+            "published": 2024,
+            "venue": null,
+            "cited_by": 10
+          },
+          {
+            "id": "https://openalex.org/W2962907301",
+            "title": "Multitask Diffusion Adaptation Over Networks",
+            "published": 2014,
+            "venue": "IEEE Transactions on Signal Processing",
+            "cited_by": 296
+          },
+          {
+            "id": "https://openalex.org/W1576186752",
+            "title": "Compressed RF Tomography for Wireless Sensor Networks: Centralized and Decentralized Approaches",
+            "published": 2009,
+            "venue": "Lecture notes in computer science",
+            "cited_by": 123
+          },
+          {
+            "id": "https://openalex.org/W3110989801",
+            "title": "Towards 6G wireless communication networks: vision, enabling technologies, and new paradigm shifts",
+            "published": 2020,
+            "venue": "Science China Information Sciences",
+            "cited_by": 2035
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 proof of inference",
+      "arxiv": {
+        "query": "all:\"proof of inference\"",
+        "status": 200,
+        "n_hits": 12,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2604.18614v1",
+            "title": "HadAgent: Harness-Aware Decentralized Agentic AI Serving with Proof-of-Inference Blockchain Consensus",
+            "published": "2026-04-15"
+          },
+          {
+            "id": "http://arxiv.org/abs/1505.07987v1",
+            "title": "SEPIA: Search for Proofs Using Inferred Automata",
+            "published": "2015-05-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2410.02232v2",
+            "title": "The Long Way to Deforestation (Technical Report): A Type Inference and Elaboration Technique for Removing Intermediate Data Structures",
+            "published": "2024-10-03"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.19025v1",
+            "title": "Towards Verifiable AI with Lightweight Cryptographic Proofs of Inference",
+            "published": "2026-03-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2002.12551v1",
+            "title": "Automating the Generation of High School Geometry Proofs using Prolog in an Educational Context",
+            "published": "2020-02-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.12630v1",
+            "title": "TensorCommitments: A Lightweight Verifiable Inference for Language Models",
+            "published": "2026-02-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/1405.3623v1",
+            "title": "Mining State-Based Models from Proof Corpora",
+            "published": "2014-05-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2307.16562v1",
+            "title": "SAKSHI: Decentralized AI Platforms",
+            "published": "2023-07-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2202.04951v3",
+            "title": "Exact uniform approximation and Dirichlet spectrum in dimension at least two",
+            "published": "2022-02-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2510.25677v3",
+            "title": "ZK-SenseLM: Verifiable Large-Model Wireless Sensing with Selective Abstention and Zero-Knowledge Attestation",
+            "published": "2025-10-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.30040v1",
+            "title": "Token Inflation: How Dishonest Providers Can Overcharge for Large Language Model Usage",
+            "published": "2026-05-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.12594v1",
+            "title": "Pythagoras-Prover: Advancing Efficient Formal Proving via Augmented Lean Formalisation",
+            "published": "2026-06-10"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "proof of inference blockchain",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 12514,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2803109435",
+            "title": "Blockchain-Based Decentralized Trust Management in Vehicular Networks",
+            "published": 2018,
+            "venue": "IEEE Internet of Things Journal",
+            "cited_by": 935
+          },
+          {
+            "id": "https://openalex.org/W3123597155",
+            "title": "Corporate Governance and Blockchains",
+            "published": 2016,
+            "venue": "European Finance Review",
+            "cited_by": 1015
+          },
+          {
+            "id": "https://openalex.org/W2921980263",
+            "title": "Security and Privacy on Blockchain",
+            "published": 2019,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 895
+          },
+          {
+            "id": "https://openalex.org/W2907683311",
+            "title": "Blockchain for AI: Review and Open Research Challenges",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 1008
+          },
+          {
+            "id": "https://openalex.org/W2904351506",
+            "title": "Applications of Blockchains in the Internet of Things: A Comprehensive Survey",
+            "published": 2018,
+            "venue": "IEEE Communications Surveys & Tutorials",
+            "cited_by": 860
+          },
+          {
+            "id": "https://openalex.org/W4214667959",
+            "title": "A survey on blockchain technology and its security",
+            "published": 2022,
+            "venue": "Blockchain Research and Applications",
+            "cited_by": 562
+          },
+          {
+            "id": "https://openalex.org/W2993463367",
+            "title": "A Privacy-Preserving-Framework-Based Blockchain and Deep Learning for Protecting Smart Power Networks",
+            "published": 2019,
+            "venue": "IEEE Transactions on Industrial Informatics",
+            "cited_by": 190
+          },
+          {
+            "id": "https://openalex.org/W2987069389",
+            "title": "Privacy-Preserving Solutions for Blockchain: Review and Challenges",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 425
+          },
+          {
+            "id": "https://openalex.org/W4206684911",
+            "title": "Agriculture-Food Supply Chain Management Based on Blockchain and IoT: A Narrative on Enterprise Blockchain Interoperability",
+            "published": 2021,
+            "venue": "Agriculture",
+            "cited_by": 324
+          },
+          {
+            "id": "https://openalex.org/W3133065136",
+            "title": "A survey on the adoption of blockchain in IoT: challenges and solutions",
+            "published": 2021,
+            "venue": "Blockchain Research and Applications",
+            "cited_by": 370
+          },
+          {
+            "id": "https://openalex.org/W2963519394",
+            "title": "Security and Privacy on Blockchain",
+            "published": 2019,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 227
+          },
+          {
+            "id": "https://openalex.org/W3108615370",
+            "title": "TP2SF: A Trustworthy Privacy-Preserving Secured Framework for sustainable smart cities by leveraging blockchain and machine learning",
+            "published": 2020,
+            "venue": "Journal of Systems Architecture",
+            "cited_by": 206
+          },
+          {
+            "id": "https://openalex.org/W2767277120",
+            "title": "Blockchain in Education",
+            "published": 2017,
+            "venue": "OAR@UM (University of Malta)",
+            "cited_by": 195
+          },
+          {
+            "id": "https://openalex.org/W3005847836",
+            "title": "Security and Privacy for Green IoT-Based Agriculture: Review, Blockchain Solutions, and Challenges",
+            "published": 2020,
+            "venue": "IEEE Access",
+            "cited_by": 444
+          },
+          {
+            "id": "https://openalex.org/W2972955472",
+            "title": "Blockchain-Driven IoT for Food Traceability With an Integrated Consensus Mechanism",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 335
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 zkML",
+      "arxiv": {
+        "query": "all:\"zkML\" OR all:\"zero knowledge machine learning\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2409.12055v2",
+            "title": "Artemis: Efficient Commit-and-Prove SNARKs for zkML",
+            "published": "2024-09-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2402.06414v1",
+            "title": "Trust the Process: Zero-Knowledge Machine Learning to Enhance Trust in Generative AI Interactions",
+            "published": "2024-02-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2212.05428v2",
+            "title": "ezDPS: An Efficient and Zero-Knowledge Machine Learning Inference Pipeline",
+            "published": "2022-12-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.08095v1",
+            "title": "zkComposer: Decomposing Proof Construction to Scale zkML",
+            "published": "2026-07-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2510.06784v2",
+            "title": "Bionetta: Efficient Client-Side Zero-Knowledge Machine Learning Proving",
+            "published": "2025-10-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.12592v1",
+            "title": "Knowledge is Overrated: A zero-knowledge machine learning and cryptographic hashing-based framework for verifiable, low latency inference at the LHC",
+            "published": "2025-11-16"
+          },
+          {
+            "id": "http://arxiv.org/abs/2508.06972v3",
+            "title": "DSperse: A Framework for Targeted Verification in Zero-Knowledge Machine Learning",
+            "published": "2025-08-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2510.21024v1",
+            "title": "JSTprove: Pioneering Verifiable AI for a Trustless Future",
+            "published": "2025-10-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2402.15006v1",
+            "title": "opp/ai: Optimistic Privacy-Preserving AI on Blockchain",
+            "published": "2024-02-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.18535v2",
+            "title": "A Survey of Zero-Knowledge Proof Based Verifiable Machine Learning",
+            "published": "2025-02-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2401.17555v2",
+            "title": "opML: Optimistic Machine Learning on Blockchain",
+            "published": "2024-01-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2312.05346v1",
+            "title": "Deep Learning for Dynamic NFT Valuation",
+            "published": "2023-12-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.17452v1",
+            "title": "Jolt Atlas: Verifiable Inference via Lookup Arguments in Zero Knowledge",
+            "published": "2026-02-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2410.13752v2",
+            "title": "Privacy-Preserving Decentralized AI with Confidential Computing",
+            "published": "2024-10-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2512.20176v1",
+            "title": "Optimistic TEE-Rollups: A Hybrid Architecture for Scalable and Verifiable Generative AI Inference on Blockchain",
+            "published": "2025-12-23"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "zero knowledge machine learning inference proof",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 77326,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3163993681",
+            "title": "Physics-informed machine learning",
+            "published": 2021,
+            "venue": "Nature Reviews Physics",
+            "cited_by": 7589
+          },
+          {
+            "id": "https://openalex.org/W2973119841",
+            "title": "Machine Learning for Fluid Mechanics",
+            "published": 2019,
+            "venue": "Annual Review of Fluid Mechanics",
+            "cited_by": 2783
+          },
+          {
+            "id": "https://openalex.org/W2799002609",
+            "title": "Statistical Inference",
+            "published": 1993,
+            "venue": "Biometrics",
+            "cited_by": 5371
+          },
+          {
+            "id": "https://openalex.org/W2040884411",
+            "title": "Selection of relevant features and examples in machine learning",
+            "published": 1997,
+            "venue": "Artificial Intelligence",
+            "cited_by": 3308
+          },
+          {
+            "id": "https://openalex.org/W2995022099",
+            "title": "Advances and Open Problems in Federated Learning",
+            "published": 2020,
+            "venue": "Foundations and Trends\u00ae in Machine Learning",
+            "cited_by": 5328
+          },
+          {
+            "id": "https://openalex.org/W2170112109",
+            "title": "Learning Bayesian Networks: The Combination of Knowledge and Statistical Data",
+            "published": 1995,
+            "venue": "Machine Learning",
+            "cited_by": 3262
+          },
+          {
+            "id": "https://openalex.org/W2168029744",
+            "title": "Kernel methods in machine learning",
+            "published": 2008,
+            "venue": "The Annals of Statistics",
+            "cited_by": 1616
+          },
+          {
+            "id": "https://openalex.org/W3140854437",
+            "title": "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions",
+            "published": 2021,
+            "venue": "Journal Of Big Data",
+            "cited_by": 7830
+          },
+          {
+            "id": "https://openalex.org/W2088794999",
+            "title": "Gradient boosting machines, a tutorial",
+            "published": 2013,
+            "venue": "Frontiers in Neurorobotics",
+            "cited_by": 3888
+          },
+          {
+            "id": "https://openalex.org/W2161484642",
+            "title": "Maintaining knowledge about temporal intervals",
+            "published": 1983,
+            "venue": "Communications of the ACM",
+            "cited_by": 7580
+          },
+          {
+            "id": "https://openalex.org/W4288039037",
+            "title": "Scientific Machine Learning Through Physics\u2013Informed Neural Networks: Where we are and What\u2019s Next",
+            "published": 2022,
+            "venue": "Journal of Scientific Computing",
+            "cited_by": 2591
+          },
+          {
+            "id": "https://openalex.org/W1517993545",
+            "title": "Learning Bayesian networks: The combination of knowledge and statistical data",
+            "published": 1995,
+            "venue": "Machine Learning",
+            "cited_by": 2046
+          },
+          {
+            "id": "https://openalex.org/W2624431344",
+            "title": "Inductive Representation Learning on Large Graphs",
+            "published": 2017,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 4538
+          },
+          {
+            "id": "https://openalex.org/W3138815606",
+            "title": "Membership Inference Attacks on Machine Learning: A Survey",
+            "published": 2022,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 526
+          },
+          {
+            "id": "https://openalex.org/W2984353870",
+            "title": "A survey on semi-supervised learning",
+            "published": 2019,
+            "venue": "Machine Learning",
+            "cited_by": 2632
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 data marketplace + incentive",
+      "arxiv": {
+        "query": "all:\"data marketplace\" AND all:\"incentive\"",
+        "status": 200,
+        "n_hits": 9,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2512.10372v1",
+            "title": "D2M: A Decentralized, Privacy-Preserving, Incentive-Compatible Data Marketplace for Collaborative Learning",
+            "published": "2025-12-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/1812.09966v1",
+            "title": "Wibson: A Decentralized Data Marketplace",
+            "published": "2018-12-24"
+          },
+          {
+            "id": "http://arxiv.org/abs/1907.12625v1",
+            "title": "Secure Exchange of Digital Goods in a Decentralized Data Marketplace",
+            "published": "2019-07-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2503.10773v2",
+            "title": "Learn then Decide: A Learning Approach for Designing Data Marketplaces",
+            "published": "2025-03-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.16052v4",
+            "title": "Incentivizing Truthful Data Contributions in a Marketplace for Mean Estimation",
+            "published": "2025-02-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2005.09248v1",
+            "title": "Selling Data at an Auction under Privacy Constraints",
+            "published": "2020-05-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2408.10648v1",
+            "title": "Smart Contract Coordinated Privacy Preserving Crowd-Sensing Campaigns",
+            "published": "2024-08-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2001.08832v2",
+            "title": "Wibson Protocol for Secure Data Exchange and Batch Payments",
+            "published": "2020-01-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.07272v2",
+            "title": "A Cram\u00e9r-von Mises Approach to Incentivizing Truthful Data Sharing",
+            "published": "2025-06-08"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "data marketplace incentive mechanism",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 78215,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2011896860",
+            "title": "The emerging role of electronic marketplaces on the Internet",
+            "published": 1998,
+            "venue": "Communications of the ACM",
+            "cited_by": 1388
+          },
+          {
+            "id": "https://openalex.org/W2167536650",
+            "title": "Theory and Practice in the Design of Physician Payment Incentives",
+            "published": 2001,
+            "venue": "Milbank Quarterly",
+            "cited_by": 415
+          },
+          {
+            "id": "https://openalex.org/W3009009008",
+            "title": "An incentive mechanism for data sharing based on blockchain with smart contracts",
+            "published": 2020,
+            "venue": "Computers & Electrical Engineering",
+            "cited_by": 139
+          },
+          {
+            "id": "https://openalex.org/W2089402107",
+            "title": "Dynamic capabilities: what are they?",
+            "published": 2000,
+            "venue": "Strategic Management Journal",
+            "cited_by": 14665
+          },
+          {
+            "id": "https://openalex.org/W3131681485",
+            "title": "DeM-CoD: Novel Access-Control-Based Cash on Delivery Mechanism for Decentralized Marketplace",
+            "published": 2020,
+            "venue": null,
+            "cited_by": 66
+          },
+          {
+            "id": "https://openalex.org/W4280508082",
+            "title": "Should platforms be allowed to sell on their own marketplaces?",
+            "published": 2022,
+            "venue": "The RAND Journal of Economics",
+            "cited_by": 200
+          },
+          {
+            "id": "https://openalex.org/W1999549237",
+            "title": "Democracy, Public Expenditures, and the Poor: Understanding Political Incentives for Providing Public Services",
+            "published": 2005,
+            "venue": "The World Bank Research Observer",
+            "cited_by": 491
+          },
+          {
+            "id": "https://openalex.org/W4411118298",
+            "title": "Constructing a Decentralized AI Data Marketplace Enabled by a Blockchain-Based Incentive Mechanism",
+            "published": 2025,
+            "venue": "Journal of Industrial Engineering and Applied Science",
+            "cited_by": 3
+          },
+          {
+            "id": "https://openalex.org/W1986147097",
+            "title": "Trust management through reputation mechanisms",
+            "published": 2000,
+            "venue": "Applied Artificial Intelligence",
+            "cited_by": 519
+          },
+          {
+            "id": "https://openalex.org/W2564688125",
+            "title": "Institutional incentives in circular economy transition: The case of material use in the Dutch textile industry",
+            "published": 2016,
+            "venue": "Journal of Cleaner Production",
+            "cited_by": 385
+          },
+          {
+            "id": "https://openalex.org/W3121693921",
+            "title": "A Survey of Corporate Governance",
+            "published": 1997,
+            "venue": "The Journal of Finance",
+            "cited_by": 16364
+          },
+          {
+            "id": "https://openalex.org/W1487507364",
+            "title": "Use of Silk Road, the online drug marketplace, in the United Kingdom, Australia and the United States",
+            "published": 2013,
+            "venue": "Addiction",
+            "cited_by": 225
+          },
+          {
+            "id": "https://openalex.org/W2169466806",
+            "title": "The cost of a cloud",
+            "published": 2008,
+            "venue": "ACM SIGCOMM Computer Communication Review",
+            "cited_by": 1628
+          },
+          {
+            "id": "https://openalex.org/W2896464666",
+            "title": "Smart Contract-Based Review System for an IoT Data Marketplace",
+            "published": 2018,
+            "venue": "Sensors",
+            "cited_by": 92
+          },
+          {
+            "id": "https://openalex.org/W2921968831",
+            "title": "Personal Data Trading Scheme for Data Brokers in IoT Data Marketplaces",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 65
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 payment by measured held-out utility",
+      "arxiv": {
+        "query": "all:\"held-out\" AND all:\"payment\"",
+        "status": 200,
+        "n_hits": 6,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2509.23712v2",
+            "title": "FraudTransformer: Time-Aware GPT for Transaction Fraud Detection",
+            "published": "2025-09-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2002.03206v3",
+            "title": "Characterizing Structural Regularities of Labeled Data in Overparameterized Models",
+            "published": "2020-02-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2601.05578v1",
+            "title": "Reinforcement Learning of Large Language Models for Interpretable Credit Card Fraud Detection",
+            "published": "2026-01-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.07529v1",
+            "title": "FedMark-FM: Auditable, Risk-Adjusted Data Markets for Federated Foundation-Model Adaptation",
+            "published": "2026-07-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.20157v1",
+            "title": "SAGE: Scalable Automatic Gating Ensemble for Confident Negative Harvesting in Fraud Detection",
+            "published": "2026-05-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.18534v1",
+            "title": "FinRCA-Bench: Benchmarking Evidence Retrieval and Reasoning for Financial AI Systems",
+            "published": "2026-08-19"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "paying contributors by measured held-out performance",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 61998,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2105738429",
+            "title": "What Do Entrepreneurs Pay for Venture Capital Affiliation?",
+            "published": 2004,
+            "venue": "The Journal of Finance",
+            "cited_by": 1366
+          },
+          {
+            "id": "https://openalex.org/W1984224700",
+            "title": "Teacher performance pay: A review",
+            "published": 2007,
+            "venue": "Journal of Policy Analysis and Management",
+            "cited_by": 319
+          },
+          {
+            "id": "https://openalex.org/W1635239747",
+            "title": "The Case for Specific Performance",
+            "published": 1979,
+            "venue": "The Yale Law Journal",
+            "cited_by": 660
+          },
+          {
+            "id": "https://openalex.org/W3121243830",
+            "title": "A comparison of CEO pay\u2013performance sensitivity in privately-held and public firms",
+            "published": 2015,
+            "venue": "Journal of Corporate Finance",
+            "cited_by": 118
+          },
+          {
+            "id": "https://openalex.org/W2546636161",
+            "title": "The role of board gender and foreign ownership in the CSR performance of Chinese listed firms",
+            "published": 2016,
+            "venue": "Journal of Corporate Finance",
+            "cited_by": 943
+          },
+          {
+            "id": "https://openalex.org/W2769276865",
+            "title": "The effects of environmental, social and governance disclosures and performance on firm value: A review of the literature in accounting and finance",
+            "published": 2017,
+            "venue": "The British Accounting Review",
+            "cited_by": 835
+          },
+          {
+            "id": "https://openalex.org/W1989750313",
+            "title": "OpenStreetMap: User-Generated Street Maps",
+            "published": 2008,
+            "venue": "IEEE Pervasive Computing",
+            "cited_by": 3183
+          },
+          {
+            "id": "https://openalex.org/W2031489346",
+            "title": "The Pascal Visual Object Classes (VOC) Challenge",
+            "published": 2009,
+            "venue": "International Journal of Computer Vision",
+            "cited_by": 19952
+          },
+          {
+            "id": "https://openalex.org/W2153509701",
+            "title": "Designing payments for environmental services in theory and practice: An overview of the issues",
+            "published": 2008,
+            "venue": "Ecological Economics",
+            "cited_by": 2448
+          },
+          {
+            "id": "https://openalex.org/W2969625533",
+            "title": "Artificial Intelligence (AI): Multidisciplinary perspectives on emerging challenges, opportunities, and agenda for research, practice and policy",
+            "published": 2019,
+            "venue": "International Journal of Information Management",
+            "cited_by": 4354
+          },
+          {
+            "id": "https://openalex.org/W1985062481",
+            "title": "Performance, Personality, and Energetics: Correlation, Causation, and Mechanism",
+            "published": 2012,
+            "venue": "Physiological and Biochemical Zoology",
+            "cited_by": 459
+          },
+          {
+            "id": "https://openalex.org/W3121901131",
+            "title": "What happens before? A field experiment exploring how pay and representation differentially shape bias on the pathway into organizations.",
+            "published": 2015,
+            "venue": "Journal of Applied Psychology",
+            "cited_by": 476
+          },
+          {
+            "id": "https://openalex.org/W1970381522",
+            "title": "Cheap and fast---but is it good?",
+            "published": 2008,
+            "venue": null,
+            "cited_by": 1927
+          },
+          {
+            "id": "https://openalex.org/W2148399945",
+            "title": "Charisma: An Ill-Defined and Ill-Measured Gift",
+            "published": 2016,
+            "venue": "Annual Review of Organizational Psychology and Organizational Behavior",
+            "cited_by": 402
+          },
+          {
+            "id": "https://openalex.org/W3022378855",
+            "title": "Why Do Firms Become Widely Held? An Analysis of the Dynamics of Corporate Ownership",
+            "published": 2007,
+            "venue": "The Journal of Finance",
+            "cited_by": 219
+          }
+        ]
+      }
+    },
+    {
+      "label": "s1 sealed evaluation tournament",
+      "arxiv": {
+        "query": "all:\"sealed\" AND all:\"evaluation\" AND all:\"tournament\"",
+        "status": 200,
+        "n_hits": 1,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2606.27397v1",
+            "title": "SidConArena: An Environment Evaluating Agents in Open-Ended,Positive-Sum Bargaining Game",
+            "published": "2026-06-24"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "sealed holdout evaluation prediction tournament staking",
+        "status": 200,
+        "n_hits": 3,
+        "corpus_matches": 3,
+        "hits": [
+          {
+            "id": "https://openalex.org/W7166901798",
+            "title": "AI Trading's Alpha Singularity: Emergent Market Reasoning through Agent-to-Agent Self-Evolution",
+            "published": 2026,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W2871873410",
+            "title": "Economic Determinations in \"Frand Rate\"-Setting: A Guide for the Perplexed",
+            "published": 2018,
+            "venue": "FLASH - Fordham Law Archive of Scholarship & History (Fordham University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W3026392005",
+            "title": "The effectiveness of European antitrust policy : evidence from the stock market",
+            "published": 2008,
+            "venue": "Z\u00fcrcher Hochschule f\u00fcr Angewandte Wissenschaften digital collection (Zurich University of Applied Sciences)",
+            "cited_by": 0
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 composable adapters",
+      "arxiv": {
+        "query": "all:\"composable\" AND all:\"adapters\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2511.03981v1",
+            "title": "Structural Priors and Modular Adapters in the Composable Fine-Tuning Algorithm of Large-Scale Models",
+            "published": "2025-11-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.15965v1",
+            "title": "MoLoRA: Composable Specialization via Per-Token Adapter Routing",
+            "published": "2026-03-16"
+          },
+          {
+            "id": "http://arxiv.org/abs/2604.21571v1",
+            "title": "Separable Expert Architecture: Toward Privacy-Preserving LLM Personalization via Composable Adapters and Deletable User Proxies",
+            "published": "2026-04-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2310.06234v2",
+            "title": "Efficient Adaptation of Large Vision Transformer via Adapter Re-Composing",
+            "published": "2023-10-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2510.10135v2",
+            "title": "CharCom: Composable Identity Control for Multi-Character Story Illustration",
+            "published": "2025-10-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2305.16651v1",
+            "title": "TADA: Task-Agnostic Dialect Adapters for English",
+            "published": "2023-05-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.14249v3",
+            "title": "HarnessX: A Composable, Adaptive, and Evolvable Agent Harness Foundry",
+            "published": "2026-06-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2101.08244v1",
+            "title": "Energy Efficient Placement of Workloads in Composable Data Center Networks",
+            "published": "2021-01-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2404.18928v1",
+            "title": "Stylus: Automatic Adapter Selection for Diffusion Models",
+            "published": "2024-04-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/1710.08256v1",
+            "title": "A Framework for Efficient Adaptively Secure Composable Oblivious Transfer in the ROM",
+            "published": "2017-10-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.22158v3",
+            "title": "Context Parametrization with Compositional Adapters",
+            "published": "2025-09-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2110.07560v2",
+            "title": "Composable Sparse Fine-Tuning for Cross-Lingual Transfer",
+            "published": "2021-10-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2403.19622v2",
+            "title": "RH20T-P: A Primitive-Level Robotic Dataset Towards Composable Generalization Agents",
+            "published": "2024-03-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2601.21795v2",
+            "title": "Effective LoRA Adapter Routing using Task Representations",
+            "published": "2026-01-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2403.19456v2",
+            "title": "Break-for-Make: Modular Low-Rank Adaptations for Composable Content-Style Customization",
+            "published": "2024-03-28"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "composable adapters",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 119762,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4393148714",
+            "title": "T2I-Adapter: Learning Adapters to Dig Out More Controllable Ability for Text-to-Image Diffusion Models",
+            "published": 2024,
+            "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+            "cited_by": 807
+          },
+          {
+            "id": "https://openalex.org/W3175604467",
+            "title": "K-Adapter: Infusing Knowledge into Pre-Trained Models with Adapters",
+            "published": 2021,
+            "venue": null,
+            "cited_by": 382
+          },
+          {
+            "id": "https://openalex.org/W2963211188",
+            "title": "Learning multiple visual domains with residual adapters",
+            "published": 2017,
+            "venue": "Oxford University Research Archive (ORA) (University of Oxford)",
+            "cited_by": 496
+          },
+          {
+            "id": "https://openalex.org/W1980344333",
+            "title": "LIM domains: multiple roles as adapters and functional modifiers in protein interactions",
+            "published": 1998,
+            "venue": "Trends in Genetics",
+            "cited_by": 599
+          },
+          {
+            "id": "https://openalex.org/W3186053696",
+            "title": "NLRP3 inflammasome activation and cell death",
+            "published": 2021,
+            "venue": "Cellular and Molecular Immunology",
+            "cited_by": 1560
+          },
+          {
+            "id": "https://openalex.org/W2246372546",
+            "title": "Urbanization, Biodiversity, and Conservation",
+            "published": 2002,
+            "venue": "BioScience",
+            "cited_by": 3651
+          },
+          {
+            "id": "https://openalex.org/W2102585554",
+            "title": "Tumor necrosis factor receptor-associated factors (TRAFs)\u2014a family of adapter proteins that regulates life and death",
+            "published": 1998,
+            "venue": "Genes & Development",
+            "cited_by": 612
+          },
+          {
+            "id": "https://openalex.org/W2067043938",
+            "title": "The pyroptosome: a supramolecular assembly of ASC dimers mediating inflammatory cell death via caspase-1 activation",
+            "published": 2007,
+            "venue": "Cell Death and Differentiation",
+            "cited_by": 1042
+          },
+          {
+            "id": "https://openalex.org/W2018807628",
+            "title": "Grd19/Snx3p functions as a cargo-specific adapter for retromer-dependent endocytic recycling",
+            "published": 2007,
+            "venue": "The Journal of Cell Biology",
+            "cited_by": 173
+          },
+          {
+            "id": "https://openalex.org/W7128817458",
+            "title": "Structural Priors and Modular Adapters in the Composable Fine-Tuning Algorithm of Large-Scale Models",
+            "published": 2025,
+            "venue": null,
+            "cited_by": 11
+          },
+          {
+            "id": "https://openalex.org/W2091267060",
+            "title": "An Induced Proximity Model for Caspase-8 Activation",
+            "published": 1998,
+            "venue": "Journal of Biological Chemistry",
+            "cited_by": 1024
+          },
+          {
+            "id": "https://openalex.org/W2143007052",
+            "title": "The Self-Serv environment for Web services composition",
+            "published": 2003,
+            "venue": "IEEE Internet Computing",
+            "cited_by": 534
+          },
+          {
+            "id": "https://openalex.org/W3005441132",
+            "title": "K-Adapter: Infusing Knowledge into Pre-Trained Models with Adapters",
+            "published": 2020,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 135
+          },
+          {
+            "id": "https://openalex.org/W1942214720",
+            "title": "Caspases: the executioners of apoptosis",
+            "published": 1997,
+            "venue": "Biochemical Journal",
+            "cited_by": 4742
+          },
+          {
+            "id": "https://openalex.org/W1972934337",
+            "title": "Endotoxin recognition and signal transduction by the TLR4/MD2-complex",
+            "published": 2004,
+            "venue": "Microbes and Infection",
+            "cited_by": 354
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 adapter composition",
+      "arxiv": {
+        "query": "all:\"adapter\" AND all:\"composition\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2605.30189v1",
+            "title": "Token-Level Generalization in LoRA Adapter Backdoors: Attack Characterization and Behavioral Detection",
+            "published": "2026-05-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.13820v1",
+            "title": "SDO: Subspace Deconflicting Operator for Multi-Adapter Composition",
+            "published": "2026-08-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2003.14377v1",
+            "title": "DATESSO: Self-Adapting Service Composition with Debt-Aware Two Levels Constraint Reasoning",
+            "published": "2020-03-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2410.09908v2",
+            "title": "Beyond Adapter Retrieval: Latent Geometry-Preserving Composition via Sparse Task Projection",
+            "published": "2024-10-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2602.21222v1",
+            "title": "Task-Aware LoRA Adapter Composition via Similarity Retrieval in Vector Databases",
+            "published": "2026-02-01"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.19355v1",
+            "title": "GRACE: Grounded Reasoning via Adapter Composition and Evidence-Aware Calibration for Educational Visual Question Answering",
+            "published": "2026-08-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.22158v3",
+            "title": "Context Parametrization with Compositional Adapters",
+            "published": "2025-09-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/0909.2183v1",
+            "title": "A Survey on Service Composition Middleware in Pervasive Environments",
+            "published": "2009-09-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.11262v1",
+            "title": "PermDoRA -- Understanding Adapter Interference in Language Models: Limits of Parameter-Space Geometry",
+            "published": "2026-06-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2203.05481v3",
+            "title": "Fully Adaptive Composition in Differential Privacy",
+            "published": "2022-03-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2101.03287v1",
+            "title": "Unifying Relational Sentence Generation and Retrieval for Medical Image Report Composition",
+            "published": "2021-01-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2409.14363v1",
+            "title": "MANTA -- Model Adapter Native generations that's Affordable",
+            "published": "2024-09-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.07685v1",
+            "title": "Test-Time Adaptive Composition for Machine Learning as a Service (MLaaS) in IoT Environments",
+            "published": "2026-06-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.10277v2",
+            "title": "Lightweight Adaptive Feature Composition for Heterogeneous Downstream Adaptation of Wireless Foundation Models",
+            "published": "2026-06-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/1907.01154v1",
+            "title": "Adaptive Music Composition for Games",
+            "published": "2019-07-02"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "adapter composition modular networks",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 11927,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4393148714",
+            "title": "T2I-Adapter: Learning Adapters to Dig Out More Controllable Ability for Text-to-Image Diffusion Models",
+            "published": 2024,
+            "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+            "cited_by": 807
+          },
+          {
+            "id": "https://openalex.org/W4319988532",
+            "title": "Progressive Neural Networks",
+            "published": 2016,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 1139
+          },
+          {
+            "id": "https://openalex.org/W2044712133",
+            "title": "Deciphering microbial interactions and detecting keystone species with co-occurrence networks",
+            "published": 2014,
+            "venue": "Frontiers in Microbiology",
+            "cited_by": 1824
+          },
+          {
+            "id": "https://openalex.org/W2615459164",
+            "title": "On Multi-Access Edge Computing: A Survey of the Emerging 5G Network Edge Cloud Architecture and Orchestration",
+            "published": 2017,
+            "venue": "IEEE Communications Surveys & Tutorials",
+            "cited_by": 1775
+          },
+          {
+            "id": "https://openalex.org/W2738359482",
+            "title": "Influence of resistance breeding in common bean on rhizosphere microbiome composition and function",
+            "published": 2017,
+            "venue": "The ISME Journal",
+            "cited_by": 471
+          },
+          {
+            "id": "https://openalex.org/W2975857234",
+            "title": "Initial soil microbiome composition and functioning predetermine future plant health",
+            "published": 2019,
+            "venue": "Science Advances",
+            "cited_by": 638
+          },
+          {
+            "id": "https://openalex.org/W2484752123",
+            "title": "The Neutron star Interior Composition Explorer (NICER): design and development",
+            "published": 2016,
+            "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+            "cited_by": 537
+          },
+          {
+            "id": "https://openalex.org/W2410580207",
+            "title": "Modular approach to customise sample preparation procedures for viral metagenomics: a reproducible protocol for virome analysis",
+            "published": 2015,
+            "venue": "Scientific Reports",
+            "cited_by": 385
+          },
+          {
+            "id": "https://openalex.org/W2041036779",
+            "title": "Elucidation of Sigma Factor-Associated Networks in Pseudomonas aeruginosa Reveals a Modular Architecture with Limited and Function-Specific Crosstalk",
+            "published": 2015,
+            "venue": "PLoS Pathogens",
+            "cited_by": 149
+          },
+          {
+            "id": "https://openalex.org/W2951254340",
+            "title": "A modular transcriptional signature identifies phenotypic heterogeneity of human tuberculosis infection",
+            "published": 2018,
+            "venue": "Nature Communications",
+            "cited_by": 241
+          },
+          {
+            "id": "https://openalex.org/W2789674418",
+            "title": "In-air microfluidics enables rapid fabrication of emulsions, suspensions, and 3D modular (bio)materials",
+            "published": 2018,
+            "venue": "Science Advances",
+            "cited_by": 222
+          },
+          {
+            "id": "https://openalex.org/W2751013971",
+            "title": "Analysing Microbial Community Composition through Amplicon Sequencing: From Sampling to Hypothesis Testing",
+            "published": 2017,
+            "venue": "Frontiers in Microbiology",
+            "cited_by": 394
+          },
+          {
+            "id": "https://openalex.org/W2140177375",
+            "title": "Genome-Wide Analysis of NBS-LRR\u2013Encoding Genes in Arabidopsis[W]",
+            "published": 2003,
+            "venue": "The Plant Cell",
+            "cited_by": 1645
+          },
+          {
+            "id": "https://openalex.org/W3176693010",
+            "title": "On the Effectiveness of Adapter-based Tuning for Pretrained Language Model Adaptation",
+            "published": 2021,
+            "venue": null,
+            "cited_by": 129
+          },
+          {
+            "id": "https://openalex.org/W2011237756",
+            "title": "Gene Discovery of Modular Diterpene Metabolism in Nonmodel Systems",
+            "published": 2013,
+            "venue": "PLANT PHYSIOLOGY",
+            "cited_by": 169
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 model stitching",
+      "arxiv": {
+        "query": "all:\"model stitching\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2505.20142v2",
+            "title": "Grounding Functional Similarity by Invariance-Aware Model Stitching",
+            "published": "2025-05-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2303.11277v2",
+            "title": "Model Stitching: Looking For Functional Similarity Between Representations",
+            "published": "2023-03-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2106.07682v1",
+            "title": "Revisiting Model Stitching to Compare Neural Representations",
+            "published": "2021-06-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.12433v3",
+            "title": "Revisiting Model Stitching In the Foundation Model Era",
+            "published": "2026-03-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2401.04821v2",
+            "title": "MoSECroT: Model Stitching with Static Word Embeddings for Crosslingual Zero-shot Transfer",
+            "published": "2024-01-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2311.03532v1",
+            "title": "The Fairness Stitch: Unveiling the Potential of Model Stitching in Neural Network De-Biasing",
+            "published": "2023-11-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.21509v1",
+            "title": "A Stitch in Time Saves Nine: Preserving Policy Compatibility Under Perception Updates in End-to-End Autonomous Driving",
+            "published": "2026-06-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2409.10967v3",
+            "title": "Relative Representations: Topological and Geometric Perspectives",
+            "published": "2024-09-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.09642v1",
+            "title": "Multi-DNN Inference of Sparse Models on Edge SoCs",
+            "published": "2026-03-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.06609v3",
+            "title": "Transferring Linear Features Across Language Models With Model Stitching",
+            "published": "2025-06-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.07815v1",
+            "title": "HybridStitch: Pixel and Timestep Level Model Stitching for Diffusion Acceleration",
+            "published": "2026-03-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2309.04653v1",
+            "title": "Relative representations for cognitive graphs",
+            "published": "2023-09-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2503.04478v1",
+            "title": "Semantic Alignment of Unimodal Medical Text and Vision Representations",
+            "published": "2025-03-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2302.02181v2",
+            "title": "Model Stitching and Visualization How GAN Generators can Invert Networks in Real-Time",
+            "published": "2023-02-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2501.06164v7",
+            "title": "Model Alignment Search",
+            "published": "2025-01-10"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "model stitching representation compatibility",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 5210,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2580035316",
+            "title": "ImageJ2: ImageJ for the next generation of scientific image data",
+            "published": 2017,
+            "venue": "BMC Bioinformatics",
+            "cited_by": 6329
+          },
+          {
+            "id": "https://openalex.org/W1978574709",
+            "title": "FLASH: An Adaptive Mesh Hydrodynamics Code for Modeling Astrophysical Thermonuclear Flashes",
+            "published": 2000,
+            "venue": "The Astrophysical Journal Supplement Series",
+            "cited_by": 2559
+          },
+          {
+            "id": "https://openalex.org/W4224315052",
+            "title": "ET-BERT: A Contextualized Datagram Representation with Pre-training Transformers for Encrypted Traffic Classification",
+            "published": 2022,
+            "venue": "Proceedings of the ACM Web Conference 2022",
+            "cited_by": 538
+          },
+          {
+            "id": "https://openalex.org/W2141165178",
+            "title": "Improving the Arabidopsis genome annotation using maximal transcript alignment assemblies",
+            "published": 2003,
+            "venue": "Nucleic Acids Research",
+            "cited_by": 2537
+          },
+          {
+            "id": "https://openalex.org/W2015159529",
+            "title": "scikit-image: image processing in Python",
+            "published": 2014,
+            "venue": "PeerJ",
+            "cited_by": 7166
+          },
+          {
+            "id": "https://openalex.org/W2098386335",
+            "title": "Virtual textile composites software : Integration with micro-mechanical, permeability and structural analysis",
+            "published": 2005,
+            "venue": "Composites Science and Technology",
+            "cited_by": 461
+          },
+          {
+            "id": "https://openalex.org/W2121278656",
+            "title": "A two-dimensional analytical model and experimental validation of garter stitch knitted shape memory alloy actuator architecture",
+            "published": 2012,
+            "venue": "Smart Materials and Structures",
+            "cited_by": 46
+          },
+          {
+            "id": "https://openalex.org/W877909479",
+            "title": "Jointly Modeling Deep Video and Compositional Text to Bridge Vision and Language in a Unified Framework",
+            "published": 2015,
+            "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+            "cited_by": 318
+          },
+          {
+            "id": "https://openalex.org/W2132074199",
+            "title": "Scene Representation Technologies for 3DTV\u2014A Survey",
+            "published": 2007,
+            "venue": "IEEE Transactions on Circuits and Systems for Video Technology",
+            "cited_by": 90
+          },
+          {
+            "id": "https://openalex.org/W1595604284",
+            "title": "Geometric and mechanical modelling of textiles",
+            "published": 2007,
+            "venue": "Nottingham ePrints (University of Nottingham)",
+            "cited_by": 206
+          },
+          {
+            "id": "https://openalex.org/W2150167921",
+            "title": "Automated Stitching of Microtubule Centerlines across Serial Electron Tomograms",
+            "published": 2014,
+            "venue": "PLoS ONE",
+            "cited_by": 32
+          },
+          {
+            "id": "https://openalex.org/W2796316420",
+            "title": "Matter imprints in waveform models for neutron star binaries: Tidal and self-spin effects",
+            "published": 2019,
+            "venue": "Physical review. D/Physical review. D.",
+            "cited_by": 229
+          },
+          {
+            "id": "https://openalex.org/W4386607611",
+            "title": "A Comprehensive Survey on Model Quantization for Deep Neural Networks in Image Classification",
+            "published": 2023,
+            "venue": "ACM Transactions on Intelligent Systems and Technology",
+            "cited_by": 220
+          },
+          {
+            "id": "https://openalex.org/W2940943319",
+            "title": "Searching for long-lived particles beyond the Standard Model at the Large Hadron Collider",
+            "published": 2020,
+            "venue": "Journal of Physics G Nuclear and Particle Physics",
+            "cited_by": 267
+          },
+          {
+            "id": "https://openalex.org/W2949074271",
+            "title": "Understanding Image Representations by Measuring Their Equivariance and Equivalence",
+            "published": 2018,
+            "venue": "International Journal of Computer Vision",
+            "cited_by": 21
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 model reuse / composition",
+      "arxiv": {
+        "query": "all:\"model composition\" AND all:\"reuse\"",
+        "status": 200,
+        "n_hits": 11,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2402.12750v2",
+            "title": "Model Composition for Multimodal Large Language Models",
+            "published": "2024-02-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2307.14012v4",
+            "title": "MCMC-Correction of Score-Based Diffusion Models for Model Composition",
+            "published": "2023-07-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.20174v2",
+            "title": "Towards Scalable and Generalizable Earth Observation Data Mining via Foundation Model Composition",
+            "published": "2025-06-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.17313v1",
+            "title": "An Expert Survey on Models and Digital Twins",
+            "published": "2025-06-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/1404.0853v1",
+            "title": "Correct-by-construction model composition: Application to the Invasive Software Composition method",
+            "published": "2014-04-03"
+          },
+          {
+            "id": "http://arxiv.org/abs/2105.06449v1",
+            "title": "Feature Interactions on Steroids: On the Composition of ML Models",
+            "published": "2021-05-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2512.17109v3",
+            "title": "Bridging Training and Merging Through Momentum-Aware Optimization",
+            "published": "2025-12-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.19083v3",
+            "title": "GEqTrain: A Configuration-Driven Framework for Retargeting Equivariant Graph Neural Networks Across 3D Scientific Tasks",
+            "published": "2026-07-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2601.00065v3",
+            "title": "When the Same Coefficients Reach Different Places: Asymmetric Realizability in Transplanting Tokenizers across Large Language Models",
+            "published": "2025-12-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.03585v1",
+            "title": "Modular Foundation Models for Time-Series Perception in Digital Twins",
+            "published": "2026-07-03"
+          },
+          {
+            "id": "http://arxiv.org/abs/2208.01795v4",
+            "title": "Dynamic Modeling of Branched Robots using Modular Composition",
+            "published": "2022-08-03"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "model composition and reuse",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 342001,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2168518910",
+            "title": "Compositional Design and Reuse of a Generic Agent Model",
+            "published": 2002,
+            "venue": null,
+            "cited_by": 100
+          },
+          {
+            "id": "https://openalex.org/W2919184664",
+            "title": "Model Composition and Reuse",
+            "published": 2019,
+            "venue": "Elsevier eBooks",
+            "cited_by": 6
+          },
+          {
+            "id": "https://openalex.org/W2144836746",
+            "title": "A Compositional Model for Software Reuse",
+            "published": 1989,
+            "venue": "The Computer Journal",
+            "cited_by": 42
+          },
+          {
+            "id": "https://openalex.org/W2115350349",
+            "title": "Reusing software: issues and research directions",
+            "published": 1995,
+            "venue": "IEEE Transactions on Software Engineering",
+            "cited_by": 560
+          },
+          {
+            "id": "https://openalex.org/W1573769547",
+            "title": "Approaches for Model Transformation Reuse: Factorization and Composition",
+            "published": 2008,
+            "venue": "Lecture notes in computer science",
+            "cited_by": 35
+          },
+          {
+            "id": "https://openalex.org/W1500250067",
+            "title": "Generative Programming: Methods, Tools, and Applications",
+            "published": 2000,
+            "venue": null,
+            "cited_by": 2560
+          },
+          {
+            "id": "https://openalex.org/W2095204200",
+            "title": "Model simplification and development via reuse, sensitivity analysis and composition: A case study in crop modelling",
+            "published": 2014,
+            "venue": "Environmental Modelling & Software",
+            "cited_by": 52
+          },
+          {
+            "id": "https://openalex.org/W2139453480",
+            "title": "Composition Patterns: An Approach to Designing Reusable Aspects",
+            "published": 2001,
+            "venue": null,
+            "cited_by": 226
+          },
+          {
+            "id": "https://openalex.org/W2020561965",
+            "title": "Minimum information requested in the annotation of biochemical models (MIRIAM)",
+            "published": 2005,
+            "venue": "Nature Biotechnology",
+            "cited_by": 641
+          },
+          {
+            "id": "https://openalex.org/W2045287414",
+            "title": "CloudSim: a toolkit for modeling and simulation of cloud computing environments and evaluation of resource provisioning algorithms",
+            "published": 2010,
+            "venue": "Software Practice and Experience",
+            "cited_by": 4959
+          },
+          {
+            "id": "https://openalex.org/W1991604845",
+            "title": "N degrees of separation",
+            "published": 1999,
+            "venue": null,
+            "cited_by": 1248
+          },
+          {
+            "id": "https://openalex.org/W1990405072",
+            "title": "The Palladio component model for model-driven performance prediction",
+            "published": 2008,
+            "venue": "Journal of Systems and Software",
+            "cited_by": 657
+          },
+          {
+            "id": "https://openalex.org/W3091375111",
+            "title": "A compositional framework for systematic modeling language reuse",
+            "published": 2020,
+            "venue": null,
+            "cited_by": 22
+          },
+          {
+            "id": "https://openalex.org/W2168103533",
+            "title": "Taverna: a tool for the composition and enactment of bioinformatics workflows",
+            "published": 2004,
+            "venue": "Bioinformatics",
+            "cited_by": 1626
+          },
+          {
+            "id": "https://openalex.org/W2024880014",
+            "title": "Cost models for future software life cycle processes: COCOMO 2.0",
+            "published": 1995,
+            "venue": "Annals of Software Engineering",
+            "cited_by": 654
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 modular DL marketplace",
+      "arxiv": {
+        "query": "all:\"modular\" AND all:\"deep learning\" AND all:\"marketplace\"",
+        "status": 200,
+        "n_hits": 1,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2305.18431v1",
+            "title": "Optimizing Airbnb Search Journey with Multi-task Learning",
+            "published": "2023-05-28"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "modular deep learning marketplace",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 9649,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2670298746",
+            "title": "Understanding platform business models: A mixed methods study of marketplaces",
+            "published": 2017,
+            "venue": "European Management Journal",
+            "cited_by": 593
+          },
+          {
+            "id": "https://openalex.org/W2885070483",
+            "title": "A Multimodal Deep Learning Method for Android Malware Detection Using Various Features",
+            "published": 2018,
+            "venue": "IEEE Transactions on Information Forensics and Security",
+            "cited_by": 515
+          },
+          {
+            "id": "https://openalex.org/W4309490745",
+            "title": "Deep learning in drug discovery: an integrative review and future challenges",
+            "published": 2022,
+            "venue": "Artificial Intelligence Review",
+            "cited_by": 390
+          },
+          {
+            "id": "https://openalex.org/W2089402107",
+            "title": "Dynamic capabilities: what are they?",
+            "published": 2000,
+            "venue": "Strategic Management Journal",
+            "cited_by": 14665
+          },
+          {
+            "id": "https://openalex.org/W2809684781",
+            "title": "A comprehensive survey on machine learning for networking: evolution, applications and research opportunities",
+            "published": 2018,
+            "venue": "Journal of Internet Services and Applications",
+            "cited_by": 1016
+          },
+          {
+            "id": "https://openalex.org/W3089703818",
+            "title": "Deep learning for misinformation detection on online social networks: a survey and new perspectives",
+            "published": 2020,
+            "venue": "Social Network Analysis and Mining",
+            "cited_by": 292
+          },
+          {
+            "id": "https://openalex.org/W3092541244",
+            "title": "Fairness in Machine Learning: A Survey",
+            "published": 2023,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 488
+          },
+          {
+            "id": "https://openalex.org/W4307280068",
+            "title": "Improved Classification Approach for Fruits and Vegetables Freshness Based on Deep Learning",
+            "published": 2022,
+            "venue": "Sensors",
+            "cited_by": 140
+          },
+          {
+            "id": "https://openalex.org/W1511737155",
+            "title": "Dynamic Organizations: Achieving Marketplace And Organizational Agility With People",
+            "published": 2003,
+            "venue": "eCommons (Cornell University)",
+            "cited_by": 123
+          },
+          {
+            "id": "https://openalex.org/W4205832669",
+            "title": "Financial Cybercrime: A Comprehensive Survey of Deep Learning Approaches to Tackle the Evolving Financial Crime Landscape",
+            "published": 2021,
+            "venue": "IEEE Access",
+            "cited_by": 178
+          },
+          {
+            "id": "https://openalex.org/W3038318401",
+            "title": "Building dynamic service analytics capabilities for the digital marketplace",
+            "published": 2020,
+            "venue": "Journal of Business Research",
+            "cited_by": 122
+          },
+          {
+            "id": "https://openalex.org/W2036123899",
+            "title": "An overview of APSIM, a model designed for farming systems simulation",
+            "published": 2002,
+            "venue": "European Journal of Agronomy",
+            "cited_by": 2873
+          },
+          {
+            "id": "https://openalex.org/W4307968550",
+            "title": "Artificial intelligence and machine learning in cancer imaging",
+            "published": 2022,
+            "venue": "Communications Medicine",
+            "cited_by": 314
+          },
+          {
+            "id": "https://openalex.org/W2158623793",
+            "title": "Learning to Build a Supply Network: An Exploration of Dynamic Business Models",
+            "published": 2008,
+            "venue": "Journal of Management Studies",
+            "cited_by": 204
+          },
+          {
+            "id": "https://openalex.org/W1623579146",
+            "title": "Learning Objects: Resources For Distance Education Worldwide",
+            "published": 2001,
+            "venue": "The International Review of Research in Open and Distributed Learning",
+            "cited_by": 270
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 LoRA marketplace",
+      "arxiv": {
+        "query": "all:\"LoRA\" AND all:\"marketplace\"",
+        "status": 200,
+        "n_hits": 4,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/1712.08221v3",
+            "title": "Tackling Contention Through Cooperation: A Distributed Federation in LoRaWAN Space",
+            "published": "2017-12-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.03886v1",
+            "title": "Enhancement of E-commerce Sponsored Search Relevancy with LLM",
+            "published": "2026-07-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.27172v1",
+            "title": "Improving Item Discoverability in e-Commerce Search via Related Intent Generation",
+            "published": "2026-07-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.16759v3",
+            "title": "Can Explanations Improve Recommendations? Evidence from Prediction-Informed Explanations",
+            "published": "2025-02-24"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "LoRA adapter marketplace trading",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 79,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4206562093",
+            "title": "A Comprehensive Survey on the Internet of Things with the Industrial Marketplace",
+            "published": 2022,
+            "venue": "Sensors",
+            "cited_by": 120
+          },
+          {
+            "id": "https://openalex.org/W4385292177",
+            "title": "LoraHub: Efficient Cross-Task Generalization via Dynamic LoRA Composition",
+            "published": 2023,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 7
+          },
+          {
+            "id": "https://openalex.org/W2909391844",
+            "title": "The internet of things for smart manufacturing: A review",
+            "published": 2019,
+            "venue": "IISE Transactions",
+            "cited_by": 441
+          },
+          {
+            "id": "https://openalex.org/W4285128558",
+            "title": "Industrial Internet of Things: Requirements, Architecture, Challenges, and Future Research Directions",
+            "published": 2022,
+            "venue": "IEEE Access",
+            "cited_by": 145
+          },
+          {
+            "id": "https://openalex.org/W2805503218",
+            "title": "Advancing IoT Platforms Interoperability",
+            "published": 2018,
+            "venue": null,
+            "cited_by": 16
+          },
+          {
+            "id": "https://openalex.org/W4412892568",
+            "title": "Transforming Product Discovery and Interpretation Using Vision\u2013Language Models",
+            "published": 2025,
+            "venue": "Journal of theoretical and applied electronic commerce research",
+            "cited_by": 2
+          },
+          {
+            "id": "https://openalex.org/W4307027184",
+            "title": "Agriculture Supply Chain Management Based on Blockchain Architecture and Smart Contracts",
+            "published": 2022,
+            "venue": "Applied Computational Intelligence and Soft Computing",
+            "cited_by": 35
+          },
+          {
+            "id": "https://openalex.org/W4399354968",
+            "title": "Large Language Models for Relevance Judgment in Product Search",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 1
+          },
+          {
+            "id": "https://openalex.org/W4404307448",
+            "title": "Large Generative AI Models meet Open Networks for 6G: Integration, Platform, and Monetization",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 1
+          },
+          {
+            "id": "https://openalex.org/W4395482906",
+            "title": "Advances and Open Challenges in Federated Foundation Models",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 5
+          },
+          {
+            "id": "https://openalex.org/W3132250245",
+            "title": "A Fully Open-Source Approach to Intelligent Edge Computing: AGILE\u2019s Lesson",
+            "published": 2021,
+            "venue": "Sensors",
+            "cited_by": 11
+          },
+          {
+            "id": "https://openalex.org/W4399052545",
+            "title": "Investigation and analysis of demand response approaches, bottlenecks, and future potential capabilities for IoT\u2010enabled smart grid",
+            "published": 2024,
+            "venue": "IET Renewable Power Generation",
+            "cited_by": 25
+          },
+          {
+            "id": "https://openalex.org/W4390528870",
+            "title": "Viz: A QLoRA-based Copyright Marketplace for Legally Compliant Generative AI",
+            "published": 2023,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W4410251856",
+            "title": "A Review on Vibe Coding: Fundamentals, State-of-the-art, Challenges and Future Directions",
+            "published": 2025,
+            "venue": null,
+            "cited_by": 17
+          },
+          {
+            "id": "https://openalex.org/W7124262264",
+            "title": "Large Language Models: A Survey of Architectures, Training Paradigms, and Alignment Methods",
+            "published": 2026,
+            "venue": "Preprints.org",
+            "cited_by": 2
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 adapter marketplace",
+      "arxiv": {
+        "query": "all:\"adapter\" AND all:\"marketplace\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2209.15418v1",
+            "title": "Equitable Marketplace Mechanism Design",
+            "published": "2022-09-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/1812.01344v1",
+            "title": "Realizing Edge Marketplaces: Challenges and Opportunities",
+            "published": "2018-12-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.13604v1",
+            "title": "Multi-Agent Reinforcement Learning from Delayed Marketplace Feedback for Objective-Weight Adaptation in Three-Sided Dispatch",
+            "published": "2026-06-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2401.04857v3",
+            "title": "Transportation Marketplace Rate Forecast Using Signature Transform",
+            "published": "2024-01-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.05833v1",
+            "title": "Benchmarking Robust Aggregation in Decentralized Gradient Marketplaces",
+            "published": "2025-09-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2006.12756v1",
+            "title": "A Framework for Fairness in Two-Sided Marketplaces",
+            "published": "2020-06-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2210.04733v1",
+            "title": "A Privacy Preserving IoT Data Marketplace Using IOTA Smart Contracts",
+            "published": "2022-10-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2311.10406v1",
+            "title": "Decentralized Energy Marketplace via NFTs and AI-based Agents",
+            "published": "2023-11-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2206.11720v2",
+            "title": "Measurement and applications of position bias in a marketplace search engine",
+            "published": "2022-06-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2401.00503v1",
+            "title": "Viz: A QLoRA-based Copyright Marketplace for Legally Compliant Generative AI",
+            "published": "2023-12-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.04707v1",
+            "title": "Detection of Illicit Content on Online Marketplaces using Large Language Models",
+            "published": "2026-03-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/2502.13891v1",
+            "title": "Highly Dynamic and Flexible Spatio-Temporal Spectrum Management with AI-Driven O-RAN: A Multi-Granularity Marketplace Framework",
+            "published": "2025-02-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.13233v1",
+            "title": "LLM-based Multi-Agent System for Simulating Strategic and Goal-Oriented Data Marketplaces",
+            "published": "2025-11-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2503.10773v2",
+            "title": "Learn then Decide: A Learning Approach for Designing Data Marketplaces",
+            "published": "2025-03-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.12246v1",
+            "title": "Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb",
+            "published": "2026-07-14"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "adapter marketplace registry",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 349,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2097565277",
+            "title": "Service oriented architectures: approaches, technologies and research issues",
+            "published": 2007,
+            "venue": "The VLDB Journal",
+            "cited_by": 1921
+          },
+          {
+            "id": "https://openalex.org/W1587464373",
+            "title": "Inter\u2010Cloud architectures and application brokering: taxonomy and survey",
+            "published": 2012,
+            "venue": "Software Practice and Experience",
+            "cited_by": 492
+          },
+          {
+            "id": "https://openalex.org/W2153457047",
+            "title": "Combining Cloud and sensors in a smart city environment",
+            "published": 2012,
+            "venue": "EURASIP Journal on Wireless Communications and Networking",
+            "cited_by": 284
+          },
+          {
+            "id": "https://openalex.org/W3089687642",
+            "title": "A global omics data sharing and analytics marketplace: Case study of a rapid data COVID-19 pandemic response platform",
+            "published": 2020,
+            "venue": "medRxiv",
+            "cited_by": 2
+          },
+          {
+            "id": "https://openalex.org/W24275207",
+            "title": "Agent Technology: Enabling Next Generation Computing (A Roadmap for Agent Based Computing)",
+            "published": 2003,
+            "venue": "ePrints Soton (University of Southampton)",
+            "cited_by": 312
+          },
+          {
+            "id": "https://openalex.org/W3129975510",
+            "title": "Addressing Semantics Standards for Cloud Portability and Interoperability in Multi Cloud Environment",
+            "published": 2021,
+            "venue": "Symmetry",
+            "cited_by": 74
+          },
+          {
+            "id": "https://openalex.org/W3109014771",
+            "title": "bIoTope: Building an IoT Open Innovation Ecosystem for Smart Cities",
+            "published": 2020,
+            "venue": "IEEE Access",
+            "cited_by": 30
+          },
+          {
+            "id": "https://openalex.org/W4400724352",
+            "title": "NFT Technology for Enhanced Global Digital Registers: A Novel Approach to Tokenization",
+            "published": 2024,
+            "venue": "Future Internet",
+            "cited_by": 10
+          },
+          {
+            "id": "https://openalex.org/W2475354318",
+            "title": "Pro Smartphone Cross-Platform Development: iPhone, Blackberry, Windows Mobile and Android Development and Distribution",
+            "published": 2010,
+            "venue": null,
+            "cited_by": 49
+          },
+          {
+            "id": "https://openalex.org/W3172053354",
+            "title": "Data Spine: A Federated Interoperability Enabler for Heterogeneous IoT Platform Ecosystems",
+            "published": 2021,
+            "venue": "Sensors",
+            "cited_by": 32
+          },
+          {
+            "id": "https://openalex.org/W4308256965",
+            "title": "The new robotic platform Hugo\u2122 RAS for lateral transabdominal adrenalectomy: a first world report of a series of five cases",
+            "published": 2022,
+            "venue": "Updates in Surgery",
+            "cited_by": 67
+          },
+          {
+            "id": "https://openalex.org/W561914075",
+            "title": "Management and control applications in Agriculture domain via a Future Internet Business-to-Business platform",
+            "published": 2015,
+            "venue": "Information Processing in Agriculture",
+            "cited_by": 48
+          },
+          {
+            "id": "https://openalex.org/W2475380493",
+            "title": "Pro Smartphone Cross-Platform Development",
+            "published": 2010,
+            "venue": "Apress eBooks",
+            "cited_by": 43
+          },
+          {
+            "id": "https://openalex.org/W2525815024",
+            "title": "Analysis of end\u2010to\u2010end multi\u2010domain management and orchestration frameworks for software defined infrastructures: an architectural survey",
+            "published": 2016,
+            "venue": "Transactions on Emerging Telecommunications Technologies",
+            "cited_by": 57
+          },
+          {
+            "id": "https://openalex.org/W4391724819",
+            "title": "UntrustIDE: Exploiting Weaknesses in VS Code Extensions",
+            "published": 2024,
+            "venue": null,
+            "cited_by": 7
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 feature store",
+      "arxiv": {
+        "query": "all:\"feature store\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2305.20077v1",
+            "title": "Managed Geo-Distributed Feature Store: Architecture and System Design",
+            "published": "2023-05-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2205.04267v2",
+            "title": "On Designing Data Models for Energy Feature Stores",
+            "published": "2022-05-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2108.05053v1",
+            "title": "Managing ML Pipelines: Feature Stores and the Coming Wave of Embedding Ecosystems",
+            "published": "2021-08-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2407.19078v1",
+            "title": "Practical Marketplace Optimization at Uber Using Causally-Informed Machine Learning",
+            "published": "2024-07-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2106.11756v5",
+            "title": "Trinity: A No-Code AI platform for complex spatial datasets",
+            "published": "2021-06-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2507.03789v2",
+            "title": "Efficient and Effective Query Context-Aware Learning-to-Rank Model for Sequential Recommendation",
+            "published": "2025-07-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.09759v2",
+            "title": "ReflectWorld-MM: An Entity-Oriented Multimodal Memory System for Open-Ended Video Streams",
+            "published": "2026-07-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.14331v1",
+            "title": "Long-History User Transformers for Real-Time Ad Ranking",
+            "published": "2026-07-15"
+          },
+          {
+            "id": "http://arxiv.org/abs/2405.05231v2",
+            "title": "DiskGNN: Bridging I/O Efficiency and Model Accuracy for Out-of-Core GNN Training",
+            "published": "2024-05-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2303.14617v1",
+            "title": "Neural Graph Reasoning: Complex Logical Query Answering Meets Graph Databases",
+            "published": "2023-03-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2508.15680v1",
+            "title": "Futurity as Infrastructure: A Techno-Philosophical Interpretation of the AI Lifecycle",
+            "published": "2025-08-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2203.09555v1",
+            "title": "On the expressive power of message-passing neural networks as global feature map transformers",
+            "published": "2022-03-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/2412.05179v1",
+            "title": "Spatially-Adaptive Hash Encodings For Neural Surface Reconstruction",
+            "published": "2024-12-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2212.02780v1",
+            "title": "Parameter Efficient Transfer Learning for Various Speech Processing Tasks",
+            "published": "2022-12-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2103.16054v1",
+            "title": "3D-MAN: 3D Multi-frame Attention Network for Object Detection",
+            "published": "2021-03-30"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "feature store versioned features machine learning",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 282158,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2112796928",
+            "title": "Gradient-based learning applied to document recognition",
+            "published": 1998,
+            "venue": "Proceedings of the IEEE",
+            "cited_by": 59396
+          },
+          {
+            "id": "https://openalex.org/W2040884411",
+            "title": "Selection of relevant features and examples in machine learning",
+            "published": 1997,
+            "venue": "Artificial Intelligence",
+            "cited_by": 3308
+          },
+          {
+            "id": "https://openalex.org/W2295598076",
+            "title": "XGBoost",
+            "published": 2016,
+            "venue": null,
+            "cited_by": 52019
+          },
+          {
+            "id": "https://openalex.org/W2884430236",
+            "title": "Machine learning for molecular and materials science",
+            "published": 2018,
+            "venue": "Nature",
+            "cited_by": 4817
+          },
+          {
+            "id": "https://openalex.org/W2970971581",
+            "title": "PyTorch: An Imperative Style, High-Performance Deep Learning Library",
+            "published": 2019,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 16167
+          },
+          {
+            "id": "https://openalex.org/W2592929672",
+            "title": "A survey on deep learning in medical image analysis",
+            "published": 2017,
+            "venue": "Medical Image Analysis",
+            "cited_by": 15057
+          },
+          {
+            "id": "https://openalex.org/W2107726111",
+            "title": "Reinforcement Learning: A Survey",
+            "published": 1996,
+            "venue": "Journal of Artificial Intelligence Research",
+            "cited_by": 8948
+          },
+          {
+            "id": "https://openalex.org/W4385245566",
+            "title": "Exploiting Generative AI to Scale up Intelligent Tutoring Systems",
+            "published": 2023,
+            "venue": "DROPS (Schloss Dagstuhl \u2013 Leibniz Center for Informatics)",
+            "cited_by": 79071
+          },
+          {
+            "id": "https://openalex.org/W2973119841",
+            "title": "Machine Learning for Fluid Mechanics",
+            "published": 2019,
+            "venue": "Annual Review of Fluid Mechanics",
+            "cited_by": 2783
+          },
+          {
+            "id": "https://openalex.org/W2998506103",
+            "title": "Applications of machine learning to machine fault diagnosis: A review and roadmap",
+            "published": 2020,
+            "venue": "Mechanical Systems and Signal Processing",
+            "cited_by": 2847
+          },
+          {
+            "id": "https://openalex.org/W2135194391",
+            "title": "An Introduction to MCMC for Machine Learning",
+            "published": 2003,
+            "venue": "Machine Learning",
+            "cited_by": 2430
+          },
+          {
+            "id": "https://openalex.org/W3200707343",
+            "title": "A guide to machine learning for biologists",
+            "published": 2021,
+            "venue": "Nature Reviews Molecular Cell Biology",
+            "cited_by": 2163
+          },
+          {
+            "id": "https://openalex.org/W2995022099",
+            "title": "Advances and Open Problems in Federated Learning",
+            "published": 2020,
+            "venue": "Foundations and Trends\u00ae in Machine Learning",
+            "cited_by": 5328
+          },
+          {
+            "id": "https://openalex.org/W2962727772",
+            "title": "Automatic differentiation in machine learning: a survey",
+            "published": 2017,
+            "venue": "Maynooth University ePrints and eTheses Archive (Maynooth University)",
+            "cited_by": 2094
+          },
+          {
+            "id": "https://openalex.org/W3140854437",
+            "title": "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions",
+            "published": 2021,
+            "venue": "Journal Of Big Data",
+            "cited_by": 7830
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 frozen backbone composition",
+      "arxiv": {
+        "query": "all:\"frozen\" AND all:\"backbone\" AND all:\"composition\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2608.09124v1",
+            "title": "ChronoState: Hidden Elapsed-Time Conditioning for Temporal-State Action Selection in Frozen-Backbone Language Models",
+            "published": "2026-08-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/2505.19075v3",
+            "title": "Universal Reasoner: A Single, Composable Plug-and-Play Reasoner for Frozen LLMs",
+            "published": "2025-05-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.14988v1",
+            "title": "Compositional Video Generation via Inference-Time Guidance",
+            "published": "2026-05-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.20674v1",
+            "title": "Modular Multimodal Classification Without Fine-Tuning: A Simple Compositional Approach",
+            "published": "2026-05-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.23271v1",
+            "title": "What CLIP Knows but Cannot Say: Recovering Negation from Frozen Intermediate Features",
+            "published": "2026-07-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.22521v1",
+            "title": "VISTA: Test-Time Compositional Alignment for Visual Autoregressive Generation",
+            "published": "2026-08-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2504.14994v1",
+            "title": "Learning Compositional Transferability of Time Series for Source-Free Domain Adaptation",
+            "published": "2025-04-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/2512.09172v2",
+            "title": "Prompt-Based Continual Compositional Zero-Shot Learning",
+            "published": "2025-12-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2604.03266v1",
+            "title": "Emergent Compositional Communication for Latent World Properties",
+            "published": "2026-03-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.04988v1",
+            "title": "InternVLA-A1.5: Unifying Understanding, Latent Foresight, and Action for Compositional Generalization",
+            "published": "2026-07-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.11710v2",
+            "title": "Unlocking Compositional Generalization in Continual Few-Shot Learning",
+            "published": "2026-05-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.10064v1",
+            "title": "MAGE: Multi-Agent Self-Evolution with Co-Evolutionary Knowledge Graphs",
+            "published": "2026-05-11"
+          },
+          {
+            "id": "http://arxiv.org/abs/2604.25314v1",
+            "title": "Golden RPG: Confidence-Adaptive Region-Aware Noise for Compositional Text-to-Image Generation",
+            "published": "2026-04-28"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.05207v1",
+            "title": "When Do Corrective Features Help? An Agent for Corrective Feature Discovery on Black-Box Forecasters",
+            "published": "2026-08-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.15765v2",
+            "title": "Learning to Orchestrate Vision Foundation Models for Multi-Task Dense Prediction",
+            "published": "2026-06-14"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "frozen backbone feature composition",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 27300,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2060789575",
+            "title": "Interplay among side chain sequence, backbone composition, and residue rigidification in polypeptide folding and assembly",
+            "published": 2008,
+            "venue": "Proceedings of the National Academy of Sciences",
+            "cited_by": 123
+          },
+          {
+            "id": "https://openalex.org/W2267190811",
+            "title": "Efficient backbone cyclization of linear peptides by a recombinant asparaginyl endopeptidase",
+            "published": 2015,
+            "venue": "Nature Communications",
+            "cited_by": 262
+          },
+          {
+            "id": "https://openalex.org/W2157599717",
+            "title": "Nanostructured materials: basic concepts and microstructure",
+            "published": 2000,
+            "venue": "Acta Materialia",
+            "cited_by": 3039
+          },
+          {
+            "id": "https://openalex.org/W2509954424",
+            "title": "Bioactivities of fish protein hydrolysates from defatted salmon backbones",
+            "published": 2016,
+            "venue": "Biotechnology Reports",
+            "cited_by": 145
+          },
+          {
+            "id": "https://openalex.org/W2295097024",
+            "title": "Using Raman spectroscopy to characterize biological materials",
+            "published": 2016,
+            "venue": "Nature Protocols",
+            "cited_by": 1275
+          },
+          {
+            "id": "https://openalex.org/W2158138282",
+            "title": "Charting molecular composition of phosphatidylcholines by fatty acid scanning and ion trap MS3 fragmentation",
+            "published": 2003,
+            "venue": "Journal of Lipid Research",
+            "cited_by": 315
+          },
+          {
+            "id": "https://openalex.org/W2051868840",
+            "title": "NEXAFS microscopy and resonant scattering: Composition and orientation probed in real and reciprocal space",
+            "published": 2007,
+            "venue": "Polymer",
+            "cited_by": 284
+          },
+          {
+            "id": "https://openalex.org/W1967005613",
+            "title": "On ultrahigh temperature crustal metamorphism: Phase equilibria, trace element thermometry, bulk composition, heat sources, timescales and tectonic settings",
+            "published": 2014,
+            "venue": "Geoscience Frontiers",
+            "cited_by": 439
+          },
+          {
+            "id": "https://openalex.org/W4309845474",
+            "title": "Squeeze-and-Excitation Networks",
+            "published": 2017,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 2259
+          },
+          {
+            "id": "https://openalex.org/W2141947008",
+            "title": "Emerging applications of stimuli-responsive polymer materials",
+            "published": 2010,
+            "venue": "Nature Materials",
+            "cited_by": 5693
+          },
+          {
+            "id": "https://openalex.org/W2164519838",
+            "title": "Acyl-Lipid Metabolism",
+            "published": 2013,
+            "venue": "The Arabidopsis Book",
+            "cited_by": 1555
+          },
+          {
+            "id": "https://openalex.org/W201863201",
+            "title": "Matrix vesicles: structure, composition, formation and function in calcification",
+            "published": 2011,
+            "venue": "Frontiers in bioscience",
+            "cited_by": 195
+          },
+          {
+            "id": "https://openalex.org/W3035060554",
+            "title": "Bootstrap your own latent: A new approach to self-supervised Learning",
+            "published": 2020,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 3447
+          },
+          {
+            "id": "https://openalex.org/W2082749931",
+            "title": "Comparative Transcriptome Analysis of Three Oil Palm Fruit and Seed Tissues That Differ in Oil Content and Fatty Acid Composition",
+            "published": 2013,
+            "venue": "PLANT PHYSIOLOGY",
+            "cited_by": 304
+          },
+          {
+            "id": "https://openalex.org/W2890828666",
+            "title": "Spatial heterogeneity as the structure feature for structure\u2013property relationship of metallic glasses",
+            "published": 2018,
+            "venue": "Nature Communications",
+            "cited_by": 191
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 representation composition",
+      "arxiv": {
+        "query": "all:\"representation\" AND all:\"composition\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2606.06182v2",
+            "title": "Slice Regular Composition Operators on Quaternionic Fock Spaces via Matrix Realization",
+            "published": "2026-06-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/1602.07065v3",
+            "title": "Composition, Cooperation, and Coordination of Computational Systems",
+            "published": "2016-02-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/math/0408120v2",
+            "title": "Representation theory of 2-groups on finite dimensional 2-vector spaces",
+            "published": "2004-08-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/math/0604368v1",
+            "title": "Composition Factors of Polynomial Representation of DAHA and Crystallized Decomposition Numbers",
+            "published": "2006-04-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/1908.03818v5",
+            "title": "Composition series of a class of induced representations built on discrete series",
+            "published": "2019-08-10"
+          },
+          {
+            "id": "http://arxiv.org/abs/1912.09427v1",
+            "title": "Composition factors of 2-parts spin representations of symmetric groups",
+            "published": "2019-12-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/1504.04157v2",
+            "title": "On the $\\ell$-modular composition factors of the Steinberg representation",
+            "published": "2015-04-16"
+          },
+          {
+            "id": "http://arxiv.org/abs/2010.03763v2",
+            "title": "Assessing Phrasal Representation and Composition in Transformers",
+            "published": "2020-10-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.02993v2",
+            "title": "Neural Networks Provably Learn Spectral Representations for Group Composition",
+            "published": "2026-06-02"
+          },
+          {
+            "id": "http://arxiv.org/abs/1612.06130v1",
+            "title": "Redundant Representation of Operators",
+            "published": "2016-12-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2101.03287v1",
+            "title": "Unifying Relational Sentence Generation and Retrieval for Medical Image Report Composition",
+            "published": "2021-01-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2312.13289v2",
+            "title": "Compositional Representation of Polymorphic Crystalline Materials",
+            "published": "2023-11-17"
+          },
+          {
+            "id": "http://arxiv.org/abs/1407.1243v2",
+            "title": "Complete representation by partial functions for composition, intersection and antidomain",
+            "published": "2014-07-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/1503.02627v2",
+            "title": "The finite representation property for composition, intersection, domain and range",
+            "published": "2015-03-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/0901.3179v3",
+            "title": "A matrix representation of composition of polynomial maps",
+            "published": "2009-01-21"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "representation composition frozen encoders",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 57247,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4318718936",
+            "title": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+            "published": 2023,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 923
+          },
+          {
+            "id": "https://openalex.org/W2125826054",
+            "title": "A human gut microbial gene catalogue established by metagenomic sequencing",
+            "published": 2010,
+            "venue": "Nature",
+            "cited_by": 11822
+          },
+          {
+            "id": "https://openalex.org/W2169123078",
+            "title": "Proanthocyanidin Synthesis and Expression of Genes Encoding Leucoanthocyanidin Reductase and Anthocyanidin Reductase in Developing Grape Berries and Grapevine Leaves",
+            "published": 2005,
+            "venue": "PLANT PHYSIOLOGY",
+            "cited_by": 541
+          },
+          {
+            "id": "https://openalex.org/W4401306886",
+            "title": "Enriching Location Representation with Detailed Semantic Information",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 440
+          },
+          {
+            "id": "https://openalex.org/W3013691153",
+            "title": "Machine translation of cortical activity to text with an encoder\u2013decoder framework",
+            "published": 2020,
+            "venue": "Nature Neuroscience",
+            "cited_by": 330
+          },
+          {
+            "id": "https://openalex.org/W3035060554",
+            "title": "Bootstrap your own latent: A new approach to self-supervised Learning",
+            "published": 2020,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 3447
+          },
+          {
+            "id": "https://openalex.org/W3207924272",
+            "title": "Self-Supervised Representation Learning: Introduction, advances, and challenges",
+            "published": 2022,
+            "venue": "IEEE Signal Processing Magazine",
+            "cited_by": 428
+          },
+          {
+            "id": "https://openalex.org/W1940378630",
+            "title": "Molecular composition of the adenovirus type 2 virion",
+            "published": 1985,
+            "venue": "Journal of Virology",
+            "cited_by": 295
+          },
+          {
+            "id": "https://openalex.org/W4404784276",
+            "title": "Video-LLaVA: Learning United Visual Representation by Alignment Before Projection",
+            "published": 2024,
+            "venue": null,
+            "cited_by": 310
+          },
+          {
+            "id": "https://openalex.org/W2144709865",
+            "title": "Polymicrobial Nature of Chronic Diabetic Foot Ulcer Biofilm Infections Determined Using Bacterial Tag Encoded FLX Amplicon Pyrosequencing (bTEFAP)",
+            "published": 2008,
+            "venue": "PLoS ONE",
+            "cited_by": 562
+          },
+          {
+            "id": "https://openalex.org/W1512875938",
+            "title": "Congenital leptin deficiency is associated with severe early-onset obesity in humans",
+            "published": 1997,
+            "venue": "Nature",
+            "cited_by": 2953
+          },
+          {
+            "id": "https://openalex.org/W2017728221",
+            "title": "Structure and composition of the Shigella flexneri\u2018needle complex\u2019, a part of its type III secreton",
+            "published": 2001,
+            "venue": "Molecular Microbiology",
+            "cited_by": 341
+          },
+          {
+            "id": "https://openalex.org/W4365129631",
+            "title": "A Survey of Text Representation and Embedding Techniques in NLP",
+            "published": 2023,
+            "venue": "IEEE Access",
+            "cited_by": 193
+          },
+          {
+            "id": "https://openalex.org/W2898700502",
+            "title": "Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 258
+          },
+          {
+            "id": "https://openalex.org/W3205717164",
+            "title": "SPoT: Better Frozen Model Adaptation through Soft Prompt Transfer",
+            "published": 2022,
+            "venue": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+            "cited_by": 176
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 modular ML economy",
+      "arxiv": {
+        "query": "all:\"modular\" AND all:\"machine learning\" AND all:\"economy\"",
+        "status": 200,
+        "n_hits": 8,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2007.02382v2",
+            "title": "Decentralized Reinforcement Learning: Global Decision-Making via Local Economic Transactions",
+            "published": "2020-07-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.26417v1",
+            "title": "OntoAligner Meets Knowledge Graph Embedding Aligners",
+            "published": "2025-09-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2004.14593v2",
+            "title": "A Triangular Network For Density Estimation",
+            "published": "2020-04-30"
+          },
+          {
+            "id": "http://arxiv.org/abs/2503.15968v1",
+            "title": "Digital Asset Data Lakehouse. The concept based on a blockchain research center",
+            "published": "2025-03-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2511.15342v1",
+            "title": "Reflexive Evidence-Based Multimodal Learning for Clean Energy Transitions: Causal Insights on Cooking Fuel Access, Urbanization, and Carbon Emissions",
+            "published": "2025-11-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/2604.13079v1",
+            "title": "Alignment as Institutional Design: From Behavioral Correction to Transaction Structure in Intelligent Systems",
+            "published": "2026-03-23"
+          },
+          {
+            "id": "http://arxiv.org/abs/2411.01042v2",
+            "title": "Introduction to AI Safety, Ethics, and Society",
+            "published": "2024-11-01"
+          },
+          {
+            "id": "http://arxiv.org/abs/2305.17066v2",
+            "title": "Mindstorms in Natural Language-Based Societies of Mind",
+            "published": "2023-05-26"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "modular machine learning economy paying contributors",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 4294,
+        "hits": [
+          {
+            "id": "https://openalex.org/W4220862305",
+            "title": "Machine-Learning-Based Disease Diagnosis: A Comprehensive Review",
+            "published": 2022,
+            "venue": "Healthcare",
+            "cited_by": 580
+          },
+          {
+            "id": "https://openalex.org/W2264050319",
+            "title": "Designing the Business Models for Circular Economy\u2014Towards the Conceptual Framework",
+            "published": 2016,
+            "venue": "Sustainability",
+            "cited_by": 1586
+          },
+          {
+            "id": "https://openalex.org/W2800663167",
+            "title": "Profiting from innovation in the digital economy: Enabling technologies, standards, and licensing models in the wireless world",
+            "published": 2018,
+            "venue": "Research Policy",
+            "cited_by": 1738
+          },
+          {
+            "id": "https://openalex.org/W4283836036",
+            "title": "Closed-loop systems to circular economy: A pathway to environmental sustainability?",
+            "published": 2022,
+            "venue": "CIRP Annals",
+            "cited_by": 300
+          },
+          {
+            "id": "https://openalex.org/W4241576146",
+            "title": "Organizations and Markets",
+            "published": 1991,
+            "venue": "The Journal of Economic Perspectives",
+            "cited_by": 1207
+          },
+          {
+            "id": "https://openalex.org/W2895341783",
+            "title": "The consumer production journey: marketing to consumers as co-producers in the sharing economy",
+            "published": 2018,
+            "venue": "RePub (Erasmus University Rotterdam)",
+            "cited_by": 216
+          },
+          {
+            "id": "https://openalex.org/W4397049712",
+            "title": "Smart product platforming powered by AI and generative AI: Personalization for the circular economy",
+            "published": 2024,
+            "venue": "International Journal of Production Economics",
+            "cited_by": 122
+          },
+          {
+            "id": "https://openalex.org/W4288076018",
+            "title": "Modular Politics",
+            "published": 2021,
+            "venue": "Proceedings of the ACM on Human-Computer Interaction",
+            "cited_by": 60
+          },
+          {
+            "id": "https://openalex.org/W2601403231",
+            "title": "The Political Economy of Clean Energy Transitions",
+            "published": 2017,
+            "venue": null,
+            "cited_by": 143
+          },
+          {
+            "id": "https://openalex.org/W4388558401",
+            "title": "A literature review of fault diagnosis based on ensemble learning",
+            "published": 2023,
+            "venue": "Engineering Applications of Artificial Intelligence",
+            "cited_by": 169
+          },
+          {
+            "id": "https://openalex.org/W2914018308",
+            "title": "Building a business case for implementation of a circular economy in higher education institutions",
+            "published": 2019,
+            "venue": "Journal of Cleaner Production",
+            "cited_by": 135
+          },
+          {
+            "id": "https://openalex.org/W3164453600",
+            "title": "2021 EDUCAUSE Horizon Report: Teaching and Learning Edition",
+            "published": 2021,
+            "venue": "Biblioth\u00e8que et Archives nationales du Qu\u00e9bec (Qu\u00e9bec government)",
+            "cited_by": 194
+          },
+          {
+            "id": "https://openalex.org/W4407338085",
+            "title": "Emerging Applications of Machine Learning in 3D Printing",
+            "published": 2025,
+            "venue": "Applied Sciences",
+            "cited_by": 36
+          },
+          {
+            "id": "https://openalex.org/W4392507534",
+            "title": "A Review on Machine/Deep Learning Techniques Applied to Building Energy Simulation, Optimization and Management",
+            "published": 2024,
+            "venue": "Thermo",
+            "cited_by": 60
+          },
+          {
+            "id": "https://openalex.org/W4317735680",
+            "title": "Exploring How Digital Technologies Enable a Circular Economy of Products",
+            "published": 2023,
+            "venue": "Sustainability",
+            "cited_by": 107
+          }
+        ]
+      }
+    },
+    {
+      "label": "s2 random features",
+      "arxiv": {
+        "query": "all:\"random features\" AND all:\"kernel\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/1909.11820v3",
+            "title": "A Mean-Field Theory for Kernel Alignment with Random Features in Generative and Discriminative Models",
+            "published": "2019-09-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2010.08270v1",
+            "title": "Fast Graph Kernel with Optical Random Features",
+            "published": "2020-10-16"
+          },
+          {
+            "id": "http://arxiv.org/abs/2408.13591v2",
+            "title": "Optimal Kernel Quantile Learning with Random Features",
+            "published": "2024-08-24"
+          },
+          {
+            "id": "http://arxiv.org/abs/1703.07872v1",
+            "title": "Random Features for Compositional Kernels",
+            "published": "2017-03-22"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.04127v1",
+            "title": "Data-Aware Random Feature Kernel for Transformers",
+            "published": "2026-03-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/2104.01351v1",
+            "title": "Random Features for the Neural Tangent Kernel",
+            "published": "2021-04-03"
+          },
+          {
+            "id": "http://arxiv.org/abs/2101.10588v1",
+            "title": "Generalization error of random features and kernel methods: hypercontractivity and kernel matrix concentration",
+            "published": "2021-01-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2201.08712v4",
+            "title": "Improved Random Features for Dot Product Kernels",
+            "published": "2022-01-21"
+          },
+          {
+            "id": "http://arxiv.org/abs/1804.07169v2",
+            "title": "Large-scale Nonlinear Variable Selection via Kernel Random Features",
+            "published": "2018-04-19"
+          },
+          {
+            "id": "http://arxiv.org/abs/1801.02690v1",
+            "title": "DCASE 2017 Task 1: Acoustic Scene Classification Using Shift-Invariant Kernels and Random Features",
+            "published": "2018-01-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2305.00156v1",
+            "title": "Taming graph kernels with random features",
+            "published": "2023-04-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2608.04227v1",
+            "title": "Random features for Grassmannian kernel approximation with bounded rank-one projections",
+            "published": "2026-08-04"
+          },
+          {
+            "id": "http://arxiv.org/abs/1810.04249v2",
+            "title": "Data-dependent compression of random features for large-scale kernel approximation",
+            "published": "2018-10-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2302.00787v1",
+            "title": "FAVOR#: Sharp Attention Kernel Approximations via New Classes of Positive Random Features",
+            "published": "2023-02-01"
+          },
+          {
+            "id": "http://arxiv.org/abs/2404.07703v2",
+            "title": "Learning Hamiltonian Dynamics with Reproducing Kernel Hilbert Spaces and Random Features",
+            "published": "2024-04-11"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "random features kernel approximation",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 169103,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3183420805",
+            "title": "Random Features for Kernel Approximation: A Survey on Algorithms, Theory, and Beyond",
+            "published": 2021,
+            "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+            "cited_by": 121
+          },
+          {
+            "id": "https://openalex.org/W2056132907",
+            "title": "Extremely randomized trees",
+            "published": 2006,
+            "venue": "Machine Learning",
+            "cited_by": 9031
+          },
+          {
+            "id": "https://openalex.org/W2963459001",
+            "title": "Random Fourier Features for Kernel Ridge Regression: Approximation Bounds and Statistical Guarantees",
+            "published": 2017,
+            "venue": "International Conference on Machine Learning",
+            "cited_by": 66
+          },
+          {
+            "id": "https://openalex.org/W2212660284",
+            "title": "A kernel two-sample test",
+            "published": 2012,
+            "venue": "MPG.PuRe (Max Planck Society)",
+            "cited_by": 2224
+          },
+          {
+            "id": "https://openalex.org/W2216946510",
+            "title": "A random forest guided tour",
+            "published": 2016,
+            "venue": "Test",
+            "cited_by": 4015
+          },
+          {
+            "id": "https://openalex.org/W2168029744",
+            "title": "Kernel methods in machine learning",
+            "published": 2008,
+            "venue": "The Annals of Statistics",
+            "cited_by": 1616
+          },
+          {
+            "id": "https://openalex.org/W2741292535",
+            "title": "Random Fourier Features for Kernel Ridge Regression: Approximation Bounds and Statistical Guarantees",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 27
+          },
+          {
+            "id": "https://openalex.org/W2809090039",
+            "title": "Neural Tangent Kernel: Convergence and Generalization in Neural Networks",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 1489
+          },
+          {
+            "id": "https://openalex.org/W2064013109",
+            "title": "Ridge Regression and Other Kernels for Genomic Selection with R Package rrBLUP",
+            "published": 2011,
+            "venue": "The Plant Genome",
+            "cited_by": 2272
+          },
+          {
+            "id": "https://openalex.org/W2163605009",
+            "title": "ImageNet classification with deep convolutional neural networks",
+            "published": 2017,
+            "venue": "Communications of the ACM",
+            "cited_by": 75665
+          },
+          {
+            "id": "https://openalex.org/W2017231317",
+            "title": "A point collocation method based on reproducing kernel approximations",
+            "published": 2000,
+            "venue": "International Journal for Numerical Methods in Engineering",
+            "cited_by": 247
+          },
+          {
+            "id": "https://openalex.org/W3019297623",
+            "title": "Random Features for Kernel Approximation: A Survey on Algorithms, Theory, and Beyond",
+            "published": 2020,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 20
+          },
+          {
+            "id": "https://openalex.org/W2901857397",
+            "title": "SVM-RFE: selection and visualization of the most relevant features through non-linear kernels",
+            "published": 2018,
+            "venue": "BMC Bioinformatics",
+            "cited_by": 826
+          },
+          {
+            "id": "https://openalex.org/W2898071315",
+            "title": "Data-dependent compression of random features for large-scale kernel approximation",
+            "published": 2018,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 13
+          },
+          {
+            "id": "https://openalex.org/W2112796928",
+            "title": "Gradient-based learning applied to document recognition",
+            "published": 1998,
+            "venue": "Proceedings of the IEEE",
+            "cited_by": 59396
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR liveness 1: AdapterHub (title)",
+      "arxiv": {
+        "query": "all:\"AdapterHub\"",
+        "status": 200,
+        "n_hits": 3,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2007.07779v3",
+            "title": "AdapterHub: A Framework for Adapting Transformers",
+            "published": "2020-07-15"
+          },
+          {
+            "id": "http://arxiv.org/abs/2108.08103v3",
+            "title": "AdapterHub Playground: Simple and Flexible Few-Shot Learning with Adapters",
+            "published": "2021-08-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.14126v2",
+            "title": "From Memorization to Parameter Interference: How Overtraining Experts Harms Model Merging",
+            "published": "2025-06-17"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "AdapterHub framework adapting transformers",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 783,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3042667808",
+            "title": "AdapterHub: A Framework for Adapting Transformers",
+            "published": 2020,
+            "venue": null,
+            "cited_by": 3
+          },
+          {
+            "id": "https://openalex.org/W4282005462",
+            "title": "AdaptFormer: Adapting Vision Transformers for Scalable Visual Recognition",
+            "published": 2022,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 262
+          },
+          {
+            "id": "https://openalex.org/W4287890953",
+            "title": "Lifting the Curse of Multilinguality by Pre-training Modular Transformers",
+            "published": 2022,
+            "venue": "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+            "cited_by": 63
+          },
+          {
+            "id": "https://openalex.org/W4322766882",
+            "title": "Parameter-efficient fine-tuning of large-scale pre-trained language models",
+            "published": 2023,
+            "venue": "Nature Machine Intelligence",
+            "cited_by": 1000
+          },
+          {
+            "id": "https://openalex.org/W3193376978",
+            "title": "AdapterHub Playground: Simple and Flexible Few-Shot Learning with Adapters",
+            "published": 2022,
+            "venue": null,
+            "cited_by": 8
+          },
+          {
+            "id": "https://openalex.org/W3206816211",
+            "title": "UniPELT: A Unified Framework for Parameter-Efficient Language Model Tuning",
+            "published": 2022,
+            "venue": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+            "cited_by": 83
+          },
+          {
+            "id": "https://openalex.org/W4382246105",
+            "title": "Recent Advances in Natural Language Processing via Large Pre-trained Language Models: A Survey",
+            "published": 2023,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 1261
+          },
+          {
+            "id": "https://openalex.org/W4285266752",
+            "title": "Shared Temporal Attention Transformer for Remaining Useful Lifetime Estimation",
+            "published": 2022,
+            "venue": "IEEE Access",
+            "cited_by": 31
+          },
+          {
+            "id": "https://openalex.org/W3094491777",
+            "title": "AdapterDrop: On the Efficiency of Adapters in Transformers",
+            "published": 2021,
+            "venue": "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+            "cited_by": 19
+          },
+          {
+            "id": "https://openalex.org/W3167473228",
+            "title": "Parameter-efficient Multi-task Fine-tuning for Transformers via Shared Hypernetworks",
+            "published": 2021,
+            "venue": null,
+            "cited_by": 20
+          },
+          {
+            "id": "https://openalex.org/W4221154626",
+            "title": "Memory Efficient Continual Learning with Transformers",
+            "published": 2022,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 12
+          },
+          {
+            "id": "https://openalex.org/W4221144388",
+            "title": "Continual Sequence Generation with Adaptive Compositional Modules",
+            "published": 2022,
+            "venue": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+            "cited_by": 19
+          },
+          {
+            "id": "https://openalex.org/W3023911605",
+            "title": "MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer",
+            "published": 2020,
+            "venue": null,
+            "cited_by": 36
+          },
+          {
+            "id": "https://openalex.org/W4294955582",
+            "title": "How to Dissect a Muppet: The Structure of Transformer Embedding Spaces",
+            "published": 2022,
+            "venue": "Transactions of the Association for Computational Linguistics",
+            "cited_by": 13
+          },
+          {
+            "id": "https://openalex.org/W4393942911",
+            "title": "IISAN: Efficiently Adapting Multimodal Representation for Sequential Recommendation with Decoupled PEFT",
+            "published": 2024,
+            "venue": null,
+            "cited_by": 36
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR liveness 2: Bittensor (title)",
+      "arxiv": {
+        "query": "all:\"Bittensor\"",
+        "status": 200,
+        "n_hits": 11,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2507.02951v1",
+            "title": "Bittensor Protocol: The Bitcoin in Decentralized Artificial Intelligence? A Critical and Empirical Analysis",
+            "published": "2025-06-29"
+          },
+          {
+            "id": "http://arxiv.org/abs/2606.10064v1",
+            "title": "Bittensor Agent Arenas as a Trajectory Primitive: Distilling a Shopping Agent from ShoppingBench Subnet Traces",
+            "published": "2026-06-08"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.29751v1",
+            "title": "Common Risk Factors in Decentralized AI Subnets",
+            "published": "2026-03-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2605.05878v1",
+            "title": "Agentic, Context-Aware Risk Intelligence in the Internet of Value",
+            "published": "2026-05-07"
+          },
+          {
+            "id": "http://arxiv.org/abs/2506.07940v2",
+            "title": "Gradients: When Markets Meet Fine-tuning -- A Distributed Approach to Model Optimisation",
+            "published": "2025-06-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2603.29763v1",
+            "title": "Option Pricing on Automated Market Maker Tokens",
+            "published": "2026-03-31"
+          },
+          {
+            "id": "http://arxiv.org/abs/2505.21684v1",
+            "title": "Incentivizing Permissionless Distributed Learning of LLMs",
+            "published": "2025-05-27"
+          },
+          {
+            "id": "http://arxiv.org/abs/2003.03917v3",
+            "title": "BitTensor: A Peer-to-Peer Intelligence Market",
+            "published": "2020-03-09"
+          },
+          {
+            "id": "http://arxiv.org/abs/2309.11568v1",
+            "title": "BTLM-3B-8K: 7B Parameter Performance in a 3B Parameter Model",
+            "published": "2023-09-20"
+          },
+          {
+            "id": "http://arxiv.org/abs/2607.13234v1",
+            "title": "Continuously Evolving Deepfake Detection: An Architecture and Public-Benchmark Evaluation of a Dynamic Detection System",
+            "published": "2026-07-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2507.17766v1",
+            "title": "Incentivised Orchestrated Training Architecture (IOTA): A Technical Primer for Release",
+            "published": "2025-07-16"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "Bittensor peer-to-peer intelligence market",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 40,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3134775366",
+            "title": "BitTensor: A Peer-to-Peer Intelligence Market",
+            "published": 2020,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 5
+          },
+          {
+            "id": "https://openalex.org/W4401910307",
+            "title": "Blockchain-Enabled Decentralized Ai Ecosystems: A Conceptual Framework and Bittensor Case Study",
+            "published": 2024,
+            "venue": "SSRN Electronic Journal",
+            "cited_by": 1
+          },
+          {
+            "id": "https://openalex.org/W4391621585",
+            "title": "A Review on Building Blocks of Decentralized Artificial Intelligence",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 8
+          },
+          {
+            "id": "https://openalex.org/W4398795403",
+            "title": "Blockchain and Artificial Intelligence: Synergies and Conflicts",
+            "published": 2025,
+            "venue": "Adaptation, learning, and optimization",
+            "cited_by": 1
+          },
+          {
+            "id": "https://openalex.org/W4385291636",
+            "title": "SoK: Design, Vulnerabilities, and Security Measures of Cryptocurrency Wallets",
+            "published": 2023,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 9
+          },
+          {
+            "id": "https://openalex.org/W4404988782",
+            "title": "SoK: Blockchain-Based Decentralized AI (DeAI)",
+            "published": 2024,
+            "venue": "Research Explorer (The University of Manchester)",
+            "cited_by": 2
+          },
+          {
+            "id": "https://openalex.org/W4410144650",
+            "title": "AI-Based Crypto Tokens: The Illusion of Decentralized AI?",
+            "published": 2025,
+            "venue": null,
+            "cited_by": 2
+          },
+          {
+            "id": "https://openalex.org/W7164447010",
+            "title": "Bittensor Agent Arenas as a Trajectory Primitive: Distilling a Shopping Agent from ShoppingBench Subnet Traces",
+            "published": 2026,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W7160727196",
+            "title": "Agentic, Context-Aware Risk Intelligence in the Internet of Value",
+            "published": 2026,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W4392490386",
+            "title": "BasedAI: A decentralized P2P network for Zero Knowledge Large Language Models (ZK-LLMs)",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 1
+          },
+          {
+            "id": "https://openalex.org/W7148178972",
+            "title": "Common Risk Factors in Decentralized AI Subnets",
+            "published": 2026,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W7161091202",
+            "title": "SoK: A Systematic Bidirectional Literature Review of AI & DLT Convergence",
+            "published": 2026,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W4413965740",
+            "title": "The architecture of blockchain value: capabilities, pillars, and growth dynamics",
+            "published": 2026,
+            "venue": "Frontiers in Blockchain",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W7119246735",
+            "title": "BEDS: Bayesian Emergent Dissipative Structures: A Formal Framework for Sustainable Digital Twins and Continual Learning Systems",
+            "published": 2026,
+            "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+            "cited_by": 0
+          },
+          {
+            "id": "https://openalex.org/W4404573296",
+            "title": "Resonance: Transaction Fees for Heterogeneous Computation",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 0
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR sensitivity: blockchain ML network (no title)",
+      "arxiv": {
+        "query": "all:\"blockchain\" AND all:\"machine learning\" AND all:\"network\"",
+        "status": 200,
+        "n_hits": 15,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/1909.03848v1",
+            "title": "Distributed creation of Machine learning agents for Blockchain analysis",
+            "published": "2019-09-06"
+          },
+          {
+            "id": "http://arxiv.org/abs/2001.09011v1",
+            "title": "Ownership preserving AI Market Places using Blockchain",
+            "published": "2020-01-18"
+          },
+          {
+            "id": "http://arxiv.org/abs/2104.06559v1",
+            "title": "Identity Inference on Blockchain using Graph Neural Network",
+            "published": "2021-04-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2411.02709v1",
+            "title": "Carbon price fluctuation prediction using blockchain information A new hybrid machine learning approach",
+            "published": "2024-11-05"
+          },
+          {
+            "id": "http://arxiv.org/abs/1911.11592v1",
+            "title": "Transaction Confirmation Time Prediction in Ethereum Blockchain Using Machine Learning",
+            "published": "2019-11-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2307.07066v2",
+            "title": "Can Blockchains Reliably Train Machine Learning Models?",
+            "published": "2023-07-13"
+          },
+          {
+            "id": "http://arxiv.org/abs/2303.14241v2",
+            "title": "Data Depth and Core-based Trend Detection on Blockchain Transaction Networks",
+            "published": "2023-03-24"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.10291v1",
+            "title": "Proof of AutoML: SDN based Secure Energy Trading with Blockchain in Disaster Case",
+            "published": "2025-09-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2411.16277v1",
+            "title": "FinML-Chain: A Blockchain-Integrated Dataset for Enhanced Financial Machine Learning",
+            "published": "2024-11-25"
+          },
+          {
+            "id": "http://arxiv.org/abs/2505.09313v1",
+            "title": "Detecting Sybil Addresses in Blockchain Airdrops: A Subgraph-based Feature Propagation and Fusion Approach",
+            "published": "2025-05-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/1910.06560v1",
+            "title": "Cascading Machine Learning to Attack Bitcoin Anonymity",
+            "published": "2019-10-15"
+          },
+          {
+            "id": "http://arxiv.org/abs/2509.23101v1",
+            "title": "Towards Quantum-Ready Blockchain Fraud Detection via Ensemble Graph Neural Networks",
+            "published": "2025-09-27"
+          },
+          {
+            "id": "http://arxiv.org/abs/2505.01196v1",
+            "title": "A Secured Triad of IoT, Machine Learning, and Blockchain for Crop Forecasting in Agriculture",
+            "published": "2025-05-02"
+          },
+          {
+            "id": "http://arxiv.org/abs/2001.03937v1",
+            "title": "Simulated Blockchains for Machine Learning Traceability and Transaction Values in the Monero Network",
+            "published": "2020-01-12"
+          },
+          {
+            "id": "http://arxiv.org/abs/2403.06129v1",
+            "title": "Blockchain-Enabled Variational Information Bottleneck for IoT Networks",
+            "published": "2024-03-10"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "blockchain machine learning network incentive",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 34403,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2995022099",
+            "title": "Advances and Open Problems in Federated Learning",
+            "published": 2020,
+            "venue": "Foundations and Trends\u00ae in Machine Learning",
+            "cited_by": 5328
+          },
+          {
+            "id": "https://openalex.org/W2899357412",
+            "title": "Blockchain technology in the energy sector: A systematic review of challenges and opportunities",
+            "published": 2018,
+            "venue": "Renewable and Sustainable Energy Reviews",
+            "cited_by": 2425
+          },
+          {
+            "id": "https://openalex.org/W2527800909",
+            "title": "Where Is Current Research on Blockchain Technology?\u2014A Systematic Review",
+            "published": 2016,
+            "venue": "PLoS ONE",
+            "cited_by": 2327
+          },
+          {
+            "id": "https://openalex.org/W2905867785",
+            "title": "A Survey on Consensus Mechanisms and Mining Strategy Management in Blockchain Networks",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 1011
+          },
+          {
+            "id": "https://openalex.org/W2803371618",
+            "title": "On blockchain and its integration with IoT. Challenges and opportunities",
+            "published": 2018,
+            "venue": "Future Generation Computer Systems",
+            "cited_by": 1909
+          },
+          {
+            "id": "https://openalex.org/W2901598045",
+            "title": "A systematic literature review of blockchain-based applications: Current status, classification and open issues",
+            "published": 2018,
+            "venue": "Telematics and Informatics",
+            "cited_by": 2518
+          },
+          {
+            "id": "https://openalex.org/W2907683311",
+            "title": "Blockchain for AI: Review and Open Research Challenges",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 1008
+          },
+          {
+            "id": "https://openalex.org/W2921980263",
+            "title": "Security and Privacy on Blockchain",
+            "published": 2019,
+            "venue": "ACM Computing Surveys",
+            "cited_by": 895
+          },
+          {
+            "id": "https://openalex.org/W2751179194",
+            "title": "Blockchain distributed ledger technologies for biomedical and health care applications",
+            "published": 2017,
+            "venue": "Journal of the American Medical Informatics Association",
+            "cited_by": 1367
+          },
+          {
+            "id": "https://openalex.org/W2904351506",
+            "title": "Applications of Blockchains in the Internet of Things: A Comprehensive Survey",
+            "published": 2018,
+            "venue": "IEEE Communications Surveys & Tutorials",
+            "cited_by": 860
+          },
+          {
+            "id": "https://openalex.org/W3031802354",
+            "title": "Blockchain for 5G and beyond networks: A state of the art survey",
+            "published": 2020,
+            "venue": "Journal of Network and Computer Applications",
+            "cited_by": 428
+          },
+          {
+            "id": "https://openalex.org/W3015515533",
+            "title": "Hierarchical Incentive Mechanism Design for Federated Machine Learning in Mobile Networks",
+            "published": 2020,
+            "venue": "IEEE Internet of Things Journal",
+            "cited_by": 232
+          },
+          {
+            "id": "https://openalex.org/W2923916638",
+            "title": "Blockchain technology: implications for operations and supply chain management",
+            "published": 2019,
+            "venue": "Supply Chain Management An International Journal",
+            "cited_by": 956
+          },
+          {
+            "id": "https://openalex.org/W2954103930",
+            "title": "Proof-of-Stake Consensus Mechanisms for Future Blockchain Networks: Fundamentals, Applications and Opportunities",
+            "published": 2019,
+            "venue": "IEEE Access",
+            "cited_by": 537
+          },
+          {
+            "id": "https://openalex.org/W3152617045",
+            "title": "Blockchain smart contracts: Applications, challenges, and future trends",
+            "published": 2021,
+            "venue": "Peer-to-Peer Networking and Applications",
+            "cited_by": 835
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR coverage 1: Rahimi & Recht (arXiv must MISS)",
+      "arxiv": {
+        "query": "all:\"Random Features for Large-Scale Kernel Machines\"",
+        "status": 200,
+        "n_hits": 1,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2307.11925v3",
+            "title": "Mercer Large-Scale Kernel Machines from Ridge Function Perspective",
+            "published": "2023-07-21"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "Random Features for Large-Scale Kernel Machines",
+        "status": 200,
+        "n_hits": 15,
+        "corpus_matches": 345552,
+        "hits": [
+          {
+            "id": "https://openalex.org/W2144902422",
+            "title": "Random Features for Large-Scale Kernel Machines",
+            "published": 2007,
+            "venue": null,
+            "cited_by": 2645
+          },
+          {
+            "id": "https://openalex.org/W4385245566",
+            "title": "Exploiting Generative AI to Scale up Intelligent Tutoring Systems",
+            "published": 2023,
+            "venue": "DROPS (Schloss Dagstuhl \u2013 Leibniz Center for Informatics)",
+            "cited_by": 79071
+          },
+          {
+            "id": "https://openalex.org/W3163993681",
+            "title": "Physics-informed machine learning",
+            "published": 2021,
+            "venue": "Nature Reviews Physics",
+            "cited_by": 7589
+          },
+          {
+            "id": "https://openalex.org/W2056132907",
+            "title": "Extremely randomized trees",
+            "published": 2006,
+            "venue": "Machine Learning",
+            "cited_by": 9031
+          },
+          {
+            "id": "https://openalex.org/W1966078827",
+            "title": "GROMACS 4: Algorithms for Highly Efficient, Load-Balanced, and Scalable Molecular Simulation",
+            "published": 2008,
+            "venue": "Journal of Chemical Theory and Computation",
+            "cited_by": 16139
+          },
+          {
+            "id": "https://openalex.org/W2168029744",
+            "title": "Kernel methods in machine learning",
+            "published": 2008,
+            "venue": "The Annals of Statistics",
+            "cited_by": 1616
+          },
+          {
+            "id": "https://openalex.org/W3201073812",
+            "title": "LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales",
+            "published": 2021,
+            "venue": "Computer Physics Communications",
+            "cited_by": 12268
+          },
+          {
+            "id": "https://openalex.org/W2163605009",
+            "title": "ImageNet classification with deep convolutional neural networks",
+            "published": 2017,
+            "venue": "Communications of the ACM",
+            "cited_by": 75665
+          },
+          {
+            "id": "https://openalex.org/W2559394418",
+            "title": "Quantum machine learning",
+            "published": 2017,
+            "venue": "Nature",
+            "cited_by": 4704
+          },
+          {
+            "id": "https://openalex.org/W3177828909",
+            "title": "Highly accurate protein structure prediction with AlphaFold",
+            "published": 2021,
+            "venue": "Nature",
+            "cited_by": 46807
+          },
+          {
+            "id": "https://openalex.org/W2216946510",
+            "title": "A random forest guided tour",
+            "published": 2016,
+            "venue": "Test",
+            "cited_by": 4015
+          },
+          {
+            "id": "https://openalex.org/W1485009520",
+            "title": "Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting",
+            "published": 2015,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 6650
+          },
+          {
+            "id": "https://openalex.org/W2884430236",
+            "title": "Machine learning for molecular and materials science",
+            "published": 2018,
+            "venue": "Nature",
+            "cited_by": 4817
+          },
+          {
+            "id": "https://openalex.org/W2321635716",
+            "title": "Bayesian kernel machine regression for estimating the health effects of multi-pollutant mixtures",
+            "published": 2014,
+            "venue": "Biostatistics",
+            "cited_by": 1828
+          },
+          {
+            "id": "https://openalex.org/W3135028703",
+            "title": "Machine Learning: Algorithms, Real-World Applications and Research Directions",
+            "published": 2021,
+            "venue": "SN Computer Science",
+            "cited_by": 5349
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR coverage 2: Numerai (deployed, no paper)",
+      "arxiv": {
+        "query": "all:\"Numerai\"",
+        "status": 200,
+        "n_hits": 3,
+        "hits": [
+          {
+            "id": "http://arxiv.org/abs/2303.16117v2",
+            "title": "Feature Engineering Methods on Multivariate Time-Series Data for Financial Data Science Competitions",
+            "published": "2023-03-26"
+          },
+          {
+            "id": "http://arxiv.org/abs/2303.07925v10",
+            "title": "Deep incremental learning models for financial temporal tabular datasets with distribution shifts",
+            "published": "2023-03-14"
+          },
+          {
+            "id": "http://arxiv.org/abs/2309.14496v5",
+            "title": "Era Splitting: Invariant Learning for Decision Trees",
+            "published": "2023-09-25"
+          }
+        ]
+      },
+      "openalex": {
+        "query": "Numerai crowdsourced hedge fund staking tournament",
+        "status": 200,
+        "n_hits": 3,
+        "corpus_matches": 3,
+        "hits": [
+          {
+            "id": "https://openalex.org/W3128984016",
+            "title": "Unchaining Collective Intelligence for Science, Research, and Technology Development by Blockchain-Boosted Community Participation",
+            "published": 2021,
+            "venue": "Frontiers in Blockchain",
+            "cited_by": 36
+          },
+          {
+            "id": "https://openalex.org/W4403300449",
+            "title": "AI-enhanced collective intelligence",
+            "published": 2024,
+            "venue": "Patterns",
+            "cited_by": 76
+          },
+          {
+            "id": "https://openalex.org/W4392933319",
+            "title": "AI-enhanced Collective Intelligence",
+            "published": 2024,
+            "venue": "arXiv (Cornell University)",
+            "cited_by": 4
+          }
+        ]
+      }
+    },
+    {
+      "label": "ANCHOR decoy: retired title string (expected zero)",
+      "arxiv": {
+        "query": "all:\"Liberal Radicalism\"",
+        "status": 200,
+        "n_hits": 0,
+        "hits": []
+      },
+      "openalex": {
+        "query": "zzqx nonexistent phrase decoy anchor",
+        "status": 200,
+        "n_hits": 0,
+        "corpus_matches": 0,
+        "hits": []
+      }
+    }
+  ]
+}

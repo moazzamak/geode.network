@@ -55,11 +55,11 @@ other's work and share the rewards by measured use. A network
 anyone can improve compounds faster than central labs that
 fossilize under secrecy and intellectual-property protection.
 Those who refuse to collaborate fall behind. The surplus attention goes to
-safety and a rollout that benefits everyone. GEODE claims no new
-learning algorithm. Its parts are old and named. Its claim is the
+safety and a rollout that benefits everyone. GEODE's claim is the
 assembly: the composed-codes architecture --- frozen representation
 artifacts composed by declaration on a versioned code bus, paid by
-measured downstream use.
+measured downstream use. It is not a new learning algorithm; the
+parts are old and named.
 \end{abstract}
 
 \tableofcontents
@@ -211,6 +211,11 @@ sampled per session from the artifact's pool under the validator
 eligibility rules (activation window, activity floor, tenure). It
 is structurally excluded from any artifact that serves the
 session. It earns a share of the registered reference-run price.
+The reference executor exists only for artifacts whose
+contributor chooses to distribute the sealed weights. For a
+weights-private artifact there is no serving-time identity check
+beyond behavioural identity on a fixed probe set, and the
+residual is priced by the bond.
 \item[Librarian.] The single role that appends ledger entries and
 executes deterministic registry updates. It is an operator key
 during bootstrap. At maturity it is a governance contract with no
@@ -236,6 +241,48 @@ third outside input is the \emph{registered authority key}: a
 government key accepted through the multi-channel rule below. It
 can trigger a freeze. It can never burn, and it holds no other
 power.
+
+\subsection{Terminology}\label{sec:terms}
+
+Every load-bearing term is defined here once and used consistently
+throughout.
+
+\begin{center}
+\begin{tabular}{@{}p{3.2cm}p{11.0cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Definition} \\
+\midrule
+Capability & A contribution that can be served: a learned arm or a
+programmed primitive. \\
+Artifact & A capability once sealed: frozen code, sealed claim,
+measured profile. \\
+Arm & A learned contribution: encoder and head over a frozen
+checkpoint. \\
+Primitive & A small deterministic program with typed inputs and
+outputs. \\
+Block & The unit the encoder emits for a patch of input. \\
+Representation artifact & The frozen block-builder the encoder is
+pinned to. \\
+Head & The final projection from blocks (or codes) to scores. \\
+Trunk & The frozen encoder the head reads from. \\
+Encoder & The block-builder, trunk and head together. \\
+Code & The block vector the encoder emits for one input. \\
+Manifest & The hashed registration payload naming the encoder,
+its data, and the head. \\
+Bus & The typed input/output channel a capability serves on. \\
+Axis & One market: input type, output type, metric, floor, and
+privacy tier. \\
+Epoch & One seven-day settlement period. \\
+Promise & The unvested credit balance: attributed but not yet
+vested. \\
+Beacon & The public randomness source every sample derives from:
+the beacon chain's RANDAO composed with a verifiable delay
+function, with drand as the fallback, seeded as
+$H(\text{drand} \parallel \text{RANDAO-VDF})$ (safe if either
+source is honest). \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 \section{Design principles}
 
@@ -268,13 +315,20 @@ on held-out data. It is sealed with a content hash. It replays
 from the ledger. The discipline is register-before-measuring: a
 claim is written down before the measurement that tests it.
 \item[Economic-only incentives.] Anti-abuse mechanisms use
-prices, delays, and burns. They never use identity checks or
-whitelists. Identity data is not collected.
-\item[No control surface.] The network has no user, region, or
-content selection path. A coercer can point at artifacts, never
-at audiences. The only content powers are public-record votes
-and authenticated freezes, and their effects are fixed:
-suspend, never burn.
+prices, delays, burns, and time-earned pedigree. There is no
+human-identity verification, no KYC, and no whitelist of
+participants; identity data is not collected. Pedigree --- the
+activation window, the activity floor, verified work --- is a
+time cost, not an identity check: a fresh key is cheap and a
+pedigree is not, which is what makes the anti-Sybil layer work.
+\item[No control surface.] The network has no user-selection
+path. A coercer can point at artifacts, never at audiences. The
+only content powers are public-record votes and authenticated
+freezes, and their effects are fixed: suspend, never burn. The
+protocol does meter per payer, and a payer address is
+pseudonymous; the metering is enforced locally at the gateway a
+user connects to, and nothing per payer is ever written to the
+public ledger.
 \item[Earned, capped votes.] A vote counts only with pedigree ---
 the activation window, the activity floor, and verified work. It
 weighs only with unclaimed earnings. No identity's weight may
@@ -301,30 +355,43 @@ answers they can verify. Verification rests on the artifact being
 frozen, hash-identified, and reputation-scored. It also rests on
 the decision record replaying from the hash chain. None of this
 requires weights to be open.
-\item \textbf{Composition.} Multiple small models can be linked
-and routed into chains. The chains serve more complex tasks
-without significant accuracy degradation. A chain $g \circ h$ is
-admissible exactly when the output contract of $h$ satisfies the
-input contract of $g$, written
-$C_{\mathrm{out}}(h) \subseteq C_{\mathrm{in}}(g)$ --- the
-outputs of the first stage must be valid inputs for the second.
-Where composition does not hold, an arm can be a large deep
-network of
-the current state of the art. The design does not depend on
-either path winning everywhere. The measured routing axes
-(Section~\ref{sec:measured}) support the composition path's
-plumbing. Two full-scale multi-encoder fusion cells are now
-measured. The first --- multi-scale codes plus DINOv2 features
-upscaled from $32\times32$ --- is a negative for both plain
-concatenation and CCA alignment, with the upscaling confound
-registered rather than hidden. The second, on a clean cell where
-both blocks carry signal (the DINOv2 block re-extracted at native
-resolution), reverses the concatenation reading: the fused design
-more than doubles the single encoder ($0.548$ vs $0.242$), while
-CCA alignment still loses to raw concatenation ($0.511$).
-Concatenation on the code manifest is the load-bearing fusion
-form; alignment bridges are optional, measured per pair. Both
-outcomes are published.
+\item \textbf{Composition (a): fusion.} Several frozen encoders can
+be concatenated on one code manifest and read by a single head
+without the blocks fighting each other. This half is measured. Two
+full-scale multi-encoder fusion cells are sealed. The first ---
+multi-scale codes plus DINOv2 features upscaled from
+$32\times32$ --- is a negative for both plain concatenation and CCA
+alignment, with the upscaling confound registered rather than
+hidden. The second, on a clean cell where both blocks carry signal
+(the DINOv2 block re-extracted at native resolution), reverses the
+concatenation reading: the fused design more than doubles the
+single encoder ($0.548$ vs $0.242$), while CCA alignment still
+loses to raw concatenation ($0.511$). Concatenation on the code
+manifest is the load-bearing fusion form; alignment bridges are
+optional, measured per pair. Both outcomes are published.
+
+\item \textbf{Composition (b): chaining.} Models can be linked into
+chains, one stage's output feeding the next, serving more complex
+tasks without significant accuracy degradation. A chain
+$g \circ h$ is admissible exactly when the output contract of $h$
+satisfies the input contract of $g$, written
+$C_{\mathrm{out}}(h) \subseteq C_{\mathrm{in}}(g)$ --- the outputs
+of the first stage must be valid inputs for the second.
+
+This is a different claim from (a), with different failure modes.
+Fusion evidence does not support it: concatenating blocks into one
+head tests neither the contract check nor the error a first stage
+hands to a second. One chain is measured end to end
+(Section~\ref{sec:measured}): a domain router feeding six
+per-domain specialists on the sealed DomainNet selection. The
+chain reaches $0.2741$ against $0.2450$ for the monolithic head
+that is the strongest single stage. The scope of that test is
+narrow: one chain, of length
+two, where both stages read the same frozen features. Chains of
+length three and above, and chains that cross modalities, remain
+unmeasured. Where composition does not hold, an arm can be a large
+deep network of the current state of the art. The design does not
+depend on either path winning everywhere.
 \end{enumerate}
 
 \section{The architecture}
@@ -339,15 +406,19 @@ work. It states the input type (image, audio, text) and the
 output type (class label, transcript, number). It also states a
 small set of fixed attributes. Each attribute comes from a short
 allowed list, never free text. An \emph{axis} is a measured task
-type: input type, output type, metric, and a published quality
-floor, fixed together. The axis metric is per-kind accuracy,
-pass@$k$, or word-error rate, each multiplied by the artifact's
+type: input type, output type, metric, a published quality
+floor, and a privacy tier, fixed together. The axis metric is
+per-kind accuracy, pass@$k$, or word-error rate, computed
+restricted to the label set the buyer declares. The artifact's
 measured coverage --- the share of inputs it answers rather than
-refuses. A score without a coverage figure is not routable: an
-arm answering a fifth of inputs at high accuracy would otherwise
-outrank an arm answering everything at lower accuracy, and users
-routed to it would receive an abstention most of the time. The
-routing mode is
+refuses --- is published beside the score and decides
+\emph{qualification}: an arm that does not cover the declared set
+is not offered for it at all. That is what stops an arm answering
+a fifth of inputs at high accuracy from outranking an arm
+answering everything, without the coverage multiplication that
+used to invert the ranking in the other direction
+(Section~\ref{sec:router}).
+The routing mode is
 best-value or best-quality. Optional fields cap the unit price
 and the total spend. The task is declared with every request. The
 system never guesses it.
@@ -373,10 +444,14 @@ input to a code vector
 z = f(x) \in \mathbb{R}^d.
 \end{equation}
 The sealed head scores the $C$ classes of the declared task as a
-fixed sum of products,
+fixed sum of products plus a bias,
 \begin{equation}
-s = W^\top z, \qquad W \in \mathbb{R}^{d \times C},
+s = W^\top z + b, \qquad W \in \mathbb{R}^{d \times C},\;
+b \in \mathbb{R}^C,
 \end{equation}
+with $W$ the class projection and $b$ the class intercept (the
+ridge fit's bias, folded into $W$ in any place that writes the
+head without it).
 the answer is the top-scoring class (the entry of $s$ with the
 largest value),
 \begin{equation}
@@ -415,17 +490,21 @@ stays private? In layers.
 
 The head is a fixed sum of products: the answer is the class
 with the largest score, $\hat y = \argmax_j (W^\top z)_j$.
-Whoever computes it attaches
+On a sampled fraction of settlement batches, whoever computes it
+attaches
 a Bulletproofs-style argument. The argument proves that the
-reported answer is exactly what the sealed head computes. The
-verifier checks the proof at a fraction of the cost of redoing the
-computation. The proof reveals nothing about the input. This is
+reported answer is exactly what the sealed head computes. It is
+not cheaper than recomputing --- for a linear head nothing is ---
+and Section~\ref{sec:proofs} prices it per axis. What it buys is
+that the proof reveals nothing about the input, and that the
+verifier never needs the private head. This is
 verification without disclosure.
 
-The deep encoder is not yet provable. The reason is speed, not
-mathematics. Proving a large network is possible today. It costs
-orders of magnitude more than serving. The design deliberately
-does not depend on it. This is an honest boundary.
+The deep encoder is not covered by the proof layer. The reason
+is speed, not mathematics. Proving a large network is possible
+today. It costs orders of magnitude more than serving. The
+design deliberately does not depend on it. This is an honest
+boundary.
 
 The encoder is a frozen checkpoint. A substituted model is caught
 probabilistically. A fraction of sessions is answered twice ---
@@ -592,7 +671,7 @@ admission (dashed).}
 \label{fig:network}
 \end{figure}
 
-\subsection{The registry and the router}
+\subsection{The registry and the router}\label{sec:router}
 
 Admission is by measurement.
 \begin{itemize}
@@ -648,9 +727,12 @@ in proportion to its ranking, and the winners' pool mates form
 the failover chain in rank order. A newcomer with a smaller
 model and a lower price enters the top five on efficiency, not
 on pedigree. On a synthetic sweep of the rule, the strongest
-arm held about one third of traffic, an equal-price tie split
-evenly, and a two-times price cut roughly doubled an arm's
-share. Rank ties resolve by a hash of the artifact and the
+arm held about one third of traffic ($0.355$), an equal-price tie split
+evenly ($0.490$ / $0.510$), and a two-times price cut roughly doubled an arm's
+share (ratio $1.95$). Those figures require the per-session term in
+the seed: with the seed drawn from the beacon alone, the same
+sweep gives a single arm $1.000$ of traffic in all three cases.
+Rank ties resolve by a hash of the artifact and the
 anchor, never the bare artifact hash: unknowable at seal time,
 deterministic per anchor.
 \item A per-axis price floor sits at the reference hosting
@@ -671,8 +753,29 @@ so.
 Formally, let $Q(t)$ be the set of admitted capabilities
 qualified for task $t$, $s_a$ the held-out score of capability
 $a$ on the axis, $p_a$ its posted unit price, and $\bar u_a$ its
-expected unit count on the axis's reference workload. The
-selection score is the quality per expected charge
+expected unit count on the axis's reference workload.
+
+\textbf{The score is conditioned on the buyer's declared label
+set, never multiplied by coverage.} Let $D$ be the label set the
+task declares. A capability enters $Q(t)$ only if it covers $D$;
+covering less of $D$ is a \emph{qualification} failure, not a
+ranking penalty. For those that qualify, $s_a$ is the axis metric
+computed restricted to $D$, oriented so that higher is better ---
+one definition, used everywhere in this paper. Abstentions are
+metered units, so they count in $\bar u_a$.
+
+An earlier form of this rule multiplied the metric by coverage.
+It inverted quality, and measurably so: on the Open Images axis it
+ranked a scoped arm reading $0.901$ on the classes it serves at
+$0.901 \times 0.049 = 0.044$, below a full-coverage arm reading
+$0.164$ on everything. Best-quality mode --- $\argmax_a s_a$ ---
+therefore returned the worse arm, and abstention was penalised
+twice over. Conditioning on $D$ keeps the property the coverage
+factor was defending, that an arm cannot win by refusing
+everything, because an arm that refuses part of $D$ never
+qualifies for $D$ at all.
+
+The selection score is the quality per expected charge
 \begin{equation}
 v_a = \frac{s_a}{p_a \, \bar u_a},
 \end{equation}
@@ -685,15 +788,56 @@ capability $a$ is chosen with probability
 \qquad
 T_5 = \text{the top five of } Q(t) \text{ by } v_a.
 \end{equation}
-The draw is seeded by the hash of the anchor, the task, the
-registry state, and the task fingerprint: deterministic per
-anchor, so every route replays, and unknowable before the
-anchor, so no host can farm it. Best-quality routing skips the
+The draw is seeded by the randomness beacon --- the same composed
+source every other sample in the protocol draws from --- ordered
+by the epoch anchor, together with the task, the registry state,
+the task fingerprint, and the session identifier. The session
+identifier is what makes it a lottery: the other fields are
+constant within a beacon round for a given task, and a seed
+built from those alone sends every session of that round to the
+same arm. The identifier is assigned at declaration and recorded
+in the ledger, so every route still replays exactly; it is not
+chosen by any host, so no host can farm its own draw. Best-quality routing skips the
 lottery and selects $r(t) = \argmax_{a \in Q(t)} s_a$. In words:
 best-value routing spreads traffic over the top five in
 proportion to quality per expected charge; best-quality routing
-picks the single highest measured score. If $Q(t)$ is empty, the
+picks the single highest measured score. Capabilities are ranked
+only against others in the same privacy tier; a cross-tier route
+is refused. If $Q(t)$ is empty, the
 system abstains.
+
+\paragraph{Crowding defense.} The base rule is the router of
+Section~\ref{sec:router}: it ranks qualified capabilities by
+quality per expected charge $v_a = s_a/(p_a \bar u_a)$ and draws
+the route from the top five as a weighted lottery. A price floor
+is a gate, not a rank: five barely-passing arms priced at the
+floor would hold all five lottery slots and evict a better arm
+that prices above the floor, because quality never enters the
+ranking once an arm is through the gate.
+
+Two additional rules are triggered in the event of crowding
+on-chain, and the axis registers which of them applies:
+
+\begin{enumerate}
+\item \textbf{Reserved slots.} The top five is the union of the
+top three by $v_a$ and the top two by $s_a$. A dominant-quality
+arm can never be evicted by price alone. Membership changes;
+weights stay the base rule's.
+\item \textbf{Quality exponent.} Rank on $s_a^{\gamma}/(p_a\bar
+u_a)$ with $\gamma$ registered per axis; $\gamma = 1$ recovers
+the base rule. The exponent re-weights traffic toward the
+quality arms as well as admitting them.
+\end{enumerate}
+
+Both additional rules are measured under the attack: in the
+registered scenario --- a strong arm at 0.95 and a good arm at
+0.85 priced at twice the floor, against a crowd of floor-priced
+arms at 0.60 --- the base rule serves only the crowd (delivered
+accuracy 0.600) once the crowd reaches five, while both
+additional rules hold the quality arms in the pool at every
+crowd size and deliver 0.701. An axis may switch between the
+rules with a governance registration, never by a code path; all
+three are measured and reported in Section~\ref{sec:measured}.
 
 \subsection{The ledger and the anchor}
 
@@ -710,7 +854,21 @@ and the hash changes. No record can be altered without breaking
 the chain.
 \item \textbf{The librarian.} One role appends entries. It is an
 operator key during bootstrap. At maturity it is a governance
-contract with no human key.
+contract with no human key. The role does not rotate on a
+schedule and posts no stake --- replacement is its whole
+discipline, which is why the next two rules carry the weight they
+do.
+
+Two separate authorities can name the librarian, and keeping them
+separate is what makes the replacement rule real. The developer's
+key names it during bootstrap and then closes. A governance
+executor names it thereafter, holds that one power and no other,
+and can hand itself on to a successor. A single authority would
+have to choose between two failures: keep the developer's key
+alive and the network never retires it, or close the developer's
+key and the librarian address freezes at whoever last held it ---
+with a two-thirds vote deciding something it has no way to carry
+out.
 \item \textbf{The anchor.} By default, the ledger tip is anchored
 to Ethereum once per epoch. The cadence grows with traffic,
 because the cadence is the rewrite window. During development the
@@ -724,19 +882,69 @@ The fork rule applies only to unanchored suffixes. A divergence
 inside an anchored prefix is a recorded reason to replace the
 librarian.
 \item \textbf{Force-inclusion queue.} Any party may post an
-entry directly to the settlement contract. The librarian must
-incorporate it within one epoch of its posting, or the chain is
-invalid. Withholding a rival's registration, a dispute filing, or
-a mismatch record therefore invalidates the chain instead of
-succeeding silently. The queue is an on-chain inbox contract:
-posting locks a deposit, incorporation returns it, and a librarian
-that fails returns it to the poster while the unincorporated
-entry stays visible --- the chain-invalid state is queryable on
-chain, never silent.
+entry directly to the settlement contract, and \emph{any party may
+incorporate the entry at the head of the queue}. Nobody has to be
+asked. A poster who is being ignored clears its own entry, so
+withholding a rival's registration, a dispute filing, or a mismatch
+record does not delay it at all. The queue is an on-chain inbox
+contract, and the state of it is queryable on chain, never silent.
+
+The reason incorporation needs no permission is that it decides
+nothing. Every step it takes --- which entry is next, whether the
+deadline passed, what the bond returns --- is already fixed by what
+is on the chain. A rule that only one party may perform a
+calculation anyone can perform protects nothing, and costs the
+network a party it has to wait for. Where the paper still names a
+role for an action, that action turns on evidence or on a vote, not
+on the calculation itself.
+
+A poster pays two amounts. The bond is refundable: it returns on
+incorporation, and a poster whose entry is left to rot withdraws it
+without discharging the librarian's obligation. The posting fee is
+not refundable, and it \emph{follows the work}. It is held against
+the entry until someone incorporates it. If the librarian does the
+job, the fee goes to the operations line. If the librarian lets the
+deadline pass and someone else clears the entry, the fee goes to
+whoever cleared it. A librarian that stalls does not simply fail to
+earn --- it watches its income move to whoever covered for it, one
+entry at a time, with no vote and no penalty ruling in the path.
+The fee rises with the square of a sender's posts in one epoch past
+a small free allowance: posting a thousand entries costs about
+three hundred thousand times what a flat fee would charge, which is
+what stops a queue nobody can clear from being bought with gas
+alone. A poster that clears its own entry before the deadline does
+not get the fee back, or posting would be free again and that price
+would collapse.
+
+Two further rules keep the queue from becoming a weapon. The
+librarian owes at most a registered number of incorporations per
+epoch; a backlog beyond that rolls forward, and every entry still
+carries a deadline fixed and computable at the moment it is posted.
+And incorporation runs in posting order, so nobody can serve a
+friend ahead of a rival. Ordering the queue is also what keeps the
+validity check cheap: a validator reads the oldest open entry and
+nothing else, so an attacker cannot make the question itself
+expensive to ask. The contract records who incorporated each entry,
+which is a sharper statistic than a missed deadline: an entry a
+stranger had to clear is direct evidence about the librarian.
 \item \textbf{Executable replacement.} The librarian is
 replaced when a recorded divergence reason collects endorsements
-from at least half of the registered validators; a deterministic
-deputy takes over at the next epoch.
+carrying two thirds of the earned voting weight, under the same
+pedigree gate, twenty percent cap, and diversity floor as every
+other governance vote; a deterministic deputy takes over at the
+next epoch. The trigger stays mechanical --- a recorded divergence
+reason is a fact a validator can replay, and no amount of weight
+substitutes for it. Only the endorsement is weighted. Replacing the
+role that appends every ledger entry is the most powerful action
+the network can take, and counting registered validators by head
+would have priced it at the cost of registering identities.
+
+The force-inclusion queue reads the librarian's address from the
+ledger rather than storing its own copy, so a replacement reaches
+the contract that contains a misbehaving librarian at the moment it
+reaches anything else. The deputy inherits the open queue. An entry
+someone is being censored over survives the replacement it may well
+have caused.
 \item \textbf{Liveness statistics.} Anchor cadence and
 inclusion latency are measured, public statistics. A librarian
 that stops anchoring, or sits on the inclusion queue, is visible
@@ -750,8 +958,11 @@ Payment and claim stay on one asset with no wrapper.
 
 \subsection{Proofs of computation}\label{sec:proofs}
 
-An answer also carries a proof of the computation behind it. The
-task head is a closed-form ridge fit. It is a fixed sum of
+An individual answer does not carry a proof. A sampled fraction of
+settlement batches does. That placement is forced by cost, and the
+cost is stated here rather than implied.
+
+The task head is a closed-form ridge fit. It is a fixed sum of
 products. Whoever computes it can prove, with a Bulletproofs-style
 inner-product argument, that the reported answer is exactly what
 the sealed head computes~\cite{bunz2018}. In symbols, the prover
@@ -762,15 +973,54 @@ statement
 s = W^\top z,
 \end{equation}
 of size logarithmic in the vector length --- the proof grows
-slowly, even as the head grows. In words: the proof vouches that
-the answer is exactly the sum of products the sealed head
-computes. A verifier checks that proof at a fraction of the cost
-of redoing the computation. Two places use these proofs.
+slowly, even as the head grows.
+
+\textbf{What the proof buys, and what it does not.} It does not
+buy cheap verification. For a linear head, redoing the computation
+is the cheapest operation in the system, and checking a proof
+costs far more than recomputing. What it buys is verification
+\emph{without disclosure}: the verifier cannot redo the
+computation, because $W$ is private. That is the whole benefit,
+and it is enough where the head must stay secret.
+
+The measured cost, on the reference CPU, per registered axis.
+Serving is a float64 mat-vec of $n = dC$ multiply-adds. Prover and
+verifier costs are the analytic Bulletproofs operation counts
+priced at a measured ed25519 scalar multiplication of
+$152.3\,\mu$s, with multi-exponentiation costed by the bucket
+method --- the model most favourable to the proof system.
+
+\begin{center}\small
+\begin{tabular}{lrrrrr}
+\toprule
+Axis & $n = dC$ & Serve & Prove & Verify & Proof \\
+\midrule
+Text, SST-2 (768$\times$2) & 1{,}536 & 1.2\,$\mu$s & 0.09\,s & 0.034\,s & 1.1\,KB \\
+Text, MNLI-m (768$\times$3) & 2{,}304 & 1.4\,$\mu$s & 0.13\,s & 0.048\,s & 1.2\,KB \\
+Audio, SC-v2 (768$\times$35) & 26{,}880 & 4.2\,$\mu$s & 1.18\,s & 0.434\,s & 1.4\,KB \\
+Routing (1024$\times$345) & 353{,}280 & 35.8\,$\mu$s & 12.80\,s & 4.615\,s & 1.6\,KB \\
+Vision (1024$\times$601) & 615{,}424 & 102.0\,$\mu$s & 21.48\,s & 7.721\,s & 1.7\,KB \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+On the vision axis the verifier costs about seventy-five thousand
+times a recomputation and the prover about two hundred thousand
+times. Granting a hypothetical implementation ten times faster
+than the one measured moves that to twenty thousand, which changes
+nothing about the placement. The $O(\log n)$ size claim holds and
+is a size claim only: proofs stay between 1.1 and 1.7 KB across a
+four-hundred-fold range in $n$. No cost claim appears anywhere in
+this paper that is not in this table.
+
+Two placements follow.
 \begin{itemize}
 \item \textbf{Settlement batches.} Each settlement batch carries a
 hash of the proofs of the computations it pays for. That
 proof-hash is anchored on-chain with the batch. A payment is tied
-to a provable computation, not just a claim.
+to a provable computation, not just a claim. The prover cost is a
+registered per-axis number and is priced into the fee flow; it is
+not free and is not hidden.
 \item \textbf{The verifier.} Anchoring a proof-hash without
 verifying the proof would make it decorative. A sampled, paid
 batch-verification step at settlement checks the proofs
@@ -779,15 +1029,48 @@ proof is a ledger-disputable L1 deviation. It is replay-gated. It
 burns the unvested promise of whoever submitted it.
 \item \textbf{Disputes.} A slash is replay-gated. A filed dispute
 re-runs the sealed artifact on sealed data. The re-run is itself
-a verifiable measurement. The computation decides guilt.
+a verifiable measurement. The computation decides guilt. Note that
+the re-run, not the proof, is what settles a dispute --- for a
+head, replay is four to five orders of magnitude cheaper than
+proof verification.
 \end{itemize}
 
-The honest boundary: today the proofs cover the small, exact
+The honest boundary: the proofs cover the small, exact
 components. They cover the closed-form head and the router. They
 do not cover the full encoder. Proving a large deep network is
-possible in principle. It is active research. Today it costs
-orders of magnitude more than serving. It is not a shipped
-feature. GEODE claims no novelty in the proof technology itself.
+possible in principle. It is active research. It costs orders of
+magnitude more than serving, and the proof layer does not
+include it. GEODE claims no novelty in the proof technology
+itself.
+
+\textbf{Where each mechanism is available, per serving tier.} The
+proof layer is not available on the private tier at all: the host
+never holds $z$ in plaintext there, so it cannot produce an
+inner-product argument about $W^\top z$ without verifiable
+homomorphic evaluation, which is research-grade and multiplicative
+on top of an already impractical cost. Stating that in a matrix
+makes the gaps unhidable.
+
+\begin{center}\small
+\begin{tabular}{lcccc}
+\toprule
+Tier & Shadow & Behavioural & Head & Dispute \\
+ & probe & identity & proof & replay \\
+\midrule
+Plaintext & yes & yes & yes & yes \\
+Device encoder & yes & yes & yes & yes \\
+Private (FHE) & residual & residual & \textbf{no} & residual \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+On the private tier every check degrades to a residual rather than
+a guarantee: the reference executor and the serving host both
+operate on ciphertext, so sameness can be checked only where the
+encoding is deterministic, and the head proof is unavailable
+outright. That tier is a registered research target with a cost
+trigger, outside the served tiers --- see
+Section~\ref{sec:limits}.
 
 \section{The protocol in detail}
 
@@ -806,6 +1089,14 @@ The input type carries its input contract.
 The output type carries its type check.
 \item \textbf{Axis metric}: per-kind accuracy, pass@$k$, or
 word-error rate.
+\item \textbf{Privacy tier}: \texttt{plaintext},
+\texttt{device\_encoder}, or \texttt{private}. The tier is part of
+the axis identity, not a preference: arms compete only within a
+tier and a cross-tier route is refused. See §Serving verification.
+\item \textbf{Declared label set} (classification only): the
+classes the buyer cares about. The axis metric is computed
+restricted to this set, and an arm that does not cover it is not
+qualified for the task at all.
 \item \textbf{Unit of work}: derived, never chosen. The input and
 output types together determine the unit by the registered table
 below.
@@ -925,8 +1216,8 @@ is the exact, closed-form part. The frozen encoder is verified
 differently, by design. The shadow probe, replay, and the
 contributor's slashable revenue window cover it. Proof does not.
 Proving a large deep network is possible in principle. It costs
-orders of magnitude more than serving. It would enter only if a
-registered cost trigger fires. The design does not depend on it.
+orders of magnitude more than serving, and the proof layer does
+not include it. The design does not depend on it.
 \item \textbf{Validators.} Honesty cannot be proved at
 registration. It is bought instead: a fee to enter, a slashable
 promise, audits, and burns. Each challenge carries a per-point
@@ -980,10 +1271,27 @@ requirement on contributors.
 \begin{itemize}
 \item Verdicts are aggregate-only. They give one score per axis.
 They never give per-row outputs or per-class breakdowns.
-\item Scores are reported to bounded precision: four significant
-digits. Single-row influence is about one part in the split size.
-It sits below that resolution. The exact value stays in the
-ledger.
+\item Scores are reported to a fixed absolute precision: four
+decimal places, a quantum of $10^{-4}$. This is a
+\emph{constraint} on the split, not a property of it. Single-row
+influence on a mean is $1/n$, so it sits below half the quantum
+only when $n \geq 2 \times 10^{4}$. That is the registered
+minimum held-out split size per axis, and it is enforced at axis
+registration: an axis with a smaller split does not get the
+guarantee. Fixed decimal places rather than significant digits is
+deliberate --- four \emph{significant} digits resolve $10^{-5}$
+on a score below $0.1$ and would silently demand ten times the
+rows exactly where scores are weakest. The exact value stays in
+the ledger.
+\item Of the axes measured in this paper only the Open Images
+vision axis clears that minimum ($245{,}723$ held-out rows). The
+standard GLUE and Speech Commands evaluation splits do not
+--- SST-2 dev is $872$ rows, MNLI-matched dev $9{,}815$, Speech
+Commands v2 test $11{,}005$ --- so on those axes single-row
+influence is at or above the reported resolution and the
+probing defense rests on the registration fee alone. Reporting
+those axes to fewer decimal places would hide the number, not the
+influence. This is stated rather than papered over.
 \item Every submission pays the registration fee. Repeated
 probing costs money.
 \item Residual: probing resistance is a cost barrier, not a
@@ -1039,7 +1347,8 @@ at admission. The same rule applies in the quorum takedown.
 Each validator in the axis's pool is keyed by
 $H(\text{validator id}, b, a, c)$, where $b$ is the first
 randomness-beacon round that closes after the commit was frozen
-on the ledger (the beacon is defined with the ledger below). The
+on the ledger (the beacon is defined in the terminology,
+Section~\ref{sec:terms}). The
 sampled set
 is the first $k$ entries in that key order. Default $k=9$. No one
 chooses their judges. The seed postdates the commit and is
@@ -1084,10 +1393,16 @@ default is two-thirds, with a minimum of three.
 its challenge's reveal is a registered proof of pre-reveal
 collusion. Validator and contributor both face the slash path.
 
-\textbf{Audits.} After each session, a fraction of the revealed
-challenges is re-labeled independently by two other validators.
-The default fraction is one-tenth. The audit work is paid from
-the challenge budget at the registry-set rate. Unpaid audit work
+\textbf{Audits.} The audit follows the axis's label regime, and the
+axis states which one it is. For a \emph{committed-label} axis the
+labels come from a Merkle-committed corpus, so a validator cannot
+plant one: the audit is a \emph{commitment-conformance} check --- the
+revealed point opens against the axis root, a cheap mechanical
+check, never a relabeling --- and the audit budget pays for that
+conformance check. For a \emph{human-labelled} axis the audit is a
+relabeling: a fraction of the revealed challenges is re-labeled
+independently by two other validators, and the audit work is paid
+from the challenge budget at the registry-set rate. Unpaid audit work
 would be shirked. A sampled auditor that declines earns a demerit.
 A validator whose expected outputs disagree with the audits on a
 registered fraction of the audited points burns the unvested
@@ -1122,10 +1437,16 @@ availability demerits.
 \item \textbf{Weight caps.} Every validator's challenges are
 capped at $m$ per round. No validator can dominate the verdict by
 volume. Quorum weight is proportional to accepted challenges.
-\item \textbf{Wrong labels.} A validator whose revealed expected
+\item \textbf{Wrong labels (human-labelled axes only).} On a
+human-labelled axis, a validator whose revealed expected
 output disagrees with the independent audit relabeling is
 excluded from the session. The score is recomputed without its
-challenges. Its fee burns. A repeat offender is delisted.
+challenges. Its fee burns. A repeat offender is delisted. On a
+\emph{committed-label} axis there is no wrong-label path: labels
+come from the Merkle-committed corpus, so the only check is
+commitment conformance --- the revealed point opens against the
+axis root --- and a point that does not open is void, never
+relabeled.
 \item \textbf{Collusion.} A correct answer whose ledger time
 precedes its challenge's reveal voids the challenge and slashes
 both parties.
@@ -1177,28 +1498,66 @@ decrypts and takes the argmax on-device. No server --- nor any
 coalition of them --- ever sees $z$, $s$, or the answer, and the
 contributor physically cannot farm user vectors. User privacy is
 ciphertext-grade: it rests on the scheme's security, not on who
-owns any server. No party ever holds $W$ in plaintext except the
-contributor's own host, so model privacy is unconditional. The
-developer is not a party. Encoder placement is tiered:
+owns any server. The developer is not a party. Encoder placement
+is tiered:
 phone-class encoders run on the device (the default); quantized
 encoders may run on device NPUs where their fp32-equivalence gate
-passes; SOTA trunks the device cannot run use the premium tier,
-where the device FHE-encrypts the input, the contributor
-evaluates the frozen trunk on ciphertext only, and the device
-decrypts its own features and continues the protocol above ---
-under the head encryption, the trunk and the head are one
-ciphertext path. The FHE cost is measured at roughly twenty
-seconds per query on one CPU for the head path, parallelizable
-across cores and queries, and is priced by the contributor as a
-premium; the developer processes no content in any tier.
-Clients without on-device compute use the plaintext tier,
-disclosed as such.
+passes. Trunk-level homomorphic evaluation --- the device
+FHE-encrypting its input and the contributor evaluating the frozen
+\emph{trunk} on ciphertext --- is \textbf{not part of the served
+tiers}. It is orders of magnitude more expensive per token than
+the head path and is a registered research target with a cost
+trigger, listed in Section~\ref{sec:limits}. A device that cannot
+run any encoder
+uses the plaintext tier, disclosed as such. The head-path FHE cost
+is measured at roughly twenty seconds per query on one CPU,
+parallelizable across cores and queries, and is priced by the
+contributor; the developer processes no content in any tier.
+
+\textbf{The device readout is a disclosed oracle.} Moving the
+argmax-and-bucket computation inside the encryption --- so that
+only an encrypted (label, bucket) pair leaves the host --- was
+measured and is not within reach of the registered scheme. The
+comparison circuit is many levels deeper than the depth-one head,
+and the measured private-query cost, extrapolated to the vision
+axis's class count, is about five hundred seconds against a
+hundred-second bound --- five times the head-only figure, not
+within the registered five-times tolerance. The private tier
+therefore returns the full score vector to the device, and that
+vector is a strictly stronger oracle than the raw margin: $d\cdot
+C$ queries recover the head exactly. Its extraction multiple is
+the score-vector-oracle figure --- $2.8\times$ expected lifetime
+revenue, against the $55\times$ of the bucketed plaintext tier ---
+and the private tier is priced on that number. No party ever
+holds $W$ in plaintext except the contributor's own host; model
+confidentiality on the private tier is therefore an economic
+boundary, the same kind as every other tier, and the paper claims
+no more than that.
+
+\textbf{The privacy tier is an axis, not a price point.} A private
+arm at twenty seconds a query cannot compete on ranking against a
+plaintext arm at a millisecond: the router ranks on
+$v_a = s_a/(p_a \bar u_a)$, so a private arm would sit four orders
+of magnitude down any shared leaderboard and never be routed to.
+Ranking arms across tiers would therefore delete the private tier
+rather than price it. So the tier is part of the axis identity.
+An axis is $(\text{input}, \text{output}, \text{metric},
+\text{floor}, \text{privacy\_tier})$, the task descriptor carries
+a \texttt{privacy\_tier} field in
+$\{\texttt{plaintext}, \texttt{device\_encoder},
+\texttt{private}\}$, and that field enters the descriptor hash
+through the unit table so it is frozen with everything else. Arms
+compete only inside their own tier; $v_a$ is never compared across
+tiers. A route that would cross a tier boundary is a refusal, not
+a low ranking. Each tier carries its own price floor --- for the
+private tier, the measured FHE reference cost --- and its own
+published quality floor. Without the descriptor field a user
+could not ask for private serving at all.
 
 A contributor could pass admission with one artifact and serve
 another. The shadow probe catches this.
 
-\begin{itemize}
-\item \textbf{The shadow probe.} A registered fraction $\rho$ of sessions
+\paragraph{The shadow probe.} A registered fraction $\rho$ of sessions
 is answered twice. The default is $\rho=0.05$, timelock-adjustable
 upward only: the floor of $0.05$ sits outside ordinary governance
 (see security floors).
@@ -1209,11 +1568,14 @@ $\hat y_{\mathrm{serve}} \neq \hat y_{\mathrm{ref}}$ is a
 deviation. The comparison is live. It is
 never against the registration challenge set. A memorizing
 lookalike could pass a stored set. It cannot know tomorrow's user
-inputs. A relative rate under-samples quiet axes. Every active
-axis therefore carries a per-epoch minimum of probed sessions.
-The default minimum is one. The detection horizon stays inside
-the vesting promise everywhere.
-\item \textbf{Behavioural identity.} At admission the
+inputs. A relative rate under-samples quiet axes, so $\rho$ is
+raised on quiet axes to hold a per-epoch floor of probed sessions.
+The floor is thirty. Where traffic cannot supply thirty probed
+sessions in an epoch, the horizon does not fit inside the vesting
+promise at any probe rate; the table below states where the line
+falls and Section~\ref{sec:limits} carries the consequence.
+
+\paragraph{Behavioural identity.} At admission the
 contributor commits to a Merkle root over $f(x)$ on a large
 sealed probe set. Each epoch a beacon-seeded fresh slice is
 revealed and the serving host must answer it; the answers must
@@ -1222,7 +1584,8 @@ with perturbed neighbours: a stored lookup table answers exact
 probes but not their neighbours, while the real artifact answers
 both. The mechanism lets a serving host prove behaviour without
 distributing weights.
-\item \textbf{Identity, not accuracy.} The probe certifies that
+
+\paragraph{Identity, not accuracy.} The probe certifies that
 the served model \emph{is} the sealed artifact. That is the only
 claim a serving-time check can measure. A live sample carries no
 label. Accuracy was settled at admission on held-out splits. It
@@ -1244,7 +1607,8 @@ canonical CPU oracle reproduces the sealed heads bit-exactly on
 its registered configuration, while the same computation under a
 different thread configuration diverges in the last bits. The
 probe therefore compares margins, never raw bits.
-\item \textbf{Commitment, not secrecy.} A session's probe flag is
+
+\paragraph{Commitment, not secrecy.} A session's probe flag is
 drawn from the randomness beacon, ordered by the epoch anchor.
 The serving host must commit the
 hash of its answer before that flag is revealed. A host cannot
@@ -1254,10 +1618,12 @@ artifact every time. The reference execution runs inside the
 probed session and compares against the committed answer. The
 duplicate is discarded with the session. Probe choice need not be
 unpredictable. It only needs to come later than the answer.
-\item \textbf{A mismatch burns.} A differing answer is a
+
+\paragraph{A mismatch burns.} A differing answer is a
 ledger-disputable deviation. It is replay-gated. It burns the
 unvested promise. Repeat offenders are delisted.
-\item \textbf{The judge is sampled, not chosen.} Reference
+
+\paragraph{The judge is sampled, not chosen.} Reference
 executors register against the artifact they hold. They earn
 eligibility the way validators do. There is an activation window
 of two epochs from registration. There is an activity floor:
@@ -1272,7 +1638,8 @@ answer commit. The judges are unknowable until the host's answer
 is already bound. No single executor judges any session alone.
 The registered reference-run price is divided among the sampled
 set. The probed contributor's dock stays one registered price.
-\item \textbf{Who judges the judge.} Every sampled executor
+
+\paragraph{Who judges the judge.} Every sampled executor
 commits its reference answer before any answer is compared. The
 commit covers the input's hash. An executor cannot fabricate a
 mismatch after seeing the answer. It cannot rubber-stamp a
@@ -1288,7 +1655,8 @@ affordable to any contributor. The loser pays the full replay
 cost. The deviation burn is destroyed, never awarded to anyone.
 A false claim has no upside. The disputed session's credit
 escrows until the replay settles.
-\item \textbf{Why it deters.} Each session is probed with
+
+\paragraph{Why it deters.} Each session is probed with
 probability $\rho$, so the number of sessions until a substituted
 artifact is first probed is geometric with expectation
 $\mathbb{E}[T] = 1/(\rho\delta)$, where $\delta$ is how often the
@@ -1302,14 +1670,51 @@ near-copies. A sequential test over the mismatch stream closes
 the near-copy case, and it is shipped and measured: at the
 registered bounds it convicts a 99.5\%-agreeing substitute at
 rate 0.958 within a median 2383 sessions, while falsely
-convicting an honest host at rate 0.004. The
-contributor's entire revenue window sits inside the vesting
-promise. Colluding with a
+convicting an honest host at rate 0.004. That median is
+2383 sessions \emph{at} $\rho=0.05$; the invariant behind it is
+119 \emph{probed} sessions, because the test consumes the mismatch
+stream. Dividing 119 by the probed sessions an epoch supplies
+gives the horizon, and the horizon is also the honest supplier's
+payout latency: the Level-1 claim freeze lasts
+$\lceil$open exposure units / units per epoch$\rceil$ epochs and
+the open exposure \emph{is} the detection window. The security
+number and the payout-latency number are the same number.
+
+\begin{center}\small
+\begin{tabular}{rrrrrl}
+\toprule
+Traffic & $\rho$ & Probed & Epochs to & Probe & Inside \\
+(sess./epoch) & & /epoch & conviction & overhead & $N=4$? \\
+\midrule
+10 & 1.00 & 10 & 11.9 & 2.00 & \textbf{no, at any $\rho$} \\
+100 & 0.30 & 30 & 3.97 & 0.60 & yes \\
+1{,}000 & 0.05 & 50 & 2.38 & 0.10 & yes \\
+10{,}000 & 0.05 & 500 & 0.24 & 0.10 & yes \\
+100{,}000 & 0.05 & 5{,}000 & 0.02 & 0.10 & yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Probed sessions cannot exceed sessions. Meeting a four-epoch
+vesting window needs $\lceil 119/4 \rceil = 30$ probed sessions
+per epoch, so an axis serving fewer than thirty sessions in an
+epoch cannot close detection inside vesting even when every
+session is probed. Below that line the substitution attack is
+bounded by the registration bond and not by the burn, and the
+bond is sized accordingly. This is arithmetic, not a tuning
+choice, and it is carried into Section~\ref{sec:limits} rather
+than smoothed over. Buying the horizon is also not free: holding
+the floor on a hundred-session axis costs sixty percent of
+serving cost in probe overhead against ten percent on a busy one.
+That is the honest price of a bounded horizon on thin traffic.
+The
+contributor's revenue window sits inside the vesting
+promise wherever the table says yes. Colluding with a
 judge is
 no cheaper. Every sampled executor must be corrupted. A
 host--executor ring needs a corrupt fraction of the pool raised
 to the executor count, not a single fresh key.
-\item \textbf{The cost.} The shadow probe is the contributor's
+\paragraph{The cost.} The shadow probe is the contributor's
 ongoing honesty certificate. Admission sets the precedent: admission costs
 the contributor, never the network. The probed session's credit
 is docked the registered reference-run price. The price is
@@ -1335,7 +1740,8 @@ The governance quorum re-routes the demand to another. The
 residual: if every provider stops, detection degrades to disputes
 alone. That is a public, measurable state, not a hidden one. The
 development fund carries no per-session monitoring line.
-\item \textbf{The operative mechanism, per tier.} The probe above
+
+\paragraph{The operative mechanism, per tier.} The probe above
 is the operative live-traffic mechanism for artifacts with a
 non-empty executor pool --- anyone holding the sealed artifact may
 register into it, so the pool is empty only when the contributor
@@ -1345,15 +1751,29 @@ a fixed, Merkle-committed probe set with locality checks and
 behavioural dedup at registration --- not fresh-input probing,
 which needs the artifact. The near-copy-on-live-traffic residual
 for such artifacts is real and is sized by the bond, not denied.
-For the private (FHE) tier, the probe is ciphertext-native: the
+For the private (FHE) tier, where the weights are distributed to a
+real executor pool, the probe is ciphertext-native: the
 host commits the output ciphertext and the executor replays the
 homomorphic evaluation on the same ciphertext --- no plaintext
-point exists in the probe at all, and the executor pool for a
-weights-private FHE contributor is the contributor's own host,
-whose evaluation is committed and replayable on the same terms.
-Each tier therefore names one operative mechanism, and the
-empty-pool case carries its stated residual.
-\end{itemize}
+point exists in the probe at all, and the replay is deterministic
+within a committed seed. A weights-private artifact has no such
+pool: its operative mechanism is behavioural identity on the
+fixed probe set on every tier, and the near-copy residual is
+priced by the bond, never papered over with a self-judging
+executor. Each tier therefore names one operative mechanism, and
+the empty-pool case carries its stated residual.
+
+\begin{center}\small
+\begin{tabular}{@{}p{3.1cm}cccl@{}}
+\toprule
+\textbf{Tier} & \textbf{Shadow probe} & \textbf{Behavioural identity} & \textbf{Head proof} & \textbf{Dispute replay} \\
+\midrule
+Plaintext & available & available & sampled batches & available \\
+Device-encoder & available & available & sampled batches & available \\
+Private (FHE) & available (weights distributed) & only mechanism for weights-private & unavailable (no verifiable FHE) & available \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 \subsection{The ledger}
 
@@ -1369,12 +1789,14 @@ of a whole-chain reconstruction.
 By default, the tip is anchored to Ethereum once per epoch. The
 anchor payload is (tip hash, record count, last record hash).
 The anchor is the timing reference. Sampling randomness comes
-from elsewhere: a public randomness beacon (drand, or the beacon
-chain's RANDAO composed with a verifiable delay function) whose
-output the librarian does not produce. Every sample in the
+from the randomness beacon: the beacon chain's RANDAO composed
+with a verifiable delay function, with drand as the fallback
+source, and the effective seed is the ordered hash of the two ---
+$H(\text{drand} \parallel \text{RANDAO-VDF})$ --- safe as long as
+either source is honest. Every sample in the
 protocol --- probe flags, validator sampling, reference-executor
-sampling --- derives from that beacon, composed with the anchor
-for ordering. A party that appends ledger entries can therefore
+sampling, the routing draw --- derives from that beacon, composed
+with the anchor for ordering. A party that appends ledger entries can therefore
 delay a sample's clock but never choose the sample itself.
 
 \subsection{A session, end to end}
@@ -1395,8 +1817,12 @@ units actually served.
 A registered fraction of queries is also answered by a reference
 execution of the sealed artifact within the same session. The
 answers must match. An abstention consumed the trunk compute: it
-is recorded and metered at the registered reduced rate --- half
-the unit price --- never free. The boundary-mapping queries that
+is recorded and metered at the measured compute fraction actually
+consumed --- for a single-pass head, the full unit price, because
+the whole forward pass runs before the abstention is known; a
+cascade that abstains before its expensive stage registers a
+genuinely lower fraction per axis --- never free. The
+boundary-mapping queries that
 probe the margin threshold are exactly the queries most likely
 to abstain, and they pay for the compute they burn.
 
@@ -1408,6 +1834,37 @@ transaction on Arbitrum One. The batch payload carries the
 proof-hash of the computations it pays for, anchored on-chain
 with the batch (Section~\ref{sec:proofs}). A malformed credit is
 skipped with a logged event. It never reverts the batch.
+
+The librarian does not hand out the money. It publishes one
+32-byte commitment for the closed epoch: the root of a tree whose
+leaves are the individual credits. Each payee then draws its own
+credit by presenting the branch of the tree that contains it.
+This keeps the librarian out of the payment itself, which matters
+for three reasons.
+
+The librarian cannot pay one contributor and quietly leave out
+another. Every credit hangs off the same published commitment, so
+an omission is visible to the party omitted. The commitment is
+write-once, so the librarian cannot pay a favoured party and then
+replace the tree.
+
+A missing commitment stops the whole epoch rather than one
+person, and the absence is public. A payee dropped from a pushed
+batch has nothing to point at. A payee facing a commitment that
+was never published has an on-chain zero to point at.
+
+Anyone may deliver the branch, not only the payee. The credit
+always lands on the address named in the leaf, so a third party
+can only pay someone on time. It cannot redirect the payment.
+
+Each leaf states a running total rather than an increment, so
+presenting the same branch twice pays once.
+
+A librarian that publishes nothing still halts that epoch's
+income, so any party may publish the commitment under a bond,
+with a challenge decided by the same replay quorum that decides
+guilt elsewhere. A stalled librarian cannot freeze the epoch's
+payments entirely.
 
 \section{Programmable primitives}
 
@@ -1425,7 +1882,7 @@ collectively \emph{capabilities}. Once sealed, either kind is
 called an \emph{artifact}. Every rule about artifacts applies to
 both.
 
-\subsection{The standard library}
+\subsection{The standard library}\label{sec:library}
 
 A small standard library ships free with the network. The
 developer provides it. It is permissively licensed, hash-pinned,
@@ -1480,8 +1937,14 @@ contract (the code-bus blocks it consumes), an output contract
 improvement on the sealed reference workload), a measured expected
 unit count, a price per unit, and a content digest of its frozen
 weights. It earns attribution through the heads that consume it,
-by the same leave-one-out rule the chain applies to every
-contribution. This is the largest contribution surface the
+by the Shapley rule of Section~\ref{sec:fees} --- the same rule
+that divides a chain, applied to the same coalition values. The
+protocol has exactly one attribution rule, and the choice is not
+cosmetic: on the measured chain of Section~\ref{sec:measured},
+Shapley and leave-one-out divide identical coalition values into
+shares that differ by a factor of $1.66$ for the routing stage.
+This is the largest contribution
+surface the
 protocol already permits, and the feature bus is what makes such
 artifacts additive and priceable: a registered representation is
 one more block in a head's code manifest, priced and replayable
@@ -1611,11 +2074,13 @@ A U.S.-dollar figure is display-only.
 \item \textbf{Query budgets.} Every payer holds a per-axis,
 per-epoch query budget, capped at the axis's registered reference
 demand per epoch. Exhaustion refuses further queries --- never
-silently. The used-over-cap rate is a ledger-visible number per
-payer per axis per epoch: it is the enforcement surface for
-budget exhaustion and the visible shape of any extraction
-campaign, which must spread its queries over as many epochs as
-the budget allows.
+silently. The budget is enforced \emph{locally} at the gateway
+the payer connects to; it is not a ledger object and no per-payer
+consumption rate is ever published. The only publishable view is
+the per-axis aggregate for the epoch, used over cap, with no
+payer dimension --- the visible shape of an extraction campaign
+is that an axis's aggregate rises, never that a particular payer
+spends more.
 \item \textbf{Display.} Interfaces may show a U.S.-dollar
 equivalent for readability. No external price feed enters the
 settlement path.
@@ -1628,7 +2093,7 @@ Confidence is a measurement, not a warranty. Refunds follow only
 from measured contract violations, decided by replay.
 \end{itemize}
 
-\subsection{The fee flow}
+\subsection{The fee flow}\label{sec:fees}
 
 Every payment for a session splits into two streams: a fee of
 $g$ ETH becomes $0.025\,g$ to the development fund and
@@ -1650,6 +2115,24 @@ the identity (pass-through) stage, and a stage that hurts the
 chain earns zero, never a subsidy. The split always sums to one
 over the paid stages. It is released gradually, as follows.
 \end{itemize}
+
+\textbf{Shapley is the protocol's single attribution rule.} It
+binds here, and it binds for representation artifacts
+(Section~\ref{sec:library}). The distinction matters in money, not only in
+notation: on the measured two-stage chain of
+Section~\ref{sec:measured}, Shapley and leave-one-out divide the
+\emph{same} four coalition values into shares that differ by a
+factor of $1.66$ for the routing stage. Naming two rules would
+mean owing two amounts.
+
+Shapley's cost is what caps chain length. A chain of $m$ stages
+needs $2^m$ end-to-end coalition evaluations, so the values are
+not computed per session. They are computed once per registered
+chain against its sealed reference workload, published with the
+chain, and reused by every session that chain serves until it
+re-registers. Chain length is capped at four stages, which is
+sixteen evaluations --- an amount a validator can replay. A chain
+longer than four is not admissible.
 
 \begin{itemize}
 \item \textbf{Vesting.} A credited amount $c$ vests linearly over
@@ -1674,7 +2157,9 @@ That happens only after vesting and claim.
 \textbf{Security floors (fixed).} The security parameters carry
 hard floors that sit outside ordinary governance, exactly as the
 zakat rule does. The probe rate $\rho$ may rise with notice but
-never below $0.05$; the vesting window $N$ never below four
+never below $0.05$, and rises above that floor as far as an
+axis's traffic requires to hold thirty probed sessions per epoch;
+the vesting window $N$ never below four
 epochs; the admission validator sample $k$ never below three; the
 reference-executor sample $k_e$ never below two; the audit
 fraction never below one in ten. A governance vote may raise any
@@ -1686,12 +2171,20 @@ knobs.
 
 The development fund's bootstrap duties are not its permanent
 purpose. The bootstrap duties are audits, tooling, security
-monitoring, and public-good research.
+monitoring, and public-good research. Maintenance is not a fund
+grant: the upkeep of the standard library, dependency
+re-certification, security audits, and pinning are paid roles on
+the operations line, measured and funded per unit of work like
+every other operations role --- so they continue unchanged after
+the fund converts, and there is no discretionary maintenance
+budget for the end state to defund.
 \begin{itemize}
 \item \textbf{The end state (fixed).} Once GEODE is mature, the
 fund converts permanently into a zakat rule. Its income goes to
 those who need it most. The income is one-fortieth (2.5\%) of
-every fee, plus the registration fees.
+every fee, plus the registration fees. The full stream converts;
+nothing is carved out for maintenance, because maintenance is
+already a paid operations role, not a fund expense.
 \item \textbf{The belief behind the number.} This is stated as a
 belief, not a fact. A mature economy grows at roughly 2--2.5\% a
 year. That growth is produced by everyone in it, directly or
@@ -1789,6 +2282,33 @@ weight at the epoch-boundary snapshot that opens it. Claiming
 or earning during the vote does not move the tally.
 \end{itemize}
 
+Where this sits in the literature. A published impossibility
+result~\cite{concave2026} shows that no voting rule deriving power
+\emph{solely from wallet balance} resists Sybil splitting, and
+measures the amplification on real DAOs: three to four orders of
+magnitude under quadratic voting, far more under steeper concave
+rules. The twenty-percent cap is such a concave rule, so the cap
+alone would not save it. What keeps this design outside that
+theorem is that weight is not a balance at all: it is a record of
+verified, externally paid work, unbuyable and non-transferable.
+MeritRank~\cite{meritrank2022} attacks the same problem from the
+other side --- it \emph{bounds} rather than prevents the gain from
+a Sybil ring, by decaying contribution value with transitivity and
+connectivity over a feedback graph. Our rule is binary where
+MeritRank is graded: credits earned from a payer inside the
+earner's own linkage closure carry no weight at all. Binary is
+cheaper to replay and harder to tune adversarially; graded decay
+degrades more gracefully against rings longer than the closure
+depth, which is a residual we state in
+Section~\ref{sec:limits} rather than repair. The
+forensic-detection literature on wash
+trading~\cite{washnft2023, washnft2306} identifies the same
+behaviour after the fact; we
+prevent it from ever entering the weight base instead, because a
+detector that runs after settlement cannot un-cast a vote.
+Trust-graph connectivity~\cite{poupko2019} is the nearest relative
+of the $d$-distinct-identity floor.
+
 \subsection{Registration}
 
 Registering a capability --- an arm or a primitive --- is one
@@ -1834,9 +2354,10 @@ they require no identity.
 budget that pays the sampled validators. Admission costs the
 contributor, never the network.
 \item \textbf{No stake.} There is no stake and no principal
-lockup. Earned-but-unclaimed credits later serve as voting
-weight (the voting-weight rule above). They are never a
-registration requirement.
+lockup. Vested-but-unclaimed credits (the claimable balance)
+can be locked into a voluntary escrow, where they carry voting
+weight; unescrowed credits are claimable and carry none. They
+are never a registration requirement.
 \end{itemize}
 
 \subsection{Slashing: burn, graded, replay-gated}
@@ -1850,7 +2371,14 @@ to the pool pays rivals to destroy each other. Routing them to the
 development fund pays the fund's managers to convict. Burn
 penalizes only the cheater.
 
-Penalties are graded, mirroring Ethereum's philosophy:
+Penalties are graded, mirroring Ethereum's philosophy. The
+\emph{promise} is the unvested credit balance: credits that have
+been attributed but have not yet vested are the promise of
+payment, and burning the promise is the penalty. \emph{Open probe
+exposure} is the window during which a session's credits are
+frozen because the session is under a serve-and-compare probe:
+while a probe is unopened, a mismatch could still surface, so the
+accrued credits stay unclaimable until the probe resolves.
 
 \begin{center}
 \begin{tabular}{@{}p{3.4cm}p{7.6cm}@{}}
@@ -1886,6 +2414,18 @@ deviation. Any party may file the dispute with a deposit. The
 computation decides guilt. A false conviction requires a false
 replay. The probability of that is effectively zero for an honest
 contributor.
+
+The conviction is filed as a proposal, not an order. The filing
+carries a bond and sits in a challenge window of one epoch. If
+nobody refutes it, the slash executes with no privileged party in
+the call. A refutation --- posted against the same bond, by
+anyone who re-ran the replay and found the accusation false ---
+escalates the filing to the replay quorum, which decides by the
+same computation. The loser of the dispute loses its bond, so a
+false accusation is not merely wrong, it is expensive, and a
+conviction that survives a challenge still lands. The bond is
+never paid to the network: the loser's stake is burned, matching
+the rule that nobody gains from a penalty.
 
 \subsection{Quorum takedown}
 
@@ -1923,14 +2463,14 @@ votes only while active, having responded to at least half of its
 sampled rounds. It votes only with recent work: a responded
 round inside the trailing two epochs. A veteran who went silent
 loses the vote entirely. This pedigree decides whether the vote
-counts. How much it weighs is separate: the voter's
-thawed-but-unclaimed earnings, per behavioural identity. A flood
+counts. How much it weighs is separate: the voter's escrowed
+vested-but-unclaimed credits, per behavioural identity. A flood
 of fresh registrations carries no weight at all --- it fails the
 pedigree gate. A vote cannot be bought on short notice, and
 weight cannot be banked long in advance --- it dies with a
 claim.
 \item \textbf{Verdict.} Let $w_v$ be validator $v$'s earned
-weight --- its thawed-but-unclaimed credits --- and
+weight --- its escrowed vested-but-unclaimed credits --- and
 $o_v \in \{0, 1\}$ its vote. A takedown ratifies when
 \begin{equation}
 \frac{\sum_v w_v o_v}{\sum_v w_v} \geq \tfrac{2}{3}
@@ -1961,6 +2501,20 @@ unformalized. It is a governance and legal question, not a
 technical one. Every takedown is a public record: the evidence,
 the votes, and the verdict.
 \end{itemize}
+
+The filing mechanism is uniform across the registry: admission,
+delisting, and the ministerial freeze are all proposed the same
+way. Any party files the decision it believes was made --- the
+evaluation rule passed, the quorum ratified, the order
+authenticated --- and posts a bond. The filing sits in a
+challenge window of one epoch. Unchallenged, it executes with no
+privileged party in the call. Challenged, the replay quorum
+decides; the loser of the dispute loses its bond, and the bond is
+burned, never paid to the network. A false filing is therefore
+refutable by the party it harms --- the operator whose artifact a
+false delisting would remove, the contributor whose artifact a
+false admission would expose --- and refuting costs the defender
+nothing if it is right.
 
 \subsection{Content orders and the authority-key registry}
 
@@ -2167,10 +2721,27 @@ serve; retires per the headroom rule \\
 Validator & per accepted challenge, epoch-vested \\
 Reference executor & share of the registered reference-run price
 on probed sessions, paid from the probed contributor's dock \\
+Operations line & the non-refundable posting fees of the
+force-inclusion queue, pulled by whoever did the work (the
+librarian for prompt incorporation, the clearer after the
+deadline); funds the librarian's gas, batch verification,
+dispute replay, and tally work \\
 Development fund & 2.5\% of all fees + registration fees \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+The operations line is sized by measured cost, not by a share of
+revenue. At the reference workload --- ten thousand sessions per
+epoch on the vision axis --- the itemized cost is about
+\$1.23 per epoch (librarian on-chain gas measured on the current
+contracts, batch verification at the measured proof cost, one
+dispute replay, one tally, and serving bookkeeping). A base
+posting fee of about \$0.19 per entry closes the line at a
+registered 1.25$\times$ margin; that fee is a registered floor,
+not a suggestion. An axis whose entry volume falls short of the
+workload does not subsidise the line: the accrual is on chain,
+so the shortfall is public.
 
 \begin{figure}[t]
 \centering
@@ -2284,34 +2855,44 @@ demonstration, not as a competitive claim.
 \toprule
 \textbf{Axis} & \textbf{Measurement} & \textbf{Result} \\
 \midrule
-Image routing & DomainNet, 345 classes, per-kind accuracy & 0.63--0.91 \\
-& router picks the right specialist & 0.91 \\
-& routed overall accuracy, what the user experiences & 0.76 \\
-Code & Qwen2.5-Coder 7B, HumanEval pass@1 / pass@3 & 0.860 / 0.884 \\
-& anchor: Qwen2.5-Coder 1.5B, pass@1 & 0.598 \\
-Speech & Whisper ladder, LibriSpeech WER & 0.0296 / 0.0279 / 0.0261 \\
-Voice & TTS loop re-transcribed, WER (real speaker) & 0.052 \\
-Vision & Open Images, DINOv2 trunk ladder, top-1 & 0.136 / 0.157 / 0.164 \\
-& served subset (129 classes), refuses 472 & 0.901 \\
-Fusion & clean cell: ms codes + native DINOv2, concatenated & 0.548 \\
-& same cell, single encoder (ms codes only) & 0.242 \\
-& same cell, CCA-aligned instead of concatenated & 0.511 \\
-Nonlinearity & quickdraw, frozen backbones (linear probes) & 0.60--0.63 \\
-& quickdraw, same features + random features & 0.675 \\
-Text & frozen BERT-base + ridge: SST-2 / IMDb / MNLI-m & 0.857 / 0.828 / 0.537 \\
-Audio & frozen wav2vec2-base + ridge, Speech Commands v2 & 0.879 \\
-Number series & in-house temporal arms, Mackey-Glass one-step & 0.0032 / 0.00031 \\
+Image routing & DomainNet, 345 classes, per-kind accuracy $\uparrow$ & 0.63--0.91 \\
+& router picks the right specialist $\uparrow$ & 0.91 \\
+& routed overall accuracy, what the user experiences $\uparrow$ & 0.76 \\
+Code & Qwen2.5-Coder 7B, HumanEval pass@1 / pass@3 $\uparrow$ & 0.860 / 0.884 \\
+& anchor: Qwen2.5-Coder 1.5B, pass@1 $\uparrow$ & 0.598 \\
+Speech & Whisper ladder, LibriSpeech WER $\downarrow$ & 0.0296 / 0.0279 / 0.0261 \\
+Voice & TTS loop re-transcribed, WER (real speaker) $\downarrow$ & 0.052 \\
+Vision & Open Images, DINOv2 trunk ladder, top-1 $\uparrow$ & 0.136 / 0.157 / 0.164 \\
+& served subset (129 classes), refuses 472 $\uparrow$ & 0.901 \\
+Text & frozen BERT-base + ridge: SST-2 / IMDb / MNLI-m $\uparrow$ & 0.857 / 0.828 / 0.537 \\
+Audio & frozen wav2vec2-base + ridge, Speech Commands v2 $\uparrow$ & 0.879 \\
+Number series & in-house temporal arms, Mackey-Glass one-step NRMSFE $\downarrow$ & 0.0032 / 0.00031 \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{The architecture's own cells (reproduction checks above; these are not published-checkpoint numbers)}} \\
+\midrule
+Fusion & clean cell: ms codes + native DINOv2, concatenated $\uparrow$ & 0.548 \\
+& same cell, single encoder (ms codes only) $\uparrow$ & 0.242 \\
+& same cell, CCA-aligned instead of concatenated $\uparrow$ & 0.511 \\
+Chaining & DomainNet router $\to$ 6 specialists, end to end $\uparrow$ & 0.2741 \\
+& same features, one monolithic head (no chain) $\uparrow$ & 0.2450 \\
+& same chain given the true domain (oracle route) $\uparrow$ & 0.2995 \\
+Nonlinearity & quickdraw, frozen backbones (linear probes) $\uparrow$ & 0.60--0.63 \\
+& quickdraw, same features + random features $\uparrow$ & 0.675 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
+$\uparrow$ higher is better; $\downarrow$ lower is better. The
+ladder rows (Whisper speech, DINOv2 vision) are families of models
+of increasing size, reported in increasing-size order.
+
 A few readings from this table, stated plainly. The vision trunk
-ladder is monotonic but far below the 0.8 deployment bar. A trunk
-ladder is a family of models of increasing size. The arm serves
-only a scoped subset and refuses the rest rather than guess. The
-TTS loop reads 0.052 WER when conditioned on a
-real speaker. The router and the code arm are the strongest
-measured results. They are still single-corpus.
+ladder --- a family of models of increasing size --- is monotonic
+but stays far below the 0.8 deployment bar, with the arm serving
+only a scoped subset and refusing the rest rather than guessing.
+The TTS loop reads 0.052 WER when conditioned on a real speaker.
+The router and the code arm are the strongest measured results in
+the table, and both remain single-corpus.
 
 The fusion and nonlinearity rows are the architecture's own
 measurements, and they belong together. On a clean two-encoder cell, concatenation
@@ -2332,8 +2913,59 @@ with the private serving path (the device computes the mapped
 features before encrypting). The wall was a ceiling of the linear
 readout, not of the frozen features. The same map was measured on
 the text, audio, and number-series axes and lifts none of them:
-it is a repair for a measured linearity ceiling, not a universal
+it is a fix for a measured linearity ceiling, not a universal
 lift, and it is reported with that boundary.
+
+\paragraph{The chaining row is the one the thesis rests on.}
+Assumption 3b says stages can be linked without significant
+degradation. Every other row in this table measures a single
+stage, and the fusion rows measure concatenation, which is a
+different operation: neither tests the contract check, and neither
+tests what a first stage's errors do to a second. The cell
+runs the composition the architecture is actually built from --- a
+router feeding specialists --- on the sealed DomainNet selection
+(138,000 train and 34,500 held-out rows, 345 classes over 6
+domains, DINOv2-small features at $56\times56$). The monolithic
+head reproduces the sealed read of $0.245014$ exactly, which is
+what licenses reading anything else off the same features.
+
+The chain reaches $0.2741$ against the monolith's $0.2450$. It
+wins, by $2.9$ points, and the win is not free: the chain carries
+six 345-way heads where the monolith carries one, and each
+specialist is fitted on roughly a sixth of the rows. It trades
+parameters for training data and comes out ahead. The comparison
+is artifact-matched rather than parameter-matched --- two stages
+are two priced artifacts whatever their size, which is the
+matching the fee rule divides over.
+
+The router is right about the domain $0.815$ of the time. Given
+the true domain instead, the same specialists reach $0.2995$. So
+routing error costs $2.5$ points of the $5.5$ points that
+specialisation is worth: the chain wins today and would win by
+roughly twice as much with a perfect router. That decomposition
+was registered before the run, because the two ways this cell
+could have failed call for opposite responses, and deciding which
+one applied after seeing the numbers would have been worthless.
+
+Two boundaries. This is one chain, of length two, whose stages
+read the same frozen features; nothing here speaks to length
+three, to crossing modalities, or to stages that must serialise
+through a text interface. And the cell is a chain that
+\emph{works} --- a degrading chain would have been published here
+instead, with assumption 3b withdrawn.
+
+\paragraph{The same chain prices the attribution rule.}
+Section~\ref{sec:fees} makes Shapley the protocol's single
+attribution rule. This cell is where that choice stops being
+notation. The four coalition values are $v(\emptyset) = 0.0029$
+(no router, no head), $v(\{A\}) = 0.0058$ (router with a null
+head), $v(\{B\}) = 0.2450$ (null router with the monolithic
+head), and $v(\{A,B\}) = 0.2741$. Shapley awards the router
+$0.0588$ of the pool. Leave-one-out, applied to the same four
+numbers, awards it $0.0977$ --- a factor of $1.66$ more. The two
+rules are not interchangeable, and a protocol naming both would
+owe two different amounts for the same work. This is why the rule
+is named once and used everywhere.
 
 The breadth rows state the recipe's actual coverage. The same
 construction --- a frozen publisher encoder with a closed-form
@@ -2357,13 +2989,24 @@ on all 601 Open Images classes is $0.164$ --- far below any
 deployment bar, and not the number the arm sells. The arm is
 scoped: it serves the 129 classes it measures at least $0.8$ on,
 refuses the other 472 rather than guess, and publishes both
-figures beside the score. Under the coverage-adjusted metric the
-scoped arm reads $0.901 \times 0.049 = 0.044$ against the
-full-coverage arm's $0.164 \times 1.0 = 0.164$: the raw metric's
-ranking inverts, which is the point of the metric. A buyer
+figures beside the score. Those 129 classes carry $0.049$ of the
+held-out rows. Under the declared-label-set rule of
+Section~\ref{sec:router} the two directions are measured. A buyer
+declaring the 129 served classes gets the scoped arm at $0.9378$
+against the full-coverage arm's $0.9010$ on the same rows: scoping
+wins because restricting the argmax to the served classes removes
+472 distractors, which is a real gain and not a definitional one.
+A buyer declaring all 601 classes finds the scoped arm
+\emph{unqualified} --- it does not cover the declaration --- and
+the full-coverage arm at $0.1643$. The coverage-product
+alternative would have scored the scoped arm
+$0.901 \times 0.049 = 0.044$ against $0.164$ and handed
+best-quality mode to the weaker arm.
+A buyer
 declares the task, sees the served set and the coverage before
-paying, and an abstention is metered at the reduced rate --- half
-the unit price, never free. The registered upgrade path
+paying, and an abstention is metered at the measured compute
+fraction --- the full unit price on a single-pass head, per axis
+--- never free. The registered upgrade path
 for the same axis is measured: stronger frozen features (the
 CLIP-class trunk closed most of the per-domain gap over the
 DINOv2 ladder) and the random-feature map above.
@@ -2411,12 +3054,73 @@ Lazebnik et al.~\cite{lazebnik2006}; Fisher vectors, Perronnin and
 S\'anchez~\cite{perronnin2013}; triangle (soft-assignment) coding,
 van Gemert et al.~\cite{vangemert2010}; prototype-based features,
 Coates et al.~\cite{coates2011}.
+\item \textbf{Fixed random features} --- randomized maps that
+approximate a kernel without learning: Rahimi and
+Recht~\cite{rahimi2007}, and the hashing trick of Weinberger et
+al.~\cite{weinberger2009}. Section~\ref{sec:measured} reports a
+random-features row; it is a reproduction of this construction and
+claims nothing new about it. Their relevance here is the principle
+GEODE depends on --- that a \emph{frozen, untrained} map can carry
+most of a task's signal to a closed-form readout.
 \item \textbf{Closed-form readouts}: ridge regression with exact
 solvers, the standard linear-model toolbox; exact concept erasure
 in closed form, Belrose et al.~\cite{belrose2023}.
 \item \textbf{Data value}: the Shapley value~\cite{shapley1953};
 Data Shapley for training data, Ghorbani and
 Zou~\cite{ghorbani2019}.
+\item \textbf{Paying by measured contribution}. Agarwal, Dahleh
+and Sarkar~\cite{agarwal2019} give the closest published relative
+of GEODE's payment principle: a marketplace that pays data
+sellers by their measured marginal contribution to a buyer's
+model quality. It prices \emph{data} through a centralized
+broker; there is no frozen registered artifact, no replayable
+decision record, and nothing at stake. Chen et
+al.~\cite{chen2019} price model instances \emph{to buyers} along
+a tuning path rather than paying upstream contributors, and Sun
+et al.~\cite{sun2022} maximize a broker's profit over federated
+training rounds rather than over registrations. Numerai's
+tournament~\cite{numerai} is the deployed system nearest the
+principle --- sealed held-out scoring, payment by measured
+out-of-sample contribution, stake at risk --- and it has never
+published, which is why we cite it as a system rather than as
+literature.
+\item \textbf{Redistribution mechanisms}: the quadratic-funding
+line, Buterin, Hitzig and Weyl~\cite{buterin2018}, is the
+precedent for the development fund's matched pacing.
+\item \textbf{Replication and spot-checking of untrusted work}:
+ringers and uncheatable distributed computation, Golle and
+Mironov~\cite{golle2001}; uncheatable grid computing, Du et
+al.~\cite{du2004}; redundant-execution consensus in
+BOINC~\cite{boinc2004} and Golem~\cite{golem2016}. The shadow
+probe is this idea, priced. What is different is only that the
+probe's outcome settles money against a registered artifact
+rather than discarding a result.
+\item \textbf{Dispute by fraud proof}: Truebit's verification
+game~\cite{truebit2017} and the optimistic-rollup lineage
+descended from it. GEODE's dispute-by-replay is the same
+skeleton --- assume honest, challenge on objection, settle by
+re-execution --- narrowed to a deterministic head fit, which is
+what makes the bisection unnecessary.
+\item \textbf{Behavioural model identity}: fingerprinting a
+network by its decision boundary, IPGuard~\cite{ipguard2021};
+conferrable adversarial examples, Lukas et al.~\cite{lukas2021};
+Proof-of-Learning, Jia et al.~\cite{pol2021}. The fingerprint of
+Section~\ref{sec:proofs} is a fingerprint in exactly their sense.
+We use it to bind economic identity, not to prove ownership in a
+court.
+\item \textbf{Zero-knowledge inference}: Kang et
+al.~\cite{kang2022}, zkCNN~\cite{zkcnn2021}, ZEN~\cite{zen2021}
+and the deployed EZKL and Modulus toolchains;
+SafetyNets~\cite{safetynets2017} is the interactive-proof
+ancestor. All prove
+that \emph{an} inference ran as specified. None establishes that
+the artifact was \emph{useful}, which is the quantity GEODE
+pays on. The two are complementary, not competing.
+\item \textbf{Sealed compute environments}: Ocean Protocol's
+compute-to-data~\cite{ocean2019} is the closest existing form of
+the challenge session's sealed scoring --- the buyer's data never
+leaves its enclosure and only a result escapes. Ocean settles a
+data-access payment; GEODE settles a measured-utility payment.
 \item \textbf{Tool use}: Toolformer and the tool-augmented-model
 line, Schick et al.~\cite{schick2023}.
 \item \textbf{Selective classification}: reject options and
@@ -2469,9 +3173,18 @@ mechanism whose incentive rules are registered before they are
 tested. The mechanism itself is a conjecture under test. See the
 next section.
 
-Two composition neighbors bound the claim. AdapterHub~\cite%
-{ruckle2020} is a registry of composable adapters over frozen
-backbones; it has no versioned-block semantics and no economy.
+Composition neighbors bound the claim. The adapter line does not
+begin with AdapterHub: residual adapters are Rebuffi, Bilen and
+Vedaldi~\cite{rebuffi2017}, who showed that many visual domains
+can share one frozen backbone through small per-domain modules.
+AdapterHub~\cite{ruckle2020} made that line a registry of
+composable adapters over frozen backbones; it has no
+versioned-block semantics and no economy.
+LoraHub~\cite{lorahub2023} composes independently trained
+low-rank modules at inference by gradient-free weight search ---
+the nearest composition relative --- but the composition is
+discovered per task rather than declared, and there is no
+versioning and no attribution.
 CoMET~\cite{comet2026} composes frozen backbones by
 PCA-compressed concatenation into a tabular-foundation-model head
 with no training --- the same frozen-concatenation recipe GEODE
@@ -2480,15 +3193,265 @@ a registry architecture and carries no attribution. Model
 stitching~\cite{bansal2023} is the methodological precedent for
 asking whether two encoders' representations are compatible at
 all --- a scientific probe, not a production composition
-architecture. Two registered prior-art sweeps (one per claim, both
-with validated instruments) found no system combining composed
+architecture. Feature stores~\cite{michelangelo2017} are the
+closest operational relative of the versioned code bus: named,
+versioned, reusable features shared across consumers. They are
+organization-internal, carry no economy, and attribute nothing.
+
+Three prior-art sweeps stand behind the position, the third of
+them run on two indexes after the first two were found to be
+arXiv-only --- a coverage limit that made them structurally blind
+to pre-2010 conference work and to deployed systems that never
+published, which is to say blind to Rahimi and Recht and to
+Numerai. The two-index sweep located no system combining composed
 codes, versioned upgrade-without-invalidation, and payment by
-measured downstream use. Absence from a search is recorded as
-absence from that search, never as a first.
+measured downstream use. It did locate the neighbors named above,
+several of which the arXiv-only sweeps had missed. The honest
+statement of what is claimed is therefore narrower than ``no one
+pays by measured contribution'' --- Agarwal et
+al.~\cite{agarwal2019} do. It is that no located work pays by the
+measured contribution of \emph{frozen, independently registered,
+composable} artifacts under a replayable settlement rule. Absence
+from a search is recorded as absence from that search, never as a
+first; no index covers unpublished deployed systems, as Numerai
+demonstrates inside the sweep itself.
 
-\section{Known limits}
+\section{Known limits}\label{sec:limits}
 
-Honesty about limits is part of the design.
+Honesty about limits is part of the design. Two kinds of limit
+are kept apart. \emph{Structural residuals} are limits the design
+carries on purpose, priced or contained but not removed. \emph{Open
+questions} are limits that need data the system does not have yet.
+Each group is ordered by severity, most severe first.
+
+\paragraph{Structural residuals}
+
+\begin{enumerate}
+\item \textbf{The frozen encoder is trusted, not audited.} The
+encoder is a publisher checkpoint, and no one can audit its
+pretraining history. The deeper consequence: every verification
+instrument --- the shadow probe, replay, dispute, proof ---
+verifies that the served model matches the sealed artifact. A
+trunk that is malicious as sealed, or backdoored by its
+publisher, passes all of them by construction. Sameness is
+certified; the sealed artifact itself is trusted, not audited.
+That is the failure mode with the largest blast radius, and it is
+stated first, not hidden mid-list.
+\item \textbf{No mechanism survives a lying majority.} Every
+distributed system that anyone can join carries this residual;
+GEODE reduces the damage a lying majority can do to economics and
+visibility, and does not pretend to remove the risk itself.
+\item \textbf{The randomness beacon is an external dependency.}
+Every sampling guarantee in the protocol --- probe flags,
+validator sampling, reference-executor sampling, the routing
+draw, corpus draws --- reduces to the beacon. The registered
+composition is $H(\text{drand} \parallel \text{RANDAO-VDF})$,
+safe as long as either source is honest, and the composition is
+required, not an option. The residual is stated plainly: a
+compromised pair of sources compromises every sampling guarantee
+at once; the mitigation is the composition, and a single-source
+failure mode (one source unavailable) falls back to the honest
+source alone, which is the weaker of the two.
+\item \textbf{Thin axes cannot close detection inside vesting.}
+The substitution test needs 119 probed sessions, so a four-epoch
+vesting window needs thirty probed sessions per epoch. Probed
+sessions cannot exceed sessions. An axis serving fewer than
+thirty sessions in an epoch therefore cannot bring the horizon
+inside vesting at any probe rate, even at $\rho=1.0$: at ten
+sessions per epoch the horizon is 11.9 epochs. On such an axis
+the substitution attack is bounded by the registration bond
+alone, not by the burn, and the bond must be sized against the
+revenue extractable over the true horizon rather than over the
+vesting window. Above the line the horizon is bought with probe
+overhead --- sixty percent of serving cost at a hundred sessions
+per epoch, against ten percent on a busy axis --- which is a
+bootstrap cost, not a free property. This is arithmetic over the
+sealed test statistic; no tuning can change it.
+\item \textbf{Model extraction is slowed, not stopped.} The trunk is a
+public checkpoint, so a buyer computes codes locally and probes
+the head. The defenses --- coarse confidence buckets, metered
+abstentions, per-payer query budgets, and the lottery router ---
+make the recovery of a classification head cost a measured
+multiple of the head's expected lifetime revenue on the axis
+(the registered simulation puts the bucketed oracle at $55\times$
+lifetime revenue against $2.8\times$ for the raw-margin oracle).
+That is an economic boundary, not a cryptographic
+one: a buyer who does not care about cost can still extract.
+The same is true of every deployed black-box model.
+\item \textbf{Weights-private artifacts are verified by behavioural
+identity on a fixed sealed probe set}, not by fresh-input
+probing: an executor pool needs the artifact, and a contributor
+that keeps the weights private has an empty pool by
+construction. The near-copy-on-live-traffic case --- a substitute
+that differs from the sealed artifact on a small fraction of
+fresh inputs --- is exactly the case only fresh-input probing
+catches, and for weights-private artifacts it is bounded by the
+per-axis bond and the dispute path, not by detection. That
+residual is priced, not hidden.
+\item \textbf{The privacy moat and the measured capability sit on
+disjoint axes today.} Private serving through homomorphic
+evaluation applies to closed-form heads --- exactly the axes
+where frozen-encoder accuracy is weakest (vision). The axes where
+the frozen-encoder recipe is strongest (code, speech) are
+autoregressive or end-to-end models, where private serving means
+trunk-level homomorphic evaluation at orders of magnitude higher
+cost per token --- conceded as impractical today. So at present:
+the axes where the network is competitive get no privacy moat,
+and the axes with the moat are not competitive. The intersection
+is not claimed to exist; it is the explicit target of the
+dependency chain --- the random-feature nonlinearity fix,
+native-resolution re-extraction, the versioned feature bus, and
+cheaper homomorphic evaluation --- each step measured before it
+is relied on. Until that chain closes, the moat and
+the capability are separate claims, and this document does not
+merge them.
+\item \textbf{Serving substitution is detected probabilistically.} A
+fraction of queries is answered twice: by the serving capability
+and by a reference execution of the sealed artifact. The answers
+must match. A swapped model is caught at the probe rate per
+query, with a per-epoch minimum on quiet axes. The serving host's
+answer is committed before the probe flag is revealed. Under the
+private tier the probe is ciphertext-native: the host commits the
+output ciphertext --- deterministic within a committed seed given
+the input ciphertext and the sealed head --- and the executor
+re-runs the homomorphic evaluation on the same ciphertext and
+compares. Determinism comes from committed-seed flooding: the
+host binds a flooding ciphertext to the seed it commits with its
+answer, and every evaluation under that seed adds that same
+flood, so the output bytes are reproducible by the executor. A
+fresh seed is a fresh flood. The executor then
+sees no plaintext at all; the private tier's probe is strictly
+more private than the plaintext tier's, and adjudication is the
+same table: an unopened commitment or a mismatched evaluation is
+a deviation. The
+remaining residual is executor--host collusion. It requires corrupting every sampled
+executor of the same session. That is a corrupt fraction of the
+executor pool raised to the executor count. The executors' own
+slashable promises bound it further.
+\item \textbf{The reference executor sees the probed input in plaintext}
+--- a further plaintext point alongside the gateway and the
+serving host. The ledger never carries the answer: the answer
+entry is a commitment whose opening exists only inside the
+sealed replay environment. The same
+no-retention, no-training data contract binds every point.
+Cryptography does not. The private serving path removes the
+serving-host point entirely for users who
+take it: the contributor evaluates the head and trunk on
+ciphertext only, and the device decrypts. The
+plaintext tier remains for axes whose users choose it, flagged as
+such. Whether ciphertext-only evaluation reduces the
+contributor's processing obligations is a question reserved for
+counsel, not claimed here.
+\item \textbf{Codes are not inputs, but they are not anonymous
+either.} A
+code vector summarizes an input, and feature-inversion attacks
+against public frozen encoders reconstruct recognizable inputs
+from codes. The data contract therefore covers codes with the
+same no-retention, no-training rules as the inputs they
+summarize. Inversion risk is a named residual: contract rules can
+be broken, and cryptography does not cover codes.
+\item \textbf{A corrupt validator's damage is bounded by the sealed
+scoring environment:} validators receive aggregate scores, never
+rows. Inside the environment, sharding means no single key reads
+the whole corpus at once. A row that leaks identifies its shard.
+A corrupt majority of validators remains outside the
+mechanism's reach.
+\item \textbf{Ballot secrecy rests on the tally committee.} The
+commitments, proofs, and opened sums stay public; a corrupt
+majority of the sampled committee could open individual ballots.
+That is the same corrupt-validator boundary the rest of the
+design carries.
+\item \textbf{The authority-key registry trusts governments' own
+channels.} Multi-channel pinning raises the cost of a forged
+order; it does not make forgery impossible. The effect of even a
+forged order stays fixed --- a freeze, never a burn.
+\item \textbf{Early networks are concentrated.} The design makes
+concentration expensive to acquire, capped in effect, and
+self-diluting through the lottery router. It does not pretend a
+two-participant genesis network is decentralized. It makes the
+path out of concentration automatic.
+\item \textbf{A payer can grind its own route.} The lottery seed
+contains the session identifier, and the payer declares the
+session, so a payer can re-declare until a preferred arm wins.
+The beacon output for the round closes after the declaration, so
+no payer can predict the draw when choosing a session; forcing
+a preferred arm means re-declaring across rounds, each attempt
+costing a declaration fee. Measured on the anchor-seeded form of
+the seed, where the anchor is public within an epoch, forcing
+the least-favoured of three arms took $3.1$ declarations on
+average. No host can do this, because no host owns another
+party's session identifiers and the seed carries no arm field.
+The residual is small: each attempt costs a declaration fee, and
+a payer can already express arm preference openly through
+best-quality mode, so grinding buys a preference it could have
+asked for.
+\item \textbf{Sealed evaluation data invites probing.} Membership and
+influence attacks run through repeated submission. The defenses ---
+aggregate-only verdicts, bounded reporting precision, fees per
+submission, rotation --- push the signal below the cost of
+probing, not to zero. The challenge layer trades the
+corpus-custody problem for label publication. Disposable
+challenge data and per-submission budgets bound that trade.
+\item \textbf{The wallet is the identity boundary.} Contract-level rules
+stop the transfer of unrealized claims. No code can stop a person
+from selling their own key, the cryptographic key that controls
+their address's funds. That residual is inherent to systems anyone
+can join.
+\item \textbf{Prices are contributor-set and can move.} Routing follows
+the posted prices within timelock bounds. Predatory cycles ---
+undercut to capture traffic, then raise --- are slowed and
+visible, not eliminated.
+\item \textbf{Meter-side metadata leaks on duration-metered axes.}
+Query budgets are enforced locally at the gateway and nothing per
+payer is published, but a duration-metered axis (audio, video)
+necessarily meters a duration. The mitigation is a registered
+padding quantum: durations are metered in whole fifteen-second
+blocks, never in exact seconds, so the meter cannot be turned
+into a per-session length stream. The residual is that a
+fifteen-second block still distinguishes a short clip from a long
+one; only a per-query flat meter would remove that, and it would
+price short clips out.
+\item \textbf{The query-budget enforcement surface is local, not
+protocol-level.} A payer can connect through a fresh gateway and
+receive a fresh local budget, so the budget is a cost lever and
+an anti-extraction pacing rule, never a hard network-wide
+refusal. A network-level bound, where the extraction argument
+needs one, is published only as the per-axis aggregate for the
+epoch, never per payer.
+\item \textbf{Suppliers hold ETH price risk across the vesting
+window.} Prices are ETH-denominated and timelocked in rule, and
+earnings vest over four more epochs with a claim freeze under
+open probe exposure. The drift-band option softens this --- a
+contributor may register a price that may move up to ten percent
+per epoch, still timelocked in rule but not in value, so a large
+market move can be tracked without a governance action per
+epoch --- but the protocol does not hedge the residual: a
+supplier whose costs are fiat-denominated holds the ETH exchange
+risk across the vesting window, and no external price feed
+enters the settlement path by design.
+\item \textbf{The reference hosting cost is a single lever below
+three verified arms.} One developer-posted figure simultaneously
+sets the per-axis price floor, the developer's own bootstrap
+price, and every competitor's bond. The design makes it a
+measured, multi-party statistic: the median of the posted
+hosting costs of all admitted arms on the axis with at least one
+epoch of verified traffic. Below three such arms the developer's
+figure is the floor and the lever is live, which is why an axis
+in that state publishes which rule is operative. A buyer or
+competitor on a young axis should read the floor as one party's
+figure, not a market statistic.
+\item \textbf{The validator fee schedule is registered with its
+Sybil-recovery fraction beside it}, and its admissible window is
+thin: at the reference parameters the break-even fee sits
+$2.5\times$ below the cash-flow-positive ceiling, and a live
+validator-cost trace above that ceiling closes the window --- at
+which point the network adds a validator bond forfeitable on
+delisting or accepts the residual in the open. The reference
+parameters are the registered launch values; the computation
+re-runs with the live validator-cost trace.
+\end{enumerate}
+
+\paragraph{Open questions}
 
 \begin{enumerate}
 \item Results are on one benchmark per axis. The corpora are
@@ -2507,143 +3470,10 @@ per-epoch detection rates puts the 90th-percentile horizon at
 four epochs. The four-epoch vesting window covers that horizon:
 detection lands before the full promise has vested. The real
 detection rate of the live system remains a deployment question.
-\item No mechanism survives a lying majority. GEODE reduces that
-risk to economics and visibility. It does not remove it.
 \item Out-of-distribution detection is an open research problem
 in this system. It is measured and published as such.
 \item Regulatory treatment is an open question. It is reviewed
 separately before any public deployment.
-\item The wallet is the identity boundary. Contract-level rules
-stop the transfer of unrealized claims. No code can stop a person
-from selling their own key, the cryptographic key that controls
-their address's funds. That residual is inherent to systems anyone
-can join.
-\item Prices are contributor-set and can move. Routing follows
-the posted prices within timelock bounds. Predatory cycles ---
-undercut to capture traffic, then raise --- are slowed and
-visible, not eliminated.
-\item Sealed evaluation data invites probing. Membership and
-influence attacks run through repeated submission. The defenses ---
-aggregate-only verdicts, bounded reporting precision, fees per
-submission, rotation --- push the signal below the cost of
-probing, not to zero. The challenge layer trades the
-corpus-custody problem for label publication. Disposable
-challenge data and per-submission budgets bound that trade.
-\item A corrupt validator's damage is bounded by the sealed
-scoring environment: validators receive aggregate scores, never
-rows. Inside the environment, sharding means no single key reads
-the whole corpus at once. A row that leaks identifies its shard.
-A corrupt majority of validators remains outside the
-mechanism's reach.
-\item Serving substitution is detected probabilistically. A
-fraction of queries is answered twice: by the serving capability
-and by a reference execution of the sealed artifact. The answers
-must match. A swapped model is caught at the probe rate per
-query, with a per-epoch minimum on quiet axes. The serving host's
-answer is committed before the probe flag is revealed. Under the
-private tier the probe is ciphertext-native: the host commits the
-output ciphertext --- deterministic given the input ciphertext and
-the sealed head --- and the executor re-runs the homomorphic
-evaluation on the same ciphertext and compares. The executor then
-sees no plaintext at all; the private tier's probe is strictly
-more private than the plaintext tier's, and adjudication is the
-same table: an unopened commitment or a mismatched evaluation is
-a deviation. The
-remaining residual is executor--host collusion. It requires corrupting every sampled
-executor of the same session. That is a corrupt fraction of the
-executor pool raised to the executor count. The executors' own
-slashable promises bound it further.
-\item The reference executor sees the probed input in plaintext
---- a further plaintext point alongside the gateway and the
-serving host. The ledger never carries the answer: the answer
-entry is a commitment whose opening exists only inside the
-sealed replay environment. The same
-no-retention, no-training data contract binds every point.
-Cryptography does not. The private serving path removes the
-serving-host point entirely for users who
-take it: the contributor evaluates the head and trunk on
-ciphertext only, and the device decrypts. The
-plaintext tier remains for axes whose users choose it, flagged as
-such. Whether ciphertext-only evaluation reduces the
-contributor's processing obligations is a question reserved for
-counsel, not claimed here.
-\item Codes are not inputs, but they are not anonymous either. A
-code vector summarizes an input, and feature-inversion attacks
-against public frozen encoders reconstruct recognizable inputs
-from codes. The data contract therefore covers codes with the
-same no-retention, no-training rules as the inputs they
-summarize. Inversion risk is a named residual: contract rules can
-be broken, and cryptography does not cover codes.
-\item The frozen encoder is a publisher checkpoint, and no one
-can audit its pretraining history. The deeper consequence: every
-verification instrument --- the shadow probe, replay, dispute,
-proof --- verifies that the served model matches the sealed
-artifact. A trunk that is malicious as sealed, or backdoored by
-its publisher, passes all of them by construction. Sameness is
-certified; the sealed artifact itself is trusted, not audited.
-That is the failure mode with the largest blast radius, and it is
-stated, not hidden.
-\item Early networks are concentrated. The design makes
-concentration expensive to acquire, capped in effect, and
-self-diluting through the lottery router. It does not pretend a
-two-participant genesis network is decentralized. It makes the
-path out of concentration automatic.
-\item The authority-key registry trusts governments' own
-channels. Multi-channel pinning raises the cost of a forged
-order; it does not make forgery impossible. The effect of even a
-forged order stays fixed --- a freeze, never a burn.
-\item Ballot secrecy rests on the tally committee. The
-commitments, proofs, and opened sums stay public; a corrupt
-majority of the sampled committee could open individual ballots.
-That is the same corrupt-validator boundary the rest of the
-design carries.
-\item The privacy moat and the measured capability sit on
-disjoint axes today. Private serving through homomorphic
-evaluation applies to closed-form heads --- exactly the axes
-where frozen-encoder accuracy is weakest (vision). The axes where
-the frozen-encoder recipe is strongest (code, speech) are
-autoregressive or end-to-end models, where private serving means
-trunk-level homomorphic evaluation at orders of magnitude higher
-cost per token --- conceded as impractical today. So at present:
-the axes where the network is competitive get no privacy moat,
-and the axes with the moat are not competitive. The intersection
-is not claimed to exist; it is the explicit target of the
-dependency chain --- the random-feature nonlinearity repair
-(M300), native-resolution re-extraction, the versioned feature
-bus, and cheaper homomorphic evaluation --- each step measured
-before it is relied on. Until that chain closes, the moat and
-the capability are separate claims, and this document does not
-merge them.
-\item Weights-private artifacts are verified by behavioural
-identity on a fixed sealed probe set, not by fresh-input
-probing: an executor pool needs the artifact, and a contributor
-that keeps the weights private has an empty pool by
-construction. The near-copy-on-live-traffic case --- a substitute
-that differs from the sealed artifact on a small fraction of
-fresh inputs --- is exactly the case only fresh-input probing
-catches, and for weights-private artifacts it is bounded by the
-per-axis bond and the dispute path, not by detection. That
-residual is priced, not hidden.
-\item Model extraction is slowed, not stopped. The trunk is a
-public checkpoint, so a buyer computes codes locally and probes
-the head. The defenses --- coarse confidence buckets, metered
-abstentions, per-payer query budgets, and the lottery router ---
-make the recovery of a classification head cost a measured
-multiple of the head's expected lifetime revenue on the axis
-(the registered simulation puts the bucketed oracle at $55\times$
-lifetime revenue, where the pre-repair margin oracle was
-$2.8\times$). That is an economic boundary, not a cryptographic
-one: a buyer who does not care about cost can still extract.
-The same is true of every deployed black-box model.
-\item The validator fee schedule is registered with its
-Sybil-recovery fraction beside it, and its admissible window is
-thin: at the reference parameters the break-even fee sits
-$2.5\times$ below the cash-flow-positive ceiling, and a live
-validator-cost trace above that ceiling closes the window --- at
-which point the network adds a validator bond forfeitable on
-delisting or accepts the residual in the open. The reference
-parameters are promoted placeholders; the launch re-runs the same
-computation with the live trace.
 \end{enumerate}
 
 \section{The methodology}\label{sec:methodology}
@@ -2719,6 +3549,11 @@ forward. That is the whole point.
 
 \appendix
 \section{Worked scenarios}\label{app:scenarios}
+
+This appendix narrates; it does not legislate. Every rule it walks
+through is stated in the body, and a scenario that appears to need
+a rule not stated there is a defect in this appendix, not a new
+rule. Nothing is registered by appearing here.
 
 Each scenario below restates a rule from the body as a concrete
 walkthrough: who does what, in what order, and what the ledger
@@ -2807,8 +3642,8 @@ serves.
 stops at the declared cap. The user pays the price locked at
 routing, for the units actually served.
 \item If the artifact abstains, the abstention is recorded and
-metered at the registered reduced rate --- half the unit price,
-never free.
+metered at the measured compute fraction actually consumed ---
+the full unit price on a single-pass head, per axis, never free.
 \end{enumerate}
 \textbf{Abuse closed here.} A payer cannot wash money through its
 own payout address. The self-payment exclusion stops that. A
@@ -2849,13 +3684,18 @@ knockoff that differs on every input ($\delta = 1$) is caught
 within $1/\rho$ sessions, inside the $N=4$-epoch vesting window.
 A close copy that differs on 0.5\% of inputs ($\delta = 0.005$)
 stretches the horizon to about 4000 sessions --- far outside the
-window. The per-epoch minimum probe holds on
-quiet axes. The cheat's revenue window is smaller than the
+window. The per-epoch probed floor of thirty holds on
+quiet axes, and does not hold on axes too thin to supply it.
+The cheat's revenue window is smaller than the
 promise it risks only for crude substitution; the near-copy case
 is exactly what the sequential test over the mismatch stream
 closes --- shipped and measured (conviction rate 0.958 within a
 median 2383 sessions for a 99.5\% substitute; false convictions
-0.004 at the registered bound). \textbf{Abuse closed
+0.004 at the registered bound), which is 119 probed sessions and
+so lands inside the four-epoch window wherever the axis supplies
+thirty probed sessions an epoch. Below that traffic the bond,
+not the burn, is what bounds the attack.
+\textbf{Abuse closed
 here for both.} The host cannot
 know which sessions are probed until its answer is bound. It
 cannot refuse probed sessions without forfeiting all revenue. It
@@ -3204,6 +4044,160 @@ S.~Hoque, J.~Zhang, J.~Sun, and F.~Suya.
 Token inflation: how dishonest providers can overcharge for large
 language model usage.
 \emph{arXiv:2605.30040}, 2026.
+
+\bibitem{rahimi2007}
+A.~Rahimi and B.~Recht.
+Random features for large-scale kernel machines.
+\emph{NIPS}, 2007.
+
+\bibitem{weinberger2009}
+K.~Weinberger, A.~Dasgupta, J.~Langford, A.~Smola, and
+J.~Attenberg.
+Feature hashing for large scale multitask learning.
+\emph{ICML}, 2009.
+
+\bibitem{numerai}
+Numerai.
+A crowdsourced hedge fund: sealed held-out scoring with staked
+predictions.
+\emph{Deployed system; no canonical paper. Documentation at
+numer.ai}, accessed 2026.
+
+\bibitem{golle2001}
+P.~Golle and I.~Mironov.
+Uncheatable distributed computations.
+\emph{CT-RSA}, 2001.
+
+\bibitem{du2004}
+W.~Du, J.~Jia, M.~Mangal, and M.~Murugesan.
+Uncheatable grid computing.
+\emph{ICDCS}, 2004.
+
+\bibitem{boinc2004}
+D.~P.~Anderson.
+BOINC: a system for public-resource computing and storage.
+\emph{IEEE/ACM International Workshop on Grid Computing}, 2004.
+
+\bibitem{golem2016}
+Golem Factory.
+The Golem project: a global, open-source, decentralized
+supercomputer.
+\emph{Whitepaper}, 2016.
+
+\bibitem{truebit2017}
+J.~Teutsch and C.~Reitwie\ss ner.
+A scalable verification solution for blockchains (Truebit).
+\emph{arXiv:1908.04756}, 2017.
+
+\bibitem{ipguard2021}
+X.~Cao, J.~Jia, and N.~Z.~Gong.
+IPGuard: protecting intellectual property of deep neural networks
+via fingerprinting the classification boundary.
+\emph{AsiaCCS}, 2021.
+
+\bibitem{lukas2021}
+N.~Lukas, Y.~Zhang, and F.~Kerschbaum.
+Deep neural network fingerprinting by conferrable adversarial
+examples.
+\emph{ICLR}, 2021.
+
+\bibitem{pol2021}
+H.~Jia, M.~Yaghini, C.~A.~Choquette-Choo, N.~Dullerud, A.~Thudi,
+V.~Chandrasekaran, and N.~Papernot.
+Proof-of-Learning: definitions and practice.
+\emph{IEEE Symposium on Security and Privacy}, 2021.
+
+\bibitem{kang2022}
+D.~Kang, T.~Hashimoto, I.~Stoica, and Y.~Sun.
+Scaling up trustless DNN inference with zero-knowledge proofs.
+\emph{arXiv:2210.08674}, 2022.
+
+\bibitem{zkcnn2021}
+T.~Liu, X.~Xie, and Y.~Zhang.
+zkCNN: zero knowledge proofs for convolutional neural network
+predictions and accuracy.
+\emph{ACM CCS}, 2021.
+
+\bibitem{zen2021}
+B.~Feng, L.~Qin, Z.~Zhang, Y.~Ding, and S.~Chu.
+ZEN: an optimizing compiler for verifiable, zero-knowledge neural
+network inferences.
+\emph{IACR Cryptology ePrint Archive 2021/087}, 2021.
+
+\bibitem{safetynets2017}
+Z.~Ghodsi, T.~Gu, and S.~Garg.
+SafetyNets: verifiable execution of deep neural networks on an
+untrusted cloud.
+\emph{NIPS}, 2017.
+
+\bibitem{ocean2019}
+Ocean Protocol Foundation.
+Ocean Protocol: a decentralized substrate for AI data and
+services; compute-to-data.
+\emph{Technical whitepaper}, 2019.
+
+\bibitem{michelangelo2017}
+J.~Hermann and M.~Del~Balso.
+Meet Michelangelo: Uber's machine learning platform.
+\emph{Uber Engineering}, 2017. See also the Feast open-source
+feature store, 2019.
+
+\bibitem{meritrank2022}
+B.~Nasrulin, G.~Ishmaev, and J.~Pouwelse.
+MeritRank: sybil tolerant reputation for merit-based tokenomics.
+\emph{arXiv:2207.09950}, 2022.
+
+\bibitem{concave2026}
+Concave is the new linear: the impossibility of anti-plutocratic
+DAO governance.
+\emph{arXiv:2605.18990}, 2026.
+
+\bibitem{washnft2023}
+NFT wash trading detection.
+\emph{arXiv:2305.01543}, 2023.
+
+\bibitem{washnft2306}
+Abnormal trading detection in the NFT market.
+\emph{arXiv:2306.04643}, 2023.
+
+\bibitem{poupko2019}
+O.~Poupko, G.~Shahaf, E.~Shapiro, and N.~Talmon.
+Building a sybil-resilient digital community utilizing trust-graph
+connectivity.
+\emph{arXiv:1901.00752}, 2019.
+
+\bibitem{buterin2018}
+V.~Buterin, Z.~Hitzig, and E.~G.~Weyl.
+A flexible design for funding public goods.
+\emph{Management Science}, 2019. Preprint arXiv:1809.06421.
+
+\bibitem{agarwal2019}
+A.~Agarwal, M.~Dahleh, and T.~Sarkar.
+A marketplace for data: an algorithmic solution.
+\emph{ACM Conference on Economics and Computation (EC)}, 2019.
+
+\bibitem{chen2019}
+L.~Chen, P.~Koutris, and A.~Kumar.
+Towards model-based pricing for machine learning in a data
+marketplace.
+\emph{ACM SIGMOD}, 2019.
+
+\bibitem{sun2022}
+P.~Sun, X.~Chen, G.~Liao, and J.~Huang.
+A profit-maximizing model marketplace with differentially private
+federated learning.
+\emph{IEEE INFOCOM}, 2022.
+
+\bibitem{rebuffi2017}
+S.-A.~Rebuffi, H.~Bilen, and A.~Vedaldi.
+Learning multiple visual domains with residual adapters.
+\emph{NIPS}, 2017.
+
+\bibitem{lorahub2023}
+C.~Huang, Q.~Liu, B.~Y.~Lin, T.~Pang, C.~Du, and M.~Lin.
+LoraHub: efficient cross-task generalization via dynamic LoRA
+composition.
+\emph{arXiv:2307.13269}, 2023.
 
 \end{thebibliography}
 

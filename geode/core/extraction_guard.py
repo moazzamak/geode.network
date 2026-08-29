@@ -6,7 +6,7 @@ Registered in ``analysis/FEASIBILITY_THREAT_REVIEW_2026-08-28.md``
 output was the softmax margin kappa(x) - a smooth function of
 s = W^T z - and abstentions cost nothing. The trunk is a public
 checkpoint, so an attacker computes z locally for free and
-recovers W from margin-annotated responses: a linear system in
+recovering W from margin-annotated responses: a linear system in
 d*C unknowns, a low six-figure query count at commodity prices.
 The most informative queries - boundary-mapping near the margin
 threshold - were exactly the free ones.
@@ -23,8 +23,18 @@ router, is shipped separately):
   fraction of the unit price. The free oracle is gone, and the
   over-abstention incentive (A7) is priced.
 - **Per-payer query budgets (R-A2c).** Per payer, per axis, per
-  epoch, with the ledger-visible used/cap rate as the enforcement
-  surface.
+  epoch, enforced LOCALLY at the gateway.
+
+M372 (G8, 29 Aug 2026) moved the budget's enforcement surface. The
+R-A2c rate was framed as "ledger-visible" - a per-user telemetry
+stream on an immutable ledger, which is exactly the audience-pointing
+surface the "no control surface" principle denies. The budget is a
+GATEWAY-LOCAL rule: the gateway enforces it, the gateway sees it, and
+nothing per-payer is ever published. If a network-level bound is
+needed, only the AXIS AGGREGATE (used/cap per axis per epoch, no payer
+dimension) may be published. Duration-metered axes carry a registered
+padding quantum so the meter itself does not leak durations (e.g.
+audio metered in fixed blocks, never in exact seconds).
 
 The gate (a separate harness): an extraction simulation
 recovering W from bucketed, metered responses costs more than the
@@ -32,14 +42,46 @@ head's expected lifetime revenue on the axis.
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
-# the registered abstention rate: half the unit price. An
-# abstention consumed the trunk compute (the expensive part) and
-# skipped only the head evaluation; a nonzero charge removes the
-# free boundary-mapping oracle without making abstention
-# punitive (the A7 balance).
-ABSTENTION_PRICE_FRACTION = 0.5
+# M357 (G19, 29 Aug 2026): the abstention is metered at the MEASURED
+# compute fraction actually consumed, per axis, not at a flat half
+# price. For a single-pass classification head the abstention decision
+# is a function of the final margin, so the whole forward pass (trunk
+# + head) runs before the abstention is known: the consumed fraction
+# is 1.0. A cascade that abstains before its expensive stage would
+# register a genuinely lower fraction per axis. The half-price figure
+# (pre-M357) was the defense-pessimistic adversary rate in M332; the
+# full-cost figure is both honest cost recovery and a STRONGER
+# extraction bound (the adversary's cheapest rate doubles).
+ABSTENTION_PRICE_FRACTION = 1.0   # measured, single-pass heads
+
+# Registered per-axis abstention compute fractions (M357). Only the
+# single-pass family is built today; cascades would register their
+# own value at axis creation.
+ABSTENTION_COMPUTE_FRACTIONS = {
+    "single_pass_head": 1.0,
+}
+
+# M372 (G8): the registered meter-side padding quantum for
+# duration-metered axes (audio, video). Durations are metered in
+# whole blocks of this many seconds, never in exact seconds, so the
+# ledger-side aggregate cannot be turned into a per-session length
+# stream.
+DURATION_QUANTUM_SECONDS = 15
+
+
+def pad_duration(seconds: float,
+                 quantum: int = DURATION_QUANTUM_SECONDS) -> int:
+    """Meter a duration in whole blocks of ``quantum`` seconds. The
+    billed block count is ceil(seconds / quantum); the residual is
+    not leaked (a 1 s and a 14 s clip both meter as one block)."""
+    if seconds < 0.0:
+        raise ValueError("duration must be non-negative")
+    if quantum <= 0:
+        raise ValueError("quantum must be positive")
+    return int(math.ceil(seconds / quantum))
 
 
 class BudgetExhausted(RuntimeError):
@@ -82,20 +124,26 @@ def abstention_charge(unit_price: float,
                       fraction: float = ABSTENTION_PRICE_FRACTION,
                       ) -> float:
     """The metered price of one abstention: the registered fraction
-    of the unit price, reduced but nonzero (R-A2b)."""
+    of the unit price (R-A2b). M357 (G19): the fraction is the
+    MEASURED compute actually consumed by the abstention on the axis
+    -- 1.0 for a single-pass head (the full forward pass runs before
+    the abstention is decided), lower only for a cascade that
+    abstains before its expensive stage. The charge is nonzero and
+    never above the full unit price."""
     if unit_price <= 0.0:
         raise ValueError("the unit price must be positive")
-    if not 0.0 < fraction < 1.0:
+    if not 0.0 < fraction <= 1.0:
         raise ValueError("the abstention fraction must lie in "
-                         "(0, 1)")
+                         "(0, 1]")
     return float(unit_price) * float(fraction)
 
 
 class PayerBudgetLedger:
-    """Per-payer, per-axis, per-epoch query budgets (R-A2c). The
-    enforcement surface is the ledger-visible rate: used / cap, per
-    (payer, axis, epoch). Exhaustion refuses further queries -
-    never silent."""
+    """Per-payer, per-axis, per-epoch query budgets (R-A2c), enforced
+    LOCALLY at the gateway (M372, G8). Exhaustion refuses further
+    queries - never silent. Nothing per-payer is published: the only
+    publishable view is the per-axis aggregate, which carries no payer
+    dimension."""
 
     def __init__(self) -> None:
         self._grants: dict[tuple[str, str, int], int] = {}
@@ -133,15 +181,30 @@ class PayerBudgetLedger:
         return self._used[key]
 
     def rate(self, payer: str, axis: str, epoch: int) -> float:
-        """The ledger-visible rate: used / cap. Raises on an
-        ungranted key (a rate for a missing budget is not a
-        number)."""
+        """The LOCAL rate: used / cap. Never published per payer;
+        this is the gateway's own view of one of its users. Raises
+        on an ungranted key."""
         key = (payer, axis, int(epoch))
         if key not in self._grants:
             raise BudgetExhausted(
                 f"no budget granted for {payer} on {axis} in "
                 f"epoch {epoch}")
         return self._used.get(key, 0) / float(self._grants[key])
+
+    def axis_rate(self, axis: str, epoch: int) -> float:
+        """The ONLY publishable budget view (M372, G8): the axis
+        aggregate used/cap across all payers for the epoch. No payer
+        dimension - this is what a network-level bound may rest on,
+        and nothing finer may be published."""
+        epoch = int(epoch)
+        total_cap = sum(cap for (p, a, e), cap in self._grants.items()
+                        if a == axis and e == epoch)
+        if total_cap == 0:
+            raise BudgetExhausted(
+                f"no budget granted on {axis} in epoch {epoch}")
+        total_used = sum(u for (p, a, e), u in self._used.items()
+                         if a == axis and e == epoch)
+        return total_used / float(total_cap)
 
     def exhausted(self, payer: str, axis: str, epoch: int) -> bool:
         key = (payer, axis, int(epoch))

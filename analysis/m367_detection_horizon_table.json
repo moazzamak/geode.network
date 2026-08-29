@@ -1,0 +1,175 @@
+{
+  "milestone": "M367",
+  "finding": "G27 -- the detection-horizon claim fails on quiet axes",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "constants": {
+    "sealed_median_sessions_at_rho_0_05": 2383,
+    "probed_sessions_needed": 119,
+    "rho_floor": 0.05,
+    "k_e": 2,
+    "vesting_window_epochs": 4,
+    "flat_min_probed_per_epoch": 1
+  },
+  "derived": {
+    "required_probed_per_epoch_to_meet_vesting": 30,
+    "review_proposed_floor": 8,
+    "review_proposal_sufficient": false,
+    "min_traffic_for_any_rho_to_meet_vesting": 30
+  },
+  "flat_rule": [
+    {
+      "traffic_sessions_per_epoch": 10,
+      "rho_effective": 0.1,
+      "probed_sessions_per_epoch": 1,
+      "sessions_to_conviction_median": 1190,
+      "epochs_to_conviction": 119.0,
+      "probe_overhead_fraction_of_serving": 0.2,
+      "honest_claim_latency_epochs": 119,
+      "inside_vesting_window": false
+    },
+    {
+      "traffic_sessions_per_epoch": 100,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 5.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 23.8,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 24,
+      "inside_vesting_window": false
+    },
+    {
+      "traffic_sessions_per_epoch": 1000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 50.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 2.38,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 3,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 10000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 500.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.238,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 100000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 5000.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.024,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    }
+  ],
+  "adaptive_rule_review_floor_8": [
+    {
+      "traffic_sessions_per_epoch": 10,
+      "rho_effective": 0.8,
+      "probed_sessions_per_epoch": 8.0,
+      "sessions_to_conviction_median": 149,
+      "epochs_to_conviction": 14.875,
+      "probe_overhead_fraction_of_serving": 1.6,
+      "honest_claim_latency_epochs": 15,
+      "inside_vesting_window": false
+    },
+    {
+      "traffic_sessions_per_epoch": 100,
+      "rho_effective": 0.08,
+      "probed_sessions_per_epoch": 8.0,
+      "sessions_to_conviction_median": 1488,
+      "epochs_to_conviction": 14.875,
+      "probe_overhead_fraction_of_serving": 0.16,
+      "honest_claim_latency_epochs": 15,
+      "inside_vesting_window": false
+    },
+    {
+      "traffic_sessions_per_epoch": 1000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 50.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 2.38,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 3,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 10000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 500.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.238,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 100000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 5000.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.024,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    }
+  ],
+  "adaptive_rule_corrected_floor": [
+    {
+      "traffic_sessions_per_epoch": 10,
+      "rho_effective": 1.0,
+      "probed_sessions_per_epoch": 10.0,
+      "sessions_to_conviction_median": 119,
+      "epochs_to_conviction": 11.9,
+      "probe_overhead_fraction_of_serving": 2.0,
+      "honest_claim_latency_epochs": 12,
+      "inside_vesting_window": false
+    },
+    {
+      "traffic_sessions_per_epoch": 100,
+      "rho_effective": 0.3,
+      "probed_sessions_per_epoch": 30.0,
+      "sessions_to_conviction_median": 397,
+      "epochs_to_conviction": 3.967,
+      "probe_overhead_fraction_of_serving": 0.6,
+      "honest_claim_latency_epochs": 4,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 1000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 50.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 2.38,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 3,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 10000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 500.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.238,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    },
+    {
+      "traffic_sessions_per_epoch": 100000,
+      "rho_effective": 0.05,
+      "probed_sessions_per_epoch": 5000.0,
+      "sessions_to_conviction_median": 2380,
+      "epochs_to_conviction": 0.024,
+      "probe_overhead_fraction_of_serving": 0.1,
+      "honest_claim_latency_epochs": 1,
+      "inside_vesting_window": true
+    }
+  ]
+}

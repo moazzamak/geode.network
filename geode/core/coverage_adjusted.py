@@ -14,6 +14,17 @@ against it. The repair:
 - the temperature/ECE calibration half (R-A7b) remains a measured
   M302 item - the scale forgery it closes is named here, not
   silently absorbed.
+
+**RETIRED FOR ROUTING (M355, 28 Aug 2026).** The coverage
+multiplication was measured to invert the ranking in the other
+direction: on the sealed Open Images axis it scores a scoped arm
+reading 0.901 on the classes it serves at 0.0441, below a
+full-coverage arm reading 0.1643 on everything, so best-quality
+mode returns the worse arm. ``geode.core.declared_label_set``
+replaces it -- coverage decides *qualification* against the
+buyer's declared label set instead of multiplying the score. This
+module is kept because M302 and M321 sealed evidence against it
+and that evidence must stay reproducible. Do not rank with it.
 """
 from __future__ import annotations
 

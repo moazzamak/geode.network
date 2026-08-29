@@ -31,6 +31,7 @@ from geode.core.librarian_containment import (
     post,
     replacement,
 )
+from geode.privacy.vote_machinery import ratifies
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = (REPO_ROOT / "experiments" / "configs" / "v26"
@@ -61,16 +62,35 @@ def run_m312(config_path: Path, output_dir: Path) -> dict[str, Any]:
     }
     cells["c1_force_inclusion"] = c1
 
-    # ---- C2 executable replacement ----
-    below = replacement(4, 10, recorded_reason="divergence")
-    at = replacement(5, 10, recorded_reason="divergence")
-    no_reason = replacement(10, 10, recorded_reason=None)
+    # ---- C2 executable replacement (M366-amended: earned weight) ----
+    # G25: this action used to run on an unweighted headcount of
+    # registered validators — the cheapest quantity in the system to
+    # Sybil. It now runs on the same earned-weight rule as every
+    # other governance action.
+    validators = [f"v{i}" for i in range(10)]
+    weights = {v: 1.0 for v in validators}
+    kw = {"verified_weights": weights, "responders": 10,
+          "pool_size": 10, "ratify": ratifies, "pedigreed": validators}
+    below = replacement("divergence", validators[:6], **kw)
+    at = replacement("divergence", validators[:7], **kw)
+    no_reason = replacement(None, validators, **kw)
+    # a Sybil fleet: many identities, no earned weight
+    sybils = [f"s{i}" for i in range(40)]
+    sybil_weights = dict(weights)
+    sybil_weights.update({s: 0.0 for s in sybils})
+    sybil = replacement("divergence", sybils,
+                        verified_weights=sybil_weights, responders=50,
+                        pool_size=50, ratify=ratifies,
+                        pedigreed=validators + sybils)
     c2 = {
         "below_threshold_fires": below["fires"],
         "at_threshold_fires": at["fires"],
         "no_reason_fires": no_reason["fires"],
+        "sybil_majority_fires": sybil["fires"],
+        "sybil_support_fraction": sybil["support_fraction"],
         "passes": bool(not below["fires"] and at["fires"]
-                       and not no_reason["fires"]),
+                       and not no_reason["fires"]
+                       and not sybil["fires"]),
     }
     cells["c2_executable_replacement"] = c2
 

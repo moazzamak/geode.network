@@ -24,6 +24,43 @@ def _orchestrator() -> Orchestrator:
     return orch
 
 
+class TestM372NoPerPayerBudgetField(unittest.TestCase):
+    """G8 (M372): the per-payer budget is a gateway-local rule; no
+    per-payer budget field appears in any ledger entry type, and a
+    session's route + payment replays without one."""
+
+    def _report(self):
+        orch = _orchestrator()
+        for i in range(4):
+            orch.serve(f"q{i}", [], task_id="d1")
+        return build_credit_batches(
+            orch, price_per_query=100,
+            payer_of=lambda qid: address_of(f"payer:{qid}"))
+
+    def test_entries_carry_no_budget_field(self):
+        report = self._report()
+        budget_names = {"cap", "used", "rate", "budget", "quota"}
+        for batch in report["batches"]:
+            for entry in batch["entries"]:
+                keys = set(entry)
+                self.assertTrue(
+                    budget_names.isdisjoint(keys),
+                    f"per-payer budget field leaked into an entry: "
+                    f"{keys & budget_names}")
+        # the batch object itself is a budget-free schema too
+        for batch in report["batches"]:
+            self.assertTrue(budget_names.isdisjoint(set(batch)))
+
+    def test_replay_succeeds_without_budget(self):
+        report = self._report()
+        # the route+payment replay validates from the report alone;
+        # the gateway-local budget ledger is nowhere in it
+        self.assertEqual(verify_batch_rules(
+            report, pool=report["pool_expected"]), [])
+        self.assertEqual(recompute_batch_hash(report),
+                         report["batch_hash"])
+
+
 class TestDepositSplit(unittest.TestCase):
     def test_contract_arithmetic(self):
         # 2.5% dev cut first, floor division, as in the Solidity

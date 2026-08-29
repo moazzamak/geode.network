@@ -28,6 +28,16 @@ class ContractMismatchError(ValueError):
     input contract - the chain refuses to assemble."""
 
 
+class ChainTooLongError(ValueError):
+    """A chain longer than the registered cap is not admissible."""
+
+
+# Shapley over m stages needs 2^m end-to-end coalition evaluations.
+# The cap is what keeps that replayable by a validator: 4 stages is
+# 16 evaluations. Registered with G12's repair (M375, 28 Aug 2026).
+MAX_CHAIN_STAGES = 4
+
+
 @dataclass(frozen=True)
 class ChainStage:
     artifact_id: str
@@ -46,6 +56,12 @@ class ChainArtifact:
     stage_scores: dict[str, float] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
+        if len(self.stages) > MAX_CHAIN_STAGES:
+            raise ChainTooLongError(
+                f"chain {self.chain_id} has {len(self.stages)} stages; "
+                f"the cap is {MAX_CHAIN_STAGES} because the Shapley "
+                f"split needs 2^m end-to-end coalition evaluations "
+                f"and a validator has to be able to replay them")
         for prev, nxt in zip(self.stages, self.stages[1:]):
             if not prev.contract_out.issubset(nxt.contract_in):
                 raise ContractMismatchError(

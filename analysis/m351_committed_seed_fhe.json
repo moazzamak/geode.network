@@ -1,0 +1,33 @@
+{
+  "milestone": "M351",
+  "gate": "same seed -> byte-identical ciphertext; different seed -> not; security parameters unchanged",
+  "c1_defect": {
+    "unflooded_output_bytes_differ": true,
+    "len_bytes": 131216,
+    "note": "two independent evaluations of the same input differ byte-for-byte: the bit-comparison probe has nothing to compare without a committed seed"
+  },
+  "c2_same_seed": {
+    "same_seed_byte_identical": true
+  },
+  "c3_different_seed": {
+    "different_seed_differ": true
+  },
+  "c4_plaintext_preserved": {
+    "flood_added_max_err": 2.410346588987977e-09,
+    "flood_preserves_computation": true
+  },
+  "c5_security_params": {
+    "one_context_all_evaluations": true,
+    "flood_is_standard_zero_encryption": true,
+    "coeff_bit_sizes": [
+      60,
+      40,
+      40,
+      60
+    ],
+    "poly_degree": 8192,
+    "note": "the flood is created by the library's normal encrypt path (fresh randomness once, then bound to the seed by the commitment); no parameter is altered between evaluations."
+  },
+  "verdict": "PASS",
+  "registered_residual": "the flood is fixed per committed seed, not fresh per evaluation; that is what determinism requires and what the commitment binds. The IND-CPA^D mitigation holds within a committed session; a fresh commitment is a fresh flood."
+}

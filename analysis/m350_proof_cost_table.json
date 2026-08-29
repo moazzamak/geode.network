@@ -1,0 +1,102 @@
+{
+  "milestone": "M350",
+  "finding": "G2 -- per-answer proofs are off by orders of magnitude",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "measured_primitives": {
+    "ffi_call_overhead_seconds": 1.2002065000024232e-06,
+    "scalarmult_raw_seconds": 0.0001534859999992477,
+    "scalarmult_seconds": 0.00015228579349924528,
+    "projective_op_seconds_derived": 4.976659918275989e-07
+  },
+  "rejected_primitive": {
+    "name": "crypto_core_ed25519_add",
+    "reason": "operates on compressed encodings; decompress+add+recompress, dominated by two field square roots. Measured 17.2 us vs 139.6 us for a full scalar multiplication, a ratio of 8 where ~306 is expected. Using it would inflate verifier cost ~40x."
+  },
+  "analytic_counts": {
+    "proof_size_elements": "2*ceil(log2 n) + 13",
+    "ops_per_scalarmult": 306,
+    "prover_naive_scalarmults": "8n",
+    "prover_multiexp_elements": "6n",
+    "verifier_multiexp_elements": "2n",
+    "multiexp_model": "bucket/Pippenger, m*255/log2(m) projective additions",
+    "source": "Bunz et al. 2018; constants are implementation-dependent"
+  },
+  "axes": [
+    {
+      "axis": "Text (BERT-base, SST-2)",
+      "d": 768,
+      "C": 2,
+      "n": 1536,
+      "serve_seconds_measured": 1.2380999996821628e-06,
+      "prover_seconds_naive": 1.871287830518726,
+      "prover_seconds_multiexp": 0.08880497754893207,
+      "verifier_seconds": 0.03365152294051879,
+      "proof_bytes": 1120,
+      "prover_over_serving": 71726.82139708386,
+      "verifier_over_serving": 27179.971689813097,
+      "prover_over_serving_at_10x_faster": 7172.682139708387,
+      "replay_over_serving": 1.0
+    },
+    {
+      "axis": "Text (BERT-base, MNLI-m)",
+      "d": 768,
+      "C": 3,
+      "n": 2304,
+      "serve_seconds_measured": 1.3680500001100882e-06,
+      "prover_seconds_naive": 2.806931745778089,
+      "prover_seconds_multiexp": 0.12754247105513378,
+      "verifier_seconds": 0.048051031289658507,
+      "proof_bytes": 1184,
+      "prover_over_serving": 93229.39296434364,
+      "verifier_over_serving": 35123.73910733657,
+      "prover_over_serving_at_10x_faster": 9322.939296434364,
+      "replay_over_serving": 1.0
+    },
+    {
+      "axis": "Audio (wav2vec2-base, Speech Commands v2)",
+      "d": 768,
+      "C": 35,
+      "n": 26880,
+      "serve_seconds_measured": 4.157100000156788e-06,
+      "prover_seconds_naive": 32.74753703407771,
+      "prover_seconds_multiexp": 1.1831299227423604,
+      "verifier_seconds": 0.43415406365494097,
+      "proof_bytes": 1376,
+      "prover_over_serving": 284604.63368640107,
+      "verifier_over_serving": 104436.76207898933,
+      "prover_over_serving_at_10x_faster": 28460.463368640107,
+      "replay_over_serving": 1.0
+    },
+    {
+      "axis": "Image routing (DINOv2-L, DomainNet 345)",
+      "d": 1024,
+      "C": 345,
+      "n": 353280,
+      "serve_seconds_measured": 3.5769599999639466e-05,
+      "prover_seconds_naive": 430.396201019307,
+      "prover_seconds_multiexp": 12.800014892235842,
+      "verifier_seconds": 4.614708534139092,
+      "proof_bytes": 1632,
+      "prover_over_serving": 357846.18481517426,
+      "verifier_over_serving": 129012.02513267148,
+      "prover_over_serving_at_10x_faster": 35784.61848151743,
+      "replay_over_serving": 1.0
+    },
+    {
+      "axis": "Vision (DINOv2-L, Open Images 601)",
+      "d": 1024,
+      "C": 601,
+      "n": 615424,
+      "serve_seconds_measured": 0.00010196309999992082,
+      "prover_seconds_naive": 749.7626574278362,
+      "prover_seconds_multiexp": 21.479543248034826,
+      "verifier_seconds": 7.720767433442114,
+      "proof_bytes": 1696,
+      "prover_over_serving": 210659.96667472358,
+      "verifier_over_serving": 75721.19162175443,
+      "prover_over_serving_at_10x_faster": 21065.99666747236,
+      "replay_over_serving": 1.0
+    }
+  ]
+}

@@ -36,6 +36,24 @@ CHANGE_DELAY_SECONDS = 2 * 24 * 3600        # admin timelocks
 PRICE_CHANGE_DELAY_SECONDS = EPOCH_SECONDS  # 1-epoch notice period
 SHADOW_PROBE_RATE = 0.05                     # rho: serve-and-compare
 
+# M360 (G21): the registered per-epoch price drift band. A contributor
+# may register price as a FIXED amount (today's rule, band = 0) or as
+# a fixed amount with this per-epoch drift band, so it can track a
+# large move without a governance action per epoch. The band is a CAP
+# on the per-epoch change, never a forced change. The router replays
+# against the day's effective price either way.
+PRICE_DRIFT_BAND_BPS = 1000   # +/-10% per epoch, registered proposal
+
+# M361 (G22): the reference hosting cost becomes a measured,
+# multi-party statistic. The old rule let the developer's single
+# posted figure simultaneously set the price floor, the developer's
+# own bootstrap price, and every competitor's bond. The repair: the
+# reference cost is the MEDIAN of the posted hosting costs of all
+# admitted arms on the axis with at least one epoch of verified
+# traffic, floored at the developer's figure only while the axis has
+# fewer than this many such arms.
+REFERENCE_COST_MIN_ARMS = 3
+
 # -- security floors (v26 M314: outside ordinary governance) ------------
 # The registered defaults ARE the floors. A timelocked adjustment may
 # raise a value with notice; it may never lower one. The floors sit
@@ -148,6 +166,107 @@ def within_cap(units: int, price_per_unit: int, max_spend: int) -> bool:
     if max_spend <= 0:
         return True
     return units * price_per_unit <= max_spend
+
+
+# M360 (G21): the per-epoch price drift band ----------------------------
+def price_within_drift(previous_price: int, proposed_price: int,
+                       band_bps: int = PRICE_DRIFT_BAND_BPS) -> bool:
+    """True iff ``proposed_price`` is inside the registered drift band
+    of ``previous_price``: |proposed - previous| <= previous * band.
+    A band of 0 is today's fixed-price rule (only an equal price is
+    inside the band)."""
+    if previous_price <= 0:
+        raise ValueError("previous price must be positive")
+    if proposed_price <= 0:
+        raise ValueError("proposed price must be positive")
+    if band_bps < 0:
+        raise ValueError("drift band must be non-negative")
+    limit = previous_price * band_bps // 10000
+    return abs(proposed_price - previous_price) <= limit
+
+
+def clamp_to_drift(previous_price: int, proposed_price: int,
+                   band_bps: int = PRICE_DRIFT_BAND_BPS) -> int:
+    """Clamp ``proposed_price`` into the drift band of the previous
+    epoch's price. The router replays against the clamped (effective)
+    price of the day; the contributor's declared price may exceed the
+    band, but the effective price never moves more than the band per
+    epoch."""
+    if previous_price <= 0:
+        raise ValueError("previous price must be positive")
+    if proposed_price <= 0:
+        raise ValueError("proposed price must be positive")
+    if band_bps < 0:
+        raise ValueError("drift band must be non-negative")
+    limit = previous_price * band_bps // 10000
+    lo = previous_price - limit
+    hi = previous_price + limit
+    return max(lo, min(hi, proposed_price))
+
+
+def effective_price_path(base_price: int, declarations: list[int],
+                         band_bps: int = PRICE_DRIFT_BAND_BPS
+                         ) -> list[int]:
+    """The deterministic, replayable price table of the day: the
+    effective price at each epoch, built by clamping the contributor's
+    per-epoch declarations into the drift band of the previous
+    effective price. ``declarations`` are the declared prices for
+    epochs 1..n (index 0 is the first epoch after the base). With no
+    declaration for an epoch, the previous effective price carries
+    over. The router replays THIS path, never a live feed. With band 0
+    this is the base price at every epoch (today's rule)."""
+    if base_price <= 0:
+        raise ValueError("base price must be positive")
+    if band_bps < 0:
+        raise ValueError("drift band must be non-negative")
+    path = [int(base_price)]
+    prev = int(base_price)
+    for declared in declarations:
+        if declared is None:
+            path.append(prev)
+            continue
+        if declared <= 0:
+            raise ValueError("a declared price must be positive")
+        eff = clamp_to_drift(prev, int(declared), band_bps)
+        path.append(eff)
+        prev = eff
+    return path
+
+
+# -- M361 (G22): the multi-party reference hosting cost ------------------
+def reference_hosting_cost(admitted_costs: list[float],
+                           developer_cost: float,
+                           min_arms: int = REFERENCE_COST_MIN_ARMS
+                           ) -> dict:
+    """M361 (G22): the reference hosting cost as a measured,
+    multi-party statistic.
+
+    ``admitted_costs`` are the posted hosting costs of all admitted
+    arms on the axis with at least one epoch of verified traffic.
+    ``developer_cost`` is the developer's posted figure, which is the
+    floor only while the axis has fewer than ``min_arms`` such arms.
+
+    Returns the reference cost, which rule produced it (median /
+    developer floor), and the count — so the registry can publish
+    which instrument is operative, exactly as the <3-arm fallback
+    requires."""
+    costs = [float(c) for c in admitted_costs]
+    if any(c < 0.0 for c in costs):
+        raise ValueError("admitted costs must be non-negative")
+    if developer_cost < 0.0:
+        raise ValueError("developer cost must be non-negative")
+    if min_arms < 1:
+        raise ValueError("min_arms must be >= 1")
+    if len(costs) < int(min_arms):
+        return {"reference": float(developer_cost),
+                "rule": "developer floor (<min_arms)",
+                "admitted_arms": len(costs)}
+    ordered = sorted(costs)
+    n = len(ordered)
+    median = ordered[n // 2] if n % 2 else \
+        (ordered[n // 2 - 1] + ordered[n // 2]) / 2.0
+    return {"reference": float(median), "rule": "median of admitted",
+            "admitted_arms": len(costs)}
 
 
 # -- the slash ladder (graded, burn, replay-gated) ----------------------

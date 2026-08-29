@@ -19,6 +19,20 @@ contract RejectingReceiver {
     }
 }
 
+/// @notice Test-only stand-in for the ledger's librarian address,
+/// so InclusionInbox's M382 source lookup can be driven directly.
+contract LibrarianSourceMock {
+    address public librarian;
+
+    constructor(address librarian_) {
+        librarian = librarian_;
+    }
+
+    function setLibrarian(address newLibrarian) external {
+        librarian = newLibrarian;
+    }
+}
+
 /// @notice Test-only receiver: re-enters claimDevFund from its
 /// receive hook, exercising the transient reentrancy guard.
 contract ReentrantReceiver {

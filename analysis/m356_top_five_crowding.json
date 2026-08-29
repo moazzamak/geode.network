@@ -1,0 +1,405 @@
+{
+  "scenario": {
+    "floor": 1.0,
+    "top_k": 5,
+    "strong_A": {
+      "accuracy": 0.95,
+      "price": 2.0
+    },
+    "good_B": {
+      "accuracy": 0.85,
+      "price": 2.0
+    },
+    "crowd_accuracy": 0.6,
+    "crowd_price": 1.0,
+    "expected_units": 1.0
+  },
+  "sweep": [
+    {
+      "crowd_size": 1,
+      "today": {
+        "delivered_accuracy": 0.7817,
+        "pool": [
+          "crowd0",
+          "A",
+          "B"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7817,
+        "pool": [
+          "A",
+          "B",
+          "crowd0"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7817,
+        "pool": [
+          "A",
+          "B",
+          "crowd0"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7817,
+        "pool": [
+          "A",
+          "B",
+          "crowd0"
+        ]
+      }
+    },
+    {
+      "crowd_size": 2,
+      "today": {
+        "delivered_accuracy": 0.7298,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "A",
+          "B"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7298,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7298,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7298,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1"
+        ]
+      }
+    },
+    {
+      "crowd_size": 3,
+      "today": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "A",
+          "B"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    },
+    {
+      "crowd_size": 4,
+      "today": {
+        "delivered_accuracy": 0.6578,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "crowd3",
+          "A"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    },
+    {
+      "crowd_size": 5,
+      "today": {
+        "delivered_accuracy": 0.6,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "crowd3",
+          "crowd4"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    },
+    {
+      "crowd_size": 6,
+      "today": {
+        "delivered_accuracy": 0.6,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "crowd3",
+          "crowd4"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    },
+    {
+      "crowd_size": 7,
+      "today": {
+        "delivered_accuracy": 0.6,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "crowd3",
+          "crowd4"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    },
+    {
+      "crowd_size": 8,
+      "today": {
+        "delivered_accuracy": 0.6,
+        "pool": [
+          "crowd0",
+          "crowd1",
+          "crowd2",
+          "crowd3",
+          "crowd4"
+        ]
+      },
+      "reserved": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g2": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      },
+      "exponent_g3": {
+        "delivered_accuracy": 0.7009,
+        "pool": [
+          "A",
+          "B",
+          "crowd0",
+          "crowd1",
+          "crowd2"
+        ]
+      }
+    }
+  ],
+  "headline_5_crowd": {
+    "today": {
+      "delivered_accuracy": 0.6,
+      "pool": [
+        "crowd0",
+        "crowd1",
+        "crowd2",
+        "crowd3",
+        "crowd4"
+      ],
+      "weights": {
+        "crowd0": 0.6,
+        "crowd1": 0.6,
+        "crowd2": 0.6,
+        "crowd3": 0.6,
+        "crowd4": 0.6
+      }
+    },
+    "reserved": {
+      "delivered_accuracy": 0.7009,
+      "pool": [
+        "A",
+        "B",
+        "crowd0",
+        "crowd1",
+        "crowd2"
+      ],
+      "weights": {
+        "A": 0.475,
+        "B": 0.425,
+        "crowd0": 0.6,
+        "crowd1": 0.6,
+        "crowd2": 0.6
+      }
+    },
+    "exponent_g2": {
+      "delivered_accuracy": 0.7009,
+      "pool": [
+        "A",
+        "B",
+        "crowd0",
+        "crowd1",
+        "crowd2"
+      ],
+      "weights": {
+        "A": 0.4512,
+        "B": 0.3612,
+        "crowd0": 0.36,
+        "crowd1": 0.36,
+        "crowd2": 0.36
+      }
+    }
+  },
+  "gate": "delivered accuracy under the crowding adversary published for all three rules"
+}

@@ -1,0 +1,88 @@
+{
+  "milestone": "M354",
+  "finding": "G16 -- the route seed has no per-session entropy",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "n_sessions": 4000,
+  "published_configuration": {
+    "source": "experiments/tier4/eval_v26_m303_router_repair.py",
+    "function": "_share",
+    "call": "router.route(FP, anchor=f\"anchor-{i}\")",
+    "varied": "the anchor, once per session",
+    "protocol_anchor_cadence": "once per epoch (whitepaper, \u00a7The ledger and the anchor)",
+    "produced_by_the_protocol": false
+  },
+  "scenarios": {
+    "three_arm_leader": {
+      "published": {
+        "follower1": 0.3325,
+        "follower2": 0.315,
+        "leader": 0.3525
+      },
+      "protocol": {
+        "leader": 1.0
+      },
+      "repaired": {
+        "follower1": 0.337,
+        "follower2": 0.30825,
+        "leader": 0.35475
+      },
+      "protocol_is_winner_take_all": true
+    },
+    "equal_price_tie": {
+      "published": {
+        "tie_a": 0.4925,
+        "tie_b": 0.5075
+      },
+      "protocol": {
+        "tie_b": 1.0
+      },
+      "repaired": {
+        "tie_a": 0.49,
+        "tie_b": 0.51
+      },
+      "protocol_is_winner_take_all": true
+    },
+    "two_times_price_cut": {
+      "published": {
+        "full_price": 0.332,
+        "half_price": 0.668
+      },
+      "protocol": {
+        "half_price": 1.0
+      },
+      "repaired": {
+        "full_price": 0.33875,
+        "half_price": 0.66125
+      },
+      "protocol_is_winner_take_all": true
+    }
+  },
+  "published_claims": {
+    "strongest_arm_about_one_third": {
+      "measured": 0.3548,
+      "holds": true
+    },
+    "equal_price_tie_splits_evenly": {
+      "measured": 0.49,
+      "holds": true
+    },
+    "two_times_price_cut_roughly_doubles_share": {
+      "measured_ratio": 1.952,
+      "holds": true
+    }
+  },
+  "grinding": {
+    "host": {
+      "seed_contains_arm_identifier": false,
+      "registry_change_moves_seed": true,
+      "reading": "a host cannot bias its own draw: the seed has no arm field, and the only registry lever it owns (its own price and score) moves the ranking, which is the intended channel"
+    },
+    "payer": {
+      "mean_resubmissions_to_force_least_favoured_arm": 3.1,
+      "least_favoured_arm_share": 0.3083,
+      "reading": "a payer DOES own its session ids and the epoch anchor is public, so it can resubmit until a preferred arm wins. Each attempt costs a declaration fee, and the payer can already express arm preference through best-quality mode, so this buys little -- but it is a real residual, not a closed hole, and the beacon (not the anchor) should seed the draw to close it."
+    }
+  },
+  "verdict": "PASS",
+  "runtime_seconds": 1.2
+}

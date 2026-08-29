@@ -19,7 +19,8 @@ private than the plaintext tier's.
 Gates (the M330 registration):
 - g1: a probed FHE session adjudicates IDENTICALLY to the plaintext
   form (commit-before-flag ordering preserved; mismatch -> L1;
-  unopened commit -> L1 per M319);
+  unopened commit -> abort, charged and tested at epoch close per
+  M364);
 - g2: the executor transcript type holds NO plaintext field (the
   M322 pattern - structural, not contractual).
 """
@@ -83,16 +84,19 @@ class ExecutorReplay:
 
 def adjudicate_fhe_probe(record: FheProbeRecord,
                          replay: ExecutorReplay) -> dict[str, Any]:
-    """Adjudicate a probed FHE session by the M319 table, mapped to
-    the ciphertext form:
-    - the host did not open its commitment -> DEVIATION L1 (the
-      M319 commit-and-abort rule, unchanged);
+    """Adjudicate a probed FHE session by the M319 table as amended by
+    M364, mapped to the ciphertext form:
+    - the host did not open its commitment -> ABORT: charged the full
+      unit price at once, escalated to a deviation only if the epoch's
+      aborts are aimed at probed sessions (see
+      ``probe_adjudication.adjudicate_epoch_aborts``);
     - the opened ciphertext mismatches the executor's replay ->
       DEVIATION L1 (the plaintext form's mismatch rule, mapped: the
       evaluation deviated from the sealed artifact);
     - opened and matching -> NO DEVIATION.
     The verdict structure is IDENTICAL to the plaintext form (g1):
-    the same table, the same levels, the same ordering."""
+    the same table, the same levels, the same ordering. It delegates
+    rather than restating, so the two forms cannot drift apart."""
     if not record.opened:
         return adjudicate_probed_session(
             commit_opened=False, probed=True,

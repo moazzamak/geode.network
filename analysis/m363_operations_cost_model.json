@@ -1,0 +1,55 @@
+{
+  "milestone": "M363",
+  "gate": "cost model closes at the reference workload with each role itemized; librarian gas included",
+  "reference_workload": {
+    "axis": "vision (DINOv2-L, 601 classes)",
+    "sessions_per_epoch": 10000,
+    "entries_per_epoch": 8,
+    "roots_per_epoch": 1,
+    "disputes_per_epoch": 1,
+    "proofs_verified_per_epoch": 100
+  },
+  "registered_prices": {
+    "gas_price_gwei": 0.1,
+    "eth_usd": 3000.0,
+    "compute_usd_per_core_s": 0.001
+  },
+  "roles_itemized": {
+    "librarian (on-chain gas)": {
+      "units": "8 incorporate + 1 root + 1 anchor",
+      "gas_per_epoch": 1465553,
+      "usd_per_epoch": 0.4397
+    },
+    "batch verifier": {
+      "units": "100 proofs sampled",
+      "core_s_per_epoch": 772.1,
+      "usd_per_epoch": 0.7721
+    },
+    "reference executor (dispute replay)": {
+      "units": "1 replay",
+      "core_s_per_epoch": 10.0,
+      "usd_per_epoch": 0.01
+    },
+    "tally committee": {
+      "units": "1.0s",
+      "usd_per_epoch": 0.001
+    },
+    "gateway / frontend": {
+      "units": "10000 sessions served",
+      "core_s_per_epoch": 5.0,
+      "usd_per_epoch": 0.005
+    }
+  },
+  "total_cost_usd_per_epoch": 1.2278,
+  "revenue_and_closing": {
+    "test_suite_base_fee_wei": 10,
+    "test_suite_revenue_usd": 0.0,
+    "total_cost_usd": 1.2278,
+    "closes_at_test_fee": false,
+    "required_base_fee_wei_to_close": 63946140625000,
+    "required_base_fee_usd": 0.191838,
+    "margin_multiple_at_required_fee": 1.25,
+    "note": "the test-suite fee is a harness value, not the registered deployment fee; the model sizes the deployment fee so the line closes at 1.25x."
+  },
+  "verdict": "DOES NOT CLOSE at the harness fee \u2014 required base fee registered instead"
+}

@@ -1,0 +1,76 @@
+{
+  "milestone": "M375",
+  "finding": "G11 -- composition asserted from fusion evidence",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "deviation_from_registered_design": {
+    "registered": "Whisper ASR -> frozen-BERT+ridge intent",
+    "run": "DomainNet router -> per-domain specialist",
+    "reason": "neither Whisper nor BERT nor any speech-to-text corpus is in the local cache; the router/specialist chain is the composition Figure 2 actually rests on and its data is sealed",
+    "declared_before_running": true
+  },
+  "corpus": {
+    "train_rows": 138000,
+    "test_rows": 34500,
+    "classes": 345,
+    "domains": 6,
+    "sealed_selection_tag": "63f590097008f749"
+  },
+  "anchor_reproduction": {
+    "registered_m144_r56_read": 0.245014492753623,
+    "measured": 0.245014,
+    "tolerance": 0.002,
+    "reproduced": true
+  },
+  "coalitions": {
+    "v_empty (no router, no head)": 0.002899,
+    "v_A (router + null head)": 0.005768,
+    "v_B (null router + monolithic head)": 0.245014,
+    "v_AB (the chain)": 0.274058
+  },
+  "diagnostics": {
+    "router_domain_accuracy": 0.81513,
+    "oracle_routed_chain": 0.299478,
+    "routing_loss_vs_oracle": 0.02542,
+    "specialisation_gain_at_oracle": 0.054464
+  },
+  "shapley": {
+    "stage_A_router": 0.015957,
+    "stage_B_head": 0.255203,
+    "router_share": 0.058846,
+    "sums_to_v_AB_minus_v_empty": true
+  },
+  "two_attribution_rules": {
+    "note": "G12 says the paper divides chains by Shapley in one section and by leave-one-out in another. On this measured chain the two rules disagree about what the router is owed.",
+    "leave_one_out_router": 0.029043,
+    "leave_one_out_head": 0.26829,
+    "loo_router_share": 0.09768,
+    "shapley_router_share": 0.058846,
+    "disagreement_ratio": 1.6599,
+    "loo_sums_to_v_AB_minus_v_empty": false
+  },
+  "capacity_disclosure": {
+    "monolith_head_params": 264960,
+    "chain_params": 1594368,
+    "note": "the chain carries six 345-way heads where the monolith carries one, so the comparison is not parameter-matched. It is artifact-matched, which is what the fee rule divides over: two stages are two priced artifacts regardless of their size. Each specialist is fitted on ~1/6 of the rows, so the chain trades parameters for training data.",
+    "rows_per_specialist": [
+      11224,
+      11587,
+      16217,
+      42457,
+      40773,
+      15742
+    ]
+  },
+  "contract_check": {
+    "matched_pairing_admitted": true,
+    "mismatched_pairing_refused": true,
+    "refusal_reason": "stage A emits class_label[345]; stage B consumes domain_label[6]"
+  },
+  "verdict": {
+    "chain_beats_strongest_single_stage": true,
+    "coalitions_all_computed": true,
+    "contract_refuses_mismatch": true,
+    "assumption_3b": "supported"
+  },
+  "runtime_seconds": 4.8
+}

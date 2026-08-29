@@ -25,7 +25,10 @@ from geode.core.eval_custody import (
     assert_not_purchasable,
     identity_economics,
 )
-from geode.core.probe_adjudication import adjudicate_probed_session
+from geode.core.probe_adjudication import (
+    adjudicate_epoch_aborts,
+    adjudicate_probed_session,
+)
 
 
 @dataclass(frozen=True)
@@ -117,12 +120,23 @@ def _claim_closed() -> bool:
 
 
 def _abort_closed() -> bool:
-    """M319: commit-and-abort on a probed session adjudicates as
-    a deviation (L1), not downtime."""
-    verdict = adjudicate_probed_session(commit_opened=False,
-                                        probed=True,
-                                        answers_match=False)
-    return bool(verdict["ladder_level"] == 1)
+    """M364 (G23): commit-and-abort is charged the full unit price
+    from the first abort, and escalates to a deviation (L1) when the
+    epoch's aborts are aimed at probed sessions. A host that dodges
+    only probed sessions is escalated; a host merely denied service
+    is not, because a third party cannot see the probe flag."""
+    dodger = adjudicate_epoch_aborts(
+        committed_sessions=1_000, probed_sessions=50,
+        aborts_probed=30, aborts_unprobed=0, unit_price=1.0)
+    denied = adjudicate_epoch_aborts(
+        committed_sessions=1_000, probed_sessions=50,
+        aborts_probed=15, aborts_unprobed=285, unit_price=1.0)
+    per_session = adjudicate_probed_session(commit_opened=False,
+                                            probed=True,
+                                            answers_match=False)
+    return bool(dodger["ladder_level"] == 1
+                and denied["ladder_level"] == 0
+                and per_session["charge_unit_price"])
 
 
 def _chain_split_closed() -> bool:
@@ -198,8 +212,9 @@ def build_campaign() -> CampaignReport:
         CampaignRow(
             step=10, attack="commit-and-abort on probed sessions "
                             "(A18)",
-            repair="M319: an unopened commit on a probed session "
-                   "is a deviation",
+            repair="M364: every abort is charged the unit price; "
+                   "aborts aimed at probed sessions escalate to a "
+                   "deviation, aborts a third party caused do not",
             module="geode.core.probe_adjudication",
             closure=_abort_closed, remaining_profit=0.0),
         CampaignRow(

@@ -1,0 +1,116 @@
+{
+  "milestone": "M353",
+  "finding": "G7 -- behavioural dedup at 0.95 locks incumbents in",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "dedup_threshold": 0.95,
+  "analytic": {
+    "bounds": "max(0, a1+a2-1) <= agreement <= 1-(a1-a2)",
+    "forced_refusal_requires": "a1 + a2 > 1.95, i.e. two equally strong arms both above 0.975",
+    "axes": [
+      {
+        "axis": "speech ASR (LibriSpeech, WER 0.02957)",
+        "accuracy_high": 0.97043,
+        "accuracy_low": 0.97043,
+        "agreement_min": 0.9409,
+        "agreement_max": 1.0,
+        "refusal_possible": true,
+        "refusal_forced": false
+      },
+      {
+        "axis": "speech classification (SC-v2, M266b)",
+        "accuracy_high": 0.8787,
+        "accuracy_low": 0.8787,
+        "agreement_min": 0.7574,
+        "agreement_max": 1.0,
+        "refusal_possible": true,
+        "refusal_forced": false
+      },
+      {
+        "axis": "code (HumanEval, M287 7B vs 1.5B anchor)",
+        "accuracy_high": 0.8598,
+        "accuracy_low": 0.5976,
+        "agreement_min": 0.4574,
+        "agreement_max": 0.7378,
+        "refusal_possible": false,
+        "refusal_forced": false
+      },
+      {
+        "axis": "code (HumanEval, M268 coder vs generalist)",
+        "accuracy_high": 0.5976,
+        "accuracy_low": 0.5061,
+        "agreement_min": 0.1037,
+        "agreement_max": 0.9085,
+        "refusal_possible": false,
+        "refusal_forced": false
+      },
+      {
+        "axis": "vision (Open Images, M286 served subset)",
+        "accuracy_high": 0.901,
+        "accuracy_low": 0.901,
+        "agreement_min": 0.802,
+        "agreement_max": 1.0,
+        "refusal_possible": true,
+        "refusal_forced": false
+      }
+    ]
+  },
+  "anchor_reproduction": {
+    "registered_test_accuracy": 0.8787,
+    "measured_test_accuracy": 0.8787,
+    "tolerance": 0.0005,
+    "reproduced": true
+  },
+  "measured_speech_commands_v2": {
+    "incumbent": "sealed M266b ridge probe",
+    "incumbent_test_accuracy": 0.8787,
+    "n_test": 11005,
+    "n_classes": 35,
+    "novelty_floor": 0.1,
+    "arms": [
+      {
+        "arm": "random_features+ridge (strong distinct arm)",
+        "test_accuracy": 0.7662,
+        "agreement_with_incumbent": 0.8005,
+        "refused_by_0p95_rule": false,
+        "novelty": 0.1236,
+        "admitted_by_novelty_rule": true
+      },
+      {
+        "arm": "nearest_class_mean (weak distinct arm)",
+        "test_accuracy": 0.3763,
+        "agreement_with_incumbent": 0.3891,
+        "refused_by_0p95_rule": false,
+        "novelty": 0.0861,
+        "admitted_by_novelty_rule": false
+      },
+      {
+        "arm": "bit_flip_copy (clone control)",
+        "test_accuracy": 0.8786,
+        "agreement_with_incumbent": 0.9999,
+        "refused_by_0p95_rule": true,
+        "novelty": 0.0,
+        "admitted_by_novelty_rule": false
+      },
+      {
+        "arm": "distilled_near_clone (clone control)",
+        "test_accuracy": 0.8494,
+        "agreement_with_incumbent": 0.9522,
+        "refused_by_0p95_rule": true,
+        "novelty": 0.021,
+        "admitted_by_novelty_rule": false
+      }
+    ]
+  },
+  "code_axis": {
+    "measured": false,
+    "reason": "the M268/M287 per-item HumanEval evidence lived under logs/ and did not survive the public-release squash; the F: cache directories for both cells are empty. Regenerating it needs two LLM generation passes. The code axis is settled analytically instead, which is sufficient because the analytic bound is an impossibility result, not an estimate."
+  },
+  "verdict": {
+    "failure_reproduced": false,
+    "novelty_rule_admits_strong_distinct_arm": true,
+    "novelty_rule_refuses_every_clone": true,
+    "reading": "G7's failure does NOT reproduce on any axis this paper measures. The 0.95 rule admitted the strong distinct arm (agreement 0.8005) and refused both clones (0.9999, 0.9522), which is the behaviour it was designed for. The analytic half explains why: refusal is impossible unless the two arms' accuracies differ by at most 0.05, and forced only when they sum above 1.95. Both code axes are outside the possibility region entirely. Only the ASR axis is inside it, and there refusal depends on error correlation rather than on accuracy alone. G7 is therefore a CONDITIONAL risk on axes above roughly 0.975, not a present CRITICAL defect.",
+    "residual": "The proposed novelty floor of 0.10 is uncomfortably close to what the legitimate strong arm scores (0.1236). A distinct arm whose errors correlate more with the incumbent's would fall below it and be refused. The floor is a tuning parameter with no measured basis and must not be presented as one."
+  },
+  "runtime_seconds": 7.4
+}

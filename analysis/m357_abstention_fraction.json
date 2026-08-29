@@ -1,0 +1,42 @@
+{
+  "milestone": "M357",
+  "gate": "per-axis fraction measured; the M332 extraction bound re-derived and not weakened",
+  "c1_measured_fractions": {
+    "registered_fractions": {
+      "single_pass_head": 1.0
+    },
+    "default_fraction": 1.0,
+    "single_pass_rationale": "the abstention predicate is a function of the final margin; the trunk encode and the head both ran before the abstention was known -> consumed fraction 1.0",
+    "cascade_note": "a cascade abstaining before its expensive stage registers its own lower fraction at axis creation; none exists in the shipped family"
+  },
+  "c2_re_derived_bound": {
+    "parameters": {
+      "d": 384,
+      "c": 345,
+      "eps": 1e-06,
+      "bisection_depth": 20,
+      "bucketed_queries": 2649600,
+      "raw_margin_queries": 132480,
+      "lifetime_revenue": 24000.0
+    },
+    "flat_half_price": {
+      "fraction": 0.5,
+      "bucketed_cost": 1324800.0,
+      "multiple": 55.2,
+      "raw_margin_cost": 66240.0,
+      "raw_multiple": 2.8
+    },
+    "measured_full_fraction": {
+      "fraction": 1.0,
+      "bucketed_cost": 2649600.0,
+      "multiple": 110.4,
+      "raw_margin_cost": 132480.0,
+      "raw_multiple": 5.5
+    },
+    "bound_strengthened": true,
+    "strengthening_factor": 2.0,
+    "abstention_charge_at_unit_price": 1.0
+  },
+  "verdict": "PASS",
+  "reading": "the measured full-cost abstention doubles the adversary's cheapest rate; bucketed extraction rises from 55.2x to 110.4x expected lifetime revenue. The supplier is no longer forced to guess to recover cost."
+}

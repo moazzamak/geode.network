@@ -1,0 +1,815 @@
+{
+  "instrument": "prior_art_search_3 (28 Aug 2026)",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md section G13 / M358-pa",
+  "claim_under_test": "governance weight in an open permissionless economic network accrues only from externally-verified revenue -- payments from counterparties with no attribution linkage to the beneficiary within a registered depth L -- so that circular payment among self-owned identities cannot convert capital into weight",
+  "displacement_criteria": {
+    "D1": "weight derived from revenue AND discounted by payer-payee graph linkage (full displacement)",
+    "D2": "wash/circular-payment filter applied to voting weight specifically (application displacement)",
+    "D3": "collusion discount over a contribution graph bounding self-dealing gain (partial; citation becomes mandatory)"
+  },
+  "queries": [
+    {
+      "label": "wash trading",
+      "query": "all:\"wash trading\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2202.03866v1",
+          "title": "NFT Wash Trading: Quantifying suspicious behaviour in NFT markets",
+          "published": "2022-02-07",
+          "summary": "The smart contract-based markets for non-fungible tokens (NFTs) on the Ethereum blockchain have seen tremendous growth in 2021, with trading volumes peaking at 3.5b in September 2021. This dramatic surge has led to industry observers questioning the authenticity of on-chain volumes, given the absence of identity requirements and the ease with which agents can control multiple addresses. We examine"
+        },
+        {
+          "id": "http://arxiv.org/abs/2411.05803v4",
+          "title": "Liquidity Jump, Liquidity Diffusion, and Crypto Wash Trading",
+          "published": "2024-10-28",
+          "summary": "We develop a new framework to detect wash trading in crypto assets through real-time liquidity fluctuation. We propose that short-term price jumps in crypto assets results from wash trading-induced liquidity fluctuation, and construct two complementary liquidity measures, liquidity jump (size of fluctuation) and liquidity diffusion (volatility of fluctuation), to capture the behavioral signature o"
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.16603v1",
+          "title": "Beyond the Surface: Advanced Wash Trading Detection in Decentralized NFT Markets",
+          "published": "2023-12-27",
+          "summary": "Wash trading in decentralized markets remains a significant concern magnified by the pseudonymous and public nature of blockchains. In this paper we introduce an innovative methodology designed to detect wash trading activities beyond surface-level transactions. Our approach integrates NFT ownership traces with the Ethereum Transaction Network, encompassing the complete historical record of all Et"
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.12544v3",
+          "title": "The Dark Side of NFTs: A Large-Scale Empirical Study of Wash Trading",
+          "published": "2023-12-19",
+          "summary": "NFTs (Non-Fungible Tokens) have seen significant growth since they first captured public attention in 2021. However, the NFT market is plagued by fake transactions and economic bubbles, e.g., NFT wash trading. Wash trading typically refers to a transaction involving the same person or two colluding individuals, and has become a major threat to the NFT ecosystem. Previous studies only detect NFT wa"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.10361v1",
+          "title": "Unveiling Wash Trading in Popular NFT Markets",
+          "published": "2024-03-15",
+          "summary": "As emerging digital assets, NFTs are susceptible to anomalous trading behaviors due to the lack of stringent regulatory mechanisms, potentially causing economic losses. In this paper, we conduct the first systematic analysis of four non-fungible tokens (NFT) markets. Specifically, we analyze more than 25 million transactions within these markets, to explore the evolution of wash trade activities. "
+        },
+        {
+          "id": "http://arxiv.org/abs/2404.07222v3",
+          "title": "Liquidity Jump, Liquidity Diffusion, and Treatment on Wash Trading of Crypto Assets",
+          "published": "2024-03-24",
+          "summary": "We propose that the liquidity of an asset includes two components: liquidity jump and liquidity diffusion. We show that liquidity diffusion has a higher correlation with crypto wash trading than liquidity jump and demonstrate that treatment on wash trading significantly reduces the level of liquidity diffusion, but only marginally reduces that of liquidity jump. We confirm that the autoregressive "
+        },
+        {
+          "id": "http://arxiv.org/abs/2302.05863v1",
+          "title": "NFTDisk: Visual Detection of Wash Trading in NFT Markets",
+          "published": "2023-02-12",
+          "summary": "With the growing popularity of Non-Fungible Tokens (NFT), a new type of digital assets, various fraudulent activities have appeared in NFT markets. Among them, wash trading has become one of the most common frauds in NFT markets, which attempts to mislead investors by creating fake trading volumes. Due to the sophisticated patterns of wash trading, only a subset of them can be detected by automati"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.01543v1",
+          "title": "NFT Wash Trading Detection",
+          "published": "2023-02-07",
+          "summary": "Wash trading is a form of market manipulation where the same entity sells an asset to themselves to drive up market prices, launder money under the cover of a legitimate transaction, or claim a tax loss without losing ownership of an asset. Although the practice is illegal with traditional assets, lack of supervision in the non-fungible token market enables criminals to wash trade and scam unsuspe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2102.07001v1",
+          "title": "Detecting and Quantifying Wash Trading on Decentralized Cryptocurrency Exchanges",
+          "published": "2021-02-13",
+          "summary": "Cryptoassets such as cryptocurrencies and tokens are increasingly traded on decentralized exchanges. The advantage for users is that the funds are not in custody of a centralized external entity. However, these exchanges are prone to manipulative behavior. In this paper, we illustrate how wash trading activity can be identified on two of the first popular limit order book-based decentralized excha"
+        },
+        {
+          "id": "http://arxiv.org/abs/2212.01225v3",
+          "title": "A Game of NFTs: Characterizing NFT Wash Trading in the Ethereum Blockchain",
+          "published": "2022-12-02",
+          "summary": "The Non-Fungible Token (NFT) market in the Ethereum blockchain experienced explosive growth in 2021, with a monthly trade volume reaching \\$6 billion in January 2022. However, concerns have emerged about possible wash trading, a form of market manipulation in which one party repeatedly trades an NFT to inflate its volume artificially. Our research examines the effects of wash trading on the NFT ma"
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.10984v1",
+          "title": "Crypto Wash Trading",
+          "published": "2021-08-24",
+          "summary": "We introduce systematic tests exploiting robust statistical and behavioral patterns in trading to detect fake transactions on 29 cryptocurrency exchanges. Regulated exchanges feature patterns consistently observed in financial markets and nature; abnormal first-significant-digit distributions, size rounding, and transaction tail distributions on unregulated exchanges reveal rampant manipulations u"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.18717v3",
+          "title": "Can AI Detect Wash Trading? Evidence from NFTs",
+          "published": "2023-11-30",
+          "summary": "Existing studies on crypto wash trading often use indirect statistical methods or leaked private data, both with inherent limitations. This paper leverages public on-chain NFT data for a more direct and granular estimation. Analyzing three major exchanges, we find that ~38% (30-40%) of trades and ~60% (25-95%) of traded value likely involve manipulation, with significant variation across exchanges"
+        },
+        {
+          "id": "http://arxiv.org/abs/2603.13830v1",
+          "title": "Early Rug Pull Warning for BSC Meme Tokens via Multi-Granularity Wash-Trading Pattern Profiling",
+          "published": "2026-03-14",
+          "summary": "The high-frequency issuance and short-cycle speculation of meme tokens in decentralized finance (DeFi) have significantly amplified rug-pull risk. Existing approaches still struggle to provide stable early warning under scarce anomalies, incomplete labels, and limited interpretability. To address this issue, an end-to-end warning framework is proposed for BSC meme tokens, consisting of four stages"
+        },
+        {
+          "id": "http://arxiv.org/abs/2411.08720v1",
+          "title": "How Wash Traders Exploit Market Conditions in Cryptocurrency Markets",
+          "published": "2024-11-08",
+          "summary": "Wash trading, the practice of simultaneously placing buy and sell orders for the same asset to inflate trading volume, has been prevalent in cryptocurrency markets. This paper investigates whether wash traders in Bitcoin act deliberately to exploit market conditions and identifies the characteristics of such manipulative behavior. Using a unique dataset of 18 million transactions from Mt. Gox, onc"
+        },
+        {
+          "id": "http://arxiv.org/abs/2306.04643v2",
+          "title": "Abnormal Trading Detection in the NFT Market",
+          "published": "2023-05-25",
+          "summary": "The Non-Fungible-Token (NFT) market has experienced explosive growth in recent years. According to DappRadar, the total transaction volume on OpenSea, the largest NFT marketplace, reached 34.7 billion dollars in February 2023. However, the NFT market is mostly unregulated and there are significant concerns about money laundering, fraud and wash trading. The lack of industry-wide regulations, and t"
+        }
+      ]
+    },
+    {
+      "label": "circular trading",
+      "query": "all:\"circular trading\"",
+      "status": 200,
+      "n_hits": 2,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/1710.10836v2",
+          "title": "An algorithmic approach to handle circular trading in commercial taxing system",
+          "published": "2017-10-30",
+          "summary": "Tax manipulation comes in a variety of forms with different motivations and of varying complexities. In this paper, we deal with a specific technique used by tax-evaders known as circular trading. In particular, we define algorithms for the detection and analysis of circular trade. To achieve this, we have modelled the whole system as a directed graph with the actors being vertices and the transac"
+        },
+        {
+          "id": "http://arxiv.org/abs/2208.07660v1",
+          "title": "Representation Learning on Graphs to Identifying Circular Trading in Goods and Services Tax",
+          "published": "2022-08-16",
+          "summary": "Circular trading is a form of tax evasion in Goods and Services Tax where a group of fraudulent taxpayers (traders) aims to mask illegal transactions by superimposing several fictitious transactions (where no value is added to the goods or service) among themselves in a short period. Due to the vast database of taxpayers, it is infeasible for authorities to manually identify groups of circular tra"
+        }
+      ]
+    },
+    {
+      "label": "self-trading detection",
+      "query": "all:\"self-trading\"",
+      "status": 200,
+      "n_hits": 2,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2510.04952v2",
+          "title": "Safe and Compliant Cross-Market Trade Execution via Constrained RL and Zero-Knowledge Audits",
+          "published": "2025-10-06",
+          "summary": "We present a cross-market algorithmic trading system that balances execution quality with rigorous compliance enforcement. The architecture comprises a high-level planner, a reinforcement learning execution agent, and an independent compliance agent. We formulate trade execution as a constrained Markov decision process with hard constraints on participation limits, price bands, and self-trading av"
+        },
+        {
+          "id": "http://arxiv.org/abs/2102.07001v1",
+          "title": "Detecting and Quantifying Wash Trading on Decentralized Cryptocurrency Exchanges",
+          "published": "2021-02-13",
+          "summary": "Cryptoassets such as cryptocurrencies and tokens are increasingly traded on decentralized exchanges. The advantage for users is that the funds are not in custody of a centralized external entity. However, these exchanges are prone to manipulative behavior. In this paper, we illustrate how wash trading activity can be identified on two of the first popular limit order book-based decentralized excha"
+        }
+      ]
+    },
+    {
+      "label": "collusion-resistant reputation",
+      "query": "all:\"collusion\" AND all:\"reputation system\"",
+      "status": 200,
+      "n_hits": 2,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/1812.10868v1",
+          "title": "Detecting Multiple Seller Collusive Shill Bidding",
+          "published": "2018-12-28",
+          "summary": "Shill bidding occurs when fake bids are introduced into an auction on the seller's behalf in order to artificially inflate the final price. This is typically achieved by the seller having friends bid in her auctions, or the seller controls multiple fake bidder accounts that are used for the sole purpose of shill bidding. We previously proposed a reputation system referred to as the Shill Score tha"
+        },
+        {
+          "id": "http://arxiv.org/abs/2608.03554v1",
+          "title": "ReputationChain: Robust Trust Updating for Blockchain-Enabled Supply Chains",
+          "published": "2026-08-04",
+          "summary": "Blockchain can preserve supply-chain records, but ledger integrity alone does not show whether a participant should be trusted in a future risk-sensitive transaction. Existing reputation systems mainly address product evidence, global feedback aggregation, or review authenticity, while giving less attention to repeated bilateral inflation, identity multiplicity, and unfair decay for honest partici"
+        }
+      ]
+    },
+    {
+      "label": "Sybil + governance",
+      "query": "all:\"Sybil\" AND all:\"governance\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2311.17929v7",
+          "title": "New Online Communities: Graph Deep Learning on Anonymous Voting Networks to Identify Sybils in Polycentric Governance",
+          "published": "2023-11-25",
+          "summary": "This research examines the polycentric governance of digital assets in blockchain-based Decentralized Autonomous Organizations (DAOs). It offers a theoretical framework and addresses a critical challenge facing decentralized governance by developing a method to identify Sybils, or spurious identities. Sybils pose significant organizational sustainability threats to DAOs and other, commons-based on"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.27370v1",
+          "title": "Compression-Based Behavioral Similarity for Open-World Sybil Discovery on Ethereum",
+          "published": "2026-07-29",
+          "summary": "Sybil attackers are Blockchain actors that adopt the characteristics of regular users to exploit airdrops or influence governance. Current methods of Sybil actor detection include constructing graphs, which requires token transfers between examined wallets. Machine learning algorithms have been employed as well, but they treat the task as a closed-set classification problem, making them vulnerable"
+        },
+        {
+          "id": "http://arxiv.org/abs/1901.00752v4",
+          "title": "Building a Sybil-Resilient Digital Community Utilizing Trust-Graph Connectivity",
+          "published": "2019-01-03",
+          "summary": "Preventing fake or duplicate digital identities (aka sybils) from joining a digital community may be crucial to its survival, especially if it utilizes a consensus protocol among its members or employs democratic governance, where sybils can undermine consensus, tilt decisions, or even take over. Here, we explore the use of a trust-graph of identities, with edges representing trust among identity "
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.01433v3",
+          "title": "A Comprehensive Study of Governance Issues in Decentralized Finance Applications",
+          "published": "2023-11-02",
+          "summary": "Decentralized Finance (DeFi) is a prominent application of smart contracts, representing a novel financial paradigm in contrast to centralized finance. While DeFi applications are rapidly emerging on mainstream blockchain platforms, their quality varies greatly, presenting numerous challenges, particularly in terms of their governance mechanisms. In this paper, we present a comprehensive study of "
+        },
+        {
+          "id": "http://arxiv.org/abs/2410.21593v1",
+          "title": "Hybrid-DAOs: Enhancing Governance, Scalability, and Compliance in Decentralized Systems",
+          "published": "2024-10-28",
+          "summary": "Decentralized Autonomous Organizations (DAOs), based on block-chain systems such as Ethereum, are emerging governance protocols that enable decentralized community management without a central authority. For instance, UniswapDAO allows members to vote on policy changes for the Uniswap exchange. However, DAOs face challenges regarding scalability, governance, and compliance. Hybrid-DAOs, which comb"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.18990v1",
+          "title": "Concave is the New Linear: The Impossibility of Anti-Plutocratic DAO Governance",
+          "published": "2026-05-18",
+          "summary": "Decentralized Autonomous Organizations (DAOs) run protocol governance by letting token holders vote on proposals. The dominant rule, voting power proportional to wallet balance, concentrates control among a small number of large holders, fueling the token-control governance attacks that have already compromised real protocols. To counter this concentration, the community has turned to anti-plutocr"
+        },
+        {
+          "id": "http://arxiv.org/abs/2505.19216v5",
+          "title": "Constitutional Consensus for Democratic Governance",
+          "published": "2025-05-25",
+          "summary": "Permissionless-consensus-based Decentralised Autonomous Organisations (DAOs) are the prevailing paradigm for participant-governed digital organisations. As participants have verified resources but no trusted identities, this ecosystem is necessarily plutocratic (one coin -- one vote). Here we offer, for the first time, a democratic (one person -- one vote) paradigm for the governance of digital co"
+        },
+        {
+          "id": "http://arxiv.org/abs/1904.09630v5",
+          "title": "Genuine Personal Identifiers and Mutual Sureties for Sybil-Resilient Community Formation",
+          "published": "2019-04-21",
+          "summary": "While most of humanity is suddenly on the net, the value of this singularity is hampered by the lack of credible digital identities: Social networking, person-to-person transactions, democratic conduct, cooperation and philanthropy are all hampered by the profound presence of fake identities, as illustrated by Facebook's removal of 5.4Bn fake accounts since the beginning of 2019. Here, we introduc"
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.17197v1",
+          "title": "Navigating the Research Landscape of Decentralized Autonomous Organizations: A Research Note and Agenda",
+          "published": "2023-12-28",
+          "summary": "This note and agenda serve as a cause for thought for scholars interested in researching Decentralized Autonomous Organizations (DAOs), addressing both the opportunities and challenges posed by this phenomenon. It covers key aspects of data retrieval, data selection criteria, issues in data reliability and validity such as governance token pricing complexities, discrepancy in treasuries, Mainnet a"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.27350v1",
+          "title": "Modeling Decisions in Blockchain Analytics: A Leakage-Aware Evaluation of Tree-Based vs. Sequential Models",
+          "published": "2026-07-29",
+          "summary": "Sybil bots are Ethereum actors that imitate legitimate users to extract airdrop rewards or influence governance. Recent Sybil detection methods increasingly use deep learning and treat blockchain activity as a quasi-linguistic sequence. However, complex sequence models are computationally expensive for real-time monitoring, and their reported performance may be inflated by label leakage from high-"
+        },
+        {
+          "id": "http://arxiv.org/abs/2405.13156v2",
+          "title": "A Privacy-Preserving DAO Model Using NFT Authentication for the Punishment not Reward Blockchain Architecture",
+          "published": "2024-05-21",
+          "summary": "This paper presents a decentralised autonomous organisation (DAO) model that uses non-fungible tokens (NFTs) for identity management and privacy-preserving interactions within a Punishment not Reward (PnR) blockchain mechanism. The proposed model introduces a dual NFT architecture deployed on Layer 2 networks: Membership NFTs (\\(NFT_{auth}\\)) for authentication and access control and interaction N"
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.02752v4",
+          "title": "Airdrops: Giving Money Away Is Harder Than It Seems",
+          "published": "2023-12-05",
+          "summary": "Airdrops are a popular mechanism used by blockchain protocols to bootstrap communities, reward early adopters, and decentralize token distribution. Despite their widespread adoption, the effectiveness of airdrops in achieving long-term user engagement and ecosystem growth remains poorly understood. In this paper, we present the first comprehensive empirical study of nine major airdrops across Ethe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2103.16012v3",
+          "title": "A database of travel-related behaviors and attitudes before, during, and after COVID-19 in the United States",
+          "published": "2021-03-30",
+          "summary": "The COVID-19 pandemic has impacted billions of people around the world. To capture some of these impacts in the United States, we are conducting a nationwide longitudinal survey collecting information about activity and travel-related behaviors and attitudes before, during, and after the COVID-19 pandemic. The survey questions cover a wide range of topics including commuting, daily travel, air tra"
+        },
+        {
+          "id": "http://arxiv.org/abs/2201.09137v1",
+          "title": "Long-term Data Sharing under Exclusivity Attacks",
+          "published": "2022-01-22",
+          "summary": "The quality of learning generally improves with the scale and diversity of data. Companies and institutions can therefore benefit from building models over shared data. Many cloud and blockchain platforms, as well as government initiatives, are interested in providing this type of service. These cooperative efforts face a challenge, which we call ``exclusivity attacks''. A firm can share distorted"
+        },
+        {
+          "id": "http://arxiv.org/abs/2303.00533v2",
+          "title": "Towards a Privacy-Preserving Dispute Resolution Protocol on Ethereum",
+          "published": "2023-03-01",
+          "summary": "We present a new dispute resolution protocol that can be built on the Ethereum blockchain. Unlike existing applications like Kleros, privacy is ensured by design through the use of the zero-knowledge protocols Semaphore and MACI (Minimal Anti-Collusion Infrastructure), which provide, among other things, resistance to Sybil-like attacks and corruption. Differently from Kleros, dispute resolution is"
+        }
+      ]
+    },
+    {
+      "label": "token voting power",
+      "query": "all:\"token\" AND all:\"voting power\"",
+      "status": 200,
+      "n_hits": 11,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2510.05830v2",
+          "title": "Fairness in Token Delegation: Mitigating Voting Power Concentration in DAOs",
+          "published": "2025-10-07",
+          "summary": "Decentralized Autonomous Organizations (DAOs) aim to enable participatory governance, but in practice face challenges of voter apathy, concentration of voting power, and misaligned delegation. Existing delegation mechanisms often reinforce visibility biases, where a small set of highly ranked delegates accumulate disproportionate influence regardless of their alignment with the broader community. "
+        },
+        {
+          "id": "http://arxiv.org/abs/2204.01176v1",
+          "title": "Analyzing Voting Power in Decentralized Governance: Who controls DAOs?",
+          "published": "2022-04-03",
+          "summary": "We empirically study the state of three prominent DAO governance systems on the Ethereum blockchain: Compound, Uniswap and ENS. In particular, we examine how the voting power is distributed in these systems. Using a comprehensive dataset of all governance token holders, delegates, proposals and votes, we analyze who holds the voting rights and how they are used to influence governance decisions."
+        },
+        {
+          "id": "http://arxiv.org/abs/2203.16612v2",
+          "title": "Decentralization illusion in Decentralized Finance: Evidence from tokenized voting in MakerDAO polls",
+          "published": "2022-03-30",
+          "summary": "Decentralized Autonomous Organization (DAO) is very popular in Decentralized Finance (DeFi) applications as it provides a decentralized governance solution through blockchain. We analyze the governance characteristics in the Maker protocol, its stablecoin DAI and governance token Maker (MKR). To achieve that, we establish several measurements of centralized governance. Our empirical analysis inves"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.18990v1",
+          "title": "Concave is the New Linear: The Impossibility of Anti-Plutocratic DAO Governance",
+          "published": "2026-05-18",
+          "summary": "Decentralized Autonomous Organizations (DAOs) run protocol governance by letting token holders vote on proposals. The dominant rule, voting power proportional to wallet balance, concentrates control among a small number of large holders, fueling the token-control governance attacks that have already compromised real protocols. To counter this concentration, the community has turned to anti-plutocr"
+        },
+        {
+          "id": "http://arxiv.org/abs/2405.18876v1",
+          "title": "On Fairness Concerns in the Blockchain Ecosystem",
+          "published": "2024-05-29",
+          "summary": "Blockchains revolutionized centralized sectors like banking and finance by promoting decentralization and transparency. In a blockchain, information is transmitted through transactions issued by participants or applications. Miners crucially select, order, and validate pending transactions for block inclusion, prioritizing those with higher incentives or fees. The order in which transactions are i"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.25959v1",
+          "title": "On the Centralization of Governance Power in Decentralized Autonomous Organizations",
+          "published": "2026-04-27",
+          "summary": "A decentralized autonomous organization (DAO) is a governing entity that empowers its stakeholders (i.e., users who hold one or more of its tokens) to manage blockchain-based protocols (i.e., smart contracts) collaboratively. The governance of a DAO is explicitly encoded in the DAO's governance contract, which defines how stakeholders participate in governance and how much influence (or voting pow"
+        },
+        {
+          "id": "http://arxiv.org/abs/2309.14232v2",
+          "title": "The Governance of Decentralized Autonomous Organizations: A Study of Contributors' Influence, Networks, and Shifts in Voting Power",
+          "published": "2023-09-25",
+          "summary": "We present a study analyzing the voting behavior of contributors, or vested users, in Decentralized Autonomous Organizations (DAOs). We evaluate their involvement in decision-making processes, discovering that in at least 7.54% of all DAOs, contributors, on average, held the necessary majority to control governance decisions. Furthermore, contributors have singularly decided at least one proposal "
+        },
+        {
+          "id": "http://arxiv.org/abs/2410.13095v1",
+          "title": "Future of Algorithmic Organization: Large-Scale Analysis of Decentralized Autonomous Organizations (DAOs)",
+          "published": "2024-10-16",
+          "summary": "Decentralized Autonomous Organizations (DAOs) resemble early online communities, particularly those centered around open-source projects, and present a potential empirical framework for complex social-computing systems by encoding governance rules within \"smart contracts\" on the blockchain. A key function of a DAO is collective decision-making, typically carried out through a series of proposals w"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.09435v1",
+          "title": "Voting Biases in Decentralized Autonomous Organization (DAO) Governance",
+          "published": "2026-07-10",
+          "summary": "Decentralized Autonomous Organizations (DAOs) use token-weighted voting to allocate resources, set protocol rules, and legitimate collective decisions. Yet, support in DAO voting is strikingly concentrated. What happens inside the ballot that produces this concentration? We study DAOs' governance at the proposal-choice level, linking each choice's voting-power share to three observable features: w"
+        },
+        {
+          "id": "http://arxiv.org/abs/2504.11341v2",
+          "title": "Evaluating DAO Sustainability and Longevity Through On-Chain Governance Metrics",
+          "published": "2025-04-15",
+          "summary": "Decentralised Autonomous Organisations (DAOs) automate governance and resource allocation through smart contracts, aiming to shift decision-making to distributed token holders. However, many DAOs face sustainability challenges linked to limited user participation, concentrated voting power, and technical design constraints. This paper addresses these issues by identifying research gaps in DAO eval"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.17655v4",
+          "title": "Understanding Blockchain Governance: Analyzing Decentralized Voting to Amend DeFi Smart Contracts",
+          "published": "2023-05-28",
+          "summary": "Decentralized Autonomous Organizations (DAOs) have emerged as a novel governance mechanism in blockchain ecosystems, particularly within Decentralized Finance (DeFi). By enabling token holders to propose and vote on protocol changes, these systems promise transparent and equitable decision-making without centralized control. In this paper, we present an in-depth empirical study of the governance p"
+        }
+      ]
+    },
+    {
+      "label": "DAO governance attack",
+      "query": "all:\"DAO\" AND all:\"governance\" AND all:\"attack\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2403.11758v1",
+          "title": "Demystifying the DAO Governance Process",
+          "published": "2024-03-18",
+          "summary": "Decentralized Autonomous Organization (DAO) becomes a popular governance solution for decentralized applications (dApps) to achieve decentralized governance. In the DAO, no single entity can arbitrarily control the dApps without approval from the majority of members. However, despite its advantages, DAO has also been targeted by several attacks, leading to the loss of millions of dollars. In this "
+        },
+        {
+          "id": "http://arxiv.org/abs/2406.15071v2",
+          "title": "SoK: Attacks on DAOs",
+          "published": "2024-06-21",
+          "summary": "Decentralized Autonomous Organizations (DAOs) are blockchain-based organizations that facilitate decentralized governance. Today, DAOs not only hold billions of dollars in their treasury but also govern many of the most popular Decentralized Finance (DeFi) protocols. This paper systematically analyses security threats to DAOs, focusing on the types of attacks they face. We study attacks on DAOs th"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.16548v1",
+          "title": "Towards Secure and Trustworthy DAOs for Cross-Chain Governance",
+          "published": "2026-07-17",
+          "summary": "Cross-chain DAOs face unique security challenges that go beyond traditional single-chain vulnerabilities. This paper identifies and categorizes four critical attack vectors in cross-chain DAO governance: bribery attacks, token control exploits, human-computer interaction deceptions, and protocol vulnerabilities. We propose a comprehensive security framework with a multi-layered architecture that i"
+        },
+        {
+          "id": "http://arxiv.org/abs/2410.21593v1",
+          "title": "Hybrid-DAOs: Enhancing Governance, Scalability, and Compliance in Decentralized Systems",
+          "published": "2024-10-28",
+          "summary": "Decentralized Autonomous Organizations (DAOs), based on block-chain systems such as Ethereum, are emerging governance protocols that enable decentralized community management without a central authority. For instance, UniswapDAO allows members to vote on policy changes for the Uniswap exchange. However, DAOs face challenges regarding scalability, governance, and compliance. Hybrid-DAOs, which comb"
+        },
+        {
+          "id": "http://arxiv.org/abs/2505.00888v2",
+          "title": "Balancing Security and Liquidity: A Time-Weighted Snapshot Framework for DAO Governance Voting",
+          "published": "2025-05-01",
+          "summary": "As new project upgrading the blockchain industry, novel forms of attack challenges developers to rethink about the design of their innovations. In the growth stage of the development, Decentralized Autonomous Organizations (DAO) introduces different approaches in managing fund through voting in governance tokens. However, relying on tokens as a weight for voting introduces opportunities for hacker"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.18990v1",
+          "title": "Concave is the New Linear: The Impossibility of Anti-Plutocratic DAO Governance",
+          "published": "2026-05-18",
+          "summary": "Decentralized Autonomous Organizations (DAOs) run protocol governance by letting token holders vote on proposals. The dominant rule, voting power proportional to wallet balance, concentrates control among a small number of large holders, fueling the token-control governance attacks that have already compromised real protocols. To counter this concentration, the community has turned to anti-plutocr"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.03530v1",
+          "title": "DAO Decentralization: Voting-Bloc Entropy, Bribery, and Dark DAOs",
+          "published": "2023-11-06",
+          "summary": "Decentralized Autonomous Organizations (DAOs) use smart contracts to foster communities working toward common goals. Existing definitions of decentralization, however-the 'D' in DAO-fall short of capturing key properties characteristic of diverse and equitable participation. We propose a new metric called Voting-Bloc Entropy (VBE, pronounced ''vibe'') that formalizes a broad notion of decentraliza"
+        },
+        {
+          "id": "http://arxiv.org/abs/2505.21296v1",
+          "title": "Repeated Auctions with Speculators: Arbitrage Incentives and Forks in DAOs",
+          "published": "2025-05-27",
+          "summary": "We analyze the vulnerability of decentralized autonomous organizations (DAOs) to speculative exploitation via their redemption mechanisms. Studying a game-theoretic model of repeated auctions for governance shares with speculators, we characterize the conditions under which -- in equilibrium -- an exploitative exit is guaranteed to occur, occurs in expectation, or never occurs. We evaluate four re"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.26204v1",
+          "title": "On Exercising Governance Power in Decentralized Autonomous Organizations",
+          "published": "2026-07-28",
+          "summary": "A decentralized autonomous organization (DAO) is a governance entity that allows its stakeholders to manage blockchain-based protocols through smart contracts. The DAO explicitly specifies how stakeholders make and enforce decisions concerning a protocol's operation in a smart contract, aptly referred to as its governance contract. The design of this governance contract, therefore, has far-reachin"
+        },
+        {
+          "id": "http://arxiv.org/abs/2105.05460v3",
+          "title": "A Systematic Literature Review on Blockchain Governance",
+          "published": "2021-05-12",
+          "summary": "Blockchain has been increasingly used as a software component to enable decentralisation in software architecture for a variety of applications. Blockchain governance has received considerable attention to ensure the safe and appropriate use and evolution of blockchain, especially after the Ethereum DAO attack in 2016. However, there are no systematic efforts to analyse existing governance solutio"
+        },
+        {
+          "id": "http://arxiv.org/abs/2308.04267v1",
+          "title": "The Vulnerable Nature of Decentralized Governance in DeFi",
+          "published": "2023-08-08",
+          "summary": "Decentralized Finance (DeFi) platforms are often governed by Decentralized Autonomous Organizations (DAOs) which are implemented via governance protocols. Governance tokens are distributed to users of the platform, granting them voting rights in the platform's governance protocol. Many DeFi platforms have already been subject to attacks resulting in the loss of millions of dollars in user funds. I"
+        },
+        {
+          "id": "http://arxiv.org/abs/2405.13156v2",
+          "title": "A Privacy-Preserving DAO Model Using NFT Authentication for the Punishment not Reward Blockchain Architecture",
+          "published": "2024-05-21",
+          "summary": "This paper presents a decentralised autonomous organisation (DAO) model that uses non-fungible tokens (NFTs) for identity management and privacy-preserving interactions within a Punishment not Reward (PnR) blockchain mechanism. The proposed model introduces a dual NFT architecture deployed on Layer 2 networks: Membership NFTs (\\(NFT_{auth}\\)) for authentication and access control and interaction N"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.16298v1",
+          "title": "Data-driven and distributed governance of building facilities management using decentralized autonomous organization, digital twin, and large language models",
+          "published": "2026-04-16",
+          "summary": "While traditional AI and data-driven facilities management approaches have improved building operational efficiency, they remain constrained by centralized organizational structures that are vulnerable to cyber attacks, limited contextual understanding, and decision-making processes that exclude key stakeholders from governance. This paper introduces a novel AI- and data-driven distributed governa"
+        },
+        {
+          "id": "http://arxiv.org/abs/1808.04041v1",
+          "title": "Optimization of a perturbed sweeping process by constrained discontinuous controls",
+          "published": "2018-08-13",
+          "summary": "This paper deals with optimal control problems described by a controlled version of Moreau's sweeping process governed by convex polyhedra, where measurable control actions enter additive perturbations. This class of problems, which addresses unbounded discontinuous differential inclusions with intrinsic state constraints, is truly challenging and underinvestigated in control theory while being hi"
+        },
+        {
+          "id": "http://arxiv.org/abs/2301.13769v1",
+          "title": "HoRStify: Sound Security Analysis of Smart Contracts",
+          "published": "2023-01-31",
+          "summary": "The cryptocurrency Ethereum is the most widely used execution platform for smart contracts. Smart contracts are distributed applications, which govern financial assets and, hence, can implement advanced financial instruments, such as decentralized exchanges or autonomous organizations (DAOs). Their financial nature makes smart contracts an attractive attack target, as demonstrated by numerous expl"
+        }
+      ]
+    },
+    {
+      "label": "quadratic funding + collusion",
+      "query": "all:\"quadratic funding\" AND all:\"collusion\"",
+      "status": 200,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "label": "pairwise-bounded quadratic funding",
+      "query": "all:\"pairwise\" AND all:\"quadratic funding\"",
+      "status": 200,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "label": "money laundering cycle detection",
+      "query": "all:\"money laundering\" AND all:\"cycle\"",
+      "status": 200,
+      "n_hits": 8,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2311.17203v1",
+          "title": "A Review on Cryptocurrency Transaction Methods for Money Laundering",
+          "published": "2023-11-28",
+          "summary": "Cryptocurrencies are considered relevant assets and they are currently used as an investment or to carry out transactions. However, specific characteristics commonly associated with the cryptocurrencies such as irreversibility, immutability, decentralized architecture, absence of control authority, mobility, and pseudo-anonymity make them appealing for money laundering activities. Thus, the collec"
+        },
+        {
+          "id": "http://arxiv.org/abs/2409.00823v1",
+          "title": "Enhancing Anti-Money Laundering Efforts with Network-Based Algorithms",
+          "published": "2024-09-01",
+          "summary": "The global banking system has faced increasing challenges in combating money laundering, necessitating advanced methods for detecting suspicious transactions. Anti-money laundering (or AML) approaches have often relied on predefined thresholds and machine learning algorithms using flagged transaction data, which are limited by the availability and accuracy of existing datasets. In this paper, we i"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.26189v1",
+          "title": "Clue-Guided Money Laundering Group Discovery",
+          "published": "2026-06-24",
+          "summary": "Money Laundering Group Discovery (MLGD) aims to identify hidden criminal groups and recover their complete structures in large-scale financial networks. Existing graph anomaly detection methods mainly produce node-level risk alerts, while global group discovery methods passively search for suspicious groups over the whole network. Both are mismatched with real Anti-money-laundering (AML) investiga"
+        },
+        {
+          "id": "http://arxiv.org/abs/2510.17848v2",
+          "title": "RISKTAGGER: Evidence-Guided LLM Agent for Post-Incident Forensic Analysis of Money Laundering in Web3",
+          "published": "2025-10-12",
+          "summary": "Cryptocurrency money-laundering forensic analysis after Web3 incidents faces challenges such as fragmented evidence, expanding transaction paths, and cross-chain discontinuity. Existing Web3 AML methods largely rely on manual clues and heuristic or graph-search-based tracing, with outputs limited to lists of suspicious addresses and lacking path-level evidence and verifiable explanations. Directly"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.10715v1",
+          "title": "Network Embedding Analysis for Anti-Money Laundering Detection",
+          "published": "2025-09-12",
+          "summary": "We employ network embedding to detect money laundering in financial transaction networks. Using real anonymized banking data, we model over one million accounts as a directed graph and use it to refine previously detected suspicious cycles with node2vec embeddings, creating a new network parameter, the spread number. Combined with more traditional centrality measures, these define an aggregate sco"
+        },
+        {
+          "id": "http://arxiv.org/abs/1909.01060v1",
+          "title": "Discovering Interesting Cycles in Directed Graphs",
+          "published": "2019-09-03",
+          "summary": "Cycles in graphs often signify interesting processes. For example, cyclic trading patterns can indicate inefficiencies or economic dependencies in trade networks, cycles in food webs can identify fragile dependencies in ecosystems, and cycles in financial transaction networks can be an indication of money laundering. Identifying such interesting cycles, which can also be constrained to contain a g"
+        },
+        {
+          "id": "http://arxiv.org/abs/2503.08456v1",
+          "title": "Network Analysis of Global Banking Systems and Detection of Suspicious Transactions",
+          "published": "2025-03-11",
+          "summary": "A novel network-based approach is introduced to analyze banking systems, focusing on two main themes: identifying influential nodes within global banking networks using Bank for International Settlements data and developing an algorithm to detect suspicious transactions for anti-money laundering. Leveraging the concept of adversarial networks, we examine Bank for International Settlements data to "
+        },
+        {
+          "id": "http://arxiv.org/abs/2303.11181v1",
+          "title": "Non-Markovian paths and cycles in NFT trades",
+          "published": "2023-03-20",
+          "summary": "Recent years have witnessed the availability of richer and richer datasets in a variety of domains, where signals often have a multi-modal nature, blending temporal, relational and semantic information. Within this context, several works have shown that standard network models are sometimes not sufficient to properly capture the complexity of real-world interacting systems. For this reason, differ"
+        }
+      ]
+    },
+    {
+      "label": "Sybil detection on graphs",
+      "query": "all:\"Sybil detection\" AND all:\"graph\"",
+      "status": 200,
+      "n_hits": 7,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2206.10835v1",
+          "title": "Interpreting Graph-based Sybil Detection Methods as Low-Pass Filtering",
+          "published": "2022-06-22",
+          "summary": "Online social networks (OSNs) are threatened by Sybil attacks, which create fake accounts (also called Sybils) on OSNs and use them for various malicious activities. Therefore, Sybil detection is a fundamental task for OSN security. Most existing Sybil detection methods are based on the graph structure of OSNs, and various methods have been proposed recently. However, although almost all methods h"
+        },
+        {
+          "id": "http://arxiv.org/abs/2409.08631v1",
+          "title": "Sybil Detection using Graph Neural Networks",
+          "published": "2024-09-13",
+          "summary": "This paper presents SYBILGAT, a novel approach to Sybil detection in social networks using Graph Attention Networks (GATs). Traditional methods for Sybil detection primarily leverage structural properties of networks; however, they tend to struggle with a large number of attack edges and are often unable to simultaneously utilize both known Sybil and honest nodes. Our proposed method addresses the"
+        },
+        {
+          "id": "http://arxiv.org/abs/2501.16624v1",
+          "title": "More Efficient Sybil Detection Mechanisms Leveraging Resistance of Users to Attack Requests",
+          "published": "2025-01-28",
+          "summary": "We investigate the problem of sybil (fake account) detection in social networks from a graph algorithms perspective, where graph structural information is used to classify users as sybil and benign. We introduce the novel notion of user resistance to attack requests (friendship requests from sybil accounts). Building on this notion, we propose a synthetic graph data generation framework that suppo"
+        },
+        {
+          "id": "http://arxiv.org/abs/1803.04321v2",
+          "title": "Structure-based Sybil Detection in Social Networks via Local Rule-based Propagation",
+          "published": "2018-03-12",
+          "summary": "Sybil detection in social networks is a basic security research problem. Structure-based methods have been shown to be promising at detecting Sybils. Existing structure-based methods can be classified into Random Walk (RW)-based methods and Loop Belief Propagation (LBP)-based methods. RW-based methods cannot leverage labeled Sybils and labeled benign users simultaneously, which limits their detect"
+        },
+        {
+          "id": "http://arxiv.org/abs/1903.00553v2",
+          "title": "Attacking Graph-based Classification via Manipulating the Graph Structure",
+          "published": "2019-03-01",
+          "summary": "Graph-based classification methods are widely used for security and privacy analytics. Roughly speaking, graph-based classification methods include collective classification and graph neural network. Evading a graph-based classification method enables an attacker to evade detection in security analytics and can be used as a privacy defense against inference attacks. Existing adversarial machine le"
+        },
+        {
+          "id": "http://arxiv.org/abs/1812.01661v3",
+          "title": "Graph-based Security and Privacy Analytics via Collective Classification with Joint Weight Learning and Propagation",
+          "published": "2018-12-04",
+          "summary": "Many security and privacy problems can be modeled as a graph classification problem, where nodes in the graph are classified by collective classification simultaneously. State-of-the-art collective classification methods for such graph-based security and privacy analytics follow the following paradigm: assign weights to edges of the graph, iteratively propagate reputation scores of nodes among the"
+        },
+        {
+          "id": "http://arxiv.org/abs/1503.02985v2",
+          "title": "SybilFrame: A Defense-in-Depth Framework for Structure-Based Sybil Detection",
+          "published": "2015-03-10",
+          "summary": "Sybil attacks are becoming increasingly widespread, and pose a significant threat to online social systems; a single adversary can inject multiple colluding identities in the system to compromise security and privacy. Recent works have leveraged the use of social network-based trust relationships to defend against Sybil attacks. However, existing defenses are based on oversimplified assumptions, w"
+        }
+      ]
+    },
+    {
+      "label": "verifiable contribution incentives",
+      "query": "all:\"verifiable\" AND all:\"contribution\" AND all:\"incentive\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2603.00666v1",
+          "title": "FWeb3: A Practical Incentive-Aware Federated Learning Framework",
+          "published": "2026-02-28",
+          "summary": "Federated learning (FL) enables collaborative model training over distributed private data. However, sustaining open participation requires incentive mechanisms that compensate contributors for their resources and risks. Enabled by Web3 primitives, especially blockchains, recent FL proposals incorporate incentive mechanisms for open participation, yet most focus primarily on algorithmic design and"
+        },
+        {
+          "id": "http://arxiv.org/abs/2512.20973v1",
+          "title": "DAO-Agent: Zero Knowledge-Verified Incentives for Decentralized Multi-Agent Coordination",
+          "published": "2025-12-24",
+          "summary": "Autonomous Large Language Model (LLM)-based multi-agent systems have emerged as a promising paradigm for facilitating cross-application and cross-organization collaborations. These autonomous agents often operate in trustless environments, where centralized coordination faces significant challenges, such as the inability to ensure transparent contribution measurement and equitable incentive distri"
+        },
+        {
+          "id": "http://arxiv.org/abs/2507.09972v1",
+          "title": "A New Incentive Model For Content Trust",
+          "published": "2025-07-14",
+          "summary": "This paper outlines an incentive-driven and decentralized approach to verifying the veracity of digital content at scale. Widespread misinformation, an explosion in AI-generated content and reduced reliance on traditional news sources demands a new approach for content authenticity and truth-seeking that is fit for a modern, digital world. By using smart contracts and digital identity to incorpora"
+        },
+        {
+          "id": "http://arxiv.org/abs/2501.04319v1",
+          "title": "VerifBFL: Leveraging zk-SNARKs for A Verifiable Blockchained Federated Learning",
+          "published": "2025-01-08",
+          "summary": "Blockchain-based Federated Learning (FL) is an emerging decentralized machine learning paradigm that enables model training without relying on a central server. Although some BFL frameworks are considered privacy-preserving, they are still vulnerable to various attacks, including inference and model poisoning. Additionally, most of these solutions employ strong trust assumptions among all particip"
+        },
+        {
+          "id": "http://arxiv.org/abs/2511.21118v1",
+          "title": "Trustless Federated Learning at Edge-Scale: A Compositional Architecture for Decentralized, Verifiable, and Incentive-Aligned Coordination",
+          "published": "2025-11-26",
+          "summary": "Artificial intelligence is retracing the Internet's path from centralized provision to distributed creation. Initially, resource-intensive computation concentrates within institutions capable of training and serving large models.Eventually, as federated learning matures, billions of edge devices holding sensitive data will be able to collectively improve models without surrendering raw information"
+        },
+        {
+          "id": "http://arxiv.org/abs/2309.11722v2",
+          "title": "Efficient Core-selecting Incentive Mechanism for Data Sharing in Federated Learning",
+          "published": "2023-09-21",
+          "summary": "Federated learning is a distributed machine learning system that uses participants' data to train an improved global model. In federated learning, participants cooperatively train a global model, and they will receive the global model and payments. Rational participants try to maximize their individual utility, and they will not input their high-quality data truthfully unless they are provided wit"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.09917v1",
+          "title": "Toward Explanatory Equilibrium: Verifiable Reasoning as a Coordination Mechanism under Asymmetric Information",
+          "published": "2026-04-10",
+          "summary": "LLM-based agents increasingly coordinate decisions in multi-agent systems, often attaching natural-language reasoning to actions. However, reasoning is neither free nor automatically reliable: it incurs computational cost and, without verification, may degenerate into persuasive cheap talk. We introduce Explanatory Equilibrium as a design principle for explanation-aware multi-agent systems and stu"
+        },
+        {
+          "id": "http://arxiv.org/abs/2505.20614v1",
+          "title": "EarthOL: A Proof-of-Human-Contribution Consensus Protocol -- Addressing Fundamental Challenges in Decentralized Value Assessment with Enhanced Verification and Security Mechanisms",
+          "published": "2025-05-27",
+          "summary": "This paper introduces EarthOL, a novel consensus protocol that attempts to replace computational waste in blockchain systems with verifiable human contributions within bounded domains. While recognizing the fundamental impossibility of universal value assessment, we propose a domain-restricted approach that acknowledges cultural diversity and subjective preferences while maintaining cryptographic "
+        },
+        {
+          "id": "http://arxiv.org/abs/2508.12138v1",
+          "title": "Substituting Proof of Work in Blockchain with Training-Verified Collaborative Model Computation",
+          "published": "2025-08-16",
+          "summary": "Bitcoin's Proof of Work (PoW) mechanism, while central to achieving decentralized consensus, has long been criticized for excessive energy use and hardware inefficiencies \\cite{devries2018bitcoin, truby2018decarbonizing}. This paper introduces a hybrid architecture that replaces Bitcoin's traditional PoW with a centralized, cloud-based collaborative training framework. In this model, miners contri"
+        },
+        {
+          "id": "http://arxiv.org/abs/2007.10596v1",
+          "title": "Incentives for Federated Learning: a Hypothesis Elicitation Approach",
+          "published": "2020-07-21",
+          "summary": "Federated learning provides a promising paradigm for collecting machine learning models from distributed data sources without compromising users' data privacy. The success of a credible federated learning system builds on the assumption that the decentralized and self-interested users will be willing to participate to contribute their local models in a trustworthy way. However, without proper ince"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.29826v1",
+          "title": "Rethinking Collaborative Trust for Verifiably Decentralized Blockchain Systems",
+          "published": "2026-06-29",
+          "summary": "Despite the promise of decentralization, measurement studies have identified a conspicuous lack of decentralization in blockchains. Centralization has been observed in almost all layers of the blockchain, in decentralized applications, and in decentralized autonomous organizations. In many cases, it is practically impossible to definitively determine the extent of centralization in the system. Whi"
+        },
+        {
+          "id": "http://arxiv.org/abs/2606.21060v1",
+          "title": "A Blockchain Consensus Mechanism for Distributed Electricity Trading",
+          "published": "2026-06-19",
+          "summary": "Distributed power systems complement centralized grids by coordinating distributed energy resources (DERs) to achieve regional energy self-sufficiency. Scaling such systems raises four persistent challenges: decentralized coordination, fair economic settlement, trustworthy operation, and system optimization, all without a central authority. This paper proposes Proof of Energy (PoE), a blockchain c"
+        },
+        {
+          "id": "http://arxiv.org/abs/2310.07165v1",
+          "title": "A Microgrid Trading Framework Based on PoC Consensus",
+          "published": "2023-10-11",
+          "summary": "In the field of energy Internet, blockchain-based distributed energy trading mode is a promising way to replace the traditional centralized trading mode. However, the current power blockchain platform based on public chain has problems such as low consensus efficiency and waste of computing resources. The energy trading platform based on the consortium chain has problems such as inability to attra"
+        },
+        {
+          "id": "http://arxiv.org/abs/2506.05379v1",
+          "title": "Designing DSIC Mechanisms for Data Sharing in the Era of Large Language Models",
+          "published": "2025-06-01",
+          "summary": "Training large language models (LLMs) requires vast amounts of high-quality data from institutions that face legal, privacy, and strategic constraints. Existing data procurement methods often rely on unverifiable trust or ignore heterogeneous provider costs. We introduce a mechanism-design framework for truthful, trust-minimized data sharing that ensures dominant-strategy incentive compatibility ("
+        },
+        {
+          "id": "http://arxiv.org/abs/2206.04731v1",
+          "title": "Leveraging Centric Data Federated Learning Using Blockchain For Integrity Assurance",
+          "published": "2022-06-09",
+          "summary": "Machine learning abilities have become a vital component for various solutions across industries, applications, and sectors. Many organizations seek to leverage AI-based solutions across their business services to unlock better efficiency and increase productivity. Problems, however, can arise if there is a lack of quality data for AI-model training, scalability, and maintenance. We propose a data"
+        }
+      ]
+    },
+    {
+      "label": "reputation from verified work",
+      "query": "all:\"reputation\" AND all:\"blockchain\" AND all:\"Sybil\"",
+      "status": 200,
+      "n_hits": 5,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2405.13156v2",
+          "title": "A Privacy-Preserving DAO Model Using NFT Authentication for the Punishment not Reward Blockchain Architecture",
+          "published": "2024-05-21",
+          "summary": "This paper presents a decentralised autonomous organisation (DAO) model that uses non-fungible tokens (NFTs) for identity management and privacy-preserving interactions within a Punishment not Reward (PnR) blockchain mechanism. The proposed model introduces a dual NFT architecture deployed on Layer 2 networks: Membership NFTs (\\(NFT_{auth}\\)) for authentication and access control and interaction N"
+        },
+        {
+          "id": "http://arxiv.org/abs/2605.18146v3",
+          "title": "DARTIC: Decentralized Anonymous Reputation at Scale for Trustworthy Crowdsourcing",
+          "published": "2026-05-18",
+          "summary": "On-chain crowdsourcing leverages blockchain's decentralization, transparency, and tamper-resistance to build trustworthy and verifiable Web3 crowdsourced services. However, existing decentralized reputation frameworks do not reconcile anonymity, reputation binding, and scalability. This paper demonstrates how on-chain crowdsourcing can simultaneously achieve these requirements under a trust-minimi"
+        },
+        {
+          "id": "http://arxiv.org/abs/2504.05143v1",
+          "title": "Taming Double-Spending in Offline Payments with Reputation-Weighted Loan Networks",
+          "published": "2025-04-07",
+          "summary": "Blockchain solutions typically assume a synchronous network to ensure consistency and achieve consensus. In contrast, offline transaction systems aim to enable users to agree on and execute transactions without assuming bounded communication delays when interacting with the blockchain. Most existing offline payment schemes depend on trusted hardware wallets that are assumed to be secure and tamper"
+        },
+        {
+          "id": "http://arxiv.org/abs/1906.09968v2",
+          "title": "B-Ride: Ride Sharing with Privacy-preservation, Trust and Fair Payment atop Public Blockchain",
+          "published": "2019-06-21",
+          "summary": "Ride-sharing is a service that enables drivers to share their trips with other riders, contributing to appealing benefits of shared travel costs. However, the majority of existing platforms rely on a central third party, which make them subject to a single point of failure and privacy disclosure issues. Moreover, they are vulnerable to DDoS and Sybil attacks due to malicious users involvement. Bes"
+        },
+        {
+          "id": "http://arxiv.org/abs/2602.02629v1",
+          "title": "Trustworthy Blockchain-based Federated Learning for Electronic Health Records: Securing Participant Identity with Decentralized Identifiers and Verifiable Credentials",
+          "published": "2026-02-02",
+          "summary": "The digitization of healthcare has generated massive volumes of Electronic Health Records (EHRs), offering unprecedented opportunities for training Artificial Intelligence (AI) models. However, stringent privacy regulations such as GDPR and HIPAA have created data silos that prevent centralized training. Federated Learning (FL) has emerged as a promising solution that enables collaborative model t"
+        }
+      ]
+    },
+    {
+      "label": "exchange volume inflation",
+      "query": "all:\"volume inflation\" AND all:\"exchange\"",
+      "status": 200,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "label": "ANCHOR liveness: Liberal Radicalism (title)",
+      "query": "all:\"Liberal Radicalism\"",
+      "status": 200,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "label": "ANCHOR sensitivity 1: quadratic funding collusion (no title)",
+      "query": "all:\"quadratic funding\" AND all:\"collusion\"",
+      "status": 200,
+      "n_hits": 0,
+      "hits": []
+    },
+    {
+      "label": "ANCHOR sensitivity 2: wash trading detection (no title)",
+      "query": "all:\"wash trading\" AND all:\"detection\"",
+      "status": 200,
+      "n_hits": 15,
+      "hits": [
+        {
+          "id": "http://arxiv.org/abs/2312.16603v1",
+          "title": "Beyond the Surface: Advanced Wash Trading Detection in Decentralized NFT Markets",
+          "published": "2023-12-27",
+          "summary": "Wash trading in decentralized markets remains a significant concern magnified by the pseudonymous and public nature of blockchains. In this paper we introduce an innovative methodology designed to detect wash trading activities beyond surface-level transactions. Our approach integrates NFT ownership traces with the Ethereum Transaction Network, encompassing the complete historical record of all Et"
+        },
+        {
+          "id": "http://arxiv.org/abs/2302.05863v1",
+          "title": "NFTDisk: Visual Detection of Wash Trading in NFT Markets",
+          "published": "2023-02-12",
+          "summary": "With the growing popularity of Non-Fungible Tokens (NFT), a new type of digital assets, various fraudulent activities have appeared in NFT markets. Among them, wash trading has become one of the most common frauds in NFT markets, which attempts to mislead investors by creating fake trading volumes. Due to the sophisticated patterns of wash trading, only a subset of them can be detected by automati"
+        },
+        {
+          "id": "http://arxiv.org/abs/2411.05803v4",
+          "title": "Liquidity Jump, Liquidity Diffusion, and Crypto Wash Trading",
+          "published": "2024-10-28",
+          "summary": "We develop a new framework to detect wash trading in crypto assets through real-time liquidity fluctuation. We propose that short-term price jumps in crypto assets results from wash trading-induced liquidity fluctuation, and construct two complementary liquidity measures, liquidity jump (size of fluctuation) and liquidity diffusion (volatility of fluctuation), to capture the behavioral signature o"
+        },
+        {
+          "id": "http://arxiv.org/abs/2305.01543v1",
+          "title": "NFT Wash Trading Detection",
+          "published": "2023-02-07",
+          "summary": "Wash trading is a form of market manipulation where the same entity sells an asset to themselves to drive up market prices, launder money under the cover of a legitimate transaction, or claim a tax loss without losing ownership of an asset. Although the practice is illegal with traditional assets, lack of supervision in the non-fungible token market enables criminals to wash trade and scam unsuspe"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.10361v1",
+          "title": "Unveiling Wash Trading in Popular NFT Markets",
+          "published": "2024-03-15",
+          "summary": "As emerging digital assets, NFTs are susceptible to anomalous trading behaviors due to the lack of stringent regulatory mechanisms, potentially causing economic losses. In this paper, we conduct the first systematic analysis of four non-fungible tokens (NFT) markets. Specifically, we analyze more than 25 million transactions within these markets, to explore the evolution of wash trade activities. "
+        },
+        {
+          "id": "http://arxiv.org/abs/2312.12544v3",
+          "title": "The Dark Side of NFTs: A Large-Scale Empirical Study of Wash Trading",
+          "published": "2023-12-19",
+          "summary": "NFTs (Non-Fungible Tokens) have seen significant growth since they first captured public attention in 2021. However, the NFT market is plagued by fake transactions and economic bubbles, e.g., NFT wash trading. Wash trading typically refers to a transaction involving the same person or two colluding individuals, and has become a major threat to the NFT ecosystem. Previous studies only detect NFT wa"
+        },
+        {
+          "id": "http://arxiv.org/abs/2102.07001v1",
+          "title": "Detecting and Quantifying Wash Trading on Decentralized Cryptocurrency Exchanges",
+          "published": "2021-02-13",
+          "summary": "Cryptoassets such as cryptocurrencies and tokens are increasingly traded on decentralized exchanges. The advantage for users is that the funds are not in custody of a centralized external entity. However, these exchanges are prone to manipulative behavior. In this paper, we illustrate how wash trading activity can be identified on two of the first popular limit order book-based decentralized excha"
+        },
+        {
+          "id": "http://arxiv.org/abs/2108.10984v1",
+          "title": "Crypto Wash Trading",
+          "published": "2021-08-24",
+          "summary": "We introduce systematic tests exploiting robust statistical and behavioral patterns in trading to detect fake transactions on 29 cryptocurrency exchanges. Regulated exchanges feature patterns consistently observed in financial markets and nature; abnormal first-significant-digit distributions, size rounding, and transaction tail distributions on unregulated exchanges reveal rampant manipulations u"
+        },
+        {
+          "id": "http://arxiv.org/abs/2311.18717v3",
+          "title": "Can AI Detect Wash Trading? Evidence from NFTs",
+          "published": "2023-11-30",
+          "summary": "Existing studies on crypto wash trading often use indirect statistical methods or leaked private data, both with inherent limitations. This paper leverages public on-chain NFT data for a more direct and granular estimation. Analyzing three major exchanges, we find that ~38% (30-40%) of trades and ~60% (25-95%) of traded value likely involve manipulation, with significant variation across exchanges"
+        },
+        {
+          "id": "http://arxiv.org/abs/2411.08720v1",
+          "title": "How Wash Traders Exploit Market Conditions in Cryptocurrency Markets",
+          "published": "2024-11-08",
+          "summary": "Wash trading, the practice of simultaneously placing buy and sell orders for the same asset to inflate trading volume, has been prevalent in cryptocurrency markets. This paper investigates whether wash traders in Bitcoin act deliberately to exploit market conditions and identifies the characteristics of such manipulative behavior. Using a unique dataset of 18 million transactions from Mt. Gox, onc"
+        },
+        {
+          "id": "http://arxiv.org/abs/2306.04643v2",
+          "title": "Abnormal Trading Detection in the NFT Market",
+          "published": "2023-05-25",
+          "summary": "The Non-Fungible-Token (NFT) market has experienced explosive growth in recent years. According to DappRadar, the total transaction volume on OpenSea, the largest NFT marketplace, reached 34.7 billion dollars in February 2023. However, the NFT market is mostly unregulated and there are significant concerns about money laundering, fraud and wash trading. The lack of industry-wide regulations, and t"
+        },
+        {
+          "id": "http://arxiv.org/abs/2607.13916v1",
+          "title": "Detecting unusual trading patterns on cryptocurrency exchanges by means of complexity measures",
+          "published": "2026-07-15",
+          "summary": "Artificial transaction generation remains an important source of potential market manipulation on cryptocurrency exchanges, as it may distort reported liquidity and reduce market transparency. This study proposes a diagnostic framework for detecting unusual trading patterns based on complexity and statistical-structure measures derived from high-frequency trade-level data. The analysis considers l"
+        },
+        {
+          "id": "http://arxiv.org/abs/2403.16082v1",
+          "title": "SoK: Comprehensive Analysis of Rug Pull Causes, Datasets, and Detection Tools in DeFi",
+          "published": "2024-03-24",
+          "summary": "Rug pulls pose a grave threat to the cryptocurrency ecosystem, leading to substantial financial loss and undermining trust in decentralized finance (DeFi) projects. With the emergence of new rug pull patterns, research on rug pull is out of state. To fill this gap, we first conducted an extensive analysis of the literature review, encompassing both scholarly and industry sources. By examining exis"
+        },
+        {
+          "id": "http://arxiv.org/abs/2602.13480v2",
+          "title": "MELT: A Behavioral Trace Dataset for High-Risk Memecoin Launch Detection",
+          "published": "2026-02-13",
+          "summary": "Launchpads have become the dominant mechanism for issuing memecoins, exposing investors to a new class of high-risk launches that existing rug-pull detection methods cannot capture. We argue that detecting these threats requires structured behavioral traces that underlie raw heterogeneous blockchain data, i.e., how insiders accumulate, coordinate, and unwind positions. To enable such analysis, we "
+        },
+        {
+          "id": "http://arxiv.org/abs/2303.11181v1",
+          "title": "Non-Markovian paths and cycles in NFT trades",
+          "published": "2023-03-20",
+          "summary": "Recent years have witnessed the availability of richer and richer datasets in a variety of domains, where signals often have a multi-modal nature, blending temporal, relational and semantic information. Within this context, several works have shown that standard network models are sometimes not sufficient to properly capture the complexity of real-world interacting systems. For this reason, differ"
+        }
+      ]
+    }
+  ]
+}

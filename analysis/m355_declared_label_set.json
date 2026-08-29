@@ -1,0 +1,62 @@
+{
+  "milestone": "M355",
+  "finding": "G20 -- coverage multiplication inverts quality",
+  "registered_in": "analysis/WHITEPAPER_REVIEW_2026-08-28_R2.md",
+  "gate_clause_1_anchor_reproduction": {
+    "anchors": {
+      "overall_601": {
+        "measured": 0.1643,
+        "registered": 0.1643
+      },
+      "served_subset": {
+        "measured": 0.901,
+        "registered": 0.901
+      },
+      "row_coverage": {
+        "measured": 0.049,
+        "registered": 0.049
+      },
+      "n_served_classes": {
+        "measured": 129,
+        "registered": 129
+      }
+    },
+    "reproduced": true,
+    "tolerance": 0.0005,
+    "note": "the sealed M286 evidence did not survive the logs/ squash; the head is refit from the same cached features and must reproduce the published values before anything is read off it"
+  },
+  "gate_clause_2_declared_129": {
+    "declared_classes": 129,
+    "test_rows_in_declared_set": 12039,
+    "scoped_arm": {
+      "qualified": true,
+      "s_a": 0.9378,
+      "coverage_within_declared_set": 1.0
+    },
+    "full_coverage_arm": {
+      "qualified": true,
+      "s_a": 0.901,
+      "coverage_within_declared_set": 1.0
+    },
+    "scoped_outranks_full": true
+  },
+  "gate_clause_3_declared_601": {
+    "declared_classes": 577,
+    "scoped_arm": {
+      "qualified": false,
+      "reason": "covers 129 of 577 declared classes; qualification is a membership question, not a ranking penalty"
+    },
+    "full_coverage_arm": {
+      "qualified": true,
+      "s_a": 0.1643
+    }
+  },
+  "old_rule_for_contrast": {
+    "rule": "s_a = metric x coverage",
+    "scoped": 0.0441,
+    "full_coverage": 0.1643,
+    "inverted": true
+  },
+  "verdict": "PASS",
+  "runtime_seconds": 5.0
+}

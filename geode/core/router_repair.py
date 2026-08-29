@@ -25,10 +25,16 @@ Registered selection semantics (written before any measurement):
 - **Top-k lottery (R-A3c).** The qualified arms are ranked by score;
   the route is drawn from the top ``k`` (registered default 5) with
   weights equal to the score. The draw is seeded from
-  ``H(anchor, task, registry state root, fingerprint)`` - deterministic
-  and replayable per anchor, unknowable in advance, and no host owns
-  the axis. The winner is returned first; the remaining pool is the
-  warm failover chain in rank order.
+  ``H(anchor, task, registry state root, fingerprint, session id)`` -
+  deterministic and replayable per session, unknowable in advance, and
+  no host owns the axis. The winner is returned first; the remaining
+  pool is the warm failover chain in rank order.
+
+  The session identifier was added by M354 (28 Aug 2026). Without it
+  every seed field is constant within an epoch for a given task, and
+  the lottery measured as winner-take-all: 1.000 to a single arm in
+  all three registered scenarios. See
+  ``analysis/m354_route_lottery_entropy.json``.
 - **Anchor-seeded tie-break (R-A3b).** Rank ties resolve by
   ``H(artifact_id, anchor)``, never by the artifact hash alone.
 """
@@ -60,13 +66,17 @@ def tie_key(artifact_id: str, anchor: str) -> str:
 
 
 def draw_seed(anchor: str, task_id: str, state_root: str,
-              fp: Sequence[float]) -> str:
-    """The lottery seed: H(anchor, task, registry state root, fp).
-    The anchor producer does not control the beacon (M311), so nobody
-    can grind the draw."""
+              fp: Sequence[float], session_id: str = "") -> str:
+    """The lottery seed: H(anchor, task, registry state root, fp,
+    session id). The anchor producer does not control the beacon
+    (M311), so nobody can grind the draw. The session id supplies the
+    per-session entropy the other four fields cannot: they are all
+    constant within an epoch for a given task (M354).
+    """
     return payload_hash({"anchor": str(anchor), "task": str(task_id),
                          "state_root": str(state_root),
-                         "fingerprint": [float(v) for v in fp]})
+                         "fingerprint": [float(v) for v in fp],
+                         "session": str(session_id)})
 
 
 class RepairedRouter:
@@ -114,12 +124,17 @@ class RepairedRouter:
         return payload_hash(state)
 
     def route(self, fp: Sequence[float], anchor: str,
-              task_id: str = "default") -> list[dict[str, Any]]:
+              task_id: str = "default",
+              session_id: str = "") -> list[dict[str, Any]]:
         """One draw from the top-k lottery. Returns [winner, pool...]
         in the same shape convention as the sealed Router: each entry
         is a copy of the arm dict annotated with ``rank_score``,
         ``share_rank``, ``unmeasured_units``, and the draw's seed and
-        winner flag."""
+        winner flag.
+
+        ``session_id`` is assigned at declaration and recorded in the
+        ledger, so the route still replays exactly.
+        """
         scored: list[tuple[float, str, dict[str, Any]]] = []
         for arm_id, arm in self._arms.items():
             price = float(arm.get("price") or 0.0)
@@ -139,7 +154,8 @@ class RepairedRouter:
         # score desc; anchor-seeded tie-break asc on exact ties
         scored.sort(key=lambda t: (-t[0], t[1]))
         pool = scored[:self.top_k]
-        seed = draw_seed(anchor, task_id, self.state_root(), fp)
+        seed = draw_seed(anchor, task_id, self.state_root(), fp,
+                         session_id)
         rng = random.Random(seed)
         weights = [entry[0] for entry in pool]
         total = sum(weights)

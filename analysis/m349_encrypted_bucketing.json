@@ -1,0 +1,170 @@
+{
+  "milestone": "M349",
+  "gate": "argmax+bucket FHE within 5x of the 20 s head-only figure, or option 2 adopted with the extraction multiple published",
+  "head_only_s": 23.0,
+  "pass_bound_s": 100.0,
+  "abs_poly_worst_err": {
+    "deg2": 3.000149955002257,
+    "deg8": 1.0767139003154962,
+    "deg16": 6.456995300708505
+  },
+  "registered_context": {
+    "2": {
+      "c": 2,
+      "depth": 1,
+      "ok": false,
+      "failure": "ValueError",
+      "message": "scale out of bounds"
+    },
+    "4": {
+      "c": 4,
+      "depth": 2,
+      "ok": false,
+      "failure": "ValueError",
+      "message": "scale out of bounds"
+    },
+    "8": {
+      "c": 8,
+      "depth": 3,
+      "ok": false,
+      "failure": "ValueError",
+      "message": "scale out of bounds"
+    }
+  },
+  "extended_contexts": {
+    "4": {
+      "build@8192": {
+        "ok": false,
+        "failure": "ValueError",
+        "message": "encryption parameters are not set correctly"
+      },
+      "c2@16384": {
+        "c": 2,
+        "depth": 1,
+        "ok": true,
+        "seconds": 0.01754360000086308,
+        "per_max_ms": 17.54360000086308,
+        "plain_max": -5.3085688274875835,
+        "fhe_max": -5.781737915575801,
+        "abs_err": 0.4731690880882171
+      },
+      "c4@16384": {
+        "c": 4,
+        "depth": 2,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      },
+      "c8@16384": {
+        "c": 8,
+        "depth": 3,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      },
+      "c16@16384": {
+        "c": 16,
+        "depth": 4,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      }
+    },
+    "5": {
+      "build@8192": {
+        "ok": false,
+        "failure": "ValueError",
+        "message": "encryption parameters are not set correctly"
+      },
+      "c2@16384": {
+        "c": 2,
+        "depth": 1,
+        "ok": true,
+        "seconds": 0.021868199999516946,
+        "per_max_ms": 21.868199999516946,
+        "plain_max": 2.025363019299842,
+        "fhe_max": 1.499193693291808,
+        "abs_err": 0.5261693260080342
+      },
+      "c4@16384": {
+        "c": 4,
+        "depth": 2,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      },
+      "c8@16384": {
+        "c": 8,
+        "depth": 3,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      },
+      "c16@16384": {
+        "c": 16,
+        "depth": 4,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      }
+    },
+    "6": {
+      "build@8192": {
+        "ok": false,
+        "failure": "ValueError",
+        "message": "encryption parameters are not set correctly"
+      },
+      "c2@16384": {
+        "c": 2,
+        "depth": 1,
+        "ok": true,
+        "seconds": 0.027203400000871625,
+        "per_max_ms": 27.203400000871625,
+        "plain_max": 7.675529106003605,
+        "fhe_max": 7.043738621525712,
+        "abs_err": 0.631790484477893
+      },
+      "c4@16384": {
+        "c": 4,
+        "depth": 2,
+        "ok": true,
+        "seconds": 0.06602139999995416,
+        "per_max_ms": 22.007133333318052,
+        "plain_max": 14.284988458916068,
+        "fhe_max": 14.139523198592752,
+        "abs_err": 0.14546526032331641
+      },
+      "c8@16384": {
+        "c": 8,
+        "depth": 3,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      },
+      "c16@16384": {
+        "c": 16,
+        "depth": 4,
+        "ok": false,
+        "failure": "ValueError",
+        "message": "scale out of bounds"
+      }
+    }
+  },
+  "extrapolation": {
+    "deepest_measured_depth": 2,
+    "per_max_ms_at_deepest": 22.007133333318052,
+    "depth_601": 10,
+    "tree_ops_601": 600,
+    "muls_per_max_degree8": 3,
+    "degree_factor_65536_over_8192": 8.0,
+    "deeper_rescaling_factor": 1.5,
+    "argmax_601_s": 475.3540799996699,
+    "bucket_edges": 4,
+    "bucket_601_s": 6.338054399995599,
+    "assumption_stated": "degree-8 |x| (3 muls per max, ~1e-2 error) for a decision-grade tree; degree 65536 for a ~1320-bit modulus at 128-bit security; per-op cost linear in degree; +1.5x for deeper rescaling. Not measured \u2014 labelled."
+  },
+  "total_private_query_s": 504.6921343996655,
+  "within_5x": false,
+  "decision": "OPTION 2 ADOPTED",
+  "finding": "The registered depth-3 context cannot hold a 3-level comparison tree (scale out of bounds; TenSEAL 0.3.17 exposes no rescale and consumes scale on plain multiplications too). The head's depth-1 structure is at the edge of the budget, so a 601-way argmax (depth-10 tree of decision- grade comparisons, ~30 muls in series) is orders of magnitude deeper. A degree-2 |x| max is decision-unreliable (worst error ~3.0)."
+}

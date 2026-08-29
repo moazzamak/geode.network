@@ -21,9 +21,16 @@ representation-artifact kind:
   resolves on the bus, its input contract must be registered, and
   its utility must be measured (never claimed).
 - ``attribution_share``: the artifact earns through a downstream
-  head - its share of the head's utility gain, by the registered
-  leave-one-out rule (the M329 chain-attribution form, applied at
-  the block level).
+  head - its share of the head's utility gain, by the protocol's
+  single attribution rule, the Shapley value of the fee flow
+  (``geode.core.chains.shapley_split``). Amended by M375
+  (28 Aug 2026): this module previously documented a leave-one-out
+  rule, which contradicted the fee flow. M375 measured both on the
+  same coalition values of a real two-stage chain and they differ
+  by a factor of 1.66, so the contradiction was worth money, not
+  only words. Shapley binds; the margin form survives only as an
+  explicitly-labelled stand-in for callers with no measured
+  coalition values.
 
 The boundary: the FREE standard library never holds learned models;
 third-party learned representations are registrable artifacts with
@@ -32,10 +39,12 @@ measured utility and a price. The paper states this surface.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from itertools import combinations
+from typing import Any, Mapping
 
 import numpy as np
 
+from geode.core.chains import shapley_split
 from geode.core.economics import reference_workload_units
 from geode.core.federation import (
     BusBlock,
@@ -157,13 +166,46 @@ def attribution_share(head_utility_with: float,
                       head_utility_without: float,
                       artifact: RepresentationArtifact,
                       other_blocks: list[str] = [],
+                      coalition_values: Mapping[
+                          frozenset[str], float] | None = None,
                       ) -> dict[str, float]:
     """The artifact's attribution share of a downstream head's
-    utility gain, by the registered leave-one-out rule (the M329
-    chain-attribution form at block level): the artifact's share is
-    its leave-one-out utility (with - without), the other blocks
-    share the remainder equally. Negative shares are recorded
-    honestly (a block that hurts pays nothing and is reported)."""
+    utility gain.
+
+    The protocol has ONE attribution rule: the Shapley value of
+    Section "The fee flow". When ``coalition_values`` is supplied
+    -- a measured utility for every subset of
+    ``[artifact.output_name] + other_blocks`` -- that rule is
+    applied exactly.
+
+    Without measured coalition values the exact rule cannot be
+    computed from two numbers, and this falls back to the
+    with-minus-without margin. That fallback is a STAND-IN, not a
+    second rule. M375 measured both on the same four coalition
+    values of a real two-stage chain: the margin rule awarded the
+    routing stage 0.0977 of the pool where Shapley awarded it
+    0.0588, a factor of 1.66. Callers that settle real payments
+    must pass ``coalition_values``.
+
+    Negative shares are recorded honestly (a block that hurts pays
+    nothing and is reported).
+    """
+    blocks = [artifact.output_name, *other_blocks]
+    if coalition_values is not None:
+        missing = [frozenset(c) for r in range(len(blocks) + 1)
+                   for c in combinations(blocks, r)
+                   if frozenset(c) not in coalition_values]
+        if missing:
+            raise ValueError(
+                f"the Shapley rule needs every coalition value; "
+                f"{len(missing)} of {2 ** len(blocks)} are missing")
+        raw = shapley_split(
+            {name: 0.0 for name in blocks},
+            chain_score=coalition_values[frozenset(blocks)],
+            coalition_value=lambda members: coalition_values[
+                frozenset(members)])
+        return {name: max(value, 0.0) for name, value in raw.items()}
+
     loo = float(head_utility_with) - float(head_utility_without)
     shares: dict[str, float] = {}
     if loo > 0.0:

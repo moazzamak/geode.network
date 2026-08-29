@@ -13,5 +13,28 @@
     "c2_fails": "replacement fires without a reason or below threshold, or never fires at threshold; VOID",
     "c3_fails": "a stopped librarian is not flagged or a healthy one reads unbounded; VOID",
     "all_hold": "M312 PASS: librarian containment closes A14 at the registered cells"
-  }
+  },
+  "amendments_after_registration": [
+    {
+      "milestone": "M365",
+      "date": "2026-08-29",
+      "finding": "G24",
+      "supersedes": "registered_notes.force_inclusion",
+      "change": "Incorporation is no longer due within a flat 1 epoch. The obligation is capped at maxIncorporationsPerEpoch = 8, and each entry's deadline is posted + window + backlog_ahead // cap, so an unbounded spam campaign cannot invalidate the chain by exceeding what any honest librarian could process. Posting now also charges a superlinear fee past a free allowance."
+    },
+    {
+      "milestone": "M366",
+      "date": "2026-08-29",
+      "finding": "G25",
+      "supersedes": "registered_notes.replacement",
+      "change": "The threshold is no longer '>= 0.5 of registered validators' by headcount, which a Sybil fleet could reach at the cost of registering identities. It is now two thirds of EARNED voting weight under the M327 rule, with the 20% per-identity cap, the pedigree gate, and the diversity floor. The recorded-reason requirement is unchanged."
+    },
+    {
+      "milestone": "M382",
+      "date": "2026-08-29",
+      "finding": "G53",
+      "supersedes": "registered_notes.replacement",
+      "change": "'Executable' was not true on chain. CreditLedger.setLibrarian was onlyOwner and the registered endgame renounces ownership, so at maturity the vote could decide but not act; InclusionInbox held an immutable copy of the address besides. A governance authority, distinct from the bootstrap owner, now holds librarian replacement and nothing else, and the inbox reads the address from the ledger so a replacement reaches the containment contract with the open queue intact."
+    }
+  ]
 }

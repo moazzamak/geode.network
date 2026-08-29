@@ -8,6 +8,15 @@ import "@openzeppelin/contracts/utils/ReentrancyGuardTransient.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 
+/// @dev Minimal pull surface over the force-inclusion inbox. The
+/// inbox names this contract as its operations line, so only this
+/// contract may call claimOperations; routing the call through the
+/// ledger keeps the pulled fees inside the same accounting envelope
+/// that funds the permissionless settlement bounties.
+interface IOperationsPuller {
+    function claimOperations() external;
+}
+
 /// @notice GEODE settlement ledger — whitepaper-aligned (24 Aug 2026).
 ///
 /// Asset: native ETH. Users deposit ETH; 2.5% routes to the
@@ -185,8 +194,11 @@ contract CreditLedger is
     SlashFiling[] public slashFilings;   // id = index
     /// @notice Bond ETH held against live filings and challenges.
     /// Accounting note: bonds are NOT part of ethHeld (they are not
-    /// deposits); address(this).balance = ethHeld + slashBondHeld +
-    /// slashBondsBurned + registryBondHeld + registryBondsBurned.
+    /// deposits); the operations pool is real held ETH pulled from
+    /// the inbox's posting fees; address(this).balance = ethHeld +
+    /// slashBondHeld + slashBondsBurned + registryBondHeld +
+    /// registryBondsBurned + rootBondHeld + rootBondsBurned +
+    /// operationsPool.
     uint256 public slashBondHeld;
     /// @notice Bond ETH forfeited by losing a dispute. Unreachable by
     /// any claim path — nobody gains from a false accusation.
@@ -215,6 +227,54 @@ contract CreditLedger is
     uint256 public registryBondHeld;
     uint256 public registryBondsBurned;
 
+    /// @notice R3-F1 (G54): a proposed epoch attribution root. The
+    /// root used to be the one settlement decision only the librarian
+    /// could file — a librarian that published nothing halted the
+    /// epoch's income (the M385 residual). The same bond/window/quorum
+    /// game as the slash and registry filings now removes the
+    /// librarian from the COMMON path: any party files the epoch's
+    /// root under a bond; an unchallenged filing executes after the
+    /// window (write-once per epoch); a challenge escalates to the
+    /// replay quorum, whose verdict (librarian-filed, the M294
+    /// pattern) applies the root or voids it, burning the loser's
+    /// bond. A false root is refutable by the payees it would pay
+    /// wrongly — the party that loses from it.
+    struct RootFiling {
+        uint256 forEpoch;      // the closed epoch the root summarises
+        bytes32 root;
+        address filer;
+        uint256 filedAt;
+        address challenger;    // address(0) if never challenged
+        uint256 resolvedAt;    // 0 while live
+        address bondRefundee;  // winner, set at resolution
+        bool guilty;           // quorum verdict: the root is wrong
+    }
+
+    RootFiling[] public rootFilings;   // id = index
+    uint256 public rootBondHeld;
+    uint256 public rootBondsBurned;
+
+    /// @notice The operations-line pool: the non-refundable
+    /// force-inclusion posting fees, pulled from the inbox (which
+    /// names this contract as its operations line) and disbursed as
+    /// registered bounties to whoever did each unit of permissionless
+    /// settlement work. The pool can never overdraw: an empty pool
+    /// skips a bounty publicly, and the shortfall is on chain like
+    /// the accrual.
+    uint256 public operationsPool;
+
+    /// @notice Registered per-root posting bounty, paid to the party
+    /// whose attribution root lands (the permissionless filing path).
+    /// Funded by the operations-line pool, i.e. by the
+    /// force-inclusion posting fees. 0 until registered; the change
+    /// is timelocked like every other money parameter.
+    uint256 public rootPostingBounty;
+    uint256 public pendingRootPostingBounty;
+    uint256 public rootPostingBountyChangeAt;
+
+    /// @notice Pull balances for root-posting bounties.
+    mapping(address => uint256) public rootBountyClaimable;
+
     event AttributionRootPosted(uint256 indexed epochId, bytes32 root);
     event AttributionClaimed(uint256 indexed epochId,
                              bytes32 indexed artifactId,
@@ -241,6 +301,25 @@ contract CreditLedger is
                                  bytes32 quorumRecordHash);
     event RegistryBondClaimed(uint256 indexed filingId,
                               address indexed refundee, uint256 amount);
+    event RootFiled(uint256 indexed filingId, uint256 indexed forEpoch,
+                    bytes32 root, address filer);
+    event RootChallenged(uint256 indexed filingId,
+                         address indexed challenger);
+    event RootExecuted(uint256 indexed filingId);
+    event RootSkipped(uint256 indexed filingId, string reason);
+    event RootResolved(uint256 indexed filingId, bool guilty,
+                       bytes32 quorumRecordHash);
+    event RootBondClaimed(uint256 indexed filingId,
+                          address indexed refundee, uint256 amount);
+    event OperationsPulled(uint256 amount);
+    event RootBountyAwarded(uint256 indexed filingId,
+                            address indexed filer, uint256 amount);
+    event RootBountySkipped(uint256 indexed filingId,
+                            uint256 shortfall);
+    event RootBountyClaimed(address indexed to, uint256 amount);
+    event RootPostingBountyChangeScheduled(uint256 newBounty,
+                                           uint256 changeAt);
+    event RootPostingBountyChanged(uint256 bounty);
 
     event Deposited(address indexed from, uint256 amount, uint256 devCut);
     event Registered(bytes32 indexed artifactId, address indexed operatorKey,
@@ -923,6 +1002,234 @@ contract CreditLedger is
         (bool ok, ) = payable(refundee).call{value: SLASH_BOND}("");
         if (!ok) revert SendFailed();
         emit RegistryBondClaimed(filingId, refundee, SLASH_BOND);
+    }
+
+    // --- R3-F1 (G54): any party may post the attribution root ----
+    //
+    // The direct `postAttributionRoot` above is the librarian's
+    // trusted fast path. This block removes the librarian from the
+    // COMMON path: any party files the closed epoch's root under a
+    // bond, the filing sits in a challenge window, and if nobody
+    // refutes it the root lands with no privileged party in the call.
+    // A refutation escalates to the replay quorum, whose verdict (the
+    // M294 pattern: the deterministic replay decides, the key files)
+    // applies the root or voids it; the loser of the dispute loses
+    // its bond. A stalled librarian can no longer freeze an epoch's
+    // payments — anyone can post the root for it.
+
+    /// @notice File an epoch's attribution root, permissionless, with
+    /// a bond. Shape is validated at filing time: a closed epoch, a
+    /// non-zero root, and no root already on file for that epoch. The
+    /// filing does NOT post the root: it only takes effect after the
+    /// challenge window (or a quorum verdict that confirms it).
+    function fileAttributionRoot(uint256 forEpoch, bytes32 root)
+        external payable whenNotPaused returns (uint256 filingId) {
+        if (msg.value != SLASH_BOND) revert WrongBond();
+        _rollEpochIfDue();
+        if (forEpoch >= epochId) revert EpochNotClosed();
+        if (root == bytes32(0)) revert NoAttributionRoot();
+        if (attributionRoot[forEpoch] != bytes32(0)) {
+            revert RootAlreadyPosted();
+        }
+        filingId = rootFilings.length;
+        rootFilings.push(RootFiling({
+            forEpoch: forEpoch,
+            root: root,
+            filer: msg.sender,
+            filedAt: block.timestamp,
+            challenger: address(0),
+            resolvedAt: 0,
+            bondRefundee: address(0),
+            guilty: false
+        }));
+        rootBondHeld += SLASH_BOND;
+        emit RootFiled(filingId, forEpoch, root, msg.sender);
+    }
+
+    /// @notice Refute a root filing inside its window, posting the
+    /// same bond. The challenger asserts the root is wrong — it would
+    /// pay credits the epoch's work does not support. Escalates to
+    /// the replay quorum. The natural challengers are the payees and
+    /// contributors a wrong root would mis-pay: the party that loses
+    /// from the false filing is the one with standing to refute it.
+    function challengeAttributionRoot(uint256 filingId)
+        external payable whenNotPaused {
+        if (msg.value != SLASH_BOND) revert WrongBond();
+        if (filingId >= rootFilings.length) revert NoSuchFiling();
+        RootFiling storage s = rootFilings[filingId];
+        if (s.resolvedAt != 0) revert AlreadyResolved();
+        if (s.challenger != address(0)) revert AlreadyChallenged();
+        if (block.timestamp >= s.filedAt + SLASH_WINDOW) {
+            revert WindowClosed();
+        }
+        s.challenger = msg.sender;
+        rootBondHeld += SLASH_BOND;
+        emit RootChallenged(filingId, msg.sender);
+    }
+
+    /// @notice Execute an UNCHALLENGED root filing after its window.
+    /// Permissionless — the librarian is nowhere in this call. The
+    /// root lands write-once; if the librarian's fast path already
+    /// posted a root for the epoch during the window, the filing
+    /// resolves with a skip and the filer's bond is returnable.
+    function executeAttributionRoot(uint256 filingId)
+        external whenNotPaused {
+        if (filingId >= rootFilings.length) revert NoSuchFiling();
+        RootFiling storage s = rootFilings[filingId];
+        if (s.resolvedAt != 0) revert AlreadyResolved();
+        if (s.challenger != address(0)) revert ChallengePending();
+        if (block.timestamp < s.filedAt + SLASH_WINDOW) {
+            revert WindowOpen();
+        }
+        s.resolvedAt = block.timestamp;
+        if (_applyRoot(s)) {
+            _rewardRootPoster(filingId, s.filer);
+        } else {
+            emit RootSkipped(filingId, "root already posted");
+        }
+        s.bondRefundee = s.filer;
+        emit RootExecuted(filingId);
+    }
+
+    /// @notice Resolve a CHALLENGED root filing by the replay
+    /// quorum's verdict (librarian-filed, the M294 pattern — the
+    /// deterministic replay decides, the key files). Guilty: the
+    /// filed root is wrong, the filing is void, and the FILER's bond
+    /// is burned — a false root loses its bond. Innocent: the root is
+    /// right, it lands, and the CHALLENGER's bond is burned — a false
+    /// challenge loses its bond. The winner in each case pulls its
+    /// own bond back; no bond is ever paid to the network.
+    function resolveAttributionRoot(uint256 filingId, bool guilty,
+                                    bytes32 quorumRecordHash)
+        external whenNotPaused {
+        if (msg.sender != librarian) revert NotLibrarian();
+        if (filingId >= rootFilings.length) revert NoSuchFiling();
+        RootFiling storage s = rootFilings[filingId];
+        if (s.resolvedAt != 0) revert AlreadyResolved();
+        if (s.challenger == address(0)) revert NotChallenged();
+        s.resolvedAt = block.timestamp;
+        s.guilty = guilty;
+        if (guilty) {
+            // the root is wrong: the filing is void, nothing lands
+            s.bondRefundee = s.challenger;
+            rootBondHeld -= SLASH_BOND;
+            rootBondsBurned += SLASH_BOND;   // filer's stake
+        } else {
+            // the root is right: it lands (write-once)
+            if (_applyRoot(s)) {
+                _rewardRootPoster(filingId, s.filer);
+            } else {
+                emit RootSkipped(filingId, "root already posted");
+            }
+            s.bondRefundee = s.filer;
+            rootBondHeld -= SLASH_BOND;
+            rootBondsBurned += SLASH_BOND;   // challenger's stake
+        }
+        emit RootResolved(filingId, guilty, quorumRecordHash);
+    }
+
+    /// @notice Pull the winner's bond after a resolved root filing.
+    /// One claim, exactly SLASH_BOND, to the party the resolution
+    /// named.
+    function claimRootBond(uint256 filingId)
+        external nonReentrant whenNotPaused {
+        if (filingId >= rootFilings.length) revert NoSuchFiling();
+        RootFiling storage s = rootFilings[filingId];
+        address refundee = s.bondRefundee;
+        if (refundee == address(0)) revert NothingToClaim();
+        s.bondRefundee = address(0);
+        rootBondHeld -= SLASH_BOND;
+        (bool ok, ) = payable(refundee).call{value: SLASH_BOND}("");
+        if (!ok) revert SendFailed();
+        emit RootBondClaimed(filingId, refundee, SLASH_BOND);
+    }
+
+    /// @notice Pull the accrued force-inclusion posting fees from the
+    /// inbox into the operations-line pool. The inbox names this
+    /// contract as its operations line, so only this contract may
+    /// call claimOperations; because the pull routes through the
+    /// ledger, anyone may trigger it — a deterministic, beneficial
+    /// keeper call, like pressing the button on an unchallenged
+    /// filing.
+    function pullOperations(address inbox) external {
+        if (inbox == address(0)) revert ZeroAddress();
+        uint256 before = address(this).balance;
+        IOperationsPuller(inbox).claimOperations();
+        uint256 delta = address(this).balance - before;
+        if (delta == 0) return;
+        operationsPool += delta;
+        emit OperationsPulled(delta);
+    }
+
+    /// @notice Register the per-root posting bounty. Timelocked like
+    /// every other money parameter. 0 means the bounty is not yet
+    /// registered and no root posting is rewarded.
+    function scheduleRootPostingBounty(uint256 newBounty)
+        external onlyOwner {
+        if (rootPostingBountyChangeAt != 0) revert NoPendingChange();
+        pendingRootPostingBounty = newBounty;
+        rootPostingBountyChangeAt = block.timestamp + CHANGE_DELAY;
+        emit RootPostingBountyChangeScheduled(newBounty,
+                                              rootPostingBountyChangeAt);
+    }
+
+    function applyRootPostingBountyChange() external {
+        if (rootPostingBountyChangeAt == 0) revert NoPendingChange();
+        if (block.timestamp < rootPostingBountyChangeAt) {
+            revert ChangeTooSoon(rootPostingBountyChangeAt,
+                                 block.timestamp);
+        }
+        rootPostingBounty = pendingRootPostingBounty;
+        pendingRootPostingBounty = 0;
+        rootPostingBountyChangeAt = 0;
+        emit RootPostingBountyChanged(rootPostingBounty);
+    }
+
+    /// @notice Pull accumulated root-posting bounties. Fee follows
+    /// the work: the party whose root landed did the settlement work
+    /// and draws the registered reward, exactly like the clearer who
+    /// pulled a deadline's posting fee.
+    function claimRootBounty() external nonReentrant whenNotPaused {
+        uint256 amount = rootBountyClaimable[msg.sender];
+        if (amount == 0) revert NothingToClaim();
+        rootBountyClaimable[msg.sender] = 0;
+        (bool ok, ) = payable(msg.sender).call{value: amount}("");
+        if (!ok) revert SendFailed();
+        emit RootBountyClaimed(msg.sender, amount);
+    }
+
+    /// @dev Pays the registered root-posting bounty to the filer
+    /// whose root landed. Never mints: an underfunded pool skips the
+    /// bounty and the shortfall is public (the accrual is on chain,
+    /// so the shortfall is too).
+    function _rewardRootPoster(uint256 filingId, address filer)
+        internal {
+        uint256 bounty = rootPostingBounty;
+        if (bounty == 0) return;
+        if (operationsPool < bounty) {
+            emit RootBountySkipped(filingId, bounty - operationsPool);
+            return;
+        }
+        operationsPool -= bounty;
+        rootBountyClaimable[filer] += bounty;
+        emit RootBountyAwarded(filingId, filer, bounty);
+    }
+
+    /// @dev Receives the operations-line pull from the inbox (which
+    /// pays its operations line by transfer). The pool accounting
+    /// happens in pullOperations via the balance delta; a stray
+    /// direct transfer is a donation and sits outside every pool.
+    receive() external payable {}
+
+    /// @dev Posts a filing's root if none is already on file for the
+    /// epoch. Write-once: the root cannot be swapped, so a false root
+    /// cannot be laundered into a correct one, and a correct one
+    /// cannot be displaced.
+    function _applyRoot(RootFiling storage s) internal returns (bool) {
+        if (attributionRoot[s.forEpoch] != bytes32(0)) return false;
+        attributionRoot[s.forEpoch] = s.root;
+        emit AttributionRootPosted(s.forEpoch, s.root);
+        return true;
     }
 
     /// @dev Shape checks for a registry filing, applied at filing

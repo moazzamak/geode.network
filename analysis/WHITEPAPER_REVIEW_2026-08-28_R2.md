@@ -2281,6 +2281,22 @@ improvised in this milestone: an optimistic root whose challenge nobody
 can adjudicate is not decentralisation, it is a griefing surface with
 better branding.
 
+**Update (R3-F1, 29 Aug 2026): the root-posting residual is closed.**
+The bonded propose-and-challenge root is implemented on `CreditLedger`
+as `fileAttributionRoot` / `challengeAttributionRoot` /
+`executeAttributionRoot` / `resolveAttributionRoot` / `claimRootBond`:
+any party files a closed epoch's root under `SLASH_BOND`; an
+unchallenged filing executes after the window; a challenge escalates to
+the replay quorum, whose verdict is librarian-filed as elsewhere. The
+filer whose root lands also earns the registered root-posting bounty
+from the operations-line pool (the inbox's non-refundable posting fees,
+pulled by `pullOperations`), so "anybody can settle onchain and claim
+the fee for it" is now true for the root path. The remaining
+quorum-authentication residual is only the verdict FILING
+(`resolveSlash` / `resolveRegistryChange` / `resolveAttributionRoot`
+stay `onlyLibrarian`), shared with M386/M387 as noted below. Gates: 14
+in `attribution_root_filing.test.js`; EVM suite **148 passing**.
+
 **The generalisable lesson.** _Converting a push to a pull is two
 separable moves, and the cheap one is worth taking alone._ Move one
 makes the privileged party commit to what it owes; move two makes the
@@ -2963,7 +2979,7 @@ Continues from M348. Every cell registers its gate **before** it runs.
 | M382 | Librarian replacement gets an execution path that survives the developer's retirement                                                       | G53            | The freeze reproduces first; governance replaces the librarian with the owner renounced; governance holds that one power only and can hand itself on; the inbox reads the librarian live and keeps its open queue across the change                                                | **SEALED, PASS**                                                                                    |
 | M383 | Incorporation becomes permissionless and the posting fee follows the work                                                                   | G54            | Anyone may incorporate; a poster clears its own entry unasked; a prompt librarian is paid and a stalled one loses the fee to whoever covered for it; the self-refund exploit stays closed                                                                                          | **SEALED, PASS**                                                                                    |
 | M384 | `liftFreeze` on expiry becomes permissionless                                                                                               | G54 (A)        | A vanished librarian cannot extend a freeze past its own timestamp; only early release still needs a filing                                                                                                                                                                        | **NO DEFECT — verified, no code change**                                                            |
-| M385 | `recordCredits` becomes a pull: payees claim against a published session-batch commitment                                                   | G54 (B)        | A payee is paid with the librarian absent; a withheld batch is provable; no payee depends on being pushed to                                                                                                                                                                       | **DONE — pull path built, root posting still librarian-only**                                       |
+| M385 | `recordCredits` becomes a pull: payees claim against a published session-batch commitment                                                   | G54 (B)        | A payee is paid with the librarian absent; a withheld batch is provable; no payee depends on being pushed to                                                                                                                                                                       | **DONE — pull path built; root posting closed by R3-F1 (permissionless, bonded)**                    |
 | M386 | `slash` becomes propose-and-challenge: anyone files with a bond, anyone refutes by replay                                                   | G54 (C)        | A guilty artifact is slashed with the librarian absent; a false accusation loses the bond; the replay still decides guilt                                                                                                                                                          | **DONE — challenge-windowed filings; disputed path needs the quorum's filer**                       |
 | M387 | `setAdmitted` / `setDelisted` / `freezeArtifact` move to propose-and-challenge                                                              | G54 (C)        | Admission follows the published rule with no privileged filer; a ratified quorum verdict executes itself; a ministerial order executes on its own confirmation                                                                                                                     | **DONE — registry filings challenge-windowed; liftFreeze stays librarian-only (incentives invert)** |
 
@@ -3190,14 +3206,15 @@ Three closures, each with a gate.
 cannot itself authenticate the off-chain two-thirds verdict: it
 executes what is filed with a recorded reason, and whether the reason
 is real is decided by the replay quorum off-chain. This is the same
-quorum-authentication gap M385 (root posting), M386 (`resolveSlash`)
-and M387 (`resolveRegistryChange`) each carry, and the review
-explicitly parked it ("wiring it is M386's machinery, not a second
-copy here"). Closing it needs an on-chain quorum oracle (threshold
-attestation or an on-chain voter registry) and is a separate
-registered milestone, not part of this closure. A fabricated reason
-is still a recorded, replay-visible deviation against its filer, and
-the delay is the notice window.
+quorum-authentication gap M386 (`resolveSlash`), M387
+(`resolveRegistryChange`) and this milestone's own replacement-filing
+each carry. (Root posting carried it too until R3-F1 made it
+permissionless: a closed root now lands with no named party in the
+path, and the filer is paid from the operations-line pool.) Closing it
+needs an on-chain quorum oracle (threshold attestation or an on-chain
+voter registry) and is a separate registered milestone, not part of
+this closure. A fabricated reason is still a recorded, replay-visible
+deviation against its filer, and the delay is the notice window.
 
 ### M388 — SEALED, PASS (29 Aug 2026)
 
@@ -3228,8 +3245,10 @@ passed, 1 skipped**.
 
 The shared quorum-authentication residual (on-chain oracle for the
 off-chain two-thirds verdict) remains registered above, untouched by
-this closure — it is the same gap M385/M386/M387 carry, and closing
-it is a separate milestone with its own design.
+this closure — it is the same gap M386/M387 carry (M385's root-posting
+leg was closed by R3-F1, which made the root permissionless and paid
+the filer from the operations-line pool), and closing it is a separate
+milestone with its own design.
 
 **One design decision made and registered.** Leftover 3 asked
 whether the instant path (a captured librarian removed fast) or the

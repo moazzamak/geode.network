@@ -16,7 +16,7 @@ design — never silently.
 
 | ID   | Severity | Finding | Fix |
 | ---- | -------- | ------- | --- |
-| F1   | HIGH     | §Settlement batching says "any party may publish the commitment under a bond, with a challenge decided by the same replay quorum that decides guilt elsewhere". Code: `CreditLedger.postAttributionRoot` is `onlyLibrarian` — the M385 residual, deliberately not closed (it needs the on-chain quorum oracle the review parked). The writing pass turned that registered residual into a false deployed claim. | Reword the paragraph to the deployed MVP: the librarian posts the root; a stopped librarian halts the epoch's income and the halt is a public zero that feeds the liveness statistics and the recorded-reason replacement discipline. Do not claim the bonded any-party path. |
+| F1   | HIGH     | §Settlement batching says "any party may publish the commitment under a bond, with a challenge decided by the same replay quorum that decides guilt elsewhere". Code: `CreditLedger.postAttributionRoot` is `onlyLibrarian` — the M385 residual, deliberately not closed (it needs the on-chain quorum oracle the review parked). The writing pass turned that registered residual into a false deployed claim. | **Implement the feature, do not reword the paper.** Add a bonded propose-and-challenge root filing (any party files a closed epoch's root under a bond; an unchallenged filing executes after the window; a challenge escalates to the replay quorum), mirroring the M386/M387 machinery. |
 | F2   | HIGH     | §Router says the lottery draw "is seeded by the randomness beacon"; `geode/core/router_repair.py` `draw_seed` seeds from the anchor. The paper (router, ledger sampling list, known-limits beacon dependency) uniformly requires beacon-seeded routing — it is the registered closure of the route-grinding residual. The writing pass made the paper claim the closure as deployed; the code has not implemented it. | Implement the beacon in `draw_seed`/`route` (beacon + anchor-for-ordering), update the M303/M354 tests and the M303 harness, re-run the share sweep to confirm the published traffic shares hold under the beacon seed. |
 | F3   | MEDIUM    | Appendix "A probed session, honest path" and "Probe-dodging attempts" say the probe flag and the executor sample are drawn from the epoch anchor; the body (§Serving verification, M371) uses the randomness beacon. Internal inconsistency left by the beacon change. | Align the appendix to the beacon. |
 | F4   | LOW      | "No cost claim appears anywhere in this paper that is not in this table" overreaches: probe overhead (10%/60%), the FHE head-path cost (~20 s/query), the five-hundred-second bound, and the operations line ($1.23/epoch) are cost claims outside the proof table. | Narrow to proof costs. |
@@ -54,12 +54,32 @@ group; commit when green.
   beacon-dependence tests added; the M354 tool and the M303 harness
   were brought to the new signature (sealed evidence untouched). The
   route-grinding residual's closure is now code, not prose.
-- **F1 SEALED.** The settlement paragraph no longer claims "any party
-  may publish the commitment under a bond" (which was the M385
-  residual, not implemented). It now states the deployed MVP: the
-  librarian posts the write-once root; a stopped librarian halts the
-  epoch's income and the absent root is a recorded divergence feeding
-  the replacement discipline.
+- **F1 SEALED (implemented, not reworded).** `CreditLedger` gains a
+  bonded propose-and-challenge root filing: `fileAttributionRoot`
+  (permissionless, SLASH_BOND, closed epoch + non-zero root + no
+  existing root at filing), `challengeAttributionRoot` (same bond,
+  escalates to the replay quorum), `executeAttributionRoot`
+  (permissionless after the window, write-once), `resolveAttributionRoot`
+  (librarian-filed quorum verdict, loser's bond burned), and
+  `claimRootBond` (pull). A stalled librarian can no longer freeze an
+  epoch's payments — any party can post the root. The paper's
+  settlement claim is restored verbatim and is now true. 14 new EVM
+  gates (`attribution_root_filing.test.js`).
+
+  **The reward is implemented too (the "claim the fee/reward for it"
+  half of the design).** The inbox names the ledger as its operations
+  line; `pullOperations` pulls the accrued non-refundable posting fees
+  into an on-chain `operationsPool`, and the party whose root lands
+  earns the registered, timelocked `rootPostingBounty` from it
+  (`claimRootBounty`, pull). An underfunded pool skips the bounty
+  publicly — nothing is minted. The paper's "who earns what" and the
+  operations-line sizing now describe the pool and the bounties, and
+  the librarian actor row states the remaining named-party acts
+  (recording credits, filing the quorum verdicts). The only residual
+  left on the settlement path is the quorum-verdict FILING
+  (`resolveSlash` / `resolveRegistryChange` / `resolveAttributionRoot`
+  stay `onlyLibrarian`), shared with M386/M387 — the registered
+  on-chain quorum-oracle milestone.
 - **F3 SEALED.** The appendix's "A probed session, honest path" and
   "Probe-dodging attempts" now use the randomness beacon (ordered by
   the epoch anchor) for the probe flag and the executor sample,

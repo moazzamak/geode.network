@@ -216,9 +216,12 @@ contributor chooses to distribute the sealed weights. For a
 weights-private artifact there is no serving-time identity check
 beyond behavioural identity on a fixed probe set, and the
 residual is priced by the bond.
-\item[Librarian.] The single role that appends ledger entries and
-executes deterministic registry updates. It is an operator key,
-named at bootstrap by the developer's key and at maturity by the
+\item[Librarian.] The role that records credits and files the
+replay quorum's verdicts --- the two acts that still need a named
+party. The settlement around them is not a privilege: anyone may
+incorporate an entry, post a root, deliver a branch, or claim,
+and the reward follows the work. It is an operator key, named at
+bootstrap by the developer's key and at maturity by the
 governance executor --- a keyless contract with no human key that
 holds that one power and no other.
 \item[Developer.] The operator of the bootstrap. It holds the
@@ -697,9 +700,10 @@ refusal, never a silent default. A new trunk is therefore a new
 bus entry, not a registry invalidation: old heads keep resolving
 their manifests, and new heads may read old and new blocks
 together.
-\item The librarian executes these updates as a clerk. It files
-the sealed measurement. The rule decides. The key never admits or
-extends on its own discretion.
+\item The registry updates are filed by any party under a bond.
+The librarian executes the replay quorum's verdict as a clerk: it
+files the sealed measurement, the rule decides, and the key never
+admits or extends on its own discretion.
 \end{itemize}
 Routing is deterministic
 (Figure~\ref{fig:network}).
@@ -853,9 +857,15 @@ with $h_0$ the genesis hash. In words: each link seals its own
 contents and the seal of the link before it. Change the content
 and the hash changes. No record can be altered without breaking
 the chain.
-\item \textbf{The librarian.} One role appends entries. It is an
-operator key, named at bootstrap by the developer's key and at
-maturity by the governance executor --- a keyless contract with
+\item \textbf{The librarian.} One role records credits. The
+settlement around that append is not a privilege: incorporation,
+root posting, branch delivery, and claims are all permissionless,
+and the reward follows the work. What is left to the role is
+writing the credits a session's evidence supports and filing the
+replay quorum's verdicts, which need an on-chain authenticator
+the network does not yet carry. It is an operator key, named at
+bootstrap by the developer's key and at maturity by the
+governance executor --- a keyless contract with
 no human key. The role does not rotate on a
 schedule and posts no stake --- replacement is its whole
 discipline, which is why the next two rules carry the weight they
@@ -1867,11 +1877,13 @@ Each leaf states a running total rather than an increment, so
 presenting the same branch twice pays once.
 
 A librarian that publishes nothing still halts that epoch's
-income. The halt is the librarian's own recorded divergence: an
-absent root is visible on chain and in the liveness statistics,
-and the recorded-reason replacement discipline is the remedy ---
-a librarian that stops posting roots is not merely failing, it
-is recording the reason it gets replaced.
+income, so any party may publish the commitment under a bond,
+with a challenge decided by the same replay quorum that decides
+guilt elsewhere. The party whose root lands earns the registered
+root-posting bounty from the operations line, so the settlement
+work is paid like the incorporation work: whoever did it draws
+the fee. A stalled librarian cannot freeze the epoch's payments
+entirely.
 
 \section{Programmable primitives}
 
@@ -2731,8 +2743,9 @@ on probed sessions, paid from the probed contributor's dock \\
 Operations line & the non-refundable posting fees of the
 force-inclusion queue, pulled by whoever did the work (the
 librarian for prompt incorporation, the clearer after the
-deadline); funds the librarian's gas, batch verification,
-dispute replay, and tally work \\
+deadline, the party whose root lands, the keeper who runs a
+batch verification or a tally); held on chain as a pool that
+funds the settlement work and pays the root-posting bounty \\
 Development fund & 2.5\% of all fees + registration fees \\
 \bottomrule
 \end{tabular}
@@ -2743,12 +2756,19 @@ revenue. At the reference workload --- ten thousand sessions per
 epoch on the vision axis --- the itemized cost is about
 \$1.23 per epoch (librarian on-chain gas measured on the current
 contracts, batch verification at the measured proof cost, one
-dispute replay, one tally, and serving bookkeeping). A base
-posting fee of about \$0.19 per entry closes the line at a
-registered 1.25$\times$ margin; that fee is a registered floor,
-not a suggestion. An axis whose entry volume falls short of the
-workload does not subsidise the line: the accrual is on chain,
-so the shortfall is public.
+dispute replay, one tally, serving bookkeeping, and the
+root-posting bounty). A base posting fee of about \$0.19 per
+entry closes the line at a registered 1.25$\times$ margin; that
+fee is a registered floor, not a suggestion. The line is held on
+chain by the settlement contract as a pool of the posting fees,
+and each unit of permissionless settlement work --- posting a
+root, running a batch verification, replaying a dispute, tallying
+a vote --- is paid a registered bounty from it. The payout is a
+pull, so no recipient can block the work that pays it. An axis
+whose entry volume falls short of the workload does not subsidise
+the line: the accrual is on chain, so the shortfall is public,
+and an empty pool skips a bounty publicly rather than minting
+one.
 
 \begin{figure}[t]
 \centering

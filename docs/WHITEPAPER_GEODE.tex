@@ -1019,7 +1019,9 @@ cost is stated here rather than implied.
 The task head is a closed-form ridge fit. It is a fixed sum of
 products. Whoever computes it can prove, with a Bulletproofs-style
 inner-product argument, that the reported answer is exactly what
-the sealed head computes~\cite{bunz2018}. In symbols, the prover
+the sealed head computes~\cite{bunz2018}. An inner-product
+argument is a compact certificate that a sum of products was
+computed correctly. In symbols, the prover
 publishes commitments to the sealed head $W$ and the input's
 code $z$ and a compact proof $\pi$ of the inner-product
 statement
@@ -1428,7 +1430,10 @@ submitter cannot grind it by re-rolling the seal.
 come from a registered sealed per-axis corpus under a published
 stratified sampling rule: the beacon-seeded draw is stratified by
 class share (equal per class unless shares are registered), and
-the corpus is committed by Merkle root at axis creation. The
+the corpus is committed by Merkle root at axis creation. A Merkle
+root is a single hash that commits to a whole set of values, so
+any one of them can later be checked against it without revealing
+the rest. The
 validator's job is to sample, pose, verify, and attest, never
 to choose the exam. Every artifact on the axis is therefore
 measured against one fixed population quantity, which is what the
@@ -1565,8 +1570,10 @@ discretion. The rules are:
 \subsection{Serving verification}\label{sec:serving}
 
 \textbf{Private serving.} The privacy-critical serving
-path is fully homomorphic evaluation of the closed-form head.
-The user's device encrypts its input $z$ under the registered
+path is fully homomorphic evaluation of the closed-form head:
+the computation runs on encrypted data, so the party doing it
+never sees the data. The user's device encrypts its input $z$
+under the registered
 scheme and sends only ciphertext to the contributor's serving
 host. The host evaluates the frozen head, the fixed sum of
 products $W^T z + b$ with $W$ never leaving the host, on the
@@ -2219,8 +2226,10 @@ $0.975\,g$ to attribution.
 applies to chains here and to representation artifacts
 (Section~\ref{sec:library}). The choice is not cosmetic: on the
 measured two-stage chain of Section~\ref{sec:measured}, Shapley
-and the simpler leave-one-out rule look at the \emph{same} four
-coalition values but weight them differently, and the two rules
+and the simpler leave-one-out rule, which credits each stage with
+the drop in the total when that stage is removed, look at the
+\emph{same} four coalition values but weight them differently,
+and the two rules
 give the routing stage shares that differ by a factor of $1.66$.
 A protocol that named two rules would owe a session two different
 amounts.
@@ -2374,7 +2383,8 @@ unaffected.
           commitments, a binding cryptographic envelope, with a
           proof that the hidden vote is a legal choice, signed and
           public. After the window closes, a tally committee of sampled
-          validators opens only the weighted sums, by threshold. The
+          validators opens only the weighted sums, by threshold, meaning
+          a minimum number of committee members must cooperate. The
           public record carries who voted, the commitments, the proofs,
           and the opened sums; individual ballots are never published, so
           a bribe cannot be checked against a ballot and a voter cannot

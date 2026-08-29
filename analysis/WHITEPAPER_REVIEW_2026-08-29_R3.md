@@ -23,6 +23,7 @@ design — never silently.
 | F5   | LOW      | The superlinear posting-fee multiple is measured at 330,839× (M365) but written "about three hundred thousand times" — 10% low. | Tighten to "about three hundred thirty thousand times". |
 | F6   | LOW      | "See §Serving verification" is an unnumbered section reference; and "five hundred seconds against a hundred-second bound --- five times the head-only figure" reads ambiguously (the 5× describes the bound, not the 500 s). | Use the numbered reference; reword the bound sentence. |
 | F7   | MEDIUM    | The Actors list says the librarian "at maturity is a governance contract with no human key"; the implemented keyless contract (M388 `LibrarianGovernance`) is the governance *executor* that replaces the librarian, not the librarian itself. The librarian is an operator key throughout the MVP. | Reword the bullet: the librarian is an operator key; a keyless governance executor names and replaces it. |
+| F8   | HIGH      | §Serving verification (device readout) says the private tier's score-vector oracle needs "$d\cdot C$ queries recover the head exactly" and prices the tier at "the score-vector-oracle figure --- $2.8\times$". Both are the RAW-MARGIN figures (M332/M357: d·C queries, 2.8×). The score vector returns all C scores per query for a code the device computed itself, so ~d queries recover W — a factor of ~C below the raw margin. The private tier's model confidentiality is not an economic boundary at 2.8×; it is recoverable in roughly d queries. Inherited from R2's G1/M349, which reused the M332 raw-margin number for the stronger oracle. | Rewrite the paragraph: the score vector recovers W in about d queries (derived, linear algebra); the tier's claim is input privacy, not model confidentiality; drop the false 2.8× pricing basis. |
 
 ## 2. Verified and closed (not findings)
 
@@ -69,7 +70,17 @@ group; commit when green.
   both "governance contract with no human key" statements reworded to
   name the keyless governance executor as the referent (the librarian
   is an operator key).
+- **F8 SEALED.** §Serving verification (device readout) no longer
+  prices the private tier at the raw-margin 2.8× figure. It now
+  states the derived fact: the score-vector oracle returns all $C$
+  scores per query for a code the device computed itself, so about
+  $d$ queries recover the head (a factor of ~$C$ below the raw
+  margin's $d\cdot C$); the private tier's claim is input privacy,
+  not model confidentiality. The known-limits model-extraction item
+  gains the same caveat. (This error survived R1/R2 and M349's
+  option-2 consequence, which reused the M332 raw-margin number for
+  the strictly stronger oracle.)
 
 Gates: Python **1144 passed / 1 skipped** (was 1142; +2 beacon
 tests); EVM **134 passing** (unchanged); `check_whitepaper_tex.py`
-**PASS** (1047/1047 braces, 17 labels, 14 refs, 58 bibitems).
+**PASS** (1048/1048 braces, 17 labels, 14 refs, 58 bibitems).

@@ -1514,7 +1514,7 @@ the head path and is a registered research target with a cost
 trigger, listed in Section~\ref{sec:limits}. A device that cannot
 run any encoder
 uses the plaintext tier, disclosed as such. The head-path FHE cost
-is measured at roughly twenty seconds per query on one CPU,
+is measured at about twenty-three seconds per query on one CPU,
 parallelizable across cores and queries, and is priced by the
 contributor; the developer processes no content in any tier.
 
@@ -1528,15 +1528,17 @@ axis's class count, is about five hundred seconds against the
 hundred-second bound (five times the head-only figure) --- not
 within the registered five-times tolerance. The private tier
 therefore returns the full score vector to the device, and that
-vector is a strictly stronger oracle than the raw margin: $d\cdot
-C$ queries recover the head exactly. Its extraction multiple is
-the score-vector-oracle figure --- $2.8\times$ expected lifetime
-revenue, against the $55\times$ of the bucketed plaintext tier ---
-and the private tier is priced on that number. No party ever
-holds $W$ in plaintext except the contributor's own host; model
-confidentiality on the private tier is therefore an economic
-boundary, the same kind as every other tier, and the paper claims
-no more than that.
+vector is a strictly stronger oracle than the raw margin: the
+device sees all $C$ scores for a code it computed itself, so
+about $d$ queries --- one per independent code --- recover the
+head exactly, a factor of about $C$ below the raw margin's
+$d \cdot C$. Model confidentiality on the private tier is
+therefore not an economic boundary: the head is recoverable in
+roughly $d$ queries, and the tier's claim is input privacy ---
+the contributor never sees the user's code or scores --- not
+model confidentiality. No party ever holds $W$ in plaintext
+except the contributor's own host; that, with the input-privacy
+guarantee, is all the paper claims for the tier.
 
 \textbf{The privacy tier is an axis, not a price point.} A private
 arm at twenty seconds a query cannot compete on ranking against a
@@ -3281,7 +3283,11 @@ multiple of the head's expected lifetime revenue on the axis
 (the registered simulation puts the bucketed oracle at $55\times$
 lifetime revenue against $2.8\times$ for the raw-margin oracle).
 That is an economic boundary, not a cryptographic
-one: a buyer who does not care about cost can still extract.
+one: a buyer who does not care about cost can still extract. The
+private tier is separate and weaker: its readout is the disclosed
+score-vector oracle, so the head is recoverable in about $d$
+queries (Section~\ref{sec:serving}) --- not a lifetime, and not
+an economic boundary.
 The same is true of every deployed black-box model.
 \item \textbf{Weights-private artifacts are verified by behavioural
 identity on a fixed sealed probe set}, not by fresh-input

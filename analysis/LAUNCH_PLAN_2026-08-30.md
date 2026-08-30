@@ -8,6 +8,7 @@ later, behind the README development notice: nothing here deploys
 anything.
 
 **Registered context this plan builds on.**
+
 - M187 chain decision: Ethereum L1 for anchors; Arbitrum One for
   token/vesting/settlement/commit-reveal; OpenTimestamps as an
   optional seal. Premise: GEODE on-chain traffic is low-frequency;
@@ -44,10 +45,10 @@ it prefer to be asked?
 
 One decision is shared: **how each party reaches the RPC.**
 
-| Mode | Who | Qualities |
-| ---- | --- | --------- |
-| Local node or local RPC (self-hosted) | operators who need proof-grade reads, no third-party trust, or offline operation | privacy, no rate limit, full control; costs sync/ops |
-| Third-party hosted RPC (Infura/Alchemy/DRPC class) | the default for everyone else | zero ops; rate limits; a third party sees the reads (reads are public anyway) |
+| Mode                                               | Who                                                                              | Qualities                                                                     |
+| -------------------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Local node or local RPC (self-hosted)              | operators who need proof-grade reads, no third-party trust, or offline operation | privacy, no rate limit, full control; costs sync/ops                          |
+| Third-party hosted RPC (Infura/Alchemy/DRPC class) | the default for everyone else                                                    | zero ops; rate limits; a third party sees the reads (reads are public anyway) |
 
 The chain is public, so using a hosted RPC leaks nothing that is not
 already public. The distinction that matters is **who is allowed to
@@ -218,15 +219,15 @@ sandboxed execution is a guarded tool arm, never a primitive).
 
 ## 4. The surface qualities table
 
-| Party | Surface | Reach | Chain reads | Chain writes | Must be good at |
-| ----- | ------- | ----- | ----------- | ------------ | --------------- |
-| User | web front end + HTTP API | hosted gateway | prices, answers, provenance | query, payment | latency, clarity, trustless-by-verification |
-| Contributor | Python toolkit | RPC (local/hosted) | status, root, earnings, vesting, filings | register, reveal, claim, challenge | one-command registration, readable statement |
-| Validator | headless program | RPC | sampling draws, assignments, disputes | attest, verdict | determinism, low false positives, audit trail |
-| Librarian | daemon service | RPC (local/hosted) | queue head, orders, route hash, epoch, windows | incorporate, record, post root | timeliness, crash safety, health legibility |
-| Reference executor | headless program | serving plane + RPC | probe assignments | comparison result | reproducibility |
-| Host | serving image + endpoint | serving plane + RPC | assignments, probe obligations | availability, commitments | uptime, probe compliance |
-| Developer | Python toolkit + sandbox | RPC | registry, floor | register primitive, propose | sandbox safety, integration |
+| Party              | Surface                  | Reach               | Chain reads                                    | Chain writes                       | Must be good at                               |
+| ------------------ | ------------------------ | ------------------- | ---------------------------------------------- | ---------------------------------- | --------------------------------------------- |
+| User               | web front end + HTTP API | hosted gateway      | prices, answers, provenance                    | query, payment                     | latency, clarity, trustless-by-verification   |
+| Contributor        | Python toolkit           | RPC (local/hosted)  | status, root, earnings, vesting, filings       | register, reveal, claim, challenge | one-command registration, readable statement  |
+| Validator          | headless program         | RPC                 | sampling draws, assignments, disputes          | attest, verdict                    | determinism, low false positives, audit trail |
+| Librarian          | daemon service           | RPC (local/hosted)  | queue head, orders, route hash, epoch, windows | incorporate, record, post root     | timeliness, crash safety, health legibility   |
+| Reference executor | headless program         | serving plane + RPC | probe assignments                              | comparison result                  | reproducibility                               |
+| Host               | serving image + endpoint | serving plane + RPC | assignments, probe obligations                 | availability, commitments          | uptime, probe compliance                      |
+| Developer          | Python toolkit + sandbox | RPC                 | registry, floor                                | register primitive, propose        | sandbox safety, integration                   |
 
 ## 5. What this plan deliberately leaves open
 

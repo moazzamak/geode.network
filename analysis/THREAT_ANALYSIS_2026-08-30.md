@@ -24,16 +24,16 @@ passing; 24,498 bytes.
 
 Actors (from the paper, plus the outside inputs the contract carries):
 
-| Actor | Trust | What it can block/delay |
-| ----- | ----- | ----------------------- |
-| User / payer | none | nothing (already bounded) |
-| Contributor | none | registration spam (priced), credit-claim honesty (attested) |
-| Host | none | serving substitution (probabilistically detected) |
-| Validator | none | verdict capture (weight-capped) |
-| Reference executor | none | probe collusion (needs every sampled executor) |
-| Librarian | partial | **the settlement key: recording credits, fast-path root posting** |
-| Developer / dev fund | none | parameter capture (timelocked), fee schedule |
-| Any funded party | none | **challenge campaigns (the DoS that opened this pass)** |
+| Actor                | Trust   | What it can block/delay                                           |
+| -------------------- | ------- | ----------------------------------------------------------------- |
+| User / payer         | none    | nothing (already bounded)                                         |
+| Contributor          | none    | registration spam (priced), credit-claim honesty (attested)       |
+| Host                 | none    | serving substitution (probabilistically detected)                 |
+| Validator            | none    | verdict capture (weight-capped)                                   |
+| Reference executor   | none    | probe collusion (needs every sampled executor)                    |
+| Librarian            | partial | **the settlement key: recording credits, fast-path root posting** |
+| Developer / dev fund | none    | parameter capture (timelocked), fee schedule                      |
+| Any funded party     | none    | **challenge campaigns (the DoS that opened this pass)**           |
 
 The relevant property: **no single party, and no cheaply-funded
 party, may halt or push settlement indefinitely.** Settlement is the
@@ -43,18 +43,18 @@ serves it.
 
 ## 2. Surface map: every blocking / delay / griefing path
 
-| # | Surface | Who | Was it a live gap? | Verdict |
-| - | ------- | --- | ------------------ | ------- |
-| S1 | Challenge every filing to push settlement out by one attestation window | any funded party | **YES** | **FIXED this session** (escalating global fee + 3-day window) |
-| S2 | Poster contract that reverts on ETH receive jams the inbox queue head forever | any party that can deploy a contract | **YES** | **FIXED this session** (bond return is now pull, M383 lesson applied to the bond) |
-| S3 | Librarian posts nothing: no attribution root for an epoch | librarian | YES (registered M385 residual) | MITIGATED: any party files the root under a bond (F1 closure, 29 Aug); fast-path race remains (registered) |
-| S4 | Librarian stops recording credits | librarian | YES (registered) | MITIGATED: failure is visible; keyless replacement is quorum-gated; new credits halt but verdicts do not (registered residual) |
-| S5 | Spam the inbox to bloat the ledger / force chain-invalidity | any funded party | YES (registered M365/G24) | MITIGATED: superlinear fee (O(N^3)), capped per-epoch obligation, recorded (29 Aug) |
-| S6 | Capture the attestation quorum by amassing vested weight | funded party | YES (registered) | MITIGATED: per-identity 20% cap, participation floor, min 3 identities; single key cannot carry a verdict |
-| S7 | Repeat a slash/registry/root challenge at flat cost to drain challengers or delay | any funded party | subset of S1 | **FIXED this session** (same global heat as S1) |
-| S8 | Governance replacement blocked by a hostile quorum | any funded party | no (quorum-gated by design) | REGISTERED: a hostile majority is outside the mechanism (paper known-limits) |
-| S9 | Dev-fund / operations-line claim paths reverted by a hostile receiver | any party | no | FIXED earlier (M383 pull); all claim paths are pull with revert handling |
-| S10 | Bond stuck forever when a filing is never resolved | filers/challengers | no | REGISTERED: bonds are pullable after resolution; an unresolved filing's bond is released on finalize/execute (permissionless) |
+| #   | Surface                                                                           | Who                                  | Was it a live gap?             | Verdict                                                                                                                        |
+| --- | --------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| S1  | Challenge every filing to push settlement out by one attestation window           | any funded party                     | **YES**                        | **FIXED this session** (escalating global fee + 3-day window)                                                                  |
+| S2  | Poster contract that reverts on ETH receive jams the inbox queue head forever     | any party that can deploy a contract | **YES**                        | **FIXED this session** (bond return is now pull, M383 lesson applied to the bond)                                              |
+| S3  | Librarian posts nothing: no attribution root for an epoch                         | librarian                            | YES (registered M385 residual) | MITIGATED: any party files the root under a bond (F1 closure, 29 Aug); fast-path race remains (registered)                     |
+| S4  | Librarian stops recording credits                                                 | librarian                            | YES (registered)               | MITIGATED: failure is visible; keyless replacement is quorum-gated; new credits halt but verdicts do not (registered residual) |
+| S5  | Spam the inbox to bloat the ledger / force chain-invalidity                       | any funded party                     | YES (registered M365/G24)      | MITIGATED: superlinear fee (O(N^3)), capped per-epoch obligation, recorded (29 Aug)                                            |
+| S6  | Capture the attestation quorum by amassing vested weight                          | funded party                         | YES (registered)               | MITIGATED: per-identity 20% cap, participation floor, min 3 identities; single key cannot carry a verdict                      |
+| S7  | Repeat a slash/registry/root challenge at flat cost to drain challengers or delay | any funded party                     | subset of S1                   | **FIXED this session** (same global heat as S1)                                                                                |
+| S8  | Governance replacement blocked by a hostile quorum                                | any funded party                     | no (quorum-gated by design)    | REGISTERED: a hostile majority is outside the mechanism (paper known-limits)                                                   |
+| S9  | Dev-fund / operations-line claim paths reverted by a hostile receiver             | any party                            | no                             | FIXED earlier (M383 pull); all claim paths are pull with revert handling                                                       |
+| S10 | Bond stuck forever when a filing is never resolved                                | filers/challengers                   | no                             | REGISTERED: bonds are pullable after resolution; an unresolved filing's bond is released on finalize/execute (permissionless)  |
 
 ## 3. S1: repeated-challenge settlement DoS — the fix
 
@@ -76,8 +76,7 @@ dispatch):**
    escalating fee.** The Nth live challenge within a 21-day half-life
    pays a non-refundable fee of `SLASH_BOND * 2^(heat-1)` (capped at
    `SLASH_BOND * 2^9` = 512 ETH) on top of the refundable base bond.
-   First challenge in a quiet period: free. Second: 1 ETH fee. Third:
-   2. Fourth: 4. Fifth: 8. The fee is credited to the operations
+   First challenge in a quiet period: free. Second: 1 ETH fee. Third: 2. Fourth: 4. Fifth: 8. The fee is credited to the operations
    pool, which funds the settlement bounties — it never goes to a
    party.
 3. **Heat is global, not per-address.** Rotating addresses cannot
@@ -100,7 +99,7 @@ the window is now 3 days per attempt. This is a cost barrier, not a
 proof — the paper says so.
 
 **Gates (all new, `test/challenge_griefing.test.js`, 8 tests):**
-first challenge free; second pays bond*2 and the fee reaches the
+first challenge free; second pays bond\*2 and the fee reaches the
 operations pool; a sustained campaign compounds (doubling per live
 challenge); heat is global across addresses; heat decays only on 21
 days of silence (20 days is not silence); a weekly campaign never

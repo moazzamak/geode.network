@@ -28,6 +28,17 @@ measured results, and the honesty boundaries:
 (LaTeX source:
 [`docs/WHITEPAPER_GEODE.tex`](docs/WHITEPAPER_GEODE.tex)).
 
+> **⚠ Development status — do not deploy yet.** This repository is a
+> research implementation under active development. The whitepaper
+> describes the design; the code here is the working implementation
+> of it, and the two are kept in line as issues are found and fixed.
+> It is **not** known to be bug-free: the test suites pass
+> (Python and EVM), but passing tests are not a proof of correctness.
+> Do **not** run a GEODE network, post real funds to any contract,
+> or rely on this code for anything in production. If you want to
+> run it for experimentation, do so on a local or test network with
+> test funds only, and expect breaking changes without notice.
+
 ## The architecture in one idea
 
 The name says it: **generalized encoders**. A registry of frozen

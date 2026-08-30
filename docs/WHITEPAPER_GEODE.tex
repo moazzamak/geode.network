@@ -1957,7 +1957,13 @@ party in the call. A challenge escalates to the on-chain
 attestation quorum: the network's credit-holding identities
 attest the verdict by the deterministic replay, weighted by
 vested credits with a per-identity cap, and anyone finalizes it.
-The tally is linear in the eligible set and is computed only when
+Challenges are priced against delay: a global decaying counter
+makes the first challenge in a quiet period free and each further
+live challenge within a twenty-one-day half-life pay a
+non-refundable fee that doubles per challenge, capped at five
+hundred twelve bonds, so a sustained campaign costs exponentially
+more than the settlement it delays. The tally is linear in the
+eligible set and is computed only when
 a filing is disputed, once per dispute on the settlement rollup.
 The party whose root lands earns the registered root-posting
 bounty from the operations line, so the settlement
@@ -3547,6 +3553,24 @@ These are the structural residuals, in order of severity:
           one-third of the network's eligible vested weight cannot be voided
           by the harmed parties alone, and lands by default unless the
           unaffected majority participates within the window.
+    \item \textbf{A funded party can delay settlement, at a cost that
+              compounds.} A challenge on any filing, even one that never
+          receives a verdict, parks the settlement until the attestation
+          window closes. The defense is a global, decaying challenge fee:
+          the first challenge in a quiet period is free, and each further
+          live challenge within a twenty-one-day half-life pays a
+          non-refundable fee of one bond times two to the challenge count,
+          capped at five hundred twelve bonds, on top of the refundable
+          base bond. The fee funds the settlement bounties, never a
+          party. The heat is global, so rotating addresses cannot reset
+          it, and it decays only on twenty-one days of silence, so a
+          weekly campaign never decays. What remains is a cost barrier,
+          not a proof: a party with enough funds can still push a single
+          epoch's settlement out by the attestation window (three days,
+          down from seven) once, and a sustained denial of service is
+          priced exponentially rather than removed. A challenge to a
+          filing that is already resolved, already challenged, or past
+          its window costs nothing and heats nothing.
     \item \textbf{The authority-key registry trusts governments' own
               channels.} Multi-channel pinning raises the cost of a forged
           order; it does not make forgery impossible. The effect of even a

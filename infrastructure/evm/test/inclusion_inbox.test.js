@@ -192,8 +192,11 @@ describe("InclusionInbox spam pricing (M365, G24)", function () {
     const before = await ethers.provider.getBalance(poster.address);
     const rc = await (await postExact(
       inbox, poster, entryId, id("m365-honest-p"))).wait();
-    const gas = rc.gasUsed * rc.gasPrice;
     await inbox.connect(librarian).incorporate(entryId);
+    // M383 pull lesson: the bond is credited, not pushed — the
+    // poster pulls it back, so the net cost is still only the fee
+    const rc2 = await (await inbox.connect(poster).claim()).wait();
+    const gas = rc.gasUsed * rc.gasPrice + rc2.gasUsed * rc2.gasPrice;
     const after = await ethers.provider.getBalance(poster.address);
     // net of gas, the poster is out exactly the posting fee
     expect(before - after - gas).to.equal(BASE_FEE);
@@ -512,7 +515,9 @@ describe("InclusionInbox incentives (M383)", function () {
     const entryId = id("m383-no-refund");
     await postExact(inbox, poster, entryId, id("m383-nr-p"));
     await inbox.connect(poster).incorporate(entryId);
-    expect(await inbox.claimable(poster.address)).to.equal(0n);
+    // the bond is credited back to the poster (pull), but the fee
+    // is never refunded — the spam price is the fee, not the bond
+    expect(await inbox.claimable(poster.address)).to.equal(BOND);
     expect(await inbox.claimable(operations.address))
       .to.equal(BASE_FEE);
   });
@@ -524,8 +529,44 @@ describe("InclusionInbox incentives (M383)", function () {
     await postExact(inbox, poster, entryId, id("m383-c-p"));
     await mineBlocks(WINDOW + 1);
     // past the deadline the poster clears its own entry and takes
-    // the bounty, which is the fee it paid in the first place
+    // the bounty, which is the fee it paid in the first place, and
+    // pulls the bond back (M383 pull lesson)
     await inbox.connect(poster).incorporate(entryId);
-    expect(await inbox.claimable(poster.address)).to.equal(BASE_FEE);
+    expect(await inbox.claimable(poster.address))
+      .to.equal(BOND + BASE_FEE);
+  });
+
+  it("a reverting poster cannot jam the queue: the bond is credited, " +
+     "not pushed", async function () {
+    // the M383 pull lesson applied to the bond. Under a PUSH bond
+    // return, a poster contract that reverts on receive would make
+    // incorporate revert forever and the queue head would be invalid
+    // for everyone. With the pull, incorporation succeeds, the bond
+    // sits in claimable, and only the poster's own claim could fail.
+    const { inbox, librarian, other } = await deployInbox();
+    const RP = await ethers.getContractFactory("RejectingPoster");
+    const rp = await RP.deploy();
+    await rp.waitForDeployment();
+    const rpAddr = await rp.getAddress();
+    const inboxAddr = await inbox.getAddress();
+    const entryId = id("m383-rejecting-poster");
+    const fee = await inbox.postingFee(rpAddr);
+    await rp.post(inboxAddr, entryId, id("m383-rp-p"),
+      { value: BOND + fee });
+    expect((await inbox.entries(entryId)).bond).to.equal(BOND);
+    // the librarian clears it; the queue head advances
+    await inbox.connect(librarian).incorporate(entryId);
+    expect((await inbox.entries(entryId)).incorporatedBlock)
+      .to.not.equal(0n);
+    expect((await inbox.entries(entryId)).bond).to.equal(0n);
+    expect(await inbox.chainValid()).to.equal(true);
+    // the reverting poster's bond is pullable, never pushed
+    expect(await inbox.claimable(rpAddr)).to.equal(BOND);
+    // and a foreign caller can still clear entries behind it
+    const entry2 = id("m383-rejecting-poster-2");
+    await rp.post(inboxAddr, entry2, id("m383-rp-p2"),
+      { value: BOND + fee });
+    await inbox.connect(other).incorporate(entry2);
+    expect(await inbox.chainValid()).to.equal(true);
   });
 });

@@ -79,7 +79,6 @@ contract CreditLedger is
     error InvalidLevel(uint8 level);
     error WrongTarget();
     error NotGovernance();
-    error NotOwnerOrGovernance();
     error WrongBond();
     error NoSuchFiling();
     error AlreadyResolved();
@@ -102,7 +101,7 @@ contract CreditLedger is
     uint256 public constant PRICE_CHANGE_DELAY = 7 days; // 1-epoch notice
     uint256 public constant SLASH_BOND = 1 ether;   // M386 filing/challenge stake
     uint256 public constant SLASH_WINDOW = 7 days;  // M386 challenge window = 1 epoch
-    uint256 public constant ATTEST_WINDOW = 7 days; // on-chain quorum: attestation window = 1 epoch
+    uint256 public constant ATTEST_WINDOW = 3 days; // on-chain quorum: attestation window
     uint256 public constant QUORUM_WEIGHT_CAP_BPS = 2000; // 20% per-identity cap
     uint256 public constant QUORUM_FLOOR_BPS = 3333;      // 1/3 participation floor
     uint256 public constant QUORUM_MIN_DISTINCT = 3;      // distinct-identity floor
@@ -217,10 +216,10 @@ contract CreditLedger is
     /// @notice Bond ETH held against live filings and challenges.
     /// Accounting note: bonds are NOT part of ethHeld (they are not
     /// deposits); the operations pool is real held ETH pulled from
-    /// the inbox's posting fees; address(this).balance = ethHeld +
-    /// slashBondHeld + slashBondsBurned + registryBondHeld +
-    /// registryBondsBurned + rootBondHeld + rootBondsBurned +
-    /// operationsPool.
+    /// the inbox's posting fees plus the anti-griefing challenge
+    /// fees; address(this).balance = ethHeld + slashBondHeld +
+    /// slashBondsBurned + registryBondHeld + registryBondsBurned +
+    /// rootBondHeld + rootBondsBurned + operationsPool.
     uint256 public slashBondHeld;
     /// @notice Bond ETH forfeited by losing a dispute. Unreachable by
     /// any claim path — nobody gains from a false accusation.
@@ -339,11 +338,11 @@ contract CreditLedger is
 
     /// @notice The operations-line pool: the non-refundable
     /// force-inclusion posting fees, pulled from the inbox (which
-    /// names this contract as its operations line) and disbursed as
-    /// registered bounties to whoever did each unit of permissionless
-    /// settlement work. The pool can never overdraw: an empty pool
-    /// skips a bounty publicly, and the shortfall is on chain like
-    /// the accrual.
+    /// names this contract as its operations line), plus the
+    /// anti-griefing challenge fees, disbursed as registered bounties
+    /// to whoever did each unit of permissionless settlement work.
+    /// The pool can never overdraw: an empty pool skips a bounty
+    /// publicly, and the shortfall is on chain like the accrual.
     uint256 public operationsPool;
 
     /// @notice Registered per-root posting bounty, paid to the party
@@ -357,6 +356,21 @@ contract CreditLedger is
 
     /// @notice Pull balances for root-posting bounties.
     mapping(address => uint256) public rootBountyClaimable;
+
+    /// @notice Anti-griefing challenge heat (the repeated-challenge
+    /// DoS repair, 30 Aug 2026). A GLOBAL decaying counter of recent
+    /// challenge openings: each challenge pays a non-refundable fee
+    /// of SLASH_BOND * 2^(heat-1) (capped at CHALLENGE_STEPS) on top
+    /// of the refundable base bond, and the heat halves every
+    /// CHALLENGE_DECAY. A single challenge in a quiet period pays no
+    /// fee; a sustained campaign (1 ETH per window of delay) compounds
+    /// exponentially and, being global, cannot be reset by rotating
+    /// addresses. The fee funds the operations pool (settlement
+    /// bounties), never a party. APPENDED at the end of the storage
+    /// layout (v1.0.0 + anti-griefing repair) so proxies keep their
+    /// slot order.
+    uint256 public challengeHeat;
+    uint256 public challengeHeatAt;
 
     event AttributionRootPosted(uint256 indexed epochId, bytes32 root);
     event AttributionClaimed(uint256 indexed epochId,
@@ -748,8 +762,7 @@ contract CreditLedger is
         if (vested <= claimedOf[who]) revert NothingToClaim();
         uint256 amount = vested - claimedOf[who];
         claimedOf[who] = vested;
-        (bool ok, ) = payable(who).call{value: amount}("");
-        if (!ok) revert SendFailed();
+        _pull(who, amount);
         emit Claimed(who, amount);
     }
 
@@ -759,8 +772,7 @@ contract CreditLedger is
         if (devFundShare == 0) revert NothingToClaim();
         uint256 amount = devFundShare;
         devFundShare = 0;
-        (bool ok, ) = payable(devFund).call{value: amount}("");
-        if (!ok) revert SendFailed();
+        _pull(devFund, amount);
         emit DevFundClaimed(amount);
     }
 
@@ -814,12 +826,12 @@ contract CreditLedger is
     }
 
     /// @notice Refute a filing by replay, within the window, posting
-    /// the same bond. The challenger asserts the replay of the filed
+    /// the same bond plus the anti-griefing challenge fee. The
+    /// challenger asserts the replay of the filed
     /// evidence does not establish this guilt. A challenged filing can
     /// no longer auto-execute; the attestation quorum decides it instead.
     function challengeSlash(uint256 filingId)
         external payable whenNotPaused {
-        if (msg.value != SLASH_BOND) revert WrongBond();
         if (filingId >= slashFilings.length) revert NoSuchFiling();
         SlashFiling storage s = slashFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
@@ -827,6 +839,7 @@ contract CreditLedger is
         if (block.timestamp >= s.filedAt + SLASH_WINDOW) {
             revert WindowClosed();
         }
+        _openChallenge();   // bond + anti-griefing fee, then heat++
         s.challenger = msg.sender;
         slashBondHeld += SLASH_BOND;
         emit SlashChallenged(filingId, msg.sender);
@@ -886,16 +899,14 @@ contract CreditLedger is
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
         uint256 eligible = _eligibleVestedTotal();
-        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
-                                eligible);
+        uint8 r = _quorumResult(s.attestStart, s.attestCount,
+                                s.filedAt, eligible);
         if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
         if (r == 1) {
             // void: the accusation is not upheld
             s.guilty = false;
             s.bondRefundee = s.challenger;
-            slashBondHeld -= SLASH_BOND;
-            slashBondsBurned += SLASH_BOND;   // filer's stake
         } else {
             // upheld by bar (r == 2) or by default (r == 3)
             s.guilty = true;
@@ -903,9 +914,9 @@ contract CreditLedger is
                 emit SlashSkipped(filingId, "insufficient balance");
             }
             s.bondRefundee = s.filer;
-            slashBondHeld -= SLASH_BOND;
-            slashBondsBurned += SLASH_BOND;   // challenger's stake
         }
+        slashBondHeld -= SLASH_BOND;
+        slashBondsBurned += SLASH_BOND;   // loser's stake
         if (r == 1) {
             _rewardAttestors(filingId, s.attestStart, s.attestCount,
                              true, eligible);
@@ -926,8 +937,7 @@ contract CreditLedger is
         if (refundee == address(0)) revert NothingToClaim();
         s.bondRefundee = address(0);
         slashBondHeld -= SLASH_BOND;
-        (bool ok, ) = payable(refundee).call{value: SLASH_BOND}("");
-        if (!ok) revert SendFailed();
+        _pull(refundee, SLASH_BOND);
         emit SlashBondClaimed(filingId, refundee, SLASH_BOND);
     }
 
@@ -1035,12 +1045,11 @@ contract CreditLedger is
     }
 
     /// @notice Refute a registry filing inside its window, posting
-    /// the same bond. The challenger asserts the off-chain decision
+    /// the same bond plus the anti-griefing challenge fee. The challenger asserts the off-chain decision
     /// was not actually made (the rule fails, the quorum was short,
     /// the order was not confirmed). Escalates to the attestation quorum.
     function challengeRegistryChange(uint256 filingId)
         external payable whenNotPaused {
-        if (msg.value != SLASH_BOND) revert WrongBond();
         if (filingId >= registryFilings.length) revert NoSuchFiling();
         RegistryFiling storage s = registryFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
@@ -1048,6 +1057,7 @@ contract CreditLedger is
         if (block.timestamp >= s.filedAt + SLASH_WINDOW) {
             revert WindowClosed();
         }
+        _openChallenge();   // bond + anti-griefing fee, then heat++
         s.challenger = msg.sender;
         registryBondHeld += SLASH_BOND;
         emit RegistryChangeChallenged(filingId, msg.sender);
@@ -1096,24 +1106,22 @@ contract CreditLedger is
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
         uint256 eligible = _eligibleVestedTotal();
-        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
-                                eligible);
+        uint8 r = _quorumResult(s.attestStart, s.attestCount,
+                                s.filedAt, eligible);
         if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
         if (r == 1) {
             // void: the change is not applied
             s.guilty = false;
             s.bondRefundee = s.challenger;
-            registryBondHeld -= SLASH_BOND;
-            registryBondsBurned += SLASH_BOND;   // filer's stake
         } else {
             // upheld by bar (r == 2) or by default (r == 3)
             s.guilty = true;
             _applyRegistryChange(s);
             s.bondRefundee = s.filer;
-            registryBondHeld -= SLASH_BOND;
-            registryBondsBurned += SLASH_BOND;   // challenger's stake
         }
+        registryBondHeld -= SLASH_BOND;
+        registryBondsBurned += SLASH_BOND;   // loser's stake
         if (r == 1) {
             _rewardAttestors(filingId, s.attestStart, s.attestCount,
                              true, eligible);
@@ -1135,8 +1143,7 @@ contract CreditLedger is
         if (refundee == address(0)) revert NothingToClaim();
         s.bondRefundee = address(0);
         registryBondHeld -= SLASH_BOND;
-        (bool ok, ) = payable(refundee).call{value: SLASH_BOND}("");
-        if (!ok) revert SendFailed();
+        _pull(refundee, SLASH_BOND);
         emit RegistryBondClaimed(filingId, refundee, SLASH_BOND);
     }
 
@@ -1185,14 +1192,13 @@ contract CreditLedger is
     }
 
     /// @notice Refute a root filing inside its window, posting the
-    /// same bond. The challenger asserts the root is wrong — it would
+    /// same bond plus the anti-griefing challenge fee. The challenger asserts the root is wrong — it would
     /// pay credits the epoch's work does not support. Escalates to
     /// the attestation quorum. The natural challengers are the payees and
     /// contributors a wrong root would mis-pay: the party that loses
     /// from the false filing is the one with standing to refute it.
     function challengeAttributionRoot(uint256 filingId)
         external payable whenNotPaused {
-        if (msg.value != SLASH_BOND) revert WrongBond();
         if (filingId >= rootFilings.length) revert NoSuchFiling();
         RootFiling storage s = rootFilings[filingId];
         if (s.resolvedAt != 0) revert AlreadyResolved();
@@ -1200,6 +1206,7 @@ contract CreditLedger is
         if (block.timestamp >= s.filedAt + SLASH_WINDOW) {
             revert WindowClosed();
         }
+        _openChallenge();   // bond + anti-griefing fee, then heat++
         s.challenger = msg.sender;
         rootBondHeld += SLASH_BOND;
         emit RootChallenged(filingId, msg.sender);
@@ -1258,16 +1265,14 @@ contract CreditLedger is
         if (s.resolvedAt != 0) revert AlreadyResolved();
         if (s.challenger == address(0)) revert NotChallenged();
         uint256 eligible = _eligibleVestedTotal();
-        uint8 r = _quorumResult(s.attestStart, s.attestCount, s.filedAt,
-                                eligible);
+        uint8 r = _quorumResult(s.attestStart, s.attestCount,
+                                s.filedAt, eligible);
         if (r == 0) revert WindowOpen();
         s.resolvedAt = block.timestamp;
         if (r == 1) {
             // void: the root is wrong, nothing lands
             s.guilty = true;
             s.bondRefundee = s.challenger;
-            rootBondHeld -= SLASH_BOND;
-            rootBondsBurned += SLASH_BOND;   // filer's stake
         } else {
             // upheld by bar (r == 2) or by default (r == 3): lands
             s.guilty = false;
@@ -1277,9 +1282,9 @@ contract CreditLedger is
                 emit RootSkipped(filingId, "root already posted");
             }
             s.bondRefundee = s.filer;
-            rootBondHeld -= SLASH_BOND;
-            rootBondsBurned += SLASH_BOND;   // challenger's stake
         }
+        rootBondHeld -= SLASH_BOND;
+        rootBondsBurned += SLASH_BOND;   // loser's stake
         if (r == 1) {
             _rewardAttestors(filingId, s.attestStart, s.attestCount,
                              true, eligible);
@@ -1301,8 +1306,7 @@ contract CreditLedger is
         if (refundee == address(0)) revert NothingToClaim();
         s.bondRefundee = address(0);
         rootBondHeld -= SLASH_BOND;
-        (bool ok, ) = payable(refundee).call{value: SLASH_BOND}("");
-        if (!ok) revert SendFailed();
+        _pull(refundee, SLASH_BOND);
         emit RootBondClaimed(filingId, refundee, SLASH_BOND);
     }
 
@@ -1376,8 +1380,7 @@ contract CreditLedger is
         uint256 amount = attestationClaimable[msg.sender];
         if (amount == 0) revert NothingToClaim();
         attestationClaimable[msg.sender] = 0;
-        (bool ok, ) = payable(msg.sender).call{value: amount}("");
-        if (!ok) revert SendFailed();
+        _pull(msg.sender, amount);
         emit AttestationRewardClaimed(msg.sender, amount);
     }
 
@@ -1389,8 +1392,7 @@ contract CreditLedger is
         uint256 amount = rootBountyClaimable[msg.sender];
         if (amount == 0) revert NothingToClaim();
         rootBountyClaimable[msg.sender] = 0;
-        (bool ok, ) = payable(msg.sender).call{value: amount}("");
-        if (!ok) revert SendFailed();
+        _pull(msg.sender, amount);
         emit RootBountyClaimed(msg.sender, amount);
     }
 
@@ -1426,6 +1428,34 @@ contract CreditLedger is
         attributionRoot[s.forEpoch] = s.root;
         emit AttributionRootPosted(s.forEpoch, s.root);
         return true;
+    }
+
+    /// @dev Shared challenge opening (the repeated-challenge DoS
+    /// repair). Records the anti-griefing heat, charges the base bond
+    /// plus the escalating fee, and routes the fee to the operations
+    /// pool. The first challenge in a quiet period pays no fee.
+    function _openChallenge() internal {
+        uint256 elapsed =
+            (block.timestamp - challengeHeatAt) / 21 days;
+        challengeHeatAt = block.timestamp;
+        if (elapsed >= 10) {
+            challengeHeat = 0;
+        } else if (elapsed > 0) {
+            challengeHeat >>= elapsed;
+        }
+        uint256 heat = challengeHeat < 10 ? challengeHeat : 10;
+        challengeHeat = heat + 1;
+        uint256 fee = heat == 0 ? 0
+            : SLASH_BOND * (1 << (heat - 1));
+        if (msg.value != SLASH_BOND + fee) revert WrongBond();
+        operationsPool += fee;
+    }
+
+    /// @dev One shared transfer with revert handling, used by every
+    /// pull path. A recipient that reverts fails only its own claim.
+    function _pull(address to, uint256 amount) internal {
+        (bool ok, ) = payable(to).call{value: amount}("");
+        if (!ok) revert SendFailed();
     }
 
     /// @dev Shared attestation core. Records one weighted attestation
@@ -1886,12 +1916,6 @@ contract CreditLedger is
     modifier onlyGovernance() {
         if (msg.sender != governance || governance == address(0))
             revert NotGovernance();
-        _;
-    }
-
-    modifier onlyOwnerOrGovernance() {
-        if (msg.sender != owner() && msg.sender != governance)
-            revert NotOwnerOrGovernance();
         _;
     }
 

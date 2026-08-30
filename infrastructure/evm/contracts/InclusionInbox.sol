@@ -258,17 +258,21 @@ contract InclusionInbox {
         emit Incorporated(entryId, e.poster, msg.sender, block.number,
                           late);
         emit FeeAwarded(entryId, earner, fee);
+        // The bond is CREDITED to the poster, never pushed: a poster
+        // whose contract reverts on receive must not be able to jam
+        // the queue head (the M383 pull lesson, applied to the bond).
         uint256 amount = e.bond;
         if (amount > 0) {
             e.bond = 0;
-            (bool ok, ) = payable(e.poster).call{value: amount}("");
-            require(ok, "bond return failed");
+            claimable[e.poster] += amount;
             emit BondReturned(entryId, e.poster, amount);
         }
     }
 
     /// @notice if the librarian misses the deadline, the poster
-    /// withdraws the bond. The entry stays open and the chain stays
+    /// withdraws the bond. The bond is CREDITED to the poster's
+    /// claimable balance, never pushed (a reverting receiver cannot
+    /// jam the queue). The entry stays open and the chain stays
     /// invalid meanwhile — withdrawing does not discharge the
     /// obligation. The posting fee is never returned.
     function withdrawBond(bytes32 entryId) external {
@@ -280,8 +284,7 @@ contract InclusionInbox {
             revert WindowNotElapsed(entryId, e.deadlineBlock);
         uint256 amount = e.bond;
         e.bond = 0;
-        (bool ok, ) = payable(e.poster).call{value: amount}("");
-        require(ok, "bond return failed");
+        claimable[e.poster] += amount;
         emit BondReturned(entryId, e.poster, amount);
     }
 

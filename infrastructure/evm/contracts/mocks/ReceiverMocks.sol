@@ -19,6 +19,26 @@ contract RejectingReceiver {
     }
 }
 
+/// @notice Test-only poster that reverts on ETH receive, proving a
+/// reverting poster cannot jam the queue head (the M383 pull lesson
+/// applied to the bond): incorporation credits the bond to the
+/// poster's claimable balance instead of pushing it.
+contract RejectingPoster {
+    error NoETH();
+
+    receive() external payable {
+        revert NoETH();
+    }
+
+    function post(address inbox, bytes32 entryId, bytes32 digest)
+        external payable {
+        (bool ok, ) = inbox.call{value: msg.value}(
+            abi.encodeWithSignature("post(bytes32,bytes32)",
+                                    entryId, digest));
+        require(ok, "post failed");
+    }
+}
+
 /// @notice Test-only stand-in for the ledger's librarian address,
 /// so InclusionInbox's M382 source lookup can be driven directly.
 contract LibrarianSourceMock {
